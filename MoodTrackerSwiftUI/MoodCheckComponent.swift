@@ -1,0 +1,80 @@
+//
+//  MoodCheckComponent.swift
+//  MoodTrackerSwiftUI
+//
+//  Created by ANTON DOBRYNIN on 15.09.2022.
+//
+
+import SwiftUI
+
+struct MoodCheckComponent: View {
+    
+    var imagesName: [String] = ["character_veryBad", "character_bad", "character_normal", "сharacter_good", "character_veryGood"]
+    var stateTitleTexts: [String] = ["Очень плохо", "Плохо", "Нормально", "Хорошо", "Лучше всех"]
+    
+    struct SliderConfigure {
+        static let min: CGFloat = 0
+        static let max: CGFloat = 40
+    }
+    
+    struct SliderSize {
+        static let width: CGFloat = 300
+        static let height: CGFloat = 50
+    }
+        
+    @ObservedObject var valueModel: SliderValueModele
+    @State var choosedImageName: String = "character_normal"
+//    @Binding var value: Double
+
+    var body: some View {
+        VStack {            
+            Image("\(choosedImageName)")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 135, height: 135)
+            ZStack {
+                SwiftUISlider(thumbBorderWidth: 3,
+                              thumbBorderColor: UIColor(Colors.Primary.perfume400Purple),
+                              thumbColor: .white,
+                              minTrackColor: UIColor(Colors.Primary.lightGray),
+                              maxTrackColor: UIColor(Colors.Primary.lightGray),
+                              minValue: SliderConfigure.min,
+                              maxValue: SliderConfigure.max,
+                              value: $valueModel.value)
+                    .zIndex(1)
+                    .frame(width: (40 * CGFloat(stateTitleTexts.count) + 50), height: SliderSize.height, alignment: .leading)
+                    .onChange(of: valueModel.value) { newValue in
+                        self.changeImage(for: valueModel.value.rounded())
+                    }
+                
+                HStack {
+                    let count: Int = stateTitleTexts.count 
+                    
+                    ForEach(0..<count) { index in
+                        VStack {
+                            Image(systemName: "circle.fill")
+                                .resizable()
+                                .frame(width: 10, height: 10, alignment: .leading)
+                                .foregroundColor(Colors.Primary.lightGray)
+                        }
+                                   
+                        if index != (count - 1) {
+                            Spacer()
+                        }
+                    }
+                }
+                .frame(width: (40 * CGFloat(stateTitleTexts.count) + 50), height: SliderSize.height)
+                .padding(EdgeInsets(top: 1.5, leading: 0, bottom: 0, trailing: 0))
+            }
+            
+            Text("\(stateTitleTexts[Int(valueModel.value.rounded() / 10.0)])")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundColor(Colors.Primary.blue)
+        }
+        
+    }
+    
+    private func changeImage(for value: CGFloat) {
+        choosedImageName = imagesName[Int(value / 10.0)]
+    }
+}

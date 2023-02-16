@@ -1,0 +1,80 @@
+//
+//  BaseViewCoordinator.swift
+//  MoodTrackerSwiftUI
+//
+//  Created by ANTON DOBRYNIN on 23.10.2022.
+//
+
+import SwiftUI
+
+class BaseViewCoordinator: ObservableObject {
+    
+    // MARK: - Stored properties
+    @Published var reportCoordinator: ReportViewCoordinator!
+    @Published var mainScreenCoordinator: MainViewCoordinator!
+    @Published var journalCoordinator: JournalViewCoordinator!
+    @Published var personalCabinetCoordinator: PersonalCabinetViewCoordinator!
+    
+    @Published var moodCheckCoordinator: MoodCheckViewCoordinator!
+    @Published var activitiesCoordinator: ActivitiesViewCoodinator!
+    
+    @Published var feelingCoordinator: FeelingViewCoordinator!
+    
+    @Published var showAuthLoginView: Bool = false
+    @Published var isShowingWhyResgistration: Bool = false
+    
+    let container: DIContainer
+    
+    // MARK: - Init
+    init(container: DIContainer) {
+        self.container = container
+        
+        self.personalCabinetCoordinator = .init(
+            parent: self,
+            container: container
+        )
+        
+        self.journalCoordinator = .init(
+            parent: self,
+            container: container
+        )
+        
+        self.reportCoordinator = .init(
+            parent: self,
+            container: container
+        )
+        
+        self.mainScreenCoordinator = .init(
+            parent: self,
+            container: container
+        )
+        
+        self.feelingCoordinator = .init(
+            container: container
+        )
+        
+        self.moodCheckCoordinator = .init(
+//            parent: self,
+            container: container
+        )
+        
+        self.activitiesCoordinator = .init(
+//            parent: self,
+            container: container
+        )
+    }
+    
+    func openFeelingScreen() -> some View {
+        
+        let coordinator = MoodCheckViewCoordinator(container: container)
+        let feelingView = MoodCheckCoordinatorView(coordinator: coordinator)
+        
+        return feelingView
+    }
+    
+//    func openWhyRegistrationScreen(completion: @escaping (() -> Void)) -> some View {
+//        return WhyNeedRegistrationScreen {
+//            completion()
+//        }
+//    }
+}
