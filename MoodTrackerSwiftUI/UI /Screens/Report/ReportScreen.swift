@@ -23,6 +23,9 @@ struct ReportScreen: View {
     @State var showPlot = false
     @State var translation: CGFloat = 0
     
+    @Binding var currentDate: Date
+    @State var currentMonth: Int = 0
+    
     var body: some View {
         ScrollView {
             
@@ -34,22 +37,84 @@ struct ReportScreen: View {
                 SegmentedControlView(countOfItems: 2, segments: dateTitles, selectedIndex: $dateSelectedIndex, currentTab: dateTitles[0])
                     .padding(.top, 10)
                     .padding(.horizontal, 16)
+
                 
-                
-//                LineChartView(data: [0, 25, 40, 0, 89], title: "", form: CGSize(width: UIScreen.main.bounds.width - 16, height: 240), rateValue: nil, dropShadow: false, valueSpecifier: "%.1f процентов")
-//                    .frame(maxWidth: .infinity, maxHeight: 240, alignment: .top)
-                
-                // Chart
-                VStack {
-                    AnimationChart()
+                if dateSelectedIndex == 0 {
+                    // Chart with graph
+                    VStack {
+                        AnimationChart()
+                    }
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(.white.shadow(.drop(radius: 2)))
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    .padding()
+                } else {
+                    // Chart with Month
+                    
+                    let days: [String] = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"]
+                    
+                    HStack(spacing: 0) {
+                        ForEach(days, id: \.self) { day in
+                            Text(day)
+                                .font(.callout)
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity)
+                        }
+                    }
+                    
+                    
+                    let column = Array(repeating: GridItem(.flexible()), count: 7)
+                    
+                    LazyVGrid(columns: column, spacing: 15) {
+                        ForEach(extractDate()) { value in
+                            CardView(value: value)
+                                .background(
+                                
+                                    Capsule()
+                                        .fill(Color.red)
+                                        .padding(.horizontal, 8)
+                                        .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
+                                )
+                        }
+                    }
+                    
+                    VStack(spacing: 20) {
+                        Text("Tasks")
+                            .font(.title2.bold())
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        if let task = tasks.first(where: { task in
+                            return isSameDay(date1: task.taskDate, date2: currentDate)
+                        }) {
+                            ForEach(task.task) { task in
+                                VStack(alignment: .leading, spacing: 10) {
+                                    Text(task.time
+                                        .addingTimeInterval(CGFloat
+                                            .random(in: 0...5000)), style: .time)
+                                    
+                                    Text(task.title)
+                                        .font(.title2.bold())
+                                    
+                                }
+                                .padding(.vertical, 10)
+                                .padding(.horizontal)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .background(
+                                    Color.red
+                                        .opacity(0.5)
+                                        .clipShape(Capsule())
+                                )
+                            }
+                        } else {
+                            Text("No tasks")
+                        }
+                    }
+                    .padding()
+//                    .padding(.top, 20)
                 }
-                .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(.white.shadow(.drop(radius: 2)))
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .padding()
 
                 Capsule()
                     .fill(Color.white)
@@ -223,6 +288,7 @@ struct ReportScreen: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onChange(of: dateSelectedIndex) { newValue in
+            
             sampleAnalytics = sample_analytics
             if dateSelectedIndex != 0 {
                 for (index, _) in sampleAnalytics.enumerated() {
@@ -232,6 +298,83 @@ struct ReportScreen: View {
             
             animateGraph(fromChange: true)
         }
+    }
+    
+    @ViewBuilder
+    func CardView(value: DateValue) -> some View {
+        VStack {
+            if value.day != -1 {
+                if let task = tasks.first(where: { task in
+                    return isSameDay(date1: task.taskDate, date2: currentDate)
+                }) {
+                    Text("\(value.day)")
+                        .font(.title3.bold())
+                        .foregroundColor(isSameDay(date1: task.taskDate, date2: currentDate) ? .white : .primary)
+                        .frame(maxWidth: .infinity)
+                    
+                    Spacer()
+                    
+                    Circle()
+                        .fill(isSameDay(date1: task.taskDate, date2: currentDate) ? .white : Color.red)
+                        .frame(width: 8, height: 8)
+                    
+                } else {
+                    Text("\(value.day)")
+                        .font(.title3.bold())
+                        .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? .white : .primary)
+
+                    
+                    Spacer()
+                }
+            }
+        }
+        .padding(.vertical, 8)
+        .frame(height: 60, alignment: .top)
+    }
+    
+    func isSameDay(date1: Date, date2: Date) -> Bool {
+        let calendar = Calendar.current
+        
+        return calendar.isDate(date1, inSameDayAs: date2)
+    }
+//    func extraData() -> [String] {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "MMMM YYYY
+//
+//        let date = formatter.string(from: currentDate)
+//
+//        return date.components(separatedBy: " ")
+//
+//    }
+    
+    func getCurrentMonth() -> Date {
+        let calendar = Calendar.current
+        
+        guard let currentMonth = calendar.date(byAdding: .month, value: self.currentMonth, to: Date()) else {
+            return Date()
+        }
+        
+        return currentMonth
+    }
+    
+    func extractDate() -> [DateValue] {
+        let calendar = Calendar.current
+        
+        let currentMonth = getCurrentMonth()
+        
+        var days = currentMonth.getAllDates().compactMap { date -> DateValue in
+            let day = calendar.component(.day, from: date)
+            
+            return DateValue(day: day, date: date)
+        }
+        
+        let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
+        
+        for _ in 0..<firstWeekday - 1 {
+            days.insert(DateValue(day: -1, date: Date()), at: 0)
+        }
+        
+        return days
     }
     
     func animateGraph(fromChange: Bool = false) {
@@ -362,6 +505,13 @@ struct ReportScreen: View {
 }
 
 
+// MARK: - For CalendarData
+
+struct DateValue: Identifiable {
+    var id = UUID().uuidString
+    var day: Int
+    var date: Date
+}
 
 // MARK: - For LineGraph
 struct SiteView: Identifiable, Comparable {
@@ -380,6 +530,17 @@ extension Date {
         let calendar = Calendar.current
         return calendar.date(bySettingHour: value, minute: 0, second: 0, of: self) ?? .now
     }
+    
+    func getAllDates() -> [Date] {
+        let calendar = Calendar.current
+        
+        let startDate = calendar.date(from: Calendar.current.dateComponents([.year, .month], from: self))!
+        let range = calendar.range(of: .day, in: .month, for: startDate)!
+        
+        return range.compactMap { day -> Date in
+            return calendar.date(byAdding: .day, value: day - 1, to: startDate)!
+        }
+    }
 }
 
 var sample_analytics: [SiteView] =
@@ -390,3 +551,42 @@ var sample_analytics: [SiteView] =
         SiteView (hour: Date() .updateHour (value: 11), views: 3688,  animate: false),
         SiteView (hour: Date () .updateHour (value: 12), views: 1000,  animate: false)
     ]
+
+
+struct TaskReport: Identifiable {
+    var id = UUID().uuidString
+    var title: String
+    var time: Date = Date()
+}
+
+struct TaskMetaData: Identifiable {
+    var id = UUID().uuidString
+    var task: [TaskReport]
+    var taskDate: Date
+}
+
+func getSampleDate(offset: Int) -> Date {
+    let calender = Calendar.current
+    let date = calender.date(byAdding: .day, value: offset, to: Date())
+    
+    return date ?? Date()
+}
+
+var tasks: [TaskMetaData] = [
+    TaskMetaData(task: [
+        TaskReport(title: "Talk"),
+        TaskReport(title: "Iphoen 13"),
+        TaskReport(title: "asdasd")
+    ], taskDate: getSampleDate(offset: 1)),
+    TaskMetaData(task: [
+        TaskReport(title: "Talk"),
+    ], taskDate: getSampleDate(offset: -3)),
+    
+    TaskMetaData(task: [
+        TaskReport(title: "Talk"),
+    ], taskDate: getSampleDate(offset: 1)),
+    
+    TaskMetaData(task: [
+        TaskReport(title: "Talk"),
+    ], taskDate: getSampleDate(offset: 8)),
+]

@@ -10,10 +10,11 @@ import SwiftUI
 struct ReportCoordinatorView: View {
     
     @ObservedObject var coordinator: ReportViewCoordinator
+    @State var currentDate: Date = Date()
 
     var body: some View {        
         NavigationView {
-            ReportScreen()
+            ReportScreen(currentDate: $currentDate)
                 .navigationTitle("Отчет")
                 .navigationBarTitleDisplayMode(.large)
         }
