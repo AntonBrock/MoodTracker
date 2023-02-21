@@ -18,6 +18,7 @@ struct ReportScreen: View {
     var dateTitles: [String] = ["Неделя", "Месяц"]
     
     @State var sampleAnalytics: [SiteView] = sample_analytics
+    @State var monthDate: [TaskMetaData] = tasks
     @State var currentPlot = ""
     @State var offset: CGSize = CGSize(width: 100, height: 200)
     @State var showPlot = false
@@ -52,34 +53,36 @@ struct ReportScreen: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     .padding()
                 } else {
+                    
                     // Chart with Month
-                    
-                    let days: [String] = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"]
-                    
-                    HStack(spacing: 0) {
-                        ForEach(days, id: \.self) { day in
-                            Text(day)
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .frame(maxWidth: .infinity)
+                    VStack {
+                        let days: [String] = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"]
+                        HStack(spacing: 0) {
+                            ForEach(days, id: \.self) { day in
+                                Text(day)
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .foregroundColor(Colors.Primary.lightGray)
+                                    .frame(maxWidth: .infinity)
+                            }
+                        }
+                        .padding(.top, 16)
+                        
+                        let column = Array(repeating: GridItem(.flexible()), count: 7)
+                        LazyVGrid(columns: column, spacing: 15) {
+                            ForEach(extractDate()) { value in
+                                CardView(value: value)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 6)
+                                            .stroke(Colors.Primary.lightGray.opacity(0.5), lineWidth: 1)
+                                            .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
+                                    )
+                                    .onTapGesture {
+                                        currentDate = value.date
+                                    }
+                            }
                         }
                     }
-                    
-                    
-                    let column = Array(repeating: GridItem(.flexible()), count: 7)
-                    
-                    LazyVGrid(columns: column, spacing: 15) {
-                        ForEach(extractDate()) { value in
-                            CardView(value: value)
-                                .background(
-                                
-                                    Capsule()
-                                        .fill(Color.red)
-                                        .padding(.horizontal, 8)
-                                        .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
-                                )
-                        }
-                    }
+                    .padding(.horizontal, 16)
                     
                     VStack(spacing: 20) {
                         Text("Tasks")
@@ -287,6 +290,9 @@ struct ReportScreen: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .onChange(of: currentMonth, perform: { newValue in
+            currentDate = getCurrentMonth()
+        })
         .onChange(of: dateSelectedIndex) { newValue in
             
             sampleAnalytics = sample_analytics
@@ -305,31 +311,30 @@ struct ReportScreen: View {
         VStack {
             if value.day != -1 {
                 if let task = tasks.first(where: { task in
-                    return isSameDay(date1: task.taskDate, date2: currentDate)
+                    return isSameDay(date1: task.taskDate, date2: value.date)
                 }) {
                     Text("\(value.day)")
-                        .font(.title3.bold())
-                        .foregroundColor(isSameDay(date1: task.taskDate, date2: currentDate) ? .white : .primary)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(isSameDay(date1: task.taskDate, date2: currentDate) ? .white : Colors.Primary.blue)
                         .frame(maxWidth: .infinity)
                     
                     Spacer()
-                    
+                                        
                     Circle()
                         .fill(isSameDay(date1: task.taskDate, date2: currentDate) ? .white : Color.red)
                         .frame(width: 8, height: 8)
-                    
                 } else {
                     Text("\(value.day)")
-                        .font(.title3.bold())
-                        .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? .white : .primary)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? Colors.Primary.blue : Colors.Primary.blue)
+                        .frame(maxWidth: .infinity)
 
-                    
                     Spacer()
                 }
             }
         }
         .padding(.vertical, 8)
-        .frame(height: 60, alignment: .top)
+        .frame(height: 44, alignment: .top)
     }
     
     func isSameDay(date1: Date, date2: Date) -> Bool {
@@ -337,15 +342,16 @@ struct ReportScreen: View {
         
         return calendar.isDate(date1, inSameDayAs: date2)
     }
-//    func extraData() -> [String] {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "MMMM YYYY
-//
-//        let date = formatter.string(from: currentDate)
-//
-//        return date.components(separatedBy: " ")
-//
-//    }
+    
+    func extraData() -> [String] {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM YYYY"
+
+        let date = formatter.string(from: currentDate)
+
+        return date.components(separatedBy: " ")
+
+    }
     
     func getCurrentMonth() -> Date {
         let calendar = Calendar.current
@@ -370,7 +376,7 @@ struct ReportScreen: View {
         
         let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
         
-        for _ in 0..<firstWeekday - 1 {
+        for _ in 0..<firstWeekday - 2 {
             days.insert(DateValue(day: -1, date: Date()), at: 0)
         }
         
@@ -577,16 +583,16 @@ var tasks: [TaskMetaData] = [
         TaskReport(title: "Talk"),
         TaskReport(title: "Iphoen 13"),
         TaskReport(title: "asdasd")
-    ], taskDate: getSampleDate(offset: 1)),
+    ], taskDate: getSampleDate(offset: 3)),
     TaskMetaData(task: [
         TaskReport(title: "Talk"),
-    ], taskDate: getSampleDate(offset: -3)),
+    ], taskDate: getSampleDate(offset: -2)),
     
     TaskMetaData(task: [
         TaskReport(title: "Talk"),
-    ], taskDate: getSampleDate(offset: 1)),
+    ], taskDate: getSampleDate(offset: -5)),
     
     TaskMetaData(task: [
         TaskReport(title: "Talk"),
-    ], taskDate: getSampleDate(offset: 8)),
+    ], taskDate: getSampleDate(offset: -2)),
 ]
