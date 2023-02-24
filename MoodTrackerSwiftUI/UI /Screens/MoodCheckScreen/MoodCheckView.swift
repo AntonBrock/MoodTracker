@@ -60,7 +60,7 @@ struct MoodCheckView: View {
                         }
                     }
                 
-                Text("Как вы себя чувствуйте?")
+                Text("Как себя чувствуешь?")
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(Colors.Primary.blue)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -71,7 +71,6 @@ struct MoodCheckView: View {
             ZStack {
                 VStack {
                     ScrollView(.vertical, showsIndicators: false) {
-                        
                         ScrollViewReader { proxy in
                             VStack {
                                 VStack {

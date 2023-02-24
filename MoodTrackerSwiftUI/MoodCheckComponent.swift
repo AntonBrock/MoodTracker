@@ -27,11 +27,29 @@ struct MoodCheckComponent: View {
 //    @Binding var value: Double
 
     var body: some View {
-        VStack {            
-            Image("\(choosedImageName)")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 135, height: 135)
+        VStack {
+            ZStack {
+                VStack {}
+                    .frame(width: 170, height: 170)
+                    .overlay(
+                        Rectangle()
+                            .fill(AngularGradient(gradient:
+                                Gradient(colors:
+                                    [Color(hex: "B9C8FD").opacity(0.1),
+                                     Color(hex: "B283E4").opacity(0.5),
+                                     Color(hex: "E3A8F5").opacity(0.8)]),
+                              center: .center))
+                            .cornerRadius(82)
+                            .opacity(0.5)
+                    )
+                    .blur(radius: 20)
+                
+                Image("\(choosedImageName)")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 135, height: 135)
+            }
+            
             ZStack {
                 SwiftUISlider(thumbBorderWidth: 3,
                               thumbBorderColor: UIColor(Colors.Primary.perfume400Purple),

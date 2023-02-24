@@ -46,7 +46,6 @@ struct ActivitiesView: View {
         VStack {
             
             HStack {
-                
                 Image("leftBackBlackArror")
                     .resizable()
                     .frame(width: 24, height: 24, alignment: .center)
@@ -56,8 +55,7 @@ struct ActivitiesView: View {
                             presentationMode.wrappedValue.dismiss()
                         }
                     }
-                
-                Text("Чем вы занимались?")
+                Text("Активность")
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(Colors.Primary.blue)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -65,44 +63,57 @@ struct ActivitiesView: View {
             }
             .frame(width: UIScreen.main.bounds.width, height: 48, alignment: .center)
             
-            ScrollView {
+            VStack {
+                Text("Выбери свою активность, чтобы отслеживать как она влияет на тебя")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundColor(Colors.Primary.blue)
+                    .font(.system(size: 16, weight: .medium))
+                    .padding(.horizontal, 16)
+                    .padding(.top, 16)
+                    .multilineTextAlignment(.center)
                 
-                LazyVGrid(columns: flexibleLayout) {
+                ScrollView {
                     
-                    ForEach(0..<activitiesArrayImageName.count) { index in
-                        ZStack {
-                            ActivitiesChooseViewBlock(activitieImageTitle: activitiesArrayImageName[index], activitieTitle: activitiesArrayTitle[index])
+                    LazyVGrid(columns: flexibleLayout) {
+                        
+                        ForEach(0..<activitiesArrayImageName.count) { index in
+                            ZStack {
+                                ActivitiesChooseViewBlock(activitieImageTitle: activitiesArrayImageName[index], activitieTitle: activitiesArrayTitle[index])
+                            }
                         }
                     }
-                }
-                .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
-
-//                VStack {
-//                    LazyVGrid(columns: flexibleLayout) {
+                    .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
+                    
+                    //                VStack {
+                    //                    LazyVGrid(columns: flexibleLayout) {
+                    //
+                    //                        ForEach(0..<activitiesArrayImageName.count) { index in
+                    //                            ZStack {
+                    //                                ActivitiesChooseViewBlock(activitieImageTitle: activitiesArrayImageName[index], activitieTitle: activitiesArrayTitle[index])
+                    //                            }
+                    //                        }
+                    //                    }
+                    //                }
+                    //                .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
+                    
+                    #warning("TODO: Нужно будет в другом месте, это выбор фото и мыслей")
+//                    VStack {
+//                        ActivitiesTextViewBlock(type: .activities)
+//                            .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
 //
-//                        ForEach(0..<activitiesArrayImageName.count) { index in
-//                            ZStack {
-//                                ActivitiesChooseViewBlock(activitieImageTitle: activitiesArrayImageName[index], activitieTitle: activitiesArrayTitle[index])
-//                            }
-//                        }
+//                        Spacer()
+//
 //                    }
-//                }
-//                .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
-                
-                VStack{
-                    ActivitiesTextViewBlock(type: .activities)
-                        .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
-                    
-                    Spacer()
-                    
-                    MTButton(buttonStyle: .fill, title: "Сохранить", handle: {
-                        print("next")
-                    })
-                    .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
+                .padding(.top, 36)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                MTButton(buttonStyle: .fill, title: "Продолжить", handle: {
+                    print("next")
+                })
+                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
