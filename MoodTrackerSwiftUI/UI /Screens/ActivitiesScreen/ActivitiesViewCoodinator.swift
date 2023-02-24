@@ -10,8 +10,7 @@ import SwiftUI
 class ActivitiesViewCoodinator: ObservableObject, Identifiable {
     
     private let container: DIContainer
-//    private unowned let parent: BaseViewCoordinator
-        
+            
     // MARK: - Init
     init(
 //        parent: BaseViewCoordinator,

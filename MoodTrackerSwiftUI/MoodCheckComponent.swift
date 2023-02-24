@@ -12,6 +12,8 @@ struct MoodCheckComponent: View {
     var imagesName: [String] = ["character_veryBad", "character_bad", "character_normal", "сharacter_good", "character_veryGood"]
     var stateTitleTexts: [String] = ["Очень плохо", "Плохо", "Нормально", "Хорошо", "Лучше всех"]
     
+    var stateStressTitleText: [String] = ["Низкий стресс", "Средний стресс", "Высокий стресс"]
+    
     struct SliderConfigure {
         static let min: CGFloat = 0
         static let max: CGFloat = 40
@@ -23,6 +25,7 @@ struct MoodCheckComponent: View {
     }
         
     @ObservedObject var valueModel: SliderValueModele
+    
     @State var choosedImageName: String = "character_normal"
 //    @Binding var value: Double
 

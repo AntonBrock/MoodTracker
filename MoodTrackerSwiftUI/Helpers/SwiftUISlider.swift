@@ -54,7 +54,6 @@ struct SwiftUISlider: UIViewRepresentable {
         @objc func valueChanged(_ sender: UISlider) {
             
             let roundedValue = Float(round(sender.value / 10) * 10).rounded(.toNearestOrEven)
-            
             self.value.wrappedValue = Double(roundedValue)
 
         }

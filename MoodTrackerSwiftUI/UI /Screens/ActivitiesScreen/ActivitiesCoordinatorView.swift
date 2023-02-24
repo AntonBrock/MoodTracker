@@ -12,6 +12,8 @@ struct ActivitiesCoordinatorView: View {
     @ObservedObject var coordinator: ActivitiesViewCoodinator
     
     var body: some View {
-        ActivitiesView(container: .live, coordinator: coordinator)
+        NavigationStack {
+            ActivitiesView(container: .live, coordinator: coordinator)
+        }
     }
 }

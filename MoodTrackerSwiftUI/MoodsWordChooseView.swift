@@ -54,6 +54,7 @@ struct MoodsWordChooseView: View {
     private let flexibleLayout = Array(repeating: GridItem(.flexible(), spacing: 15), count: 4)
 
     @ObservedObject var valueModel: SliderValueModele
+    
 //    @Binding var value: Double
     
     @State var selectedMoodId: String = "" // later change string to Int

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4509075829A8C46800815892 /* StressCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509075729A8C46800815892 /* StressCheckView.swift */; };
+		4509076129A8D03800815892 /* StressCheckComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509076029A8D03800815892 /* StressCheckComponent.swift */; };
 		4509716928D1FF08000FF0AE /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509716828D1FF08000FF0AE /* Colors.swift */; };
 		450FED25296BCC5F005D2467 /* CalendarRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450FED24296BCC5F005D2467 /* CalendarRange.swift */; };
 		451E6BB929056EE50048714B /* AppState .swift in Sources */ = {isa = PBXBuildFile; fileRef = 451E6BB829056EE50048714B /* AppState .swift */; };
@@ -121,6 +123,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4509075729A8C46800815892 /* StressCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressCheckView.swift; sourceTree = "<group>"; };
+		4509076029A8D03800815892 /* StressCheckComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressCheckComponent.swift; sourceTree = "<group>"; };
 		4509716828D1FF08000FF0AE /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4509717128D20FAF000FF0AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		450FED24296BCC5F005D2467 /* CalendarRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRange.swift; sourceTree = "<group>"; };
@@ -250,6 +254,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4509075629A8C44800815892 /* StressCheckScreen */ = {
+			isa = PBXGroup;
+			children = (
+				4509075D29A8CFF400815892 /* Views */,
+				4509075729A8C46800815892 /* StressCheckView.swift */,
+			);
+			path = StressCheckScreen;
+			sourceTree = "<group>";
+		};
+		4509075D29A8CFF400815892 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4509076029A8D03800815892 /* StressCheckComponent.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		451E6BAF29056E6B0048714B /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +380,7 @@
 				4551C3EC295995D20034665E /* FeelingScreen */,
 				453AAC25295DBFD400CE0F15 /* MoodCheckScreen */,
 				456AA722296E9E9900BD414B /* ActivitiesScreen */,
+				4509075629A8C44800815892 /* StressCheckScreen */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -756,6 +778,7 @@
 				45A132FE2965C01700EA21A1 /* CalendarViewRepresentable.swift in Sources */,
 				451E6BB929056EE50048714B /* AppState .swift in Sources */,
 				45E750372920B7B300CF9E21 /* ServiceProvider.swift in Sources */,
+				4509076129A8D03800815892 /* StressCheckComponent.swift in Sources */,
 				456750B029744FB100392992 /* LoginView.swift in Sources */,
 				45B459AC29921D5800890CC9 /* PieSliceView.swift in Sources */,
 				451E6BBB29056EEB0048714B /* Services.swift in Sources */,
@@ -815,6 +838,7 @@
 				4551C3F2295996070034665E /* FeelingCoordinatorView.swift in Sources */,
 				45E750312920B6E700CF9E21 /* BaseAPI.swift in Sources */,
 				45F88C0B28D8750C00AB6153 /* MTButton.swift in Sources */,
+				4509075829A8C46800815892 /* StressCheckView.swift in Sources */,
 				453399CE299124D600ED1359 /* SCDonutChartView.swift in Sources */,
 				45319EF2296FBAC300D58DCF /* ImagePicker.swift in Sources */,
 				45319EF0296FBAB100D58DCF /* GalleryPhotoPicker.swift in Sources */,

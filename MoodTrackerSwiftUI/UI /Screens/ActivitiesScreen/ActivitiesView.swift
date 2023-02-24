@@ -14,6 +14,8 @@ struct ActivitiesView: View {
     let container: DIContainer
     private unowned let coordinator: ActivitiesViewCoodinator
     
+    @State var isShowStressScreen: Bool = false
+    
     init(
         container: DIContainer,
         coordinator: ActivitiesViewCoodinator
@@ -23,7 +25,6 @@ struct ActivitiesView: View {
     }
     
     private let flexibleLayout = Array(repeating: GridItem(.flexible(), spacing: 10), count: 4)
-    
     private var activitiesArrayImageName: [String] =
     [
         "anguished face", "face with open mouth and cold sweat", "face with cold sweat", "disappointed but relieved face",
@@ -82,7 +83,7 @@ struct ActivitiesView: View {
                             }
                         }
                     }
-                    .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
+                    .padding(EdgeInsets(top: 10, leading: 16, bottom: 0, trailing: 16))
                     
                     //                VStack {
                     //                    LazyVGrid(columns: flexibleLayout) {
@@ -96,21 +97,20 @@ struct ActivitiesView: View {
                     //                }
                     //                .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
                     
-                    #warning("TODO: Нужно будет в другом месте, это выбор фото и мыслей")
-//                    VStack {
-//                        ActivitiesTextViewBlock(type: .activities)
-//                            .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
-//
-//                        Spacer()
-//
-//                    }
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .padding(.top, 36)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
+                NavigationLink(
+                    isActive: $isShowStressScreen,
+                    destination: {
+                        StressCheckView()
+                            .navigationBarHidden(true)
+                    },
+                    label: {}
+                )
+                
                 MTButton(buttonStyle: .fill, title: "Продолжить", handle: {
-                    print("next")
+                    isShowStressScreen.toggle()
                 })
                 .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
             }
@@ -128,18 +128,26 @@ struct ActivitiesChooseViewBlock: View {
 
     var body: some View {
 
-        VStack {
+        VStack(spacing: 1) {
             Image("\(activitieImageTitle)")
                 .resizable()
-                .frame(width: 25.0, height: 25.0)
-                .padding()
-                .background(isSelected ? Colors.Secondary.shamrock600Green : Colors.TextColors.athensGray300)
-                .cornerRadius(30)
+                .frame(width: 38, height: 38)
             Text("\(activitieTitle)")
-                .font(Fonts.InterRegular16)
-                .foregroundColor(Colors.TextColors.slateGray700)
-                .frame(alignment: .center)
+                .font(.system(size: 12, weight: .medium))
+                .foregroundColor(Colors.Primary.blue)
+                .padding(.top, 10)
         }
+        .frame(width: 80, height: 87)
+        .background(.white)
+        .cornerRadius(10)
+        .shadow(color: Colors.TextColors.mystic400, radius: 6.0, x: 0, y: 0)
+        .overlay {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(isSelected ?
+                        Colors.Primary.royalPurple600Purple :
+                        .white, lineWidth: 1)
+        }
+        .padding(.top, 16)
         .onTapGesture {
             isSelected.toggle()
         }

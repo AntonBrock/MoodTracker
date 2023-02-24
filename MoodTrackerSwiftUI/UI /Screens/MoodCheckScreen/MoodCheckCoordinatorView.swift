@@ -20,9 +20,13 @@ struct MoodCheckCoordinatorView: View {
             MoodCheckView(container: .live, coordinator: coordinator,
                           valueModel: SliderValueModele())
             .navigation(item: $coordinator.activitiesViewCoordinator) {
-                    ActivitiesView(container: .live, coordinator: $0)
+                ActivitiesView(container: .live, coordinator: $0)
                     .navigationBarHidden(true)
                 }
+//            .navigation(item: $coordinator.stressViewCoordinator) {
+//                StressCheckView(container: .live, coordinator: $0)
+//                    .navigationBarHidden(true)
+//            }
         }
     }
 }
