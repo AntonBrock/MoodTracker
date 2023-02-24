@@ -22,6 +22,7 @@ struct ReportScreen: View {
     @State var currentPlot = ""
     @State var offset: CGSize = CGSize(width: 100, height: 200)
     @State var showPlot = false
+    @State var showDaylyMonthDetails: Bool = false
     @State var translation: CGFloat = 0
     
     @Binding var currentDate: Date
@@ -77,46 +78,102 @@ struct ReportScreen: View {
                                             .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
                                     )
                                     .onTapGesture {
-                                        currentDate = value.date
+                                        guard tasks.first(where: { task in
+                                            currentDate = value.date
+                                            showDaylyMonthDetails = true
+                                            return isSameDay(date1: task.taskDate, date2: currentDate)
+                                        }) != nil else {
+                                            currentDate = value.date
+                                            showDaylyMonthDetails = false
+                                            return
+                                        }
                                     }
                             }
                         }
                     }
                     .padding(.horizontal, 16)
                     
-                    VStack(spacing: 20) {
-                        Text("Tasks")
-                            .font(.title2.bold())
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        if let task = tasks.first(where: { task in
-                            return isSameDay(date1: task.taskDate, date2: currentDate)
-                        }) {
-                            ForEach(task.task) { task in
-                                VStack(alignment: .leading, spacing: 10) {
-                                    Text(task.time
-                                        .addingTimeInterval(CGFloat
-                                            .random(in: 0...5000)), style: .time)
-                                    
-                                    Text(task.title)
-                                        .font(.title2.bold())
-                                    
+                    if showDaylyMonthDetails {
+                        VStack(spacing: 20) {
+                            Text("\(currentDate)")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(Colors.Primary.blue)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                            
+                            if let task = tasks.first(where: { task in
+                                return isSameDay(date1: task.taskDate, date2: currentDate)
+                            }) {
+                                ForEach(task.task) { task in
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        HStack {
+                                            HStack(spacing: 16) {
+                                                ZStack {
+                                                    VStack{}
+                                                        .background(
+                                                            Circle()
+                                                                .fill(.blue)
+                                                                .frame(width: 50, height: 50)
+                                                            
+                                                        )
+                                                    VStack{}
+                                                        .background(
+                                                            ZStack {
+                                                                Circle()
+                                                                    .fill(.white)
+                                                                    .frame(width: 24, height: 24)
+                                                                
+                                                                Circle()
+                                                                    .fill(.red)
+                                                                    .frame(width: 20, height: 20)
+                                                            }
+                                                            
+                                                            
+                                                        )
+                                                        .padding(.top, 26)
+                                                        .padding(.leading, 26)
+                                                }
+                                                .frame(width: 50, height: 50)
+                                                .padding(.leading, 5)
+                                                .padding(.vertical, 9)
+                                            }
+                                            
+                                            VStack(spacing: 6) {
+                                                Text(task.title)
+                                                    .font(.system(size: 16, weight: .regular))
+                                                    .foregroundColor(Colors.Primary.blue)
+                                                
+                                                #warning("TODO: После получения данных сделать ForEach")
+                                                Image("emoji_cool")
+                                                    .resizable()
+                                                    .frame(width: 12, height: 12)
+                                                    .padding(.leading, -12)
+                                            }
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            
+                                            Spacer()
+                                            
+                                            Text(task.time
+                                                .addingTimeInterval(CGFloat
+                                                    .random(in: 0...5000)), style: .time)
+                                            .foregroundColor(Colors.Primary.lightGray)
+                                            .font(.system(size: 11, weight: .regular))
+                                        }
+                                        
+                                    }
+                                    .padding(.vertical, 10)
+                                    .padding(.horizontal)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(
+                                        Color.white
+                                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                                            .shadow(color: Colors.TextColors.cadetBlue600.opacity(0.5), radius: 5)
+                                    )
                                 }
-                                .padding(.vertical, 10)
-                                .padding(.horizontal)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .background(
-                                    Color.red
-                                        .opacity(0.5)
-                                        .clipShape(Capsule())
-                                )
                             }
-                        } else {
-                            Text("No tasks")
                         }
+                        .padding()
+                        //                    .padding(.top, 20)
                     }
-                    .padding()
-//                    .padding(.top, 20)
                 }
 
                 Capsule()
@@ -148,27 +205,6 @@ struct ReportScreen: View {
                         .cornerRadius(16)
                     }
                     .shadow(color: Colors.Primary.lightGray.opacity(0.2), radius: 5, x: 0, y: 0)
-
-//                HStack {
-//                    PieChartView(
-//                        values: [10, 20, 60, 0, 10],
-//                        names: ["Очень хорошо", "Хорошо", "Нормально", "Плохо", "Очень плохо"],
-//                        formatter: {value in String(format: "$%.2f", value)},
-//                        colors: [Color(hex: "FFC794"), Color(hex: "86E9C5"), Color(hex: "B283E4"), Color(hex: "B9C8FD"), Color(hex: "F5DADA")],
-//                        backgroundColor: .white
-//                    )
-//                    .frame(width: UIScreen.main.bounds.width, height: 200, alignment: .center)
-////                    .clipped()
-//                }
-//                .frame(width: UIScreen.main.bounds.width - 32, height: 200, alignment: .center)
-//                .background(
-//                    RoundedRectangle(cornerRadius: 10)
-//                        .foregroundColor(.red)
-//                        .padding(.leading, 10)
-//                        .padding(.trailing, 10)
-////                            .shadow(color: Colors.Primary.lightGray.opacity(0.5), radius: 5, x: 0, y: 0)
-//                )
-////                .clipped()
                 
                 Capsule()
                     .fill(Color.white)
@@ -319,10 +355,17 @@ struct ReportScreen: View {
                         .frame(maxWidth: .infinity)
                     
                     Spacer()
-                                        
-                    Circle()
-                        .fill(isSameDay(date1: task.taskDate, date2: currentDate) ? .white : Color.red)
-                        .frame(width: 8, height: 8)
+                    
+                    if isSameDay(date1: task.taskDate, date2: value.date) {
+                        HStack(spacing: 1) {
+                            ForEach (task.task) { taskSub in
+                                Circle()
+                                    .fill(Color.red)
+                                    .frame(width: 5, height: 5)
+                            }
+                        }
+                    }
+                   
                 } else {
                     Text("\(value.day)")
                         .font(.system(size: 16, weight: .medium))
