@@ -40,7 +40,7 @@ struct StressCheckView: View {
             .frame(width: UIScreen.main.bounds.width, height: 48, alignment: .center)
             
             StressCheckComponent(value: $value)
-                .padding(.top, -20)
+                .padding(.top, 50)
                 .id(1)
             
             VStack {

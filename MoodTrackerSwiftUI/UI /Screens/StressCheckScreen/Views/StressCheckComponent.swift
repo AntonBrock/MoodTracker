@@ -34,32 +34,87 @@ struct StressCheckComponent: View {
     var body: some View {
         VStack {
             HStack(spacing: 15 * CGFloat(stateStressTitleText.count)) {
-                Image(firstImage)
-                    .resizable()
-                    .scaledToFit()
+                
+                ZStack {
+                    VStack{}
                     .frame(width: choosedImageName == firstImage ? 60 : 30,
                            height: choosedImageName == firstImage ? 60 : 30)
-                    .transition(.scale)
-                
-                Image(secondImage)
-                    .resizable()
-                    .scaledToFit()
+                    .overlay(
+                        Rectangle()
+                            .fill(AngularGradient(gradient:
+                                Gradient(colors:
+                                    [Color(hex: "C9F0E2").opacity(1),
+                                     Color(hex: "33D299").opacity(1)]),
+                              center: .center))
+                            .cornerRadius(82)
+                            .opacity(0.5)
+                    )
+                    .blur(radius: 20)
+                    
+                    Image(firstImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: choosedImageName == firstImage ? 60 : 30,
+                               height: choosedImageName == firstImage ? 60 : 30)
+                        .transition(.scale)
+                }
+               
+                ZStack {
+                    VStack{}
                     .frame(width: choosedImageName == secondImage ? 60 : 30,
                            height: choosedImageName == secondImage ? 60 : 30)
-                    .transition(.scale)
+                    .overlay(
+                        Rectangle()
+                            .fill(AngularGradient(gradient:
+                                Gradient(colors:
+                                    [Color(hex: "CDA8F5").opacity(1),
+                                     Color(hex: "B283E4").opacity(1),
+                                     Color(hex: "B9C8FD").opacity(1)]),
+                              center: .center))
+                            .cornerRadius(82)
+                            .opacity(0.5)
+                    )
+                    .blur(radius: 20)
+                    
+                    Image(secondImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: choosedImageName == secondImage ? 60 : 30,
+                               height: choosedImageName == secondImage ? 60 : 30)
+                        .transition(.scale)
+                }
                 
-                Image(thirdImage)
-                    .resizable()
-                    .scaledToFit()
+                ZStack {
+                    VStack{}
                     .frame(width: choosedImageName == thirdImage ? 60 : 30,
                            height: choosedImageName == thirdImage ? 60 : 30)
-                    .transition(.scale)
+                    .overlay(
+                        Rectangle()
+                            .fill(AngularGradient(gradient:
+                                Gradient(colors:
+                                    [Color(hex: "FFC8C8").opacity(1),
+                                     Color(hex: "F95555").opacity(1)]),
+                              center: .center))
+                            .cornerRadius(82)
+                            .opacity(0.5)
+                    )
+                    .blur(radius: 20)
+                    
+                    Image(thirdImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: choosedImageName == thirdImage ? 60 : 30,
+                               height: choosedImageName == thirdImage ? 60 : 30)
+                        .transition(.scale)
+                }
             }
-            
+
             ZStack {
                 SwiftUISlider(thumbBorderWidth: 3,
-                              thumbBorderColor: UIColor(Colors.Primary.perfume400Purple),
-                              thumbColor: .white,
+                              thumbBorderColor: .white,
+                              thumbColor: choosedImageName == firstImage ? UIColor(Colors.Secondary.riptide500Green)
+                              : choosedImageName == secondImage ? UIColor(Colors.Primary.perfume400Purple)
+                              : UIColor(Color(hex: "F95555")),
                               minTrackColor: UIColor(Colors.Primary.lightGray),
                               maxTrackColor: UIColor(Colors.Primary.lightGray),
                               minValue: SliderConfigure.min,
@@ -91,11 +146,18 @@ struct StressCheckComponent: View {
                 .padding(EdgeInsets(top: 1.5, leading: 0, bottom: 0, trailing: 0))
             }
             
-            Text("\(stateStressTitleText[Int(value.rounded() / 10.0)])")
-                .font(.system(size: 24, weight: .bold))
-                .foregroundColor(Colors.Primary.blue)
+            VStack(spacing: 8) {
+                Text("\(stateStressTitleText[Int(value.rounded() / 10.0)])")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(Colors.Primary.blue)
+                    .padding(.bottom, -5)
+                
+                Text("У тебя есть беспокоящие мысли?")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(Colors.Primary.blue)
+            }
+            .padding(.top, 32)
         }
-        
     }
     
     private func changeImage(for value: CGFloat) {
