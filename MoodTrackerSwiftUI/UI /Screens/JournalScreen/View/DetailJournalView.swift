@@ -53,17 +53,19 @@ struct DetailJournalView: View {
         ScrollView {
             headerView()
                 .frame(height: 240)
-                .background(
-                    GradientRoundedCornersView(gradient: [Color(hex: "FFD7B1"), Color(hex: "FEF7F1")], tl: 0, tr: 0, bl: 10, br: 10)
-                )
+                .background(GradientRoundedCornersView(gradient: [Color(hex: "FFD7B1"),
+                                                                  Color(hex: "FEF7F1")],
+                                                       tl: 0, tr: 0, bl: 10, br: 10))
+            
             VStack {
-                VStack(spacing: 12) {
-                    Text("ЧЕМ ВЫ ЗАНИМАЛИСЬ")
-                        .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
-                        .foregroundColor(Colors.Primary.lightGray)
-                        .font(.system(size: 12))
-
-                    ScrollView(.horizontal, showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Активность")
+                        .foregroundColor(Colors.Primary.blue)
+                        .font(.system(size: 16, weight: .semibold))
+                        .padding(.leading, 16)
+                    
+                    ScrollView(.horizontal,
+                               showsIndicators: false) {
                         LazyHGrid(rows: column, spacing: 8) {
                             ForEach(0..<mockData.count, id: \.self) { i in
                                 HStack {
@@ -81,19 +83,17 @@ struct DetailJournalView: View {
                             }
                         }
                         .frame(height: 32)
-                        .padding(.horizontal, 16)
                     }
                     .frame(height: 68)
-                    .background(.white)
+                    .padding(.horizontal, 16)
                 }
-                .background(Colors.Primary.lightWhite)
-                .padding(.top, -10)
+                .background(.white)
 
-                VStack(spacing: 12) {
-                    Text("ВАШИ ЧУВСТВА")
-                        .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
-                        .foregroundColor(Colors.Primary.lightGray)
-                        .font(.system(size: 12))
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Чувства")
+                        .foregroundColor(Colors.Primary.blue)
+                        .font(.system(size: 16, weight: .semibold))
+                        .padding(.leading, 16)
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHGrid(rows: column, spacing: 8) {
@@ -115,51 +115,65 @@ struct DetailJournalView: View {
                                         .shadow(color: Colors.TextColors.mystic400, radius: 4, x: 0, y: 0)
                                 )
                                 .frame(width: 80, height: 90)
-                                .background(.white)
                             }
                         }
                         .frame(height: 150)
-                        .padding(.horizontal, 16)
                     }
-                    .background(.white)
+                    .padding(.leading, 16)
                 }
-                .background(Colors.Primary.lightWhite)
-                .padding(.top, -10)
+                .background(.white)
 
-                VStack(spacing: 12) {
-                    Text("ВАШИ МЫСЛИ")
-                        .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
-                        .foregroundColor(Colors.Primary.lightGray)
-                        .font(.system(size: 12))
+                HStack {
+                    Text("Уровень стресса")
+                        .foregroundColor(Colors.Primary.blue)
+                        .font(.system(size: 16, weight: .semibold))
+                        .padding(.leading, 16)
+
+                    Spacer()
+                    
+                    HStack(spacing: 10) {
+                        ZStack {
+                            Circle()
+                                .fill(.white)
+                                .frame(width: 16, height: 16)
+                            
+                            Circle()
+                                .fill(Colors.Primary.lavender500Purple)
+                                .frame(width: 12, height: 12)
+                        }
+                        
+                        Text("Средний стресс")
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundColor(Colors.Primary.blue)
+                    }
+                    .padding(.trailing, 16)
+                }
+                .background(.white)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Divider()
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Твои мысли")
+                        .foregroundColor(Colors.Primary.blue)
+                        .font(.system(size: 16, weight: .semibold))
 
                     VStack {
                         Text("Дневник благодарности - практика, позволяющая вам бла бла бла бла бла бла бла бла бла бла блаб блаблабла блаб балб аблаб бал ")
                             .foregroundColor(.black)
                             .font(.system(size: 16))
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80, maximum: 80))], spacing: 16) {
-                            ForEach(0..<mockDataFeeling.count, id: \.self) { i in
-                                Image("\(mockDataFeeling[i].image)")
-                                    .resizable()
-                                    .frame(width: 80, height: 80)
-                                    .cornerRadius(10)
-                            }
-                        }
-                        .padding(.top, 24)
                     }
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 16)
-                    .background(.white)
-
+                    .padding(.top, 11)
                 }
-                .background(Colors.Primary.lightWhite)
-                .padding(.top, -10)
+                .background(.white)
+                .padding(.top, 10)
+                .padding(.bottom, 240)
+                .padding(.leading, 16)
             }
-//            .gesture(DragGesture(minimumDistance: 0).onChanged(onChanged(value:)).onEnded(onEnded(value:)))
+            .padding(.top, 24)
         }
         .matchedGeometryEffect(id: model.id, in: animation)
-//        .scaleEffect(scale)
         .ignoresSafeArea(.all, edges: .top)
     }
     
