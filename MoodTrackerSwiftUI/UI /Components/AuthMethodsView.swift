@@ -12,6 +12,7 @@ struct AuthMethodsView: View {
     
     @State var bottomSheetPosition: BottomSheetPosition = .dynamic
     var dismiss: (() -> Void)
+    var openAboutRegistration: (() -> Void)
     
     var body: some View {
         VStack {}
@@ -54,7 +55,7 @@ struct AuthMethodsView: View {
                 .padding(.top, 14)
                 
                 Button {
-                    print("show new screen")
+                    openAboutRegistration()
                     
                     bottomSheetPosition = .absolute(0)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {

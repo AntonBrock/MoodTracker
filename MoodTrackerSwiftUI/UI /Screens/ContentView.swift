@@ -27,13 +27,26 @@ struct ContentView: View {
                     withAnimation {
                         coordinator.showAuthLoginView.toggle()
                     }
+                }, openAboutRegistration: {
+                    withAnimation {
+                        coordinator.isShowingWhyResgistration.toggle()
+                    }
                 })
                 .zIndex(999999)
-                                
-//                                , openAboutRegistration: {
-//                                    coordinator.isShowingWhyResgistration.toggle()
-//                                })
-//                                .transition(.move(edge: .bottom))
+            }
+            
+            if coordinator.isShowingWhyResgistration {
+                WhyRegistrationInfoView {
+                    withAnimation {
+                        coordinator.isShowingWhyResgistration.toggle()
+                    }
+                    withAnimation {
+                        coordinator.showAuthLoginView.toggle()
+                    }
+                } dismiss: {
+                    coordinator.isShowingWhyResgistration.toggle()
+                }
+                .transition(.move(edge: .bottom))
             }
         }
     }

@@ -73,7 +73,7 @@ class BaseViewCoordinator: ObservableObject {
     }
     
 //    func openWhyRegistrationScreen(completion: @escaping (() -> Void)) -> some View {
-//        return WhyNeedRegistrationScreen {
+//        return WhyRegistrationInfoView {
 //            completion()
 //        }
 //    }
