@@ -90,6 +90,8 @@
 		456AA726296E9FC200BD414B /* ActivitiesCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456AA725296E9FC200BD414B /* ActivitiesCoordinatorView.swift */; };
 		4570B8C22985144B0063E2DC /* AuthMethodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4570B8C12985144B0063E2DC /* AuthMethodsView.swift */; };
 		4579220E28CF4FBD00722D16 /* SwiftUISlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4579220D28CF4FBD00722D16 /* SwiftUISlider.swift */; };
+		457A886029A9FC6F00FC7BBB /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 457A885F29A9FC6F00FC7BBB /* GoogleSignIn */; };
+		457A886229A9FC6F00FC7BBB /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 457A886129A9FC6F00FC7BBB /* GoogleSignInSwift */; };
 		459390DE28F2E27400A94902 /* ReportScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459390DD28F2E27300A94902 /* ReportScreen.swift */; };
 		459390E028F2E5C700A94902 /* SegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459390DF28F2E5C700A94902 /* SegmentedControlView.swift */; };
 		459797F8295A88220059CAC2 /* DetailJournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459797F7295A88220059CAC2 /* DetailJournalView.swift */; };
@@ -136,7 +138,6 @@
 		451E6BC7290577220048714B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		451E6BC9290578130048714B /* ReportViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewCoordinator.swift; sourceTree = "<group>"; };
 		451E6BCB290578360048714B /* ReportCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCoordinatorView.swift; sourceTree = "<group>"; };
-		4523F3D7298B8C430006F81B /* WhyNeedRegistrationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyNeedRegistrationScreen.swift; sourceTree = "<group>"; };
 		452AD1B928DB4D9B00225F96 /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
 		452AD1BB28DDBAD200225F96 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		452AD1BD28E1E75200225F96 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
@@ -241,7 +242,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				457A886229A9FC6F00FC7BBB /* GoogleSignInSwift in Frameworks */,
 				45C338F82983F2E70043E26C /* BottomSheet in Frameworks */,
+				457A886029A9FC6F00FC7BBB /* GoogleSignIn in Frameworks */,
 				45316885295D76FA003AC601 /* SwiftUIDatePickerDialog in Frameworks */,
 				45B459A829921C9D00890CC9 /* SwiftPieChart in Frameworks */,
 				45E750472920BC2D00CF9E21 /* Moya in Frameworks */,
@@ -410,14 +413,6 @@
 			path = Charts;
 			sourceTree = "<group>";
 		};
-		4523F3D6298B8C360006F81B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				4523F3D7298B8C430006F81B /* WhyNeedRegistrationScreen.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		452D35112951A8570018A3DA /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,7 +453,6 @@
 		452D35462951CEA80018A3DA /* PersonalCabinet */ = {
 			isa = PBXGroup;
 			children = (
-				4523F3D6298B8C360006F81B /* View */,
 				452D35472951CED40018A3DA /* PersonalCabinetView.swift */,
 				452D35492951CEDD0018A3DA /* PersonalCabinetViewCoordinator.swift */,
 				452D354B2951CEE70018A3DA /* PersonalCabinetCoordinatorView.swift */,
@@ -691,6 +685,8 @@
 				45C338F72983F2E70043E26C /* BottomSheet */,
 				453399C42990C8BC00ED1359 /* SwiftUICharts */,
 				45B459A729921C9D00890CC9 /* SwiftPieChart */,
+				457A885F29A9FC6F00FC7BBB /* GoogleSignIn */,
+				457A886129A9FC6F00FC7BBB /* GoogleSignInSwift */,
 			);
 			productName = MoodTrackerSwiftUI;
 			productReference = 4539308628C88EC000A5D828 /* MoodTrackerSwiftUI.app */;
@@ -728,6 +724,7 @@
 				45C338F62983F2E70043E26C /* XCRemoteSwiftPackageReference "BottomSheet" */,
 				453399C32990C8BC00ED1359 /* XCRemoteSwiftPackageReference "ChartView" */,
 				45B459A629921C9D00890CC9 /* XCRemoteSwiftPackageReference "SwiftPieChart" */,
+				457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 4539308728C88EC000A5D828 /* Products */;
 			projectDirPath = "";
@@ -1088,6 +1085,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		45A132FA2965BE5C00EA21A1 /* XCRemoteSwiftPackageReference "HorizonCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/HorizonCalendar.git";
@@ -1137,6 +1142,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4535635228FAACD7008975C1 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */;
 			productName = WrappingStack;
+		};
+		457A885F29A9FC6F00FC7BBB /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		457A886129A9FC6F00FC7BBB /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 		45A132FB2965BE5C00EA21A1 /* HorizonCalendar */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -28,6 +28,7 @@ struct ContentView: View {
                         coordinator.showAuthLoginView.toggle()
                     }
                 })
+                .zIndex(999999)
                                 
 //                                , openAboutRegistration: {
 //                                    coordinator.isShowingWhyResgistration.toggle()

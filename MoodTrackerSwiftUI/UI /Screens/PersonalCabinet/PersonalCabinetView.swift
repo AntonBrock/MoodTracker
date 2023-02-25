@@ -22,7 +22,6 @@ struct PersonalCabinetView: View {
     var body: some View {
         
         ScrollView {
-            
             CreateLoginView("", isLogin: false)
                 .background(.white)
                 .padding(.top, 16)

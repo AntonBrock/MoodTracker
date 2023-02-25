@@ -16,7 +16,8 @@ struct AuthMethodsView: View {
     var body: some View {
         VStack {}
         .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
-        .bottomSheet(bottomSheetPosition: $bottomSheetPosition, switchablePositions: [.dynamic]) {
+        .bottomSheet(bottomSheetPosition: $bottomSheetPosition,
+                     switchablePositions: [.dynamic]) {
             VStack(spacing: 0) {
                 Text("Персональный\nпомощник")
                     .frame(maxWidth: .infinity, alignment: .center)
