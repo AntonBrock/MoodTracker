@@ -8,30 +8,22 @@
 import SwiftUI
 import HorizonCalendar
 
-class SliderValueModele: ObservableObject {
-    @Published var value: Double = 20
-}
-
 struct MoodCheckView: View {
     
     @Environment(\.dismiss) var dismiss
-
-//    @Binding var isShowingMoodCheckView: Bool
     @ObservedObject var valueModel: SliderValueModele
-//    @Binding var value: Double
-
+    @State var value: Double = 20
+    
     let container: DIContainer
     private unowned let coordinator: MoodCheckViewCoordinator
     
     init(container: DIContainer,
          coordinator: MoodCheckViewCoordinator,
          valueModel: SliderValueModele
-//         isShowingMoodCheckView: Binding<Bool>
         ){
         self.container = container
         self.coordinator = coordinator
         self.valueModel = valueModel
-//        self._isShowingMoodCheckView = isShowingMoodCheckView
     }
     
     @State private var date = Date()
@@ -98,7 +90,8 @@ struct MoodCheckView: View {
                                 }
                                 .padding(.top, 10)
                                 
-                                MoodCheckComponent(valueModel: valueModel)
+                                MoodCheckComponent(valueModel: valueModel,
+                                                   value: $value)
                                     .padding(.top, 15)
                                 
                                 MoodsWordChooseView(valueModel: valueModel)
@@ -157,7 +150,6 @@ struct MoodCheckView: View {
                     }
                     
                     CalendarViewRepresentable(selectedDay: selectedDay, onSelect: { day in
-                        
                         self.selectedDay = day
                     })
                     

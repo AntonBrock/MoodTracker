@@ -7,26 +7,22 @@
 
 import SwiftUI
 
+class SliderValueModele: ObservableObject {
+    @Published var value: Double = 20
+}
+
 struct MoodCheckCoordinatorView: View {
     
     @ObservedObject var coordinator: MoodCheckViewCoordinator
     
-//    @Binding var isNeedToShowActivities: Bool
-//    @Binding var isShowingMoodCheckView: Bool
-//    @State var value: Double = 20
-    
     var body: some View {
         NavigationView {
             MoodCheckView(container: .live, coordinator: coordinator,
-                          valueModel: SliderValueModele())
+                          valueModel: coordinator.sliderValueModele!)
             .navigation(item: $coordinator.activitiesViewCoordinator) {
                 ActivitiesView(container: .live, coordinator: $0)
                     .navigationBarHidden(true)
                 }
-//            .navigation(item: $coordinator.stressViewCoordinator) {
-//                StressCheckView(container: .live, coordinator: $0)
-//                    .navigationBarHidden(true)
-//            }
         }
     }
 }

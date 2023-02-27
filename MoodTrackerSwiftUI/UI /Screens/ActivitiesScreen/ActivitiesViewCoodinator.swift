@@ -10,13 +10,13 @@ import SwiftUI
 class ActivitiesViewCoodinator: ObservableObject, Identifiable {
     
     private let container: DIContainer
-            
+    @Published var sliderValueModele: SliderStressValueModele?
+    
     // MARK: - Init
     init(
-//        parent: BaseViewCoordinator,
         container: DIContainer
     ) {
-//        self.parent = parent
         self.container = container
+        self.sliderValueModele = SliderStressValueModele()
     }
 }

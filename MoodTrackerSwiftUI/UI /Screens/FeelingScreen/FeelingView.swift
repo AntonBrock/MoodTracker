@@ -13,10 +13,11 @@ struct FeelingView: View {
     
     var body: some View {
         VStack {
-            MoodCheckComponent(valueModel: SliderValueModele())
-//            MoodCheckComponent(valueModel: SliderValueModele())
+            MoodCheckComponent(valueModel: SliderValueModele(),
+                               value: $value)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity,
+               maxHeight: .infinity)
         .background(.white)
     }
 }

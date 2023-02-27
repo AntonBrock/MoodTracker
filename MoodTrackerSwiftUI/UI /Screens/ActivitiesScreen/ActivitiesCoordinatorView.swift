@@ -7,13 +7,18 @@
 
 import SwiftUI
 
+class SliderStressValueModele: ObservableObject {
+    @Published var value: Double = 10
+}
+
 struct ActivitiesCoordinatorView: View {
     
     @ObservedObject var coordinator: ActivitiesViewCoodinator
     
     var body: some View {
         NavigationStack {
-            ActivitiesView(container: .live, coordinator: coordinator)
+            ActivitiesView(container: .live,
+                           coordinator: coordinator)
         }
     }
 }

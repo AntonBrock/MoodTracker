@@ -10,17 +10,15 @@ import SwiftUI
 class MoodCheckViewCoordinator: ObservableObject, Identifiable {
     
     private let container: DIContainer
-//    private unowned let parent: BaseViewCoordinator
-    
+    @Published var sliderValueModele: SliderValueModele?
     @Published var activitiesViewCoordinator: ActivitiesViewCoodinator?
     
     // MARK: - Init
     init(
-//        parent: BaseViewCoordinator,
         container: DIContainer
     ) {
-//        self.parent = parent
         self.container = container
+        self.sliderValueModele = SliderValueModele()
     }
     
     func openAcitivitiesScreen() {

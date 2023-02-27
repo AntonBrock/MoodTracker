@@ -26,10 +26,10 @@ struct StressCheckComponent: View {
         static let height: CGFloat = 50
     }
         
-//    @ObservedObject var valueModel: SliderStressValueModele
+    @ObservedObject var valueModel: SliderStressValueModele
     
     @State var choosedImageName: String = "character_veryBad"
-    @Binding var value: Double
+//    @Binding var value: Double
         
     var body: some View {
         VStack {
@@ -119,11 +119,11 @@ struct StressCheckComponent: View {
                               maxTrackColor: UIColor(Colors.Primary.lightGray),
                               minValue: SliderConfigure.min,
                               maxValue: SliderConfigure.max,
-                              value: $value)
+                              value: $valueModel.value)
                     .zIndex(1)
                     .frame(width: (40 * CGFloat(stateStressTitleText.count) + 50), height: SliderSize.height, alignment: .leading)
-                    .onChange(of: value) { newValue in
-                        self.changeImage(for: value.rounded())
+                    .onChange(of: valueModel.value) { newValue in
+                        self.changeImage(for: valueModel.value)
                     }
                 
                 HStack {
@@ -147,7 +147,7 @@ struct StressCheckComponent: View {
             }
             
             VStack(spacing: 8) {
-                Text("\(stateStressTitleText[Int(value.rounded() / 10.0)])")
+                Text("\(stateStressTitleText[Int(valueModel.value / 10.0)])")
                     .font(.system(size: 24, weight: .bold))
                     .foregroundColor(Colors.Primary.blue)
                     .padding(.bottom, -5)

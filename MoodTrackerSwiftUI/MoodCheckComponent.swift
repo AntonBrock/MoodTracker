@@ -27,7 +27,7 @@ struct MoodCheckComponent: View {
     @ObservedObject var valueModel: SliderValueModele
     
     @State var choosedImageName: String = "character_normal"
-//    @Binding var value: Double
+    @Binding var value: Double
 
     var body: some View {
         VStack {

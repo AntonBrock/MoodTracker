@@ -65,16 +65,9 @@ class BaseViewCoordinator: ObservableObject {
     }
     
     func openFeelingScreen() -> some View {
-        
-        let coordinator = MoodCheckViewCoordinator(container: container)
+        let coordinator = self.moodCheckCoordinator!
         let feelingView = MoodCheckCoordinatorView(coordinator: coordinator)
         
         return feelingView
     }
-    
-//    func openWhyRegistrationScreen(completion: @escaping (() -> Void)) -> some View {
-//        return WhyRegistrationInfoView {
-//            completion()
-//        }
-//    }
 }

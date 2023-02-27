@@ -7,18 +7,19 @@
 
 import SwiftUI
 
-class SliderStressValueModele: ObservableObject {
-    @Published var value: Double = 10
-}
+//class SliderStressValueModele: ObservableObject {
+//    @Published var value: Double = 10
+//}
 
 struct StressCheckView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
 //    @ObservedObject var valueModel: SliderStressValueModele
-    @State var value: Double = 10
+//    @Ob var value: Double = 10
+    @ObservedObject var valueModel: SliderStressValueModele
     @State var text: String = ""
-
+    
     var body: some View {
         VStack {
             HStack {
@@ -39,7 +40,7 @@ struct StressCheckView: View {
             }
             .frame(width: UIScreen.main.bounds.width, height: 48, alignment: .center)
             
-            StressCheckComponent(value: $value)
+            StressCheckComponent(valueModel: valueModel)
                 .padding(.top, 50)
                 .id(1)
             

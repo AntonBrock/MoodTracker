@@ -103,7 +103,7 @@ struct ActivitiesView: View {
                 NavigationLink(
                     isActive: $isShowStressScreen,
                     destination: {
-                        StressCheckView()
+                        StressCheckView(valueModel: coordinator.sliderValueModele!)
                             .navigationBarHidden(true)
                     },
                     label: {}
