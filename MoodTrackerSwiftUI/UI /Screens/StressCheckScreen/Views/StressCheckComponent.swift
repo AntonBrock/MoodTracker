@@ -9,12 +9,12 @@ import SwiftUI
 
 struct StressCheckComponent: View {
     
-    var imagesName: [String] = ["character_veryBad", "character_bad", "character_normal"]
+    var imagesName: [String] = ["st-ic-low", "st-ic-medium", "st-ic-hight"]
     var stateStressTitleText: [String] = ["Низкий стресс", "Средний стресс", "Высокий стресс"]
     
-    var firstImage = "character_veryBad"
-    var secondImage = "character_bad"
-    var thirdImage = "character_normal"
+    var firstImage = "st-ic-low"
+    var secondImage = "st-ic-medium"
+    var thirdImage = "st-ic-hight"
     
     struct SliderConfigure {
         static let min: CGFloat = 0
@@ -27,9 +27,7 @@ struct StressCheckComponent: View {
     }
         
     @ObservedObject var valueModel: SliderStressValueModele
-    
-    @State var choosedImageName: String = "character_veryBad"
-//    @Binding var value: Double
+    @State var choosedImageName: String = "st-ic-medium"
         
     var body: some View {
         VStack {

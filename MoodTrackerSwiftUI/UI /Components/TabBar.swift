@@ -57,15 +57,15 @@ struct TabBarView: View {
 //                                .offset(y: -geometry.size.height / 6)
 //                        }
                         HStack {
-                            TabBarIcon(viewRouter: viewRouter, assignedPage: .home, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "homeIconNoneFill", tabName: "home", filledIconName: "homeIconFill")
-                            TabBarIcon(viewRouter: viewRouter, assignedPage: .jurnal, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "jurnalIconNoneFill", tabName: "jurnal", filledIconName: "jurnalIconFill")
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .home, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-home-none-fill", tabName: "home", filledIconName: "tb-ic-home-fill")
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .jurnal, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-jurnall-none-fill", tabName: "jurnal", filledIconName: "tb-ic-jurnall-fill")
                             
                             ZStack {
                                 Circle()
                                     .foregroundColor(Colors.Primary.lavender500Purple)
                                     .frame(width: geometry.size.width / 7, height: geometry.size.width / 7)
                                 
-                                Image("plusIcon")
+                                Image("tb-ic-plus")
                                     .resizable()
                                     .frame(width: 25 , height: 25)
                             }
@@ -74,16 +74,14 @@ struct TabBarView: View {
                                 
                                 withAnimation {
                                     isShowingMoodView.toggle()
-                                    //                                coordinator.openFeelingScreen()
-                                    //                                coordinator.openFeelingScreen()
                                 }
                             }
                             .scaleEffect(showPopUp ? CGFloat(0.9) : 1.0)
                             .animation(Animation.spring(response: 0.35, dampingFraction: 0.35, blendDuration: 1), value: showPopUp)
                             .shadow(color: Colors.Primary.lavender500Purple.opacity(0.5), radius: 5, x: 0, y: 9)
                             
-                            TabBarIcon(viewRouter: viewRouter, assignedPage: .report, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "reportIconNoneFill", tabName: "report", filledIconName: "reportIconFill")
-                            TabBarIcon(viewRouter: viewRouter, assignedPage: .profile, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "userIconNoneFill", tabName: "profile", filledIconName: "userIconFill")
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .report, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-report-none-fill", tabName: "report", filledIconName: "tb-ic-report-fill")
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .profile, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-pc-none-fill", tabName: "profile", filledIconName: "tb-ic-pc-fill")
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height / 12)
                     }
