@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>GIDClientID</key>
-	<string>947104793436-qgb8cd092g6drrk7rpb699ivdbon6l9m.apps.googleusercontent.com</string>
+	<string>947104793436-d0ag0du82f66brj6ce1dtqa1i5i3ut4j.apps.googleusercontent.com</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -11,7 +11,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>947104793436-qgb8cd092g6drrk7rpb699ivdbon6l9m.apps.googleusercontent.com</string>
+				<string>947104793436-d0ag0du82f66brj6ce1dtqa1i5i3ut4j.apps.googleusercontent.com</string>
 			</array>
 		</dict>
 		<dict>
@@ -19,14 +19,9 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.947104793436-qgb8cd092g6drrk7rpb699ivdbon6l9m</string>
+				<string>com.googleusercontent.apps.947104793436-d0ag0du82f66brj6ce1dtqa1i5i3ut4j</string>
 			</array>
 		</dict>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>AvertaDemoPE-ExtraboldItalic.ttf</string>
-		<string>AvertaDemoPE-Regular.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
@@ -45,5 +40,10 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AvertaDemoPE-ExtraboldItalic.ttf</string>
+		<string>AvertaDemoPE-Regular.ttf</string>
+	</array>
 </dict>
 </plist>
