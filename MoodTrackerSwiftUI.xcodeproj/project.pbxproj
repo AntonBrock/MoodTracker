@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45133A1E29AF917800258072 /* PersonalCabinetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45133A1D29AF917800258072 /* PersonalCabinetViewModel.swift */; };
+		45133A2029AFB88900258072 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45133A1F29AFB88900258072 /* AuthService.swift */; };
+		45133A2229AFB97400258072 /* AuthEnpPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45133A2129AFB97400258072 /* AuthEnpPoint.swift */; };
 		4529AA6D29AF1471001D2390 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6C29AF1471001D2390 /* Assets.xcassets */; };
 		4529AA7029AF1471001D2390 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6F29AF1471001D2390 /* Preview Assets.xcassets */; };
 		4529AA7729AF1519001D2390 /* WrappingStack in Frameworks */ = {isa = PBXBuildFile; productRef = 4529AA7629AF1519001D2390 /* WrappingStack */; };
@@ -123,6 +126,7 @@
 		4529ABD629AF1942001D2390 /* MoodCheckComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9BCD28D36F3000A4FCD7 /* MoodCheckComponent.swift */; };
 		4529ABD729AF1942001D2390 /* MoodsWordChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D81C1328D469D800AEF36E /* MoodsWordChooseView.swift */; };
 		4529ABD829AF1967001D2390 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529AA6A29AF1470001D2390 /* ContentView.swift */; };
+		4529ABDC29AF7FF6001D2390 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 4529ABDB29AF7FF6001D2390 /* JWTDecode */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +135,9 @@
 		4509716828D1FF08000FF0AE /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4509717128D20FAF000FF0AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		450FED24296BCC5F005D2467 /* CalendarRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRange.swift; sourceTree = "<group>"; };
+		45133A1D29AF917800258072 /* PersonalCabinetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCabinetViewModel.swift; sourceTree = "<group>"; };
+		45133A1F29AFB88900258072 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		45133A2129AFB97400258072 /* AuthEnpPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEnpPoint.swift; sourceTree = "<group>"; };
 		451E6BB829056EE50048714B /* AppState .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppState .swift"; sourceTree = "<group>"; };
 		451E6BBA29056EEB0048714B /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		451E6BBC29056F490048714B /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
@@ -255,6 +262,7 @@
 				4529AA8929AF151A001D2390 /* GoogleSignIn in Frameworks */,
 				4529AA8529AF1519001D2390 /* SwiftUICharts in Frameworks */,
 				4529AA8129AF1519001D2390 /* HorizonCalendar in Frameworks */,
+				4529ABDC29AF7FF6001D2390 /* JWTDecode in Frameworks */,
 				4529AA8B29AF151A001D2390 /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,6 +506,7 @@
 				452D35472951CED40018A3DA /* PersonalCabinetView.swift */,
 				452D35492951CEDD0018A3DA /* PersonalCabinetViewCoordinator.swift */,
 				452D354B2951CEE70018A3DA /* PersonalCabinetCoordinatorView.swift */,
+				45133A1D29AF917800258072 /* PersonalCabinetViewModel.swift */,
 			);
 			path = PersonalCabinet;
 			sourceTree = "<group>";
@@ -689,6 +698,7 @@
 			isa = PBXGroup;
 			children = (
 				45E750382920B7D100CF9E21 /* MainScreenService.swift */,
+				45133A1F29AFB88900258072 /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -698,6 +708,7 @@
 			children = (
 				45E750302920B6E700CF9E21 /* BaseAPI.swift */,
 				45E750322920B73200CF9E21 /* MainScreenEndpoint.swift */,
+				45133A2129AFB97400258072 /* AuthEnpPoint.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -728,6 +739,7 @@
 				4529AA8629AF151A001D2390 /* SwiftPieChart */,
 				4529AA8829AF151A001D2390 /* GoogleSignIn */,
 				4529AA8A29AF151A001D2390 /* GoogleSignInSwift */,
+				4529ABDB29AF7FF6001D2390 /* JWTDecode */,
 			);
 			productName = MoodMap;
 			productReference = 4529AA6629AF1470001D2390 /* MoodMap.app */;
@@ -766,6 +778,7 @@
 				453399C32990C8BC00ED1359 /* XCRemoteSwiftPackageReference "ChartView" */,
 				45B459A629921C9D00890CC9 /* XCRemoteSwiftPackageReference "SwiftPieChart" */,
 				457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				4529ABDA29AF7FF6001D2390 /* XCRemoteSwiftPackageReference "JWTDecode" */,
 			);
 			productRefGroup = 4539308728C88EC000A5D828 /* Products */;
 			projectDirPath = "";
@@ -876,6 +889,7 @@
 				4529ABBF29AF1941001D2390 /* DetailJournalView.swift in Sources */,
 				4529ABC029AF1941001D2390 /* JournalView.swift in Sources */,
 				4529ABC129AF1941001D2390 /* JournalViewCoordinator.swift in Sources */,
+				45133A2229AFB97400258072 /* AuthEnpPoint.swift in Sources */,
 				4529ABC229AF1941001D2390 /* JournalCoordinatorView.swift in Sources */,
 				4529ABC329AF1941001D2390 /* ReportScreen.swift in Sources */,
 				4529ABC429AF1941001D2390 /* ReportViewCoordinator.swift in Sources */,
@@ -890,6 +904,7 @@
 				4529ABCD29AF1942001D2390 /* MoodCheckView.swift in Sources */,
 				4529ABCE29AF1942001D2390 /* MoodCheckViewCoordinator.swift in Sources */,
 				4529ABCF29AF1942001D2390 /* MoodCheckCoordinatorView.swift in Sources */,
+				45133A1E29AF917800258072 /* PersonalCabinetViewModel.swift in Sources */,
 				4529ABD029AF1942001D2390 /* ActivitiesView.swift in Sources */,
 				4529ABD129AF1942001D2390 /* ActivitiesViewCoodinator.swift in Sources */,
 				4529ABD229AF1942001D2390 /* ActivitiesCoordinatorView.swift in Sources */,
@@ -898,6 +913,7 @@
 				4529ABD529AF1942001D2390 /* SwiftUISlider.swift in Sources */,
 				4529ABD629AF1942001D2390 /* MoodCheckComponent.swift in Sources */,
 				4529ABD729AF1942001D2390 /* MoodsWordChooseView.swift in Sources */,
+				45133A2029AFB88900258072 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1119,6 +1135,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4529ABDA29AF7FF6001D2390 /* XCRemoteSwiftPackageReference "JWTDecode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		45316883295D76FA003AC601 /* XCRemoteSwiftPackageReference "swiftui-date-picker-dialog" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/globulus/swiftui-date-picker-dialog";
@@ -1230,6 +1254,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		4529ABDB29AF7FF6001D2390 /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4529ABDA29AF7FF6001D2390 /* XCRemoteSwiftPackageReference "JWTDecode" */;
+			productName = JWTDecode;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

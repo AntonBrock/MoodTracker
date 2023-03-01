@@ -7,17 +7,21 @@
 
 struct Services {
     
-    let mainScreenService: MainScreenService
+    static let mainScreenService: MainScreenService = MainScreenService()
+    static let authService: AuthService = AuthService()
     
-    init(
-        mainScreenService: MainScreenService
-    ) {
-        self.mainScreenService = mainScreenService
-    }
+//    init(
+//        mainScreenService: MainScreenService,
+//        authService: AuthService
+//    ) {
+//        self.mainScreenService = mainScreenService
+//        self.authService = authService
+//    }
     
-    static var stub: Self {
-        .init(
-            mainScreenService: MainScreenService()
-        )
-    }
+//    static var stub: Self {
+//        .init(
+//            mainScreenService: MainScreenService(),
+//            authService: AuthService()
+//        )
+//    }
 }

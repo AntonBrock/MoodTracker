@@ -9,11 +9,12 @@ import SwiftUI
 import BottomSheet
 import GoogleSignIn
 import GoogleSignInSwift
+import JWTDecode
 
 struct AuthMethodsView: View {
     
     @State var bottomSheetPosition: BottomSheetPosition = .dynamic
-    var dismiss: (() -> Void)
+    var dismiss: ((UserInfoModel?) -> Void)
     var openAboutRegistration: (() -> Void)
     
     var body: some View {
@@ -63,7 +64,7 @@ struct AuthMethodsView: View {
                     
                     bottomSheetPosition = .absolute(0)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        dismiss()
+                        dismiss(nil)
                     }
                 } label: {
                     Text("Зачем нужна учетная запись?")
@@ -89,7 +90,7 @@ struct AuthMethodsView: View {
         .onDismiss {
             bottomSheetPosition = .absolute(0)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                dismiss()
+                dismiss(nil)
             }
         }
     }
@@ -108,7 +109,30 @@ struct AuthMethodsView: View {
                     // Inspect error
                     return
                 }
+                
+                guard let googleJWTToken = result.user.idToken?.tokenString else { fatalError() }
+                let model = try! parseJWTToken(googleJWTToken)
+                // нужная инфа для пользователя тут нужно распарсить данные и потправляем (email, name,                                                                                                                            locale, notify (true/ false )
+                                                        // отдаем сюда /auth/sign_up -> вернется в ответ наш JWT Token и его сохроняем на клиенте
+                                                        // и делаем запрос
+                                                        
+                
+                dismiss(model)
                 // If sign in succeeded, display the app's main content View.
             }
+    }
+    
+    func parseJWTToken(_ token: String) throws -> UserInfoModel {
+        do {
+            let jwt = try decode(jwt: token)
+            let jwtBody = jwt.body
+            let model: UserInfoModel = UserInfoModel(name: jwtBody["name"] as! String,
+                                                     email: jwtBody["email"] as! String,
+                                                     isNotificationEnable: false,
+                                                     locale: jwtBody["locale"] as! String)
+
+            return model
+        } catch { fatalError() }
+        
     }
 }

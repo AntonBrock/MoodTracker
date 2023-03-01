@@ -23,7 +23,10 @@ struct ContentView: View {
                     .background(.black.opacity(0.7))
                     .transition(.opacity)
                 
-                AuthMethodsView(dismiss: {
+                AuthMethodsView(dismiss: { model in
+                    guard let model = model else { return } // показать ошибку 
+                    coordinator.personalCabinetCoordinator.viewModel.singUp(with: model)
+                        
                     withAnimation {
                         coordinator.showAuthLoginView.toggle()
                     }

@@ -12,6 +12,8 @@ class PersonalCabinetViewCoordinator: ObservableObject, Identifiable {
     private let container: DIContainer
     private unowned let parent: BaseViewCoordinator
     
+    var viewModel: PersonalCabinetView.PersonalCabinetViewModel!
+    
     @Published var passwordScreen: LoginViewCoordinator?
     
     // MARK: - Init
@@ -21,6 +23,7 @@ class PersonalCabinetViewCoordinator: ObservableObject, Identifiable {
     ) {
         self.parent = parent
         self.container = container
+        self.viewModel = PersonalCabinetView.PersonalCabinetViewModel()
     }
     
     func openLoginView() {

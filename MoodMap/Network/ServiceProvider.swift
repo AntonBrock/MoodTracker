@@ -28,7 +28,6 @@ public final class ServiceProvider: ServiceProviderType {
 
     init() {
         self.registerDefaultServices()
-
         self.networkService = getService()
     }
 

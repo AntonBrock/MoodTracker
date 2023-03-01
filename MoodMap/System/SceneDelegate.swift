@@ -44,7 +44,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             setupTabBarAppearance()
             
             let appState = AppState()
-            let services = Services(mainScreenService: MainScreenService())
+            let services = Services()
             
             let DIContainer = DIContainer(appState: appState, services: services)
             let coordinator = BaseViewCoordinator(container: DIContainer)
