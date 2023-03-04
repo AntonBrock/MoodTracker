@@ -9,12 +9,11 @@ import SwiftUI
 import BottomSheet
 import GoogleSignIn
 import GoogleSignInSwift
-import JWTDecode
 
 struct AuthMethodsView: View {
     
     @State var bottomSheetPosition: BottomSheetPosition = .dynamic
-    var dismiss: ((UserInfoModel?) -> Void)
+    var dismiss: ((String?) -> Void)
     var openAboutRegistration: (() -> Void)
     
     var body: some View {
@@ -111,28 +110,13 @@ struct AuthMethodsView: View {
                 }
                 
                 guard let googleJWTToken = result.user.idToken?.tokenString else { fatalError() }
-                let model = try! parseJWTToken(googleJWTToken)
                 // нужная инфа для пользователя тут нужно распарсить данные и потправляем (email, name,                                                                                                                            locale, notify (true/ false )
                                                         // отдаем сюда /auth/sign_up -> вернется в ответ наш JWT Token и его сохроняем на клиенте
                                                         // и делаем запрос
                                                         
-                
-                dismiss(model)
+                // потом будет ручка на получения данных для модели (UserInfoModel)
+                dismiss(googleJWTToken)
                 // If sign in succeeded, display the app's main content View.
             }
-    }
-    
-    func parseJWTToken(_ token: String) throws -> UserInfoModel {
-        do {
-            let jwt = try decode(jwt: token)
-            let jwtBody = jwt.body
-            let model: UserInfoModel = UserInfoModel(name: jwtBody["name"] as! String,
-                                                     email: jwtBody["email"] as! String,
-                                                     isNotificationEnable: false,
-                                                     locale: jwtBody["locale"] as! String)
-
-            return model
-        } catch { fatalError() }
-        
     }
 }

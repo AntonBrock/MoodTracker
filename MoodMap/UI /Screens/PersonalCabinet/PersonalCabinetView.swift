@@ -9,20 +9,23 @@ import SwiftUI
 
 struct PersonalCabinetView: View {
     
-    @State var isPushNotificationOn: Bool = false
     private unowned let coordinator: PersonalCabinetViewCoordinator
-    
+    @ObservedObject var viewModel: ViewModel
+    @State var pushNotification: Bool = false
+
     init(
         coordinator: PersonalCabinetViewCoordinator,
         showAuthMethodView: Bool = false
     ){
         self.coordinator = coordinator
+        self.pushNotification = coordinator.viewModel.pushNotification
+        self.viewModel = coordinator.viewModel
     }
 
     var body: some View {
         
         ScrollView {
-            CreateLoginView("", isLogin: false)
+            CreateLoginView(isLogin: viewModel.isLogin)
                 .background(.white)
                 .padding(.top, 16)
                 .padding(.horizontal, 24)
@@ -34,7 +37,7 @@ struct PersonalCabinetView: View {
                     .font(.system(size: 12))
                 
                 VStack {
-                    Toggle(isOn: $isPushNotificationOn) {
+                    Toggle(isOn: $pushNotification) {
                         Text("Напоминания")
                     }
                     .frame(width: UIScreen.main.bounds.width - 32, height: 64)
@@ -78,17 +81,17 @@ struct PersonalCabinetView: View {
     }
     
     @ViewBuilder
-    private func CreateLoginView(_ title: String, isLogin: Bool) -> some View {
+    private func CreateLoginView(isLogin: Bool) -> some View {
         HStack {
             VStack {
                 VStack(spacing: 4) {
-                    Text("Привет, ")
+                    Text(isLogin ? "Привет, \(viewModel.userInfoModel?.username ?? "")" : "Привет,")
                         .font(.system(size: 12, weight: .bold))
                         .foregroundColor(Colors.Primary.lightGray)
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text(isLogin ? "Name_User" : "Вы не вошли в аккаунт")
+                    Text(isLogin ? "Бесплатный план" : "Вы не вошли в аккаунт")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(isLogin ? Colors.Primary.lavender500Purple : .white)
                         .lineLimit(1)

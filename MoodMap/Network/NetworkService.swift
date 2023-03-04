@@ -14,8 +14,7 @@ final class NetworkService: BaseService {
         let authPlugin = AccessTokenPlugin(tokenClosure: { (type) -> String in
             switch type {
             case .bearer:
-                return ""
-//                return Global.services.authorizationService.jwtToken ?? ""
+                return AppState.shared.jwtToken ?? ""
             default:
                 return ""
             }

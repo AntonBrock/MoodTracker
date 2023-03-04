@@ -40,6 +40,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
         if let windowScene = scene as? UIWindowScene {
             self.windowScene = windowScene
 
+            clearKeychainIfWillUnistall()
             setupNavbarAppearance()
             setupTabBarAppearance()
             
@@ -82,6 +83,16 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             
             window.rootViewController = vc
             window.makeKeyAndVisible()
+        }
+    }
+    
+    func clearKeychainIfWillUnistall() {
+        let freshInstall = !UserDefaults.standard.bool(forKey: "alreadyInstalled")
+        if freshInstall {
+            KeychainHelper.standard.delete(service: "isAuthorizated", account: "CHKeychain")
+            KeychainHelper.standard.delete(service: "JWT", account: "CHKeychain")
+            KeychainHelper.standard.delete(service: "refreshToken", account: "CHKeychain")
+            UserDefaults.standard.set(true, forKey: "alreadyInstalled")
         }
     }
 }

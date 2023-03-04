@@ -15,11 +15,11 @@ struct DIContainer {
 extension DIContainer {
     static var preview: Self {
         .init(
-            appState: AppState.preview, services: Services()
+            appState: AppState.shared, services: Services()
         )
     }
     
     static var live: Self {
-        .init(appState: AppState.live, services: Services())
+        .init(appState: AppState.shared, services: Services())
     }
 }

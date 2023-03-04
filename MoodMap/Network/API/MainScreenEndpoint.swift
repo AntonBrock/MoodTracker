@@ -51,10 +51,7 @@ enum MainScreenEndpoint: TargetType {
     var headers: [String: String]? {
         switch self {
         case .getUserInfo:
-            return [
-                "Accept": "application/json",
-//                "Authorization": "Bearer \(token)"
-            ]
+            return nil
         }
     }
     

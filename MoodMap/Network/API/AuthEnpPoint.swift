@@ -10,19 +10,24 @@ import Moya
 
 enum AuthEnpPoint: TargetType {
     
-    case singUp(with: UserInfoModel)
+    case singUp(GToken: String)
+    case getUserInfo
     
     var baseURL: URL {
         switch self {
         case .singUp:
             return URL(string: "https://api.mapmood.com/auth")!
+        case .getUserInfo:
+            return URL(string: "https://api.mapmood.com/v1/users")!
         }
     }
     
     var path: String {
         switch self {
         case .singUp:
-            return "/sing_up"
+            return "/oauth/google"
+        case .getUserInfo:
+            return "/me"
         }
     }
     
@@ -30,6 +35,8 @@ enum AuthEnpPoint: TargetType {
         switch self {
         case .singUp:
             return .post
+        case .getUserInfo:
+            return .get
         }
     }
     
@@ -39,23 +46,19 @@ enum AuthEnpPoint: TargetType {
     
     var task: Task {
         switch self {
-        case .singUp(let model):
+        case .singUp(let GToken):
             return .requestParameters(
-                parameters: ["name": model.name,
-                             "email": model.email,
-                             "notifications": model.isNotificationEnable,
-                             "local": model.locale],
+                parameters: ["id_token": GToken],
                 encoding: JSONEncoding.default)
+        case .getUserInfo:
+            return .requestPlain
         }
     }
     
     var headers: [String: String]? {
         switch self {
         case .singUp: return nil
-//            return [
-////                "Accept": "application/json",
-////                "Authorization": "Bearer \(token)"
-//            ]
+        case .getUserInfo: return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
         }
     }
     
@@ -63,6 +66,8 @@ enum AuthEnpPoint: TargetType {
         switch self {
         case .singUp:
             return nil
+        case .getUserInfo:
+            return .bearer
         }
     }
     

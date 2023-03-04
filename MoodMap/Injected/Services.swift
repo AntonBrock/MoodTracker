@@ -8,7 +8,7 @@
 struct Services {
     
     static let mainScreenService: MainScreenService = MainScreenService()
-    static let authService: AuthService = AuthService()
+    static var authService: AuthService = AuthService()
     
 //    init(
 //        mainScreenService: MainScreenService,

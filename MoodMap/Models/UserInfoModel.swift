@@ -7,9 +7,19 @@
 
 import Foundation
 
-struct UserInfoModel {
-    let name: String
+struct UserInfoModel: Decodable {
+    let id: String
+    let username: String
     let email: String
-    let isNotificationEnable: Bool
-    let locale: String
+    let created_at: String?
+    let updated_at: String?
+    let settings: Settings
+    
+    struct Settings: Decodable {
+        let id: String
+        let notifications: Bool
+        let language: String
+        let created_at: String
+        let updated_at: String?
+    }
 }

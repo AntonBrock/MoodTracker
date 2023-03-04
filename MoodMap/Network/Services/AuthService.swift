@@ -8,10 +8,13 @@
 import Foundation
 
 protocol AuthServiceProtocol {
-    func singUp(with model: UserInfoModel, completion: @escaping(Result<Bool, Error>) -> Void)
+    func singUp(with gToken: String, completion: @escaping(Result<String, Error>) -> Void)
+    func getUserInfo(completion: @escaping(Result<UserInfoModel, Error>) -> Void)
 }
 
 struct AuthService: AuthServiceProtocol {
+    
+    public var jwtToken: String = ""
     
     private var decoder: JSONDecoder = {
         let decoder = JSONDecoder()
@@ -42,23 +45,35 @@ struct AuthService: AuthServiceProtocol {
         return decoder
     }()
     
-    func singUp(with model: UserInfoModel, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let target = BaseAPI.auth(.singUp(with: model))
+    func singUp(with GToken: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let target = BaseAPI.auth(.singUp(GToken: GToken))
         
         let networkService = ServiceProvider().networkService
         networkService?.request(.target(target), completion: { response in
             switch response {
             case let .success(result):
-                do {
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    //                    let models = try decoder.decode(UserInfoModel.self, from: result.data)
-                    
-//                    completion(.success(models))
-                    print(result)
-                } catch {
-                    completion(.failure(error))
+                guard let jsonResult = try! result.mapJSON() as? [String: Any] else { return }
+                
+                if let jwtToken = jsonResult["access_token"] as? String {
+                    completion(.success(jwtToken))
                 }
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        })
+    }
+    
+    func getUserInfo(completion: @escaping(Result<UserInfoModel, Error>) -> Void) {
+        let target = BaseAPI.auth(.getUserInfo)
+        
+        let networkService = ServiceProvider().networkService
+        networkService?.request(.target(target), completion: { response in
+            switch response {
+            case let .success(result):
+                guard let model = try? JSONDecoder().decode(UserInfoModel.self, from: result.data) else {
+                    return
+                }
+                completion(.success(model))
             case let .failure(error):
                 completion(.failure(error))
             }

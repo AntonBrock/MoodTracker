@@ -47,6 +47,7 @@ struct MoodCheckView: View {
                     .padding(.leading, 18)
                     .onTapGesture {
                         withAnimation {
+                            print(Services.authService.jwtToken)
                             dismiss.callAsFunction()
 //                            isShowingMoodCheckView.toggle()
                         }

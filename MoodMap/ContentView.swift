@@ -23,9 +23,9 @@ struct ContentView: View {
                     .background(.black.opacity(0.7))
                     .transition(.opacity)
                 
-                AuthMethodsView(dismiss: { model in
-                    guard let model = model else { return } // показать ошибку 
-                    coordinator.personalCabinetCoordinator.viewModel.singUp(with: model)
+                AuthMethodsView(dismiss: { GToken in
+                    guard let gToken = GToken else { return } // показать ошибку
+                    coordinator.personalCabinetCoordinator.viewModel.singUp(with: gToken)
                         
                     withAnimation {
                         coordinator.showAuthLoginView.toggle()
