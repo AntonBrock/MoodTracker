@@ -27,20 +27,19 @@ struct ActivitiesView: View {
     private let flexibleLayout = Array(repeating: GridItem(.flexible(), spacing: 10), count: 4)
     private var activitiesArrayImageName: [String] =
     [
-        "anguished face", "face with open mouth and cold sweat", "face with cold sweat", "disappointed but relieved face",
-        "disappointed face", "dizzy face", "loudly crying face", "unamused face", "anguished face", "face with open mouth and cold sweat",
-        "anguished face", "face with open mouth and cold sweat", "anguished face", "face with open mouth and cold sweat"
+        "ac-ic-work", "ac-ic-study", "ac-ic-hobby", "ac-ic-learning",
+        "ac-ic-sleep", "ac-ic-food", "ac-ic-health", "ac-ic-rest", "ac-ic-sport",
+        "ac-ic-meditation", "ac-ic-walkingt", "ac-ic-yoga", "face with open mouth and cold sweat",
+        "ac-ic-family", "fac-ic-friends", "ac-ic-date", "ac-ic-party",
+        "ac-ic-traveling", "ac-ic-shopping", "ac-ic-drinks", "ac-ic-music"
     ]
     
     private var activitiesArrayTitle: [String] = [
-        "Лицо", "Лицо", "Лицо", "Лицо",
-        "Лицо", "Лицо", "Лицо", "Лицо",
-        "Лицо", "Лицо", "Лицо", "Лицо",
-        "Лицо", "Лицо", "Лицо", "Лицо",
-        "Лицо", "Лицо", "Лицо", "Лицо",
-        "Лицо", "Лицо", "Лицо", "Лицо",
-        "Лицо", "Лицо", "Лицо", "Лицо",
-        "Лицо", "Лицо", "Лицо", "Лицо"
+        "Работа", "Учеба", "Хобби", "Саморазвитие",
+        "Сон", "Еда", "Здоровье", "Отдых",
+        "Медитация", "Прогулка", "Йога", "Спорт",
+        "Семья", "Друзья", "Свидание", "Вечеринка",
+        "Путешествие", "Шопинг", "Алкоголь", "Музыка"
     ]
     
     var body: some View {

@@ -12,43 +12,39 @@ struct MoodsWordChooseView: View {
     
     var emotionsArrayImageName: [[String]] =
     [
-        ["anguished face", "face with open mouth and cold sweat", "face with cold sweat", "disappointed but relieved face",
-         "disappointed face", "dizzy face", "loudly crying face", "unamused face"],
+        ["em-vb-dizzyFace", "em-vb-unStrongFace", "em-vb-perseveringFace", "em-vb-spiralEyesFace",
+         "em-vb-angryFace", "em-vb-cryingFace", "em-vb-fearfulFace", "em-vb-screamingInFearFace"],
         
-        ["conused face", "sneezing face", "disappointed but relieved face", "disappointed face",
-         "sleepy face", "expressionless face", "face with thermometer", "dizzy face"],
+        ["em-b-unamusedFace", "em-b-hotFace", "em-b-confoundedFace", "em-b-anxiousFace",
+         "em-b-poutingFace", "em-b-cryingFace", "em-b-worriedFace", "em-b-grimacingFace"],
         
-        ["relfieved face", "slightly smiling face", "face with medical mask", "astonished face",
-         "hushed face", "thinking face", "smiling face with smiling eyes and handd covering mouth", "upside down face"],
+        ["em-f-diagonalMouthFace", "em-f-sleepingFace", "em-f-exhalingFace", "em-f-withoutMouthFace",
+         "em-f-wearyFace", "em-f-flushedFace", "em-f-expressionlessFace", "em-f-smilingFaceWithSmilingEyes"],
         
-        ["face savouring delicious food", "face with stuck out tongue and winking eye", "drooling face", "grinning face",
-         "nerd face", "smiling face with open mouth", "white smiling face", "smiling face with heart shaped eyes"],
+        ["em-g-squintingWithTongueFace", "em-g-beamingWithSmilingEyesFace", "em-g-winkingWithTongueFace", "em-g-kissingFace",
+         "em-g-smilingWithHeartsFace", "em-g-kissingWithSmilingEyesFace", "em-g-relievedFace", "em-g-blowingAKissFace"],
         
-        ["face with party horn and party hat", "smiling face with horns", "smiling face with smiling eyes and three hearts", "smiling face with sunglassese",
-         "smiling face with open mouth and tightly closed eyes", "smirking face", "grinning face with one large and one small eyea", "drooling face"],
-        ["face with party horn and party hat", "smiling face with horns", "smiling face with smiling eyes and three hearts", "smiling face with sunglassese",
-         "smiling face with open mouth and tightly closed eyes", "smirking face", "grinning face with one large and one small eyea", "drooling face"]
+        ["em-vg-nerdFace", "em-vg-starStruckFace", "em-vg-happyWithEnlargedEyesFace", "em-vg-smilingWithHaloFace",
+         "em-vg-smilingWithHeartEyesFace", "em-vg-kissingWithClosedEyesFace", "em-vg-smilingWithSunglassesFace", "em-vg-withTongueFace"]
+        
     ]
     
     var emotionsArrayTitle: [[String]] =
     [
-        ["Лицо", "Лицо", "Лицо", "Лицо",
-         "Лицо", "Лицо", "Лицо", "Лицо"],
+        ["Апатия", "Бессилие", "Тоска", "Потерянонсть",
+         "Агрессия", "Отчаяние", "Тревожность", "Паника"],
         
-        ["Лицо", "Лицо", "Лицо", "Лицо",
-         "Лицо", "Лицо", "Лицо", "Лицо"],
+        ["Безразличие", "Переутомление", "Подавленость", "Растерянность",
+         "Недовольство", "Печаль", "Обида", "Беспокойство"],
         
-        ["Лицо", "Лицо", "Лицо", "Лицо",
-         "Лицо", "Лицо", "Лицо", "Лицо"],
+        ["Скука", "Усталость", "Лень", "Неуверенность",
+         "Раздражение", "Смущение", "Сомнение", "Спокойствие"],
         
-        ["Лицо", "Лицо", "Лицо", "Лицо",
-         "Лицо", "Лицо", "Лицо", "Лицо"],
+        ["Веселье", "Энергичность", "Бодрость", "Уверенность",
+         "Умиротворение", "Нежность", "Доверие", "Влюбленность"],
         
-        ["Лицо", "Лицо", "Лицо", "Лицо",
-         "Лицо", "Лицо", "Лицо", "Лицо"],
-        
-        ["Лицо", "Лицо", "Лицо", "Лицо",
-         "Лицо", "Лицо", "Лицо", "Лицо"]
+        ["Интерес", "Активность", "Восторг", "Покой",
+         "Любовь", "Забота", "Гордость", "Эйфория"]
     ]
     
     private let flexibleLayout = Array(repeating: GridItem(.flexible(), spacing: 15), count: 4)
