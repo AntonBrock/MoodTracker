@@ -127,6 +127,8 @@
 		4529ABD729AF1942001D2390 /* MoodsWordChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D81C1328D469D800AEF36E /* MoodsWordChooseView.swift */; };
 		4529ABD829AF1967001D2390 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529AA6A29AF1470001D2390 /* ContentView.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
+		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
+		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -238,6 +240,8 @@
 		45C338F9298406D10043E26C /* AuthHyperString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHyperString.swift; sourceTree = "<group>"; };
 		45CDA58528F955220047D060 /* FeelingCircleChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingCircleChartsView.swift; sourceTree = "<group>"; };
 		45D6F15D29B3771B007EABFA /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateViewModel.swift; sourceTree = "<group>"; };
+		45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateInfoModel.swift; sourceTree = "<group>"; };
 		45D81C1328D469D800AEF36E /* MoodsWordChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodsWordChooseView.swift; sourceTree = "<group>"; };
 		45E750302920B6E700CF9E21 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		45E750322920B73200CF9E21 /* MainScreenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenEndpoint.swift; sourceTree = "<group>"; };
@@ -393,9 +397,7 @@
 				451E6BC029056FC40048714B /* Report */,
 				452D35462951CEA80018A3DA /* PersonalCabinet */,
 				4551C3EC295995D20034665E /* FeelingScreen */,
-				453AAC25295DBFD400CE0F15 /* MoodCheckScreen */,
-				456AA722296E9E9900BD414B /* ActivitiesScreen */,
-				4509075629A8C44800815892 /* StressCheckScreen */,
+				45D6F16A29B6575F007EABFA /* UserStateScreen */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -695,6 +697,18 @@
 			path = SwiftPieChart;
 			sourceTree = "<group>";
 		};
+		45D6F16A29B6575F007EABFA /* UserStateScreen */ = {
+			isa = PBXGroup;
+			children = (
+				45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */,
+				45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */,
+				453AAC25295DBFD400CE0F15 /* MoodCheckScreen */,
+				456AA722296E9E9900BD414B /* ActivitiesScreen */,
+				4509075629A8C44800815892 /* StressCheckScreen */,
+			);
+			path = UserStateScreen;
+			sourceTree = "<group>";
+		};
 		45E7502E2920B6CE00CF9E21 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -833,6 +847,7 @@
 				4529AB8529AF193F001D2390 /* AppState .swift in Sources */,
 				4529AB8629AF193F001D2390 /* Services.swift in Sources */,
 				4529AB8729AF193F001D2390 /* SceneDelegate.swift in Sources */,
+				45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */,
 				4529AB8829AF193F001D2390 /* AppEnvironment.swift in Sources */,
 				4529AB8929AF1940001D2390 /* DIContinainer.swift in Sources */,
 				4529AB8A29AF1940001D2390 /* PieSliceView.swift in Sources */,
@@ -863,6 +878,7 @@
 				4529ABA529AF1940001D2390 /* MTButton.swift in Sources */,
 				4529ABA629AF1940001D2390 /* CutomAlertView.swift in Sources */,
 				4529ABA729AF1940001D2390 /* EmotionBoardView.swift in Sources */,
+				45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */,
 				4529ABA829AF1940001D2390 /* QuoteView.swift in Sources */,
 				4529ABA929AF1941001D2390 /* ActivitiesTextViewBlock.swift in Sources */,
 				4529ABAA29AF1941001D2390 /* MPErrorFlowView.swift in Sources */,

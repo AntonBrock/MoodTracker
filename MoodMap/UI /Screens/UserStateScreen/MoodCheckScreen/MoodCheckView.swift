@@ -12,6 +12,8 @@ struct MoodCheckView: View {
     
     @Environment(\.dismiss) var dismiss
     @ObservedObject var valueModel: SliderValueModele
+    @ObservedObject var userStateVideModel: ViewModel
+    
     @State var value: Double = 20
     
     let container: DIContainer
@@ -24,6 +26,7 @@ struct MoodCheckView: View {
         self.container = container
         self.coordinator = coordinator
         self.valueModel = valueModel
+        self.userStateVideModel = coordinator.userStateViewModel
     }
     
     @State private var date = Date()
@@ -91,11 +94,14 @@ struct MoodCheckView: View {
                                 }
                                 .padding(.top, 10)
                                 
-                                MoodCheckComponent(valueModel: valueModel,
-                                                   value: $value)
-                                    .padding(.top, 15)
+                                MoodCheckComponent(setChoosedState: { choosedState in
+                                    self.userStateVideModel.choosedState = choosedState
+                                }, valueModel: valueModel, value: $value)
+                                .padding(.top, 15)
                                 
-                                MoodsWordChooseView(valueModel: valueModel)
+                                MoodsWordChooseView(valueModel: valueModel, setChoosedEmotion: { choosedEmotion in
+                                    self.userStateVideModel.choosedEmotion = choosedEmotion
+                                })
                                     .padding(.top, -20)
                                     .id(1)
                             }
@@ -114,7 +120,7 @@ struct MoodCheckView: View {
                 
                 VStack {
                     MTButton(buttonStyle: .fill, title: "Продолжить") {
-                        coordinator.openAcitivitiesScreen()
+                        coordinator.openAcitivitiesScreen(with: userStateVideModel)
                     }
                     .frame(width: UIScreen.main.bounds.width - 32, height: 44, alignment: .bottom)
                     .padding(.bottom, 24)

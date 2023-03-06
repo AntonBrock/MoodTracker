@@ -15,6 +15,7 @@ struct ActivitiesView: View {
     private unowned let coordinator: ActivitiesViewCoodinator
     
     @State var isShowStressScreen: Bool = false
+    @State var choosedActivities: [String] = []
     
     init(
         container: DIContainer,
@@ -78,37 +79,36 @@ struct ActivitiesView: View {
                         
                         ForEach(0..<activitiesArrayImageName.count) { index in
                             ZStack {
-                                ActivitiesChooseViewBlock(activitieImageTitle: activitiesArrayImageName[index], activitieTitle: activitiesArrayTitle[index])
+                                ActivitiesChooseViewBlock(activitieImageTitle: activitiesArrayImageName[index],
+                                                          activitieTitle: activitiesArrayTitle[index]) { choosedActivitie in
+                                    self.choosedActivities.append(choosedActivitie)
+                                }
                             }
                         }
                     }
                     .padding(EdgeInsets(top: 10, leading: 16, bottom: 0, trailing: 16))
-                    
-                    //                VStack {
-                    //                    LazyVGrid(columns: flexibleLayout) {
-                    //
-                    //                        ForEach(0..<activitiesArrayImageName.count) { index in
-                    //                            ZStack {
-                    //                                ActivitiesChooseViewBlock(activitieImageTitle: activitiesArrayImageName[index], activitieTitle: activitiesArrayTitle[index])
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                }
-                    //                .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
-                    
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
                 NavigationLink(
                     isActive: $isShowStressScreen,
                     destination: {
-                        StressCheckView(valueModel: coordinator.sliderValueModele!)
-                            .navigationBarHidden(true)
+                        StressCheckView(valueModel: coordinator.sliderValueModele!,
+                                        userStateVideModel: coordinator.userStateViewModel,
+                                        saveButtonDidTap: { text, choosedStress in
+                            coordinator.userStateViewModel.choosedStress = choosedStress
+                            coordinator.userStateViewModel.mindText = text
+                            
+                            coordinator.userStateViewModel.sendUserStateInfo()
+                        }
+                    )
+                    .navigationBarHidden(true)
                     },
                     label: {}
                 )
                 
                 MTButton(buttonStyle: .fill, title: "Продолжить", handle: {
+                    coordinator.userStateViewModel.choosedActivities = choosedActivities
                     isShowStressScreen.toggle()
                 })
                 .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
@@ -124,7 +124,8 @@ struct ActivitiesChooseViewBlock: View {
     var activitieTitle: String
 
     @State var isSelected: Bool = false
-
+    
+    var setSelected: ((String) -> Void)
     var body: some View {
 
         VStack(spacing: 1) {
@@ -149,6 +150,7 @@ struct ActivitiesChooseViewBlock: View {
         .padding(.top, 16)
         .onTapGesture {
             isSelected.toggle()
+            setSelected(activitieTitle)
         }
     }
 }

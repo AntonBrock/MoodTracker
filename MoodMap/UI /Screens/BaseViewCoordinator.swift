@@ -54,13 +54,12 @@ class BaseViewCoordinator: ObservableObject {
         )
         
         self.moodCheckCoordinator = .init(
-//            parent: self,
             container: container
         )
         
         self.activitiesCoordinator = .init(
-//            parent: self,
-            container: container
+            container: container,
+            userStateViewModel: MoodCheckView.ViewModel()
         )
     }
     

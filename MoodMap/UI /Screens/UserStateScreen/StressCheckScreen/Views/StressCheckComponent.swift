@@ -29,6 +29,8 @@ struct StressCheckComponent: View {
     @ObservedObject var valueModel: SliderStressValueModele
     @State var choosedImageName: String = "st-ic-medium"
         
+    var choosedStress: ((String) -> Void)
+    
     var body: some View {
         VStack {
             HStack(spacing: 15 * CGFloat(stateStressTitleText.count)) {
@@ -155,6 +157,9 @@ struct StressCheckComponent: View {
                     .foregroundColor(Colors.Primary.blue)
             }
             .padding(.top, 32)
+        }
+        .onChange(of: choosedImageName) { newValue in
+            choosedStress(newValue)
         }
     }
     

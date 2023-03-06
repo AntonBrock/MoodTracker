@@ -51,8 +51,9 @@ struct MoodsWordChooseView: View {
                                                            spacing: 35), count: 4)
 
     @ObservedObject var valueModel: SliderValueModele
-        
     @State var selectedMoodId: String = "" // later change string to Int
+    
+    var setChoosedEmotion: ((String) -> Void)
     
     var body: some View {
         VStack {
@@ -89,6 +90,9 @@ struct MoodsWordChooseView: View {
             }
             .padding(EdgeInsets(top: 8, leading: 16, bottom: 32, trailing: 16))
         }
+        .onChange(of: selectedMoodId) { newValue in
+            setChoosedEmotion(newValue)
+        }
     }
 }
 
@@ -117,6 +121,6 @@ struct MoodsWordChooseViewBlock: View {
     
     private func emotionDidChoosed(id: String) {
         self.selectedMoodId = id
-        print(id)
+//        print(id)
     }
 }

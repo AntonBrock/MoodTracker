@@ -12,11 +12,15 @@ class ActivitiesViewCoodinator: ObservableObject, Identifiable {
     private let container: DIContainer
     @Published var sliderValueModele: SliderStressValueModele?
     
+    @ObservedObject var userStateViewModel: MoodCheckView.ViewModel
+
     // MARK: - Init
     init(
-        container: DIContainer
+        container: DIContainer,
+        userStateViewModel: MoodCheckView.ViewModel
     ) {
         self.container = container
         self.sliderValueModele = SliderStressValueModele()
+        self.userStateViewModel = userStateViewModel
     }
 }

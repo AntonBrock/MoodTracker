@@ -12,7 +12,7 @@ struct MoodCheckComponent: View {
     var imagesName: [String] = ["ch-ic-veryBad", "ch-ic-sad", "ch-ic-fine", "ch-ic-good", "ch-ic-veryGood"]
     var stateTitleTexts: [String] = ["Очень плохо", "Плохо", "Нормально", "Хорошо", "Лучше всех"]
     
-    var stateStressTitleText: [String] = ["Низкий стресс", "Средний стресс", "Высокий стресс"]
+    var setChoosedState: ((String) -> Void)
     
     struct SliderConfigure {
         static let min: CGFloat = 0
@@ -91,6 +91,9 @@ struct MoodCheckComponent: View {
             Text("\(stateTitleTexts[Int(valueModel.value.rounded() / 10.0)])")
                 .font(.system(size: 24, weight: .bold))
                 .foregroundColor(Colors.Primary.blue)
+        }
+        .onChange(of: choosedImageName) { newValue in
+            self.setChoosedState(newValue)
         }
         
     }

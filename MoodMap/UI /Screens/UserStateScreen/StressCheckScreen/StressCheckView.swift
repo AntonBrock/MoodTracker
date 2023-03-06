@@ -7,18 +7,16 @@
 
 import SwiftUI
 
-//class SliderStressValueModele: ObservableObject {
-//    @Published var value: Double = 10
-//}
-
 struct StressCheckView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-//    @ObservedObject var valueModel: SliderStressValueModele
-//    @Ob var value: Double = 10
     @ObservedObject var valueModel: SliderStressValueModele
+    @ObservedObject var userStateVideModel: MoodCheckView.ViewModel
     @State var text: String = ""
+    
+    var saveButtonDidTap: ((_ text: String, _ choosedStress: String) -> Void)
+    @State var choosedStress: String = ""
     
     var body: some View {
         VStack {
@@ -40,9 +38,11 @@ struct StressCheckView: View {
             }
             .frame(width: UIScreen.main.bounds.width, height: 48, alignment: .center)
             
-            StressCheckComponent(valueModel: valueModel)
-                .padding(.top, 50)
-                .id(1)
+            StressCheckComponent(valueModel: valueModel, choosedStress: { choosedStress in
+                self.choosedStress = choosedStress
+            })
+            .padding(.top, 50)
+            .id(1)
             
             VStack {
                 ZStack {
@@ -69,7 +69,7 @@ struct StressCheckView: View {
             .shadow(color: Colors.TextColors.mystic400.opacity(0.3), radius: 4.0, x: 0.0, y: 0.0)
             
             MTButton(buttonStyle: .fill, title: "Сохранить", handle: {
-                print("Save")
+                saveButtonDidTap(text, choosedStress)
             })
             .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
             
