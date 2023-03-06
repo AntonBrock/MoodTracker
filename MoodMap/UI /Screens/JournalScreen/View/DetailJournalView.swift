@@ -234,7 +234,7 @@ struct DetailJournalView: View {
             .padding(.leading, 27)
             
             VStack {
-                Image("сharacter_good")
+                Image("ch-ic-good")
                     .resizable()
                     .frame(width: 207, height: 207, alignment: .trailing)
                     .padding(.trailing, -26)

@@ -118,7 +118,7 @@ struct PersonalCabinetView: View {
             }
             
             HStack {
-                Image(isLogin ? "сharacter_good" : "character_normal")
+                Image(isLogin ? "ch-ic-good" : "ch-ic-fine")
                     .resizable()
                     .foregroundColor(.green)
                     .frame(width: 135, height: 140)

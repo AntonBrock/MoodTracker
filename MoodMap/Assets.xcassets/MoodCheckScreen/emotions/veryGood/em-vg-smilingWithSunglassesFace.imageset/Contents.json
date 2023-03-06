@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "smiling-face-with-sunglasses.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -12,7 +12,7 @@ struct DiaryView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                Image("сharacter_good")
+                Image("ch-ic-good")
                     .resizable()
                     .frame(width: 134, height: 134, alignment: .center)
                     
