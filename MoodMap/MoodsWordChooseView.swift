@@ -47,12 +47,11 @@ struct MoodsWordChooseView: View {
          "Любовь", "Забота", "Гордость", "Эйфория"]
     ]
     
-    private let flexibleLayout = Array(repeating: GridItem(.flexible(), spacing: 15), count: 4)
+    private let flexibleLayout = Array(repeating: GridItem(.flexible(),
+                                                           spacing: 35), count: 4)
 
     @ObservedObject var valueModel: SliderValueModele
-    
-//    @Binding var value: Double
-    
+        
     @State var selectedMoodId: String = "" // later change string to Int
     
     var body: some View {
@@ -74,7 +73,7 @@ struct MoodsWordChooseView: View {
                         MoodsWordChooseViewBlock(emotion: emotions[item - 1],
                                                  emotionTitle: emotionTitle[item - 1],
                                                  selectedMoodId: $selectedMoodId)
-                            .frame(width: 80, height: 90)
+                            .frame(width: 90, height: 95)
                             .background(.white)
                             .cornerRadius(10)
                             .shadow(color: Colors.TextColors.mystic400, radius: 6.0, x: 0, y: 0)
@@ -107,7 +106,7 @@ struct MoodsWordChooseViewBlock: View {
                 .resizable()
                 .frame(width: 38, height: 38)
             Text("\(emotionTitle)")
-                .font(.system(size: 12, weight: .medium))
+                .font(.system(size: 11, weight: .medium))
                 .foregroundColor(Colors.Primary.blue)
                 .frame(alignment: .center)
         }

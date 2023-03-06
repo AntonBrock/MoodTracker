@@ -28,9 +28,9 @@ struct ActivitiesView: View {
     private var activitiesArrayImageName: [String] =
     [
         "ac-ic-work", "ac-ic-study", "ac-ic-hobby", "ac-ic-learning",
-        "ac-ic-sleep", "ac-ic-food", "ac-ic-health", "ac-ic-rest", "ac-ic-sport",
-        "ac-ic-meditation", "ac-ic-walkingt", "ac-ic-yoga", "face with open mouth and cold sweat",
-        "ac-ic-family", "fac-ic-friends", "ac-ic-date", "ac-ic-party",
+        "ac-ic-sleep", "ac-ic-food", "ac-ic-health", "ac-ic-rest",
+        "ac-ic-meditation", "ac-ic-wakling", "ac-ic-yoga", "ac-ic-sport",
+        "ac-ic-family", "ac-ic-friends", "ac-ic-date", "ac-ic-party",
         "ac-ic-traveling", "ac-ic-shopping", "ac-ic-drinks", "ac-ic-music"
     ]
     
@@ -132,11 +132,11 @@ struct ActivitiesChooseViewBlock: View {
                 .resizable()
                 .frame(width: 38, height: 38)
             Text("\(activitieTitle)")
-                .font(.system(size: 12, weight: .medium))
+                .font(.system(size: 10, weight: .medium))
                 .foregroundColor(Colors.Primary.blue)
                 .padding(.top, 10)
         }
-        .frame(width: 80, height: 87)
+        .frame(width: 90, height: 95)
         .background(.white)
         .cornerRadius(10)
         .shadow(color: Colors.TextColors.mystic400, radius: 6.0, x: 0, y: 0)
