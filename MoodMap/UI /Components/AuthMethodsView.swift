@@ -37,17 +37,12 @@ struct AuthMethodsView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color(hex: "7A7E80"))
                     .padding(.top, 8)
-//
-//                Button {
-//                    GoogleSignInButton(action: handleSignInButton)
-//                } label: {
-//                    Image("login_google_icon")
-//                        .resizable()
-//                        .frame(width: 279, height: 48, alignment: .center)
-//                }
-//                .padding(.top, 14)
                 
-                GoogleSignInButton(action: handleSignInButton)
+                GoogleSignInButton(style: .wide, action: handleSignInButton)
+                    .frame(width: 279, height: 48, alignment: .center)
+                    .padding(.horizontal, 16)
+                    .padding(.top, 14)
+                    .padding(.bottom, 10)
                 
                 Button {
                     print("Apple")
@@ -88,6 +83,7 @@ struct AuthMethodsView: View {
         .enableSwipeToDismiss(true)
         .onDismiss {
             bottomSheetPosition = .absolute(0)
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 dismiss(nil)
             }

@@ -24,7 +24,13 @@ struct ContentView: View {
                     .transition(.opacity)
                 
                 AuthMethodsView(dismiss: { GToken in
-                    guard let gToken = GToken else { return } // показать ошибку
+                    guard let gToken = GToken else {
+                        withAnimation {
+                            coordinator.showAuthLoginView.toggle()
+                        }
+                        
+                        return
+                    }
                     coordinator.personalCabinetCoordinator.viewModel.singUp(with: gToken)
                         
                     withAnimation {
