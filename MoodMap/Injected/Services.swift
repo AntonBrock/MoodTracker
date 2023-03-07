@@ -9,19 +9,5 @@ struct Services {
     
     static let mainScreenService: MainScreenService = MainScreenService()
     static var authService: AuthService = AuthService()
-    
-//    init(
-//        mainScreenService: MainScreenService,
-//        authService: AuthService
-//    ) {
-//        self.mainScreenService = mainScreenService
-//        self.authService = authService
-//    }
-    
-//    static var stub: Self {
-//        .init(
-//            mainScreenService: MainScreenService(),
-//            authService: AuthService()
-//        )
-//    }
+    static var userStateService: UserStateService = UserStateService()
 }

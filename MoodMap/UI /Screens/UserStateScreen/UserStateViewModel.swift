@@ -26,5 +26,28 @@ extension MoodCheckView {
             print(choosedStress)
             print(mindText)
         }
+        
+        func getEmotionsList() {
+            Services.userStateService.getEmotionList { result in
+                switch result {
+                case .success(let bool):
+                    print(bool)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
+        func getActiviriesList() {
+            Services.userStateService.getActivitiesList { result in
+                switch result {
+                case .success(let bool):
+                    print(bool)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
     }
 }

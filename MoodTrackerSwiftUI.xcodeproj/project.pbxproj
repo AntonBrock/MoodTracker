@@ -126,6 +126,8 @@
 		4529ABD629AF1942001D2390 /* MoodCheckComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9BCD28D36F3000A4FCD7 /* MoodCheckComponent.swift */; };
 		4529ABD729AF1942001D2390 /* MoodsWordChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D81C1328D469D800AEF36E /* MoodsWordChooseView.swift */; };
 		4529ABD829AF1967001D2390 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529AA6A29AF1470001D2390 /* ContentView.swift */; };
+		456A400829B75DD200371B5C /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400729B75DD200371B5C /* UserStateEndPoint.swift */; };
+		456A400A29B75DDB00371B5C /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400929B75DDB00371B5C /* UserStateService.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
 		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
@@ -215,6 +217,8 @@
 		456750B129744FB800392992 /* LoginViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewCoordinator.swift; sourceTree = "<group>"; };
 		456750B329744FC100392992 /* LoginCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinatorView.swift; sourceTree = "<group>"; };
 		456750B5297451E300392992 /* MTKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTKeyboardView.swift; sourceTree = "<group>"; };
+		456A400729B75DD200371B5C /* UserStateEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateEndPoint.swift; sourceTree = "<group>"; };
+		456A400929B75DDB00371B5C /* UserStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateService.swift; sourceTree = "<group>"; };
 		456AA71C296D485000BD414B /* CalendarTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTooltipView.swift; sourceTree = "<group>"; };
 		456AA71E296E9E5F00BD414B /* MoodCheckCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckCoordinatorView.swift; sourceTree = "<group>"; };
 		456AA720296E9E6600BD414B /* MoodCheckViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckViewCoordinator.swift; sourceTree = "<group>"; };
@@ -714,6 +718,7 @@
 			children = (
 				45E750382920B7D100CF9E21 /* MainScreenService.swift */,
 				45133A1F29AFB88900258072 /* AuthService.swift */,
+				456A400929B75DDB00371B5C /* UserStateService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -724,6 +729,7 @@
 				45E750302920B6E700CF9E21 /* BaseAPI.swift */,
 				45E750322920B73200CF9E21 /* MainScreenEndpoint.swift */,
 				45133A2129AFB97400258072 /* AuthEnpPoint.swift */,
+				456A400729B75DD200371B5C /* UserStateEndPoint.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -846,6 +852,7 @@
 				4529AB8429AF193F001D2390 /* Colors.swift in Sources */,
 				4529AB8529AF193F001D2390 /* AppState .swift in Sources */,
 				4529AB8629AF193F001D2390 /* Services.swift in Sources */,
+				456A400A29B75DDB00371B5C /* UserStateService.swift in Sources */,
 				4529AB8729AF193F001D2390 /* SceneDelegate.swift in Sources */,
 				45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */,
 				4529AB8829AF193F001D2390 /* AppEnvironment.swift in Sources */,
@@ -872,6 +879,7 @@
 				4529AB9F29AF1940001D2390 /* SCDonutChartView.swift in Sources */,
 				4529ABA029AF1940001D2390 /* ActivitiesBarCharsView.swift in Sources */,
 				4529ABA129AF1940001D2390 /* FeelingCircleChartsView.swift in Sources */,
+				456A400829B75DD200371B5C /* UserStateEndPoint.swift in Sources */,
 				4529ABA229AF1940001D2390 /* MoodBarCharsView.swift in Sources */,
 				4529ABA329AF1940001D2390 /* SegmentedControlView.swift in Sources */,
 				4529ABA429AF1940001D2390 /* TabBar.swift in Sources */,

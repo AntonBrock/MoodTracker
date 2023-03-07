@@ -11,6 +11,7 @@ import Moya
 enum BaseAPI {
     case mainScreen(MainScreenEndpoint)
     case auth(AuthEnpPoint)
+    case userState(UserStateEndPoint)
 }
 
 extension BaseAPI: TargetType {
@@ -19,6 +20,7 @@ extension BaseAPI: TargetType {
         switch self {
         case let .mainScreen(mainScreenAPI): return mainScreenAPI.baseURL
         case let .auth(authAPI): return authAPI.baseURL
+        case let .userState(userStateAPI): return userStateAPI.baseURL
         }
     }
     
@@ -26,6 +28,7 @@ extension BaseAPI: TargetType {
         switch self {
         case let .mainScreen(mainScreenAPI): return mainScreenAPI.path
         case let .auth(authAPI): return authAPI.path
+        case let .userState(userStateAPI): return userStateAPI.path
         }
     }
     
@@ -33,6 +36,7 @@ extension BaseAPI: TargetType {
         switch self {
         case let .mainScreen(mainScreenAPI): return mainScreenAPI.method
         case let .auth(authAPI): return authAPI.method
+        case let .userState(userStateAPI): return userStateAPI.method
         }
     }
     
@@ -40,6 +44,7 @@ extension BaseAPI: TargetType {
         switch self {
         case let .mainScreen(mainScreenAPI): return mainScreenAPI.sampleData
         case let .auth(authAPI): return authAPI.sampleData
+        case let .userState(userStateAPI): return userStateAPI.sampleData
         }
     }
     
@@ -47,6 +52,7 @@ extension BaseAPI: TargetType {
         switch self {
         case let .mainScreen(mainScreenAPI): return mainScreenAPI.task
         case let .auth(authAPI): return authAPI.task
+        case let .userState(userStateAPI): return userStateAPI.task
         }
     }
     
@@ -54,14 +60,15 @@ extension BaseAPI: TargetType {
         switch self {
         case let .mainScreen(mainScreenAPI): return mainScreenAPI.headers
         case let .auth(authAPI): return authAPI.headers
+        case let .userState(userStateAPI): return userStateAPI.headers
         }
     }
     
-    // MARK: AccessTokenAuthorizable
     var authorizationType: AuthorizationType? {
         switch self {
         case let .mainScreen(mainScreenAPI): return mainScreenAPI.authorizationType
         case let .auth(authAPI): return authAPI.authorizationType
+        case let .userState(userStateAPI): return userStateAPI.authorizationType
         }
     }
 }

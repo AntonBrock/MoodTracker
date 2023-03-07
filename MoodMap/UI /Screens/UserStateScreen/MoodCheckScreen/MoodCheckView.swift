@@ -227,6 +227,10 @@ struct MoodCheckView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .onAppear {
+            coordinator.userStateViewModel.getEmotionsList()
+            coordinator.userStateViewModel.getActiviriesList()
+        }
 //        .transition(.push(from: .trailing))
     }
     
