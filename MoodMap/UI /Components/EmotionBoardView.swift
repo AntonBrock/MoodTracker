@@ -156,33 +156,34 @@ struct EmotionBoardDataView: View {
 
                 HStack {
                     ForEach(0..<activities.count, id: \.self) { item in
-                        Text(activities[item])
-                            .font(.system(size: 12, weight: .medium))
-                            .multilineTextAlignment(.center)
-                            .fixedSize(horizontal: true, vertical: true)
-                            .foregroundColor(.white)
-                            .cornerRadius(7)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 8)
-                            .background {
-                                RoundedRectangle(cornerRadius: 45, style: .circular)
-                                    .fill(.white.opacity(0.3))
-                            }
+                        if activities.count >= 2 && item != 1 {
+                            Text(activities[item])
+                                .font(.system(size: 12, weight: .medium))
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: true, vertical: true)
+                                .foregroundColor(.white)
+                                .cornerRadius(7)
+                                .padding(.horizontal, 14)
+                                .padding(.vertical, 8)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 45, style: .circular)
+                                        .fill(.white.opacity(0.3))
+                                }
+                        } else {
+                            Text("+ \(activities.count - 1)")
+                                .font(.system(size: 12, weight: .medium))
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: true, vertical: true)
+                                .foregroundColor(.white)
+                                .cornerRadius(7)
+                                .padding(.horizontal, 14)
+                                .padding(.vertical, 8)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 45, style: .circular)
+                                        .fill(.white.opacity(0.3))
+                                }
+                        }
                     }
-                    
-//                    if activities.count > 1 {
-//                        Text("+\(activities.count - 1)")
-//                            .font(.system(size: 16))
-//                            .fontWeight(.bold)
-//                            .multilineTextAlignment(.center)
-////                            .foregroundColor(color)
-//                            .background(.clear)
-//                            .frame(width: 60, height: 25, alignment: .center)
-//                            .minimumScaleFactor(0.5)
-////                            .background(color.opacity(0.4))
-//                            .cornerRadius(7)
-//                    }
-                    
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
 
