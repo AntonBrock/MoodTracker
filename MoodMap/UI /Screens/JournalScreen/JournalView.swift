@@ -13,6 +13,9 @@ struct JournalView: View {
             
     var animation: Namespace.ID
 
+    @ObservedObject var viewModel: ViewModel
+    private unowned let coordinator: JournalViewCoordinator
+
     @State var selectedIndex: Int = 0
     @State var showMoreInfo: Bool = false
     @State var currentID: Int = 1
@@ -35,16 +38,20 @@ struct JournalView: View {
     
     @State var isRangeCalendarMode: Bool = false // enum
 
-    @State var currentModel: EmotionBoardViewModel = EmotionBoardViewModel(id: 0, data: "", emotionTitle: "", activities: [], color: .white, emotionImage: "")
+    @State var currentModel: JournalViewModel?
     
-    let titles: [String] = ["Общий отчет", "Журнал"]
-    let dates: [String] = ["week", "mounth", "year", "all"]
+    init(
+        coordinator: JournalViewCoordinator,
+        animation: Namespace.ID,
+        showAuthMethodView: Bool = false
+    ){
+        self.coordinator = coordinator
+        self.animation = animation
+        self.viewModel = coordinator.viewModel
+    }
     
-    var emotionBoardViewModels: [EmotionBoardViewModel] = [
-        EmotionBoardViewModel(id: 0, data: "12:20", emotionTitle: "Very happy", activities: [ActivitiesViewModel(name: "travel")], color: .cyan, emotionImage: "character_veryGood"),
-        EmotionBoardViewModel(id: 1, data: "12:20", emotionTitle: "Very happy", activities: [ActivitiesViewModel(name: "travel")], color: .indigo, emotionImage: "character_veryGood"),
-        EmotionBoardViewModel(id: 2, data: "12:20", emotionTitle: "Very happy", activities: [ActivitiesViewModel(name: "travel")], color: .cyan, emotionImage: "character_veryGood")
-    ]
+//    let titles: [String] = ["Общий отчет", "Журнал"]
+//    let dates: [String] = ["week", "mounth", "year", "all"]
     
     var body: some View {
         
@@ -55,9 +62,10 @@ struct JournalView: View {
                     .padding(.top, 24)
                 
                 VStack(alignment: .leading, spacing: 12) {
-                    EmotionBoardView(emotionBoardViewModels: emotionBoardViewModels, wasTouched: { id in
+                    EmotionBoardView(data: coordinator.viewModel.journalViewModels ?? [],
+                                     wasTouched: { id in
                         currentID = id
-                        currentModel = emotionBoardViewModels[currentID]
+                        currentModel = coordinator.viewModel.journalViewModels?[currentID]
                         
                         withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
                             showMoreInfo.toggle()
@@ -72,11 +80,12 @@ struct JournalView: View {
                 VStack(alignment: .leading) {
                     Spacer()
 
-                    ForEach(0..<emotionBoardViewModels.count, id: \.self) { i in
-                        if currentID == emotionBoardViewModels[i].id {
+                    ForEach(0..<(coordinator.viewModel.journalViewModels?.count ?? 0), id: \.self) { i in
+                        if currentID == coordinator.viewModel.journalViewModels?[i].id {
 
                             DetailJournalView(showMoreInfo: $showMoreInfo, animation: animation, model: $currentModel)
                                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
+                                
                         }
                     }
                 }

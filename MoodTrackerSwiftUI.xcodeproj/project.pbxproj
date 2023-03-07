@@ -128,6 +128,7 @@
 		4529ABD829AF1967001D2390 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529AA6A29AF1470001D2390 /* ContentView.swift */; };
 		456A400829B75DD200371B5C /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400729B75DD200371B5C /* UserStateEndPoint.swift */; };
 		456A400A29B75DDB00371B5C /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400929B75DDB00371B5C /* UserStateService.swift */; };
+		456A400C29B76AF800371B5C /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400B29B76AF800371B5C /* JournalViewModel.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
 		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
@@ -219,6 +220,7 @@
 		456750B5297451E300392992 /* MTKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTKeyboardView.swift; sourceTree = "<group>"; };
 		456A400729B75DD200371B5C /* UserStateEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateEndPoint.swift; sourceTree = "<group>"; };
 		456A400929B75DDB00371B5C /* UserStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateService.swift; sourceTree = "<group>"; };
+		456A400B29B76AF800371B5C /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewModel.swift; sourceTree = "<group>"; };
 		456AA71C296D485000BD414B /* CalendarTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTooltipView.swift; sourceTree = "<group>"; };
 		456AA71E296E9E5F00BD414B /* MoodCheckCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckCoordinatorView.swift; sourceTree = "<group>"; };
 		456AA720296E9E6600BD414B /* MoodCheckViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckViewCoordinator.swift; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 				452D35402951C4AC0018A3DA /* JournalView.swift */,
 				452D35422951C4B70018A3DA /* JournalViewCoordinator.swift */,
 				452D35442951C4C00018A3DA /* JournalCoordinatorView.swift */,
+				456A400B29B76AF800371B5C /* JournalViewModel.swift */,
 			);
 			path = JournalScreen;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 				4529AB9C29AF1940001D2390 /* SCChartWrapperView.swift in Sources */,
 				4529AB9D29AF1940001D2390 /* SCDonutView.swift in Sources */,
 				4529AB9E29AF1940001D2390 /* SCDonutPartView.swift in Sources */,
+				456A400C29B76AF800371B5C /* JournalViewModel.swift in Sources */,
 				4529AB9F29AF1940001D2390 /* SCDonutChartView.swift in Sources */,
 				4529ABA029AF1940001D2390 /* ActivitiesBarCharsView.swift in Sources */,
 				4529ABA129AF1940001D2390 /* FeelingCircleChartsView.swift in Sources */,

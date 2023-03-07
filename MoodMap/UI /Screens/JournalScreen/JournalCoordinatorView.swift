@@ -14,7 +14,8 @@ struct JournalCoordinatorView: View {
 
     var body: some View {
         NavigationView {
-            JournalView(animation: animation)
+            JournalView(coordinator: coordinator,
+                        animation: animation)
 //                .navigationTitle("Журнал")
 //                .navigationBarTitleDisplayMode(.large)
         }

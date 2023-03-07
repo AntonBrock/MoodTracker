@@ -12,7 +12,7 @@ struct DetailJournalView: View {
     @Binding var showMoreInfo: Bool
     
     var animation: Namespace.ID
-    @Binding var model: EmotionBoardViewModel
+    @Binding var model: JournalViewModel?
     
 //    @State var scale: CGFloat = 1
     
@@ -173,7 +173,7 @@ struct DetailJournalView: View {
             }
             .padding(.top, 24)
         }
-        .matchedGeometryEffect(id: model.id, in: animation)
+        .matchedGeometryEffect(id: model?.id, in: animation)
         .ignoresSafeArea(.all, edges: .top)
     }
     

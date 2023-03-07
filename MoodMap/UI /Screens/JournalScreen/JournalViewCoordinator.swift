@@ -12,16 +12,14 @@ class JournalViewCoordinator: ObservableObject, Identifiable {
     private let container: DIContainer
     private unowned let parent: BaseViewCoordinator
     
-    // MARK: - Init
+    @ObservedObject var viewModel: JournalView.ViewModel
+    
     init(
         parent: BaseViewCoordinator,
         container: DIContainer
     ) {
         self.parent = parent
         self.container = container
+        self.viewModel = JournalView.ViewModel()
     }
-    
-//    func isHiddenTabBar(_ value: Bool) {
-//        parent.container.appState.isHiddenTabBar = value
-//    }
 }
