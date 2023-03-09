@@ -55,138 +55,139 @@ struct JournalView: View {
     
     var body: some View {
         
-        ZStack {
-            ScrollView {
-                
-                SearchView(showCalendar: $showDatePicker, choosedDays: $selectedDay, rangeDays: $rangeDays)
-                    .padding(.top, 24)
-                
-                VStack(alignment: .leading, spacing: 12) {
-                    EmotionBoardView(data: coordinator.viewModel.journalViewModels ?? [],
-                                     wasTouched: { id in
-                        currentID = id
-                        currentModel = coordinator.viewModel.journalViewModels?[currentID]
-                        
-                        withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
-                            showMoreInfo.toggle()
-//                            coordinator.isHiddenTabBar(true)
-                        }
-                    }, animation: animation)
-                }
-                .background(.white)
-            }
+        VStack {
+            SearchView(showCalendar: $showDatePicker, choosedDays: $selectedDay, rangeDays: $rangeDays)
+                .padding(.top, 24)
             
-            if showMoreInfo {
-                VStack(alignment: .leading) {
-                    Spacer()
-
-                    ForEach(0..<(coordinator.viewModel.journalViewModels?.count ?? 0), id: \.self) { i in
-                        if currentID == coordinator.viewModel.journalViewModels?[i].id {
-
-                            DetailJournalView(showMoreInfo: $showMoreInfo, animation: animation, model: $currentModel)
-                                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
+            ZStack {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 12) {
+                        EmotionBoardView(data: coordinator.viewModel.journalViewModels ?? [],
+                                         wasTouched: { id in
+                            currentID = id
+                            currentModel = coordinator.viewModel.journalViewModels?[currentID]
+                            
+                            withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
+                                showMoreInfo.toggle()
+                                //                            coordinator.isHiddenTabBar(true)
+                            }
+                        }, animation: animation)
+                    }
+                    .background(.white)
+                }
+                
+                if showMoreInfo {
+                    VStack(alignment: .leading) {
+                        Spacer()
+                        
+                        ForEach(0..<(coordinator.viewModel.journalViewModels?.count ?? 0), id: \.self) { i in
+                            if currentID == coordinator.viewModel.journalViewModels?[i].id {
                                 
+                                DetailJournalView(showMoreInfo: $showMoreInfo, animation: animation, model: $currentModel)
+                                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
+                                
+                            }
                         }
                     }
-                }
-                .background(.white)
-            }
-        }
-        .popover(isPresented: $showDatePicker) {
-            
-            HStack {
-                Button {
-                    clearCalendar()
-                    showDatePicker.toggle()
-                } label: {
-                    Image("crossIcon")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .padding(.horizontal, 12)
-                        .padding(.top, 24)
+                    .background(.white)
                 }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-           
-            VStack(spacing: 10) {
-                Text("Выбери дату или укажи диапоз дат")
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 12)
-                    .padding(.top, 16)
+            .popover(isPresented: $showDatePicker) {
                 
-//                Text("\(lowerDate?.description ?? "") - \(upperDate?.description ?? "")")
-//                    .font(.system(size: 16, weight: .regular))
-//                    .foregroundColor(Colors.TextColors.cadetBlue600)
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                    .padding(.horizontal, 12)
-//                    .opacity(lowerDate == nil ? 0 : 1)
-//                    .transition(.opacity)
-            }
-          
-            Toggle(isOn: $isRangeCalendarMode) {
-                Text("Выбор диапазона")
-            }
-            .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-            
-            CalendarViewRepresentable(lowerDate: lowerDate, upperDate: upperDate, selectedDay: selectedDay, onSelect: { day in
-                                
-                if isRangeCalendarMode {
-                    if !isSelectedFirstDateInRange {
-                        self.lowerDate = day
-                        self.isSelectedFirstDateInRange.toggle()
-                        
-                        if isSelectedSecondDateInRange {
-                            self.upperDate = nil
+                HStack {
+                    Button {
+                        clearCalendar()
+                        showDatePicker.toggle()
+                    } label: {
+                        Image("crossIcon")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .padding(.horizontal, 12)
+                            .padding(.top, 24)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                VStack(spacing: 10) {
+                    Text("Выбери дату или укажи диапоз дат")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 12)
+                        .padding(.top, 16)
+                    
+                    //                Text("\(lowerDate?.description ?? "") - \(upperDate?.description ?? "")")
+                    //                    .font(.system(size: 16, weight: .regular))
+                    //                    .foregroundColor(Colors.TextColors.cadetBlue600)
+                    //                    .frame(maxWidth: .infinity, alignment: .leading)
+                    //                    .padding(.horizontal, 12)
+                    //                    .opacity(lowerDate == nil ? 0 : 1)
+                    //                    .transition(.opacity)
+                }
+                
+                Toggle(isOn: $isRangeCalendarMode) {
+                    Text("Выбор диапазона")
+                }
+                .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+                
+                CalendarViewRepresentable(lowerDate: lowerDate, upperDate: upperDate, selectedDay: selectedDay, onSelect: { day in
+                    
+                    if isRangeCalendarMode {
+                        if !isSelectedFirstDateInRange {
+                            self.lowerDate = day
+                            self.isSelectedFirstDateInRange.toggle()
+                            
+                            if isSelectedSecondDateInRange {
+                                self.upperDate = nil
+                            }
+                        } else {
+                            self.upperDate = day
+                            self.isSelectedSecondDateInRange.toggle()
+                            self.isSelectedFirstDateInRange.toggle()
                         }
                     } else {
-                        self.upperDate = day
-                        self.isSelectedSecondDateInRange.toggle()
-                        self.isSelectedFirstDateInRange.toggle()
+                        self.selectedDay = day
                     }
-                } else {
-                    self.selectedDay = day
-                }
-                
-            })
-            
-            Divider()
-            
-            HStack {
-                MTButton(buttonStyle: .outline, title: "Очистить") {
-                    clearCalendar()
-                }
-                .frame(width: 100, height: 40)
-                
-                Spacer()
-                
-                MTButton(buttonStyle: .fill, title: "Применить") {
-                    guard let lowerDate = lowerDate, let upperDate = upperDate else { return }
-                    rangeDays = lowerDate...upperDate
                     
-//                    clearCalendar()
-                    showDatePicker.toggle()
-                }
-                .frame(width: 100, height: 40)
-                .disabled(isRangeCalendarMode ? upperDate == nil || lowerDate == nil : selectedDay == nil) // тут нужна еще разделние на выбранный тип отмечания
-            }
-            .frame(height: 100)
-            .padding(.horizontal, 16)
-        }
-        .onChange(of: isRangeCalendarMode) { _ in
-            if isRangeCalendarMode {
-                self.selectedDay = nil
-            } else {
-//                selectedDay = nil
-
-                lowerDate = nil
-                upperDate = nil
+                })
                 
-//                isSelectedFirstDateInRange.toggle()
-//                isSelectedSecondDateInRange.toggle()
+                Divider()
+                
+                HStack {
+                    MTButton(buttonStyle: .outline, title: "Очистить") {
+                        clearCalendar()
+                    }
+                    .frame(width: 100, height: 40)
+                    
+                    Spacer()
+                    
+                    MTButton(buttonStyle: .fill, title: "Применить") {
+                        guard let lowerDate = lowerDate, let upperDate = upperDate else { return }
+                        rangeDays = lowerDate...upperDate
+                        
+                        //                    clearCalendar()
+                        showDatePicker.toggle()
+                    }
+                    .frame(width: 100, height: 40)
+                    .disabled(isRangeCalendarMode ? upperDate == nil || lowerDate == nil : selectedDay == nil) // тут нужна еще разделние на выбранный тип отмечания
+                }
+                .frame(height: 100)
+                .padding(.horizontal, 16)
             }
-
+            .onChange(of: isRangeCalendarMode) { _ in
+                if isRangeCalendarMode {
+                    self.selectedDay = nil
+                } else {
+                    //                selectedDay = nil
+                    
+                    lowerDate = nil
+                    upperDate = nil
+                    
+                    //                isSelectedFirstDateInRange.toggle()
+                    //                isSelectedSecondDateInRange.toggle()
+                }
+                
+            }
         }
     }
     

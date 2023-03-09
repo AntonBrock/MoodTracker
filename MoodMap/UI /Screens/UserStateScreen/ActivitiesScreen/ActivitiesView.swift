@@ -30,7 +30,7 @@ struct ActivitiesView: View {
     [
         "ac-ic-work", "ac-ic-study", "ac-ic-hobby", "ac-ic-learning",
         "ac-ic-sleep", "ac-ic-food", "ac-ic-health", "ac-ic-rest",
-        "ac-ic-meditation", "ac-ic-wakling", "ac-ic-yoga", "ac-ic-sport",
+        "ac-ic-meditation", "ac-ic-walking", "ac-ic-yoga", "ac-ic-sport",
         "ac-ic-family", "ac-ic-friends", "ac-ic-date", "ac-ic-party",
         "ac-ic-traveling", "ac-ic-shopping", "ac-ic-drinks", "ac-ic-music"
     ]
