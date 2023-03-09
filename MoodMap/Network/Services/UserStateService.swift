@@ -8,19 +8,22 @@
 import Foundation
 
 protocol UserStateServiceProtocol {
-    func getEmotionList(completion: @escaping(Result<Bool, Error>) -> Void)
+    func getEmotionList(completion: @escaping(Result<[EmotionsModel], Error>) -> Void)
     func getActivitiesList(completion: @escaping(Result<Bool, Error>) -> Void)
 }
 
 struct UserStateService: UserStateServiceProtocol {
-    func getEmotionList(completion: @escaping(Result<Bool, Error>) -> Void) {
+    func getEmotionList(completion: @escaping(Result<[EmotionsModel], Error>) -> Void) {
         let target = BaseAPI.userState(.getEmotionsList)
 
         let networkService = ServiceProvider().networkService
         networkService?.request(.target(target), completion: { response in
             switch response {
             case let .success(result):
-                print(result)
+                guard let model = try? JSONDecoder().decode([EmotionsModel].self, from: result.data) else {
+                    return
+                }
+                completion(.success(model))
             case let .failure(error):
                 completion(.failure(error))
             }

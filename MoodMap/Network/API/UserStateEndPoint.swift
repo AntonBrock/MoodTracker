@@ -25,7 +25,8 @@ enum UserStateEndPoint: TargetType {
     
     var path: String {
         switch self {
-        case .getEmotionsList, .getActivitiesList: return ""
+        case .getEmotionsList,
+             .getActivitiesList: return ""
         }
     }
     
@@ -43,22 +44,22 @@ enum UserStateEndPoint: TargetType {
     var task: Task {
         switch self {
         case .getEmotionsList,
-                .getActivitiesList:
-            return .requestPlain
+             .getActivitiesList:
+            return .requestParameters(parameters: ["language": "ru"], encoding: URLEncoding.queryString)
         }
     }
     
     var headers: [String: String]? {
         switch self {
         case .getEmotionsList,
-                .getActivitiesList: return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
+             .getActivitiesList: return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
         }
     }
     
     var authorizationType: AuthorizationType? {
         switch self {
         case .getEmotionsList,
-                .getActivitiesList:
+             .getActivitiesList:
             return .bearer
         }
     }

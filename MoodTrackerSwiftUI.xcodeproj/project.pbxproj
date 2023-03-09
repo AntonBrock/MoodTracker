@@ -129,6 +129,8 @@
 		456A400829B75DD200371B5C /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400729B75DD200371B5C /* UserStateEndPoint.swift */; };
 		456A400A29B75DDB00371B5C /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400929B75DDB00371B5C /* UserStateService.swift */; };
 		456A400C29B76AF800371B5C /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400B29B76AF800371B5C /* JournalViewModel.swift */; };
+		456A400E29B990C900371B5C /* EmotionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400D29B990C900371B5C /* EmotionsModel.swift */; };
+		456A401129B991E200371B5C /* EmotionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401029B991E200371B5C /* EmotionsViewModel.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
 		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
@@ -221,6 +223,8 @@
 		456A400729B75DD200371B5C /* UserStateEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateEndPoint.swift; sourceTree = "<group>"; };
 		456A400929B75DDB00371B5C /* UserStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateService.swift; sourceTree = "<group>"; };
 		456A400B29B76AF800371B5C /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewModel.swift; sourceTree = "<group>"; };
+		456A400D29B990C900371B5C /* EmotionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionsModel.swift; sourceTree = "<group>"; };
+		456A401029B991E200371B5C /* EmotionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionsViewModel.swift; sourceTree = "<group>"; };
 		456AA71C296D485000BD414B /* CalendarTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTooltipView.swift; sourceTree = "<group>"; };
 		456AA71E296E9E5F00BD414B /* MoodCheckCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckCoordinatorView.swift; sourceTree = "<group>"; };
 		456AA720296E9E6600BD414B /* MoodCheckViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckViewCoordinator.swift; sourceTree = "<group>"; };
@@ -302,6 +306,7 @@
 			children = (
 				45E7503A2920B80200CF9E21 /* UserInfoModel.swift */,
 				452D352D2951B57F0018A3DA /* AnotherHelpsPreviewModel.swift */,
+				456A400D29B990C900371B5C /* EmotionsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -650,6 +655,14 @@
 			path = LoginScreen;
 			sourceTree = "<group>";
 		};
+		456A400F29B991DA00371B5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				456A401029B991E200371B5C /* EmotionsViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		456AA722296E9E9900BD414B /* ActivitiesScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -707,6 +720,7 @@
 		45D6F16A29B6575F007EABFA /* UserStateScreen */ = {
 			isa = PBXGroup;
 			children = (
+				456A400F29B991DA00371B5C /* Model */,
 				45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */,
 				45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */,
 				453AAC25295DBFD400CE0F15 /* MoodCheckScreen */,
@@ -930,12 +944,14 @@
 				4529ABCB29AF1942001D2390 /* FeelingViewCoordinator.swift in Sources */,
 				4529ABCC29AF1942001D2390 /* FeelingCoordinatorView.swift in Sources */,
 				4529ABCD29AF1942001D2390 /* MoodCheckView.swift in Sources */,
+				456A400E29B990C900371B5C /* EmotionsModel.swift in Sources */,
 				4529ABCE29AF1942001D2390 /* MoodCheckViewCoordinator.swift in Sources */,
 				4529ABCF29AF1942001D2390 /* MoodCheckCoordinatorView.swift in Sources */,
 				45133A1E29AF917800258072 /* PersonalCabinetViewModel.swift in Sources */,
 				4529ABD029AF1942001D2390 /* ActivitiesView.swift in Sources */,
 				4529ABD129AF1942001D2390 /* ActivitiesViewCoodinator.swift in Sources */,
 				4529ABD229AF1942001D2390 /* ActivitiesCoordinatorView.swift in Sources */,
+				456A401129B991E200371B5C /* EmotionsViewModel.swift in Sources */,
 				4529ABD329AF1942001D2390 /* StressCheckComponent.swift in Sources */,
 				4529ABD429AF1942001D2390 /* StressCheckView.swift in Sources */,
 				4529ABD529AF1942001D2390 /* SwiftUISlider.swift in Sources */,

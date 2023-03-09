@@ -11,6 +11,7 @@ extension MoodCheckView {
     class ViewModel: ObservableObject {
         
         @Published var userStateInfoModel: UserStateInfoModel?
+        @Published var emotionsViewModel: [[EmotionsViewModel]] = []
         
         @Published var choosedTimeDate: Date?
         @Published var choosedState: String?
@@ -30,8 +31,23 @@ extension MoodCheckView {
         func getEmotionsList() {
             Services.userStateService.getEmotionList { result in
                 switch result {
-                case .success(let bool):
-                    print(bool)
+                case .success(let emotionsModels):
+//                    var veryBadEmotion: [EmotionsViewModel] = []
+          
+//                        if item.image.contains(where: { $0 == "-b" }) {
+//                            print(item.image)
+//                        }
+//                        self.emotionsViewModel.append(
+//                            EmotionsViewModel(
+//                                id: item.id,
+//                                text: item.text,
+//                                language: item.language,
+//                                image: item.image
+//                            )
+//                        )
+//                    }
+                    
+                    print(self.emotionsViewModel)
                 case .failure(let error):
                     print(error)
                 }
