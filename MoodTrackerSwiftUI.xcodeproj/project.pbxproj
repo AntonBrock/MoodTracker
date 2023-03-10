@@ -131,6 +131,10 @@
 		456A400C29B76AF800371B5C /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400B29B76AF800371B5C /* JournalViewModel.swift */; };
 		456A400E29B990C900371B5C /* EmotionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400D29B990C900371B5C /* EmotionsModel.swift */; };
 		456A401129B991E200371B5C /* EmotionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401029B991E200371B5C /* EmotionsViewModel.swift */; };
+		456A401329BA41BB00371B5C /* StatesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401229BA41BB00371B5C /* StatesModel.swift */; };
+		456A401529BA41C200371B5C /* ActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401429BA41C200371B5C /* ActivitiesModel.swift */; };
+		456A401729BA424200371B5C /* ActivitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401629BA424200371B5C /* ActivitiesViewModel.swift */; };
+		456A401929BAE1BB00371B5C /* StatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401829BAE1BB00371B5C /* StatesViewModel.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
 		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
@@ -225,6 +229,10 @@
 		456A400B29B76AF800371B5C /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewModel.swift; sourceTree = "<group>"; };
 		456A400D29B990C900371B5C /* EmotionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionsModel.swift; sourceTree = "<group>"; };
 		456A401029B991E200371B5C /* EmotionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionsViewModel.swift; sourceTree = "<group>"; };
+		456A401229BA41BB00371B5C /* StatesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesModel.swift; sourceTree = "<group>"; };
+		456A401429BA41C200371B5C /* ActivitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesModel.swift; sourceTree = "<group>"; };
+		456A401629BA424200371B5C /* ActivitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewModel.swift; sourceTree = "<group>"; };
+		456A401829BAE1BB00371B5C /* StatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesViewModel.swift; sourceTree = "<group>"; };
 		456AA71C296D485000BD414B /* CalendarTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTooltipView.swift; sourceTree = "<group>"; };
 		456AA71E296E9E5F00BD414B /* MoodCheckCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckCoordinatorView.swift; sourceTree = "<group>"; };
 		456AA720296E9E6600BD414B /* MoodCheckViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckViewCoordinator.swift; sourceTree = "<group>"; };
@@ -307,6 +315,8 @@
 				45E7503A2920B80200CF9E21 /* UserInfoModel.swift */,
 				452D352D2951B57F0018A3DA /* AnotherHelpsPreviewModel.swift */,
 				456A400D29B990C900371B5C /* EmotionsModel.swift */,
+				456A401229BA41BB00371B5C /* StatesModel.swift */,
+				456A401429BA41C200371B5C /* ActivitiesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -659,6 +669,8 @@
 			isa = PBXGroup;
 			children = (
 				456A401029B991E200371B5C /* EmotionsViewModel.swift */,
+				456A401629BA424200371B5C /* ActivitiesViewModel.swift */,
+				456A401829BAE1BB00371B5C /* StatesViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -856,6 +868,7 @@
 				4529AB7029AF193F001D2390 /* UIView+extenstion.swift in Sources */,
 				45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */,
 				4529AB7129AF193F001D2390 /* UIImage+extension.swift in Sources */,
+				456A401329BA41BB00371B5C /* StatesModel.swift in Sources */,
 				4529AB7229AF193F001D2390 /* UINavigationController+extention.swift in Sources */,
 				4529AB7329AF193F001D2390 /* UIDevice+extension.swift in Sources */,
 				4529AB7429AF193F001D2390 /* NetworkService.swift in Sources */,
@@ -865,6 +878,7 @@
 				4529AB7829AF193F001D2390 /* MainScreenEndpoint.swift in Sources */,
 				4529AB7929AF193F001D2390 /* UserInfoModel.swift in Sources */,
 				4529AB7A29AF193F001D2390 /* AnotherHelpsPreviewModel.swift in Sources */,
+				456A401529BA41C200371B5C /* ActivitiesModel.swift in Sources */,
 				4529AB7B29AF193F001D2390 /* Fonts.swift in Sources */,
 				4529AB8429AF193F001D2390 /* Colors.swift in Sources */,
 				4529AB8529AF193F001D2390 /* AppState .swift in Sources */,
@@ -890,6 +904,7 @@
 				4529AB9929AF1940001D2390 /* NumberFormatter+Defaults.swift in Sources */,
 				4529AB9A29AF1940001D2390 /* SCPalletes.swift in Sources */,
 				4529AB9B29AF1940001D2390 /* SCCaptionsView.swift in Sources */,
+				456A401929BAE1BB00371B5C /* StatesViewModel.swift in Sources */,
 				4529AB9C29AF1940001D2390 /* SCChartWrapperView.swift in Sources */,
 				4529AB9D29AF1940001D2390 /* SCDonutView.swift in Sources */,
 				4529AB9E29AF1940001D2390 /* SCDonutPartView.swift in Sources */,
@@ -938,6 +953,7 @@
 				4529ABC529AF1941001D2390 /* ReportCoordinatorView.swift in Sources */,
 				4529ABC629AF1941001D2390 /* WhyRegistrationInfoView.swift in Sources */,
 				4529ABC729AF1941001D2390 /* PersonalCabinetView.swift in Sources */,
+				456A401729BA424200371B5C /* ActivitiesViewModel.swift in Sources */,
 				4529ABC829AF1942001D2390 /* PersonalCabinetViewCoordinator.swift in Sources */,
 				4529ABC929AF1942001D2390 /* PersonalCabinetCoordinatorView.swift in Sources */,
 				4529ABCA29AF1942001D2390 /* FeelingView.swift in Sources */,

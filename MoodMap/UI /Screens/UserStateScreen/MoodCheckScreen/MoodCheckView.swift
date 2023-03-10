@@ -94,16 +94,23 @@ struct MoodCheckView: View {
                                 }
                                 .padding(.top, 10)
                                 
-                                MoodCheckComponent(setChoosedState: { choosedState in
-                                    self.userStateVideModel.choosedState = choosedState
-                                }, valueModel: valueModel, value: $value)
-                                .padding(.top, 15)
-                                
-                                MoodsWordChooseView(valueModel: valueModel, setChoosedEmotion: { choosedEmotion in
-                                    self.userStateVideModel.choosedEmotion = choosedEmotion
-                                })
-                                    .padding(.top, -20)
-                                    .id(1)
+                                #warning("TODO: Пока нет лоудера")
+                                if !coordinator.userStateViewModel.statesViewModel.isEmpty {
+                                    MoodCheckComponent(statesViewModel: coordinator.userStateViewModel.statesViewModel,
+                                                       setChoosedState: { choosedState in
+                                        self.userStateVideModel.choosedState = choosedState
+                                    }, valueModel: valueModel, value: $value)
+                                    .padding(.top, 15)
+                                }
+                                if !coordinator.userStateViewModel.emotionsViewModel.isEmpty {
+                                    MoodsWordChooseView(emotionViewModel: coordinator.userStateViewModel.emotionsViewModel,
+                                                        valueModel: valueModel,
+                                                        setChoosedEmotion: { choosedEmotion in
+                                        self.userStateVideModel.choosedEmotion = choosedEmotion
+                                    })
+                                        .padding(.top, -20)
+                                        .id(1)
+                                }
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                             .background(.white)
@@ -228,8 +235,7 @@ struct MoodCheckView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onAppear {
-            coordinator.userStateViewModel.getEmotionsList()
-            coordinator.userStateViewModel.getActiviriesList()
+            coordinator.userStateViewModel.fetch()
         }
 //        .transition(.push(from: .trailing))
     }

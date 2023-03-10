@@ -10,43 +10,7 @@ import SwiftUI
 
 struct MoodsWordChooseView: View {
     
-    var emotionsArrayImageName: [[String]] =
-    [
-        ["em-vb-dizzyFace", "em-vb-unStrongFace", "em-vb-perseveringFace", "em-vb-spiralEyesFace",
-         "em-vb-angryFace", "em-vb-cryingFace", "em-vb-fearfulFace", "em-vb-screamingInFearFace"],
-        
-        ["em-b-unamusedFace", "em-b-hotFace", "em-b-confoundedFace", "em-b-anxiousFace",
-         "em-b-poutingFace", "em-b-cryingFace", "em-b-worriedFace", "em-b-grimacingFace"],
-        
-        ["em-f-diagonalMouthFace", "em-f-sleepingFace", "em-f-exhalingFace", "em-f-withoutMouthFace",
-         "em-f-wearyFace", "em-f-flushedFace", "em-f-expressionlessFace", "em-f-smilingFaceWithSmilingEyes"],
-        
-        ["em-g-squintingWithTongueFace", "em-g-beamingWithSmilingEyesFace", "em-g-winkingWithTongueFace", "em-g-kissingFace",
-         "em-g-smilingWithHeartsFace", "em-g-kissingWithSmilingEyesFace", "em-g-relievedFace", "em-g-blowingAKissFace"],
-        
-        ["em-vg-nerdFace", "em-vg-starStruckFace", "em-vg-happyWithEnlargedEyesFace", "em-vg-smilingWithHaloFace",
-         "em-vg-smilingWithHeartEyesFace", "em-vg-kissingWithClosedEyesFace", "em-vg-smilingWithSunglassesFace", "em-vg-withTongueFace"]
-        
-    ]
-    
-    var emotionsArrayTitle: [[String]] =
-    [
-        ["Апатия", "Бессилие", "Тоска", "Потерянонсть",
-         "Агрессия", "Отчаяние", "Тревожность", "Паника"],
-        
-        ["Безразличие", "Переутомление", "Подавленость", "Растерянность",
-         "Недовольство", "Печаль", "Обида", "Беспокойство"],
-        
-        ["Скука", "Усталость", "Лень", "Неуверенность",
-         "Раздражение", "Смущение", "Сомнение", "Спокойствие"],
-        
-        ["Веселье", "Энергичность", "Бодрость", "Уверенность",
-         "Умиротворение", "Нежность", "Доверие", "Влюбленность"],
-        
-        ["Интерес", "Активность", "Восторг", "Покой",
-         "Любовь", "Забота", "Гордость", "Эйфория"]
-    ]
-    
+    var emotionViewModel: [[EmotionsViewModel]] = []
     private let flexibleLayout = Array(repeating: GridItem(.flexible(),
                                                            spacing: 35), count: 4)
 
@@ -66,25 +30,25 @@ struct MoodsWordChooseView: View {
                 .fixedSize(horizontal: false, vertical: true)
             
             LazyVGrid(columns: flexibleLayout) {
-                let emotions = emotionsArrayImageName[Int(valueModel.value.rounded() / 10.0)]
-                let emotionTitle = emotionsArrayTitle[Int(valueModel.value.rounded() / 10.0)]
+                let emotions = emotionViewModel[Int(valueModel.value.rounded() / 10.0)]
 
                 ForEach(1...emotions.count, id: \.self) { item in
                     ZStack {
-                        MoodsWordChooseViewBlock(emotion: emotions[item - 1],
-                                                 emotionTitle: emotionTitle[item - 1],
+                        MoodsWordChooseViewBlock(emotionId: emotions[item - 1].id,
+                                                 emotion: emotions[item - 1].image,
+                                                 emotionTitle: emotions[item - 1].text,
                                                  selectedMoodId: $selectedMoodId)
-                            .frame(width: 90, height: 95)
-                            .background(.white)
-                            .cornerRadius(10)
-                            .shadow(color: Colors.TextColors.mystic400, radius: 6.0, x: 0, y: 0)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(selectedMoodId == emotions[item - 1] ?
-                                            Colors.Primary.royalPurple600Purple :
-                                            .white, lineWidth: 1)
-                            }
-                            .padding(.top, 16)
+                        .frame(width: 90, height: 95)
+                        .background(.white)
+                        .cornerRadius(10)
+                        .shadow(color: Colors.TextColors.mystic400, radius: 6.0, x: 0, y: 0)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(selectedMoodId == emotions[item - 1].id ?
+                                        Colors.Primary.royalPurple600Purple :
+                                        .white, lineWidth: 1)
+                        }
+                        .padding(.top, 16)
                     }
                 }
             }
@@ -98,6 +62,7 @@ struct MoodsWordChooseView: View {
 
 struct MoodsWordChooseViewBlock: View {
     
+    var emotionId: String
     var emotion: String
     var emotionTitle: String
     
@@ -115,12 +80,11 @@ struct MoodsWordChooseViewBlock: View {
                 .frame(alignment: .center)
         }
         .onTapGesture {
-            self.emotionDidChoosed(id: "\(emotion)")
+            self.emotionDidChoosed(id: emotionId)
         }
     }
     
     private func emotionDidChoosed(id: String) {
         self.selectedMoodId = id
-//        print(id)
     }
 }

@@ -8,19 +8,20 @@
 import Foundation
 
 protocol UserStateServiceProtocol {
+    func getStateList(completion: @escaping(Result<[StatesModel], Error>) -> Void)
     func getEmotionList(completion: @escaping(Result<[EmotionsModel], Error>) -> Void)
-    func getActivitiesList(completion: @escaping(Result<Bool, Error>) -> Void)
+    func getActivitiesList(completion: @escaping(Result<[ActivitiesModel], Error>) -> Void)
 }
 
 struct UserStateService: UserStateServiceProtocol {
-    func getEmotionList(completion: @escaping(Result<[EmotionsModel], Error>) -> Void) {
-        let target = BaseAPI.userState(.getEmotionsList)
+    func getStateList(completion: @escaping(Result<[StatesModel], Error>) -> Void) {
+        let target = BaseAPI.userState(.getStateList)
 
         let networkService = ServiceProvider().networkService
         networkService?.request(.target(target), completion: { response in
             switch response {
             case let .success(result):
-                guard let model = try? JSONDecoder().decode([EmotionsModel].self, from: result.data) else {
+                guard let model = try? JSONDecoder().decode([StatesModel].self, from: result.data) else {
                     return
                 }
                 completion(.success(model))
@@ -30,14 +31,36 @@ struct UserStateService: UserStateServiceProtocol {
         })
     }
     
-    func getActivitiesList(completion: @escaping(Result<Bool, Error>) -> Void) {
+    func getEmotionList(completion: @escaping(Result<[EmotionsModel], Error>) -> Void) {
+        let target = BaseAPI.userState(.getEmotionsList)
+
+        let networkService = ServiceProvider().networkService
+        networkService?.request(.target(target), completion: { response in
+            switch response {
+            case let .success(result):
+                let decoder = JSONDecoder()
+                guard let model = try? decoder.decode([EmotionsModel].self,
+                                                      from: result.data) else {
+                    return
+                }
+                completion(.success(model))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        })
+    }
+    
+    func getActivitiesList(completion: @escaping(Result<[ActivitiesModel], Error>) -> Void) {
         let target = BaseAPI.userState(.getActivitiesList)
 
         let networkService = ServiceProvider().networkService
         networkService?.request(.target(target), completion: { response in
             switch response {
             case let .success(result):
-                print(result)
+                guard let model = try? JSONDecoder().decode([ActivitiesModel].self, from: result.data) else {
+                    return
+                }
+                completion(.success(model))
             case let .failure(error):
                 completion(.failure(error))
             }

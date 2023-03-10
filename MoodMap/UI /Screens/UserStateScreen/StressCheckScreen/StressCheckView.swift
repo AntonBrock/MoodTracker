@@ -47,19 +47,18 @@ struct StressCheckView: View {
             VStack {
                 ZStack {
                     TextEditor(text: $text)
-                        .frame(maxWidth: .infinity, maxHeight: 220, alignment: .topLeading)
+                        .frame(width: UIScreen.main.bounds.width - 32, height: 220, alignment: .topLeading)
+                        .font(.system(size: 16))
                         .multilineTextAlignment(.leading)
                         .font(Fonts.InterRegular16)
                         .colorMultiply(Colors.TextColors.porcelain200)
                         .cornerRadius(10)
                         .shadow(color: Colors.TextColors.cadetBlue600, radius: 1.5, x: 0.0, y: 0.0)
                     
-                    Text("\("Расскажи о том, что чувствуешь - в будущем это поможет определить почему при определенных занятиях ты себя ощущаешь лучше или хуже")")
-                        .font(.system(size: text == "" ? 14 : 16))
+                    Text("\("Расскажи для себя, что тебя беспокоит, то что не выходит из головы")")
+                        .font(.system(size: 16))
                         .foregroundColor(text == "" ? Colors.TextColors.cadetBlue600 : Colors.Primary.blue)
                         .frame(maxWidth: .infinity, maxHeight: 220, alignment: .topLeading)
-                        .padding(.vertical, 16)
-                        .padding(.horizontal, 16)
                         .opacity(text.isEmpty ? 1 : 0)
                 }
             }

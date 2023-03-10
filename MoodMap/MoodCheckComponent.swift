@@ -9,8 +9,10 @@ import SwiftUI
 
 struct MoodCheckComponent: View {
     
-    var imagesName: [String] = ["ch-ic-veryBad", "ch-ic-sad", "ch-ic-fine", "ch-ic-good", "ch-ic-veryGood"]
-    var stateTitleTexts: [String] = ["Очень плохо", "Плохо", "Нормально", "Хорошо", "Лучше всех"]
+//    var imagesName: [String] = ["ch-ic-veryBad", "ch-ic-sad", "ch-ic-fine", "ch-ic-good", "ch-ic-veryGood"]
+//    var stateTitleTexts: [String] = ["Очень плохо", "Плохо", "Нормально", "Хорошо", "Лучше всех"]
+    
+    var statesViewModel: [StatesViewModel] = []
     
     var setChoosedState: ((String) -> Void)
     
@@ -63,13 +65,13 @@ struct MoodCheckComponent: View {
                               maxValue: SliderConfigure.max,
                               value: $valueModel.value)
                     .zIndex(1)
-                    .frame(width: (40 * CGFloat(stateTitleTexts.count) + 50), height: SliderSize.height, alignment: .leading)
+                    .frame(width: (40 * CGFloat(statesViewModel.count) + 50), height: SliderSize.height, alignment: .leading)
                     .onChange(of: valueModel.value) { newValue in
                         self.changeImage(for: valueModel.value.rounded())
                     }
                 
                 HStack {
-                    let count: Int = stateTitleTexts.count 
+                    let count: Int = statesViewModel.count
                     
                     ForEach(0..<count) { index in
                         VStack {
@@ -84,11 +86,11 @@ struct MoodCheckComponent: View {
                         }
                     }
                 }
-                .frame(width: (40 * CGFloat(stateTitleTexts.count) + 50), height: SliderSize.height)
+                .frame(width: (40 * CGFloat(statesViewModel.count) + 50), height: SliderSize.height)
                 .padding(EdgeInsets(top: 1.5, leading: 0, bottom: 0, trailing: 0))
             }
             
-            Text("\(stateTitleTexts[Int(valueModel.value.rounded() / 10.0)])")
+            Text("\(statesViewModel[Int(valueModel.value.rounded() / 10.0)].text)")
                 .font(.system(size: 24, weight: .bold))
                 .foregroundColor(Colors.Primary.blue)
         }
@@ -99,6 +101,6 @@ struct MoodCheckComponent: View {
     }
     
     private func changeImage(for value: CGFloat) {
-        choosedImageName = imagesName[Int(value / 10.0)]
+        choosedImageName = statesViewModel[Int(value / 10.0)].image
     }
 }

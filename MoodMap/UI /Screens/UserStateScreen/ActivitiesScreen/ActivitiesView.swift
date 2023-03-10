@@ -26,23 +26,7 @@ struct ActivitiesView: View {
     }
     
     private let flexibleLayout = Array(repeating: GridItem(.flexible(), spacing: 10), count: 4)
-    private var activitiesArrayImageName: [String] =
-    [
-        "ac-ic-work", "ac-ic-study", "ac-ic-hobby", "ac-ic-learning",
-        "ac-ic-sleep", "ac-ic-food", "ac-ic-health", "ac-ic-rest",
-        "ac-ic-meditation", "ac-ic-walking", "ac-ic-yoga", "ac-ic-sport",
-        "ac-ic-family", "ac-ic-friends", "ac-ic-date", "ac-ic-party",
-        "ac-ic-traveling", "ac-ic-shopping", "ac-ic-drinks", "ac-ic-music"
-    ]
-    
-    private var activitiesArrayTitle: [String] = [
-        "Работа", "Учеба", "Хобби", "Саморазвитие",
-        "Сон", "Еда", "Здоровье", "Отдых",
-        "Медитация", "Прогулка", "Йога", "Спорт",
-        "Семья", "Друзья", "Свидание", "Вечеринка",
-        "Путешествие", "Шопинг", "Алкоголь", "Музыка"
-    ]
-    
+
     var body: some View {
         VStack {
             
@@ -77,10 +61,11 @@ struct ActivitiesView: View {
                     
                     LazyVGrid(columns: flexibleLayout) {
                         
-                        ForEach(0..<activitiesArrayImageName.count) { index in
+                        ForEach(0..<coordinator.userStateViewModel.activitiesViewModel.count) { index in
                             ZStack {
-                                ActivitiesChooseViewBlock(activitieImageTitle: activitiesArrayImageName[index],
-                                                          activitieTitle: activitiesArrayTitle[index]) { choosedActivitie in
+                                ActivitiesChooseViewBlock(activitiesId: coordinator.userStateViewModel.activitiesViewModel[index].id,
+                                                          activitieImageTitle: coordinator.userStateViewModel.activitiesViewModel[index].image,
+                                                          activitieTitle: coordinator.userStateViewModel.activitiesViewModel[index].text) { choosedActivitie in
                                     self.choosedActivities.append(choosedActivitie)
                                 }
                             }
@@ -120,6 +105,7 @@ struct ActivitiesView: View {
 // MARK: - ActivitiesChooseViewBlock
 struct ActivitiesChooseViewBlock: View {
 
+    var activitiesId: String
     var activitieImageTitle: String
     var activitieTitle: String
 
@@ -150,7 +136,7 @@ struct ActivitiesChooseViewBlock: View {
         .padding(.top, 16)
         .onTapGesture {
             isSelected.toggle()
-            setSelected(activitieTitle)
+            setSelected(activitiesId)
         }
     }
 }

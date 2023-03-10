@@ -13,9 +13,9 @@ struct FeelingView: View {
     
     var body: some View {
         VStack {
-            MoodCheckComponent(setChoosedState: { state in
-                print("хуй")
-            }, valueModel: SliderValueModele(), value: $value)
+//            MoodCheckComponent(setChoosedState: { state in
+//                print("хуй")
+//            }, valueModel: SliderValueModele(), value: $value)
         }
         .frame(maxWidth: .infinity,
                maxHeight: .infinity)

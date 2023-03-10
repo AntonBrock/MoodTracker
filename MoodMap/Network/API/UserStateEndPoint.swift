@@ -10,29 +10,30 @@ import Moya
 
 enum UserStateEndPoint: TargetType {
     
+    case getStateList
     case getEmotionsList
     case getActivitiesList
-//    case getStressList
     
     var baseURL: URL {
         switch self {
-        case .getEmotionsList:
-            return URL(string: "https://api.mapmood.com/v1/emotions")!
-        case .getActivitiesList:
-            return URL(string: "https://api.mapmood.com/v1/activities")!
+        case .getStateList, .getEmotionsList, .getActivitiesList:
+            return URL(string: "https://api.mapmood.com/v1")!
         }
     }
     
     var path: String {
         switch self {
-        case .getEmotionsList,
-             .getActivitiesList: return ""
+        case .getStateList: return "/states"
+        case .getEmotionsList: return "/emotions"
+        case .getActivitiesList: return "/activities"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getEmotionsList, .getActivitiesList:
+        case .getStateList,
+             .getEmotionsList,
+             .getActivitiesList:
             return .get
         }
     }
@@ -43,7 +44,8 @@ enum UserStateEndPoint: TargetType {
     
     var task: Task {
         switch self {
-        case .getEmotionsList,
+        case .getStateList,
+             .getEmotionsList,
              .getActivitiesList:
             return .requestParameters(parameters: ["language": "ru"], encoding: URLEncoding.queryString)
         }
@@ -51,14 +53,16 @@ enum UserStateEndPoint: TargetType {
     
     var headers: [String: String]? {
         switch self {
-        case .getEmotionsList,
+        case .getStateList,
+             .getEmotionsList,
              .getActivitiesList: return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
         }
     }
     
     var authorizationType: AuthorizationType? {
         switch self {
-        case .getEmotionsList,
+        case .getStateList,
+             .getEmotionsList,
              .getActivitiesList:
             return .bearer
         }
