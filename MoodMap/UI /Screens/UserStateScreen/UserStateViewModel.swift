@@ -21,15 +21,11 @@ extension MoodCheckView {
         @Published var choosedState: String?
         @Published var choosedEmotion: String?
         @Published var choosedActivities: [String]?
-        @Published var choosedStress: String?
+        @Published var choosedStress: Int?
         @Published var mindText: String?
         
         func sendUserStateInfo() {
-            print(choosedState)
-            print(choosedEmotion)
-            print(choosedActivities)
-            print(choosedStress)
-            print(mindText)
+            self.sendUserNote()
         }
         
         func fetch() {
@@ -138,5 +134,24 @@ extension MoodCheckView {
             }
         }
         
+        private func sendUserNote() {
+            guard let stateId = choosedState else { return }
+            guard let emotionId = choosedEmotion else { return }
+            guard let activities = choosedActivities else { return }
+            guard let stressNumber = choosedStress else { return }
+
+            Services.userStateService.sendUserNote(activities: activities,
+                                                   emotionId: emotionId,
+                                                   stateId: stateId,
+                                                   stressRate: stressNumber,
+                                                   text: mindText ?? "") { result in
+                switch result {
+                case .success(let success):
+                    print(success)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
 }

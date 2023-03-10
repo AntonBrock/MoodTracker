@@ -29,7 +29,7 @@ struct StressCheckComponent: View {
     @ObservedObject var valueModel: SliderStressValueModele
     @State var choosedImageName: String = "st-ic-medium"
         
-    var choosedStress: ((String) -> Void)
+    var choosedStress: ((Int) -> Void)
     
     var body: some View {
         VStack {
@@ -159,7 +159,13 @@ struct StressCheckComponent: View {
             .padding(.top, 32)
         }
         .onChange(of: choosedImageName) { newValue in
-            choosedStress(newValue)
+            if newValue == "st-ic-hight" {
+                choosedStress(3)
+            } else if newValue == "st-ic-medium" {
+                choosedStress(2)
+            } else {
+                choosedStress(1)
+            }
         }
     }
     

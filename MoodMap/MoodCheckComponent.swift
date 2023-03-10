@@ -29,6 +29,7 @@ struct MoodCheckComponent: View {
     @ObservedObject var valueModel: SliderValueModele
     
     @State var choosedImageName: String = "ch-ic-fine"
+    @State var choosedImageId: String = ""
     @Binding var value: Double
 
     var body: some View {
@@ -95,12 +96,13 @@ struct MoodCheckComponent: View {
                 .foregroundColor(Colors.Primary.blue)
         }
         .onChange(of: choosedImageName) { newValue in
-            self.setChoosedState(newValue)
+            self.setChoosedState(choosedImageId)
         }
         
     }
     
     private func changeImage(for value: CGFloat) {
         choosedImageName = statesViewModel[Int(value / 10.0)].image
+        choosedImageId = statesViewModel[Int(value / 10.0)].id
     }
 }
