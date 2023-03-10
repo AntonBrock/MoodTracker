@@ -13,11 +13,10 @@ enum UserStateEndPoint: TargetType {
     case getStateList
     case getEmotionsList
     case getActivitiesList
-    case sendUserNote(activities: [String], emotionId: String, stateId: String, stressRate: Int, text: String)
     
     var baseURL: URL {
         switch self {
-        case .getStateList, .getEmotionsList, .getActivitiesList, .sendUserNote:
+        case .getStateList, .getEmotionsList, .getActivitiesList:
             return URL(string: "https://api.mapmood.com/v1")!
         }
     }
@@ -27,7 +26,6 @@ enum UserStateEndPoint: TargetType {
         case .getStateList: return "/states"
         case .getEmotionsList: return "/emotions"
         case .getActivitiesList: return "/activities"
-        case .sendUserNote: return "/diary/notes"
         }
     }
     
@@ -37,8 +35,6 @@ enum UserStateEndPoint: TargetType {
              .getEmotionsList,
              .getActivitiesList:
             return .get
-        case .sendUserNote:
-            return .post
         }
     }
     
@@ -52,22 +48,6 @@ enum UserStateEndPoint: TargetType {
              .getEmotionsList,
              .getActivitiesList:
             return .requestParameters(parameters: ["language": "ru"], encoding: URLEncoding.queryString)
-        case .sendUserNote(let activities,
-                           let emotionId,
-                           let stateId,
-                           let stressRate,
-                           let text):
-            return .requestParameters(
-                parameters: [
-                    "activities": activities,
-                    "day_rate": 0,
-                    "emotion_id": emotionId,
-                    "state_id": stateId,
-                    "stress_rate": stressRate,
-                    "text": text
-                ],
-                encoding: JSONEncoding.default
-            )
         }
     }
     
@@ -75,8 +55,7 @@ enum UserStateEndPoint: TargetType {
         switch self {
         case .getStateList,
              .getEmotionsList,
-             .getActivitiesList,
-             .sendUserNote(_, _, _, _, _)
+             .getActivitiesList
             : return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
         }
     }
@@ -85,8 +64,7 @@ enum UserStateEndPoint: TargetType {
         switch self {
         case .getStateList,
              .getEmotionsList,
-             .getActivitiesList,
-             .sendUserNote(_, _, _, _, _)
+             .getActivitiesList
              :return .bearer
         }
     }

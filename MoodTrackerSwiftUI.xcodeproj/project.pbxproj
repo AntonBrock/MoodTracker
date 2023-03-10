@@ -135,6 +135,8 @@
 		456A401529BA41C200371B5C /* ActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401429BA41C200371B5C /* ActivitiesModel.swift */; };
 		456A401729BA424200371B5C /* ActivitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401629BA424200371B5C /* ActivitiesViewModel.swift */; };
 		456A401929BAE1BB00371B5C /* StatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401829BAE1BB00371B5C /* StatesViewModel.swift */; };
+		456A401D29BBA7E500371B5C /* JournalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401C29BBA7E500371B5C /* JournalService.swift */; };
+		456A401F29BBA84400371B5C /* JournalEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401E29BBA84400371B5C /* JournalEndPoint.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
 		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
@@ -233,6 +235,8 @@
 		456A401429BA41C200371B5C /* ActivitiesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesModel.swift; sourceTree = "<group>"; };
 		456A401629BA424200371B5C /* ActivitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewModel.swift; sourceTree = "<group>"; };
 		456A401829BAE1BB00371B5C /* StatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesViewModel.swift; sourceTree = "<group>"; };
+		456A401C29BBA7E500371B5C /* JournalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalService.swift; sourceTree = "<group>"; };
+		456A401E29BBA84400371B5C /* JournalEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEndPoint.swift; sourceTree = "<group>"; };
 		456AA71C296D485000BD414B /* CalendarTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTooltipView.swift; sourceTree = "<group>"; };
 		456AA71E296E9E5F00BD414B /* MoodCheckCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckCoordinatorView.swift; sourceTree = "<group>"; };
 		456AA720296E9E6600BD414B /* MoodCheckViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckViewCoordinator.swift; sourceTree = "<group>"; };
@@ -748,6 +752,7 @@
 				45E750382920B7D100CF9E21 /* MainScreenService.swift */,
 				45133A1F29AFB88900258072 /* AuthService.swift */,
 				456A400929B75DDB00371B5C /* UserStateService.swift */,
+				456A401C29BBA7E500371B5C /* JournalService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -759,6 +764,7 @@
 				45E750322920B73200CF9E21 /* MainScreenEndpoint.swift */,
 				45133A2129AFB97400258072 /* AuthEnpPoint.swift */,
 				456A400729B75DD200371B5C /* UserStateEndPoint.swift */,
+				456A401E29BBA84400371B5C /* JournalEndPoint.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -904,6 +910,7 @@
 				4529AB9929AF1940001D2390 /* NumberFormatter+Defaults.swift in Sources */,
 				4529AB9A29AF1940001D2390 /* SCPalletes.swift in Sources */,
 				4529AB9B29AF1940001D2390 /* SCCaptionsView.swift in Sources */,
+				456A401F29BBA84400371B5C /* JournalEndPoint.swift in Sources */,
 				456A401929BAE1BB00371B5C /* StatesViewModel.swift in Sources */,
 				4529AB9C29AF1940001D2390 /* SCChartWrapperView.swift in Sources */,
 				4529AB9D29AF1940001D2390 /* SCDonutView.swift in Sources */,
@@ -934,6 +941,7 @@
 				4529ABB329AF1941001D2390 /* AuthHyperString.swift in Sources */,
 				4529ABB429AF1941001D2390 /* AuthMethodsView.swift in Sources */,
 				4529ABB529AF1941001D2390 /* BaseViewCoordinator.swift in Sources */,
+				456A401D29BBA7E500371B5C /* JournalService.swift in Sources */,
 				4529ABB629AF1941001D2390 /* LoginView.swift in Sources */,
 				4529ABB729AF1941001D2390 /* LoginViewCoordinator.swift in Sources */,
 				4529ABB829AF1941001D2390 /* LoginCoordinatorView.swift in Sources */,

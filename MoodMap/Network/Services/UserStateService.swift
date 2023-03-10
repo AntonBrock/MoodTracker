@@ -73,7 +73,7 @@ struct UserStateService: UserStateServiceProtocol {
                       stressRate: Int,
                       text: String,
                       completion: @escaping(Result<Bool, Error>) -> Void) {
-        let target = BaseAPI.userState(.sendUserNote(activities: activities,
+        let target = BaseAPI.journal(.sendUserNote(activities: activities,
                                                      emotionId: emotionId,
                                                      stateId: stateId,
                                                      stressRate: stressRate,

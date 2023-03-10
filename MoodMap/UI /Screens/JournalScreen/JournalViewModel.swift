@@ -18,6 +18,15 @@ extension JournalView {
         }
         
         func getJournalViewModel() -> [JournalViewModel] {
+            Services.journalService.getUserNotes { result in
+                switch result {
+                case .success(let success):
+                    print(success)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            
             return [
                 JournalViewModel(
                     id: 0,

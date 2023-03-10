@@ -10,4 +10,5 @@ struct Services {
     static let mainScreenService: MainScreenService = MainScreenService()
     static var authService: AuthService = AuthService()
     static var userStateService: UserStateService = UserStateService()
+    static var journalService: JournalService = JournalService()
 }

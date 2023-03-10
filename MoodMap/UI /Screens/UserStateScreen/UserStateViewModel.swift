@@ -140,7 +140,7 @@ extension MoodCheckView {
             guard let activities = choosedActivities else { return }
             guard let stressNumber = choosedStress else { return }
 
-            Services.userStateService.sendUserNote(activities: activities,
+            Services.journalService.sendUserNote(activities: activities,
                                                    emotionId: emotionId,
                                                    stateId: stateId,
                                                    stressRate: stressNumber,
