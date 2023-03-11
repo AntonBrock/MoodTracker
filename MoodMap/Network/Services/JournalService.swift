@@ -5,8 +5,10 @@
 //  Created by ANTON DOBRYNIN on 11.03.2023.
 //
 
+import Foundation
+
 protocol JournalServiceProtocol {
-    func getUserNotes(completion: @escaping(Result<Bool, Error>) -> Void)
+    func getUserNotes(completion: @escaping(Result<[JournalModel], Error>) -> Void)
     func sendUserNote(activities: [String],
                       emotionId: String,
                       stateId: String,
@@ -39,14 +41,17 @@ struct JournalService: JournalServiceProtocol {
         })
     }
     
-    func getUserNotes(completion: @escaping(Result<Bool, Error>) -> Void) {
+    func getUserNotes(completion: @escaping(Result<[JournalModel], Error>) -> Void) {
         let target = BaseAPI.journal(.getUserNotes)
 
         let networkService = ServiceProvider().networkService
         networkService?.request(.target(target), completion: { response in
             switch response {
-            case let .success:
-                completion(.success(true))
+            case let .success(result):
+                guard let model = try? JSONDecoder().decode([JournalModel].self, from: result.data) else {
+                    return
+                }
+                completion(.success(model))
             case let .failure(error):
                 completion(.failure(error))
             }

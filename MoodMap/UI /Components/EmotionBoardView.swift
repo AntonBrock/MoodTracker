@@ -10,7 +10,7 @@ import SwiftUI
 struct EmotionBoardView: View {
     
     var data: [JournalViewModel] = []
-    var wasTouched: ((_ id: Int) -> Void)
+    var wasTouched: ((_ id: String) -> Void)
     var animation: Namespace.ID
     
     @State var isNeededLast: Bool = false
@@ -45,7 +45,12 @@ struct EmotionBoardView: View {
                         if !isHidden {
                             VStack {
                                 ForEach (0..<data.count, id: \.self) { i in
-                                    EmotionBoardDataView(activities: data[i].activities, data: data[i].time, emotionTitle: data[i].title, emotionImage: data[i].emotionImage, color: data[i].color, animation: animation)
+                                    EmotionBoardDataView(activities: data[i].activities,
+                                                         data: data[i].time,
+                                                         emotionTitle: data[i].title,
+                                                         emotionImage: data[i].emotionImage,
+                                                         color: data[i].color,
+                                                         animation: animation)
                                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
                                         .matchedGeometryEffect(id: data[i].id, in: animation)
                                         .onTapGesture {
@@ -58,7 +63,12 @@ struct EmotionBoardView: View {
                             .frame(maxHeight: .infinity, alignment: .top)
                             .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)).animation(.linear).combined(with: .opacity))
                         } else {
-                            EmotionBoardDataView(activities: data[0].activities, data: data[0].time, emotionTitle: data[0].title, emotionImage: data[0].emotionImage, color: data[0].color, animation: animation)
+                            EmotionBoardDataView(activities: data[0].activities,
+                                                 data: data[0].time,
+                                                 emotionTitle: data[0].title,
+                                                 emotionImage: data[0].emotionImage,
+                                                 color: data[0].color,
+                                                 animation: animation)
                                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
                                 .onTapGesture {
                                     withAnimation {
@@ -67,7 +77,12 @@ struct EmotionBoardView: View {
                                 }
                         }
                     } else {
-                        EmotionBoardDataView(activities: data[0].activities, data: data[0].time, emotionTitle: data[0].title, emotionImage: data[0].emotionImage, color: data[0].color, animation: animation)
+                        EmotionBoardDataView(activities: data[0].activities,
+                                             data: data[0].time,
+                                             emotionTitle: data[0].title,
+                                             emotionImage: data[0].emotionImage,
+                                             color: data[0].color,
+                                             animation: animation)
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
                             .onTapGesture {
                                 withAnimation {
@@ -113,7 +128,7 @@ struct EmotionBoardDateView: View {
 // MARK: - EmotionBoardDataView
 struct EmotionBoardDataView: View {
     
-    var activities: [String] = []
+    var activities: [ActivitiesViewModel] = []
     var data: String
     var emotionTitle: String
     var emotionImage: String
@@ -122,7 +137,7 @@ struct EmotionBoardDataView: View {
     var animation: Namespace.ID
     
     init(
-        activities: [String],
+        activities: [ActivitiesViewModel],
         data: String,
         emotionTitle: String,
         emotionImage: String,
@@ -156,8 +171,8 @@ struct EmotionBoardDataView: View {
 
                 HStack {
                     ForEach(0..<activities.count, id: \.self) { item in
-                        if activities.count >= 2 && item != 1 {
-                            Text(activities[item])
+                        if item == 0 {
+                            Text(activities[item].text)
                                 .font(.system(size: 12, weight: .medium))
                                 .multilineTextAlignment(.center)
                                 .fixedSize(horizontal: true, vertical: true)
@@ -169,7 +184,7 @@ struct EmotionBoardDataView: View {
                                     RoundedRectangle(cornerRadius: 45, style: .circular)
                                         .fill(.white.opacity(0.3))
                                 }
-                        } else {
+                            
                             Text("+ \(activities.count - 1)")
                                 .font(.system(size: 12, weight: .medium))
                                 .multilineTextAlignment(.center)

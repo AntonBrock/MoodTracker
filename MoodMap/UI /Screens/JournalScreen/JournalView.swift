@@ -18,7 +18,7 @@ struct JournalView: View {
 
     @State var selectedIndex: Int = 0
     @State var showMoreInfo: Bool = false
-    @State var currentID: Int = 1
+    @State var currentID: String = ""
     
 //    @State private var beginingDate = Date()
 //    @State private var endDate = Date()
@@ -65,7 +65,7 @@ struct JournalView: View {
                         EmotionBoardView(data: coordinator.viewModel.journalViewModels ?? [],
                                          wasTouched: { id in
                             currentID = id
-                            currentModel = coordinator.viewModel.journalViewModels?[currentID]
+                            currentModel = coordinator.viewModel.journalViewModels?.first(where: { $0.id == currentID })!
                             
                             withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
                                 showMoreInfo.toggle()
@@ -83,7 +83,9 @@ struct JournalView: View {
                         ForEach(0..<(coordinator.viewModel.journalViewModels?.count ?? 0), id: \.self) { i in
                             if currentID == coordinator.viewModel.journalViewModels?[i].id {
                                 
-                                DetailJournalView(showMoreInfo: $showMoreInfo, animation: animation, model: $currentModel)
+                                DetailJournalView(showMoreInfo: $showMoreInfo,
+                                                  animation: animation,
+                                                  model: $currentModel)
                                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
                                 
                             }

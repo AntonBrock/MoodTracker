@@ -137,6 +137,7 @@
 		456A401929BAE1BB00371B5C /* StatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401829BAE1BB00371B5C /* StatesViewModel.swift */; };
 		456A401D29BBA7E500371B5C /* JournalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401C29BBA7E500371B5C /* JournalService.swift */; };
 		456A401F29BBA84400371B5C /* JournalEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401E29BBA84400371B5C /* JournalEndPoint.swift */; };
+		456A402129BC2BC200371B5C /* JournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A402029BC2BC200371B5C /* JournalModel.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
 		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
@@ -237,6 +238,7 @@
 		456A401829BAE1BB00371B5C /* StatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesViewModel.swift; sourceTree = "<group>"; };
 		456A401C29BBA7E500371B5C /* JournalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalService.swift; sourceTree = "<group>"; };
 		456A401E29BBA84400371B5C /* JournalEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEndPoint.swift; sourceTree = "<group>"; };
+		456A402029BC2BC200371B5C /* JournalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalModel.swift; sourceTree = "<group>"; };
 		456AA71C296D485000BD414B /* CalendarTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTooltipView.swift; sourceTree = "<group>"; };
 		456AA71E296E9E5F00BD414B /* MoodCheckCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckCoordinatorView.swift; sourceTree = "<group>"; };
 		456AA720296E9E6600BD414B /* MoodCheckViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckViewCoordinator.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				456A400D29B990C900371B5C /* EmotionsModel.swift */,
 				456A401229BA41BB00371B5C /* StatesModel.swift */,
 				456A401429BA41C200371B5C /* ActivitiesModel.swift */,
+				456A402029BC2BC200371B5C /* JournalModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -896,6 +899,7 @@
 				4529AB8929AF1940001D2390 /* DIContinainer.swift in Sources */,
 				4529AB8A29AF1940001D2390 /* PieSliceView.swift in Sources */,
 				4529AB8B29AF1940001D2390 /* PieChartView.swift in Sources */,
+				456A402129BC2BC200371B5C /* JournalModel.swift in Sources */,
 				4529AB8C29AF1940001D2390 /* GeometryProxy+Shortcuts.swift in Sources */,
 				4529AB8D29AF1940001D2390 /* View+ReadValues.swift in Sources */,
 				4529AB8E29AF1940001D2390 /* Path+Shortcuts.swift in Sources */,

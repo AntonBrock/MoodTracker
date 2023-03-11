@@ -14,30 +14,29 @@ extension JournalView {
         var journalViewModels: [JournalViewModel]?
         
         init() {
-            journalViewModels = getJournalViewModel()
+            getJournalViewModel()
         }
         
-        func getJournalViewModel() -> [JournalViewModel] {
+        func getJournalViewModel() {
             Services.journalService.getUserNotes { result in
                 switch result {
-                case .success(let success):
-                    print(success)
+                case .success(let models):
+                    self.journalViewModels = models.map({ JournalViewModel(
+                        id: $0.id,
+                        state: .fine,
+                        title: $0.emotionId,
+                        activities: $0.activities.map({ ActivitiesViewModel(id: $0.id,
+                                                                            text: $0.text,
+                                                                            language: $0.language,
+                                                                            image: $0.image)}),
+                        color: self.getColors(with: .fine),
+                        emotionImage: "ch-ic-fine",
+                        time: $0.createdAt)
+                    })
                 case .failure(let error):
                     print(error)
                 }
             }
-            
-            return [
-                JournalViewModel(
-                    id: 0,
-                    state: .fine,
-                    title: getTitle(with: .fine),
-                    activities: ["Свидание", "Еда"],
-                    color: getColors(with: .fine),
-                    emotionImage: "ch-ic-fine",
-                    time: "12:20"
-                )
-            ]
         }
         
         private func getTitle(with state: JournalViewModel.State) -> String {
@@ -74,10 +73,10 @@ struct JournalViewModel {
         case veryGood
     }
     
-    let id: Int
+    let id: String
     let state: State
     let title: String
-    let activities: [String]
+    let activities: [ActivitiesViewModel]
     let color: [Color]
     let emotionImage: String
     let time: String
