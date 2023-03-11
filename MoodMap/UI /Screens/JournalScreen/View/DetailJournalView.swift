@@ -20,41 +20,44 @@ struct DetailJournalView: View {
         GridItem(.flexible())
     ]
 
-    let mockData: [String] = [
-        "Хобби",
-        "Работа",
-        "Йога",
-        "Хобби",
-        "Работа",
-        "Йога",
-        "Хобби",
-        "Работа",
-        "Йога",
-        "Хобби",
-        "Работа",
-        "Йога"
-    ]
+//    let mockData: [String] = [
+//        "Хобби",
+//        "Работа",
+//        "Йога",
+//        "Хобби",
+//        "Работа",
+//        "Йога",
+//        "Хобби",
+//        "Работа",
+//        "Йога",
+//        "Хобби",
+//        "Работа",
+//        "Йога"
+//    ]
         
-    struct FeelingDataMock {
-        var image: String
-        var title: String
-    }
-    
-    let mockDataFeeling: [FeelingDataMock] = [
-        FeelingDataMock(image: "emoji_happy", title: "Любовь"),
-        FeelingDataMock(image: "emoji_cool", title: "Радость"),
-        FeelingDataMock(image: "emoji_happy", title: "Любовь"),
-        FeelingDataMock(image: "emoji_cool", title: "Радость"),
-        FeelingDataMock(image: "emoji_happy", title: "Любовь"),
-        FeelingDataMock(image: "emoji_cool", title: "Радость")
-    ]
+//    struct FeelingDataMock {
+//        var image: String
+//        var title: String
+//    }
+//
+//    let mockDataFeeling: [FeelingDataMock] = [
+//        FeelingDataMock(image: "emoji_happy", title: "Любовь"),
+//        FeelingDataMock(image: "emoji_cool", title: "Радость"),
+//        FeelingDataMock(image: "emoji_happy", title: "Любовь"),
+//        FeelingDataMock(image: "emoji_cool", title: "Радость"),
+//        FeelingDataMock(image: "emoji_happy", title: "Любовь"),
+//        FeelingDataMock(image: "emoji_cool", title: "Радость")
+//    ]
     
     var body: some View {
         ScrollView {
-            headerView()
+            headerView(
+                with: model?.stateImage ?? "",
+                and: model?.title ?? "",
+                and: model?.time ?? "5 июня"
+            )
                 .frame(height: 240)
-                .background(GradientRoundedCornersView(gradient: [Color(hex: "FFD7B1"),
-                                                                  Color(hex: "FEF7F1")],
+                .background(GradientRoundedCornersView(gradient: model?.color ?? [],
                                                        tl: 0, tr: 0, bl: 10, br: 10))
             
             VStack {
@@ -67,9 +70,9 @@ struct DetailJournalView: View {
                     ScrollView(.horizontal,
                                showsIndicators: false) {
                         LazyHGrid(rows: column, spacing: 8) {
-                            ForEach(0..<mockData.count, id: \.self) { i in
+                            ForEach(0..<(model?.activities.count ?? 0), id: \.self) { i in
                                 HStack {
-                                    Text(mockData[i])
+                                    Text(model?.activities[i].text ?? "")
                                         .foregroundColor(Colors.Secondary.neonCarrot600Orange)
                                         .padding(.horizontal, 14)
                                         .padding(.vertical, 8)
@@ -97,25 +100,44 @@ struct DetailJournalView: View {
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHGrid(rows: column, spacing: 8) {
-                            ForEach(0..<mockDataFeeling.count, id: \.self) { i in
-                                VStack {
-                                    Image("\(mockDataFeeling[i].image)")
-                                        .resizable()
-                                        .frame(width: 39, height: 38)
-
-                                    Text("\(mockDataFeeling[i].title)")
-                                        .foregroundColor(.black)
-                                        .font(.system(size: 11))
-                                }
-                                .background(
-                                    Rectangle()
-                                        .fill(Color.white)
-                                        .frame(width: 80, height: 90)
-                                        .cornerRadius(10)
-                                        .shadow(color: Colors.TextColors.mystic400, radius: 4, x: 0, y: 0)
-                                )
-                                .frame(width: 80, height: 90)
+                            
+                            VStack {
+                                Image("\(model?.emotionImage)")
+                                    .resizable()
+                                    .frame(width: 39, height: 38)
+                                
+                                Text("Не знаю")
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 11))
                             }
+                            .background(
+                                Rectangle()
+                                    .fill(Color.white)
+                                    .frame(width: 80, height: 90)
+                                    .cornerRadius(10)
+                                    .shadow(color: Colors.TextColors.mystic400, radius: 4, x: 0, y: 0)
+                            )
+                            .frame(width: 80, height: 90)
+                            #warning("TODO: После дороботок вернуть")
+//                            ForEach(0..<model?.emotionImage.count, id: \.self) { i in
+//                                VStack {
+//                                    Image("\(mockDataFeeling[i].image)")
+//                                        .resizable()
+//                                        .frame(width: 39, height: 38)
+//
+//                                    Text("\(mockDataFeeling[i].title)")
+//                                        .foregroundColor(.black)
+//                                        .font(.system(size: 11))
+//                                }
+//                                .background(
+//                                    Rectangle()
+//                                        .fill(Color.white)
+//                                        .frame(width: 80, height: 90)
+//                                        .cornerRadius(10)
+//                                        .shadow(color: Colors.TextColors.mystic400, radius: 4, x: 0, y: 0)
+//                                )
+//                                .frame(width: 80, height: 90)
+//                            }
                         }
                         .frame(height: 150)
                     }
@@ -138,11 +160,11 @@ struct DetailJournalView: View {
                                 .frame(width: 16, height: 16)
                             
                             Circle()
-                                .fill(Colors.Primary.lavender500Purple)
+                                .fill(model?.stressRate == 0 ? Colors.Secondary.shamrock600Green : model?.stressRate == 1 ? Colors.Primary.lavender500Purple : Color(hex: "F95555"))
                                 .frame(width: 12, height: 12)
                         }
                         
-                        Text("Средний стресс")
+                        Text("\(model?.stressRate == 0 ? "Низкий стресс" : model?.stressRate == 1 ? "Средний стресс" : "Высокий стресс")")
                             .font(.system(size: 12, weight: .medium))
                             .foregroundColor(Colors.Primary.blue)
                     }
@@ -151,25 +173,27 @@ struct DetailJournalView: View {
                 .background(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Divider()
-                
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("Твои мысли")
-                        .foregroundColor(Colors.Primary.blue)
-                        .font(.system(size: 16, weight: .semibold))
+                if let text = model?.text, !text.isEmpty {
+                    Divider()
+                    
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("Твои мысли")
+                            .foregroundColor(Colors.Primary.blue)
+                            .font(.system(size: 16, weight: .semibold))
 
-                    VStack {
-                        Text("Дневник благодарности - практика, позволяющая вам бла бла бла бла бла бла бла бла бла бла блаб блаблабла блаб балб аблаб бал ")
-                            .foregroundColor(.black)
-                            .font(.system(size: 16))
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        VStack {
+                            Text(text)
+                                .foregroundColor(.black)
+                                .font(.system(size: 16))
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
+                        .padding(.top, 11)
                     }
-                    .padding(.top, 11)
+                    .background(.white)
+                    .padding(.top, 10)
+                    .padding(.bottom, 240)
+                    .padding(.leading, 16)
                 }
-                .background(.white)
-                .padding(.top, 10)
-                .padding(.bottom, 240)
-                .padding(.leading, 16)
             }
             .padding(.top, 24)
         }
@@ -201,7 +225,11 @@ struct DetailJournalView: View {
 //    }
     
     @ViewBuilder
-    private func headerView() -> some View {
+    private func headerView(
+        with stateImageName: String,
+        and stateTitle: String,
+        and date: String
+    ) -> some View {
         HStack {
             VStack {
                 Button {
@@ -216,14 +244,14 @@ struct DetailJournalView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 VStack {
-                    Text("19 Июня")
-                        .foregroundColor(Colors.Primary.blue)
-                        .font(.system(size: 16))
+                    Text(date)
+                        .foregroundColor(.white)
+                        .font(.system(size: 16, weight: .semibold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text("Счастье")
-                        .foregroundColor(Colors.Primary.blue)
-                        .font(.system(size: 24))
+                    Text(stateTitle)
+                        .foregroundColor(.white)
+                        .font(.system(size: 24, weight: .bold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding(.top, 26)
@@ -234,11 +262,11 @@ struct DetailJournalView: View {
             .padding(.leading, 27)
             
             VStack {
-                Image("ch-ic-good")
+                Image(stateImageName)
                     .resizable()
-                    .frame(width: 207, height: 207, alignment: .trailing)
+                    .frame(width: 200, height: 200, alignment: .trailing)
                     .padding(.trailing, -26)
-                    .padding(.bottom, -64)
+                    .padding(.bottom, -100)
             }
             .frame(maxHeight: .infinity)
             .clipped()

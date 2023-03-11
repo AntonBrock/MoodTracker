@@ -48,7 +48,7 @@ struct EmotionBoardView: View {
                                     EmotionBoardDataView(activities: data[i].activities,
                                                          data: data[i].time,
                                                          emotionTitle: data[i].title,
-                                                         emotionImage: data[i].emotionImage,
+                                                         emotionImage: data[i].stateImage,
                                                          color: data[i].color,
                                                          animation: animation)
                                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
@@ -66,7 +66,7 @@ struct EmotionBoardView: View {
                             EmotionBoardDataView(activities: data[0].activities,
                                                  data: data[0].time,
                                                  emotionTitle: data[0].title,
-                                                 emotionImage: data[0].emotionImage,
+                                                 emotionImage: data[0].stateImage,
                                                  color: data[0].color,
                                                  animation: animation)
                                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
@@ -80,7 +80,7 @@ struct EmotionBoardView: View {
                         EmotionBoardDataView(activities: data[0].activities,
                                              data: data[0].time,
                                              emotionTitle: data[0].title,
-                                             emotionImage: data[0].emotionImage,
+                                             emotionImage: data[0].stateImage,
                                              color: data[0].color,
                                              animation: animation)
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
