@@ -13,7 +13,7 @@ struct MoodCheckView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var valueModel: SliderValueModele
     @ObservedObject var userStateVideModel: ViewModel
-    
+        
     @State var value: Double = 20
     
     let container: DIContainer

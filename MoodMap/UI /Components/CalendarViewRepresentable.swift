@@ -93,28 +93,28 @@ struct CalendarViewRepresentable: UIViewRepresentable {
             let date = calendar.date(from: day.components)!
             
             var invariantViewProperties = DayLabel.InvariantViewProperties(
-                font: UIFont.systemFont(ofSize: 18),
-                textColor: .darkGray,
+                font: UIFont.systemFont(ofSize: 16),
+                textColor: UIColor(Colors.Primary.blue),
                 backgroundColor: .clear)
             
             if calendar.isDateInToday(date) {
-                invariantViewProperties.textColor = .darkGray
-                invariantViewProperties.backgroundColor = UIColor(Colors.Primary.moonRaker300Purple)
+                invariantViewProperties.textColor = UIColor(Color(hex: "BC93E8"))
+                invariantViewProperties.backgroundColor = UIColor.white
             }
             
             if day == lowerDate {
                 invariantViewProperties.textColor = .white
-                invariantViewProperties.backgroundColor = UIColor(Colors.Primary.royalPurple600Purple)
+                invariantViewProperties.backgroundColor = UIColor(Color(hex: "BC93E8"))
             }
             
             if day == upperDate {
                 invariantViewProperties.textColor = .white
-                invariantViewProperties.backgroundColor = UIColor(Colors.Primary.royalPurple600Purple)
+                invariantViewProperties.backgroundColor = UIColor(Color(hex: "BC93E8"))
             }
             
             if day == selectedDay {
                 invariantViewProperties.textColor = .white
-                invariantViewProperties.backgroundColor = UIColor(Colors.Primary.royalPurple600Purple)
+                invariantViewProperties.backgroundColor = UIColor(Color(hex: "BC93E8"))
             }
             
             return CalendarItemModel<DayLabel>(
@@ -161,7 +161,7 @@ struct DayLabel: CalendarItemViewRepresentable {
         
         label.textAlignment = .center
         label.clipsToBounds = true
-        label.layer.cornerRadius = 25
+        label.layer.cornerRadius = 9
         
         return label
     }
@@ -174,7 +174,7 @@ struct DayLabel: CalendarItemViewRepresentable {
 extension DayRangeIndicatorView: CalendarItemViewRepresentable {
     
     struct InvariantViewProperties: Hashable {
-        let indicatorColor = UIColor(Colors.Primary.royalPurple600Purple).withAlphaComponent(0.30)
+        let indicatorColor = UIColor(Color(hex: "E2CEF7"))
     }
     
     struct ViewModel: Equatable {

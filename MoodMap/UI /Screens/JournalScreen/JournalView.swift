@@ -109,14 +109,15 @@ struct JournalView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 37)
                 
                 VStack(spacing: 10) {
-                    Text("Выбери дату или укажи диапоз дат")
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(.black)
+                    Text("Выбери день или укажи несколько")
+                        .font(.system(size: 24, weight: .semibold))
+                        .foregroundColor(Colors.Primary.blue)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 12)
-                        .padding(.top, 16)
+                        .padding(.top, 34)
                     
                     //                Text("\(lowerDate?.description ?? "") - \(upperDate?.description ?? "")")
                     //                    .font(.system(size: 16, weight: .regular))
@@ -128,11 +129,17 @@ struct JournalView: View {
                 }
                 
                 Toggle(isOn: $isRangeCalendarMode) {
-                    Text("Выбор диапазона")
+                    Text("Выбор нескольких дней")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(Colors.Primary.blue)
                 }
                 .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+                .tint(Colors.Primary.lavender500Purple)
                 
-                CalendarViewRepresentable(lowerDate: lowerDate, upperDate: upperDate, selectedDay: selectedDay, onSelect: { day in
+                CalendarViewRepresentable(lowerDate: lowerDate,
+                                          upperDate: upperDate,
+                                          selectedDay: selectedDay,
+                                          onSelect: { day in
                     
                     if isRangeCalendarMode {
                         if !isSelectedFirstDateInRange {
@@ -152,15 +159,15 @@ struct JournalView: View {
                     }
                     
                 })
-                
-                Divider()
-                
+                .frame(width: UIScreen.main.bounds.width - 32)
+                .padding(.top, 10)
+                                
                 HStack {
                     MTButton(buttonStyle: .outline, title: "Очистить") {
                         clearCalendar()
                     }
-                    .frame(width: 100, height: 40)
-                    
+                    .frame(maxWidth: 160, maxHeight: 48)
+
                     Spacer()
                     
                     MTButton(buttonStyle: .fill, title: "Применить") {
@@ -170,7 +177,7 @@ struct JournalView: View {
                         //                    clearCalendar()
                         showDatePicker.toggle()
                     }
-                    .frame(width: 100, height: 40)
+                    .frame(maxWidth: 160, maxHeight: 48)
                     .disabled(isRangeCalendarMode ? upperDate == nil || lowerDate == nil : selectedDay == nil) // тут нужна еще разделние на выбранный тип отмечания
                 }
                 .frame(height: 100)
