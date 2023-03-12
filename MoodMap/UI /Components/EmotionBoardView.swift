@@ -184,18 +184,20 @@ struct EmotionBoardDataView: View {
                                         .fill(.white.opacity(0.3))
                                 }
                             
-                            Text("+ \(activities.count - 1)")
-                                .font(.system(size: 12, weight: .medium))
-                                .multilineTextAlignment(.center)
-                                .fixedSize(horizontal: true, vertical: true)
-                                .foregroundColor(.white)
-                                .cornerRadius(7)
-                                .padding(.horizontal, 14)
-                                .padding(.vertical, 8)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 45, style: .circular)
-                                        .fill(.white.opacity(0.3))
-                                }
+                            if activities.count > 1 {
+                                Text("+ \(activities.count - 1)")
+                                    .font(.system(size: 12, weight: .medium))
+                                    .multilineTextAlignment(.center)
+                                    .fixedSize(horizontal: true, vertical: true)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(7)
+                                    .padding(.horizontal, 14)
+                                    .padding(.vertical, 8)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 45, style: .circular)
+                                            .fill(.white.opacity(0.3))
+                                    }
+                            }
                         }
                     }
                 }
