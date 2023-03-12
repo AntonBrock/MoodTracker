@@ -25,6 +25,7 @@ struct JournalView: View {
 
     @State var choosedDate: Date = Date()
     @State var showDatePicker: Bool = false
+    @State var isChoosindNewDate: Bool = false
     
     @State var selectedDay: Day?
     
@@ -56,7 +57,9 @@ struct JournalView: View {
     var body: some View {
         
         VStack {
-            SearchView(showCalendar: $showDatePicker, choosedDays: $selectedDay, rangeDays: $rangeDays)
+            SearchView(showCalendar: $showDatePicker,
+                       choosedDays: $selectedDay,
+                       rangeDays: $rangeDays)
                 .padding(.top, 24)
             
             ZStack {
@@ -116,8 +119,9 @@ struct JournalView: View {
                         .font(.system(size: 24, weight: .semibold))
                         .foregroundColor(Colors.Primary.blue)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 12)
-                        .padding(.top, 34)
+                        .padding(.leading, 12)
+                        .padding(.trailing, 10)
+                        .padding(.top, 24)
                     
                     //                Text("\(lowerDate?.description ?? "") - \(upperDate?.description ?? "")")
                     //                    .font(.system(size: 16, weight: .regular))
@@ -140,7 +144,6 @@ struct JournalView: View {
                                           upperDate: upperDate,
                                           selectedDay: selectedDay,
                                           onSelect: { day in
-                    
                     if isRangeCalendarMode {
                         if !isSelectedFirstDateInRange {
                             self.lowerDate = day
@@ -160,22 +163,31 @@ struct JournalView: View {
                     
                 })
                 .frame(width: UIScreen.main.bounds.width - 32)
-                .padding(.top, 10)
+                .padding(.top, 5)
                                 
                 HStack {
                     MTButton(buttonStyle: .outline, title: "Очистить") {
                         clearCalendar()
+                        isChoosindNewDate = false
                     }
                     .frame(maxWidth: 160, maxHeight: 48)
 
                     Spacer()
                     
                     MTButton(buttonStyle: .fill, title: "Применить") {
-                        guard let lowerDate = lowerDate, let upperDate = upperDate else { return }
-                        rangeDays = lowerDate...upperDate
+                        if isRangeCalendarMode {
+                            guard let lowerDate = lowerDate,
+                                    let upperDate = upperDate else { return }
+                            rangeDays = lowerDate...upperDate
+                            
+                            //                    clearCalendar()
+                            showDatePicker.toggle()
+                            isChoosindNewDate.toggle()
+                        } else {
+                            showDatePicker.toggle()
+                            isChoosindNewDate.toggle()
+                        }
                         
-                        //                    clearCalendar()
-                        showDatePicker.toggle()
                     }
                     .frame(maxWidth: 160, maxHeight: 48)
                     .disabled(isRangeCalendarMode ? upperDate == nil || lowerDate == nil : selectedDay == nil) // тут нужна еще разделние на выбранный тип отмечания
@@ -183,6 +195,31 @@ struct JournalView: View {
                 .frame(height: 100)
                 .padding(.horizontal, 16)
             }
+            .onChange(of: isChoosindNewDate, perform: { _ in
+                if isRangeCalendarMode {
+                    guard let lowerDate = lowerDate,
+                            let upperDate = upperDate else {
+                        coordinator.viewModel.getJournalViewModel()
+                        return
+                    }
+                    coordinator.viewModel.getJournalViewModel(from: lowerDate.description,
+                                                              to: upperDate.description)
+                } else {
+                    guard let selectedDay = selectedDay else {
+                        coordinator.viewModel.getJournalViewModel()
+                        return
+                    }
+                    
+                    let toMonth = selectedDay.month
+                    let toDay = selectedDay.day + 1
+                    let toDayWith0String = "0" + "\(toDay)"
+                    
+                    let toDayString = String(toDay <= 9 ? toDayWith0String : "\(toDay)")
+                    
+                    let to = "\(toMonth)-\(toDayString)"
+                    coordinator.viewModel.getJournalViewModel(from: selectedDay.description, to: to)
+                }
+            })
             .onChange(of: isRangeCalendarMode) { _ in
                 if isRangeCalendarMode {
                     self.selectedDay = nil
@@ -203,8 +240,8 @@ struct JournalView: View {
     private func clearCalendar() {
         lowerDate = nil
         upperDate = nil
-        
         selectedDay = nil
+        rangeDays = nil
         
 //        isSelectedFirstDateInRange.toggle()
 //        isSelectedSecondDateInRange.toggle()

@@ -13,7 +13,6 @@ struct SearchView: View {
     
     @Binding var showCalendar: Bool
     @Binding var choosedDays: Day?
-    
     @Binding var rangeDays: ClosedRange<Day>?
     
     var body: some View {

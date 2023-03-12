@@ -16,7 +16,6 @@ struct EmotionBoardView: View {
     @State var isNeededLast: Bool = false
     @State var isHidden: Bool = false
     
-    
     var body: some View {
         
         if data.isEmpty {
@@ -46,7 +45,7 @@ struct EmotionBoardView: View {
                             VStack {
                                 ForEach (0..<data.count, id: \.self) { i in
                                     EmotionBoardDataView(activities: data[i].activities,
-                                                         data: data[i].time,
+                                                         data: data[i].shortTime,
                                                          emotionTitle: data[i].title,
                                                          emotionImage: data[i].stateImage,
                                                          color: data[i].color,
@@ -64,7 +63,7 @@ struct EmotionBoardView: View {
                             .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)).animation(.linear).combined(with: .opacity))
                         } else {
                             EmotionBoardDataView(activities: data[0].activities,
-                                                 data: data[0].time,
+                                                 data: data[0].shortTime,
                                                  emotionTitle: data[0].title,
                                                  emotionImage: data[0].stateImage,
                                                  color: data[0].color,
@@ -78,7 +77,7 @@ struct EmotionBoardView: View {
                         }
                     } else {
                         EmotionBoardDataView(activities: data[0].activities,
-                                             data: data[0].time,
+                                             data: data[0].shortTime,
                                              emotionTitle: data[0].title,
                                              emotionImage: data[0].stateImage,
                                              color: data[0].color,

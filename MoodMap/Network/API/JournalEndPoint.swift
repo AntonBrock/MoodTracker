@@ -11,7 +11,7 @@ import Moya
 enum JournalEndPoint: TargetType {
     
     case sendUserNote(activities: [String], emotionId: String, stateId: String, stressRate: Int, text: String)
-    case getUserNotes
+    case getUserNotes(from: String?, to: String?)
 
     var baseURL: URL {
         switch self {
@@ -41,7 +41,19 @@ enum JournalEndPoint: TargetType {
     
     var task: Task {
         switch self {
-        case .getUserNotes: return .requestPlain
+        case .getUserNotes(let from, let to):
+            if let from = from,
+                let to = to,
+               !from.isEmpty && !to.isEmpty {
+                return .requestParameters(parameters:
+                                          [
+                                            "from": from,
+                                            "to": to
+                                          ],
+                                          encoding: URLEncoding.queryString)
+            } else {
+                return .requestPlain
+            }
         case .sendUserNote(let activities,
                            let emotionId,
                            let stateId,

@@ -104,6 +104,8 @@ final class AppState: ObservableObject {
         return decoder
     }()
     
+    
+    
     func startStory(type: UserStoryType, container: DIContainer) {
         guard UIApplication.shared.connectedScenes.first?.delegate is SceneDelegate else {
             fatalError()

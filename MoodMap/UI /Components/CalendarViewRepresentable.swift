@@ -124,7 +124,6 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         .interMonthSpacing(24)
         .verticalDayMargin(8)
         .horizontalDayMargin(8)
-        
     }
     
     class Coordinator: NSObject {
