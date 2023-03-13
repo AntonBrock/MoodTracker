@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmotionBoardView: View {
     
-    var data: [JournalViewModel] = []
+    var data: [[JournalViewModel]] = []
     var wasTouched: ((_ id: String) -> Void)
     var animation: Namespace.ID
     
@@ -20,7 +20,7 @@ struct EmotionBoardView: View {
         
         if data.isEmpty {
             HStack {
-                EmotionBoardDateView()
+                EmotionBoardDateView(monthTitle: "Jun", monthDate: "20")
                     .frame(maxHeight: .infinity, alignment: .top)
                     .padding(.leading, 16)
                 EmotionBoardEmtyView()
@@ -32,70 +32,151 @@ struct EmotionBoardView: View {
             
             Divider()
         } else {
-            VStack {
+            EmotionsBoard()
+//            VStack {
+//                ForEach(data, id: \.self) { item in
+//                    HStack {
+//                        VStack {
+//                            EmotionBoardDateView(monthTitle: "Jun", monthDate: "20")
+//                        }
+//                        .frame(maxHeight: .infinity, alignment: .top)
+//                        .padding(.leading, 16)
+//
+//                        if !isNeededLast {
+//                            if !isHidden {
+//                                VStack {
+//                                    ForEach (0..<item.count, id: \.self) { index in
+//                                        EmotionBoardDataView(activities: data[index].activities,
+//                                                             data: data[index].shortTime,
+//                                                             emotionTitle: data[index].title,
+//                                                             emotionImage: data[index].stateImage,
+//                                                             color: data[index].color,
+//                                                             animation: animation)
+//                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
+//                                            .matchedGeometryEffect(id: data[index].id, in: animation)
+//                                            .onTapGesture {
+//                                                withAnimation(.interactiveSpring(response: 0.7, dampingFraction: 0.6, blendDuration: 0.6)) {
+//                                                    wasTouched(data[index].id)
+//                                                }
+//                                            }
+//                                    }
+//                                }
+//                                .frame(maxHeight: .infinity, alignment: .top)
+//                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)).animation(.linear).combined(with: .opacity))
+//                            } else {
+////                                EmotionBoardDataView(activities: data[0].activities,
+////                                                     data: data[0].shortTime,
+////                                                     emotionTitle: data[0].title,
+////                                                     emotionImage: data[0].stateImage,
+////                                                     color: data[0].color,
+////                                                     animation: animation)
+////                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
+////                                    .onTapGesture {
+////                                        withAnimation {
+////                                            wasTouched(data[0].id)
+////                                        }
+////                                    }
+//                            }
+//                        } else {
+////                            EmotionBoardDataView(activities: data[0].activities,
+////                                                 data: data[0].shortTime,
+////                                                 emotionTitle: data[0].title,
+////                                                 emotionImage: data[0].stateImage,
+////                                                 color: data[0].color,
+////                                                 animation: animation)
+////                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
+////                                .onTapGesture {
+////                                    withAnimation {
+////                                        wasTouched(data[0].id)
+////                                    }
+////                                }
+//                        }
+//                    }
+//                }
+//            }
+//            .frame(maxWidth: .infinity, alignment: .top)
+//            .fixedSize(horizontal: false, vertical: true)
+//            .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
+//
+//            Divider()
+        }
+    }
+    
+    @ViewBuilder
+    private func EmotionsBoard() -> some View {
+        VStack {
+            ForEach(data, id: \.self) { item in
                 HStack {
                     VStack {
-                        EmotionBoardDateView()
+                        EmotionBoardDateView(monthTitle: item[0].month,
+                                             monthDate: item[0].monthCurrentTime)
                     }
                     .frame(maxHeight: .infinity, alignment: .top)
                     .padding(.leading, 16)
 
                     if !isNeededLast {
-                        if !isHidden {
-                            VStack {
-                                ForEach (0..<data.count, id: \.self) { i in
-                                    EmotionBoardDataView(activities: data[i].activities,
-                                                         data: data[i].shortTime,
-                                                         emotionTitle: data[i].title,
-                                                         emotionImage: data[i].stateImage,
-                                                         color: data[i].color,
-                                                         animation: animation)
-                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
-                                        .matchedGeometryEffect(id: data[i].id, in: animation)
-                                        .onTapGesture {
-                                            withAnimation(.interactiveSpring(response: 0.7, dampingFraction: 0.6, blendDuration: 0.6)) {
-                                                wasTouched(data[i].id)
-                                            }
-                                        }
-                                }
-                            }
-                            .frame(maxHeight: .infinity, alignment: .top)
-                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)).animation(.linear).combined(with: .opacity))
-                        } else {
-                            EmotionBoardDataView(activities: data[0].activities,
-                                                 data: data[0].shortTime,
-                                                 emotionTitle: data[0].title,
-                                                 emotionImage: data[0].stateImage,
-                                                 color: data[0].color,
-                                                 animation: animation)
-                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
-                                .onTapGesture {
-                                    withAnimation {
-                                        wasTouched(data[0].id)
-                                    }
-                                }
-                        }
+                        EmotionBoardIsNotNeededLast(item: item)
+
                     } else {
-                        EmotionBoardDataView(activities: data[0].activities,
-                                             data: data[0].shortTime,
-                                             emotionTitle: data[0].title,
-                                             emotionImage: data[0].stateImage,
-                                             color: data[0].color,
-                                             animation: animation)
-                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
-                            .onTapGesture {
-                                withAnimation {
-                                    wasTouched(data[0].id)
-                                }
-                            }
+//                            EmotionBoardDataView(activities: data[0].activities,
+//                                                 data: data[0].shortTime,
+//                                                 emotionTitle: data[0].title,
+//                                                 emotionImage: data[0].stateImage,
+//                                                 color: data[0].color,
+//                                                 animation: animation)
+//                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
+//                                .onTapGesture {
+//                                    withAnimation {
+//                                        wasTouched(data[0].id)
+//                                    }
+//                                }
                     }
                 }
+                
+                Divider()
             }
-            .frame(maxWidth: .infinity, alignment: .top)
-            .fixedSize(horizontal: false, vertical: true)
-            .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
-
-            Divider()
+        }
+        .frame(maxWidth: .infinity, alignment: .top)
+        .fixedSize(horizontal: false, vertical: true)
+        .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
+    }
+    
+    @ViewBuilder
+    private func EmotionBoardIsNotNeededLast(item: [JournalViewModel]) -> some View {
+        if !isHidden {
+            VStack {
+                EmotionBoardIsNotNeededLastForEach(item: item)
+            }
+            .frame(maxHeight: .infinity, alignment: .top)
+            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)).animation(.linear).combined(with: .opacity))
+        } else {
+//                                EmotionBoardDataView(activities: data[0].activities,
+//                                                     data: data[0].shortTime,
+//                                                     emotionTitle: data[0].title,
+//                                                     emotionImage: data[0].stateImage,
+//                                                     color: data[0].color,
+//                                                     animation: animation)
+//                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
+//                                    .onTapGesture {
+//                                        withAnimation {
+//                                            wasTouched(data[0].id)
+//                                        }
+//                                    }
+        }
+    }
+    
+    @ViewBuilder
+    private func EmotionBoardIsNotNeededLastForEach(item: [JournalViewModel]) -> some View {
+        ForEach (0..<item.count, id: \.self) { index in
+            EmotionBoardDataView(model: item[index],
+                                 animation: animation)
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
+//                .matchedGeometryEffect(id: data[index].id, in: animation)
+                .onTapGesture {
+                    withAnimation(.interactiveSpring(response: 0.7, dampingFraction: 0.6, blendDuration: 0.6)) {
+//                        wasTouched(data[index].id)
+                    }
+                }
         }
     }
     
@@ -108,13 +189,17 @@ struct EmotionBoardView: View {
 
 // MARK: - EmotionBoardDateView
 struct EmotionBoardDateView: View {
+    
+    var monthTitle: String
+    var monthDate: String
+    
     var body: some View {
         VStack {
-            Text("Jun")
+            Text(monthTitle)
                 .font(.system(size: 20))
                 .fontWeight(.bold)
                 .foregroundColor(Colors.TextColors.cadetBlue600)
-            Text("20")
+            Text(monthDate)
                 .font(.system(size: 24))
                 .fontWeight(.bold)
                 .foregroundColor(Colors.TextColors.fiord800)
@@ -127,51 +212,59 @@ struct EmotionBoardDateView: View {
 // MARK: - EmotionBoardDataView
 struct EmotionBoardDataView: View {
     
-    var activities: [ActivitiesViewModel] = []
-    var data: String
-    var emotionTitle: String
-    var emotionImage: String
-    var color: [Color]
-    
+    var model: JournalViewModel
+//    var activities: [ActivitiesViewModel] = []
+//    var data: String
+//    var emotionTitle: String
+//    var emotionImage: String
+//    var color: [Color]
+//
     var animation: Namespace.ID
+//
+//    init(
+//        activities: [ActivitiesViewModel],
+//        data: String,
+//        emotionTitle: String,
+//        emotionImage: String,
+//        color: [Color],
+//        animation: Namespace.ID
+//    ) {
+//        self.activities = activities
+//        self.data = data
+//        self.emotionTitle = emotionTitle
+//        self.emotionImage = emotionImage
+//        self.color = color
+//
+//        self.animation = animation
+//    }
     
-    init(
-        activities: [ActivitiesViewModel],
-        data: String,
-        emotionTitle: String,
-        emotionImage: String,
-        color: [Color],
+    init(model: JournalViewModel,
         animation: Namespace.ID
     ) {
-        self.activities = activities
-        self.data = data
-        self.emotionTitle = emotionTitle
-        self.emotionImage = emotionImage
-        self.color = color
-        
+        self.model = model
         self.animation = animation
     }
     
     var body: some View {
         HStack {
             VStack {
-                Text(data)
+                Text(model.shortTime)
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(.white.opacity(0.8))
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 14)
                 
-                Text(emotionTitle)
+                Text(model.title)
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 HStack {
-                    ForEach(0..<activities.count, id: \.self) { item in
+                    ForEach(0..<model.activities.count, id: \.self) { item in
                         if item == 0 {
-                            Text(activities[item].text)
+                            Text(model.activities[item].text)
                                 .font(.system(size: 12, weight: .medium))
                                 .multilineTextAlignment(.center)
                                 .fixedSize(horizontal: true, vertical: true)
@@ -184,8 +277,8 @@ struct EmotionBoardDataView: View {
                                         .fill(.white.opacity(0.3))
                                 }
                             
-                            if activities.count > 1 {
-                                Text("+ \(activities.count - 1)")
+                            if model.activities.count > 1 {
+                                Text("+ \(model.activities.count - 1)")
                                     .font(.system(size: 12, weight: .medium))
                                     .multilineTextAlignment(.center)
                                     .fixedSize(horizontal: true, vertical: true)
@@ -207,8 +300,13 @@ struct EmotionBoardDataView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
             
+//        data: data[0].shortTime,
+//        emotionTitle: data[0].title,
+//        emotionImage: data[0].stateImage,
+//        color: data[0].color,
+//        animation: animation)
             HStack {
-                Image(emotionImage)
+                Image(model.stateImage)
                     .resizable()
                     .foregroundColor(.green)
                     .frame(width: 135, height: 135)
@@ -219,7 +317,7 @@ struct EmotionBoardDataView: View {
 //            .clipped()
         }
         .frame(maxWidth: .infinity, maxHeight: 120.0, alignment: .leading)
-        .background(LinearGradient(colors: color, startPoint: .topLeading, endPoint: .bottomTrailing))
+        .background(LinearGradient(colors: model.color, startPoint: .topLeading, endPoint: .bottomTrailing))
         .compositingGroup()
         .cornerRadius(15)
         .padding(.horizontal, 24)

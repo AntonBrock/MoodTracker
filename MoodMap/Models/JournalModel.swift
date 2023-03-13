@@ -5,12 +5,14 @@
 //  Created by ANTON DOBRYNIN on 11.03.2023.
 //
 
+import Foundation
+
 struct JournalModel: Decodable {
     
     let id: String
     let stressRate: Int
-    let createdAt: String
-    let updatedAt: String?
+    let createdAt: Date
+    let updatedAt: Date?
     let stateId: String
     let emotionId: String
     let text: String
@@ -33,8 +35,8 @@ struct JournalModel: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         text = try container.decode(String.self, forKey: .text)
-        createdAt = try container.decode(String.self, forKey: .createdAt)
-        updatedAt = try? container.decode(String.self, forKey: .updatedAt)
+        createdAt = try container.decode(Date.self, forKey: .createdAt)
+        updatedAt = try? container.decode(Date.self, forKey: .updatedAt)
         stateId = try container.decode(String.self, forKey: .stateId)
         stressRate = try container.decode(Int.self, forKey: .stressRate)
         emotionId = try container.decode(String.self, forKey: .emotionId)

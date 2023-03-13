@@ -68,7 +68,8 @@ struct JournalView: View {
                         EmotionBoardView(data: coordinator.viewModel.journalViewModels ?? [],
                                          wasTouched: { id in
                             currentID = id
-                            currentModel = coordinator.viewModel.journalViewModels?.first(where: { $0.id == currentID })!
+                            #warning("TODO: Вернуть после разделения!")
+//                            currentModel = coordinator.viewModel.journalViewModels?.first(where: { $0.id == currentID })!
                             
                             withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
                                 showMoreInfo.toggle()
@@ -83,15 +84,16 @@ struct JournalView: View {
                     VStack(alignment: .leading) {
                         Spacer()
                         
+                        #warning("TODO: Вернуть после разделения")
                         ForEach(0..<(coordinator.viewModel.journalViewModels?.count ?? 0), id: \.self) { i in
-                            if currentID == coordinator.viewModel.journalViewModels?[i].id {
-                                
-                                DetailJournalView(showMoreInfo: $showMoreInfo,
-                                                  animation: animation,
-                                                  model: $currentModel)
-                                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
-                                
-                            }
+//                            if currentID == coordinator.viewModel.journalViewModels?[i].id {
+//
+//                                DetailJournalView(showMoreInfo: $showMoreInfo,
+//                                                  animation: animation,
+//                                                  model: $currentModel)
+//                                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
+//
+//                            }
                         }
                     }
                     .background(.white)

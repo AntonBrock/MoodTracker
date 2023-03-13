@@ -11,7 +11,7 @@ import SwiftUI
 extension JournalView {
     class ViewModel: ObservableObject {
         
-        @Published var journalViewModels: [JournalViewModel]?
+        @Published var journalViewModels: [[JournalViewModel]]?
         
         init() {
             getJournalViewModel()
@@ -21,62 +21,65 @@ extension JournalView {
             Services.journalService.getUserNotes { result in
                 switch result {
                 case .success(let models):
-                    self.journalViewModels = models.map({ JournalViewModel(
-                        id: $0.id,
-                        state: self.getState(from: $0.stateId),
-                        title: self.getTitle(with: self.getState(from: $0.stateId)),
-                        activities: $0.activities.map({ ActivitiesViewModel(id: $0.id,
-                                                                            text: $0.text,
-                                                                            language: $0.language,
-                                                                            image: $0.image)}),
-                        color: self.getColors(with: self.getState(from: $0.stateId)),
-                        stateImage: self.getStateImage(from: $0.stateId),
-                        emotionImage: self.getEmotionImage(from: $0.emotionId),
-                        stressRate: $0.stressRate,
-                        text: $0.text,
-                        shortTime: self.getFormatterTime(with: $0.createdAt, and: "HH:mm"),
-                        longTime: self.getFormatterTime(with: $0.createdAt, and: "dd MMM yyyy, HH:mm"))
-                    })
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-        func getJournalViewModel(from: String, to: String) {
-            Services.journalService.getUserNotesWithDate(from: from, to: to) { result in
-                switch result {
-                case .success(let models):
-                    self.journalViewModels?.removeAll()
-                    
-                    self.journalViewModels = models.map({ JournalViewModel(
-                        id: $0.id,
-                        state: self.getState(from: $0.stateId),
-                        title: self.getTitle(with: self.getState(from: $0.stateId)),
-                        activities: $0.activities.map({ ActivitiesViewModel(id: $0.id,
-                                                                            text: $0.text,
-                                                                            language: $0.language,
-                                                                            image: $0.image)}),
-                        color: self.getColors(with: self.getState(from: $0.stateId)),
-                        stateImage: self.getStateImage(from: $0.stateId),
-                        emotionImage: self.getEmotionImage(from: $0.emotionId),
-                        stressRate: $0.stressRate,
-                        text: $0.text,
-                        shortTime: self.getFormatterTime(with: $0.createdAt, and: "HH:mm"),
-                        longTime: self.getFormatterTime(with: $0.createdAt, and: "dd MMM yyyy, HH:mm"))
-                    })
+                    self.journalViewModels = self.mappingViewModel(data: models)
                 case .failure(let error):
                     print(error)
                 }
             }
         }
         
-        private func getFormatterTime(with time: String, and format: String) -> String {
+        func getJournalViewModel(from: String, to: String) {
+            Services.journalService.getUserNotesWithDate(from: from, to: to) { result in
+                switch result {
+                case .success(let models):
+                    self.journalViewModels?.removeAll()
+                    self.journalViewModels = self.mappingViewModel(data: models)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
+        private func mappingViewModel(data: [JournalModel]) -> [[JournalViewModel]] {
+            var models: [JournalViewModel] = []
+            let formatter = DateFormatter()
+            formatter.calendar = Calendar(identifier: .iso8601)
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.dateFormat = "MMM dd"
+                                    
+            for i in data {
+                models.append(JournalViewModel(
+                    id: i.id,
+                    state: self.getState(from: i.stateId),
+                    title: self.getTitle(with: self.getState(from: i.stateId)),
+                    activities: i.activities.map({ ActivitiesViewModel(id: $0.id,
+                                                                       text: $0.text,
+                                                                       language: $0.language,
+                                                                       image: $0.image)}),
+                    color: self.getColors(with: self.getState(from: i.stateId)),
+                    stateImage: self.getStateImage(from: i.stateId),
+                    emotionImage: self.getEmotionImage(from: i.emotionId),
+                    stressRate: i.stressRate,
+                    text: i.text,
+                    monthTime: self.getFormatterTime(with: i.createdAt, and: "MMM dd"),
+                    month: self.getFormatterTime(with: i.createdAt, and: "MMM"),
+                    monthCurrentTime: self.getFormatterTime(with: i.createdAt, and: "dd"),
+                    shortTime: self.getFormatterTime(with: i.createdAt, and: "HH:mm"),
+                    longTime: self.getFormatterTime(with: i.createdAt, and: "dd MMM yyyy, HH:mm")))
+            }
+            
+            let modelGroups = Array(Dictionary(grouping: models){ $0.monthTime }.values)
+            return modelGroups
+        }
+        
+        private func getFormatterTime(with time: Date, and format: String) -> String {
             let formatter = DateFormatter()
             formatter.calendar = Calendar(identifier: .iso8601)
             formatter.locale = Locale(identifier: "en_US_POSIX")
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-
-            if let timeDate = formatter.date(from: time) {
+            let timeDate = formatter.string(from: time)
+            
+            if let timeDate = formatter.date(from: timeDate) {
                 formatter.dateFormat = format
                 formatter.locale = Locale(identifier: "ru_RU") // Тут настройка от потом языка!
                 return formatter.string(from: timeDate)
@@ -136,7 +139,15 @@ extension JournalView {
     }
 }
 
-struct JournalViewModel {
+struct JournalViewModel: Hashable {
+    static func == (lhs: JournalViewModel, rhs: JournalViewModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(id)
+    }
+    
     enum State {
         case diary
         case veryBad
@@ -146,6 +157,7 @@ struct JournalViewModel {
         case veryGood
     }
     
+    let identifier: String = UUID().uuidString
     let id: String
     let state: State
     let title: String
@@ -155,6 +167,9 @@ struct JournalViewModel {
     let emotionImage: String
     let stressRate: Int
     let text: String
+    let monthTime: String
+    let month: String
+    let monthCurrentTime: String
     let shortTime: String
     let longTime: String
 }
