@@ -43,7 +43,6 @@ extension JournalView {
         private func mappingViewModel(data: [JournalModel]) -> [[JournalViewModel]] {
             var models: [JournalViewModel] = []
             let formatter = DateFormatter()
-            formatter.calendar = Calendar(identifier: .iso8601)
             formatter.locale = Locale(identifier: "en_US_POSIX")
             formatter.dateFormat = "MMM dd"
                                     
@@ -67,10 +66,12 @@ extension JournalView {
                     shortTime: self.getFormatterTime(with: i.createdAt, and: "HH:mm"),
                     longTime: self.getFormatterTime(with: i.createdAt, and: "dd MMM yyyy, HH:mm")))
             }
-            let sortedModels = models.sorted(by: { $0.longTime > $1.longTime })
             
+            let sortedModels = models.sorted(by: { $0.longTime > $1.longTime })
             let modelGroups = Array(Dictionary(grouping: sortedModels){ $0.monthTime }.values)
-            return modelGroups
+            let sortedGroupsModel = modelGroups.sorted(by: { $0[0].month < $1[0].month })
+            
+            return sortedGroupsModel
         }
         
         private func getFormatterTime(with time: Date,
@@ -78,7 +79,8 @@ extension JournalView {
             let formatter = DateFormatter()
             formatter.calendar = Calendar(identifier: .iso8601)
             formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+            formatter.timeZone = TimeZone(identifier: "UTC")
             let timeDate = formatter.string(from: time)
             
             if let timeDate = formatter.date(from: timeDate) {

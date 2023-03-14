@@ -40,7 +40,6 @@ struct JournalService: JournalServiceProtocol {
             }
 
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
-
             if let date = formatter.date(from: dateStr) {
                 return date
             }
