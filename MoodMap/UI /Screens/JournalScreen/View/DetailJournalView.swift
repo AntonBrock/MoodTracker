@@ -45,12 +45,12 @@ struct DetailJournalView: View {
                                 ForEach(0..<(model?.activities.count ?? 0), id: \.self) { i in
                                     HStack {
                                         Text(model?.activities[i].text ?? "")
-                                            .foregroundColor(Colors.Secondary.neonCarrot600Orange)
+                                            .foregroundColor(.white)
                                             .padding(.horizontal, 14)
                                             .padding(.vertical, 8)
                                             .background(
                                                 Rectangle()
-                                                    .fill(Colors.Secondary.negroni400Orange)
+                                                    .fill(model!.color[0])
                                                     .frame(height: 32)
                                                     .cornerRadius(32 / 2)
                                             )

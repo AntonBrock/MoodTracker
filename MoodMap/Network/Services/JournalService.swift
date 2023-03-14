@@ -98,7 +98,7 @@ struct JournalService: JournalServiceProtocol {
         networkService?.request(.target(target), completion: { response in
             switch response {
             case let .success(result):
-                guard let model = try? JSONDecoder().decode([JournalModel].self, from: result.data) else {
+                guard let model = try? decoder.decode([JournalModel].self, from: result.data) else {
                     return
                 }
                 completion(.success(model))

@@ -20,9 +20,6 @@ struct EmotionBoardView: View {
         
         if data.isEmpty {
             HStack {
-                EmotionBoardDateView(monthTitle: "Jun", monthDate: "20")
-                    .frame(maxHeight: .infinity, alignment: .top)
-                    .padding(.leading, 16)
                 EmotionBoardEmtyView()
                     .frame(maxHeight: .infinity, alignment: .top)
             }
@@ -33,72 +30,6 @@ struct EmotionBoardView: View {
             Divider()
         } else {
             EmotionsBoard()
-//            VStack {
-//                ForEach(data, id: \.self) { item in
-//                    HStack {
-//                        VStack {
-//                            EmotionBoardDateView(monthTitle: "Jun", monthDate: "20")
-//                        }
-//                        .frame(maxHeight: .infinity, alignment: .top)
-//                        .padding(.leading, 16)
-//
-//                        if !isNeededLast {
-//                            if !isHidden {
-//                                VStack {
-//                                    ForEach (0..<item.count, id: \.self) { index in
-//                                        EmotionBoardDataView(activities: data[index].activities,
-//                                                             data: data[index].shortTime,
-//                                                             emotionTitle: data[index].title,
-//                                                             emotionImage: data[index].stateImage,
-//                                                             color: data[index].color,
-//                                                             animation: animation)
-//                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
-//                                            .matchedGeometryEffect(id: data[index].id, in: animation)
-//                                            .onTapGesture {
-//                                                withAnimation(.interactiveSpring(response: 0.7, dampingFraction: 0.6, blendDuration: 0.6)) {
-//                                                    wasTouched(data[index].id)
-//                                                }
-//                                            }
-//                                    }
-//                                }
-//                                .frame(maxHeight: .infinity, alignment: .top)
-//                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)).animation(.linear).combined(with: .opacity))
-//                            } else {
-////                                EmotionBoardDataView(activities: data[0].activities,
-////                                                     data: data[0].shortTime,
-////                                                     emotionTitle: data[0].title,
-////                                                     emotionImage: data[0].stateImage,
-////                                                     color: data[0].color,
-////                                                     animation: animation)
-////                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
-////                                    .onTapGesture {
-////                                        withAnimation {
-////                                            wasTouched(data[0].id)
-////                                        }
-////                                    }
-//                            }
-//                        } else {
-////                            EmotionBoardDataView(activities: data[0].activities,
-////                                                 data: data[0].shortTime,
-////                                                 emotionTitle: data[0].title,
-////                                                 emotionImage: data[0].stateImage,
-////                                                 color: data[0].color,
-////                                                 animation: animation)
-////                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
-////                                .onTapGesture {
-////                                    withAnimation {
-////                                        wasTouched(data[0].id)
-////                                    }
-////                                }
-//                        }
-//                    }
-//                }
-//            }
-//            .frame(maxWidth: .infinity, alignment: .top)
-//            .fixedSize(horizontal: false, vertical: true)
-//            .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
-//
-//            Divider()
         }
     }
     
@@ -116,20 +47,19 @@ struct EmotionBoardView: View {
 
                     if !isNeededLast {
                         EmotionBoardIsNotNeededLast(item: item)
-
                     } else {
-//                            EmotionBoardDataView(activities: data[0].activities,
-//                                                 data: data[0].shortTime,
-//                                                 emotionTitle: data[0].title,
-//                                                 emotionImage: data[0].stateImage,
-//                                                 color: data[0].color,
-//                                                 animation: animation)
-//                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
-//                                .onTapGesture {
-//                                    withAnimation {
-//                                        wasTouched(data[0].id)
-//                                    }
+//                        EmotionBoardDataView(activities: data[item].activities,
+//                                             data: data[0].shortTime,
+//                                             emotionTitle: data[0].title,
+//                                             emotionImage: data[0].stateImage,
+//                                             color: data[0].color,
+//                                             animation: animation)
+//                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
+//                            .onTapGesture {
+//                                withAnimation {
+//                                    wasTouched(data[0].id)
 //                                }
+//                            }
                     }
                 }
                 
@@ -150,18 +80,13 @@ struct EmotionBoardView: View {
             .frame(maxHeight: .infinity, alignment: .top)
             .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)).animation(.linear).combined(with: .opacity))
         } else {
-//                                EmotionBoardDataView(activities: data[0].activities,
-//                                                     data: data[0].shortTime,
-//                                                     emotionTitle: data[0].title,
-//                                                     emotionImage: data[0].stateImage,
-//                                                     color: data[0].color,
-//                                                     animation: animation)
-//                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
-//                                    .onTapGesture {
-//                                        withAnimation {
-//                                            wasTouched(data[0].id)
-//                                        }
-//                                    }
+            EmotionBoardDataView(model: item[0], animation: animation)
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
+            .onTapGesture {
+                withAnimation {
+                    wasTouched(item[0].id)
+                }
+            }
         }
     }
     
@@ -171,10 +96,10 @@ struct EmotionBoardView: View {
             EmotionBoardDataView(model: item[index],
                                  animation: animation)
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
-//                .matchedGeometryEffect(id: data[index].id, in: animation)
+                .matchedGeometryEffect(id: item[index].id, in: animation)
                 .onTapGesture {
                     withAnimation(.interactiveSpring(response: 0.7, dampingFraction: 0.6, blendDuration: 0.6)) {
-//                        wasTouched(data[index].id)
+                        wasTouched(item[index].id)
                     }
                 }
         }
@@ -204,7 +129,7 @@ struct EmotionBoardDateView: View {
                 .fontWeight(.bold)
                 .foregroundColor(Colors.TextColors.fiord800)
         }
-        .frame(maxWidth: 50.0, maxHeight: .infinity, alignment: .top)
+        .frame(maxWidth: 70, maxHeight: .infinity, alignment: .top)
         .fixedSize(horizontal: true, vertical: true)
     }
 }
@@ -213,30 +138,7 @@ struct EmotionBoardDateView: View {
 struct EmotionBoardDataView: View {
     
     var model: JournalViewModel
-//    var activities: [ActivitiesViewModel] = []
-//    var data: String
-//    var emotionTitle: String
-//    var emotionImage: String
-//    var color: [Color]
-//
     var animation: Namespace.ID
-//
-//    init(
-//        activities: [ActivitiesViewModel],
-//        data: String,
-//        emotionTitle: String,
-//        emotionImage: String,
-//        color: [Color],
-//        animation: Namespace.ID
-//    ) {
-//        self.activities = activities
-//        self.data = data
-//        self.emotionTitle = emotionTitle
-//        self.emotionImage = emotionImage
-//        self.color = color
-//
-//        self.animation = animation
-//    }
     
     init(model: JournalViewModel,
         animation: Namespace.ID
@@ -300,11 +202,6 @@ struct EmotionBoardDataView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
             
-//        data: data[0].shortTime,
-//        emotionTitle: data[0].title,
-//        emotionImage: data[0].stateImage,
-//        color: data[0].color,
-//        animation: animation)
             HStack {
                 Image(model.stateImage)
                     .resizable()

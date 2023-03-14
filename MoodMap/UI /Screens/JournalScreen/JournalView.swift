@@ -50,10 +50,7 @@ struct JournalView: View {
         self.animation = animation
         self.viewModel = coordinator.viewModel
     }
-    
-//    let titles: [String] = ["Общий отчет", "Журнал"]
-//    let dates: [String] = ["week", "mounth", "year", "all"]
-    
+
     var body: some View {
         
         VStack {
@@ -68,12 +65,10 @@ struct JournalView: View {
                         EmotionBoardView(data: coordinator.viewModel.journalViewModels ?? [],
                                          wasTouched: { id in
                             currentID = id
-                            #warning("TODO: Вернуть после разделения!")
-//                            currentModel = coordinator.viewModel.journalViewModels?.first(where: { $0.id == currentID })!
-                            
+                            chooseSelectedModel()
                             withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
                                 showMoreInfo.toggle()
-                                //                            coordinator.isHiddenTabBar(true)
+//                                coordinator.isHiddenTabBar(true)
                             }
                         }, animation: animation)
                     }
@@ -82,19 +77,10 @@ struct JournalView: View {
                 
                 if showMoreInfo {
                     VStack(alignment: .leading) {
-                        Spacer()
-                        
-                        #warning("TODO: Вернуть после разделения")
-                        ForEach(0..<(coordinator.viewModel.journalViewModels?.count ?? 0), id: \.self) { i in
-//                            if currentID == coordinator.viewModel.journalViewModels?[i].id {
-//
-//                                DetailJournalView(showMoreInfo: $showMoreInfo,
-//                                                  animation: animation,
-//                                                  model: $currentModel)
-//                                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
-//
-//                            }
-                        }
+                        DetailJournalView(showMoreInfo: $showMoreInfo,
+                                          animation: animation,
+                                          model: $currentModel)
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
                     }
                     .background(.white)
                 }
@@ -192,7 +178,8 @@ struct JournalView: View {
                         
                     }
                     .frame(maxWidth: 160, maxHeight: 48)
-                    .disabled(isRangeCalendarMode ? upperDate == nil || lowerDate == nil : selectedDay == nil) // тут нужна еще разделние на выбранный тип отмечания
+                    .disabled(isRangeCalendarMode ? upperDate == nil || lowerDate == nil : selectedDay == nil)
+                    // тут нужна еще разделние на выбранный тип отмечания
                 }
                 .frame(height: 100)
                 .padding(.horizontal, 16)
@@ -235,6 +222,16 @@ struct JournalView: View {
                     //                isSelectedSecondDateInRange.toggle()
                 }
                 
+            }
+        }
+    }
+    
+    private func chooseSelectedModel() {
+        for index in 0..<coordinator.viewModel.journalViewModels!.count {
+            for item in coordinator.viewModel.journalViewModels![index] {
+                if item.id == currentID {
+                    currentModel = item
+                }
             }
         }
     }

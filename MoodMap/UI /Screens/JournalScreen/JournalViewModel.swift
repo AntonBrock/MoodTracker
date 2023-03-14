@@ -67,12 +67,14 @@ extension JournalView {
                     shortTime: self.getFormatterTime(with: i.createdAt, and: "HH:mm"),
                     longTime: self.getFormatterTime(with: i.createdAt, and: "dd MMM yyyy, HH:mm")))
             }
+            let sortedModels = models.sorted(by: { $0.longTime > $1.longTime })
             
-            let modelGroups = Array(Dictionary(grouping: models){ $0.monthTime }.values)
+            let modelGroups = Array(Dictionary(grouping: sortedModels){ $0.monthTime }.values)
             return modelGroups
         }
         
-        private func getFormatterTime(with time: Date, and format: String) -> String {
+        private func getFormatterTime(with time: Date,
+                                      and format: String) -> String {
             let formatter = DateFormatter()
             formatter.calendar = Calendar(identifier: .iso8601)
             formatter.locale = Locale(identifier: "en_US_POSIX")
@@ -129,11 +131,11 @@ extension JournalView {
         private func getColors(with state: JournalViewModel.State) -> [Color] {
             switch state {
             case .diary: return [Color(hex: "86E9C5"), Color(hex: "0B98C5")]
-            case .veryBad: return [Color(hex: "86E9C5"), Color(hex: "0B98C5")]
-            case .bad: return [Color(hex: "86E9C5"), Color(hex: "0B98C5")]
-            case .fine: return [Color(hex: "86E9C5"), Color(hex: "0B98C5")]
-            case .good: return [Color(hex: "86E9C5"), Color(hex: "0B98C5")]
-            case .veryGood: return [Color(hex: "86E9C5"), Color(hex: "0B98C5")]
+            case .veryBad: return [Color(hex: "FFC8C8"), Color(hex: "F95555")]
+            case .bad: return [Color(hex: "7392FC"), Color(hex: "7137AF")]
+            case .fine: return [Color(hex: "BBBAFF"), Color(hex: "973FF4")]
+            case .good: return [Color(hex: "86E9C5"), Color(hex: "11AADF")]
+            case .veryGood: return [Color(hex: "FFC8C8"), Color(hex: "FFC794")]
             }
         }
     }
