@@ -14,7 +14,7 @@ struct ReportCoordinatorView: View {
 
     var body: some View {        
         NavigationView {
-            ReportScreen(currentDate: $currentDate)
+            ReportScreen(coordinator: coordinator)
                 .navigationTitle("Отчет")
                 .navigationBarTitleDisplayMode(.large)
         }

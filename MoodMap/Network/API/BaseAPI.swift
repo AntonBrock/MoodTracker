@@ -13,6 +13,7 @@ enum BaseAPI {
     case auth(AuthEnpPoint)
     case userState(UserStateEndPoint)
     case journal(JournalEndPoint)
+    case report(ReportEndPoint)
 }
 
 extension BaseAPI: TargetType {
@@ -23,6 +24,7 @@ extension BaseAPI: TargetType {
         case let .auth(authAPI): return authAPI.baseURL
         case let .userState(userStateAPI): return userStateAPI.baseURL
         case let .journal(journalEndPoint): return journalEndPoint.baseURL
+        case let .report(reportEndPoint): return reportEndPoint.baseURL
         }
     }
     
@@ -32,6 +34,7 @@ extension BaseAPI: TargetType {
         case let .auth(authAPI): return authAPI.path
         case let .userState(userStateAPI): return userStateAPI.path
         case let .journal(journalEndPoint): return journalEndPoint.path
+        case let .report(reportEndPoint): return reportEndPoint.path
         }
     }
     
@@ -41,6 +44,7 @@ extension BaseAPI: TargetType {
         case let .auth(authAPI): return authAPI.method
         case let .userState(userStateAPI): return userStateAPI.method
         case let .journal(journalEndPoint): return journalEndPoint.method
+        case let .report(reportEndPoint): return reportEndPoint.method
         }
     }
     
@@ -50,6 +54,7 @@ extension BaseAPI: TargetType {
         case let .auth(authAPI): return authAPI.sampleData
         case let .userState(userStateAPI): return userStateAPI.sampleData
         case let .journal(journalEndPoint): return journalEndPoint.sampleData
+        case let .report(reportEndPoint): return reportEndPoint.sampleData
         }
     }
     
@@ -59,6 +64,7 @@ extension BaseAPI: TargetType {
         case let .auth(authAPI): return authAPI.task
         case let .userState(userStateAPI): return userStateAPI.task
         case let .journal(journalEndPoint): return journalEndPoint.task
+        case let .report(reportEndPoint): return reportEndPoint.task
         }
     }
     
@@ -68,6 +74,7 @@ extension BaseAPI: TargetType {
         case let .auth(authAPI): return authAPI.headers
         case let .userState(userStateAPI): return userStateAPI.headers
         case let .journal(journalEndPoint): return journalEndPoint.headers
+        case let .report(reportEndPoint): return reportEndPoint.headers
         }
     }
     
@@ -77,6 +84,7 @@ extension BaseAPI: TargetType {
         case let .auth(authAPI): return authAPI.authorizationType
         case let .userState(userStateAPI): return userStateAPI.authorizationType
         case let .journal(journalEndPoint): return journalEndPoint.authorizationType
+        case let .report(reportEndPoint): return reportEndPoint.authorizationType
         }
     }
 }

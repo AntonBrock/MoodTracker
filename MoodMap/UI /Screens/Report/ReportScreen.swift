@@ -11,6 +11,9 @@ import Charts
 
 struct ReportScreen: View {
     
+    @ObservedObject var viewModel: ViewModel
+    private unowned let coordinator: ReportViewCoordinator
+    
     @State var typeSelectedIndex: Int = 0
     @State var dateSelectedIndex: Int = 0
     
@@ -25,8 +28,15 @@ struct ReportScreen: View {
     @State var showDaylyMonthDetails: Bool = false
     @State var translation: CGFloat = 0
     
-    @Binding var currentDate: Date
+    @State var currentDate: Date = Date()
     @State var currentMonth: Int = 0
+    
+    init(
+        coordinator: ReportViewCoordinator
+    ){
+        self.coordinator = coordinator
+        self.viewModel = coordinator.viewModel
+    }
     
     var body: some View {
         ScrollView {

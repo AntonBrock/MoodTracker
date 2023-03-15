@@ -138,6 +138,9 @@
 		456A401D29BBA7E500371B5C /* JournalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401C29BBA7E500371B5C /* JournalService.swift */; };
 		456A401F29BBA84400371B5C /* JournalEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401E29BBA84400371B5C /* JournalEndPoint.swift */; };
 		456A402129BC2BC200371B5C /* JournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A402029BC2BC200371B5C /* JournalModel.swift */; };
+		457F591729C183F100E96E1D /* ReportScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591629C183F100E96E1D /* ReportScreenViewModel.swift */; };
+		457F591929C184B900E96E1D /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591829C184B900E96E1D /* ReportService.swift */; };
+		457F591B29C184F300E96E1D /* ReportEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591A29C184F300E96E1D /* ReportEndPoint.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
 		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
@@ -247,6 +250,9 @@
 		4570B8C12985144B0063E2DC /* AuthMethodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodsView.swift; sourceTree = "<group>"; };
 		4579220D28CF4FBD00722D16 /* SwiftUISlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISlider.swift; sourceTree = "<group>"; };
 		457A886429A9FD3400FC7BBB /* WhyRegistrationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyRegistrationInfoView.swift; sourceTree = "<group>"; };
+		457F591629C183F100E96E1D /* ReportScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportScreenViewModel.swift; sourceTree = "<group>"; };
+		457F591829C184B900E96E1D /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
+		457F591A29C184F300E96E1D /* ReportEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEndPoint.swift; sourceTree = "<group>"; };
 		459390DD28F2E27300A94902 /* ReportScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportScreen.swift; sourceTree = "<group>"; };
 		459390DF28F2E5C700A94902 /* SegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlView.swift; sourceTree = "<group>"; };
 		459797F7295A88220059CAC2 /* DetailJournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailJournalView.swift; sourceTree = "<group>"; };
@@ -436,6 +442,7 @@
 				459390DD28F2E27300A94902 /* ReportScreen.swift */,
 				451E6BC9290578130048714B /* ReportViewCoordinator.swift */,
 				451E6BCB290578360048714B /* ReportCoordinatorView.swift */,
+				457F591629C183F100E96E1D /* ReportScreenViewModel.swift */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -756,6 +763,7 @@
 				45133A1F29AFB88900258072 /* AuthService.swift */,
 				456A400929B75DDB00371B5C /* UserStateService.swift */,
 				456A401C29BBA7E500371B5C /* JournalService.swift */,
+				457F591829C184B900E96E1D /* ReportService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -768,6 +776,7 @@
 				45133A2129AFB97400258072 /* AuthEnpPoint.swift */,
 				456A400729B75DD200371B5C /* UserStateEndPoint.swift */,
 				456A401E29BBA84400371B5C /* JournalEndPoint.swift */,
+				457F591A29C184F300E96E1D /* ReportEndPoint.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -915,11 +924,13 @@
 				4529AB9A29AF1940001D2390 /* SCPalletes.swift in Sources */,
 				4529AB9B29AF1940001D2390 /* SCCaptionsView.swift in Sources */,
 				456A401F29BBA84400371B5C /* JournalEndPoint.swift in Sources */,
+				457F591929C184B900E96E1D /* ReportService.swift in Sources */,
 				456A401929BAE1BB00371B5C /* StatesViewModel.swift in Sources */,
 				4529AB9C29AF1940001D2390 /* SCChartWrapperView.swift in Sources */,
 				4529AB9D29AF1940001D2390 /* SCDonutView.swift in Sources */,
 				4529AB9E29AF1940001D2390 /* SCDonutPartView.swift in Sources */,
 				456A400C29B76AF800371B5C /* JournalViewModel.swift in Sources */,
+				457F591729C183F100E96E1D /* ReportScreenViewModel.swift in Sources */,
 				4529AB9F29AF1940001D2390 /* SCDonutChartView.swift in Sources */,
 				4529ABA029AF1940001D2390 /* ActivitiesBarCharsView.swift in Sources */,
 				4529ABA129AF1940001D2390 /* FeelingCircleChartsView.swift in Sources */,
@@ -932,6 +943,7 @@
 				4529ABA729AF1940001D2390 /* EmotionBoardView.swift in Sources */,
 				45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */,
 				4529ABA829AF1940001D2390 /* QuoteView.swift in Sources */,
+				457F591B29C184F300E96E1D /* ReportEndPoint.swift in Sources */,
 				4529ABA929AF1941001D2390 /* ActivitiesTextViewBlock.swift in Sources */,
 				4529ABAA29AF1941001D2390 /* MPErrorFlowView.swift in Sources */,
 				4529ABAB29AF1941001D2390 /* SearchView.swift in Sources */,

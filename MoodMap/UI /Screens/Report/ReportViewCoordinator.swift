@@ -12,6 +12,8 @@ class ReportViewCoordinator: ObservableObject, Identifiable {
     private let container: DIContainer
     private unowned let parent: BaseViewCoordinator
     
+    @ObservedObject var viewModel: ReportScreen.ViewModel
+    
     // MARK: - Init
     init(
         parent: BaseViewCoordinator,
@@ -19,5 +21,6 @@ class ReportViewCoordinator: ObservableObject, Identifiable {
     ) {
         self.parent = parent
         self.container = container
+        self.viewModel = ReportScreen.ViewModel()
     }
 }
