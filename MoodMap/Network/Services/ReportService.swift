@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ReportServiceProtocol {
-    func fetchReport()
+    func fetchReport(completion: @escaping(Result<ReportModel, Error>) -> Void)
 }
 
 struct ReportService: ReportServiceProtocol {
@@ -41,17 +41,19 @@ struct ReportService: ReportServiceProtocol {
         return decoder
     }()
     
-    func fetchReport() {
+    func fetchReport(completion: @escaping(Result<ReportModel, Error>) -> Void) {
         let target = BaseAPI.report(.getReport)
 
         let networkService = ServiceProvider().networkService
         networkService?.request(.target(target), completion: { response in
             switch response {
             case let .success(result):
-               print(result)
+                guard let model = try? decoder.decode(ReportModel.self, from: result.data) else {
+                    return
+                }
+                completion(.success(model))
             case let .failure(error):
-//                completion(.failure(error))
-                print(error)
+                completion(.failure(error))
             }
         })
     }

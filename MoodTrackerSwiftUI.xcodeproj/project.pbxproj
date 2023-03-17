@@ -141,6 +141,7 @@
 		457F591729C183F100E96E1D /* ReportScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591629C183F100E96E1D /* ReportScreenViewModel.swift */; };
 		457F591929C184B900E96E1D /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591829C184B900E96E1D /* ReportService.swift */; };
 		457F591B29C184F300E96E1D /* ReportEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591A29C184F300E96E1D /* ReportEndPoint.swift */; };
+		4592521429C4205E007B1706 /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592521329C4205E007B1706 /* ReportModel.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
 		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
@@ -253,6 +254,7 @@
 		457F591629C183F100E96E1D /* ReportScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportScreenViewModel.swift; sourceTree = "<group>"; };
 		457F591829C184B900E96E1D /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		457F591A29C184F300E96E1D /* ReportEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEndPoint.swift; sourceTree = "<group>"; };
+		4592521329C4205E007B1706 /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
 		459390DD28F2E27300A94902 /* ReportScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportScreen.swift; sourceTree = "<group>"; };
 		459390DF28F2E5C700A94902 /* SegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlView.swift; sourceTree = "<group>"; };
 		459797F7295A88220059CAC2 /* DetailJournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailJournalView.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				456A401229BA41BB00371B5C /* StatesModel.swift */,
 				456A401429BA41C200371B5C /* ActivitiesModel.swift */,
 				456A402029BC2BC200371B5C /* JournalModel.swift */,
+				4592521329C4205E007B1706 /* ReportModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -972,6 +975,7 @@
 				4529ABC129AF1941001D2390 /* JournalViewCoordinator.swift in Sources */,
 				45133A2229AFB97400258072 /* AuthEnpPoint.swift in Sources */,
 				4529ABC229AF1941001D2390 /* JournalCoordinatorView.swift in Sources */,
+				4592521429C4205E007B1706 /* ReportModel.swift in Sources */,
 				4529ABC329AF1941001D2390 /* ReportScreen.swift in Sources */,
 				4529ABC429AF1941001D2390 /* ReportViewCoordinator.swift in Sources */,
 				4529ABC529AF1941001D2390 /* ReportCoordinatorView.swift in Sources */,

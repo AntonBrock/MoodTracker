@@ -143,6 +143,7 @@ extension JournalView {
     }
 }
 
+// MARK: - JournalViewModel
 struct JournalViewModel: Hashable {
     static func == (lhs: JournalViewModel, rhs: JournalViewModel) -> Bool {
         return lhs.id == rhs.id
