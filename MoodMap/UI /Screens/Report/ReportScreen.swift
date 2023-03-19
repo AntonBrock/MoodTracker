@@ -56,7 +56,7 @@ struct ReportScreen: View {
                 
                 if typeSelectedIndex == 0 || typeSelectedIndex == 1 {
                     if dateSelectedIndex == 0 {
-                        WeekAnimationChart()
+                        WeekAnimationChart(weekChartViewModel: viewModel.reportViewModel?.chartData ?? [])
                     } else {
                         MonthChart()
                     }
@@ -151,8 +151,6 @@ struct ReportScreen: View {
                         }
                     }
                 }
-
-                ReportTipView()
                 
                 CircleEmotionChart()
                 

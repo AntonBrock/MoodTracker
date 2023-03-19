@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension ReportScreen {
     
@@ -106,7 +107,9 @@ struct ReportViewModel {
     let badActivitiesReportData: BadActivitiesReportDataViewModel
 }
 
-struct ChartDataViewModel {
+struct ChartDataViewModel: Identifiable {
+    
+    let id = UUID().uuidString
     let date: String
     let dayRate: Int
     let description: [ChartDataDescriptionViewModel]
