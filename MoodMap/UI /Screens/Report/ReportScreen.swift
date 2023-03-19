@@ -152,7 +152,7 @@ struct ReportScreen: View {
                     }
                 }
                 
-                CircleEmotionChart()
+                CircleEmotionChart(emotionViewModel: viewModel.reportViewModel?.emotionCountData)
                 
                 ReportTipView()
                

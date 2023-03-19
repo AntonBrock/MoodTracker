@@ -59,7 +59,9 @@ extension ReportScreen {
                 common: emotionCountData.common,
                 state: emotionCountData.state.compactMap({ EmotionCountDataViewModel.EmotionCountDataStateViewModel(
                     text: $0.text,
-                    count: $0.count)})
+                    count: $0.count,
+                    color: mappingColorForEmotion(with: $0.text)
+                )})
             )
             
             timeDataViewModel = TimeDataViewModel(
@@ -95,6 +97,14 @@ extension ReportScreen {
                 goodActivitiesReportData: goodActivitiesReportDataViewModel,
                 badActivitiesReportData: badActivitiesReportDataViewModel)
         }
+        
+        private func mappingColorForEmotion(with emotionTitle: String) -> String {
+            switch emotionTitle {
+            case "Good", "Хорошо": return "FFC794"
+            case "Bad", "Плохо": return "B9C8FD"
+            default: return "B283E4"
+            }
+        }
     }
 }
 
@@ -121,14 +131,15 @@ struct ChartDataViewModel: Identifiable {
     }
 }
 
-struct EmotionCountDataViewModel {
+struct EmotionCountDataViewModel: Equatable {
     let total: Int
     let common: String
     let state: [EmotionCountDataStateViewModel]
     
-    struct EmotionCountDataStateViewModel {
+    struct EmotionCountDataStateViewModel: Equatable {
         let text: String
         let count: Int
+        let color: String
     }
 }
 

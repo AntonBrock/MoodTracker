@@ -9,7 +9,10 @@ import SwiftUI
 
 @available(OSX 10.15, *)
 public struct PieChartView: View {
-    public let values: [Double]
+    @State var values: [Double]
+    @State var total: Int
+    @State var emotionsValuesByCategory: [Double]
+    
     public let names: [String]
     public let formatter: (Double) -> String
     
@@ -28,13 +31,30 @@ public struct PieChartView: View {
         
         for (i, value) in values.enumerated() {
             let degrees: Double = value * 360 / sum
-            tempSlices.append(PieSliceData(startAngle: Angle(degrees: endDeg), endAngle: Angle(degrees: endDeg + degrees), text: String(format: "%.0f%%", value * 100 / sum), color: self.colors[i]))
+            tempSlices.append(
+                PieSliceData(
+                    startAngle: Angle(degrees: endDeg),
+                    endAngle: Angle(degrees: endDeg + degrees),
+                    text: String(format: "2f", sum),
+                    color: self.colors[i])
+            )
             endDeg += degrees
         }
         return tempSlices
     }
     
-    public init(values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color] = [Color.blue, Color.green, Color.orange], backgroundColor: Color = Color(red: 21 / 255, green: 24 / 255, blue: 30 / 255, opacity: 1.0), widthFraction: CGFloat = 0.45, innerRadiusFraction: CGFloat = 0.70){
+    public init(
+        total: Int,
+        emotionsValuesByCategory: [Double],
+        values: [Double],
+        names: [String],
+        formatter: @escaping (Double) -> String, colors: [Color] = [Color.blue, Color.green, Color.orange],
+        backgroundColor: Color = .white,
+        widthFraction: CGFloat = 0.35,
+        innerRadiusFraction: CGFloat = 0.70
+    ) {
+        self.total = total
+        self.emotionsValuesByCategory = emotionsValuesByCategory
         self.values = values
         self.names = names
         self.formatter = formatter
@@ -83,44 +103,54 @@ public struct PieChartView: View {
                     )
                     Circle()
                         .fill(self.backgroundColor)
-                        .frame(width: widthFraction * geometry.size.width * innerRadiusFraction, height: widthFraction * geometry.size.width * innerRadiusFraction)
+                        .frame(width: widthFraction * geometry.size.width * innerRadiusFraction,
+                               height: widthFraction * geometry.size.width * innerRadiusFraction)
                     
                     VStack {
-                        Text(self.activeIndex == -1 ? "+21%" : "\(Int(values[self.activeIndex]))%")
+                        Text(self.activeIndex == -1 ? "\(total)" : "\(Int(values[self.activeIndex]))")
                             .font(.title)
                             .foregroundColor(Color.gray)
-//                        Text(self.formatter(self.activeIndex == -1 ? values.reduce(0, +) : values[self.activeIndex]))
-//                            .font(.title)
                     }
                     
                 }
+                .padding(.leading, 16)
+                .foregroundColor(.white)
                 
                 Spacer()
                 
-                PieChartRows(colors: self.colors, names: self.names, values: self.values.map { self.formatter($0) }, percents: self.values.map { String(format: "%.0f%%", $0 * 100 / self.values.reduce(0, +)) })
-                    .frame(maxWidth: .infinity, alignment: .top)
+                setChartRows()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-            .background(self.backgroundColor)
-            .foregroundColor(Color.white)
+            .frame(maxWidth: .infinity, maxHeight: 135, alignment: .center)
+            .background(backgroundColor)
         }
+    }
+    
+    @ViewBuilder
+    func setChartRows() -> some View {
+        PieChartRows(
+            count: values.count,
+            colors: colors,
+            names: names,
+            percents: emotionsValuesByCategory.map { String(Int($0)) }
+        )
+            .frame(maxWidth: .infinity, alignment: .top)
     }
 }
 
 @available(OSX 10.15, *)
 struct PieChartRows: View {
+    var count: Int
     var colors: [Color]
     var names: [String]
-    var values: [String]
     var percents: [String]
     
     var body: some View {
         VStack{
-            ForEach(0..<self.values.count){ i in
+            ForEach(0..<count){ i in
                 HStack {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(self.colors[i])
-                        .frame(width: 20, height: 20)
+                        .frame(width: 10, height: 10)
                     Text(self.names[i])
                         .foregroundColor(Colors.Primary.blue)
                         .font(.system(size: 14, weight: .regular))
@@ -133,17 +163,10 @@ struct PieChartRows: View {
 
                     }
                 }
-                .padding(.trailing, 16)
+                .frame(maxWidth: 160, alignment: .trailing)
             }
         }
         .frame(maxHeight: .infinity, alignment: .center)
-    }
-}
-
-@available(OSX 10.15.0, *)
-struct PieChartView_Previews: PreviewProvider {
-    static var previews: some View {
-        PieChartView(values: [1300, 500, 300], names: ["Rent", "Transport", "Education"], formatter: {value in String(format: "$%.2f", value)})
     }
 }
 
