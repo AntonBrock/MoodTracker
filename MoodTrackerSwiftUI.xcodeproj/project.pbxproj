@@ -142,6 +142,13 @@
 		457F591929C184B900E96E1D /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591829C184B900E96E1D /* ReportService.swift */; };
 		457F591B29C184F300E96E1D /* ReportEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591A29C184F300E96E1D /* ReportEndPoint.swift */; };
 		4592521429C4205E007B1706 /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592521329C4205E007B1706 /* ReportModel.swift */; };
+		4592521B29C6EB9A007B1706 /* WeekAnimationChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592521A29C6EB9A007B1706 /* WeekAnimationChart.swift */; };
+		4592521D29C6EBA2007B1706 /* MonthChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592521C29C6EBA2007B1706 /* MonthChart.swift */; };
+		4592521F29C6ED01007B1706 /* Date+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592521E29C6ED01007B1706 /* Date+Extenstion.swift */; };
+		4592522329C6EE0D007B1706 /* CircleEmotionChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522229C6EE0D007B1706 /* CircleEmotionChart.swift */; };
+		4592522529C6EE73007B1706 /* ReportTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522429C6EE73007B1706 /* ReportTipView.swift */; };
+		4592522729C6EEB6007B1706 /* DayilyCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522629C6EEB6007B1706 /* DayilyCharts.swift */; };
+		4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522829C6EEEE007B1706 /* ActivitiesCharts.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
 		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
@@ -255,6 +262,13 @@
 		457F591829C184B900E96E1D /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		457F591A29C184F300E96E1D /* ReportEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEndPoint.swift; sourceTree = "<group>"; };
 		4592521329C4205E007B1706 /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
+		4592521A29C6EB9A007B1706 /* WeekAnimationChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekAnimationChart.swift; sourceTree = "<group>"; };
+		4592521C29C6EBA2007B1706 /* MonthChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthChart.swift; sourceTree = "<group>"; };
+		4592521E29C6ED01007B1706 /* Date+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extenstion.swift"; sourceTree = "<group>"; };
+		4592522229C6EE0D007B1706 /* CircleEmotionChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleEmotionChart.swift; sourceTree = "<group>"; };
+		4592522429C6EE73007B1706 /* ReportTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTipView.swift; sourceTree = "<group>"; };
+		4592522629C6EEB6007B1706 /* DayilyCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayilyCharts.swift; sourceTree = "<group>"; };
+		4592522829C6EEEE007B1706 /* ActivitiesCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesCharts.swift; sourceTree = "<group>"; };
 		459390DD28F2E27300A94902 /* ReportScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportScreen.swift; sourceTree = "<group>"; };
 		459390DF28F2E5C700A94902 /* SegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlView.swift; sourceTree = "<group>"; };
 		459797F7295A88220059CAC2 /* DetailJournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailJournalView.swift; sourceTree = "<group>"; };
@@ -356,6 +370,7 @@
 				45316886295D92A0003AC601 /* UIImage+extension.swift */,
 				45316888295D93E5003AC601 /* UINavigationController+extention.swift */,
 				45319EF3296FBAEC00D58DCF /* UIDevice+extension.swift */,
+				4592521E29C6ED01007B1706 /* Date+Extenstion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -442,6 +457,7 @@
 		451E6BC029056FC40048714B /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				4592521529C6EB2A007B1706 /* Views */,
 				459390DD28F2E27300A94902 /* ReportScreen.swift */,
 				451E6BC9290578130048714B /* ReportViewCoordinator.swift */,
 				451E6BCB290578360048714B /* ReportCoordinatorView.swift */,
@@ -719,6 +735,51 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		4592521529C6EB2A007B1706 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4592522429C6EE73007B1706 /* ReportTipView.swift */,
+				4592521629C6EB4B007B1706 /* Charts */,
+				4592521729C6EB56007B1706 /* EmotionCharts */,
+				4592521829C6EB60007B1706 /* DayilyCharts */,
+				4592521929C6EB68007B1706 /* ActivitiesCharts */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4592521629C6EB4B007B1706 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				4592521A29C6EB9A007B1706 /* WeekAnimationChart.swift */,
+				4592521C29C6EBA2007B1706 /* MonthChart.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		4592521729C6EB56007B1706 /* EmotionCharts */ = {
+			isa = PBXGroup;
+			children = (
+				4592522229C6EE0D007B1706 /* CircleEmotionChart.swift */,
+			);
+			path = EmotionCharts;
+			sourceTree = "<group>";
+		};
+		4592521829C6EB60007B1706 /* DayilyCharts */ = {
+			isa = PBXGroup;
+			children = (
+				4592522629C6EEB6007B1706 /* DayilyCharts.swift */,
+			);
+			path = DayilyCharts;
+			sourceTree = "<group>";
+		};
+		4592521929C6EB68007B1706 /* ActivitiesCharts */ = {
+			isa = PBXGroup;
+			children = (
+				4592522829C6EEEE007B1706 /* ActivitiesCharts.swift */,
+			);
+			path = ActivitiesCharts;
+			sourceTree = "<group>";
+		};
 		459797F6295A87FE0059CAC2 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -913,6 +974,7 @@
 				4529AB8B29AF1940001D2390 /* PieChartView.swift in Sources */,
 				456A402129BC2BC200371B5C /* JournalModel.swift in Sources */,
 				4529AB8C29AF1940001D2390 /* GeometryProxy+Shortcuts.swift in Sources */,
+				4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */,
 				4529AB8D29AF1940001D2390 /* View+ReadValues.swift in Sources */,
 				4529AB8E29AF1940001D2390 /* Path+Shortcuts.swift in Sources */,
 				4529AB9129AF1940001D2390 /* View+Environment.swift in Sources */,
@@ -926,6 +988,7 @@
 				4529AB9929AF1940001D2390 /* NumberFormatter+Defaults.swift in Sources */,
 				4529AB9A29AF1940001D2390 /* SCPalletes.swift in Sources */,
 				4529AB9B29AF1940001D2390 /* SCCaptionsView.swift in Sources */,
+				4592522329C6EE0D007B1706 /* CircleEmotionChart.swift in Sources */,
 				456A401F29BBA84400371B5C /* JournalEndPoint.swift in Sources */,
 				457F591929C184B900E96E1D /* ReportService.swift in Sources */,
 				456A401929BAE1BB00371B5C /* StatesViewModel.swift in Sources */,
@@ -943,6 +1006,7 @@
 				4529ABA429AF1940001D2390 /* TabBar.swift in Sources */,
 				4529ABA529AF1940001D2390 /* MTButton.swift in Sources */,
 				4529ABA629AF1940001D2390 /* CutomAlertView.swift in Sources */,
+				4592521B29C6EB9A007B1706 /* WeekAnimationChart.swift in Sources */,
 				4529ABA729AF1940001D2390 /* EmotionBoardView.swift in Sources */,
 				45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */,
 				4529ABA829AF1940001D2390 /* QuoteView.swift in Sources */,
@@ -952,12 +1016,14 @@
 				4529ABAB29AF1941001D2390 /* SearchView.swift in Sources */,
 				4529ABAC29AF1941001D2390 /* CalendarViewRepresentable.swift in Sources */,
 				4529ABAD29AF1941001D2390 /* CalendarRange.swift in Sources */,
+				4592522729C6EEB6007B1706 /* DayilyCharts.swift in Sources */,
 				4529ABAE29AF1941001D2390 /* CalendarTooltipView.swift in Sources */,
 				4529ABAF29AF1941001D2390 /* AttachmentView.swift in Sources */,
 				4529ABB029AF1941001D2390 /* GalleryPhotoPicker.swift in Sources */,
 				4529ABB129AF1941001D2390 /* ImagePicker.swift in Sources */,
 				4529ABB229AF1941001D2390 /* MTKeyboardView.swift in Sources */,
 				4529ABB329AF1941001D2390 /* AuthHyperString.swift in Sources */,
+				4592521D29C6EBA2007B1706 /* MonthChart.swift in Sources */,
 				4529ABB429AF1941001D2390 /* AuthMethodsView.swift in Sources */,
 				4529ABB529AF1941001D2390 /* BaseViewCoordinator.swift in Sources */,
 				456A401D29BBA7E500371B5C /* JournalService.swift in Sources */,
@@ -976,6 +1042,7 @@
 				45133A2229AFB97400258072 /* AuthEnpPoint.swift in Sources */,
 				4529ABC229AF1941001D2390 /* JournalCoordinatorView.swift in Sources */,
 				4592521429C4205E007B1706 /* ReportModel.swift in Sources */,
+				4592522529C6EE73007B1706 /* ReportTipView.swift in Sources */,
 				4529ABC329AF1941001D2390 /* ReportScreen.swift in Sources */,
 				4529ABC429AF1941001D2390 /* ReportViewCoordinator.swift in Sources */,
 				4529ABC529AF1941001D2390 /* ReportCoordinatorView.swift in Sources */,
@@ -997,6 +1064,7 @@
 				4529ABD229AF1942001D2390 /* ActivitiesCoordinatorView.swift in Sources */,
 				456A401129B991E200371B5C /* EmotionsViewModel.swift in Sources */,
 				4529ABD329AF1942001D2390 /* StressCheckComponent.swift in Sources */,
+				4592521F29C6ED01007B1706 /* Date+Extenstion.swift in Sources */,
 				4529ABD429AF1942001D2390 /* StressCheckView.swift in Sources */,
 				4529ABD529AF1942001D2390 /* SwiftUISlider.swift in Sources */,
 				4529ABD629AF1942001D2390 /* MoodCheckComponent.swift in Sources */,
