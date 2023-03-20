@@ -154,13 +154,14 @@ struct ReportScreen: View {
                 
                 CircleEmotionChart(emotionViewModel: viewModel.reportViewModel?.emotionCountData)
                 
-                ReportTipView()
+                ReportTipView(text: "")
                
-                DayilyCharts()
+                DayilyCharts(viewModel: viewModel.reportViewModel?.timeData)
                 
-                ReportTipView()
+                ReportTipView(text: "")
                 
-                ActivitiesCharts()
+                ActivitiesCharts(goodActivitiesViewModel: viewModel.reportViewModel?.goodActivitiesReportData,
+                                 badActivitiesViewModel: viewModel.reportViewModel?.badActivitiesReportData)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }

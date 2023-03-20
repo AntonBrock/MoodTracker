@@ -75,7 +75,7 @@ extension ReportScreen {
                 activities: goodActivitiesReportData.activities.compactMap({ GoodActivitiesReportDataViewModel.GoodActivitiesReportDataActivitiesViewModel(
                     image: $0.image,
                     count: $0.count
-                ) }))
+                ) }).sorted(by: { $0.count > $1.count }))
             
             badActivitiesReportDataViewModel = BadActivitiesReportDataViewModel(
                 worstActivity: badActivitiesReportData.worstActivity,
@@ -83,7 +83,7 @@ extension ReportScreen {
                     BadActivitiesReportDataViewModel.BadActivitiesReportDataActivitiesViewModel(
                     image: $0.image,
                     count: $0.count
-                ) }))
+                ) }).sorted(by: { $0.count > $1.count }))
             
             guard let emotionCountDataViewModel = emotionCountDataViewModel,
                   let timeDataViewModel = timeDataViewModel,

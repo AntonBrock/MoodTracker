@@ -9,19 +9,38 @@ import SwiftUI
 
 struct ReportTipView: View {
     
+//    enum ReportTipType {
+//    case goodActivities
+//    case badActivities
+//    case `default`
+//    }
+    
+//    @State var type: ReportTipType
+    @State var text: String = ""
+    
     var body: some View {
-        Capsule()
-            .fill(Color.white)
-            .frame(width: 290, height: 40)
-            .shadow(color: Colors.Primary.lightGray.opacity(0.5), radius: 5, x: 0, y: 0)
-            .overlay(
-                Text("Твое общее настроение изменилось на +21% с прошлой недели")
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .font(.system(size: 14, weight: .light))
-                    .foregroundColor(Colors.Primary.blue)
-                    .padding()
-            )
-            .padding(.top, 30)
+        VStack {
+            Capsule()
+                .fill(Color.white)
+                .frame(maxWidth: UIScreen.main.bounds.width - 32, minHeight: 40, maxHeight: .infinity)
+                .shadow(color: Colors.Primary.lightGray.opacity(0.5), radius: 5, x: 0, y: 0)
+                .overlay(
+                    Text(text)
+                        .multilineTextAlignment(.center)
+                        .font(.system(size: 14, weight: .light))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .foregroundColor(Colors.Primary.blue)
+                        .lineLimit(3)
+                        .padding()
+                )
+                .padding(.top, 30)
+        }
+//        .onChange(of: type) { newValue in
+//            switch newValue {
+//            case .badActivities: text = "Активность, которая тебя радовала больше всего на этой неделе Работа"
+//            case .goodActivities: text = "Активность, которая расстраивала больше всего на этой неделе Свидание"
+//            case .default: text = ""
+//            }
+//        }
     }
 }
