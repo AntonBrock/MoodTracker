@@ -126,6 +126,7 @@
 		4529ABD629AF1942001D2390 /* MoodCheckComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9BCD28D36F3000A4FCD7 /* MoodCheckComponent.swift */; };
 		4529ABD729AF1942001D2390 /* MoodsWordChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D81C1328D469D800AEF36E /* MoodsWordChooseView.swift */; };
 		4529ABD829AF1967001D2390 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529AA6A29AF1470001D2390 /* ContentView.swift */; };
+		4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544361229CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift */; };
 		456A400829B75DD200371B5C /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400729B75DD200371B5C /* UserStateEndPoint.swift */; };
 		456A400A29B75DDB00371B5C /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400929B75DDB00371B5C /* UserStateService.swift */; };
 		456A400C29B76AF800371B5C /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400B29B76AF800371B5C /* JournalViewModel.swift */; };
@@ -229,6 +230,7 @@
 		4539308D28C88EC400A5D828 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4539309028C88EC400A5D828 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		453AAC26295DBFEB00CE0F15 /* MoodCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckView.swift; sourceTree = "<group>"; };
+		4544361229CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesChartsForAllTime.swift; sourceTree = "<group>"; };
 		45470CB328E5BEE1004822E0 /* ActivitiesBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesBarCharsView.swift; sourceTree = "<group>"; };
 		4551C3ED295995E60034665E /* FeelingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingView.swift; sourceTree = "<group>"; };
 		4551C3EF295995FE0034665E /* FeelingViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingViewCoordinator.swift; sourceTree = "<group>"; };
@@ -776,6 +778,7 @@
 			isa = PBXGroup;
 			children = (
 				4592522829C6EEEE007B1706 /* ActivitiesCharts.swift */,
+				4544361229CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift */,
 			);
 			path = ActivitiesCharts;
 			sourceTree = "<group>";
@@ -1053,6 +1056,7 @@
 				4529ABC929AF1942001D2390 /* PersonalCabinetCoordinatorView.swift in Sources */,
 				4529ABCA29AF1942001D2390 /* FeelingView.swift in Sources */,
 				4529ABCB29AF1942001D2390 /* FeelingViewCoordinator.swift in Sources */,
+				4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */,
 				4529ABCC29AF1942001D2390 /* FeelingCoordinatorView.swift in Sources */,
 				4529ABCD29AF1942001D2390 /* MoodCheckView.swift in Sources */,
 				456A400E29B990C900371B5C /* EmotionsModel.swift in Sources */,
