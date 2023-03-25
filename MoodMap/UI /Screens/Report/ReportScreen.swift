@@ -98,7 +98,7 @@ struct ReportScreen: View {
                     
                     Spacer()
                     
-                    if dateSelectedIndex == 0 {
+                    if dateSelectedIndex == 1 {
                         Image("rc-ic-calendar")
                             .resizable()
                             .frame(width: 24, height: 24)
