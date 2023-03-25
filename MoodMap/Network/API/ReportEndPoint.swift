@@ -10,7 +10,7 @@ import Moya
 
 enum ReportEndPoint: TargetType {
     
-    case getReport
+    case getReport(from: String, to: String)
     
     var baseURL: URL {
         switch self {
@@ -37,7 +37,10 @@ enum ReportEndPoint: TargetType {
     
     var task: Task {
         switch self {
-        case .getReport: return .requestPlain
+        case .getReport(let from, let to):
+            return .requestParameters(parameters: ["from": from,
+                                                   "to": to],
+                                      encoding: URLEncoding.queryString)
         }
     }
     

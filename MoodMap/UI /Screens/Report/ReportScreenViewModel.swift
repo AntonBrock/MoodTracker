@@ -5,21 +5,70 @@
 //  Created by ANTON DOBRYNIN on 15.03.2023.
 //
 
-import Foundation
 import UIKit
+import HorizonCalendar
 
 extension ReportScreen {
     
     class ViewModel: ObservableObject {
         
         @Published var reportViewModel: ReportViewModel?
+        @Published var firstDayOfWeek: String?
+        @Published var lastDayOfWeek: String?
+        @Published var currentMonth: String?
+        var shortDateMonth: String?
+        @Published var currentYear: String?
 
-        init() {
-            fetchReport()
+        init() {}
+        
+        func getDates() {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd"
+            let firstDay = Calendar.current.date(byAdding: .day, value: -7, to: Date())
+            firstDayOfWeek = formatter.string(from: firstDay!)
+           
+            let lastDay = Calendar.current.date(byAdding: .day, value: 0, to: Date())
+            lastDayOfWeek = formatter.string(from: lastDay!)
+            
+            formatter.dateFormat = "MMM"
+            let mounth = Calendar.current.date(byAdding: .month, value: 0, to: Date())
+            currentMonth = formatter.string(from: mounth!)
+            
+            formatter.dateFormat = "MM"
+            let shortMonth = Calendar.current.date(byAdding: .month, value: 0, to: Date())
+            shortDateMonth = formatter.string(from: shortMonth!)
+            
+            formatter.dateFormat = "yyyy"
+            let year = Calendar.current.date(byAdding: .year, value: 0, to: Date())
+            currentYear = formatter.string(from: year!)
+            
+            let from = "\(currentYear!)-\(shortDateMonth!)-\(firstDayOfWeek!)"
+            let to = "\(currentYear!)-\(shortDateMonth!)-\(lastDayOfWeek!)"
+
+            fetchReport(from: from, to: to)
         }
         
-        private func fetchReport() {
-            Services.reportService.fetchReport { result in
+        func toBeforeWeekDidTap() {
+            // от выбранной недели назад на 1 неделю
+            
+            let from = "\(currentYear!)-\(shortDateMonth!)-\(firstDayOfWeek!)"
+            let to = "\(currentYear!)-\(shortDateMonth!)-\(lastDayOfWeek!)"
+
+            fetchReport(from: from, to: to)
+        }
+        
+        func toNextWeekDidTap() {
+            // от выбранной недели вперед на 1 неделю
+            
+            
+            let from = "\(currentYear!)-\(shortDateMonth!)-\(firstDayOfWeek!)"
+            let to = "\(currentYear!)-\(shortDateMonth!)-\(lastDayOfWeek!)"
+
+            fetchReport(from: from, to: to)
+        }
+        
+        private func fetchReport(from: String, to: String) {
+            Services.reportService.fetchReport(from: from, to: to) { result in
                 switch result {
                 case .success(let model):
                     self.reportViewModel = self.mappingViewModel(data: model)

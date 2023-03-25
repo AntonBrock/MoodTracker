@@ -52,6 +52,7 @@ struct ReportScreen: View {
     ){
         self.coordinator = coordinator
         self.viewModel = coordinator.viewModel
+        coordinator.viewModel.getDates()
     }
     
     var body: some View {
@@ -92,7 +93,7 @@ struct ReportScreen: View {
                         
                         Spacer()
                         
-                        Text(dateSelectedIndex == 0 ? "10 - 16 февраля 2023" : "Февраль 2023")
+                        Text(dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!) - \(coordinator.viewModel.lastDayOfWeek!) \(coordinator.viewModel.currentMonth!) \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.currentMonth!) \(coordinator.viewModel.currentYear!)")
                             .foregroundColor(Colors.Primary.blue)
                             .font(.system(size: 14, weight: .semibold))
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -283,11 +284,11 @@ struct ReportScreen: View {
     }
     
     private func toBeforeWeekDidTap() {
-        print("toBeforeWeekDidTap()")
+        coordinator.viewModel.toBeforeWeekDidTap()
     }
     
     private func toNextWeekDidTap() {
-        print("toNextWeekDidTap()")
+        coordinator.viewModel.toNextWeekDidTap()
     }
     
     private func monthDidTap() {
