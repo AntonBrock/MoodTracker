@@ -14,6 +14,8 @@ struct CalendarViewRepresentable: UIViewRepresentable {
 //    @Binding var startDate: Date
 //    @Binding var endDate: Date
     
+    var isWeeklyCalendar: Bool = false
+
     var lowerDate: Day?
     var upperDate: Day?
     
@@ -82,7 +84,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
                     textColor: self.lowerDate == nil || self.upperDate != nil ? .clear : UIColor(Colors.Primary.blue)),
                 viewModel: .init(
                     frameOfTooltippedItem: overlayLayoutContext.overlaidItemFrame,
-                    text: "2 - дня минимум"))
+                    text: isWeeklyCalendar ? "Укажи неделю" : "2 - дня минимум"))
         }
         .dayRangeItemProvider(for: [dateRangeToHighlight]) { dayRangeLayoutContext in
             DayRangeIndicatorView.calendarItemModel(
