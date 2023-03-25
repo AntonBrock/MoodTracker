@@ -69,58 +69,59 @@ struct ReportScreen: View {
                     .padding(.top, 10)
                     .padding(.horizontal, 16)
                 
-                HStack {
-                
+                if typeSelectedIndex != 2 {
                     HStack {
-                        Image("rc-ic-toBeforeWeek")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .onTapGesture {
-                                toBeforeWeekDidTap()
-                            }
                         
-                        Image("rc-ic-toNextWeek")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .onTapGesture {
-                                toNextWeekDidTap()
-                            }
+                        HStack {
+                            Image("rc-ic-toBeforeWeek")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .onTapGesture {
+                                    toBeforeWeekDidTap()
+                                }
+                            
+                            Image("rc-ic-toNextWeek")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .onTapGesture {
+                                    toNextWeekDidTap()
+                                }
+                        }
+                        .opacity(dateSelectedIndex == 0 ? 1 : 0)
+                        
+                        
+                        Spacer()
+                        
+                        Text(dateSelectedIndex == 0 ? "10 - 16 февраля 2023" : "Февраль 2023")
+                            .foregroundColor(Colors.Primary.blue)
+                            .font(.system(size: 14, weight: .semibold))
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        
+                        Spacer()
+                        
+                        if dateSelectedIndex == 1 {
+                            Image("rc-ic-calendar")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .onTapGesture {
+                                    monthDidTap()
+                                }
+                        } else {
+                            Image("rc-ic-information")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .onTapGesture {
+                                    informationDidTap()
+                                }
+                        }
+                        
+                        
                     }
-                    .opacity(dateSelectedIndex == 0 ? 1 : 0)
-                    
-                    
-                    Spacer()
-                    
-                    Text(dateSelectedIndex == 0 ? "10 - 16 февраля 2023" : "Февраль 2023")
-                        .foregroundColor(Colors.Primary.blue)
-                        .font(.system(size: 14, weight: .semibold))
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    
-                    Spacer()
-                    
-                    if dateSelectedIndex == 1 {
-                        Image("rc-ic-calendar")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .onTapGesture {
-                                monthDidTap()
-                            }
-                    } else {
-                        Image("rc-ic-information")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .onTapGesture {
-                                informationDidTap()
-                            }
-                    }
-                   
-                    
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 22)
+                    .padding(.leading, 16)
+                    .padding(.trailing, 16)
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.top, 22)
-                .padding(.leading, 16)
-                .padding(.trailing, 16)
-            
 
                 if typeSelectedIndex == 0 || typeSelectedIndex == 1 {
                     if dateSelectedIndex == 0 {
