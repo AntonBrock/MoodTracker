@@ -70,7 +70,8 @@ struct WeekAnimationChart: View {
                     }
                 }
                 // MARK: Customizing Y-Axis Length
-                .chartYScale(domain: 1...(max == 0 ? 5 : max))
+                .chartYScale(domain: 1...(max == 0 ? 5 : 5))
+                .padding(.top, 25)
                 .frame (height: 250)
                 .onAppear {
                     animateGraph()

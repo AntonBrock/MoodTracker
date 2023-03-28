@@ -67,11 +67,28 @@ extension ReportScreen {
             fetchReport(from: from, to: to)
         }
         
+        func didChooseMonthTab() {
+            let formatter = DateFormatter()
+            
+            formatter.dateFormat = "dd"
+            let theLastDayOfWeek = formatter.string(from: Calendar.current.date(byAdding: .day, value: 0, to: Date().endOfMonth)!)
+
+            formatter.dateFormat = "MM"
+            let month = formatter.string(from: Calendar.current.date(byAdding: .month, value: 0, to: Date())!)
+            
+            
+            let from = "\(currentYear!)-\(month)-01"
+            let to = "\(currentYear!)-\(month)-\(theLastDayOfWeek)"
+            
+            fetchReport(from: from, to: to)
+        }
+        
         private func fetchReport(from: String, to: String) {
             Services.reportService.fetchReport(from: from, to: to) { result in
                 switch result {
                 case .success(let model):
                     self.reportViewModel = self.mappingViewModel(data: model)
+                    
                 case .failure(let error):
                     print(error)
                 }
@@ -92,14 +109,25 @@ extension ReportScreen {
             var badActivitiesReportDataViewModel: BadActivitiesReportDataViewModel?
             
             chartData.forEach { model in
-                chartDataViewModel.append(ChartDataViewModel(
-                    date: model.date,
-                    dayRate: model.dayRate,
-                    description: model.description.compactMap({ ChartDataViewModel.ChartDataDescriptionViewModel(
-                        stateText: $0.stateText,
-                        rate: $0.rate,
-                        count: $0.count)}))
-                )
+                let dateFormatterGet = DateFormatter()
+                dateFormatterGet.dateFormat = "yyyy-MM-dd"
+
+                let dateFormatterPrint = DateFormatter()
+                dateFormatterPrint.dateFormat = "MMM dd"
+                
+                if let date = dateFormatterGet.date(from: model.date) {
+                    chartDataViewModel.append(ChartDataViewModel(
+                        date: dateFormatterPrint.string(from: date),
+                        date2: model.date.toDate(.isoDate) ?? Date(),
+                        dayRate: model.dayRate,
+                        description: model.description.compactMap({ ChartDataViewModel.ChartDataDescriptionViewModel(
+                            stateText: $0.stateText,
+                            rate: $0.rate,
+                            count: $0.count)}))
+                    )
+                } else {
+                   print("There was an error decoding the string")
+                }
                 
             }
             
@@ -170,6 +198,7 @@ struct ChartDataViewModel: Identifiable {
     
     let id = UUID().uuidString
     let date: String
+    let date2: Date
     let dayRate: Int
     let description: [ChartDataDescriptionViewModel]
 

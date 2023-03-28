@@ -128,7 +128,7 @@ struct ReportScreen: View {
                     if dateSelectedIndex == 0 {
                         WeekAnimationChart(weekChartViewModel: viewModel.reportViewModel?.chartData ?? [])
                     } else {
-                        MonthChart()
+                        MonthChart(monthChartViewModel: viewModel.reportViewModel?.chartData ?? [])
                     }
                     
                     CircleEmotionChart(emotionViewModel: viewModel.reportViewModel?.emotionCountData)
@@ -148,6 +148,9 @@ struct ReportScreen: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onChange(of: dateSelectedIndex) { newValue in
+            if dateSelectedIndex == 1 {
+                viewModel.didChooseMonthTab()
+            }
             
 //            sampleAnalytics = sample_analytics
 //            if dateSelectedIndex != 0 {
