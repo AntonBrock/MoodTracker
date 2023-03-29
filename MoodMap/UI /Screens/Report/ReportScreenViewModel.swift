@@ -167,12 +167,12 @@ extension ReportScreen {
                         description: model.description.compactMap({ ChartDataViewModel.ChartDataDescriptionViewModel(
                             stateText: $0.stateText,
                             rate: $0.rate,
-                            count: $0.count)}))
+                            count: $0.count)})
+                        )
                     )
                 } else {
                    print("There was an error decoding the string")
                 }
-                
             }
             
             emotionCountDataViewModel = EmotionCountDataViewModel(
@@ -182,7 +182,7 @@ extension ReportScreen {
                     text: $0.text,
                     count: $0.count,
                     color: mappingColorForEmotion(with: $0.text)
-                )})
+                )}).sorted(by: { $0.count > $1.count })
             )
             
             timeDataViewModel = TimeDataViewModel(
@@ -212,7 +212,7 @@ extension ReportScreen {
                   let badActivitiesReportDataViewModel = badActivitiesReportDataViewModel else { fatalError() }
             
             return ReportViewModel(
-                chartData: chartDataViewModel,
+                chartData: chartDataViewModel.sorted(by: { $0.date < $1.date }),
                 emotionCountData: emotionCountDataViewModel,
                 timeData: timeDataViewModel,
                 goodActivitiesReportData: goodActivitiesReportDataViewModel,
@@ -221,9 +221,12 @@ extension ReportScreen {
         
         private func mappingColorForEmotion(with emotionTitle: String) -> String {
             switch emotionTitle {
-            case "Good", "Хорошо": return "FFC794"
-            case "Bad", "Плохо": return "B9C8FD"
-            default: return "B283E4"
+            case "Oчень плохо": return "F5DADA"
+            case "Плохо": return "B9C8FD"
+            case "Нормально": return "B283E4"
+            case "Хорошо": return "86E9C5"
+            case "Очень хорошо": return "FFC794"
+            default: return ""
             }
         }
     }

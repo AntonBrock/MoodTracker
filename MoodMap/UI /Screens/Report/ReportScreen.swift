@@ -134,7 +134,12 @@ struct ReportScreen: View {
                     
                     CircleEmotionChart(emotionViewModel: viewModel.reportViewModel?.emotionCountData)
                     
-                    ReportTipView(text: "")
+                    ReportTipView(
+                        text: "Твоим самым частым настроением стало ",
+                        selectedText: viewModel.reportViewModel?.emotionCountData.common ?? "",
+                        tipType: .commonEmotionState
+                    )
+                    .padding(.top, -16)
                    
                     DayilyCharts(viewModel: viewModel.reportViewModel?.timeData)
                     

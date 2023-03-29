@@ -12,6 +12,7 @@ struct ReportTipView: View {
     enum TipType {
         case goodActivities
         case badActivities
+        case commonEmotionState
     }
     
     @State var text: String = ""
@@ -36,6 +37,9 @@ struct ReportTipView: View {
                             .font(.system(size: 14, weight: .light))
                     }
                     .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(3)
+                    .padding()
                 )
                 .padding(.top, 30)
         }
@@ -45,6 +49,15 @@ struct ReportTipView: View {
         switch state {
         case .goodActivities: return Colors.Secondary.shamrock600Green
         case .badActivities: return Colors.Secondary.malibu600Blue
+        case .commonEmotionState:
+            switch selectedText {
+            case "Oчень плохо": return Color(hex: "F5DADA")
+            case "Плохо": return Color(hex: "B9C8FD")
+            case "Нормально": return Color(hex: "B283E4")
+            case "Хорошо": return Color(hex: "86E9C5")
+            case "Очень хорошо": return Color(hex: "FFC794")
+            default: return Color.white
+            }
         }
     }
 }
