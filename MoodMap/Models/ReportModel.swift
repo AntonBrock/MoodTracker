@@ -199,3 +199,57 @@ struct ReportModel: Decodable {
         }
     }
 }
+
+struct ReportCurrentDateModel: Decodable {
+    
+    let stateRate: Int
+    let stressRate: Int
+    let time: Date
+    let activities: [ReportCurrentDateActivitiesModel]
+    
+    enum CodingKeys: String, CodingKey {
+        case stateRate = "state_rate"
+        case stressRate = "stress_rate"
+        case time
+        case activities
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        stateRate = try container.decode(Int.self, forKey: .stateRate)
+        stressRate = try container.decode(Int.self, forKey: .stressRate)
+        time = try container.decode(Date.self, forKey: .time)
+        activities = try container.decode([ReportCurrentDateActivitiesModel].self, forKey: .activities)
+    }
+
+    struct ReportCurrentDateActivitiesModel: Decodable {
+        let id: String
+        let text: String
+        let language: String
+        let createdAt: Date
+        let updatedAt: Date?
+        let image: String
+        let count: Int?
+        
+        enum CodingKeys: String, CodingKey {
+            case id
+            case text
+            case language
+            case image
+            case count
+            case createdAt = "created_at"
+            case updatedAt = "updated_at"
+        }
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            id = try container.decode(String.self, forKey: .id)
+            text = try container.decode(String.self, forKey: .text)
+            language = try container.decode(String.self, forKey: .language)
+            image = try container.decode(String.self, forKey: .image)
+            count = try? container.decode(Int.self, forKey: .count)
+            createdAt = try container.decode(Date.self, forKey: .createdAt)
+            updatedAt = try? container.decode(Date.self, forKey: .updatedAt)
+        }
+    }
+}

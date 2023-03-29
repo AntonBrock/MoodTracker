@@ -128,7 +128,8 @@ struct ReportScreen: View {
                     if dateSelectedIndex == 0 {
                         WeekAnimationChart(weekChartViewModel: viewModel.reportViewModel?.chartData ?? [])
                     } else {
-                        MonthChart(monthChartViewModel: viewModel.reportViewModel?.chartData ?? [])
+                        MonthChart(viewModel: viewModel,
+                                   monthChartViewModel: viewModel.reportViewModel?.chartData ?? [])
                     }
                     
                     CircleEmotionChart(emotionViewModel: viewModel.reportViewModel?.emotionCountData)

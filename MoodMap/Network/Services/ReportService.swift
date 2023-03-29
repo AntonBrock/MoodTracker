@@ -9,6 +9,7 @@ import Foundation
 
 protocol ReportServiceProtocol {
     func fetchReport(from: String, to: String, completion: @escaping(Result<ReportModel, Error>) -> Void)
+    func fetchCurrentDate(date: Date, complection: @escaping(Result<[ReportCurrentDateModel], Error>) -> Void)
 }
 
 struct ReportService: ReportServiceProtocol {
@@ -58,6 +59,28 @@ struct ReportService: ReportServiceProtocol {
                 completion(.success(model))
             case let .failure(error):
                 completion(.failure(error))
+            }
+        })
+    }
+    
+    func fetchCurrentDate(
+        date: Date,
+        complection: @escaping(Result<[ReportCurrentDateModel], Error>) -> Void
+    ) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: date)
+        
+        let target = BaseAPI.report(.currentReportDay(day: dateString))
+
+        let networkService = ServiceProvider().networkService
+        networkService?.request(.target(target), completion: { response in
+            switch response {
+            case let .success(result):
+                guard let model = try? decoder.decode([ReportCurrentDateModel].self, from: result.data) else { return }
+                complection(.success(model))
+            case let .failure(error):
+                complection(.failure(error))
             }
         })
     }

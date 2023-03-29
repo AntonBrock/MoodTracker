@@ -83,16 +83,60 @@ extension ReportScreen {
             fetchReport(from: from, to: to)
         }
         
+        func fetchCurrentDate(date: Date, completion: @escaping ([ReportCurrentViewModel]) -> Void) {
+            Services.reportService.fetchCurrentDate(date: date) { result in
+                switch result {
+                case .success(let models):
+                    let viewModel = self.mappingCurrentReportViewModel(models: models)
+                    completion(viewModel)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
         private func fetchReport(from: String, to: String) {
             Services.reportService.fetchReport(from: from, to: to) { result in
                 switch result {
                 case .success(let model):
                     self.reportViewModel = self.mappingViewModel(data: model)
-                    
                 case .failure(let error):
                     print(error)
                 }
             }
+        }
+        
+        private func mappingCurrentReportViewModel(models: [ReportCurrentDateModel]) -> [ReportCurrentViewModel] {
+            
+            var viewModels: [ReportCurrentViewModel] = []
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            
+            for model in models {
+                
+                let timeString = dateFormatter.string(from: model.time)
+                var activities: [ReportCurrentViewModel.ReportCurrentDateActivitiesViewModel] = []
+                model.activities.forEach { model in
+                    activities.append(ReportCurrentViewModel.ReportCurrentDateActivitiesViewModel(
+                        id: model.id,
+                        text: model.text,
+                        language: model.language,
+                        createdAt: model.createdAt,
+                        updatedAt: model.updatedAt,
+                        image: model.image,
+                        count: model.count ?? 0
+                    ))
+                }
+                
+                viewModels.append(ReportCurrentViewModel(stateRate: model.stateRate,
+                                                         stressRate: model.stressRate,
+                                                         time: timeString,
+                                                         activities: activities))
+            }
+            
+           
+            return viewModels
         }
         
         private func mappingViewModel(data: ReportModel) -> ReportViewModel {

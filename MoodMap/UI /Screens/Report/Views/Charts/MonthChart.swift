@@ -9,13 +9,20 @@ import SwiftUI
 
 struct MonthChart: View {
     
+    @State var viewModel: ReportScreen.ViewModel?
     @State var monthChartViewModel: [ChartDataViewModel] = []
-
-//    @State var monthDate: [TaskMetaData] = tasks
+    @State var subReportInfo: [ReportCurrentViewModel] = []
+    
     @State var showDaylyMonthDetails: Bool = false
     @State var translation: CGFloat = 0
     
-    @State var currentDate: Date = Date()
+    @State var currentDate: Date = Date() {
+        didSet {
+            viewModel?.fetchCurrentDate(date: currentDate, completion: { subReportInfo in
+                self.subReportInfo = subReportInfo
+            })
+        }
+    }
     @State var currentMonth: Int = 0
 
     var body: some View {
@@ -37,7 +44,12 @@ struct MonthChart: View {
                     CardView(value: value)
                         .overlay(
                             RoundedRectangle(cornerRadius: 6)
-                                .stroke(Colors.Primary.lightGray.opacity(0.5), lineWidth: 1)
+                                .stroke(
+                                    Colors.Primary.lightGray.opacity(isSameDay(date1: Date(),
+                                                                               date2: currentDate)
+                                                                     ? 0.0
+                                                                     : 0.5),
+                                    lineWidth: 1)
                                 .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
                         )
                         .onTapGesture {
@@ -59,100 +71,161 @@ struct MonthChart: View {
             currentDate = getCurrentMonth()
         })
         
-        #warning("TODO: Get ExtraInformation")
-//        if showDaylyMonthDetails {
-//            VStack(spacing: 20) {
-//                Text("\(currentDate)")
-//                    .font(.system(size: 12, weight: .semibold))
-//                    .foregroundColor(Colors.Primary.blue)
-//                    .frame(maxWidth: .infinity, alignment: .center)
-//
-//                if let task = monthChartViewModel.first(where: { task in
-//                    return isSameDay(date1: task.date2, date2: currentDate)
-//                }) {
-//                    ForEach(task.task) { task in
-//                        VStack(alignment: .leading, spacing: 8) {
-//                            HStack {
-//                                HStack(spacing: 16) {
-//                                    ZStack {
-//                                        VStack{}
-//                                            .background(
-//                                                Circle()
-//                                                    .fill(.blue)
-//                                                    .frame(width: 50, height: 50)
-//
-//                                            )
-//                                        VStack{}
-//                                            .background(
-//                                                ZStack {
-//                                                    Circle()
-//                                                        .fill(.white)
-//                                                        .frame(width: 24, height: 24)
-//
-//                                                    Circle()
-//                                                        .fill(.red)
-//                                                        .frame(width: 20, height: 20)
-//                                                }
-//
-//
-//                                            )
-//                                            .padding(.top, 26)
-//                                            .padding(.leading, 26)
-//                                    }
-//                                    .frame(width: 50, height: 50)
-//                                    .padding(.leading, 5)
-//                                    .padding(.vertical, 9)
-//                                }
-//
-//                                VStack(spacing: 6) {
-//                                    VStack {
-//                                        Text(task.title)
-//                                            .font(.system(size: 16, weight: .regular))
-//                                            .foregroundColor(Colors.Primary.blue)
-//                                            .frame(maxWidth: .infinity, alignment: .leading)
-//
-//                                        Text("Средний стресс")
-//                                            .font(.system(size: 9, weight: .medium))
-//                                            .foregroundColor(Colors.Primary.blue)
-//                                            .frame(maxWidth: .infinity, alignment: .leading)
-//                                    }
-//                                    .frame(maxWidth: .infinity, alignment: .leading)
-//
-//                                    #warning("TODO: После получения данных сделать ForEach")
-//                                    HStack {
-//                                        Image("emoji_cool")
-//                                            .resizable()
-//                                            .frame(width: 12, height: 12)
-//                                            .padding(.leading, -12)
-//                                    }
-//                                    .frame(maxWidth: .infinity, alignment: .leading)
-//                                    .padding(.leading, 16)
-//                                }
-//                                .frame(maxWidth: .infinity, alignment: .leading)
-//
-//                                Spacer()
-//
-//                                Text(task.time
-//                                    .addingTimeInterval(CGFloat
-//                                        .random(in: 0...5000)), style: .time)
-//                                .foregroundColor(Colors.Primary.lightGray)
-//                                .font(.system(size: 11, weight: .regular))
-//                            }
-//
-//                        }
-//                        .padding(.vertical, 10)
-//                        .padding(.horizontal)
-//                        .frame(maxWidth: .infinity, alignment: .leading)
-//                        .background(
-//                            Color.white
-//                                .clipShape(RoundedRectangle(cornerRadius: 16))
-//                                .shadow(color: Colors.TextColors.cadetBlue600.opacity(0.5), radius: 5)
-//                        )
-//                    }
-//                }
-//            }
-//            .padding()
-//        }
+        if showDaylyMonthDetails {
+            VStack(spacing: 20) {
+                Text("\(getFormattedChoosedDate(currentDate))")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(Colors.Primary.blue)
+                    .frame(maxWidth: .infinity, alignment: .center)
+
+                if let task = monthChartViewModel.first(where: { task in
+                    return isSameDay(date1: task.date2, date2: currentDate)
+                }) {
+                    ForEach(subReportInfo, id: \.time) { task in
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                HStack(spacing: 16) {
+                                    ZStack {
+                                        VStack{}
+                                            .background(
+                                                Circle()
+                                                    .fill(getColorStage(task.stateRate))
+                                                    .frame(width: 50, height: 50)
+
+                                            )
+                                        VStack{}
+                                            .background(
+                                                ZStack {
+                                                    Circle()
+                                                        .fill(.white)
+                                                        .frame(width: 24, height: 24)
+
+                                                    Circle()
+                                                        .fill(getColorStress(task.stressRate))
+                                                        .frame(width: 20, height: 20)
+                                                }
+
+
+                                            )
+                                            .padding(.top, 26)
+                                            .padding(.leading, 26)
+                                    }
+                                    .frame(width: 50, height: 50)
+                                    .padding(.leading, 5)
+                                    .padding(.vertical, 9)
+                                }
+
+                                VStack(spacing: 6) {
+                                    VStack {
+                                        Text(getTitleStage(task.stateRate))
+                                            .font(.system(size: 16, weight: .regular))
+                                            .foregroundColor(Colors.Primary.blue)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+
+                                        Text(getTitleStress(task.stressRate))
+                                            .font(.system(size: 9, weight: .medium))
+                                            .foregroundColor(getColorStress(task.stressRate))
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                                    HStack {
+                                        activitiesStack(task)
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+
+                                Spacer()
+
+                                Text("\(task.time)")
+                                .foregroundColor(Colors.Primary.lightGray)
+                                .font(.system(size: 11, weight: .regular))
+                            }
+
+                        }
+                        .padding(.vertical, 10)
+                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(
+                            Color.white
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                                .shadow(color: Colors.TextColors.cadetBlue600.opacity(0.5), radius: 5)
+                        )
+                    }
+                }
+            }
+            .padding()
+        }
+    }
+    
+    private func getFormattedChoosedDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM"
+        return dateFormatter.string(from: date)
+    }
+    
+    private func getTitleStage(_ stage: Int) -> String {
+        switch stage {
+        case 1: return "Очень плохо"
+        case 2: return "Плохо"
+        case 3: return "Нормально"
+        case 4: return "Хорошо"
+        case 5: return "Очень хорошо"
+        default: return ""
+        }
+    }
+    
+    private func getTitleStress(_ stress: Int) -> String {
+        switch stress {
+        case 1: return "Низкий стресс"
+        case 2: return "Средней стресс"
+        case 3: return "Высокий стресс"
+        default: return ""
+        }
+    }
+    
+    private func getColorStage(_ stage: Int) -> Color {
+        switch stage {
+        case 1: return Color(hex: "F5DADA")
+        case 2: return Color(hex: "B9C8FD")
+        case 3: return Color(hex: "B283E4")
+        case 4: return Color(hex: "86E9C5")
+        case 5: return Color(hex: "FFC794")
+        default: return .white
+        }
+    }
+    
+    private func getColorStress(_ stress: Int) -> Color {
+        switch stress {
+        case 1: return Color(hex: "F95555")
+        case 2: return Color(hex: "33D299")
+        case 3: return Color(hex: "B283E4")
+        default: return .white
+        }
+    }
+    
+    @ViewBuilder
+    func activitiesStack(_ task: ReportCurrentViewModel) -> some View {
+        ForEach(0..<task.activities.count) { item in
+            if item == 0 || item == 1 || item == 2 {
+                Image("\(task.activities[item].image)")
+                    .resizable()
+                    .frame(width: 12, height: 12)
+                    .padding(.trailing, 3)
+            }
+        }
+        
+        if task.activities.count > 3 {
+            Text("+ \(task.activities.count - 3)")
+                .font(.system(size: 12, weight: .medium))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: true, vertical: true)
+                .foregroundColor(Colors.TextColors.cadetBlue600)
+                .padding(.leading, 5)
+                .padding(.vertical, 8)
+        }
     }
     
     @ViewBuilder
@@ -182,7 +255,7 @@ struct MonthChart: View {
                 } else {
                     Text("\(value.day)")
                         .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? Colors.Primary.blue : Colors.Primary.blue)
+                        .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? Colors.Primary.lavender500Purple : Colors.Primary.blue)
                         .frame(maxWidth: .infinity)
 
                     Spacer()
@@ -240,40 +313,25 @@ struct MonthChart: View {
     }
 }
 
-//struct TaskReport: Identifiable {
-//    var id = UUID().uuidString
-//    var title: String
-//    var time: Date = Date()
-//}
-
-//struct TaskMetaData: Identifiable {
-//    var id = UUID().uuidString
-//    var task: [TaskReport]
-//    var taskDate: Date
-//}
-
+struct ReportCurrentViewModel {
+    let stateRate: Int
+    let stressRate: Int
+    let time: String
+    let activities: [ReportCurrentDateActivitiesViewModel]
+    
+    struct ReportCurrentDateActivitiesViewModel {
+        let id: String
+        let text: String
+        let language: String
+        let createdAt: Date
+        let updatedAt: Date?
+        let image: String
+        let count: Int
+    }
+}
 func getSampleDate(offset: Int) -> Date {
     let calender = Calendar.current
     let date = calender.date(byAdding: .day, value: offset, to: Date())
     
     return date ?? Date()
 }
-//
-//var tasks: [TaskMetaData] = [
-//    TaskMetaData(task: [
-//        TaskReport(title: "Talk"),
-//        TaskReport(title: "Iphoen 13"),
-//        TaskReport(title: "asdasd")
-//    ], taskDate: getSampleDate(offset: 3)),
-//    TaskMetaData(task: [
-//        TaskReport(title: "Talk"),
-//    ], taskDate: getSampleDate(offset: -2)),
-//
-//    TaskMetaData(task: [
-//        TaskReport(title: "Talk"),
-//    ], taskDate: getSampleDate(offset: -5)),
-//
-//    TaskMetaData(task: [
-//        TaskReport(title: "Talk"),
-//    ], taskDate: getSampleDate(offset: -2)),
-//]

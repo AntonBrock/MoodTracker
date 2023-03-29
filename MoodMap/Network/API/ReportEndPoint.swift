@@ -11,10 +11,11 @@ import Moya
 enum ReportEndPoint: TargetType {
     
     case getReport(from: String, to: String)
+    case currentReportDay(day: String)
     
     var baseURL: URL {
         switch self {
-        case .getReport:
+        case .getReport, .currentReportDay:
             return URL(string: "https://api.mapmood.com/v1")!
         }
     }
@@ -22,12 +23,14 @@ enum ReportEndPoint: TargetType {
     var path: String {
         switch self {
         case .getReport: return "/reports"
+        case .currentReportDay(let day):
+            return "/reports/\(day)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getReport: return .get
+        case .getReport, .currentReportDay: return .get
         }
     }
     
@@ -41,18 +44,22 @@ enum ReportEndPoint: TargetType {
             return .requestParameters(parameters: ["from": from,
                                                    "to": to],
                                       encoding: URLEncoding.queryString)
+        case .currentReportDay:
+            return .requestPlain
         }
     }
     
     var headers: [String: String]? {
         switch self {
-        case .getReport: return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
+        case .getReport, .currentReportDay:
+            return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
         }
     }
     
     var authorizationType: AuthorizationType? {
         switch self {
-        case .getReport: return .bearer
+        case .getReport, .currentReportDay:
+            return .bearer
         }
     }
     
