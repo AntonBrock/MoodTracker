@@ -9,14 +9,15 @@ import SwiftUI
 
 struct ReportTipView: View {
     
-//    enum ReportTipType {
-//    case goodActivities
-//    case badActivities
-//    case `default`
-//    }
+    enum TipType {
+        case goodActivities
+        case badActivities
+    }
     
-//    @State var type: ReportTipType
     @State var text: String = ""
+    @State var selectedText: String = ""
+    
+    @State var tipType: TipType = .goodActivities
     
     var body: some View {
         VStack {
@@ -25,22 +26,25 @@ struct ReportTipView: View {
                 .frame(maxWidth: UIScreen.main.bounds.width - 32, minHeight: 40, maxHeight: .infinity)
                 .shadow(color: Colors.Primary.lightGray.opacity(0.5), radius: 5, x: 0, y: 0)
                 .overlay(
-                    Text(text)
-                        .multilineTextAlignment(.center)
-                        .font(.system(size: 14, weight: .light))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .foregroundColor(Colors.Primary.blue)
-                        .lineLimit(3)
-                        .padding()
+                    HStack {
+                        Text(text)
+                            .font(.system(size: 14, weight: .light))
+                            .foregroundColor(Colors.Primary.blue) +
+                        
+                        Text(selectedText)
+                            .foregroundColor(getColorFor(tipType))
+                            .font(.system(size: 14, weight: .light))
+                    }
+                    .multilineTextAlignment(.center)
                 )
                 .padding(.top, 30)
         }
-//        .onChange(of: type) { newValue in
-//            switch newValue {
-//            case .badActivities: text = "Активность, которая тебя радовала больше всего на этой неделе Работа"
-//            case .goodActivities: text = "Активность, которая расстраивала больше всего на этой неделе Свидание"
-//            case .default: text = ""
-//            }
-//        }
+    }
+    
+    private func getColorFor(_ state: TipType) -> Color {
+        switch state {
+        case .goodActivities: return Colors.Secondary.shamrock600Green
+        case .badActivities: return Colors.Secondary.malibu600Blue
+        }
     }
 }

@@ -20,7 +20,8 @@ struct ActivitiesCharts: View {
                 createEmptyAcitiviewsView()
             }
             
-            ReportTipView(text: "Активность, которая тебя радовала больше всего на этой неделе Работа")
+            ReportTipView(text: "Активность, которая тебя радовала больше всего ",
+                          selectedText: goodActivitiesViewModel?.bestActivity ?? "", tipType: .goodActivities)
             
             if let badActivitiesViewModel = badActivitiesViewModel {
                 createBadActivitiesView(badActivitiesViewModel)
@@ -28,7 +29,8 @@ struct ActivitiesCharts: View {
                 createEmptyAcitiviewsView()
             }
             
-            ReportTipView(text: "Активность, которая тебя радовала больше всего на этой неделе Работа")
+            ReportTipView(text: "Активность, которая расстраивала больше всего ",
+                          selectedText: badActivitiesViewModel?.worstActivity ?? "", tipType: .badActivities)
         }
         .padding(.bottom, 26)
     }
