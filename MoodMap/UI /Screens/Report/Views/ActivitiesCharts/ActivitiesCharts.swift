@@ -38,7 +38,8 @@ struct ActivitiesCharts: View {
     @ViewBuilder
     private func createGoodActivitiesView(_ viewModel: GoodActivitiesReportDataViewModel) -> some View {
 
-        let flexibleLayout = Array(repeating: GridItem(.fixed(80), spacing: -10), count: 3)
+        let flexibleLayout = Array(repeating: GridItem(.fixed(80), spacing: -10),
+                                   count: viewModel.activities.count >= 3 ? 3 : viewModel.activities.count)
 
         LazyVGrid(columns: flexibleLayout) {
             ForEach(0..<viewModel.activities.count) { index in
@@ -72,6 +73,7 @@ struct ActivitiesCharts: View {
                 .padding(.top, 15)
             }
         }
+        .frame(maxWidth: .infinity, alignment: .center)
         .padding(.top, 20)
 
     }
@@ -79,7 +81,8 @@ struct ActivitiesCharts: View {
     @ViewBuilder
     private func createBadActivitiesView(_ viewModel: BadActivitiesReportDataViewModel) -> some View {
         
-        let flexibleLayout = Array(repeating: GridItem(.fixed(80), spacing: -10), count: 3)
+        let flexibleLayout = Array(repeating: GridItem(.fixed(80), spacing: -10),
+                                   count: viewModel.activities.count >= 3 ? 3 : viewModel.activities.count)
         LazyVGrid(columns: flexibleLayout) {
             ForEach(0..<viewModel.activities.count) { index in
                 VStack {
@@ -112,6 +115,7 @@ struct ActivitiesCharts: View {
                 .padding(.top, 15)
             }
         }
+        .frame(maxWidth: .infinity, alignment: .center)
         .padding(.top, 20)
     }
     

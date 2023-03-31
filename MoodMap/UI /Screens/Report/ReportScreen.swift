@@ -57,101 +57,117 @@ struct ReportScreen: View {
     
     var body: some View {
         ScrollView {
-            
-            VStack {
-                SegmentedControlView(countOfItems: 3, segments: typeTitles,
-                                     selectedIndex: $typeSelectedIndex,
-                                     currentTab: typeTitles[0])
+            if viewModel.isLoading {
+                Text("Is Loading ...")
+            } else {
+                VStack {
+                    SegmentedControlView(countOfItems: 3, segments: typeTitles,
+                                         selectedIndex: $typeSelectedIndex,
+                                         currentTab: typeTitles[0])
                     .padding(.top, 16)
                     .padding(.horizontal, 16)
-                SegmentedControlView(countOfItems: 2, segments: dateTitles,
-                                     selectedIndex: $dateSelectedIndex,
-                                     currentTab: dateTitles[0])
+                    
+                    SegmentedControlView(countOfItems: 2, segments: dateTitles,
+                                         selectedIndex: $dateSelectedIndex,
+                                         currentTab: dateTitles[0])
                     .padding(.top, 10)
                     .padding(.horizontal, 16)
-                
-                if typeSelectedIndex != 2 {
-                    HStack {
-                        
+                    
+                    if typeSelectedIndex != 2 {
                         HStack {
-                            Image("rc-ic-toBeforeWeek")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .onTapGesture {
-                                    toBeforeWeekDidTap()
-                                }
                             
-                            Image("rc-ic-toNextWeek")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .onTapGesture {
-                                    toNextWeekDidTap()
-                                }
+                            HStack {
+                                Image("rc-ic-toBeforeWeek")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                    .onTapGesture {
+                                        toBeforeWeekDidTap()
+                                    }
+                                
+                                Image("rc-ic-toNextWeek")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                    .onTapGesture {
+                                        toNextWeekDidTap()
+                                    }
+                            }
+                            .opacity(dateSelectedIndex == 0 ? 1 : 0)
+                            
+                            
+                            Spacer()
+                            
+                            Text(dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!) - \(coordinator.viewModel.lastDayOfWeek!) \(coordinator.viewModel.currentMonth!) \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.currentMonth!) \(coordinator.viewModel.currentYear!)")
+                                .foregroundColor(Colors.Primary.blue)
+                                .font(.system(size: 14, weight: .semibold))
+                                .frame(maxWidth: .infinity, alignment: .center)
+                            
+                            Spacer()
+                            
+                            if dateSelectedIndex == 1 {
+                                Image("rc-ic-calendar")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                    .onTapGesture {
+                                        monthDidTap()
+                                    }
+                            } else {
+                                Image("rc-ic-information")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                    .onTapGesture {
+                                        informationDidTap()
+                                    }
+                            }
+                            
+                            
                         }
-                        .opacity(dateSelectedIndex == 0 ? 1 : 0)
-                        
-                        
-                        Spacer()
-                        
-                        Text(dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!) - \(coordinator.viewModel.lastDayOfWeek!) \(coordinator.viewModel.currentMonth!) \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.currentMonth!) \(coordinator.viewModel.currentYear!)")
-                            .foregroundColor(Colors.Primary.blue)
-                            .font(.system(size: 14, weight: .semibold))
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        
-                        Spacer()
-                        
-                        if dateSelectedIndex == 1 {
-                            Image("rc-ic-calendar")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .onTapGesture {
-                                    monthDidTap()
-                                }
+                        .frame(maxWidth: .infinity)
+                        .padding(.top, 22)
+                        .padding(.leading, 16)
+                        .padding(.trailing, 16)
+                    }
+                    
+                    if typeSelectedIndex == 0 || typeSelectedIndex == 1 {
+                        if dateSelectedIndex == 0 {
+                            WeekAnimationChart(weekChartViewModel: viewModel.reportViewModel?.chartData ?? [])
                         } else {
-                            Image("rc-ic-information")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .onTapGesture {
-                                    informationDidTap()
-                                }
+                            MonthChart(viewModel: viewModel,
+                                       monthChartViewModel: viewModel.reportViewModel?.chartData ?? [])
                         }
                         
+                        CircleEmotionChart(
+                            emotionStateCounts: viewModel.reportViewModel?.emotionCountData
+                                .state
+                                .compactMap({ Double($0.count) }) ?? [],
+                            emotionNames: viewModel.reportViewModel?.emotionCountData
+                                .state
+                                .compactMap({ $0.text }) ?? [],
+                            emotionColors: viewModel.reportViewModel?.emotionCountData
+                                .state
+                                .compactMap({ Color(hex: $0.color) }) ?? [],
+                            emotionTotal: viewModel.reportViewModel?.emotionCountData.total ?? 0
+                        )
                         
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, 22)
-                    .padding(.leading, 16)
-                    .padding(.trailing, 16)
-                }
-
-                if typeSelectedIndex == 0 || typeSelectedIndex == 1 {
-                    if dateSelectedIndex == 0 {
-                        WeekAnimationChart(weekChartViewModel: viewModel.reportViewModel?.chartData ?? [])
+                        ReportTipView(
+                            text: "Твоим самым частым настроением стало ",
+                            selectedText: viewModel.reportViewModel?.emotionCountData.common ?? "",
+                            tipType: .commonEmotionState
+                        )
+                        .padding(.top, -16)
+                        
+                        DayilyCharts(viewModel: viewModel.reportViewModel?.timeData)
+                        
+                        //                        ReportTipView(text: "")
+                        
+                        ActivitiesCharts(goodActivitiesViewModel: viewModel.reportViewModel?.goodActivitiesReportData,
+                                         badActivitiesViewModel: viewModel.reportViewModel?.badActivitiesReportData)
                     } else {
-                        MonthChart(viewModel: viewModel,
-                                   monthChartViewModel: viewModel.reportViewModel?.chartData ?? [])
+                        ActivitiesChartsForAllTime()
                     }
                     
-                    CircleEmotionChart(emotionViewModel: viewModel.reportViewModel?.emotionCountData)
-                    
-                    ReportTipView(
-                        text: "Твоим самым частым настроением стало ",
-                        selectedText: viewModel.reportViewModel?.emotionCountData.common ?? "",
-                        tipType: .commonEmotionState
-                    )
-                    .padding(.top, -16)
-                   
-                    DayilyCharts(viewModel: viewModel.reportViewModel?.timeData)
-                    
-                    ReportTipView(text: "")
-                    
-                    ActivitiesCharts(goodActivitiesViewModel: viewModel.reportViewModel?.goodActivitiesReportData,
-                                     badActivitiesViewModel: viewModel.reportViewModel?.badActivitiesReportData)
-                } else {
-                    ActivitiesChartsForAllTime()
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onChange(of: dateSelectedIndex) { newValue in
             if dateSelectedIndex == 1 {

@@ -18,10 +18,13 @@ extension ReportScreen {
         @Published var currentMonth: String?
         var shortDateMonth: String?
         @Published var currentYear: String?
-
+        
+        @Published var isLoading: Bool = false
+        
         init() {}
         
         func getDates() {
+            
             let formatter = DateFormatter()
             formatter.dateFormat = "dd"
             let firstDay = Calendar.current.date(byAdding: .day, value: -7, to: Date())
@@ -84,11 +87,15 @@ extension ReportScreen {
         }
         
         func fetchCurrentDate(date: Date, completion: @escaping ([ReportCurrentViewModel]) -> Void) {
+            isLoading = true
+
             Services.reportService.fetchCurrentDate(date: date) { result in
                 switch result {
                 case .success(let models):
                     let viewModel = self.mappingCurrentReportViewModel(models: models)
                     completion(viewModel)
+                    
+                    self.isLoading = false
                 case .failure(let error):
                     print(error)
                 }
@@ -96,10 +103,13 @@ extension ReportScreen {
         }
         
         private func fetchReport(from: String, to: String) {
+            isLoading = true
+
             Services.reportService.fetchReport(from: from, to: to) { result in
                 switch result {
                 case .success(let model):
                     self.reportViewModel = self.mappingViewModel(data: model)
+                    self.isLoading = false
                 case .failure(let error):
                     print(error)
                 }
