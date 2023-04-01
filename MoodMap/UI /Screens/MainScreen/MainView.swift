@@ -36,7 +36,7 @@ struct MainView: View {
                 createEmotionalHeader()
                     .padding(.top, 16)
                 
-                if true {
+                if !(viewModel.journalViewModels?.isEmpty ?? true) {
                     createJournalView()
                 }
                 
@@ -164,11 +164,6 @@ struct MainView: View {
     
     @ViewBuilder
     private func createJournalView() -> some View {
-        let mockItems: [AnotherHelpsPreviewModel] = [
-            AnotherHelpsPreviewModel(id: 0, title: "Дневник\nблагодарности", imagePreview: "dairyHelperCover"),
-            AnotherHelpsPreviewModel(id: 1, title: "Будущее", imagePreview: "previewCover")
-        ]
-        
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 6) {
                 VStack {
@@ -194,16 +189,17 @@ struct MainView: View {
                         radius: 2.0, x: 0.0, y: 0)
                 .padding(.leading, 20)
                 
-                ForEach(mockItems, id: \.self) { item in
+                // Всегда берем 1 элемент, так как нужно показать инфу за текущий день
+                ForEach(viewModel.journalViewModels?[0] ?? [], id: \.self) { item in
                     VStack {
-                        Text("06:10")
+                        Text(item.shortTime)
                             .frame(maxWidth: .infinity,
                                    maxHeight: .infinity, alignment: .center)
                             .foregroundColor(.white)
                             .font(.system(size: 12, weight: .semibold))
                             .padding(.top, 14)
                         
-                        Text("Очень хорошо")
+                        Text(item.title)
                             .frame(maxWidth: .infinity,
                                    maxHeight: .infinity, alignment: .center)
                             .foregroundColor(.white)
@@ -214,7 +210,7 @@ struct MainView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.top, 4)
                        
-                        Text("Низкий стресс")
+                        Text(getStressTitle(item.stressRate))
                             .frame(maxWidth: .infinity,
                                    maxHeight: .infinity, alignment: .bottom)
                             .foregroundColor(.white)
@@ -224,7 +220,7 @@ struct MainView: View {
                     }
                     .frame(width: 116, height: 120)
                     .compositingGroup()
-                    .background(LinearGradient(colors: getColorByTime(), startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .background(LinearGradient(colors: item.color, startPoint: .topLeading, endPoint: .bottomTrailing))
                     .cornerRadius(15)
                     .shadow(color: Colors.TextColors.mischka500,
                             radius: 2.0, x: 0.0, y: 0)
@@ -264,6 +260,15 @@ struct MainView: View {
         .padding(.horizontal, 20)
         .shadow(color: Colors.TextColors.mischka500,
                 radius: 3.0, x: 1.0, y: 0)
+    }
+    
+    private func getStressTitle(_ stressRate: Int) -> String {
+        switch stressRate {
+        case 1: return "Низкий стресс"
+        case 2: return "Средний стресс"
+        case 3: return "Высокий стресс"
+        default: return "Неизвестно"
+        }
     }
     
     private func getColorByTime() -> [Color] {
