@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45026B4929D7C25E00B6A504 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45026B4829D7C25E00B6A504 /* MainViewModel.swift */; };
 		45133A1E29AF917800258072 /* PersonalCabinetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45133A1D29AF917800258072 /* PersonalCabinetViewModel.swift */; };
 		45133A2029AFB88900258072 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45133A1F29AFB88900258072 /* AuthService.swift */; };
 		45133A2229AFB97400258072 /* AuthEnpPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45133A2129AFB97400258072 /* AuthEnpPoint.swift */; };
@@ -157,6 +158,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45026B4829D7C25E00B6A504 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		4509075729A8C46800815892 /* StressCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressCheckView.swift; sourceTree = "<group>"; };
 		4509076029A8D03800815892 /* StressCheckComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressCheckComponent.swift; sourceTree = "<group>"; };
 		4509716828D1FF08000FF0AE /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 				452D35272951AAA20018A3DA /* MainView.swift */,
 				452D35292951AAAB0018A3DA /* MainViewCoordinator.swift */,
 				452D352B2951AAB80018A3DA /* MainCoordinatorView.swift */,
+				45026B4829D7C25E00B6A504 /* MainViewModel.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -1078,6 +1081,7 @@
 				4529ABD629AF1942001D2390 /* MoodCheckComponent.swift in Sources */,
 				4529ABD729AF1942001D2390 /* MoodsWordChooseView.swift in Sources */,
 				45133A2029AFB88900258072 /* AuthService.swift in Sources */,
+				45026B4929D7C25E00B6A504 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

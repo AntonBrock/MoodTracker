@@ -13,7 +13,9 @@ class MainViewCoordinator: ObservableObject, Identifiable {
     private unowned let parent: BaseViewCoordinator
     
     @Published var diaryViewCoordinator: DiaryViewCoordinator?
-    
+
+    @ObservedObject var viewModel: MainView.ViewModel
+
     // MARK: - Init
     init(
         parent: BaseViewCoordinator,
@@ -21,6 +23,7 @@ class MainViewCoordinator: ObservableObject, Identifiable {
     ) {
         self.parent = parent
         self.container = container
+        self.viewModel = MainView.ViewModel()
     }
     
     func openDiary() {

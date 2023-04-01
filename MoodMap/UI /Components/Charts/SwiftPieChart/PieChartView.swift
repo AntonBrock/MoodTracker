@@ -9,18 +9,18 @@ import SwiftUI
 
 @available(OSX 10.15, *)
 public struct PieChartView: View {
-    @State var values: [Double]
-    @State var total: Int
-    @State var emotionsValuesByCategory: [Double]
     
-    public let names: [String]
+    @Binding var values: [Double]
+    @Binding var total: Int
+    @Binding var emotionsValuesByCategory: [Double]
+    @Binding var colors: [Color]
+    @Binding var names: [String]
+    
     public let formatter: (Double) -> String
     
-    public var colors: [Color]
-    public var backgroundColor: Color
-    
-    public var widthFraction: CGFloat
-    public var innerRadiusFraction: CGFloat
+    public var backgroundColor: Color = .white
+    public var widthFraction: CGFloat = 0.35
+    public var innerRadiusFraction: CGFloat = 0.70
     
     @State private var activeIndex: Int = -1
     
@@ -41,28 +41,6 @@ public struct PieChartView: View {
             endDeg += degrees
         }
         return tempSlices
-    }
-    
-    public init(
-        total: Int,
-        emotionsValuesByCategory: [Double],
-        values: [Double],
-        names: [String],
-        formatter: @escaping (Double) -> String, colors: [Color] = [Color.blue, Color.green, Color.orange],
-        backgroundColor: Color = .white,
-        widthFraction: CGFloat = 0.35,
-        innerRadiusFraction: CGFloat = 0.70
-    ) {
-        self.total = total
-        self.emotionsValuesByCategory = emotionsValuesByCategory
-        self.values = values
-        self.names = names
-        self.formatter = formatter
-        
-        self.colors = colors
-        self.backgroundColor = backgroundColor
-        self.widthFraction = widthFraction
-        self.innerRadiusFraction = innerRadiusFraction
     }
     
     public var body: some View {

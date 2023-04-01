@@ -9,9 +9,11 @@ import SwiftUI
 
 struct MainView: View {
     
+    @ObservedObject var viewModel: ViewModel
+
     let container: DIContainer
     var animation: Namespace.ID
-    
+
     private unowned let coordinator: MainViewCoordinator
     
     @State var typeSelectedIndex: Int = 0
@@ -25,6 +27,7 @@ struct MainView: View {
         self.container = container
         self.coordinator = coordinator
         self.animation = animation
+        self.viewModel = coordinator.viewModel
     }
     
     var body: some View {
@@ -32,6 +35,10 @@ struct MainView: View {
             VStack {
                 createEmotionalHeader()
                     .padding(.top, 16)
+                
+                if true {
+                    createJournalView()
+                }
                 
                 createChooseStateUser()
                     .padding(.top, 10)
@@ -55,7 +62,6 @@ struct MainView: View {
                 QuoteView()
                     .padding(.top, 10)
                 
-                
                 Text("Статистика сегодня")
                     .foregroundColor(Colors.Primary.blue)
                     .font(.system(size: 20, weight: .semibold))
@@ -70,13 +76,10 @@ struct MainView: View {
                 .padding(.horizontal, 20)
                 
                 CircleEmotionChart(
-                    emotionStateCounts: [10.0, 10.2],
-//                        .compactMap({ Double($0.count) }) ?? [],
-                    emotionNames: ["Asd", "asda"],
-//                        .compactMap({ $0.text }) ?? [],
-                    emotionColors: [.white, .blue],
-//                        .compactMap({ Color(hex: $0.color) }) ?? [],
-                    emotionTotal: 10
+                    emotionStateCounts: $viewModel.emotionCountData.countState,
+                    emotionNames: $viewModel.emotionCountData.text,
+                    emotionColors: $viewModel.emotionCountData.color,
+                    emotionTotal: $viewModel.emotionCountData.total
                 )
                 .padding(.top, 16)
                 .padding(.horizontal, 10)
@@ -160,6 +163,79 @@ struct MainView: View {
     }
     
     @ViewBuilder
+    private func createJournalView() -> some View {
+        let mockItems: [AnotherHelpsPreviewModel] = [
+            AnotherHelpsPreviewModel(id: 0, title: "Дневник\nблагодарности", imagePreview: "dairyHelperCover"),
+            AnotherHelpsPreviewModel(id: 1, title: "Будущее", imagePreview: "previewCover")
+        ]
+        
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 6) {
+                VStack {
+                    Image("ic-jn-openJournal")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .aspectRatio(1, contentMode: .fit)
+                    .padding(.top, 10)
+                   
+                    Text("Посмотреть журнал")
+                        .frame(maxWidth: .infinity,
+                               maxHeight: .infinity, alignment: .center)
+                        .foregroundColor(Colors.Primary.lavender500Purple)
+                        .font(.system(size: 10, weight: .medium))
+                        .padding(.top, 21)
+                    
+                }
+                .frame(width: 116, height: 120)
+                .compositingGroup()
+                .background(.white)
+                .cornerRadius(15)
+                .shadow(color: Colors.TextColors.mischka500,
+                        radius: 2.0, x: 0.0, y: 0)
+                .padding(.leading, 20)
+                
+                ForEach(mockItems, id: \.self) { item in
+                    VStack {
+                        Text("06:10")
+                            .frame(maxWidth: .infinity,
+                                   maxHeight: .infinity, alignment: .center)
+                            .foregroundColor(.white)
+                            .font(.system(size: 12, weight: .semibold))
+                            .padding(.top, 14)
+                        
+                        Text("Очень хорошо")
+                            .frame(maxWidth: .infinity,
+                                   maxHeight: .infinity, alignment: .center)
+                            .foregroundColor(.white)
+                            .font(.system(size: 16, weight: .semibold))
+                            .padding(.horizontal, 5)
+                            .lineLimit(2)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.top, 4)
+                       
+                        Text("Низкий стресс")
+                            .frame(maxWidth: .infinity,
+                                   maxHeight: .infinity, alignment: .bottom)
+                            .foregroundColor(.white)
+                            .font(.system(size: 10, weight: .semibold))
+                            .padding(.bottom, 22)
+                        
+                    }
+                    .frame(width: 116, height: 120)
+                    .compositingGroup()
+                    .background(LinearGradient(colors: getColorByTime(), startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .cornerRadius(15)
+                    .shadow(color: Colors.TextColors.mischka500,
+                            radius: 2.0, x: 0.0, y: 0)
+                }
+            }
+            .padding(.top, 10)
+            .padding(.bottom, 10)
+        }
+    }
+    
+    @ViewBuilder
     private func createDiaryView() -> some View {
         VStack(alignment: .center, spacing: 16) {
             ZStack {
@@ -235,39 +311,5 @@ struct MainView: View {
         case 17..<22: return NSLocalizedString("Рад, что ты\nздесь со мной", comment: "Рад, что ты\nздесь со мной")
         default: return NSLocalizedString("Спасибо,\nчто ты есть", comment: "Спасибо,\nчто ты есть")
         }
-    }
-        
-    
-    @ViewBuilder
-    private func createEmotionalHelperScroll() -> some View {
-        let mockItems: [AnotherHelpsPreviewModel] = [
-            AnotherHelpsPreviewModel(id: 0, title: "Дневник\nблагодарности", imagePreview: "dairyHelperCover"),
-            AnotherHelpsPreviewModel(id: 1, title: "Будущее", imagePreview: "previewCover")
-        ]
-        
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 16) {
-                ForEach(mockItems, id: \.self) { item in
-                    ZStack {
-                        Image("\(item.imagePreview)")
-                        .resizable()
-                        .frame(width: 240, height: 180)
-                        .aspectRatio(1, contentMode: .fit)
-                       
-                        Text(item.title)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                            .foregroundColor(.white)
-                            .font(Fonts.InterSemiBold16)
-                            .lineSpacing(4.0)
-                            .padding(.leading, 16)
-                            .padding(.bottom, 16)
-                        
-                    }
-                    .frame(width: 240, height: 180)
-                    .cornerRadius(20)
-                    .shadow(color: Colors.TextColors.mischka500, radius: 3.0, x: 1.0, y: 0)
-                }
-            }
-        }.padding(.bottom, 48)
     }
 }

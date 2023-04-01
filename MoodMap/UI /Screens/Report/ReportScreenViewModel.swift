@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import HorizonCalendar
 
 extension ReportScreen {
@@ -13,6 +14,15 @@ extension ReportScreen {
     class ViewModel: ObservableObject {
         
         @Published var reportViewModel: ReportViewModel?
+        
+        @Published var emotionCountData: EmotionCountDataViewModel = EmotionCountDataViewModel(
+            total: 0,
+            common: "",
+            text: [],
+            color: [],
+            countState: []
+        )
+        
         @Published var firstDayOfWeek: String?
         @Published var lastDayOfWeek: String?
         @Published var currentMonth: String?
@@ -162,6 +172,7 @@ extension ReportScreen {
             var goodActivitiesReportDataViewModel: GoodActivitiesReportDataViewModel?
             var badActivitiesReportDataViewModel: BadActivitiesReportDataViewModel?
             
+            #warning("TODO: Для правильного обновления экрана использовать модели по примеру модели эмоции и главного экрана")
             chartData.forEach { model in
                 let dateFormatterGet = DateFormatter()
                 dateFormatterGet.dateFormat = "yyyy-MM-dd"
@@ -188,12 +199,17 @@ extension ReportScreen {
             emotionCountDataViewModel = EmotionCountDataViewModel(
                 total: emotionCountData.total,
                 common: emotionCountData.common,
-                state: emotionCountData.state.compactMap({ EmotionCountDataViewModel.EmotionCountDataStateViewModel(
-                    text: $0.text,
-                    count: $0.count,
-                    color: mappingColorForEmotion(with: $0.text)
-                )}).sorted(by: { $0.count > $1.count })
+                text: emotionCountData.state.compactMap({ $0.text }),
+                color: emotionCountData.state.compactMap({ mappingColorForEmotion(with: $0.text)}),
+                countState: emotionCountData.state.compactMap({ Double($0.count) }).sorted(by: { $0 > $1 })
+                
+//                state: emotionCountData.state.compactMap({ EmotionCountDataViewModel.EmotionCountDataStateViewModel(
+//                    text: $0.text,
+//                    countState: Double($0.count),
+//                    color: mappingColorForEmotion(with: $0.text)
             )
+//            .sorted(by: { $0.countState > $1.countState })
+//            )
             
             timeDataViewModel = TimeDataViewModel(
                 bestTime: timeData.bestTime,
@@ -221,6 +237,8 @@ extension ReportScreen {
                   let goodActivitiesReportDataViewModel = goodActivitiesReportDataViewModel,
                   let badActivitiesReportDataViewModel = badActivitiesReportDataViewModel else { fatalError() }
             
+            self.emotionCountData = emotionCountDataViewModel
+            
             return ReportViewModel(
                 chartData: chartDataViewModel.sorted(by: { $0.date < $1.date }),
                 emotionCountData: emotionCountDataViewModel,
@@ -229,14 +247,14 @@ extension ReportScreen {
                 badActivitiesReportData: badActivitiesReportDataViewModel)
         }
         
-        private func mappingColorForEmotion(with emotionTitle: String) -> String {
+        private func mappingColorForEmotion(with emotionTitle: String) -> Color {
             switch emotionTitle {
-            case "Oчень плохо": return "F5DADA"
-            case "Плохо": return "B9C8FD"
-            case "Нормально": return "B283E4"
-            case "Хорошо": return "86E9C5"
-            case "Очень хорошо": return "FFC794"
-            default: return ""
+            case "Oчень плохо": return Color(hex: "F5DADA")
+            case "Плохо": return Color(hex: "B9C8FD")
+            case "Нормально": return Color(hex: "B283E4")
+            case "Хорошо": return Color(hex: "86E9C5")
+            case "Очень хорошо": return Color(hex: "FFC794")
+            default: return Color.white
             }
         }
     }
@@ -245,7 +263,7 @@ extension ReportScreen {
 struct ReportViewModel {
     
     let chartData: [ChartDataViewModel]
-    let emotionCountData: EmotionCountDataViewModel
+    var emotionCountData: EmotionCountDataViewModel
     let timeData: TimeDataViewModel
     let goodActivitiesReportData: GoodActivitiesReportDataViewModel
     let badActivitiesReportData: BadActivitiesReportDataViewModel
@@ -267,15 +285,18 @@ struct ChartDataViewModel: Identifiable {
 }
 
 struct EmotionCountDataViewModel: Equatable {
-    let total: Int
+    var total: Int
     let common: String
-    let state: [EmotionCountDataStateViewModel]
-    
-    struct EmotionCountDataStateViewModel: Equatable {
-        let text: String
-        let count: Int
-        let color: String
-    }
+//    var state: [EmotionCountDataStateViewModel]
+    var text: [String]
+    var color: [Color]
+    var countState: [Double]
+
+//    struct EmotionCountDataStateViewModel: Equatable {
+//        let text: String
+//        var countState: Double
+//        let color: String
+//    }
 }
 
 struct TimeDataViewModel {

@@ -136,16 +136,10 @@ struct ReportScreen: View {
                         }
                         
                         CircleEmotionChart(
-                            emotionStateCounts: viewModel.reportViewModel?.emotionCountData
-                                .state
-                                .compactMap({ Double($0.count) }) ?? [],
-                            emotionNames: viewModel.reportViewModel?.emotionCountData
-                                .state
-                                .compactMap({ $0.text }) ?? [],
-                            emotionColors: viewModel.reportViewModel?.emotionCountData
-                                .state
-                                .compactMap({ Color(hex: $0.color) }) ?? [],
-                            emotionTotal: viewModel.reportViewModel?.emotionCountData.total ?? 0
+                            emotionStateCounts: $viewModel.emotionCountData.countState,
+                            emotionNames: $viewModel.emotionCountData.text,
+                            emotionColors: $viewModel.emotionCountData.color,
+                            emotionTotal: $viewModel.emotionCountData.total
                         )
                         
                         ReportTipView(
