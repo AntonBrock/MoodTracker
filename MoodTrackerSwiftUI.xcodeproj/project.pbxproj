@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		45026B4929D7C25E00B6A504 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45026B4829D7C25E00B6A504 /* MainViewModel.swift */; };
+		4504F00129D974DA0042CF6B /* DiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504F00029D974DA0042CF6B /* DiaryViewModel.swift */; };
+		4504F00329D9762F0042CF6B /* DiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504F00229D9762F0042CF6B /* DiaryModel.swift */; };
+		4504F00529D976440042CF6B /* DiaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504F00429D976440042CF6B /* DiaryService.swift */; };
+		4504F00729D976DC0042CF6B /* DiaryEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504F00629D976DC0042CF6B /* DiaryEndPoint.swift */; };
+		4504F00929D97CAC0042CF6B /* NewDiaryPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504F00829D97CAC0042CF6B /* NewDiaryPageView.swift */; };
 		45133A1E29AF917800258072 /* PersonalCabinetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45133A1D29AF917800258072 /* PersonalCabinetViewModel.swift */; };
 		45133A2029AFB88900258072 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45133A1F29AFB88900258072 /* AuthService.swift */; };
 		45133A2229AFB97400258072 /* AuthEnpPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45133A2129AFB97400258072 /* AuthEnpPoint.swift */; };
@@ -159,6 +164,11 @@
 
 /* Begin PBXFileReference section */
 		45026B4829D7C25E00B6A504 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		4504F00029D974DA0042CF6B /* DiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewModel.swift; sourceTree = "<group>"; };
+		4504F00229D9762F0042CF6B /* DiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryModel.swift; sourceTree = "<group>"; };
+		4504F00429D976440042CF6B /* DiaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryService.swift; sourceTree = "<group>"; };
+		4504F00629D976DC0042CF6B /* DiaryEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEndPoint.swift; sourceTree = "<group>"; };
+		4504F00829D97CAC0042CF6B /* NewDiaryPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryPageView.swift; sourceTree = "<group>"; };
 		4509075729A8C46800815892 /* StressCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressCheckView.swift; sourceTree = "<group>"; };
 		4509076029A8D03800815892 /* StressCheckComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressCheckComponent.swift; sourceTree = "<group>"; };
 		4509716828D1FF08000FF0AE /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -326,6 +336,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4504F00A29D97CB00042CF6B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4504F00829D97CAC0042CF6B /* NewDiaryPageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4509075629A8C44800815892 /* StressCheckScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,6 +371,7 @@
 				456A401429BA41C200371B5C /* ActivitiesModel.swift */,
 				456A402029BC2BC200371B5C /* JournalModel.swift */,
 				4592521329C4205E007B1706 /* ReportModel.swift */,
+				4504F00229D9762F0042CF6B /* DiaryModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -800,9 +819,11 @@
 		459797F9295C054E0059CAC2 /* Diary */ = {
 			isa = PBXGroup;
 			children = (
+				4504F00A29D97CB00042CF6B /* View */,
 				459797FA295C055A0059CAC2 /* DiaryView.swift */,
 				459797FC295C05620059CAC2 /* DiaryViewCoordinator.swift */,
 				459797FE295C056B0059CAC2 /* DiaryCoordinatorView.swift */,
+				4504F00029D974DA0042CF6B /* DiaryViewModel.swift */,
 			);
 			path = Diary;
 			sourceTree = "<group>";
@@ -837,6 +858,7 @@
 				456A400929B75DDB00371B5C /* UserStateService.swift */,
 				456A401C29BBA7E500371B5C /* JournalService.swift */,
 				457F591829C184B900E96E1D /* ReportService.swift */,
+				4504F00429D976440042CF6B /* DiaryService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -850,6 +872,7 @@
 				456A400729B75DD200371B5C /* UserStateEndPoint.swift */,
 				456A401E29BBA84400371B5C /* JournalEndPoint.swift */,
 				457F591A29C184F300E96E1D /* ReportEndPoint.swift */,
+				4504F00629D976DC0042CF6B /* DiaryEndPoint.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1015,6 +1038,7 @@
 				4529ABA329AF1940001D2390 /* SegmentedControlView.swift in Sources */,
 				4529ABA429AF1940001D2390 /* TabBar.swift in Sources */,
 				4529ABA529AF1940001D2390 /* MTButton.swift in Sources */,
+				4504F00329D9762F0042CF6B /* DiaryModel.swift in Sources */,
 				4529ABA629AF1940001D2390 /* CutomAlertView.swift in Sources */,
 				4592521B29C6EB9A007B1706 /* WeekAnimationChart.swift in Sources */,
 				4529ABA729AF1940001D2390 /* EmotionBoardView.swift in Sources */,
@@ -1029,6 +1053,7 @@
 				4592522729C6EEB6007B1706 /* DayilyCharts.swift in Sources */,
 				4529ABAE29AF1941001D2390 /* CalendarTooltipView.swift in Sources */,
 				4529ABAF29AF1941001D2390 /* AttachmentView.swift in Sources */,
+				4504F00729D976DC0042CF6B /* DiaryEndPoint.swift in Sources */,
 				4529ABB029AF1941001D2390 /* GalleryPhotoPicker.swift in Sources */,
 				4529ABB129AF1941001D2390 /* ImagePicker.swift in Sources */,
 				4529ABB229AF1941001D2390 /* MTKeyboardView.swift in Sources */,
@@ -1050,6 +1075,7 @@
 				4529ABC029AF1941001D2390 /* JournalView.swift in Sources */,
 				4529ABC129AF1941001D2390 /* JournalViewCoordinator.swift in Sources */,
 				45133A2229AFB97400258072 /* AuthEnpPoint.swift in Sources */,
+				4504F00929D97CAC0042CF6B /* NewDiaryPageView.swift in Sources */,
 				4529ABC229AF1941001D2390 /* JournalCoordinatorView.swift in Sources */,
 				4592521429C4205E007B1706 /* ReportModel.swift in Sources */,
 				4592522529C6EE73007B1706 /* ReportTipView.swift in Sources */,
@@ -1059,6 +1085,8 @@
 				4529ABC629AF1941001D2390 /* WhyRegistrationInfoView.swift in Sources */,
 				4529ABC729AF1941001D2390 /* PersonalCabinetView.swift in Sources */,
 				456A401729BA424200371B5C /* ActivitiesViewModel.swift in Sources */,
+				4504F00129D974DA0042CF6B /* DiaryViewModel.swift in Sources */,
+				4504F00529D976440042CF6B /* DiaryService.swift in Sources */,
 				4529ABC829AF1942001D2390 /* PersonalCabinetViewCoordinator.swift in Sources */,
 				4529ABC929AF1942001D2390 /* PersonalCabinetCoordinatorView.swift in Sources */,
 				4529ABCA29AF1942001D2390 /* FeelingView.swift in Sources */,

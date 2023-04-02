@@ -11,6 +11,8 @@ class DiaryViewCoordinator: ObservableObject, Identifiable {
     
     private let container: DIContainer
     private unowned let parent: BaseViewCoordinator
+    @ObservedObject var viewModel: DiaryView.ViewModel
+
         
     // MARK: - Init
     init(
@@ -19,5 +21,6 @@ class DiaryViewCoordinator: ObservableObject, Identifiable {
     ) {
         self.parent = parent
         self.container = container
+        self.viewModel = DiaryView.ViewModel()
     }
 }

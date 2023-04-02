@@ -12,7 +12,7 @@ struct DiaryCoordinatorView: View {
     @ObservedObject var coordinator: DiaryViewCoordinator
     
     var body: some View {
-        DiaryView()
+        DiaryView(coordinator: coordinator)
             .navigationTitle("Дневник благодарности")
             .navigationBarTitleDisplayMode(.inline)
     }

@@ -16,10 +16,10 @@ struct ActivitiesTextViewBlock: View {
 
     @State var text: String = ""
     @State var subPlaceholder: String = ""
-
     @State private var attachmentsView: AttachmentView!
-
     @State var type: TextViewType = .diary
+    
+    var saveDiaryText: ((_ text: String) -> Void)?
 
     var body: some View {
         VStack {
@@ -43,8 +43,8 @@ struct ActivitiesTextViewBlock: View {
                 }
                 
                 if type == .diary {
-                    MTButton(buttonStyle: .fill, title: "Сохранить") {
-                        print("Save to back")
+                    MTButton(buttonStyle: .fill, title: "Сделать запись в дневник ") {
+                        saveDiaryText!(text)
                         text = ""
                     }
                     .frame(width: 205, height: 48)
@@ -68,15 +68,15 @@ struct ActivitiesTextViewBlock: View {
             .padding(EdgeInsets(top: 12, leading: 16, bottom: 12, trailing: 16))
             .background(.white)
             .cornerRadius(10)
-            .shadow(color: Colors.TextColors.mystic400, radius: 4.0, x: 0.0, y: 0.0)
+//            .shadow(color: Colors.TextColors.mystic400, radius: 4.0, x: 0.0, y: 0.0)
 
-            if type == .diary {
-                MTButton(buttonStyle: .outline, title: "Мои записи") {
-                    print("Open next Screen")
-                }
-                .frame(width: 205, height: 48)
-                .padding(.top, 16)
-            }
+//            if type == .diary {
+//                MTButton(buttonStyle: .outline, title: "Мои записи") {
+//                    print("Open next Screen")
+//                }
+//                .frame(width: 205, height: 48)
+//                .padding(.top, 16)
+//            }
             
         }
 //        .padding(.bottom, 48)

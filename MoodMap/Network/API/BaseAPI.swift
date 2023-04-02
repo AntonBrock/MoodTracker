@@ -14,6 +14,7 @@ enum BaseAPI {
     case userState(UserStateEndPoint)
     case journal(JournalEndPoint)
     case report(ReportEndPoint)
+    case diary(DiaryEndPoint)
 }
 
 extension BaseAPI: TargetType {
@@ -25,6 +26,7 @@ extension BaseAPI: TargetType {
         case let .userState(userStateAPI): return userStateAPI.baseURL
         case let .journal(journalEndPoint): return journalEndPoint.baseURL
         case let .report(reportEndPoint): return reportEndPoint.baseURL
+        case let .diary(diaryEndPoint): return diaryEndPoint.baseURL
         }
     }
     
@@ -35,6 +37,7 @@ extension BaseAPI: TargetType {
         case let .userState(userStateAPI): return userStateAPI.path
         case let .journal(journalEndPoint): return journalEndPoint.path
         case let .report(reportEndPoint): return reportEndPoint.path
+        case let .diary(diaryEndPoint): return diaryEndPoint.path
         }
     }
     
@@ -45,6 +48,7 @@ extension BaseAPI: TargetType {
         case let .userState(userStateAPI): return userStateAPI.method
         case let .journal(journalEndPoint): return journalEndPoint.method
         case let .report(reportEndPoint): return reportEndPoint.method
+        case let .diary(diaryEndPoint): return diaryEndPoint.method
         }
     }
     
@@ -55,6 +59,7 @@ extension BaseAPI: TargetType {
         case let .userState(userStateAPI): return userStateAPI.sampleData
         case let .journal(journalEndPoint): return journalEndPoint.sampleData
         case let .report(reportEndPoint): return reportEndPoint.sampleData
+        case let .diary(diaryEndPoint): return diaryEndPoint.sampleData
         }
     }
     
@@ -65,6 +70,7 @@ extension BaseAPI: TargetType {
         case let .userState(userStateAPI): return userStateAPI.task
         case let .journal(journalEndPoint): return journalEndPoint.task
         case let .report(reportEndPoint): return reportEndPoint.task
+        case let .diary(diaryEndPoint): return diaryEndPoint.task
         }
     }
     
@@ -75,6 +81,7 @@ extension BaseAPI: TargetType {
         case let .userState(userStateAPI): return userStateAPI.headers
         case let .journal(journalEndPoint): return journalEndPoint.headers
         case let .report(reportEndPoint): return reportEndPoint.headers
+        case let .diary(diaryEndPoint): return diaryEndPoint.headers
         }
     }
     
@@ -85,6 +92,7 @@ extension BaseAPI: TargetType {
         case let .userState(userStateAPI): return userStateAPI.authorizationType
         case let .journal(journalEndPoint): return journalEndPoint.authorizationType
         case let .report(reportEndPoint): return reportEndPoint.authorizationType
+        case let .diary(diaryEndPoint): return diaryEndPoint.authorizationType
         }
     }
 }

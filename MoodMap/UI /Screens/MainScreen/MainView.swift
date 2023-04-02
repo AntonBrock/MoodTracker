@@ -56,7 +56,7 @@ struct MainView: View {
                 createDiaryView()
                     .padding(.top, 10)
                     .onTapGesture {
-                        print("Show screen diary")
+                        coordinator.openDiary()
                     }
                 
                 QuoteView()

@@ -19,6 +19,8 @@ struct MainCoordinatorView: View {
                 .navigationBarTitleDisplayMode(.large)
                 .navigation(item: $coordinator.diaryViewCoordinator) {
                     DiaryCoordinatorView(coordinator: $0)
+                        .navigationBarTitle("")
+                        .navigationBarHidden(true)
                 }
         }.accentColor(.black)
     }
