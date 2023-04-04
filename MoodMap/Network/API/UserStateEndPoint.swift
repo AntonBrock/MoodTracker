@@ -13,10 +13,11 @@ enum UserStateEndPoint: TargetType {
     case getStateList
     case getEmotionsList
     case getActivitiesList
+    case getStressList
     
     var baseURL: URL {
         switch self {
-        case .getStateList, .getEmotionsList, .getActivitiesList:
+        case .getStateList, .getEmotionsList, .getActivitiesList, .getStressList:
             return URL(string: "https://api.mapmood.com/v1")!
         }
     }
@@ -26,6 +27,7 @@ enum UserStateEndPoint: TargetType {
         case .getStateList: return "/states"
         case .getEmotionsList: return "/emotions"
         case .getActivitiesList: return "/activities"
+        case .getStressList: return "/stresses"
         }
     }
     
@@ -33,7 +35,8 @@ enum UserStateEndPoint: TargetType {
         switch self {
         case .getStateList,
              .getEmotionsList,
-             .getActivitiesList:
+             .getActivitiesList,
+             .getStressList:
             return .get
         }
     }
@@ -46,7 +49,8 @@ enum UserStateEndPoint: TargetType {
         switch self {
         case .getStateList,
              .getEmotionsList,
-             .getActivitiesList:
+             .getActivitiesList,
+             .getStressList:
             return .requestParameters(parameters: ["language": "ru"], encoding: URLEncoding.queryString)
         }
     }
@@ -55,7 +59,8 @@ enum UserStateEndPoint: TargetType {
         switch self {
         case .getStateList,
              .getEmotionsList,
-             .getActivitiesList
+             .getActivitiesList,
+             .getStressList
             : return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
         }
     }
@@ -64,7 +69,8 @@ enum UserStateEndPoint: TargetType {
         switch self {
         case .getStateList,
              .getEmotionsList,
-             .getActivitiesList
+             .getActivitiesList,
+             .getStressList
              :return .bearer
         }
     }

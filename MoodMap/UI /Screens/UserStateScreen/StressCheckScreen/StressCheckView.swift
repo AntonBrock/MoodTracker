@@ -13,10 +13,13 @@ struct StressCheckView: View {
     
     @ObservedObject var valueModel: SliderStressValueModele
     @ObservedObject var userStateVideModel: MoodCheckView.ViewModel
+    
+    var stressViewModel: [StressViewModel]
+
     @State var text: String = ""
     
-    var saveButtonDidTap: ((_ text: String, _ choosedStress: Int) -> Void)
-    @State var choosedStress: Int = 0
+    var saveButtonDidTap: ((_ text: String, _ choosedStress: String) -> Void)
+    @State var choosedStress: String = ""
     
     var body: some View {
         VStack {
@@ -38,8 +41,9 @@ struct StressCheckView: View {
             }
             .frame(width: UIScreen.main.bounds.width, height: 48, alignment: .center)
             
-            StressCheckComponent(valueModel: valueModel,
-                                 choosedStress: { choosedStress in
+            StressCheckComponent(stressViewModel: stressViewModel,
+                                 valueModel: valueModel,
+                                 choosedStressID: { choosedStress in
                 self.choosedStress = choosedStress
             })
             .padding(.top, 50)

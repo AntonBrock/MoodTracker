@@ -15,7 +15,7 @@ protocol JournalServiceProtocol {
     func sendUserNote(activities: [String],
                       emotionId: String,
                       stateId: String,
-                      stressRate: Int,
+                      stressRate: String,
                       text: String,
                       completion: @escaping(Result<Bool, Error>) -> Void)
 }
@@ -52,7 +52,7 @@ struct JournalService: JournalServiceProtocol {
     func sendUserNote(activities: [String],
                       emotionId: String,
                       stateId: String,
-                      stressRate: Int,
+                      stressRate: String,
                       text: String,
                       completion: @escaping(Result<Bool, Error>) -> Void) {
         let target = BaseAPI.journal(.sendUserNote(activities: activities,

@@ -43,5 +43,4 @@ struct JournalModel: Decodable {
         userId = try container.decode(String.self, forKey: .userId)
         activities = try container.decode([ActivitiesModel].self, forKey: .activities)
     }
-    
 }

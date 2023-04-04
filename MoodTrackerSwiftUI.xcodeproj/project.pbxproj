@@ -160,6 +160,8 @@
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
 		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
+		45E2876729DB104A00593E7A /* StressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E2876629DB104A00593E7A /* StressModel.swift */; };
+		45E2876929DB117A00593E7A /* StressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E2876829DB117A00593E7A /* StressViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -305,6 +307,8 @@
 		45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateViewModel.swift; sourceTree = "<group>"; };
 		45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateInfoModel.swift; sourceTree = "<group>"; };
 		45D81C1328D469D800AEF36E /* MoodsWordChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodsWordChooseView.swift; sourceTree = "<group>"; };
+		45E2876629DB104A00593E7A /* StressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressModel.swift; sourceTree = "<group>"; };
+		45E2876829DB117A00593E7A /* StressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressViewModel.swift; sourceTree = "<group>"; };
 		45E750302920B6E700CF9E21 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		45E750322920B73200CF9E21 /* MainScreenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenEndpoint.swift; sourceTree = "<group>"; };
 		45E750342920B78700CF9E21 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -372,6 +376,7 @@
 				456A402029BC2BC200371B5C /* JournalModel.swift */,
 				4592521329C4205E007B1706 /* ReportModel.swift */,
 				4504F00229D9762F0042CF6B /* DiaryModel.swift */,
+				45E2876629DB104A00593E7A /* StressModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -731,6 +736,7 @@
 				456A401029B991E200371B5C /* EmotionsViewModel.swift */,
 				456A401629BA424200371B5C /* ActivitiesViewModel.swift */,
 				456A401829BAE1BB00371B5C /* StatesViewModel.swift */,
+				45E2876829DB117A00593E7A /* StressViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1024,6 +1030,7 @@
 				4592522329C6EE0D007B1706 /* CircleEmotionChart.swift in Sources */,
 				456A401F29BBA84400371B5C /* JournalEndPoint.swift in Sources */,
 				457F591929C184B900E96E1D /* ReportService.swift in Sources */,
+				45E2876729DB104A00593E7A /* StressModel.swift in Sources */,
 				456A401929BAE1BB00371B5C /* StatesViewModel.swift in Sources */,
 				4529AB9C29AF1940001D2390 /* SCChartWrapperView.swift in Sources */,
 				4529AB9D29AF1940001D2390 /* SCDonutView.swift in Sources */,
@@ -1090,6 +1097,7 @@
 				4529ABC829AF1942001D2390 /* PersonalCabinetViewCoordinator.swift in Sources */,
 				4529ABC929AF1942001D2390 /* PersonalCabinetCoordinatorView.swift in Sources */,
 				4529ABCA29AF1942001D2390 /* FeelingView.swift in Sources */,
+				45E2876929DB117A00593E7A /* StressViewModel.swift in Sources */,
 				4529ABCB29AF1942001D2390 /* FeelingViewCoordinator.swift in Sources */,
 				4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */,
 				4529ABCC29AF1942001D2390 /* FeelingCoordinatorView.swift in Sources */,

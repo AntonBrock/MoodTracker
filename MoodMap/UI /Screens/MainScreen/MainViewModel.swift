@@ -69,7 +69,7 @@ extension MainView {
         }
         
         private func fetchReport(from: String, to: String) {
-            Services.reportService.fetchReport(from: from, to: to) { result in
+            Services.reportService.fetchReport(from: from, to: to, type: .mood) { result in
                 switch result {
                 case .success(let model):
                     self.emotionCountData = self.mappingEmotionCountData(data: model)

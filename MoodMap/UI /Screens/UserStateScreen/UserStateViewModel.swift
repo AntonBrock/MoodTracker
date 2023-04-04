@@ -16,12 +16,13 @@ extension MoodCheckView {
         @Published var statesViewModel: [StatesViewModel] = []
         @Published var emotionsViewModel: [[EmotionsViewModel]] = []
         @Published var activitiesViewModel: [ActivitiesViewModel] = []
+        @Published var stressViewModel: [StressViewModel] = []
         
         @Published var choosedTimeDate: Date?
         @Published var choosedState: String?
         @Published var choosedEmotion: String?
         @Published var choosedActivities: [String]?
-        @Published var choosedStress: Int?
+        @Published var choosedStress: String?
         @Published var mindText: String?
         
         func sendUserStateInfo() {
@@ -29,12 +30,19 @@ extension MoodCheckView {
         }
         
         func fetch() {
-            getStatesList()
-            getEmotionsList()
-            getActiviriesList()
+            let group = DispatchGroup()
+            
+            group.enter()
+            getStatesList(group)
+            
+            group.notify(queue: .main) {
+                self.getEmotionsList()
+                self.getActiviriesList()
+                self.getStressList()
+            }
         }
         
-        private func getStatesList() {
+        private func getStatesList(_ group: DispatchGroup) {
             Services.userStateService.getStateList { result in
                 switch result {
                 case .success(let models):
@@ -48,6 +56,8 @@ extension MoodCheckView {
                 case .failure(let error):
                     print(error)
                 }
+                
+                group.leave()
             }
         }
         
@@ -128,6 +138,21 @@ extension MoodCheckView {
                                                                                 text: $0.text,
                                                                                 language: $0.language,
                                                                                 image: $0.image)})
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
+        private func getStressList() {
+            Services.userStateService.getStressList { result in
+                switch result {
+                case .success(let models):
+                    self.stressViewModel.append(contentsOf: models.compactMap({ StressViewModel(
+                        id: $0.id,
+                        text: $0.text,
+                        image: $0.image
+                    )}))
                 case .failure(let error):
                     print(error)
                 }

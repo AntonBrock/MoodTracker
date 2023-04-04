@@ -11,6 +11,7 @@ protocol UserStateServiceProtocol {
     func getStateList(completion: @escaping(Result<[StatesModel], Error>) -> Void)
     func getEmotionList(completion: @escaping(Result<[EmotionsModel], Error>) -> Void)
     func getActivitiesList(completion: @escaping(Result<[ActivitiesModel], Error>) -> Void)
+    func getStressList(completion: @escaping(Result<[StressModel], Error>) -> Void)
 }
 
 struct UserStateService: UserStateServiceProtocol {
@@ -67,10 +68,27 @@ struct UserStateService: UserStateServiceProtocol {
         })
     }
     
+    func getStressList(completion: @escaping(Result<[StressModel], Error>) -> Void) {
+        let target = BaseAPI.userState(.getStressList)
+
+        let networkService = ServiceProvider().networkService
+        networkService?.request(.target(target), completion: { response in
+            switch response {
+            case let .success(result):
+                guard let model = try? JSONDecoder().decode([StressModel].self, from: result.data) else {
+                    return
+                }
+                completion(.success(model))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        })
+    }
+    
     func sendUserNote(activities: [String],
                       emotionId: String,
                       stateId: String,
-                      stressRate: Int,
+                      stressRate: String,
                       text: String,
                       completion: @escaping(Result<Bool, Error>) -> Void) {
         let target = BaseAPI.journal(.sendUserNote(activities: activities,

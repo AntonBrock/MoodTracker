@@ -99,7 +99,7 @@ extension ReportScreen {
         func fetchCurrentDate(date: Date, completion: @escaping ([ReportCurrentViewModel]) -> Void) {
             isLoading = true
 
-            Services.reportService.fetchCurrentDate(date: date) { result in
+            Services.reportService.fetchCurrentDate(date: date, type: .mood) { result in
                 switch result {
                 case .success(let models):
                     let viewModel = self.mappingCurrentReportViewModel(models: models)
@@ -115,7 +115,7 @@ extension ReportScreen {
         private func fetchReport(from: String, to: String) {
             isLoading = true
 
-            Services.reportService.fetchReport(from: from, to: to) { result in
+            Services.reportService.fetchReport(from: from, to: to, type: .mood) { result in
                 switch result {
                 case .success(let model):
                     self.reportViewModel = self.mappingViewModel(data: model)

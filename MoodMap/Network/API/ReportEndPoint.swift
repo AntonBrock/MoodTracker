@@ -10,7 +10,12 @@ import Moya
 
 enum ReportEndPoint: TargetType {
     
-    case getReport(from: String, to: String)
+    enum TypeOfReport: String {
+        case mood = "mood"
+        case stress = "stress"
+    }
+    
+    case getReport(from: String, to: String, type: TypeOfReport)
     case currentReportDay(day: String)
     
     var baseURL: URL {
@@ -40,9 +45,10 @@ enum ReportEndPoint: TargetType {
     
     var task: Task {
         switch self {
-        case .getReport(let from, let to):
+        case .getReport(let from, let to, let type):
             return .requestParameters(parameters: ["from": from,
-                                                   "to": to],
+                                                   "to": to,
+                                                   "type": type.rawValue],
                                       encoding: URLEncoding.queryString)
         case .currentReportDay:
             return .requestPlain
