@@ -170,7 +170,7 @@ struct JournalViewModel: Hashable {
     let color: [Color]
     let stateImage: String
     let emotionImage: String
-    let stressRate: Int
+    let stressRate: String
     let text: String
     let monthTime: String
     let month: String

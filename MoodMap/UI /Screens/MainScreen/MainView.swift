@@ -262,11 +262,11 @@ struct MainView: View {
                 radius: 3.0, x: 1.0, y: 0)
     }
     
-    private func getStressTitle(_ stressRate: Int) -> String {
+    private func getStressTitle(_ stressRate: String) -> String {
         switch stressRate {
-        case 1: return "Низкий стресс"
-        case 2: return "Средний стресс"
-        case 3: return "Высокий стресс"
+        case "fd3f28e0-273b-4a18-8aa8-56e85c9943c0": return "Низкий стресс"
+        case "8b02d308-37fa-41de-bdd2-00303b976031": return "Средний стресс"
+        case "42148e04-8ba7-468d-8ce6-4f25987bdbdf": return "Высокий стресс"
         default: return "Неизвестно"
         }
     }

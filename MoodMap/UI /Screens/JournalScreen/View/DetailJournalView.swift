@@ -132,11 +132,12 @@ struct DetailJournalView: View {
                                     .frame(width: 16, height: 16)
                                 
                                 Circle()
-                                    .fill(model?.stressRate == 0 ? Colors.Secondary.shamrock600Green : model?.stressRate == 1 ? Colors.Primary.lavender500Purple : Color(hex: "F95555"))
+                                    .fill(model?.stressRate == "fd3f28e0-273b-4a18-8aa8-56e85c9943c0" ? Colors.Secondary.shamrock600Green : model?.stressRate == "8b02d308-37fa-41de-bdd2-00303b976031" ? Colors.Primary.lavender500Purple : Color(hex: "F95555"))
                                     .frame(width: 12, height: 12)
                             }
                             
-                            Text("\(model?.stressRate == 0 ? "Низкий стресс" : model?.stressRate == 1 ? "Средний стресс" : "Высокий стресс")")
+                            
+                            Text("\(model?.stressRate == "fd3f28e0-273b-4a18-8aa8-56e85c9943c0" ? "Низкий стресс" : model?.stressRate == "8b02d308-37fa-41de-bdd2-00303b976031" ? "Средний стресс" : "Высокий стресс")")
                                 .font(.system(size: 12, weight: .medium))
                                 .foregroundColor(Colors.Primary.blue)
                         }

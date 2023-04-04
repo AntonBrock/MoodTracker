@@ -10,7 +10,7 @@ import Foundation
 struct JournalModel: Decodable {
     
     let id: String
-    let stressRate: Int
+    let stressRate: String
     let createdAt: Date
     let updatedAt: Date?
     let stateId: String
@@ -22,7 +22,7 @@ struct JournalModel: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case text
-        case stressRate = "stress_rate"
+        case stressRate = "stress_id"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case emotionId = "emotion_id"
@@ -38,7 +38,7 @@ struct JournalModel: Decodable {
         createdAt = try container.decode(Date.self, forKey: .createdAt)
         updatedAt = try? container.decode(Date.self, forKey: .updatedAt)
         stateId = try container.decode(String.self, forKey: .stateId)
-        stressRate = try container.decode(Int.self, forKey: .stressRate)
+        stressRate = try container.decode(String.self, forKey: .stressRate)
         emotionId = try container.decode(String.self, forKey: .emotionId)
         userId = try container.decode(String.self, forKey: .userId)
         activities = try container.decode([ActivitiesModel].self, forKey: .activities)
