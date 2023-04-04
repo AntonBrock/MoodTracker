@@ -18,9 +18,13 @@ extension MainView {
             color: [],
             countState: []
         )
-        @Published var timeData: TimeDataViewModel?
         
+        @Published var timeData: TimeDataViewModel?
         @Published var journalViewModels: [[JournalViewModel]]?
+        
+        @Published var isEnableTypeOfReprot: [String] = ["Настроение", "Стресс"]
+        @Published var isEnableTypeOfReportForRequest: [String] = ["mood", "stress"]
+        var selectedTypeOfReport: Int = 0
         
         var firstDayOfWeek: String?
         var lastDayOfWeek: String?
@@ -53,7 +57,7 @@ extension MainView {
             let to = "\(currentYear!)-\(shortDateMonth!)-\(lastDayOfWeek!)"
 
             getJournalViewModel(from: from, to: to)
-            fetchReport(from: from, to: to)
+            fetchReport(from: from, to: to, type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood)
         }
         
         func getJournalViewModel(from: String, to: String) {
@@ -68,13 +72,12 @@ extension MainView {
             }
         }
         
-        private func fetchReport(from: String, to: String) {
-            Services.reportService.fetchReport(from: from, to: to, type: .mood) { result in
+        private func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport) {
+            Services.reportService.fetchReport(from: from, to: to, type: type) { result in
                 switch result {
                 case .success(let model):
                     self.emotionCountData = self.mappingEmotionCountData(data: model)
                     self.timeData = self.mappingTimeData(data: model)
-
                 case .failure(let error):
                     print(error)
                 }

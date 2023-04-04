@@ -17,7 +17,6 @@ struct MainView: View {
     private unowned let coordinator: MainViewCoordinator
     
     @State var typeSelectedIndex: Int = 0
-    var typeTitles: [String] = ["Настроение", "Стресс"]
     
     init(
         container: DIContainer,
@@ -69,9 +68,9 @@ struct MainView: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 20)
                 
-                SegmentedControlView(countOfItems: 3, segments: typeTitles,
+                SegmentedControlView(countOfItems: 2, segments: viewModel.isEnableTypeOfReprot,
                                      selectedIndex: $typeSelectedIndex,
-                                     currentTab: typeTitles[0])
+                                     currentTab: viewModel.isEnableTypeOfReprot[typeSelectedIndex])
                 .padding(.top, 16)
                 .padding(.horizontal, 20)
                 
@@ -87,6 +86,10 @@ struct MainView: View {
                 DayilyCharts(viewModel: TimeDataViewModel(bestTime: "", worstTime: "", dayParts: nil))
                     .padding(.top, 16)
                     .padding(.horizontal, 10)
+            }
+            .onChange(of: typeSelectedIndex) { newValue in
+                viewModel.selectedTypeOfReport = typeSelectedIndex
+                viewModel.fetchMainData()
             }
         }
     }
