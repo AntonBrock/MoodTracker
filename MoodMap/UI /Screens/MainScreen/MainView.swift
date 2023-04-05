@@ -18,6 +18,9 @@ struct MainView: View {
     
     @State var typeSelectedIndex: Int = 0
     
+    @State var isAnimated: Bool = false
+    @State var isAnimatedJournalView: Bool = false
+    
     init(
         container: DIContainer,
         animation: Namespace.ID,
@@ -32,11 +35,17 @@ struct MainView: View {
     var body: some View {
         ScrollView {
             VStack {
-                createEmotionalHeader()
-                    .padding(.top, 16)
+                if isAnimated {
+                    createEmotionalHeader()
+                        .padding(.top, 16)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                }
                 
                 if !(viewModel.journalViewModels?.isEmpty ?? true) {
-                    createJournalView()
+                    if isAnimatedJournalView {
+                        createJournalView()
+                            .transition(.move(edge: .leading).combined(with: .opacity))
+                    }
                 }
                 
                 createChooseStateUser()
@@ -44,6 +53,7 @@ struct MainView: View {
                     .onTapGesture {
                         print("Show screen for add State loader")
                     }
+                
                 
                 Text("Эмоциональная поддержка")
                     .foregroundColor(Colors.Primary.blue)
@@ -86,10 +96,27 @@ struct MainView: View {
                 DayilyCharts(viewModel: TimeDataViewModel(bestTime: "", worstTime: "", dayParts: nil))
                     .padding(.top, 16)
                     .padding(.horizontal, 10)
+                    .onChange(of: typeSelectedIndex) { newValue in
+                        viewModel.selectedTypeOfReport = typeSelectedIndex
+                        viewModel.fetchMainData()
+                    }
+                
             }
-            .onChange(of: typeSelectedIndex) { newValue in
-                viewModel.selectedTypeOfReport = typeSelectedIndex
-                viewModel.fetchMainData()
+        }
+        .onAppear {
+            withAnimation(.linear(duration: 0.3)) {
+                self.isAnimated = true
+            }
+            
+            if !(viewModel.journalViewModels?.isEmpty ?? true) {
+                withAnimation(.linear(duration: 0.3)) {
+                    self.isAnimatedJournalView = true
+                }
+            }
+        }
+        .onChange(of: viewModel.journalViewModels) { newValue in
+            withAnimation(.linear(duration: 0.3)) {
+                self.isAnimatedJournalView = true
             }
         }
     }

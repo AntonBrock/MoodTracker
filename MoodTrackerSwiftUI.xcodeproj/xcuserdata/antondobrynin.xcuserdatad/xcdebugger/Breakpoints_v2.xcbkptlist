@@ -366,8 +366,8 @@
             filePath = "MoodMap/UI /Screens/Report/ReportScreenViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "didChooseMonthTab()"
             landmarkType = "7">
          </BreakpointContent>
@@ -461,8 +461,8 @@
             filePath = "MoodMap/UI /Screens/Report/ReportScreenViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "mappingViewModel(data:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -477,8 +477,8 @@
             filePath = "MoodMap/UI /Screens/Report/ReportScreenViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "mappingViewModel(data:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -525,8 +525,8 @@
             filePath = "MoodMap/UI /Screens/Report/ReportScreenViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "fetchCurrentDate(date:completion:)"
             landmarkType = "7">
             <Locations>
@@ -671,22 +671,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
             endingLineNumber = "48"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "88E75404-C0C4-4158-8DC9-8BC33C09556E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoodMap/UI /Screens/MainScreen/MainView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>

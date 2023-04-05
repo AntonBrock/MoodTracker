@@ -35,6 +35,7 @@ extension ReportScreen {
         
         func getDates() {
             
+            #warning("TODO: Нужно проверять что месяц тоже на -1 нужно делать, иначе запрос выглядит как 2023-04-25 / 2023-04-05")
             let formatter = DateFormatter()
             formatter.dateFormat = "dd"
             let firstDay = Calendar.current.date(byAdding: .day, value: -7, to: Date())
