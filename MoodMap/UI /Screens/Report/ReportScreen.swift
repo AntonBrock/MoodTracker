@@ -33,7 +33,6 @@ struct ReportScreen: View {
     @State var isSelectedFirstDateInRange: Bool = false
     @State var isSelectedSecondDateInRange: Bool = false
         
-    var typeTitles: [String] = ["Настроение", "Стресс"] // "События"
     var dateTitles: [String] = ["Неделя", "Месяц"] // "Все время"
 
     init(
@@ -50,9 +49,9 @@ struct ReportScreen: View {
                 Text("Is Loading ...")
             } else {
                 VStack {
-                    SegmentedControlView(countOfItems: 3, segments: typeTitles,
+                    SegmentedControlView(countOfItems: 3, segments: viewModel.isEnableTypeOfReprot,
                                          selectedIndex: $typeSelectedIndex,
-                                         currentTab: typeTitles[0])
+                                         currentTab: viewModel.isEnableTypeOfReprot[0])
                     .padding(.top, 16)
                     .padding(.horizontal, 16)
                     
@@ -162,19 +161,29 @@ struct ReportScreen: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
+        .onChange(of: typeSelectedIndex, perform: { newValue in
+            
+            if dateSelectedIndex == 0 {
+                if newValue == 0 {
+                    viewModel.selectedTypeOfReport = newValue
+                    viewModel.getDates()
+                }
+                
+                if newValue == 1 {
+                    viewModel.selectedTypeOfReport = newValue
+                    viewModel.getDates()
+                }
+            }
+            
+            if dateSelectedIndex == 1 {
+                viewModel.selectedTypeOfReport = newValue
+                viewModel.didChooseMonthTab()
+            }
+        })
         .onChange(of: dateSelectedIndex) { newValue in
             if dateSelectedIndex == 1 {
                 viewModel.didChooseMonthTab()
             }
-            
-//            sampleAnalytics = sample_analytics
-//            if dateSelectedIndex != 0 {
-//                for (index, _) in sampleAnalytics.enumerated() {
-//                    sampleAnalytics[index].views = .random(in: 1500...10000)
-//                }
-//            }
-//
-//            animateGraph(fromChange: true)
         }
         .popover(isPresented: $showDatePicker) {
             

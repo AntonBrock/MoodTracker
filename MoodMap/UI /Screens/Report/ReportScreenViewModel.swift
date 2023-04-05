@@ -13,8 +13,10 @@ extension ReportScreen {
     
     class ViewModel: ObservableObject {
         
+        @Published var isEnableTypeOfReprot: [String] = ["Настроение", "Стресс"]
+        @Published var isEnableTypeOfReportForRequest: [String] = ["mood", "stress"]
+
         @Published var reportViewModel: ReportViewModel?
-        
         @Published var emotionCountData: EmotionCountDataViewModel = EmotionCountDataViewModel(
             total: 0,
             common: "",
@@ -26,15 +28,13 @@ extension ReportScreen {
         @Published var firstDayOfWeek: String?
         @Published var lastDayOfWeek: String?
         @Published var currentMonth: String?
-       
-        var shortDateMonthForFrom: String?
-        
-        var currentShortMonthForFrom: String?
-        var currentShortMonthForTo: String?
-
         @Published var currentYear: String?
         
         @Published var isLoading: Bool = false
+        var selectedTypeOfReport: Int = 0
+        var shortDateMonthForFrom: String?
+        var currentShortMonthForFrom: String?
+        var currentShortMonthForTo: String?
         
         init() {}
         
@@ -51,7 +51,11 @@ extension ReportScreen {
             let toDateString = formatter.string(from: toDate)
             
             setTextInformationDate(fromDate, toDate)
-            fetchReport(from: fromDateString, to: toDateString)
+            fetchReport(
+                from: fromDateString,
+                to: toDateString,
+                type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood
+            )
 
 //            let isDayInMonthAgoForTheFirstDay = isDayInMonthAgo(day: Int(firstDayOfWeek ?? "") ?? 0)
 //
@@ -126,7 +130,11 @@ extension ReportScreen {
             let oneWeekAgoToString = formatter.string(from: oneWeekAgoTo)
 
             setTextInformationDate(oneWeekAgoFrom, oneWeekAgoTo)
-            fetchReport(from: oneWeekAgoFromString, to: oneWeekAgoToString)
+            fetchReport(
+                from: oneWeekAgoFromString,
+                to: oneWeekAgoToString,
+                type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood
+            )
         }
         
         func toNextWeekDidTap() {
@@ -153,7 +161,11 @@ extension ReportScreen {
             let oneWeekNextToString = formatter.string(from: oneWeekNextTo)
 
             setTextInformationDate(oneWeekNextFrom, oneWeekNextTo)
-            fetchReport(from: oneWeekNextFromString, to: oneWeekNextToString)
+            fetchReport(
+                from: oneWeekNextFromString,
+                to: oneWeekNextToString,
+                type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood
+            )
         }
         
         func didChooseMonthTab() {
@@ -169,7 +181,11 @@ extension ReportScreen {
             let from = "\(currentYear!)-\(month)-01"
             let to = "\(currentYear!)-\(month)-\(theLastDayOfWeek)"
             
-            fetchReport(from: from, to: to)
+            fetchReport(
+                from: from,
+                to: to,
+                type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood
+            )
         }
         
         func fetchCurrentDate(date: Date, completion: @escaping ([ReportCurrentViewModel]) -> Void) {
@@ -188,10 +204,10 @@ extension ReportScreen {
             }
         }
         
-        private func fetchReport(from: String, to: String) {
+        private func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport) {
             isLoading = true
 
-            Services.reportService.fetchReport(from: from, to: to, type: .mood) { result in
+            Services.reportService.fetchReport(from: from, to: to, type: type) { result in
                 switch result {
                 case .success(let model):
                     self.reportViewModel = self.mappingViewModel(data: model)
