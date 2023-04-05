@@ -15,6 +15,9 @@ struct DiaryView: View {
     private unowned let coordinator: DiaryViewCoordinator
     
     @State private var presentNewDiaryPage: Bool = false
+    @State private var presentDetailsPage: Bool = false
+
+    @State private var choosedPage: DiaryViewModel?
 
     init(
         coordinator: DiaryViewCoordinator
@@ -40,9 +43,18 @@ struct DiaryView: View {
                 ForEach(viewModel.diaryViewModel ?? [], id: \.id) { item in
                     diaryView(time: item.createdAt, diaryPage: item.message)
                         .padding(.top, 16)
+                        .onTapGesture {
+                            self.choosedPage = item
+                            self.presentDetailsPage = true
+                        }
                 }
             }
         }
+        .sheet(isPresented: $presentDetailsPage, content: {
+            DetailsDiaryPage(dismiss: {
+                self.presentDetailsPage = false
+            }, diaryPage: choosedPage)
+        })
         .sheet(isPresented: $presentNewDiaryPage) {
             NewDiaryPageView {
                 self.presentNewDiaryPage = false

@@ -111,11 +111,10 @@ public struct PieChartView: View {
             names: names,
             percents: emotionsValuesByCategory.map { String(Int($0)) }
         )
-            .frame(maxWidth: .infinity, alignment: .top)
+        .frame(maxWidth: .infinity, alignment: .top)
     }
 }
 
-@available(OSX 10.15, *)
 struct PieChartRows: View {
     var count: Int
     var colors: [Color]
@@ -123,8 +122,8 @@ struct PieChartRows: View {
     var percents: [String]
     
     var body: some View {
-        VStack{
-            ForEach(0..<count){ i in
+        VStack {
+            ForEach(0..<count) { i in
                 HStack {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(self.colors[i])
@@ -133,7 +132,9 @@ struct PieChartRows: View {
                         .foregroundColor(Colors.Primary.blue)
                         .font(.system(size: 14, weight: .regular))
                         .padding(.leading, 10)
+                    
                     Spacer()
+                    
                     VStack(alignment: .trailing) {
                         Text(self.percents[i])
                             .foregroundColor(Colors.Primary.lightGray)
@@ -142,9 +143,11 @@ struct PieChartRows: View {
                     }
                 }
                 .frame(maxWidth: 160, alignment: .trailing)
+                .padding(.top, -10)
             }
         }
-        .frame(maxHeight: .infinity, alignment: .center)
+        .frame(maxHeight: .infinity,  alignment: .center)
+        .padding(.top, 10)
     }
 }
 

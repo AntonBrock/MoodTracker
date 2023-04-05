@@ -132,6 +132,7 @@
 		4529ABD629AF1942001D2390 /* MoodCheckComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9BCD28D36F3000A4FCD7 /* MoodCheckComponent.swift */; };
 		4529ABD729AF1942001D2390 /* MoodsWordChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D81C1328D469D800AEF36E /* MoodsWordChooseView.swift */; };
 		4529ABD829AF1967001D2390 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529AA6A29AF1470001D2390 /* ContentView.swift */; };
+		4529EE6529DD24A1004CF900 /* DetailsDiaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529EE6429DD24A1004CF900 /* DetailsDiaryPage.swift */; };
 		4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544361229CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift */; };
 		456A400829B75DD200371B5C /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400729B75DD200371B5C /* UserStateEndPoint.swift */; };
 		456A400A29B75DDB00371B5C /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400929B75DDB00371B5C /* UserStateService.swift */; };
@@ -192,6 +193,7 @@
 		4529AA6C29AF1471001D2390 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4529AA6F29AF1471001D2390 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4529AA7429AF147A001D2390 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4529EE6429DD24A1004CF900 /* DetailsDiaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsDiaryPage.swift; sourceTree = "<group>"; };
 		452AD1B928DB4D9B00225F96 /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
 		452AD1BB28DDBAD200225F96 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		452AD1BD28E1E75200225F96 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				4504F00829D97CAC0042CF6B /* NewDiaryPageView.swift */,
+				4529EE6429DD24A1004CF900 /* DetailsDiaryPage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1028,6 +1031,7 @@
 				4529AB9B29AF1940001D2390 /* SCCaptionsView.swift in Sources */,
 				45C200C129D317F80087B0E3 /* String+Extenstion.swift in Sources */,
 				4592522329C6EE0D007B1706 /* CircleEmotionChart.swift in Sources */,
+				4529EE6529DD24A1004CF900 /* DetailsDiaryPage.swift in Sources */,
 				456A401F29BBA84400371B5C /* JournalEndPoint.swift in Sources */,
 				457F591929C184B900E96E1D /* ReportService.swift in Sources */,
 				45E2876729DB104A00593E7A /* StressModel.swift in Sources */,
