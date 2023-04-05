@@ -110,14 +110,6 @@ struct JournalView: View {
                         .padding(.leading, 12)
                         .padding(.trailing, 10)
                         .padding(.top, 24)
-                    
-                    //                Text("\(lowerDate?.description ?? "") - \(upperDate?.description ?? "")")
-                    //                    .font(.system(size: 16, weight: .regular))
-                    //                    .foregroundColor(Colors.TextColors.cadetBlue600)
-                    //                    .frame(maxWidth: .infinity, alignment: .leading)
-                    //                    .padding(.horizontal, 12)
-                    //                    .opacity(lowerDate == nil ? 0 : 1)
-                    //                    .transition(.opacity)
                 }
                 
                 Toggle(isOn: $isRangeCalendarMode) {

@@ -16,6 +16,7 @@ struct MonthChart: View {
     @State var showDaylyMonthDetails: Bool = false
     @State var translation: CGFloat = 0
     
+    #warning("TODO: Вызывается по 3 раза!")
     @State var currentDate: Date = Date() {
         didSet {
             viewModel?.fetchCurrentDate(

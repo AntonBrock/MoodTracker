@@ -137,7 +137,6 @@ struct MoodCheckView: View {
             .frame(maxWidth: UIScreen.main.bounds.width - 32, maxHeight: .infinity)
         }
         .popover(isPresented: $showDatePicker) {
-            
             ZStack {
                 VStack {
                     HStack {
@@ -153,60 +152,60 @@ struct MoodCheckView: View {
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 37)
                     
                     VStack(spacing: 10) {
                         Text("Выбери дату")
-                            .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(.black)
+                            .font(.system(size: 24, weight: .semibold))
+                            .foregroundColor(Colors.Primary.blue)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 12)
-                            .padding(.top, 16)
+                            .padding(.leading, 12)
+                            .padding(.trailing, 10)
+                            .padding(.top, 24)
                     }
                     
                     CalendarViewRepresentable(selectedDay: selectedDay, onSelect: { day in
                         self.selectedDay = day
                     })
+                    .frame(width: UIScreen.main.bounds.width - 32)
+                    .padding(.top, 5)
                     
                     Divider()
                     
-                    HStack {
-                        MTButton(buttonStyle: .outline, title: "Очистить") {
-                            clearCalendar()
-                        }
-                        .frame(width: 100, height: 40)
-                        
-                        Spacer()
-                        
-                        MTButton(buttonStyle: .fill, title: "Применить") {
-                            
-                            withAnimation {
-                                showChoosingTimePicker.toggle()
-                            }
-                        }
-                        .frame(width: 100, height: 40)
-                        .disabled(selectedDay == nil)
-                    }
-                    .frame(height: 100)
-                    .padding(.horizontal, 16)
-                }
-                
-                if showChoosingTimePicker {
                     VStack {
-                        VStack(spacing: 16) {
+                        HStack {
+                            Text("Выбор точного времени:")
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(Colors.Primary.blue)
                             
-                            Text("Выбери время")
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(.black)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .padding(.top, 16)
+                            Spacer()
                             
-                            DatePicker("", selection: $choosedTimeDate,
-                                       displayedComponents: .hourAndMinute)
-                                .labelsHidden()
+                            Text("\(getCurrentTime())")
+                                .padding()
+                                .background(Color(hex: "F0F2F8"))
+                                .cornerRadius(15)
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(Colors.Primary.blue)
+                                .padding(.leading, 16)
+                                .padding(.vertical, 8)
+                                .onTapGesture {
+                                    showDatePicker.toggle()
+                                    showChoosingTimePicker.toggle()
+                                }
+                           
+                        }
+                        .padding(.top, 10)
+                        .padding(.horizontal, 16)
+                        
+                        HStack {
+                            MTButton(buttonStyle: .outline, title: "Очистить") {
+                                clearCalendar()
+                            }
+                            .frame(maxWidth: 160, maxHeight: 48)
+                            
+                            Spacer()
                             
                             MTButton(buttonStyle: .fill, title: "Применить") {
-                                print(selectedDay?.day.description ?? "")
-                                
                                 let formatter = DateFormatter()
                                 formatter.timeStyle = .short
                                 formatter.locale = Locale(identifier: "ru_RU")
@@ -214,30 +213,125 @@ struct MoodCheckView: View {
                                 
                                 self.formatedTimeDate = dateString
                                 self.timeViewText = "\(selectedDay?.description ?? "")"
-                                
                                 withAnimation {
                                     showChoosingTimePicker.toggle()
-                                    showDatePicker.toggle()
                                 }
                             }
-                            .frame(width: 135, height: 30, alignment: .bottom)
-                            .padding(.top, 20)
+                            .frame(maxWidth: 160, maxHeight: 48)
+                            .disabled(selectedDay == nil)
                         }
-                        .frame(width: 180, height: 180, alignment: .center)
-                        .background(.white)
-                        .cornerRadius(10)
+                        .frame(height: 100)
+                        .padding(.horizontal, 16)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                    .background(.black.opacity(0.5))
-//                    .transition(.opacity)
                 }
+                
+//                if showChoosingTimePicker {
+//                    VStack {
+//                        VStack(spacing: 16) {
+//
+//                            Text("Выбери время")
+//                                .font(.system(size: 24, weight: .semibold))
+//                                .foregroundColor(Colors.Primary.blue)
+//                                .frame(maxWidth: .infinity, alignment: .leading)
+//                                .padding(.leading, 12)
+//                                .padding(.trailing, 10)
+//                                .padding(.top, 24)
+//
+//                            DatePicker("", selection: $choosedTimeDate,
+//                                       displayedComponents: .hourAndMinute)
+//                                .labelsHidden()
+//
+//                            MTButton(buttonStyle: .fill, title: "Применить") {
+//                                let formatter = DateFormatter()
+//                                formatter.timeStyle = .short
+//                                formatter.locale = Locale(identifier: "ru_RU")
+//                                let dateString = formatter.string(from: choosedTimeDate)
+//
+//                                self.formatedTimeDate = dateString
+//                                self.timeViewText = "\(selectedDay?.description ?? "")"
+//
+//                                withAnimation {
+//                                    showChoosingTimePicker.toggle()
+//                                }
+//                            }
+//                            .frame(width: 135, height: 30, alignment: .bottom)
+//                            .padding(.top, 20)
+//                        }
+//                        .frame(width: 180, height: 180, alignment: .center)
+//                        .padding(.horizontal, 16)
+//                        .background(.white)
+//                        .cornerRadius(10)
+//                    }
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+//                    .background(.black.opacity(0.5))
+//                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .popover(isPresented: $showChoosingTimePicker, content: {
+            VStack {
+                HStack {
+                    Button {
+                        showChoosingTimePicker.toggle()
+                        showDatePicker.toggle()
+                    } label: {
+                        Image("crossIcon")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .padding(.horizontal, 12)
+                            .padding(.top, 24)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 37)
+                
+                VStack(spacing: 10) {
+                    Text("Выбор точного времени")
+                        .font(.system(size: 24, weight: .semibold))
+                        .foregroundColor(Colors.Primary.blue)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, 12)
+                        .padding(.trailing, 10)
+                        .padding(.top, 24)
+                }
+                
+                Spacer()
+                
+                DatePicker("", selection: $choosedTimeDate,
+                           displayedComponents: .hourAndMinute)
+                .frame(height: 216)
+                .datePickerStyle(.wheel)
+                .labelsHidden()
+
+                Spacer()
+
+                Divider()
+                
+                VStack {
+                    HStack {
+                        MTButton(buttonStyle: .outline, title: "Отменить") {
+                            #warning("TODO: Добавить удаление")
+                            showChoosingTimePicker.toggle()
+                            showDatePicker.toggle()
+                        }
+                        .frame(maxWidth: 160, maxHeight: 48)
+                        
+                        Spacer()
+                        
+                        MTButton(buttonStyle: .fill, title: "Применить") {
+                            showChoosingTimePicker.toggle()
+                            showDatePicker.toggle()
+                        }
+                        .frame(maxWidth: 160, maxHeight: 48)
+                    }
+                    .frame(height: 100)
+                    .padding(.horizontal, 16)
+                }
+            }
+        })
         .onAppear {
             coordinator.userStateViewModel.fetch()
         }
-//        .transition(.push(from: .trailing))
     }
     
     private func clearCalendar() {

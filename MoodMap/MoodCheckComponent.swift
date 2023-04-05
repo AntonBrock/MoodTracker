@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct MoodCheckComponent: View {
-    
-//    var imagesName: [String] = ["ch-ic-veryBad", "ch-ic-sad", "ch-ic-fine", "ch-ic-good", "ch-ic-veryGood"]
-//    var stateTitleTexts: [String] = ["Очень плохо", "Плохо", "Нормально", "Хорошо", "Лучше всех"]
-    
+        
     var statesViewModel: [StatesViewModel] = []
-    
     var setChoosedState: ((String) -> Void)
     
     struct SliderConfigure {
