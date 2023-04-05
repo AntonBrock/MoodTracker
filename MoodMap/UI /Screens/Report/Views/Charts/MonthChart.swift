@@ -18,8 +18,10 @@ struct MonthChart: View {
     
     @State var currentDate: Date = Date() {
         didSet {
-            viewModel?.fetchCurrentDate(date: currentDate, completion: { subReportInfo in
-                self.subReportInfo = subReportInfo
+            viewModel?.fetchCurrentDate(
+                date: currentDate,
+                completion: { subReportInfo in
+                    self.subReportInfo = subReportInfo
             })
         }
     }
@@ -246,7 +248,7 @@ struct MonthChart: View {
                         HStack(spacing: 1) {
                             ForEach (0..<task.description.count) { _ in
                                 Circle()
-                                    .fill(Color.red)
+                                    .fill(getColorForDotEmotion(task))
                                     .frame(width: 5, height: 5)
                             }
                         }
@@ -264,6 +266,17 @@ struct MonthChart: View {
         }
         .padding(.vertical, 8)
         .frame(height: 44, alignment: .top)
+    }
+    
+    func getColorForDotEmotion(_ data: ChartDataViewModel) -> Color {
+        switch data.dayRate {
+        case 1: return Color(hex: "F5DADA")
+        case 2: return Color(hex: "B9C8FD")
+        case 3: return Color(hex: "B283E4")
+        case 4: return Color(hex: "86E9C5")
+        case 5: return Color(hex: "FFC794")
+        default: return Color.red
+        }
     }
     
     func isSameDay(date1: Date, date2: Date) -> Bool {

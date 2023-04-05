@@ -9,7 +9,7 @@ import Foundation
 
 protocol ReportServiceProtocol {
     func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport, completion: @escaping(Result<ReportModel, Error>) -> Void)
-    func fetchCurrentDate(date: Date, type: ReportEndPoint.TypeOfReport, complection: @escaping(Result<[ReportCurrentDateModel], Error>) -> Void)
+    func fetchCurrentDate(date: Date, complection: @escaping(Result<[ReportCurrentDateModel], Error>) -> Void)
 }
 
 struct ReportService: ReportServiceProtocol {
@@ -66,7 +66,6 @@ struct ReportService: ReportServiceProtocol {
     
     func fetchCurrentDate(
         date: Date,
-        type: ReportEndPoint.TypeOfReport,
         complection: @escaping(Result<[ReportCurrentDateModel], Error>) -> Void
     ) {
         let dateFormatter = DateFormatter()

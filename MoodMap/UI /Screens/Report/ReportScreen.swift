@@ -14,10 +14,7 @@ struct ReportScreen: View {
     
     @ObservedObject var viewModel: ViewModel
     private unowned let coordinator: ReportViewCoordinator
-    
-    @State var typeSelectedIndex: Int = 0
-    @State var dateSelectedIndex: Int = 0
-    
+        
     @State var choosedDate: Date = Date()
     @State var showDatePicker: Bool = false
     @State var isChoosindNewDate: Bool = false
@@ -50,18 +47,18 @@ struct ReportScreen: View {
             } else {
                 VStack {
                     SegmentedControlView(countOfItems: 3, segments: viewModel.isEnableTypeOfReprot,
-                                         selectedIndex: $typeSelectedIndex,
+                                         selectedIndex: $viewModel.selectedTypeOfReport,
                                          currentTab: viewModel.isEnableTypeOfReprot[0])
                     .padding(.top, 16)
                     .padding(.horizontal, 16)
                     
                     SegmentedControlView(countOfItems: 2, segments: dateTitles,
-                                         selectedIndex: $dateSelectedIndex,
+                                         selectedIndex: $viewModel.dateSelectedIndex,
                                          currentTab: dateTitles[0])
                     .padding(.top, 10)
                     .padding(.horizontal, 16)
                     
-                    if typeSelectedIndex != 2 {
+                    if viewModel.selectedTypeOfReport != 2 {
                         HStack {
                             
                             HStack {
@@ -79,19 +76,19 @@ struct ReportScreen: View {
                                         toNextWeekDidTap()
                                     }
                             }
-                            .opacity(dateSelectedIndex == 0 ? 1 : 0)
+                            .opacity(viewModel.dateSelectedIndex == 0 ? 1 : 0)
                             
                             
                             Spacer()
                             
-                            Text(dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!).\(coordinator.viewModel.currentShortMonthForFrom!) - \(coordinator.viewModel.lastDayOfWeek!).\(coordinator.viewModel.currentShortMonthForTo!), \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.shortDateMonthForFrom!), \(coordinator.viewModel.currentYear!)")
+                            Text(viewModel.dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!).\(coordinator.viewModel.currentShortMonthForFrom!) - \(coordinator.viewModel.lastDayOfWeek!).\(coordinator.viewModel.currentShortMonthForTo!), \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.shortDateMonthForFrom!), \(coordinator.viewModel.currentYear!)")
                                 .foregroundColor(Colors.Primary.blue)
                                 .font(.system(size: 14, weight: .semibold))
                                 .frame(maxWidth: .infinity, alignment: .center)
 
                             Spacer()
                             
-                            if dateSelectedIndex == 1 {
+                            if viewModel.dateSelectedIndex == 1 {
                                 Image("rc-ic-calendar")
                                     .resizable()
                                     .frame(width: 24, height: 24)
@@ -115,8 +112,8 @@ struct ReportScreen: View {
                         .padding(.trailing, 16)
                     }
                     
-                    if typeSelectedIndex == 0 || typeSelectedIndex == 1 {
-                        if dateSelectedIndex == 0 {
+                    if viewModel.selectedTypeOfReport == 0 || viewModel.selectedTypeOfReport == 1 {
+                        if viewModel.dateSelectedIndex == 0 {
                             WeekAnimationChart(weekChartViewModel: viewModel.reportViewModel?.chartData ?? [])
 //                                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
 //                                    .onEnded({ value in
@@ -161,32 +158,7 @@ struct ReportScreen: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .onChange(of: typeSelectedIndex, perform: { newValue in
-            
-            if dateSelectedIndex == 0 {
-                if newValue == 0 {
-                    viewModel.selectedTypeOfReport = newValue
-                    viewModel.getDates()
-                }
-                
-                if newValue == 1 {
-                    viewModel.selectedTypeOfReport = newValue
-                    viewModel.getDates()
-                }
-            }
-            
-            if dateSelectedIndex == 1 {
-                viewModel.selectedTypeOfReport = newValue
-                viewModel.didChooseMonthTab()
-            }
-        })
-        .onChange(of: dateSelectedIndex) { newValue in
-            if dateSelectedIndex == 1 {
-                viewModel.didChooseMonthTab()
-            }
-        }
         .popover(isPresented: $showDatePicker) {
-            
             HStack {
                 Button {
                     clearCalendar()
@@ -282,16 +254,16 @@ struct ReportScreen: View {
             .frame(height: 100)
             .padding(.horizontal, 16)
         }
-        .onChange(of: isChoosindNewDate, perform: { _ in
-            guard let lowerDate = lowerDate,
-                    let upperDate = upperDate
-            else {
-//                coordinator.viewModel.getJournalViewModel()
-                return
-            }
-//            coordinator.viewModel.getJournalViewModel(from: lowerDate.description,
-//                                                      to: upperDate.description)
-        })
+//        .onChange(of: isChoosindNewDate, perform: { _ in
+//            guard let lowerDate = lowerDate,
+//                    let upperDate = upperDate
+//            else {
+////                coordinator.viewModel.getJournalViewModel()
+//                return
+//            }
+////            coordinator.viewModel.getJournalViewModel(from: lowerDate.description,
+////                                                      to: upperDate.description)
+//        })
     }
     
     private func calendarViewDidTap() {

@@ -29,9 +29,34 @@ extension ReportScreen {
         @Published var lastDayOfWeek: String?
         @Published var currentMonth: String?
         @Published var currentYear: String?
-        
         @Published var isLoading: Bool = false
-        var selectedTypeOfReport: Int = 0
+      
+        var selectedTypeOfReport: Int = 0 {
+            didSet {
+                if dateSelectedIndex == 0 {
+                    if selectedTypeOfReport == 0 {
+                        getDates()
+                    }
+                    
+                    if selectedTypeOfReport == 1 {
+                        getDates()
+                    }
+                }
+                
+                if dateSelectedIndex == 1 {
+                    didChooseMonthTab()
+                }
+            }
+        }
+        
+        var dateSelectedIndex: Int = 0 {
+            didSet {
+                if dateSelectedIndex == 1 {
+                    didChooseMonthTab()
+                }
+            }
+        }
+        
         var shortDateMonthForFrom: String?
         var currentShortMonthForFrom: String?
         var currentShortMonthForTo: String?
@@ -188,20 +213,20 @@ extension ReportScreen {
             )
         }
         
-        func fetchCurrentDate(date: Date, completion: @escaping ([ReportCurrentViewModel]) -> Void) {
-            isLoading = true
+        func fetchCurrentDate(date: Date,
+                              completion: @escaping ([ReportCurrentViewModel]) -> Void) {
+//            isLoading = true
 
-            Services.reportService.fetchCurrentDate(date: date, type: .mood) { result in
+            Services.reportService.fetchCurrentDate(date: date) { result in
                 switch result {
                 case .success(let models):
                     let viewModel = self.mappingCurrentReportViewModel(models: models)
                     completion(viewModel)
-                    
-                    self.isLoading = false
                 case .failure(let error):
                     print(error)
                 }
             }
+//            self.isLoading = false
         }
         
         private func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport) {
@@ -343,7 +368,7 @@ extension ReportScreen {
         
         private func mappingColorForEmotion(with emotionTitle: String) -> Color {
             switch emotionTitle {
-            case "Oчень плохо": return Color(hex: "F5DADA")
+            case "Очень плохо": return Color(hex: "F5DADA")
             case "Плохо": return Color(hex: "B9C8FD")
             case "Нормально": return Color(hex: "B283E4")
             case "Хорошо": return Color(hex: "86E9C5")
