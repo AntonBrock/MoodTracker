@@ -33,20 +33,9 @@ struct ReportScreen: View {
     @State var isSelectedFirstDateInRange: Bool = false
     @State var isSelectedSecondDateInRange: Bool = false
         
-    var typeTitles: [String] = ["Настроение", "Стресс", "События"]
-    var dateTitles: [String] = ["Неделя", "Месяц", "Все время"]
-        
-//    @State var sampleAnalytics: [SiteView] = sample_analytics
-//    @State var monthDate: [TaskMetaData] = tasks
-//    @State var currentPlot = ""
-//    @State var offset: CGSize = CGSize(width: 100, height: 200)
-//    @State var showPlot = false
-//    @State var showDaylyMonthDetails: Bool = false
-//    @State var translation: CGFloat = 0
-    
-//    @State var currentDate: Date = Date()
-//    @State var currentMonth: Int = 0
-    
+    var typeTitles: [String] = ["Настроение", "Стресс"] // "События"
+    var dateTitles: [String] = ["Неделя", "Месяц"] // "Все время"
+
     init(
         coordinator: ReportViewCoordinator
     ){
@@ -96,11 +85,11 @@ struct ReportScreen: View {
                             
                             Spacer()
                             
-                            Text(dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!) - \(coordinator.viewModel.lastDayOfWeek!) \(coordinator.viewModel.currentMonth!) \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.currentMonth!) \(coordinator.viewModel.currentYear!)")
+                            Text(dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!).\(coordinator.viewModel.currentShortMonthForFrom!) - \(coordinator.viewModel.lastDayOfWeek!).\(coordinator.viewModel.currentShortMonthForTo!), \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.shortDateMonthForFrom!), \(coordinator.viewModel.currentYear!)")
                                 .foregroundColor(Colors.Primary.blue)
                                 .font(.system(size: 14, weight: .semibold))
                                 .frame(maxWidth: .infinity, alignment: .center)
-                            
+
                             Spacer()
                             
                             if dateSelectedIndex == 1 {

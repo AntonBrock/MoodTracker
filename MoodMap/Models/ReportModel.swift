@@ -209,7 +209,7 @@ struct ReportCurrentDateModel: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case stateRate = "state_rate"
-        case stressRate = "stress_rate"
+        case stressRate = "stress_id"
         case time
         case activities
     }

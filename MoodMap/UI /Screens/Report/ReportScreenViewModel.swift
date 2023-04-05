@@ -26,7 +26,12 @@ extension ReportScreen {
         @Published var firstDayOfWeek: String?
         @Published var lastDayOfWeek: String?
         @Published var currentMonth: String?
-        var shortDateMonth: String?
+       
+        var shortDateMonthForFrom: String?
+        
+        var currentShortMonthForFrom: String?
+        var currentShortMonthForTo: String?
+
         @Published var currentYear: String?
         
         @Published var isLoading: Bool = false
@@ -35,50 +40,167 @@ extension ReportScreen {
         
         func getDates() {
             
-            #warning("TODO: Нужно проверять что месяц тоже на -1 нужно делать, иначе запрос выглядит как 2023-04-25 / 2023-04-05")
             let formatter = DateFormatter()
-            formatter.dateFormat = "dd"
-            let firstDay = Calendar.current.date(byAdding: .day, value: -7, to: Date())
-            firstDayOfWeek = formatter.string(from: firstDay!)
-           
-            let lastDay = Calendar.current.date(byAdding: .day, value: 0, to: Date())
-            lastDayOfWeek = formatter.string(from: lastDay!)
+            formatter.dateFormat = "yyyy-MM-dd"
+            
+            let calendar = Calendar.current
+            let fromDate = calendar.date(byAdding: .day, value: -7, to: Date())!
+            let toDate = calendar.date(byAdding: .day, value: 0, to: Date())!
+
+            let fromDateString = formatter.string(from: fromDate)
+            let toDateString = formatter.string(from: toDate)
+            
+            setTextInformationDate(fromDate, toDate)
+            fetchReport(from: fromDateString, to: toDateString)
+            
+            
+//            #warning("TODO: Нужно проверять что месяц тоже на -1 нужно делать, иначе запрос выглядит как 2023-04-25 / 2023-04-05")
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "dd"
+//
+//            let firstDay = Calendar.current.date(byAdding: .day, value: -7, to: Date())
+//            firstDayOfWeek = formatter.string(from: firstDay!)
+//
+//            let lastDay = Calendar.current.date(byAdding: .day, value: 0, to: Date())
+//            lastDayOfWeek = formatter.string(from: lastDay!)
+//
+//            formatter.dateFormat = "MMM"
+//            let mounth = Calendar.current.date(byAdding: .month, value: 0, to: Date())
+//            currentMonth = formatter.string(from: mounth!)
+//
+//            formatter.dateFormat = "MM"
+//            let currentMounthForTo = Calendar.current.date(byAdding: .month, value: 0, to: Date())
+//            currentShortMonthForTo = formatter.string(from: currentMounthForTo!)
+//
+//            let isDayInMonthAgoForTheFirstDay = isDayInMonthAgo(day: Int(firstDayOfWeek ?? "") ?? 0)
+//
+//            if isDayInMonthAgoForTheFirstDay {
+//                formatter.dateFormat = "MM"
+//                let shortMonth = Calendar.current.date(byAdding: .month,
+//                                                       value: -1,
+//                                                       to: Date())
+//                shortDateMonthForFrom = formatter.string(from: shortMonth!)
+//            } else {
+//                formatter.dateFormat = "MM"
+//                let shortMonth = Calendar.current.date(byAdding: .month,
+//                                                       value: 0,
+//                                                       to: Date())
+//                shortDateMonthForFrom = formatter.string(from: shortMonth!)
+//            }
+//
+//
+//            formatter.dateFormat = "yyyy"
+//            let year = Calendar.current.date(byAdding: .year, value: 0, to: Date())
+//            currentYear = formatter.string(from: year!)
+//
+//            let from = "\(currentYear!)-\(shortDateMonthForFrom!)-\(firstDayOfWeek!)"
+//            let to = "\(currentYear!)-\(currentShortMonthForTo!)-\(lastDayOfWeek!)"
+//
+//            fetchReport(from: from, to: to)
+        }
+        
+//        private func saveBaseDate(_ fromDate: Date, _ toDate: Date) {
+//            let formatter = DateFormatter()
+//
+//            formatter.dateFormat = "MMM"
+//            self.currentMonth = formatter.string(from: fromDate)
+//
+//            formatter.dateFormat = "dd"
+//            self.firstDayOfWeek = formatter.string(from: fromDate)
+//            self.lastDayOfWeek = formatter.string(from: toDate)
+//
+//            formatter.dateFormat = "YYYY"
+//            self.currentYear = formatter.string(from: fromDate)
+//
+//            formatter.dateFormat = "MM"
+//            self.currentShortMonthForFrom = formatter.string(from: fromDate)
+//
+//            formatter.dateFormat = "MM"
+//            self.currentShortMonthForTo = formatter.string(from: toDate)
+//        }
+        
+        private func setTextInformationDate(_ fromDate: Date, _ toDate: Date) {
+            let formatter = DateFormatter()
             
             formatter.dateFormat = "MMM"
-            let mounth = Calendar.current.date(byAdding: .month, value: 0, to: Date())
-            currentMonth = formatter.string(from: mounth!)
+            self.currentMonth = formatter.string(from: fromDate)
+            
+            formatter.dateFormat = "dd"
+            self.firstDayOfWeek = formatter.string(from: fromDate)
+            self.lastDayOfWeek = formatter.string(from: toDate)
+            
+            formatter.dateFormat = "YYYY"
+            self.currentYear = formatter.string(from: fromDate)
+
+            formatter.dateFormat = "MM"
+            self.currentShortMonthForFrom = formatter.string(from: fromDate)
             
             formatter.dateFormat = "MM"
-            let shortMonth = Calendar.current.date(byAdding: .month, value: 0, to: Date())
-            shortDateMonth = formatter.string(from: shortMonth!)
+            self.currentShortMonthForTo = formatter.string(from: toDate)
+        }
+        
+        func isDayInMonthAgo(day: Int) -> Bool {
+            let calendar = Calendar.current
+            let now = Date()
+            let oneMonthAgo = calendar.date(byAdding: .month, value: -1, to: now)!
+            let components = calendar.dateComponents([.year, .month], from: oneMonthAgo)
+            let targetDate = calendar.date(from: components)!.addingTimeInterval(TimeInterval(day * 86400)) // Convert day to seconds
             
-            formatter.dateFormat = "yyyy"
-            let year = Calendar.current.date(byAdding: .year, value: 0, to: Date())
-            currentYear = formatter.string(from: year!)
-            
-            let from = "\(currentYear!)-\(shortDateMonth!)-\(firstDayOfWeek!)"
-            let to = "\(currentYear!)-\(shortDateMonth!)-\(lastDayOfWeek!)"
-
-            fetchReport(from: from, to: to)
+            return targetDate >= oneMonthAgo && targetDate < now
         }
         
         func toBeforeWeekDidTap() {
             // от выбранной недели назад на 1 неделю
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
             
-            let from = "\(currentYear!)-\(shortDateMonth!)-\(firstDayOfWeek!)"
-            let to = "\(currentYear!)-\(shortDateMonth!)-\(lastDayOfWeek!)"
+            let currentDayFrom = "\(currentYear!)-\(currentShortMonthForFrom!)-\(firstDayOfWeek!)"
+            let currentDayTo = "\(currentYear!)-\(currentShortMonthForTo!)-\(lastDayOfWeek!)"
+            
+            guard let dateFrom = formatter.date(from: currentDayFrom) else {
+                return
+            }
+            
+            guard let dateTo = formatter.date(from: currentDayTo) else {
+                return
+            }
 
-            fetchReport(from: from, to: to)
+            let calendar = Calendar.current
+            let oneWeekAgoFrom = calendar.date(byAdding: .day, value: -7, to: dateFrom)!
+            let oneWeekAgoTo = calendar.date(byAdding: .day, value: -7, to: dateTo)!
+
+            let oneWeekAgoFromString = formatter.string(from: oneWeekAgoFrom)
+            let oneWeekAgoToString = formatter.string(from: oneWeekAgoTo)
+
+            setTextInformationDate(oneWeekAgoFrom, oneWeekAgoTo)
+            fetchReport(from: oneWeekAgoFromString, to: oneWeekAgoToString)
         }
         
         func toNextWeekDidTap() {
-            // от выбранной недели вперед на 1 неделю
+            // от выбранной недели назад на 1 неделю
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
             
+            let currentDayFrom = "\(currentYear!)-\(currentShortMonthForFrom!)-\(firstDayOfWeek!)"
+            let currentDayTo = "\(currentYear!)-\(currentShortMonthForTo!)-\(lastDayOfWeek!)"
             
-            let from = "\(currentYear!)-\(shortDateMonth!)-\(firstDayOfWeek!)"
-            let to = "\(currentYear!)-\(shortDateMonth!)-\(lastDayOfWeek!)"
+            guard let dateFrom = formatter.date(from: currentDayFrom) else {
+                return
+            }
+            
+            guard let dateTo = formatter.date(from: currentDayTo) else {
+                return
+            }
 
-            fetchReport(from: from, to: to)
+            let calendar = Calendar.current
+            let oneWeekNextFrom = calendar.date(byAdding: .day, value: +7, to: dateFrom)!
+            let oneWeekNextTo = calendar.date(byAdding: .day, value: +7, to: dateTo)!
+
+            let oneWeekNextFromString = formatter.string(from: oneWeekNextFrom)
+            let oneWeekNextToString = formatter.string(from: oneWeekNextTo)
+
+            setTextInformationDate(oneWeekNextFrom, oneWeekNextTo)
+            fetchReport(from: oneWeekNextFromString, to: oneWeekNextToString)
         }
         
         func didChooseMonthTab() {
@@ -120,11 +242,13 @@ extension ReportScreen {
                 switch result {
                 case .success(let model):
                     self.reportViewModel = self.mappingViewModel(data: model)
-                    self.isLoading = false
+//                    self.isLoading = false
                 case .failure(let error):
                     print(error)
                 }
             }
+            
+            self.isLoading = false // Пока что тут сделаем, но потом нужно на компонент графика - добавить плашку что данных нет!
         }
         
         private func mappingCurrentReportViewModel(models: [ReportCurrentDateModel]) -> [ReportCurrentViewModel] {
@@ -241,7 +365,7 @@ extension ReportScreen {
             self.emotionCountData = emotionCountDataViewModel
             
             return ReportViewModel(
-                chartData: chartDataViewModel.sorted(by: { $0.date < $1.date }),
+                chartData: chartDataViewModel,
                 emotionCountData: emotionCountDataViewModel,
                 timeData: timeDataViewModel,
                 goodActivitiesReportData: goodActivitiesReportDataViewModel,
