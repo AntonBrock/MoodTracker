@@ -119,6 +119,16 @@ struct ReportScreen: View {
                     if typeSelectedIndex == 0 || typeSelectedIndex == 1 {
                         if dateSelectedIndex == 0 {
                             WeekAnimationChart(weekChartViewModel: viewModel.reportViewModel?.chartData ?? [])
+//                                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+//                                    .onEnded({ value in
+//                                        if value.translation.width < 0 {
+//                                            coordinator.viewModel.toBeforeWeekDidTap()
+//                                        }
+//
+//                                        if value.translation.width > 0 {
+//                                            coordinator.viewModel.toNextWeekDidTap()
+//                                        }
+//                                    }))
                         } else {
                             MonthChart(viewModel: viewModel,
                                        monthChartViewModel: viewModel.reportViewModel?.chartData ?? [])

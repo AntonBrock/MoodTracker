@@ -52,26 +52,7 @@ extension ReportScreen {
             
             setTextInformationDate(fromDate, toDate)
             fetchReport(from: fromDateString, to: toDateString)
-            
-            
-//            #warning("TODO: Нужно проверять что месяц тоже на -1 нужно делать, иначе запрос выглядит как 2023-04-25 / 2023-04-05")
-//            let formatter = DateFormatter()
-//            formatter.dateFormat = "dd"
-//
-//            let firstDay = Calendar.current.date(byAdding: .day, value: -7, to: Date())
-//            firstDayOfWeek = formatter.string(from: firstDay!)
-//
-//            let lastDay = Calendar.current.date(byAdding: .day, value: 0, to: Date())
-//            lastDayOfWeek = formatter.string(from: lastDay!)
-//
-//            formatter.dateFormat = "MMM"
-//            let mounth = Calendar.current.date(byAdding: .month, value: 0, to: Date())
-//            currentMonth = formatter.string(from: mounth!)
-//
-//            formatter.dateFormat = "MM"
-//            let currentMounthForTo = Calendar.current.date(byAdding: .month, value: 0, to: Date())
-//            currentShortMonthForTo = formatter.string(from: currentMounthForTo!)
-//
+
 //            let isDayInMonthAgoForTheFirstDay = isDayInMonthAgo(day: Int(firstDayOfWeek ?? "") ?? 0)
 //
 //            if isDayInMonthAgoForTheFirstDay {
@@ -87,43 +68,14 @@ extension ReportScreen {
 //                                                       to: Date())
 //                shortDateMonthForFrom = formatter.string(from: shortMonth!)
 //            }
-//
-//
-//            formatter.dateFormat = "yyyy"
-//            let year = Calendar.current.date(byAdding: .year, value: 0, to: Date())
-//            currentYear = formatter.string(from: year!)
-//
-//            let from = "\(currentYear!)-\(shortDateMonthForFrom!)-\(firstDayOfWeek!)"
-//            let to = "\(currentYear!)-\(currentShortMonthForTo!)-\(lastDayOfWeek!)"
-//
-//            fetchReport(from: from, to: to)
         }
-        
-//        private func saveBaseDate(_ fromDate: Date, _ toDate: Date) {
-//            let formatter = DateFormatter()
-//
-//            formatter.dateFormat = "MMM"
-//            self.currentMonth = formatter.string(from: fromDate)
-//
-//            formatter.dateFormat = "dd"
-//            self.firstDayOfWeek = formatter.string(from: fromDate)
-//            self.lastDayOfWeek = formatter.string(from: toDate)
-//
-//            formatter.dateFormat = "YYYY"
-//            self.currentYear = formatter.string(from: fromDate)
-//
-//            formatter.dateFormat = "MM"
-//            self.currentShortMonthForFrom = formatter.string(from: fromDate)
-//
-//            formatter.dateFormat = "MM"
-//            self.currentShortMonthForTo = formatter.string(from: toDate)
-//        }
         
         private func setTextInformationDate(_ fromDate: Date, _ toDate: Date) {
             let formatter = DateFormatter()
             
             formatter.dateFormat = "MMM"
             self.currentMonth = formatter.string(from: fromDate)
+            self.shortDateMonthForFrom = formatter.string(from: fromDate)
             
             formatter.dateFormat = "dd"
             self.firstDayOfWeek = formatter.string(from: fromDate)
@@ -137,6 +89,7 @@ extension ReportScreen {
             
             formatter.dateFormat = "MM"
             self.currentShortMonthForTo = formatter.string(from: toDate)
+            
         }
         
         func isDayInMonthAgo(day: Int) -> Bool {
