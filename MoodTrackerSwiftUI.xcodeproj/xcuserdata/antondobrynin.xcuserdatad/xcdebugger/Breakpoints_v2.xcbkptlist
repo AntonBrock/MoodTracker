@@ -366,8 +366,8 @@
             filePath = "MoodMap/UI /Screens/Report/ReportScreenViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
             landmarkName = "didChooseMonthTab()"
             landmarkType = "7">
          </BreakpointContent>
@@ -461,8 +461,8 @@
             filePath = "MoodMap/UI /Screens/Report/ReportScreenViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "mappingViewModel(data:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -477,8 +477,8 @@
             filePath = "MoodMap/UI /Screens/Report/ReportScreenViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
+            startingLineNumber = "387"
+            endingLineNumber = "387"
             landmarkName = "mappingViewModel(data:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -525,8 +525,8 @@
             filePath = "MoodMap/UI /Screens/Report/ReportScreenViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
+            startingLineNumber = "325"
+            endingLineNumber = "325"
             landmarkName = "fetchCurrentDate(date:completion:)"
             landmarkType = "7">
             <Locations>
@@ -953,8 +953,8 @@
             filePath = "MoodMap/UI /Screens/Report/ReportScreenViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "463"
-            endingLineNumber = "463"
+            startingLineNumber = "467"
+            endingLineNumber = "467"
             landmarkName = "mappingViewModel(data:)"
             landmarkType = "7">
          </BreakpointContent>

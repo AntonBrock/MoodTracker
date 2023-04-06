@@ -55,6 +55,10 @@ extension ReportScreen {
                 if dateSelectedIndex == 1 {
                     didChooseMonthTab()
                 }
+                
+                if dateSelectedIndex == 0 {
+                    getDates()
+                }
             }
         }
         
