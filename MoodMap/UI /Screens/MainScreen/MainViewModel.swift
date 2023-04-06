@@ -16,7 +16,8 @@ extension MainView {
             common: "",
             text: [],
             color: [],
-            countState: []
+            countState: [],
+            emotionCircleViewModel: []
         )
         
         @Published var timeData: TimeDataViewModel?
@@ -130,7 +131,18 @@ extension MainView {
                 countState: emotionCountData.state.compactMap({ Double($0.count) }).sorted(by: { $0 > $1 })
             )
             
-            guard let emotionCountDataViewModel = emotionCountDataViewModel else { fatalError() }
+            guard var emotionCountDataViewModel = emotionCountDataViewModel else { fatalError() }
+            
+            var emotionalCircleViewModel: [EmotionCircleViewModel] = []
+            emotionCountData.state.forEach { item in
+                emotionalCircleViewModel.append(EmotionCircleViewModel(
+                    name: item.text,
+                    value: String(item.count),
+                    color: mappingColorForEmotion(with: item.text)))
+            }
+
+            self.emotionCountData = emotionCountDataViewModel
+            emotionCountDataViewModel.emotionCircleViewModel = emotionalCircleViewModel
 
             return emotionCountDataViewModel
         }

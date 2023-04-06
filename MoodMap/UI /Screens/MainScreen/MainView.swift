@@ -88,7 +88,8 @@ struct MainView: View {
                     emotionStateCounts: $viewModel.emotionCountData.countState,
                     emotionNames: $viewModel.emotionCountData.text,
                     emotionColors: $viewModel.emotionCountData.color,
-                    emotionTotal: $viewModel.emotionCountData.total
+                    emotionTotal: $viewModel.emotionCountData.total,
+                    emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel
                 )
                 .padding(.top, 16)
                 .padding(.horizontal, 10)

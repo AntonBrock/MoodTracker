@@ -14,7 +14,6 @@ struct MonthChart: View {
     @State var subReportInfo: [ReportCurrentViewModel] = []
     
     @State var showDaylyMonthDetails: Bool = false
-    @State var translation: CGFloat = 0
     
     #warning("TODO: Вызывается по 3 раза!")
     @State var currentDate: Date = Date() {
@@ -84,7 +83,7 @@ struct MonthChart: View {
                 if let task = monthChartViewModel.first(where: { task in
                     return isSameDay(date1: task.date2, date2: currentDate)
                 }) {
-                    ForEach(subReportInfo, id: \.time) { task in
+                    ForEach(subReportInfo, id: \.stateRate) { task in
                         VStack(alignment: .leading, spacing: 8) {
                             HStack {
                                 HStack(spacing: 16) {
@@ -247,9 +246,9 @@ struct MonthChart: View {
                     
                     if isSameDay(date1: task.date2, date2: value.date) {
                         HStack(spacing: 1) {
-                            ForEach (0..<task.description.count) { _ in
+                            ForEach (0..<task.description.count) { item in
                                 Circle()
-                                    .fill(getColorForDotEmotion(task))
+                                    .fill(getColorForDotEmotion(task.description[item].rate))
                                     .frame(width: 5, height: 5)
                             }
                         }
@@ -269,8 +268,8 @@ struct MonthChart: View {
         .frame(height: 44, alignment: .top)
     }
     
-    func getColorForDotEmotion(_ data: ChartDataViewModel) -> Color {
-        switch data.dayRate {
+    func getColorForDotEmotion(_ data: Int) -> Color {
+        switch data {
         case 1: return Color(hex: "F5DADA")
         case 2: return Color(hex: "B9C8FD")
         case 3: return Color(hex: "B283E4")

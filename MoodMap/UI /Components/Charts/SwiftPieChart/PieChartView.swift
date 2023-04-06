@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@available(OSX 10.15, *)
 public struct PieChartView: View {
     
     @Binding var values: [Double]
@@ -15,6 +14,8 @@ public struct PieChartView: View {
     @Binding var emotionsValuesByCategory: [Double]
     @Binding var colors: [Color]
     @Binding var names: [String]
+    
+    @Binding var emotionCircleViewModel: [EmotionCircleViewModel]?
     
     public let formatter: (Double) -> String
     
@@ -29,14 +30,14 @@ public struct PieChartView: View {
         var endDeg: Double = 0
         var tempSlices: [PieSliceData] = []
         
-        for (i, value) in values.enumerated() {
-            let degrees: Double = value * 360 / sum
+        for i in emotionCircleViewModel! {
+            let degrees: Double = (Double(i.value) ?? 0) * 360 / sum
             tempSlices.append(
                 PieSliceData(
                     startAngle: Angle(degrees: endDeg),
                     endAngle: Angle(degrees: endDeg + degrees),
                     text: String(format: "2f", sum),
-                    color: self.colors[i])
+                    color: i.color)
             )
             endDeg += degrees
         }
@@ -106,29 +107,23 @@ public struct PieChartView: View {
     @ViewBuilder
     func setChartRows() -> some View {
         PieChartRows(
-            count: values.count,
-            colors: colors,
-            names: names,
-            percents: emotionsValuesByCategory.map { String(Int($0)) }
+            emotionCircleViewModel: emotionCircleViewModel?.sorted(by: { $0.value > $1.value })
         )
         .frame(maxWidth: .infinity, alignment: .top)
     }
 }
 
 struct PieChartRows: View {
-    var count: Int
-    var colors: [Color]
-    var names: [String]
-    var percents: [String]
+    var emotionCircleViewModel: [EmotionCircleViewModel]?
     
     var body: some View {
         VStack {
-            ForEach(0..<count) { i in
+            ForEach(emotionCircleViewModel ?? [], id: \.name) { i in
                 HStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(self.colors[i])
+                        .fill(i.color)
                         .frame(width: 10, height: 10)
-                    Text(self.names[i])
+                    Text(i.name)
                         .foregroundColor(Colors.Primary.blue)
                         .font(.system(size: 14, weight: .regular))
                         .padding(.leading, 10)
@@ -136,7 +131,7 @@ struct PieChartRows: View {
                     Spacer()
                     
                     VStack(alignment: .trailing) {
-                        Text(self.percents[i])
+                        Text(i.value)
                             .foregroundColor(Colors.Primary.lightGray)
                             .font(.system(size: 14, weight: .light))
 

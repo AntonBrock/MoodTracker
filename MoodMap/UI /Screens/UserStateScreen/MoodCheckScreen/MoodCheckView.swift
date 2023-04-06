@@ -318,6 +318,7 @@ struct MoodCheckView: View {
                         
                         Spacer()
                         
+                            #warning("TODO: Не закрывается")
                         MTButton(buttonStyle: .fill, title: "Применить") {
                             showChoosingTimePicker.toggle()
                             showDatePicker.toggle()

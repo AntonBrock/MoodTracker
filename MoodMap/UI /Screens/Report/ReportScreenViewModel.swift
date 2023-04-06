@@ -22,7 +22,8 @@ extension ReportScreen {
             common: "",
             text: [],
             color: [],
-            countState: []
+            countState: [],
+            emotionCircleViewModel: []
         )
         
         @Published var firstDayOfWeek: String?
@@ -58,6 +59,7 @@ extension ReportScreen {
         }
         
         var shortDateMonthForFrom: String?
+        var shortDateMonthForTo: String?
         var currentShortMonthForFrom: String?
         var currentShortMonthForTo: String?
         
@@ -109,6 +111,7 @@ extension ReportScreen {
             formatter.dateFormat = "dd"
             self.firstDayOfWeek = formatter.string(from: fromDate)
             self.lastDayOfWeek = formatter.string(from: toDate)
+            self.shortDateMonthForTo = formatter.string(from: toDate)
             
             formatter.dateFormat = "YYYY"
             self.currentYear = formatter.string(from: fromDate)
@@ -236,13 +239,11 @@ extension ReportScreen {
                 switch result {
                 case .success(let model):
                     self.reportViewModel = self.mappingViewModel(data: model)
-//                    self.isLoading = false
+                    self.isLoading = false
                 case .failure(let error):
                     print(error)
                 }
-            }
-            
-            self.isLoading = false // Пока что тут сделаем, но потом нужно на компонент графика - добавить плашку что данных нет!
+            }            
         }
         
         private func mappingCurrentReportViewModel(models: [ReportCurrentDateModel]) -> [ReportCurrentViewModel] {
@@ -318,17 +319,10 @@ extension ReportScreen {
             emotionCountDataViewModel = EmotionCountDataViewModel(
                 total: emotionCountData.total,
                 common: emotionCountData.common,
-                text: emotionCountData.state.compactMap({ $0.text }),
-                color: emotionCountData.state.compactMap({ mappingColorForEmotion(with: $0.text)}),
-                countState: emotionCountData.state.compactMap({ Double($0.count) }).sorted(by: { $0 > $1 })
-                
-//                state: emotionCountData.state.compactMap({ EmotionCountDataViewModel.EmotionCountDataStateViewModel(
-//                    text: $0.text,
-//                    countState: Double($0.count),
-//                    color: mappingColorForEmotion(with: $0.text)
+                text: emotionCountData.state.map({ $0.text }),
+                color: emotionCountData.state.map({ mappingColorForEmotion(with: $0.text)}),
+                countState: emotionCountData.state.map({ Double($0.count) })
             )
-//            .sorted(by: { $0.countState > $1.countState })
-//            )
             
             timeDataViewModel = TimeDataViewModel(
                 bestTime: timeData.bestTime,
@@ -356,7 +350,16 @@ extension ReportScreen {
                   let goodActivitiesReportDataViewModel = goodActivitiesReportDataViewModel,
                   let badActivitiesReportDataViewModel = badActivitiesReportDataViewModel else { fatalError() }
             
+            var emotionalCircleViewModel: [EmotionCircleViewModel] = []
+            emotionCountData.state.forEach { item in
+                emotionalCircleViewModel.append(EmotionCircleViewModel(
+                    name: item.text,
+                    value: String(item.count),
+                    color: mappingColorForEmotion(with: item.text)))
+            }
+
             self.emotionCountData = emotionCountDataViewModel
+            self.emotionCountData.emotionCircleViewModel = emotionalCircleViewModel
             
             return ReportViewModel(
                 chartData: chartDataViewModel,
@@ -404,18 +407,16 @@ struct ChartDataViewModel: Identifiable {
 }
 
 struct EmotionCountDataViewModel: Equatable {
+    static func == (lhs: EmotionCountDataViewModel, rhs: EmotionCountDataViewModel) -> Bool {
+        return lhs.text == rhs.text
+    }
+    
     var total: Int
     let common: String
-//    var state: [EmotionCountDataStateViewModel]
     var text: [String]
     var color: [Color]
     var countState: [Double]
-
-//    struct EmotionCountDataStateViewModel: Equatable {
-//        let text: String
-//        var countState: Double
-//        let color: String
-//    }
+    var emotionCircleViewModel: [EmotionCircleViewModel]?
 }
 
 struct TimeDataViewModel {

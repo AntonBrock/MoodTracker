@@ -29,6 +29,7 @@ struct ReportScreen: View {
     
     @State var isSelectedFirstDateInRange: Bool = false
     @State var isSelectedSecondDateInRange: Bool = false
+    @State var isAnimated = false
         
     var dateTitles: [String] = ["Неделя", "Месяц"] // "Все время"
 
@@ -46,21 +47,24 @@ struct ReportScreen: View {
                 Text("Is Loading ...")
             } else {
                 VStack {
-                    SegmentedControlView(countOfItems: 3, segments: viewModel.isEnableTypeOfReprot,
-                                         selectedIndex: $viewModel.selectedTypeOfReport,
-                                         currentTab: viewModel.isEnableTypeOfReprot[0])
-                    .padding(.top, 16)
-                    .padding(.horizontal, 16)
-                    
-                    SegmentedControlView(countOfItems: 2, segments: dateTitles,
-                                         selectedIndex: $viewModel.dateSelectedIndex,
-                                         currentTab: dateTitles[0])
-                    .padding(.top, 10)
-                    .padding(.horizontal, 16)
+                    if isAnimated {
+                        SegmentedControlView(countOfItems: 3, segments: viewModel.isEnableTypeOfReprot,
+                                             selectedIndex: $viewModel.selectedTypeOfReport,
+                                             currentTab: viewModel.isEnableTypeOfReprot[0])
+                        .padding(.top, 16)
+                        .padding(.horizontal, 16)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                        
+                        SegmentedControlView(countOfItems: 2, segments: dateTitles,
+                                             selectedIndex: $viewModel.dateSelectedIndex,
+                                             currentTab: dateTitles[0])
+                        .padding(.top, 10)
+                        .padding(.horizontal, 16)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                    }
                     
                     if viewModel.selectedTypeOfReport != 2 {
                         HStack {
-                            
                             HStack {
                                 Image("rc-ic-toBeforeWeek")
                                     .resizable()
@@ -81,11 +85,11 @@ struct ReportScreen: View {
                             
                             Spacer()
                             
-                            Text(viewModel.dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!).\(coordinator.viewModel.currentShortMonthForFrom!) - \(coordinator.viewModel.lastDayOfWeek!).\(coordinator.viewModel.currentShortMonthForTo!), \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.shortDateMonthForFrom!), \(coordinator.viewModel.currentYear!)")
+                            Text(viewModel.dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!).\(coordinator.viewModel.currentShortMonthForFrom!) - \(coordinator.viewModel.lastDayOfWeek!).\(coordinator.viewModel.currentShortMonthForTo!), \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.shortDateMonthForTo!), \(coordinator.viewModel.currentYear!)")
                                 .foregroundColor(Colors.Primary.blue)
                                 .font(.system(size: 14, weight: .semibold))
                                 .frame(maxWidth: .infinity, alignment: .center)
-
+                            
                             Spacer()
                             
                             if viewModel.dateSelectedIndex == 1 {
@@ -112,52 +116,53 @@ struct ReportScreen: View {
                         .padding(.trailing, 16)
                     }
                     
-                    if viewModel.selectedTypeOfReport == 0 || viewModel.selectedTypeOfReport == 1 {
-                        if viewModel.dateSelectedIndex == 0 {
-                            WeekAnimationChart(weekChartViewModel: viewModel.reportViewModel?.chartData ?? [])
-//                                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-//                                    .onEnded({ value in
-//                                        if value.translation.width < 0 {
-//                                            coordinator.viewModel.toBeforeWeekDidTap()
-//                                        }
-//
-//                                        if value.translation.width > 0 {
-//                                            coordinator.viewModel.toNextWeekDidTap()
-//                                        }
-//                                    }))
+                    if isAnimated {
+                        if viewModel.selectedTypeOfReport == 0 || viewModel.selectedTypeOfReport == 1 {
+                            if viewModel.dateSelectedIndex == 0 {
+                                WeekAnimationChart(weekChartViewModel: viewModel.reportViewModel?.chartData ?? [])
+                                    .transition(.move(edge: .top).combined(with: .opacity))
+                            } else {
+                                MonthChart(viewModel: viewModel,
+                                           monthChartViewModel: viewModel.reportViewModel?.chartData ?? [])
+                            }
+                            
+                            CircleEmotionChart(
+                                emotionStateCounts: $viewModel.emotionCountData.countState,
+                                emotionNames: $viewModel.emotionCountData.text,
+                                emotionColors: $viewModel.emotionCountData.color,
+                                emotionTotal: $viewModel.emotionCountData.total,
+                                emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel
+                            )
+                            
+                            
+                            ReportTipView(
+                                text: "Твоим самым частым настроением стало ",
+                                selectedText: viewModel.reportViewModel?.emotionCountData.common ?? "",
+                                tipType: .commonEmotionState
+                            )
+                            .padding(.top, -16)
+                            
+                            DayilyCharts(viewModel: viewModel.reportViewModel?.timeData)
+                            
+                            //                        ReportTipView(text: "")
+                            
+                            ActivitiesCharts(goodActivitiesViewModel: viewModel.reportViewModel?.goodActivitiesReportData,
+                                             badActivitiesViewModel: viewModel.reportViewModel?.badActivitiesReportData)
                         } else {
-                            MonthChart(viewModel: viewModel,
-                                       monthChartViewModel: viewModel.reportViewModel?.chartData ?? [])
+                            ActivitiesChartsForAllTime()
                         }
-                        
-                        CircleEmotionChart(
-                            emotionStateCounts: $viewModel.emotionCountData.countState,
-                            emotionNames: $viewModel.emotionCountData.text,
-                            emotionColors: $viewModel.emotionCountData.color,
-                            emotionTotal: $viewModel.emotionCountData.total
-                        )
-                        
-                        ReportTipView(
-                            text: "Твоим самым частым настроением стало ",
-                            selectedText: viewModel.reportViewModel?.emotionCountData.common ?? "",
-                            tipType: .commonEmotionState
-                        )
-                        .padding(.top, -16)
-                        
-                        DayilyCharts(viewModel: viewModel.reportViewModel?.timeData)
-                        
-                        //                        ReportTipView(text: "")
-                        
-                        ActivitiesCharts(goodActivitiesViewModel: viewModel.reportViewModel?.goodActivitiesReportData,
-                                         badActivitiesViewModel: viewModel.reportViewModel?.badActivitiesReportData)
-                    } else {
-                        ActivitiesChartsForAllTime()
                     }
-                    
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
+        .onChange(of: viewModel.isLoading, perform: { newValue in
+            withAnimation(.linear(duration: 0.5)) {
+                if !isAnimated {
+                    self.isAnimated = true
+                }
+            }
+        })
         .popover(isPresented: $showDatePicker) {
             HStack {
                 Button {

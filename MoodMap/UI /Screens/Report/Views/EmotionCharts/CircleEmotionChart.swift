@@ -7,12 +7,20 @@
 
 import SwiftUI
 
+struct EmotionCircleViewModel {
+    var name: String
+    var value: String
+    var color: Color
+}
+
 struct CircleEmotionChart: View {
         
     @Binding var emotionStateCounts: [Double]
     @Binding var emotionNames: [String]
     @Binding var emotionColors: [Color]
     @Binding var emotionTotal: Int
+    
+    @Binding var emotionCircleViewModel: [EmotionCircleViewModel]?
 
     var body: some View {
         RoundedRectangle(cornerRadius: 17)
@@ -27,6 +35,7 @@ struct CircleEmotionChart: View {
                         emotionsValuesByCategory: $emotionStateCounts,
                         colors: $emotionColors,
                         names: $emotionNames,
+                        emotionCircleViewModel: $emotionCircleViewModel,
                         formatter: { value in String(format: "2f", value) }
                     )
                     .frame(width: UIScreen.main.bounds.width - 32, height: 135, alignment: .center)
