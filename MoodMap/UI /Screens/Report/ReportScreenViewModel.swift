@@ -111,17 +111,27 @@ extension ReportScreen {
             formatter.dateFormat = "dd"
             self.firstDayOfWeek = formatter.string(from: fromDate)
             self.lastDayOfWeek = formatter.string(from: toDate)
-            self.shortDateMonthForTo = formatter.string(from: toDate)
             
             formatter.dateFormat = "YYYY"
             self.currentYear = formatter.string(from: fromDate)
 
             formatter.dateFormat = "MM"
             self.currentShortMonthForFrom = formatter.string(from: fromDate)
+            self.currentShortMonthForTo = formatter.string(from: toDate)
+            
+            formatter.dateFormat = "MMM"
+            self.shortDateMonthForTo = formatter.string(from: toDate)
+        }
+        
+        private func setTextInformationMonthDate(_ fromDate: Date, _ toDate: Date) {
+            let formatter = DateFormatter()
+            
+            formatter.dateFormat = "MMM"
+            self.shortDateMonthForTo = formatter.string(from: toDate)
             
             formatter.dateFormat = "MM"
             self.currentShortMonthForTo = formatter.string(from: toDate)
-            
+            self.currentShortMonthForTo = formatter.string(from: toDate)
         }
         
         func isDayInMonthAgo(day: Int) -> Bool {
@@ -166,7 +176,7 @@ extension ReportScreen {
         }
         
         func toNextWeekDidTap() {
-            // от выбранной недели назад на 1 неделю
+            // от выбранной недели вперед на 1 неделю
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
             
@@ -196,6 +206,95 @@ extension ReportScreen {
             )
         }
         
+        func toBeforeMonthDidTap() {
+            // от выбранного месяца назад на 1 месяц
+            let currentDayFrom = "\(currentYear!)-\(currentShortMonthForTo!)-01"
+            let monthAgo = getDatesForMonthAgo(from: currentDayFrom)
+
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let monthAgoDateFrom = formatter.date(from: monthAgo?.0 ?? "")!
+            let monthAgoDateTo = formatter.date(from: monthAgo?.1 ?? "")!
+
+            setTextInformationMonthDate(monthAgoDateFrom, monthAgoDateTo)
+            fetchReport(
+                from: monthAgo?.0 ?? "",
+                to: monthAgo?.1 ?? "",
+                type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood
+            )
+        }
+        
+        func toNextMonthDidTap() {
+            // от выбранного месяца вперед на 1 месяц
+            let currentDayFrom = "\(currentYear!)-\(currentShortMonthForTo!)-01"
+            let nextMonth = getDatesForMonthNext(from: currentDayFrom)
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let nextMonthDateFrom = formatter.date(from: nextMonth?.0 ?? "")!
+            let nextMonthDateTo = formatter.date(from: nextMonth?.1 ?? "")!
+
+            setTextInformationMonthDate(nextMonthDateFrom, nextMonthDateTo)
+            fetchReport(
+                from: nextMonth?.0 ?? "",
+                to: nextMonth?.1 ?? "",
+                type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood
+            )
+        }
+        
+        private func getDatesForMonthAgo(from dateString: String) -> (String, String)? {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            guard let startDate = formatter.date(from: dateString) else {
+                return nil // Failed to parse date string
+            }
+            
+            let calendar = Calendar.current
+            
+            // Subtract one month from the start date
+            guard let monthAgo = calendar.date(byAdding: .month, value: -1, to: startDate) else {
+                return nil // Failed to subtract one month from start date
+            }
+            
+            // Get the start of the month a month ago
+            let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: monthAgo))!
+            
+            // Get the end of the month a month ago
+            let startOfNextMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
+            
+            // Convert dates back to string format
+            let startOfMonthString = formatter.string(from: startOfMonth)
+            let startOfNextMonthString = formatter.string(from: startOfNextMonth)
+            
+            return (startOfMonthString, startOfNextMonthString)
+        }
+        private func getDatesForMonthNext(from dateString: String) -> (String, String)? {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            guard let startDate = formatter.date(from: dateString) else {
+                return nil // Failed to parse date string
+            }
+            
+            let calendar = Calendar.current
+            
+            // Subtract one month from the start date
+            guard let monthAgo = calendar.date(byAdding: .month, value: +1, to: startDate) else {
+                return nil // Failed to subtract one month from start date
+            }
+            
+            // Get the start of the month a month ago
+            let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: monthAgo))!
+            
+            // Get the end of the month a month ago
+            let startOfNextMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
+            
+            // Convert dates back to string format
+            let startOfMonthString = formatter.string(from: startOfMonth)
+            let startOfNextMonthString = formatter.string(from: startOfNextMonth)
+            
+            return (startOfMonthString, startOfNextMonthString)
+        }
+        
         func didChooseMonthTab() {
             let formatter = DateFormatter()
             
@@ -204,7 +303,6 @@ extension ReportScreen {
 
             formatter.dateFormat = "MM"
             let month = formatter.string(from: Calendar.current.date(byAdding: .month, value: 0, to: Date())!)
-            
             
             let from = "\(currentYear!)-\(month)-01"
             let to = "\(currentYear!)-\(month)-\(theLastDayOfWeek)"
@@ -239,11 +337,13 @@ extension ReportScreen {
                 switch result {
                 case .success(let model):
                     self.reportViewModel = self.mappingViewModel(data: model)
-                    self.isLoading = false
                 case .failure(let error):
                     print(error)
                 }
-            }            
+            }
+            
+            isLoading = false
+            
         }
         
         private func mappingCurrentReportViewModel(models: [ReportCurrentDateModel]) -> [ReportCurrentViewModel] {

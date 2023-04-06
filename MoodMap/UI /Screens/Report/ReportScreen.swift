@@ -29,7 +29,7 @@ struct ReportScreen: View {
     
     @State var isSelectedFirstDateInRange: Bool = false
     @State var isSelectedSecondDateInRange: Bool = false
-    @State var isAnimated = false
+    @State var isAnimated = true
         
     var dateTitles: [String] = ["Неделя", "Месяц"] // "Все время"
 
@@ -65,22 +65,42 @@ struct ReportScreen: View {
                     
                     if viewModel.selectedTypeOfReport != 2 {
                         HStack {
-                            HStack {
-                                Image("rc-ic-toBeforeWeek")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                    .onTapGesture {
-                                        toBeforeWeekDidTap()
-                                    }
-                                
-                                Image("rc-ic-toNextWeek")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                    .onTapGesture {
-                                        toNextWeekDidTap()
-                                    }
+                            
+                            if viewModel.dateSelectedIndex == 0 {
+                                HStack {
+                                    Image("rc-ic-toBeforeWeek")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                        .onTapGesture {
+                                            toBeforeWeekDidTap()
+                                        }
+                                    
+                                    Image("rc-ic-toNextWeek")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                        .onTapGesture {
+                                            toNextWeekDidTap()
+                                        }
+                                }
                             }
-                            .opacity(viewModel.dateSelectedIndex == 0 ? 1 : 0)
+                            
+                            if viewModel.dateSelectedIndex == 1 {
+                                HStack {
+                                    Image("rc-ic-toBeforeWeek")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                        .onTapGesture {
+                                            toBeforeMonthDidTap()
+                                        }
+                                    
+                                    Image("rc-ic-toNextWeek")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                        .onTapGesture {
+                                            toNextMonthDidTap()
+                                        }
+                                }
+                            }
                             
                             
                             Spacer()
@@ -92,21 +112,12 @@ struct ReportScreen: View {
                             
                             Spacer()
                             
-                            if viewModel.dateSelectedIndex == 1 {
-                                Image("rc-ic-calendar")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                    .onTapGesture {
-                                        monthDidTap()
-                                    }
-                            } else {
-                                Image("rc-ic-information")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                    .onTapGesture {
-                                        informationDidTap()
-                                    }
-                            }
+                            Image("rc-ic-information")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .onTapGesture {
+                                    informationDidTap()
+                                }
                             
                             
                         }
@@ -295,8 +306,12 @@ struct ReportScreen: View {
         coordinator.viewModel.toNextWeekDidTap()
     }
     
-    private func monthDidTap() {
-        print("monthDidTap")
+    private func toBeforeMonthDidTap() {
+        viewModel.toBeforeMonthDidTap()
+    }
+    
+    private func toNextMonthDidTap() {
+        viewModel.toNextMonthDidTap()
     }
     
     private func informationDidTap() {
@@ -304,9 +319,7 @@ struct ReportScreen: View {
     }
 }
 
-
 // MARK: - For CalendarData
-
 struct DateValue: Identifiable {
     var id = UUID().uuidString
     var day: Int
