@@ -10,7 +10,7 @@ import Charts
 
 struct WeekAnimationChart: View {
     
-    @State var weekChartViewModel: [ChartDataViewModel] = []
+    @Binding var weekChartViewModel: [ChartDataViewModel]
     @State var translation: CGFloat = 0
 
     var body: some View {
@@ -35,46 +35,38 @@ struct WeekAnimationChart: View {
         GeometryReader { proxy in
             let height = proxy.size.height
             let width = (proxy.size.width) / CGFloat(weekChartViewModel.count - 1)
-            
-//            let maxPoint = (sampleAnalytics.max()?.emotion ?? 0)
-//            let points = sampleAnalytics.enumerated().compactMap({ item -> CGPoint in
-//                let progress = item.element.emotion / maxPoint
-//                let pathHeight = progress
-//
-//                let pathWidth = width * CGFloat(item.offset)
-//
-//                return CGPoint(x: pathWidth, y: CGFloat(-pathHeight) + height)
-//            })
-                                                     
 
             ZStack {
-                Chart {
-                    ForEach (weekChartViewModel) { item in
-                        LineMark(
-                            x: .value("day", item.date),
-//                            y: .value("emotion", item.animate ? item.dayRate : 0)
-                            y: .value("emotion", item.dayRate)
-                        )
-//                        .accessibilityLabel("\(item.emotion)")
-                        .foregroundStyle(
-                               .linearGradient(
-                                    colors: [ Colors.Secondary.yourPinkRed400,
-                                              Colors.Secondary.melrose500Blue,
-                                              Colors.Secondary.cruise400Green],
-                                    startPoint: .bottom,
-                                    endPoint: .top
+                if !weekChartViewModel.isEmpty {
+                    Chart {
+                        ForEach (weekChartViewModel) { item in
+                            LineMark(
+                                x: .value("day", item.date),
+    //                            y: .value("emotion", item.animate ? item.dayRate : 0)
+                                y: .value("emotion", item.dayRate)
+                            )
+    //                        .accessibilityLabel("\(item.emotion)")
+                            .foregroundStyle(
+                                   .linearGradient(
+                                        colors: [ Colors.Secondary.yourPinkRed400,
+                                                  Colors.Secondary.melrose500Blue,
+                                                  Colors.Secondary.cruise400Green],
+                                        startPoint: .bottom,
+                                        endPoint: .top
+                                   )
                                )
-                           )
-                           .alignsMarkStylesWithPlotArea()
-                           .interpolationMethod(.catmullRom)
+                               .alignsMarkStylesWithPlotArea()
+                               .interpolationMethod(.catmullRom)
+                        }
                     }
-                }
-                // MARK: Customizing Y-Axis Length
-                .chartYScale(domain: 1...(max == 0 ? 5 : 5))
-                .padding(.top, 25)
-                .frame (height: 250)
-                .onAppear {
-                    animateGraph()
+                    // MARK: Customizing Y-Axis Length
+                    .chartYScale(domain: 1...(max == 0 ? 5 : 5))
+                    .padding(.top, 25)
+                    .frame (height: 250)
+                    .onAppear {
+                        animateGraph()
+                    }
+                    .contentShape(Rectangle())
                 }
 //                .overlay(
 //                    VStack(spacing: 0) {
@@ -113,7 +105,6 @@ struct WeekAnimationChart: View {
 ////                        .opacity(showPlot ? 1 : 0),
 //                        alignment: .bottomLeading
 //                )
-                .contentShape(Rectangle())
 //                .gesture(DragGesture().onChanged({ value in
 //                    withAnimation { showPlot = true }
 //

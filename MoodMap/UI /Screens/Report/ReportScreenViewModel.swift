@@ -26,6 +26,8 @@ extension ReportScreen {
             emotionCircleViewModel: []
         )
         
+        @Published var chartDataViewModel: [ChartDataViewModel] = []
+        
         @Published var firstDayOfWeek: String?
         @Published var lastDayOfWeek: String?
         @Published var currentMonth: String?
@@ -472,7 +474,9 @@ extension ReportScreen {
             }
                         
             emotionCountDataViewModel.emotionCircleViewModel = emotionalCircleViewModel
+            
             self.emotionCountData = emotionCountDataViewModel
+            self.chartDataViewModel = chartDataViewModel
             
             return ReportViewModel(
                 chartData: chartDataViewModel,

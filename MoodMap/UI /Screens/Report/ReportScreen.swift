@@ -126,7 +126,7 @@ struct ReportScreen: View {
                 if isAnimated {
                     if viewModel.selectedTypeOfReport == 0 || viewModel.selectedTypeOfReport == 1 {
                         if viewModel.dateSelectedIndex == 0 {
-                            WeekAnimationChart(weekChartViewModel: viewModel.reportViewModel?.chartData ?? [])
+                            WeekAnimationChart(weekChartViewModel: $viewModel.chartDataViewModel)
                                 .transition(.move(edge: .top).combined(with: .opacity))
                         } else {
                             MonthChart(viewModel: viewModel,
@@ -187,11 +187,13 @@ struct ReportScreen: View {
     }
     
     private func toBeforeWeekDidTap() {
-        coordinator.viewModel.toBeforeWeekDidTap()
+        viewModel.chartDataViewModel = []
+        viewModel.toBeforeWeekDidTap()
     }
     
     private func toNextWeekDidTap() {
-        coordinator.viewModel.toNextWeekDidTap()
+        viewModel.chartDataViewModel = []
+        viewModel.toNextWeekDidTap()
     }
     
     private func toBeforeMonthDidTap() {
