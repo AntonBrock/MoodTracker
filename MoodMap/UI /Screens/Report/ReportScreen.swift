@@ -43,129 +43,123 @@ struct ReportScreen: View {
     
     var body: some View {
         ScrollView {
-            if viewModel.isLoading {
-                Text("Is Loading ...")
-            } else {
-                VStack {
-                    if isAnimated {
-                        SegmentedControlView(countOfItems: 3, segments: viewModel.isEnableTypeOfReprot,
-                                             selectedIndex: $viewModel.selectedTypeOfReport,
-                                             currentTab: viewModel.isEnableTypeOfReprot[0])
-                        .padding(.top, 16)
-                        .padding(.horizontal, 16)
-                        .transition(.move(edge: .top).combined(with: .opacity))
+            VStack {
+                if isAnimated {
+                    SegmentedControlView(countOfItems: 3, segments: viewModel.isEnableTypeOfReprot,
+                                         selectedIndex: $viewModel.selectedTypeOfReport,
+                                         currentTab: viewModel.isEnableTypeOfReprot[0])
+                    .padding(.top, 16)
+                    .padding(.horizontal, 16)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                    
+                    SegmentedControlView(countOfItems: 2, segments: dateTitles,
+                                         selectedIndex: $viewModel.dateSelectedIndex,
+                                         currentTab: dateTitles[0])
+                    .padding(.top, 10)
+                    .padding(.horizontal, 16)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                }
+                
+                if viewModel.selectedTypeOfReport != 2 {
+                    HStack {
+                        if viewModel.dateSelectedIndex == 0 {
+                            HStack {
+                                Image("rc-ic-toBeforeWeek")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                    .onTapGesture {
+                                        toBeforeWeekDidTap()
+                                    }
+                                
+                                Image("rc-ic-toNextWeek")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                    .onTapGesture {
+                                        toNextWeekDidTap()
+                                    }
+                            }
+                        }
                         
-                        SegmentedControlView(countOfItems: 2, segments: dateTitles,
-                                             selectedIndex: $viewModel.dateSelectedIndex,
-                                             currentTab: dateTitles[0])
-                        .padding(.top, 10)
-                        .padding(.horizontal, 16)
-                        .transition(.move(edge: .top).combined(with: .opacity))
-                    }
-                    
-                    if viewModel.selectedTypeOfReport != 2 {
-                        HStack {
-                            
-                            if viewModel.dateSelectedIndex == 0 {
-                                HStack {
-                                    Image("rc-ic-toBeforeWeek")
-                                        .resizable()
-                                        .frame(width: 24, height: 24)
-                                        .onTapGesture {
-                                            toBeforeWeekDidTap()
-                                        }
-                                    
-                                    Image("rc-ic-toNextWeek")
-                                        .resizable()
-                                        .frame(width: 24, height: 24)
-                                        .onTapGesture {
-                                            toNextWeekDidTap()
-                                        }
-                                }
+                        if viewModel.dateSelectedIndex == 1 {
+                            HStack {
+                                Image("rc-ic-toBeforeWeek")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                    .onTapGesture {
+                                        toBeforeMonthDidTap()
+                                    }
+                                
+                                Image("rc-ic-toNextWeek")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                    .onTapGesture {
+                                        toNextMonthDidTap()
+                                    }
                             }
-                            
-                            if viewModel.dateSelectedIndex == 1 {
-                                HStack {
-                                    Image("rc-ic-toBeforeWeek")
-                                        .resizable()
-                                        .frame(width: 24, height: 24)
-                                        .onTapGesture {
-                                            toBeforeMonthDidTap()
-                                        }
-                                    
-                                    Image("rc-ic-toNextWeek")
-                                        .resizable()
-                                        .frame(width: 24, height: 24)
-                                        .onTapGesture {
-                                            toNextMonthDidTap()
-                                        }
-                                }
-                            }
-                            
-                            
-                            Spacer()
-                            
-                            Text(viewModel.dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!).\(coordinator.viewModel.currentShortMonthForFrom!) - \(coordinator.viewModel.lastDayOfWeek!).\(coordinator.viewModel.currentShortMonthForTo!), \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.shortDateMonthForTo!), \(coordinator.viewModel.currentYear!)")
-                                .foregroundColor(Colors.Primary.blue)
-                                .font(.system(size: 14, weight: .semibold))
-                                .frame(maxWidth: .infinity, alignment: .center)
-                            
-                            Spacer()
-                            
-                            Image("rc-ic-information")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .onTapGesture {
-                                    informationDidTap()
-                                }
-                            
-                            
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding(.top, 22)
-                        .padding(.leading, 16)
-                        .padding(.trailing, 16)
-                    }
-                    
-                    if isAnimated {
-                        if viewModel.selectedTypeOfReport == 0 || viewModel.selectedTypeOfReport == 1 {
-                            if viewModel.dateSelectedIndex == 0 {
-                                WeekAnimationChart(weekChartViewModel: viewModel.reportViewModel?.chartData ?? [])
-                                    .transition(.move(edge: .top).combined(with: .opacity))
-                            } else {
-                                MonthChart(viewModel: viewModel,
-                                           monthChartViewModel: viewModel.reportViewModel?.chartData ?? [])
+                        
+                        
+                        Spacer()
+                        
+                        Text(viewModel.dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!).\(coordinator.viewModel.currentShortMonthForFrom!) - \(coordinator.viewModel.lastDayOfWeek!).\(coordinator.viewModel.currentShortMonthForTo!), \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.shortDateMonthForTo!), \(coordinator.viewModel.currentYear!)")
+                            .foregroundColor(Colors.Primary.blue)
+                            .font(.system(size: 14, weight: .semibold))
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        
+                        Spacer()
+                        
+                        Image("rc-ic-information")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .onTapGesture {
+                                informationDidTap()
                             }
-                            
-                            CircleEmotionChart(
-                                emotionStateCounts: $viewModel.emotionCountData.countState,
-                                emotionNames: $viewModel.emotionCountData.text,
-                                emotionColors: $viewModel.emotionCountData.color,
-                                emotionTotal: $viewModel.emotionCountData.total,
-                                emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel
-                            )
-                            
-                            
-                            ReportTipView(
-                                text: "Твоим самым частым настроением стало ",
-                                selectedText: viewModel.reportViewModel?.emotionCountData.common ?? "",
-                                tipType: .commonEmotionState
-                            )
-                            .padding(.top, -16)
-                            
-                            DayilyCharts(viewModel: viewModel.reportViewModel?.timeData)
-                            
-                            //                        ReportTipView(text: "")
-                            
-                            ActivitiesCharts(goodActivitiesViewModel: viewModel.reportViewModel?.goodActivitiesReportData,
-                                             badActivitiesViewModel: viewModel.reportViewModel?.badActivitiesReportData)
+                        
+                        
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 22)
+                    .padding(.leading, 16)
+                    .padding(.trailing, 16)
+                }
+                
+                if isAnimated {
+                    if viewModel.selectedTypeOfReport == 0 || viewModel.selectedTypeOfReport == 1 {
+                        if viewModel.dateSelectedIndex == 0 {
+                            WeekAnimationChart(weekChartViewModel: viewModel.reportViewModel?.chartData ?? [])
+                                .transition(.move(edge: .top).combined(with: .opacity))
                         } else {
-                            ActivitiesChartsForAllTime()
+                            MonthChart(viewModel: viewModel,
+                                       monthChartViewModel: viewModel.reportViewModel?.chartData ?? [])
                         }
+                        
+                        CircleEmotionChart(
+                            emotionStateCounts: $viewModel.emotionCountData.countState,
+                            emotionNames: $viewModel.emotionCountData.text,
+                            emotionColors: $viewModel.emotionCountData.color,
+                            emotionTotal: $viewModel.emotionCountData.total,
+                            emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel
+                        )
+                        
+                        ReportTipView(
+                            text: "Твоим самым частым настроением стало ",
+                            selectedText: viewModel.reportViewModel?.emotionCountData.common ?? "",
+                            tipType: .commonEmotionState
+                        )
+                        .padding(.top, -16)
+                        
+                        DayilyCharts(viewModel: viewModel.reportViewModel?.timeData)
+                        
+                        //                        ReportTipView(text: "")
+                        
+                        ActivitiesCharts(goodActivitiesViewModel: viewModel.reportViewModel?.goodActivitiesReportData,
+                                         badActivitiesViewModel: viewModel.reportViewModel?.badActivitiesReportData)
+                    } else {
+                        ActivitiesChartsForAllTime()
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onChange(of: viewModel.isLoading, perform: { newValue in
             withAnimation(.linear(duration: 0.5)) {

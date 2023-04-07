@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct EmotionCircleViewModel {
+struct EmotionCircleViewModel: Identifiable {
+    let id = UUID().uuidString
     var name: String
     var value: String
     var color: Color
@@ -19,7 +20,6 @@ struct CircleEmotionChart: View {
     @Binding var emotionNames: [String]
     @Binding var emotionColors: [Color]
     @Binding var emotionTotal: Int
-    
     @Binding var emotionCircleViewModel: [EmotionCircleViewModel]?
 
     var body: some View {

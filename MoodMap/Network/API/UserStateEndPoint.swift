@@ -27,7 +27,7 @@ enum UserStateEndPoint: TargetType {
         case .getStateList: return "/states"
         case .getEmotionsList: return "/emotions"
         case .getActivitiesList: return "/activities"
-        case .getStressList: return "/stresses"
+        case .getStressList: return "/stress"
         }
     }
     

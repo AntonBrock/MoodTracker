@@ -34,6 +34,15 @@ extension ReportScreen {
       
         var selectedTypeOfReport: Int = 0 {
             didSet {
+                emotionCountData = EmotionCountDataViewModel(
+                    total: 0,
+                    common: "",
+                    text: [],
+                    color: [],
+                    countState: [],
+                    emotionCircleViewModel: []
+                )
+                
                 if dateSelectedIndex == 0 {
                     if selectedTypeOfReport == 0 {
                         getDates()
@@ -341,13 +350,13 @@ extension ReportScreen {
                 switch result {
                 case .success(let model):
                     self.reportViewModel = self.mappingViewModel(data: model)
+                    self.isLoading = false
                 case .failure(let error):
                     print(error)
                 }
             }
             
-            isLoading = false
-            
+//            isLoading = false
         }
         
         private func mappingCurrentReportViewModel(models: [ReportCurrentDateModel]) -> [ReportCurrentViewModel] {
@@ -449,7 +458,7 @@ extension ReportScreen {
                     count: $0.count
                 ) }).sorted(by: { $0.count > $1.count }))
             
-            guard let emotionCountDataViewModel = emotionCountDataViewModel,
+            guard var emotionCountDataViewModel = emotionCountDataViewModel,
                   let timeDataViewModel = timeDataViewModel,
                   let goodActivitiesReportDataViewModel = goodActivitiesReportDataViewModel,
                   let badActivitiesReportDataViewModel = badActivitiesReportDataViewModel else { fatalError() }
@@ -459,11 +468,11 @@ extension ReportScreen {
                 emotionalCircleViewModel.append(EmotionCircleViewModel(
                     name: item.text,
                     value: String(item.count),
-                    color: mappingColorForEmotion(with: item.text)))
+                    color: selectedTypeOfReport == 1 ? mappingColorForEmotionStress(with: item.text) : mappingColorForEmotion(with: item.text)))
             }
-
+                        
+            emotionCountDataViewModel.emotionCircleViewModel = emotionalCircleViewModel
             self.emotionCountData = emotionCountDataViewModel
-            self.emotionCountData.emotionCircleViewModel = emotionalCircleViewModel
             
             return ReportViewModel(
                 chartData: chartDataViewModel,
@@ -471,6 +480,15 @@ extension ReportScreen {
                 timeData: timeDataViewModel,
                 goodActivitiesReportData: goodActivitiesReportDataViewModel,
                 badActivitiesReportData: badActivitiesReportDataViewModel)
+        }
+        
+        private func mappingColorForEmotionStress(with stressTitle: String) -> Color {
+            switch stressTitle {
+            case "Низкий": return Colors.Secondary.riptide500Green
+            case "Средний": return Colors.Primary.lavender500Purple
+            case "Высокий": return Colors.Secondary.yourPinkRed400
+            default: return Color.white
+            }
         }
         
         private func mappingColorForEmotion(with emotionTitle: String) -> Color {

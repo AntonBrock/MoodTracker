@@ -73,6 +73,18 @@ extension MainView {
             }
         }
         
+        func segmentDidChange() {
+            emotionCountData = EmotionCountDataViewModel(
+                total: 0,
+                common: "",
+                text: [],
+                color: [],
+                countState: [],
+                emotionCircleViewModel: []
+            )
+            fetchMainData()
+        }
+        
         private func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport) {
             Services.reportService.fetchReport(from: from, to: to, type: type) { result in
                 switch result {
@@ -138,7 +150,7 @@ extension MainView {
                 emotionalCircleViewModel.append(EmotionCircleViewModel(
                     name: item.text,
                     value: String(item.count),
-                    color: mappingColorForEmotion(with: item.text)))
+                    color: selectedTypeOfReport == 1 ? mappingColorForEmotionStress(with: item.text) : mappingColorForEmotion(with: item.text)))
             }
 
             self.emotionCountData = emotionCountDataViewModel
@@ -160,6 +172,15 @@ extension MainView {
             guard let timeDataViewModel = timeDataViewModel else { fatalError() }
             
             return timeDataViewModel
+        }
+        
+        private func mappingColorForEmotionStress(with stressTitle: String) -> Color {
+            switch stressTitle {
+            case "Низкий": return Colors.Secondary.riptide500Green
+            case "Средний": return Colors.Primary.lavender500Purple
+            case "Высокий": return Colors.Secondary.yourPinkRed400
+            default: return Color.white
+            }
         }
     
         private func mappingColorForEmotion(with emotionTitle: String) -> Color {

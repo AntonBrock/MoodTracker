@@ -99,9 +99,8 @@ struct MainView: View {
                     .padding(.horizontal, 10)
                     .onChange(of: typeSelectedIndex) { newValue in
                         viewModel.selectedTypeOfReport = typeSelectedIndex
-                        viewModel.fetchMainData()
+                        viewModel.segmentDidChange()
                     }
-                
             }
         }
         .onAppear {

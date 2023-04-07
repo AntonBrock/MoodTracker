@@ -14,7 +14,7 @@ public struct PieChartView: View {
     @Binding var emotionsValuesByCategory: [Double]
     @Binding var colors: [Color]
     @Binding var names: [String]
-    
+        
     @Binding var emotionCircleViewModel: [EmotionCircleViewModel]?
     
     public let formatter: (Double) -> String
@@ -48,47 +48,50 @@ public struct PieChartView: View {
         GeometryReader { geometry in
             HStack {
                 ZStack {
-                    ForEach(0..<self.values.count){ i in
-                        PieSlice(pieSliceData: self.slices[i])
-                            .scaleEffect(self.activeIndex == i ? 1.10 : 1)
-                            .animation(Animation.spring())
-                    }
-                    .frame(width: widthFraction * geometry.size.width, height: widthFraction * geometry.size.width)
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { value in
-                                let radius = 0.5 * widthFraction * geometry.size.width
-                                let diff = CGPoint(x: value.location.x - radius, y: radius - value.location.y)
-                                let dist = pow(pow(diff.x, 2.0) + pow(diff.y, 2.0), 0.5)
-                                if (dist > radius || dist < radius * innerRadiusFraction) {
-                                    self.activeIndex = -1
-                                    return
-                                }
-                                var radians = Double(atan2(diff.x, diff.y))
-                                if (radians < 0) {
-                                    radians = 2 * Double.pi + radians
-                                }
-                                
-                                for (i, slice) in slices.enumerated() {
-                                    if (radians < slice.endAngle.radians) {
-                                        self.activeIndex = i
-                                        break
+                    if !slices.isEmpty {
+                        ForEach(0..<values.count) { i in
+                            PieSlice(pieSliceData: slices[i])
+                                .scaleEffect(activeIndex == i ? 1.10 : 1)
+                                .animation(Animation.spring())
+                        }
+                        .frame(width: widthFraction * geometry.size.width, height: widthFraction * geometry.size.width)
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { value in
+                                    let radius = 0.5 * widthFraction * geometry.size.width
+                                    let diff = CGPoint(x: value.location.x - radius, y: radius - value.location.y)
+                                    let dist = pow(pow(diff.x, 2.0) + pow(diff.y, 2.0), 0.5)
+                                    if (dist > radius || dist < radius * innerRadiusFraction) {
+                                        self.activeIndex = -1
+                                        return
+                                    }
+                                    var radians = Double(atan2(diff.x, diff.y))
+                                    if (radians < 0) {
+                                        radians = 2 * Double.pi + radians
+                                    }
+                                    
+                                    for (i, slice) in slices.enumerated() {
+                                        if (radians < slice.endAngle.radians) {
+                                            self.activeIndex = i
+                                            break
+                                        }
                                     }
                                 }
-                            }
-                            .onEnded { value in
-                                self.activeIndex = -1
-                            }
-                    )
-                    Circle()
-                        .fill(self.backgroundColor)
-                        .frame(width: widthFraction * geometry.size.width * innerRadiusFraction,
-                               height: widthFraction * geometry.size.width * innerRadiusFraction)
-                    
-                    VStack {
-                        Text(self.activeIndex == -1 ? "\(total)" : "\(Int(values[self.activeIndex]))")
-                            .font(.title)
-                            .foregroundColor(Color.gray)
+                                .onEnded { value in
+                                    self.activeIndex = -1
+                                }
+                        )
+                        
+                        Circle()
+                            .fill(self.backgroundColor)
+                            .frame(width: widthFraction * geometry.size.width * innerRadiusFraction,
+                                   height: widthFraction * geometry.size.width * innerRadiusFraction)
+                        
+                        VStack {
+                            Text(self.activeIndex == -1 ? "\(total)" : "\(Int(values[self.activeIndex]))")
+                                .font(.title)
+                                .foregroundColor(Color.gray)
+                        }
                     }
                     
                 }
