@@ -349,6 +349,7 @@ extension ReportScreen {
             let from = "\(currentYear!)-\(month)-01"
             let to = "\(currentYear!)-\(month)-\(theLastDayOfWeek)"
             
+            clearData()
             fetchReport(
                 from: from,
                 to: to,
