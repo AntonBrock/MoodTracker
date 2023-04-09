@@ -10,11 +10,15 @@ import BottomSheet
 import GoogleSignIn
 import GoogleSignInSwift
 
+import AuthenticationServices
+
 struct AuthMethodsView: View {
     
     @State var bottomSheetPosition: BottomSheetPosition = .dynamic
     var dismiss: ((String?) -> Void)
     var openAboutRegistration: (() -> Void)
+    
+    var appleSignInButton: ASAuthorizationAppleIDButton = ASAuthorizationAppleIDButton()
     
     var body: some View {
         VStack {}
@@ -44,14 +48,32 @@ struct AuthMethodsView: View {
                     .padding(.top, 14)
                     .padding(.bottom, 10)
                 
-                Button {
-                    print("Apple")
-                } label: {
-                    Image("login_apple_icon")
-                        .resizable()
-                        .frame(width: 279, height: 48, alignment: .center)
-                }
-                .padding(.top, 14)
+                SignInWithAppleButton(
+                    .continue) { request in
+                        request.requestedScopes = [.fullName, .email]
+                    } onCompletion: { result in
+                        switch result {
+                        case .success(let auth):
+                            switch auth.credential {
+                            case let credential as ASAuthorizationAppleIDCredential:
+                                
+                                #warning("TODO: Нужно собрать UserID и отправить на наш бэк")
+                                print(credential)
+                                let userId = credential.user
+
+                                let email = credential.email
+                                let firstName = credential.fullName?.givenName
+                                let lastName = credential.fullName?.familyName
+                            default: break
+                            }
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                    .signInWithAppleButtonStyle(.black)
+                    .frame(width: 279, height: 48)
+                    .padding(.top, 14)
+                    .cornerRadius(8)
                 
                 Button {
                     openAboutRegistration()
