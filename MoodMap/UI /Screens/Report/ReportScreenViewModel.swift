@@ -23,10 +23,27 @@ extension ReportScreen {
             text: [],
             color: [],
             countState: [],
-            emotionCircleViewModel: []
+            emotionCircleViewModel: [],
+            dataIsEmpty: true
         )
         
         @Published var chartDataViewModel: [ChartDataViewModel] = []
+        @Published var timeDataViewModel: TimeDataViewModel = TimeDataViewModel(
+            bestTime: "",
+            worstTime: "",
+            dayParts: nil,
+            dataIsEmpty: true
+        )
+        @Published var goodActivitiesDataViewModel: GoodActivitiesReportDataViewModel = GoodActivitiesReportDataViewModel(
+            bestActivity: "",
+            activities: [],
+            dataIsEmpty: true
+        )
+        @Published var badActivitiesDataViewModel: BadActivitiesReportDataViewModel = BadActivitiesReportDataViewModel(
+            worstActivity: "",
+            activities: [],
+            dataIsEmpty: true
+        )
         
         @Published var firstDayOfWeek: String?
         @Published var lastDayOfWeek: String?
@@ -42,7 +59,8 @@ extension ReportScreen {
                     text: [],
                     color: [],
                     countState: [],
-                    emotionCircleViewModel: []
+                    emotionCircleViewModel: [],
+                    dataIsEmpty: true
                 )
                 
                 if dateSelectedIndex == 0 {
@@ -348,6 +366,7 @@ extension ReportScreen {
         private func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport) {
             isLoading = true
 
+            clearData()
             Services.reportService.fetchReport(from: from, to: to, type: type) { result in
                 switch result {
                 case .success(let model):
@@ -359,6 +378,36 @@ extension ReportScreen {
             }
             
 //            isLoading = false
+        }
+        
+        private func clearData() {
+            chartDataViewModel = []
+            
+            emotionCountData = EmotionCountDataViewModel(
+                total: 0,
+                common: "",
+                text: [],
+                color: [],
+                countState: [],
+                emotionCircleViewModel: [],
+                dataIsEmpty: true
+            )
+            timeDataViewModel = TimeDataViewModel(
+                bestTime: "",
+                worstTime: "",
+                dayParts: nil,
+                dataIsEmpty: true
+            )
+            goodActivitiesDataViewModel = GoodActivitiesReportDataViewModel(
+                bestActivity: "",
+                activities: [],
+                dataIsEmpty: true
+            )
+            badActivitiesDataViewModel = BadActivitiesReportDataViewModel(
+                worstActivity: "",
+                activities: [],
+                dataIsEmpty: true
+            )
         }
         
         private func mappingCurrentReportViewModel(models: [ReportCurrentDateModel]) -> [ReportCurrentViewModel] {
@@ -436,13 +485,15 @@ extension ReportScreen {
                 common: emotionCountData.common,
                 text: emotionCountData.state.map({ $0.text }),
                 color: emotionCountData.state.map({ mappingColorForEmotion(with: $0.text)}),
-                countState: emotionCountData.state.map({ Double($0.count) })
+                countState: emotionCountData.state.map({ Double($0.count) }),
+                dataIsEmpty: emotionCountData.total == 0 ? true : false
             )
             
             timeDataViewModel = TimeDataViewModel(
                 bestTime: timeData.bestTime,
                 worstTime: timeData.worstTime,
-                dayParts: timeData.dayParts
+                dayParts: timeData.dayParts,
+                dataIsEmpty: (timeData.dayParts != nil) ? false : true
             )
             
             goodActivitiesReportDataViewModel = GoodActivitiesReportDataViewModel(
@@ -450,7 +501,9 @@ extension ReportScreen {
                 activities: goodActivitiesReportData.activities.compactMap({ GoodActivitiesReportDataViewModel.GoodActivitiesReportDataActivitiesViewModel(
                     image: $0.image,
                     count: $0.count
-                ) }).sorted(by: { $0.count > $1.count }))
+                )}).sorted(by: { $0.count > $1.count }),
+                dataIsEmpty: goodActivitiesReportData.activities.isEmpty ? true : false
+            )
             
             badActivitiesReportDataViewModel = BadActivitiesReportDataViewModel(
                 worstActivity: badActivitiesReportData.worstActivity,
@@ -458,7 +511,9 @@ extension ReportScreen {
                     BadActivitiesReportDataViewModel.BadActivitiesReportDataActivitiesViewModel(
                     image: $0.image,
                     count: $0.count
-                ) }).sorted(by: { $0.count > $1.count }))
+                ) }).sorted(by: { $0.count > $1.count }),
+                dataIsEmpty: badActivitiesReportData.activities.isEmpty ? true : false
+            )
             
             guard var emotionCountDataViewModel = emotionCountDataViewModel,
                   let timeDataViewModel = timeDataViewModel,
@@ -477,7 +532,10 @@ extension ReportScreen {
             
             self.emotionCountData = emotionCountDataViewModel
             self.chartDataViewModel = chartDataViewModel
-            
+            self.timeDataViewModel = timeDataViewModel
+            self.goodActivitiesDataViewModel = goodActivitiesReportDataViewModel
+            self.badActivitiesDataViewModel = badActivitiesReportDataViewModel
+
             return ReportViewModel(
                 chartData: chartDataViewModel,
                 emotionCountData: emotionCountDataViewModel,
@@ -538,22 +596,25 @@ struct EmotionCountDataViewModel: Equatable {
     }
     
     var total: Int
-    let common: String
+    var common: String
     var text: [String]
     var color: [Color]
     var countState: [Double]
     var emotionCircleViewModel: [EmotionCircleViewModel]?
+    var dataIsEmpty: Bool
 }
 
 struct TimeDataViewModel {
     let bestTime: String
     let worstTime: String
     let dayParts: String?
+    var dataIsEmpty: Bool
 }
 
 struct GoodActivitiesReportDataViewModel {
-    let bestActivity: String
+    var bestActivity: String
     let activities: [GoodActivitiesReportDataActivitiesViewModel]
+    var dataIsEmpty: Bool
     
     struct GoodActivitiesReportDataActivitiesViewModel {
         let image: String
@@ -562,8 +623,9 @@ struct GoodActivitiesReportDataViewModel {
 }
 
 struct BadActivitiesReportDataViewModel {
-    let worstActivity: String
+    var worstActivity: String
     let activities: [BadActivitiesReportDataActivitiesViewModel]
+    var dataIsEmpty: Bool
     
     struct BadActivitiesReportDataActivitiesViewModel {
         let image: String

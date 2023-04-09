@@ -21,6 +21,7 @@ struct CircleEmotionChart: View {
     @Binding var emotionColors: [Color]
     @Binding var emotionTotal: Int
     @Binding var emotionCircleViewModel: [EmotionCircleViewModel]?
+    @Binding var dataIsEmpty: Bool
 
     var body: some View {
         RoundedRectangle(cornerRadius: 17)
@@ -42,16 +43,20 @@ struct CircleEmotionChart: View {
                     .background(.white)
                     .cornerRadius(16)
                 } else {
-                    VStack{
-                        Text("Отметь свое состояние\nмы покажет стастистику по настраению")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .foregroundColor(Colors.TextColors.fiord800)
-                            .font(.system(size: 12, weight: .medium))
-                            .multilineTextAlignment(.center)
+                    
+                    if dataIsEmpty {
+                        VStack{
+                            Text("Отметь свое состояние\nмы покажет стастистику по настроению")
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .foregroundColor(Colors.TextColors.fiord800)
+                                .font(.system(size: 12, weight: .medium))
+                                .multilineTextAlignment(.center)
+                        }
+                        .frame(width: UIScreen.main.bounds.width - 32, height: 135, alignment: .center)
+                        .background(.white)
+                        .cornerRadius(16)
                     }
-                    .frame(width: UIScreen.main.bounds.width - 32, height: 135, alignment: .center)
-                    .background(.white)
-                    .cornerRadius(16)
+                   
                 }
             }
             .shadow(color: Colors.Primary.lightGray.opacity(0.2), radius: 5, x: 0, y: 0)

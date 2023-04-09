@@ -138,22 +138,22 @@ struct ReportScreen: View {
                             emotionNames: $viewModel.emotionCountData.text,
                             emotionColors: $viewModel.emotionCountData.color,
                             emotionTotal: $viewModel.emotionCountData.total,
-                            emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel
+                            emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel,
+                            dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty
                         )
                         
                         ReportTipView(
                             text: "Твоим самым частым настроением стало ",
-                            selectedText: viewModel.reportViewModel?.emotionCountData.common ?? "",
+                            selectedText: $viewModel.emotionCountData.common,
                             tipType: .commonEmotionState
                         )
                         .padding(.top, -16)
                         
-                        DayilyCharts(viewModel: viewModel.reportViewModel?.timeData)
-                        
-                        //                        ReportTipView(text: "")
-                        
-                        ActivitiesCharts(goodActivitiesViewModel: viewModel.reportViewModel?.goodActivitiesReportData,
-                                         badActivitiesViewModel: viewModel.reportViewModel?.badActivitiesReportData)
+                        DayilyCharts(viewModel: $viewModel.timeDataViewModel)
+                            .padding(.top, 16)
+                                                
+                        ActivitiesCharts(goodActivitiesViewModel: $viewModel.goodActivitiesDataViewModel,
+                                         badActivitiesViewModel: $viewModel.badActivitiesDataViewModel)
                     } else {
                         ActivitiesChartsForAllTime()
                     }

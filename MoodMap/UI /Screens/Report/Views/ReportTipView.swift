@@ -16,7 +16,7 @@ struct ReportTipView: View {
     }
     
     @State var text: String = ""
-    @State var selectedText: String = ""
+    @Binding var selectedText: String
     
     @State var tipType: TipType = .goodActivities
     
@@ -28,13 +28,24 @@ struct ReportTipView: View {
                 .shadow(color: Colors.Primary.lightGray.opacity(0.5), radius: 5, x: 0, y: 0)
                 .overlay(
                     HStack {
-                        Text(text)
-                            .font(.system(size: 14, weight: .light))
-                            .foregroundColor(Colors.Primary.blue) +
-                        
-                        Text(selectedText)
-                            .foregroundColor(getColorFor(tipType))
-                            .font(.system(size: 14, weight: .light))
+                        if selectedText == "" {
+                            Text("Мы не нашли за выбранный период твоих данных")
+                                .font(.system(size: 14, weight: .light))
+                                .foregroundColor(Colors.Primary.blue) +
+                            
+                            Text(" начинай следить за своим состоянием")
+                                .foregroundColor(getColorFor(tipType))
+                                .font(.system(size: 14, weight: .light))
+                        } else {
+                            Text(text)
+                                .font(.system(size: 14, weight: .light))
+                                .foregroundColor(Colors.Primary.blue) +
+                            
+                            Text(selectedText)
+                                .foregroundColor(getColorFor(tipType))
+                                .font(.system(size: 14, weight: .light))
+                        }
+                     
                     }
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
@@ -56,7 +67,7 @@ struct ReportTipView: View {
             case "Нормально": return Color(hex: "B283E4")
             case "Хорошо": return Color(hex: "86E9C5")
             case "Очень хорошо": return Color(hex: "FFC794")
-            default: return Color.white
+            default: return Colors.TextColors.slateGray700
             }
         }
     }

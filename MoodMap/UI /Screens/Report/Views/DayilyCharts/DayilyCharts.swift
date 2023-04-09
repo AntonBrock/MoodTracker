@@ -9,20 +9,35 @@ import SwiftUI
 
 struct DayilyCharts: View {
     
-    @State var viewModel: TimeDataViewModel?
+    @Binding var viewModel: TimeDataViewModel
    
     var body: some View {
         HStack(spacing: 17) {
-            VStack {
-                createDaylyView("Утро", state: "Нет данных", colors: [Color(hex: "7392FC"), Color(hex: "FFC8C8")])
-                createDaylyView("Вечер", state: "Нет данных", colors: [Color(hex: "86E9C5"), Color(hex: "0B98C5")])
-                    .padding(.top, 16)
-            }
             
-            VStack {
-                createDaylyView("День", state: "Нет данных", colors: [Color(hex: "FFC8C8"), Color(hex: "FFC794")])
-                createDaylyView("Ночь", state: "Нет данных", colors: [Color(hex: "0B98C5"), Color(hex: "7E46B9")])
-                    .padding(.top, 16)
+            if viewModel.dataIsEmpty {
+                VStack {
+                    createDaylyView("Утро", state: "Не нашли данных", colors: [Color(hex: "7392FC"), Color(hex: "FFC8C8")])
+                    createDaylyView("Вечер", state: "Не нашли данных", colors: [Color(hex: "86E9C5"), Color(hex: "0B98C5")])
+                        .padding(.top, 16)
+                }
+                
+                VStack {
+                    createDaylyView("День", state: "Не нашли данных", colors: [Color(hex: "FFC8C8"), Color(hex: "FFC794")])
+                    createDaylyView("Ночь", state: "Не нашли данных", colors: [Color(hex: "0B98C5"), Color(hex: "7E46B9")])
+                        .padding(.top, 16)
+                }
+            } else {
+                VStack {
+                    createDaylyView("Утро", state: "Нет данных", colors: [Color(hex: "7392FC"), Color(hex: "FFC8C8")])
+                    createDaylyView("Вечер", state: "Нет данных", colors: [Color(hex: "86E9C5"), Color(hex: "0B98C5")])
+                        .padding(.top, 16)
+                }
+                
+                VStack {
+                    createDaylyView("День", state: "Нет данных", colors: [Color(hex: "FFC8C8"), Color(hex: "FFC794")])
+                    createDaylyView("Ночь", state: "Нет данных", colors: [Color(hex: "0B98C5"), Color(hex: "7E46B9")])
+                        .padding(.top, 16)
+                }
             }
         }
         .frame(maxWidth: .infinity)
@@ -50,8 +65,12 @@ struct DayilyCharts: View {
                     Text(state)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                         .padding(.bottom, 10)
+                        .fixedSize(horizontal: true, vertical: false)
+                        .lineLimit(3)
+                        .padding(.leading, -5)
+                        .multilineTextAlignment(.leading)
                 }
                 .padding(.horizontal, 16)
             }

@@ -89,12 +89,13 @@ struct MainView: View {
                     emotionNames: $viewModel.emotionCountData.text,
                     emotionColors: $viewModel.emotionCountData.color,
                     emotionTotal: $viewModel.emotionCountData.total,
-                    emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel
+                    emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel,
+                    dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty
                 )
                 .padding(.top, 16)
                 .padding(.horizontal, 10)
                 
-                DayilyCharts(viewModel: TimeDataViewModel(bestTime: "", worstTime: "", dayParts: nil))
+                DayilyCharts(viewModel: $viewModel.timeData)
                     .padding(.top, 16)
                     .padding(.horizontal, 10)
                     .onChange(of: typeSelectedIndex) { newValue in

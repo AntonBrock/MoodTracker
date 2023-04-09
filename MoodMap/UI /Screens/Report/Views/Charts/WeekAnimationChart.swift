@@ -31,7 +31,7 @@ struct WeekAnimationChart: View {
         let max = weekChartViewModel.max { item1, item2 in
             return item2.dayRate > item1.dayRate
         }?.dayRate ?? 0
-                
+        
         GeometryReader { proxy in
             let height = proxy.size.height
             let width = (proxy.size.width) / CGFloat(weekChartViewModel.count - 1)
@@ -67,6 +67,17 @@ struct WeekAnimationChart: View {
                         animateGraph()
                     }
                     .contentShape(Rectangle())
+                } else {
+                    VStack{
+                        Text("Видим, что пора начать следить за своим психологическим здоровьем\nпосле мы покажем статистику")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .foregroundColor(Colors.TextColors.fiord800)
+                            .font(.system(size: 14, weight: .medium))
+                            .multilineTextAlignment(.center)
+                    }
+                    .frame(height: 250, alignment: .center)
+                    .background(.white)
+                    .cornerRadius(16)
                 }
 //                .overlay(
 //                    VStack(spacing: 0) {

@@ -74,7 +74,7 @@ struct ReportModel: Decodable {
     // MARK: - EmotionCountData
     struct EmotionCountData: Decodable {
         let total: Int
-        let common: String
+        var common: String
         let state: [EmotionCountDataState]
         
         struct EmotionCountDataState: Decodable {

@@ -9,28 +9,30 @@ import SwiftUI
 
 struct ActivitiesCharts: View {
     
-    @State var goodActivitiesViewModel: GoodActivitiesReportDataViewModel?
-    @State var badActivitiesViewModel: BadActivitiesReportDataViewModel?
+    @Binding var goodActivitiesViewModel: GoodActivitiesReportDataViewModel
+    @Binding var badActivitiesViewModel: BadActivitiesReportDataViewModel
     
     var body: some View {
         VStack {
-            if let goodActivitiesViewModel = goodActivitiesViewModel {
+            if let goodActivitiesViewModel = goodActivitiesViewModel, !goodActivitiesViewModel.dataIsEmpty {
                 createGoodActivitiesView(goodActivitiesViewModel)
             } else {
                 createEmptyAcitiviewsView()
             }
             
             ReportTipView(text: "Активность, которая тебя радовала больше всего ",
-                          selectedText: goodActivitiesViewModel?.bestActivity ?? "", tipType: .goodActivities)
+                          selectedText: $goodActivitiesViewModel.bestActivity, tipType: .goodActivities)
+            .padding(.top, -16)
             
-            if let badActivitiesViewModel = badActivitiesViewModel {
+            if let badActivitiesViewModel = badActivitiesViewModel, !badActivitiesViewModel.dataIsEmpty {
                 createBadActivitiesView(badActivitiesViewModel)
             } else {
                 createEmptyAcitiviewsView()
             }
             
             ReportTipView(text: "Активность, которая расстраивала больше всего ",
-                          selectedText: badActivitiesViewModel?.worstActivity ?? "", tipType: .badActivities)
+                          selectedText: $badActivitiesViewModel.worstActivity, tipType: .badActivities)
+            .padding(.top, -16)
         }
         .padding(.bottom, 26)
     }
@@ -42,35 +44,37 @@ struct ActivitiesCharts: View {
                                    count: viewModel.activities.count >= 3 ? 3 : viewModel.activities.count)
 
         LazyVGrid(columns: flexibleLayout) {
-            ForEach(0..<viewModel.activities.count) { index in
-                VStack {
-                    ZStack {
-                        Circle()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(Colors.Secondary.shamrock600Green)
-                            .overlay {
-                                Text("\(viewModel.activities[index].count <= 10 ? "\(viewModel.activities[index].count)" : "10+")")
-                                    .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.top, -35)
-                            .padding(.leading, 40)
-                            .zIndex(9999999)
-
-                        Rectangle()
-                            .fill(Color.white)
-                            .frame(width: 50, height: 50)
-                            .overlay {
-                                Image(viewModel.activities[index].image)
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Colors.Primary.lightGray.opacity(0.5), lineWidth: 1)
-                            }
+            if !viewModel.activities.isEmpty {
+                ForEach(0..<viewModel.activities.count) { index in
+                    VStack {
+                        ZStack {
+                            Circle()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(Colors.Secondary.shamrock600Green)
+                                .overlay {
+                                    Text("\(viewModel.activities[index].count <= 10 ? "\(viewModel.activities[index].count)" : "10+")")
+                                        .font(.system(size: 12, weight: .bold))
+                                        .foregroundColor(.white)
+                                }
+                                .padding(.top, -35)
+                                .padding(.leading, 40)
+                                .zIndex(9999999)
+                            
+                            Rectangle()
+                                .fill(Color.white)
+                                .frame(width: 50, height: 50)
+                                .overlay {
+                                    Image(viewModel.activities[index].image)
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                    
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(Colors.Primary.lightGray.opacity(0.5), lineWidth: 1)
+                                }
+                        }
                     }
+                    .padding(.top, 15)
                 }
-                .padding(.top, 15)
             }
         }
         .frame(maxWidth: .infinity, alignment: .center)
@@ -84,35 +88,38 @@ struct ActivitiesCharts: View {
         let flexibleLayout = Array(repeating: GridItem(.fixed(80), spacing: -10),
                                    count: viewModel.activities.count >= 3 ? 3 : viewModel.activities.count)
         LazyVGrid(columns: flexibleLayout) {
-            ForEach(0..<viewModel.activities.count) { index in
-                VStack {
-                    ZStack {
-                        Circle()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(Colors.Secondary.malibu600Blue)
-                            .overlay {
-                                Text("\(viewModel.activities[index].count <= 10 ? "\(viewModel.activities[index].count)": "10+")")
-                                    .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.top, -35)
-                            .padding(.leading, 40)
-                            .zIndex(9999999)
-
-                        Rectangle()
-                            .fill(Color.white)
-                            .frame(width: 50, height: 50)
-                            .overlay {
-                                Image(viewModel.activities[index].image)
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Colors.Primary.lightGray.opacity(0.5), lineWidth: 1)
-                            }
+            
+            if !viewModel.activities.isEmpty {
+                ForEach(0..<viewModel.activities.count) { index in
+                    VStack {
+                        ZStack {
+                            Circle()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(Colors.Secondary.malibu600Blue)
+                                .overlay {
+                                    Text("\(viewModel.activities[index].count <= 10 ? "\(viewModel.activities[index].count)": "10+")")
+                                        .font(.system(size: 12, weight: .bold))
+                                        .foregroundColor(.white)
+                                }
+                                .padding(.top, -35)
+                                .padding(.leading, 40)
+                                .zIndex(9999999)
+                            
+                            Rectangle()
+                                .fill(Color.white)
+                                .frame(width: 50, height: 50)
+                                .overlay {
+                                    Image(viewModel.activities[index].image)
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                    
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(Colors.Primary.lightGray.opacity(0.5), lineWidth: 1)
+                                }
+                        }
                     }
+                    .padding(.top, 15)
                 }
-                .padding(.top, 15)
             }
         }
         .frame(maxWidth: .infinity, alignment: .center)

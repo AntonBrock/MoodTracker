@@ -17,10 +17,17 @@ extension MainView {
             text: [],
             color: [],
             countState: [],
-            emotionCircleViewModel: []
+            emotionCircleViewModel: [],
+            dataIsEmpty: true
         )
         
-        @Published var timeData: TimeDataViewModel?
+        @Published var timeData: TimeDataViewModel = TimeDataViewModel(
+            bestTime: "",
+            worstTime: "",
+            dayParts: "",
+            dataIsEmpty: true
+        )
+        
         @Published var journalViewModels: [[JournalViewModel]]?
         
         @Published var isEnableTypeOfReprot: [String] = ["Настроение", "Стресс"]
@@ -80,7 +87,8 @@ extension MainView {
                 text: [],
                 color: [],
                 countState: [],
-                emotionCircleViewModel: []
+                emotionCircleViewModel: [],
+                dataIsEmpty: true
             )
             fetchMainData()
         }
@@ -140,7 +148,8 @@ extension MainView {
                 common: emotionCountData.common,
                 text: emotionCountData.state.compactMap({ $0.text }),
                 color: emotionCountData.state.compactMap({ mappingColorForEmotion(with: $0.text)}),
-                countState: emotionCountData.state.compactMap({ Double($0.count) }).sorted(by: { $0 > $1 })
+                countState: emotionCountData.state.compactMap({ Double($0.count) }).sorted(by: { $0 > $1 }),
+                dataIsEmpty: emotionCountData.total == 0 ? true : false
             )
             
             guard var emotionCountDataViewModel = emotionCountDataViewModel else { fatalError() }
@@ -166,7 +175,8 @@ extension MainView {
             timeDataViewModel = TimeDataViewModel(
                 bestTime: timeData.bestTime,
                 worstTime: timeData.worstTime,
-                dayParts: timeData.dayParts
+                dayParts: timeData.dayParts,
+                dataIsEmpty: timeData.dayParts == nil ? true : false
             )
             
             guard let timeDataViewModel = timeDataViewModel else { fatalError() }
