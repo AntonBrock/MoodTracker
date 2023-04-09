@@ -31,7 +31,7 @@ struct TabBarView: View {
     @State var isHiddenTabBar: Bool = false
     @Namespace var animation
     
-    @State var isShowingMoodView: Bool = false
+//    @State var isShowingMoodView: Bool = false
     @State var value: Double = 20
     @State var isNeedToShowActivities: Bool = false
 
@@ -73,7 +73,7 @@ struct TabBarView: View {
                             .onTapGesture {
                                 
                                 withAnimation {
-                                    isShowingMoodView.toggle()
+                                    coordinator.isShowingMoodCheckScreen.toggle()
                                 }
                             }
                             .scaleEffect(showPopUp ? CGFloat(0.9) : 1.0)
@@ -93,7 +93,7 @@ struct TabBarView: View {
                 .background(.clear)
                 .edgesIgnoringSafeArea(.bottom)
             }
-            .sheet(isPresented: $isShowingMoodView) {
+            .sheet(isPresented: $coordinator.isShowingMoodCheckScreen) {
                 print("dissmiss")
             } content: {
                 coordinator.openFeelingScreen()

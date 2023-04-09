@@ -32,4 +32,8 @@ class MainViewCoordinator: ObservableObject, Identifiable {
             container: container
         )
     }
+    
+    func openMoodCheckScreen() {
+        parent.isShowingMoodCheckScreen.toggle()
+    }
 }

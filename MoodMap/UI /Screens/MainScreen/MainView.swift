@@ -51,7 +51,7 @@ struct MainView: View {
                 createChooseStateUser()
                     .padding(.top, 10)
                     .onTapGesture {
-                        print("Show screen for add State loader")
+                        coordinator.openMoodCheckScreen()
                     }
                 
                 

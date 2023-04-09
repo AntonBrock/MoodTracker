@@ -23,6 +23,8 @@ class BaseViewCoordinator: ObservableObject {
     @Published var showAuthLoginView: Bool = false
     @Published var isShowingWhyResgistration: Bool = false
     
+    @Published var isShowingMoodCheckScreen: Bool = false
+    
     let container: DIContainer
     
     // MARK: - Init
