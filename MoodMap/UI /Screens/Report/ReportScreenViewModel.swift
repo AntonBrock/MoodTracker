@@ -50,6 +50,8 @@ extension ReportScreen {
         @Published var currentMonth: String?
         @Published var currentYear: String?
         @Published var isLoading: Bool = false
+        
+        @Published var currentMonthDidChoose: Date?
       
         var selectedTypeOfReport: Int = 0 {
             didSet {
@@ -249,6 +251,9 @@ extension ReportScreen {
             let monthAgoDateFrom = formatter.date(from: monthAgo?.0 ?? "")!
             let monthAgoDateTo = formatter.date(from: monthAgo?.1 ?? "")!
 
+            self.currentMonthDidChoose = monthAgoDateFrom
+            
+            clearData()
             setTextInformationMonthDate(monthAgoDateFrom, monthAgoDateTo)
             fetchReport(
                 from: monthAgo?.0 ?? "",
@@ -267,6 +272,9 @@ extension ReportScreen {
             let nextMonthDateFrom = formatter.date(from: nextMonth?.0 ?? "")!
             let nextMonthDateTo = formatter.date(from: nextMonth?.1 ?? "")!
 
+            self.currentMonthDidChoose = nextMonthDateFrom
+            
+            clearData()
             setTextInformationMonthDate(nextMonthDateFrom, nextMonthDateTo)
             fetchReport(
                 from: nextMonth?.0 ?? "",
@@ -301,6 +309,7 @@ extension ReportScreen {
             
             return (startOfMonthString, startOfNextMonthString)
         }
+        
         private func getDatesForMonthNext(from dateString: String) -> (String, String)? {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"

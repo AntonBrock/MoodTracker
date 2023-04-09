@@ -10,7 +10,8 @@ import SwiftUI
 struct MonthChart: View {
     
     @State var viewModel: ReportScreen.ViewModel?
-    @State var monthChartViewModel: [ChartDataViewModel] = []
+    
+    @Binding var monthChartViewModel: [ChartDataViewModel]
     @State var subReportInfo: [ReportCurrentViewModel] = []
     
     @State var showDaylyMonthDetails: Bool = false
@@ -18,6 +19,7 @@ struct MonthChart: View {
     #warning("TODO: Вызывается по 3 раза!")
     @State var currentDate: Date = Date() {
         didSet {
+            self.subReportInfo = []
             viewModel?.fetchCurrentDate(
                 date: currentDate,
                 completion: { subReportInfo in
@@ -298,7 +300,8 @@ struct MonthChart: View {
     func getCurrentMonth() -> Date {
         let calendar = Calendar.current
         
-        guard let currentMonth = calendar.date(byAdding: .month, value: self.currentMonth, to: Date()) else {
+        guard let currentMonth = calendar.date(byAdding: .month, value: self.currentMonth,
+                                               to: viewModel?.currentMonthDidChoose ?? Date()) else {
             return Date()
         }
         
@@ -317,11 +320,13 @@ struct MonthChart: View {
         }
         
         let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
+        let range = firstWeekday == 1 ? firstWeekday : firstWeekday - 2
         
-        for _ in 0..<firstWeekday - 2 {
+        #warning("TODO: На днях когда первое число это воскресенье - не правильно отображется первое число")
+        for _ in 0..<range {
             days.insert(DateValue(day: -1, date: Date()), at: 0)
         }
-        
+      
         return days
     }
 }

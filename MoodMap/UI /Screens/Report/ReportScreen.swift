@@ -130,7 +130,7 @@ struct ReportScreen: View {
                                 .transition(.move(edge: .top).combined(with: .opacity))
                         } else {
                             MonthChart(viewModel: viewModel,
-                                       monthChartViewModel: viewModel.reportViewModel?.chartData ?? [])
+                                       monthChartViewModel: $viewModel.chartDataViewModel)
                         }
                         
                         CircleEmotionChart(
