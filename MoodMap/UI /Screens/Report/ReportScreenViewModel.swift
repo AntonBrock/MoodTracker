@@ -52,6 +52,9 @@ extension ReportScreen {
         @Published var isLoading: Bool = false
         
         @Published var currentMonthDidChoose: Date?
+        
+        @Published var isMonthCurrentTab: Bool = false
+        @Published var isStressCurrentTab: Bool = false
       
         var selectedTypeOfReport: Int = 0 {
             didSet {
@@ -67,10 +70,12 @@ extension ReportScreen {
                 
                 if dateSelectedIndex == 0 {
                     if selectedTypeOfReport == 0 {
+                        isStressCurrentTab = false
                         getDates()
                     }
                     
                     if selectedTypeOfReport == 1 {
+                        isStressCurrentTab = true
                         getDates()
                     }
                 }
@@ -84,10 +89,12 @@ extension ReportScreen {
         var dateSelectedIndex: Int = 0 {
             didSet {
                 if dateSelectedIndex == 1 {
+                    isMonthCurrentTab = true
                     didChooseMonthTab()
                 }
                 
                 if dateSelectedIndex == 0 {
+                    isMonthCurrentTab = false
                     getDates()
                 }
             }

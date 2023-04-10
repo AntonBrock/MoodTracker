@@ -142,18 +142,51 @@ struct ReportScreen: View {
                             dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty
                         )
                         
-                        ReportTipView(
-                            text: "Твоим самым частым настроением стало ",
-                            selectedText: $viewModel.emotionCountData.common,
-                            tipType: .commonEmotionState
-                        )
-                        .padding(.top, -16)
+                        if viewModel.isMonthCurrentTab {
+                            if viewModel.isStressCurrentTab {
+                                ReportTipView(
+                                    text: "Твой уровень стресса в этом месяце в большинстве случаев был ",
+                                    selectedText: $viewModel.emotionCountData.common,
+                                    tipType: .commonEmotionStateStress
+                                )
+                                .padding(.top, -16)
+                            } else {
+                                ReportTipView(
+                                    text: "Твоим самым частым настроением этого месяца стало ",
+                                    selectedText: $viewModel.emotionCountData.common,
+                                    tipType: .commonEmotionState
+                                )
+                                .padding(.top, -16)
+                            }
+                            
+                        } else {
+                            if viewModel.isStressCurrentTab {
+                                ReportTipView(
+                                    text: "Твой уровень стресса на этой неделе в большинстве случаев ",
+                                    selectedText: $viewModel.emotionCountData.common,
+                                    tipType: .commonEmotionStateStress
+                                )
+                                .padding(.top, -16)
+                            } else {
+                                ReportTipView(
+                                    text: "Твоим самым частым настроением этой недели стало ",
+                                    selectedText: $viewModel.emotionCountData.common,
+                                    tipType: .commonEmotionState
+                                )
+                                .padding(.top, -16)
+                            }
+                        }
+                       
                         
                         DayilyCharts(viewModel: $viewModel.timeDataViewModel)
                             .padding(.top, 16)
                                                 
-                        ActivitiesCharts(goodActivitiesViewModel: $viewModel.goodActivitiesDataViewModel,
-                                         badActivitiesViewModel: $viewModel.badActivitiesDataViewModel)
+                        ActivitiesCharts(
+                            goodActivitiesViewModel: $viewModel.goodActivitiesDataViewModel,
+                            badActivitiesViewModel: $viewModel.badActivitiesDataViewModel,
+                            isMonthCurrentTab: $viewModel.isMonthCurrentTab,
+                            isStressCurrentTab: $viewModel.isStressCurrentTab
+                        )
                     } else {
                         ActivitiesChartsForAllTime()
                     }

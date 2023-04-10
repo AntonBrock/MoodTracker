@@ -12,27 +12,70 @@ struct ActivitiesCharts: View {
     @Binding var goodActivitiesViewModel: GoodActivitiesReportDataViewModel
     @Binding var badActivitiesViewModel: BadActivitiesReportDataViewModel
     
+    @Binding var isMonthCurrentTab: Bool
+    @Binding var isStressCurrentTab: Bool
+    
     var body: some View {
         VStack {
-            if let goodActivitiesViewModel = goodActivitiesViewModel, !goodActivitiesViewModel.dataIsEmpty {
+            if let goodActivitiesViewModel = goodActivitiesViewModel,
+                !goodActivitiesViewModel.dataIsEmpty {
                 createGoodActivitiesView(goodActivitiesViewModel)
             } else {
                 createEmptyAcitiviewsView()
             }
             
-            ReportTipView(text: "Активность, которая тебя радовала больше всего ",
-                          selectedText: $goodActivitiesViewModel.bestActivity, tipType: .goodActivities)
-            .padding(.top, -16)
+            if isMonthCurrentTab {
+                if isStressCurrentTab {
+                    ReportTipView(text: "Самое успокаивающее в этом месяце ",
+                                  selectedText: $goodActivitiesViewModel.bestActivity, tipType: .goodActivitiesStress)
+                    .padding(.top, -16)
+                } else {
+                    ReportTipView(text: "Активность, которая тебя радовала больше всего в этом месяце ",
+                                  selectedText: $goodActivitiesViewModel.bestActivity, tipType: .goodActivities)
+                    .padding(.top, -16)
+                }
+            } else {
+                if isStressCurrentTab {
+                    ReportTipView(text: "Самое успокаивающее на этой неделе ",
+                                  selectedText: $goodActivitiesViewModel.bestActivity, tipType: .goodActivitiesStress)
+                    .padding(.top, -16)
+                } else {
+                    ReportTipView(text: "Активность, которая тебя радовала больше всего на этой недели ",
+                                  selectedText: $goodActivitiesViewModel.bestActivity, tipType: .goodActivities)
+                    .padding(.top, -16)
+                }
+
+            }
             
-            if let badActivitiesViewModel = badActivitiesViewModel, !badActivitiesViewModel.dataIsEmpty {
+            if let badActivitiesViewModel = badActivitiesViewModel,
+                !badActivitiesViewModel.dataIsEmpty {
                 createBadActivitiesView(badActivitiesViewModel)
             } else {
                 createEmptyAcitiviewsView()
             }
             
-            ReportTipView(text: "Активность, которая расстраивала больше всего ",
-                          selectedText: $badActivitiesViewModel.worstActivity, tipType: .badActivities)
-            .padding(.top, -16)
+            if isMonthCurrentTab {
+                if isStressCurrentTab {
+                    ReportTipView(text: "Самое тревожное в этом месяце ",
+                                  selectedText: $goodActivitiesViewModel.bestActivity, tipType: .badActivitiesStress)
+                    .padding(.top, -16)
+                } else {
+                    ReportTipView(text: "Активность, которая тебя радовала больше всего в этом месяце ",
+                                  selectedText: $goodActivitiesViewModel.bestActivity, tipType: .badActivities)
+                    .padding(.top, -16)
+                }
+            } else {
+                if isStressCurrentTab {
+                    ReportTipView(text: "Самое тревожное на этой неделе ",
+                                  selectedText: $goodActivitiesViewModel.bestActivity, tipType: .badActivitiesStress)
+                    .padding(.top, -16)
+                } else {
+                    ReportTipView(text: "Активность, которая расстраивала больше всего на этой недели ",
+                                  selectedText: $badActivitiesViewModel.worstActivity, tipType: .badActivities)
+                    .padding(.top, -16)
+                }
+            }
+            
         }
         .padding(.bottom, 26)
     }

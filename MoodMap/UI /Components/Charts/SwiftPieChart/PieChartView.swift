@@ -48,7 +48,7 @@ public struct PieChartView: View {
         GeometryReader { geometry in
             HStack {
                 ZStack {
-                    if !slices.isEmpty {
+                    if !slices.isEmpty && slices.count <= names.count {
                         ForEach(0..<values.count) { i in
                             PieSlice(pieSliceData: slices[i])
                                 .scaleEffect(activeIndex == i ? 1.10 : 1)

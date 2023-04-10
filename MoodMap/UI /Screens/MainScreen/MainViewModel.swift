@@ -32,6 +32,7 @@ extension MainView {
         
         @Published var isEnableTypeOfReprot: [String] = ["Настроение", "Стресс"]
         @Published var isEnableTypeOfReportForRequest: [String] = ["mood", "stress"]
+        
         var selectedTypeOfReport: Int = 0
         
         var firstDayOfWeek: String?
