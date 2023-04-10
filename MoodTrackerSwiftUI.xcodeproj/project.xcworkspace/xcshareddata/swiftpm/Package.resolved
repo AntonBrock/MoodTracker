@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "divkit-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/divkit/divkit-ios",
+      "state" : {
+        "revision" : "59d7338eebba575fd3e8b47c1d633544c1c6024a",
+        "version" : "13.0.0"
+      }
+    },
+    {
       "identity" : "googlesignin-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleSignIn-iOS",
@@ -70,6 +79,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "6ff91e5a6aeecadb363acee650b5f3a0fb7bcd54"
+      }
+    },
+    {
+      "identity" : "metrica-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yandexmobile/metrica-sdk-ios",
+      "state" : {
+        "revision" : "2715532b3ddae3576b7b6d24a195ce37842ed203",
+        "version" : "4.5.0"
       }
     },
     {
@@ -133,6 +151,15 @@
       "state" : {
         "revision" : "530e1d24155bc272af461da4cc1ed25ecce9e3ab",
         "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "yandex-ads-sdk-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yandexmobile/yandex-ads-sdk-swift",
+      "state" : {
+        "revision" : "6015a0fc8808299e9a86051fe5810f5ce8434dfd",
+        "version" : "5.5.0"
       }
     }
   ],

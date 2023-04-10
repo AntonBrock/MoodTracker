@@ -133,6 +133,9 @@
 		4529ABD729AF1942001D2390 /* MoodsWordChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D81C1328D469D800AEF36E /* MoodsWordChooseView.swift */; };
 		4529ABD829AF1967001D2390 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529AA6A29AF1470001D2390 /* ContentView.swift */; };
 		4529EE6529DD24A1004CF900 /* DetailsDiaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529EE6429DD24A1004CF900 /* DetailsDiaryPage.swift */; };
+		453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */; };
+		453844DC29E40D5000A89FEE /* YandexInterstitialADView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DB29E40D5000A89FEE /* YandexInterstitialADView.swift */; };
+		453844DE29E40D5800A89FEE /* YandexInterstitialADViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DD29E40D5800A89FEE /* YandexInterstitialADViewController.swift */; };
 		4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544361229CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift */; };
 		456A400829B75DD200371B5C /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400729B75DD200371B5C /* UserStateEndPoint.swift */; };
 		456A400A29B75DDB00371B5C /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400929B75DDB00371B5C /* UserStateService.swift */; };
@@ -163,6 +166,7 @@
 		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
 		45E2876729DB104A00593E7A /* StressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E2876629DB104A00593E7A /* StressModel.swift */; };
 		45E2876929DB117A00593E7A /* StressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E2876829DB117A00593E7A /* StressViewModel.swift */; };
+		45EC871829E407440018AE91 /* YandexMobileAdsPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 45EC871729E407440018AE91 /* YandexMobileAdsPackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -245,6 +249,9 @@
 		45339A012991253C00ED1359 /* Font+Shortcuts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Font+Shortcuts.swift"; sourceTree = "<group>"; };
 		45339A022991253C00ED1359 /* CGPoint+Shortcuts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Shortcuts.swift"; sourceTree = "<group>"; };
 		4535637728FD83F5008975C1 /* EmotionBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionBoardView.swift; sourceTree = "<group>"; };
+		453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YandexMobileAdsBundle.bundle; sourceTree = "<group>"; };
+		453844DB29E40D5000A89FEE /* YandexInterstitialADView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YandexInterstitialADView.swift; sourceTree = "<group>"; };
+		453844DD29E40D5800A89FEE /* YandexInterstitialADViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YandexInterstitialADViewController.swift; sourceTree = "<group>"; };
 		4539308D28C88EC400A5D828 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4539309028C88EC400A5D828 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		453AAC26295DBFEB00CE0F15 /* MoodCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckView.swift; sourceTree = "<group>"; };
@@ -335,6 +342,7 @@
 				4529AA7F29AF1519001D2390 /* SwiftUIDatePickerDialog in Frameworks */,
 				4529AA8929AF151A001D2390 /* GoogleSignIn in Frameworks */,
 				4529AA8529AF1519001D2390 /* SwiftUICharts in Frameworks */,
+				45EC871829E407440018AE91 /* YandexMobileAdsPackage in Frameworks */,
 				4529AA8129AF1519001D2390 /* HorizonCalendar in Frameworks */,
 				4529AA8B29AF151A001D2390 /* GoogleSignInSwift in Frameworks */,
 			);
@@ -450,6 +458,7 @@
 		451E6BB629056EC00048714B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				453844D929E40D3500A89FEE /* AD */,
 				451E6BC4290570220048714B /* Charts */,
 				459390DF28F2E5C700A94902 /* SegmentedControlView.swift */,
 				452AD1BB28DDBAD200225F96 /* TabBar.swift */,
@@ -669,9 +678,27 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		453844D929E40D3500A89FEE /* AD */ = {
+			isa = PBXGroup;
+			children = (
+				453844DA29E40D3A00A89FEE /* Yandex */,
+			);
+			path = AD;
+			sourceTree = "<group>";
+		};
+		453844DA29E40D3A00A89FEE /* Yandex */ = {
+			isa = PBXGroup;
+			children = (
+				453844DB29E40D5000A89FEE /* YandexInterstitialADView.swift */,
+				453844DD29E40D5800A89FEE /* YandexInterstitialADViewController.swift */,
+			);
+			path = Yandex;
+			sourceTree = "<group>";
+		};
 		4539307D28C88EBF00A5D828 = {
 			isa = PBXGroup;
 			children = (
+				453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */,
 				4539308828C88EC000A5D828 /* MoodTrackerSwiftUI */,
 				4529AA6729AF1470001D2390 /* MoodMap */,
 				4539308728C88EC000A5D828 /* Products */,
@@ -914,6 +941,7 @@
 				4529AA8629AF151A001D2390 /* SwiftPieChart */,
 				4529AA8829AF151A001D2390 /* GoogleSignIn */,
 				4529AA8A29AF151A001D2390 /* GoogleSignInSwift */,
+				45EC871729E407440018AE91 /* YandexMobileAdsPackage */,
 			);
 			productName = MoodMap;
 			productReference = 4529AA6629AF1470001D2390 /* MoodMap.app */;
@@ -952,6 +980,7 @@
 				453399C32990C8BC00ED1359 /* XCRemoteSwiftPackageReference "ChartView" */,
 				45B459A629921C9D00890CC9 /* XCRemoteSwiftPackageReference "SwiftPieChart" */,
 				457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				45EC871629E407440018AE91 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-swift" */,
 			);
 			productRefGroup = 4539308728C88EC000A5D828 /* Products */;
 			projectDirPath = "";
@@ -978,6 +1007,7 @@
 				4529AA9329AF15A9001D2390 /* Inter-SemiBold.ttf in Resources */,
 				4529AA7029AF1471001D2390 /* Preview Assets.xcassets in Resources */,
 				4529AA6D29AF1471001D2390 /* Assets.xcassets in Resources */,
+				453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -990,6 +1020,7 @@
 			files = (
 				4529ABD829AF1967001D2390 /* ContentView.swift in Sources */,
 				4529AB6F29AF193F001D2390 /* SynchronizedDictionary.swift in Sources */,
+				453844DC29E40D5000A89FEE /* YandexInterstitialADView.swift in Sources */,
 				4529AB7029AF193F001D2390 /* UIView+extenstion.swift in Sources */,
 				45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */,
 				4529AB7129AF193F001D2390 /* UIImage+extension.swift in Sources */,
@@ -1019,6 +1050,7 @@
 				4529AB8C29AF1940001D2390 /* GeometryProxy+Shortcuts.swift in Sources */,
 				4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */,
 				4529AB8D29AF1940001D2390 /* View+ReadValues.swift in Sources */,
+				453844DE29E40D5800A89FEE /* YandexInterstitialADViewController.swift in Sources */,
 				4529AB8E29AF1940001D2390 /* Path+Shortcuts.swift in Sources */,
 				4529AB9129AF1940001D2390 /* View+Environment.swift in Sources */,
 				4529AB9229AF1940001D2390 /* Font+Shortcuts.swift in Sources */,
@@ -1157,6 +1189,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = MoodMap.MoodMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1196,6 +1229,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = MoodMap.MoodMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1411,6 +1445,14 @@
 				version = 14.0.0;
 			};
 		};
+		45EC871629E407440018AE91 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yandexmobile/yandex-ads-sdk-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1458,6 +1500,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		45EC871729E407440018AE91 /* YandexMobileAdsPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45EC871629E407440018AE91 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-swift" */;
+			productName = YandexMobileAdsPackage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
