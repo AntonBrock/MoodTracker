@@ -164,6 +164,7 @@
 		45B39F8D29E52D6B00852E70 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 45B39F8C29E52D6B00852E70 /* Lottie */; };
 		45B39F9029E52DBC00852E70 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8F29E52DBC00852E70 /* LottieView.swift */; };
 		45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9129E52F7300852E70 /* SplashScreen.json */; };
+		45B39F9429E5406500852E70 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9329E5406500852E70 /* Launch Screen.storyboard */; };
 		45C200C129D317F80087B0E3 /* String+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C200C029D317F80087B0E3 /* String+Extenstion.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
@@ -314,6 +315,7 @@
 		45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		45B39F8F29E52DBC00852E70 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		45B39F9129E52F7300852E70 /* SplashScreen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreen.json; sourceTree = "<group>"; };
+		45B39F9329E5406500852E70 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		45B459AA29921D5800890CC9 /* PieSliceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		45B459AB29921D5800890CC9 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		45B998D728EB2CD500C170C8 /* MoodBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodBarCharsView.swift; sourceTree = "<group>"; };
@@ -709,6 +711,7 @@
 		4539307D28C88EBF00A5D828 = {
 			isa = PBXGroup;
 			children = (
+				45B39F9329E5406500852E70 /* Launch Screen.storyboard */,
 				453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */,
 				4539308828C88EC000A5D828 /* MoodTrackerSwiftUI */,
 				4529AA6729AF1470001D2390 /* MoodMap */,
@@ -1031,6 +1034,7 @@
 				4529AA8E29AF15A9001D2390 /* Inter-ExtraBold.ttf in Resources */,
 				4529AA8F29AF15A9001D2390 /* Inter-ExtraLight.ttf in Resources */,
 				4529AA9029AF15A9001D2390 /* Inter-Light.ttf in Resources */,
+				45B39F9429E5406500852E70 /* Launch Screen.storyboard in Resources */,
 				4529AA9129AF15A9001D2390 /* Inter-Medium.ttf in Resources */,
 				4529AA9229AF15A9001D2390 /* Inter-Regular.ttf in Resources */,
 				4529AA9329AF15A9001D2390 /* Inter-SemiBold.ttf in Resources */,
@@ -1209,9 +1213,8 @@
 				INFOPLIST_FILE = MoodMap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMapp;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1249,9 +1252,8 @@
 				INFOPLIST_FILE = MoodMap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMapp;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

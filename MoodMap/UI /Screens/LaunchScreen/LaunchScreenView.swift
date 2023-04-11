@@ -10,6 +10,9 @@ import SwiftUI
 struct LaunchScreenView: View {
     
     @State var isSplashScreenShow: Bool = false
+    @State var animatedIsFinished: Bool = false
+    
+    @State var isLoadingMainInfo: Bool = false
     
     let parent: BaseViewCoordinator
     let container: DIContainer
@@ -23,28 +26,35 @@ struct LaunchScreenView: View {
     }
     
     var body: some View {
-        VStack {
-            if !isSplashScreenShow {
-                Image("ic-launch")
-                    .resizable()
-                    .frame(width: 78, height: 78)
-            } else {
+        
+        ZStack {
+            
+            if isLoadingMainInfo {
+                ContentView(coordinator: parent)
+            }
+            
+            ZStack {
+                Color("LaunchScreenBG")
+                    .ignoresSafeArea()
+                
                 LottieView(name: "SplashScreen", loopMode: .loop)
                     .onAppear {
+                        // тут делаем запрос на данные для Главного экрана потом и вырубаем либо при показе АТТ, Пушах, Главной
                         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                            AppState.shared.startStory(type: .mainScreen,
-                                                       parent: parent,
-                                                       container: container)
+                            withAnimation(.spring()) {
+                                animatedIsFinished = true
+                                isLoadingMainInfo = true
+                            }
                         }
                     }
             }
-           
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .opacity(animatedIsFinished ? 0 : 1)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.isSplashScreenShow.toggle()
-            }
+            self.isSplashScreenShow.toggle()
         }
+        
     }
 }

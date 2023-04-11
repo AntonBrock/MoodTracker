@@ -52,11 +52,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             
             let DIContainer = DIContainer(appState: appState, services: services)
             let coordinator = BaseViewCoordinator(container: DIContainer)
-
+            
             if false { // check enable codePassword
                 startStory(type: .login,
                            parent: coordinator, container: DIContainer)
             } else {
+                
                 let launchScreen = LaunchScreenView(parent: coordinator, container: DIContainer)
                 
                 let window = UIWindow(windowScene: windowScene)
@@ -65,18 +66,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
                 let vc = UIHostingController(rootView: launchScreen)
                 window.rootViewController = vc
                 window.makeKeyAndVisible()
-//                if isLaunched {
-//                    let contentView = ContentView(coordinator: coordinator) //isHiddenTabBar: appState.$isHiddenTabBar
-//
-//                    let window = UIWindow(windowScene: windowScene)
-//                    self.window = window
-//
-//                    let vc = UIHostingController(rootView: contentView)
-//                    window.rootViewController = vc
-//                    window.makeKeyAndVisible()
-//                } else {
-//
-//                }
             }
         }
     }
