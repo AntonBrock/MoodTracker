@@ -22,20 +22,20 @@ struct StressCheckComponent: View {
     }
         
     @ObservedObject var valueModel: SliderStressValueModele
-    @State var choosedImageName: String = "st-ic-medium"
-    @State var choosedImageId: String = ""
+    
+    @State var choosedImageId: String = "8b02d308-37fa-41de-bdd2-00303b976031"
     
     var choosedStressID: ((String) -> Void)
     
     var body: some View {
         VStack {
-            HStack(spacing: 15 * CGFloat(stressViewModel.count ?? 0)) {
+            HStack(spacing: 15 * CGFloat(stressViewModel.count)) {
                 
                 ForEach(stressViewModel, id: \.id) { item in
                     ZStack {
                         VStack{}
-                            .frame(width: choosedImageName == item.image ? 60 : 30,
-                                   height: choosedImageName == item.image ? 60 : 30)
+                            .frame(width: choosedImageId == item.id ? 60 : 30,
+                                   height: choosedImageId == item.id ? 60 : 30)
                         .overlay(
                             Rectangle()
                                 .fill(AngularGradient(gradient:
@@ -49,8 +49,8 @@ struct StressCheckComponent: View {
                         Image(item.image)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: choosedImageName == item.image ? 60 : 30,
-                                   height: choosedImageName == item.image ? 60 : 30)
+                            .frame(width: choosedImageId == item.id ? 60 : 30,
+                                   height: choosedImageId == item.id ? 60 : 30)
                             .transition(.scale)
                     }
                 }
@@ -59,8 +59,8 @@ struct StressCheckComponent: View {
             ZStack {
                 SwiftUISlider(thumbBorderWidth: 3,
                               thumbBorderColor: .white,
-                              thumbColor: choosedImageName == "fd3f28e0-273b-4a18-8aa8-56e85c9943c0" ? UIColor(Colors.Secondary.riptide500Green)
-                              : choosedImageName == "8b02d308-37fa-41de-bdd2-00303b976031" ? UIColor(Colors.Primary.perfume400Purple)
+                              thumbColor: choosedImageId == "fd3f28e0-273b-4a18-8aa8-56e85c9943c0" ? UIColor(Colors.Secondary.riptide500Green)
+                              : choosedImageId == "8b02d308-37fa-41de-bdd2-00303b976031" ? UIColor(Colors.Primary.perfume400Purple)
                               : UIColor(Color(hex: "F95555")),
                               minTrackColor: UIColor(Colors.Primary.lightGray),
                               maxTrackColor: UIColor(Colors.Primary.lightGray),
@@ -105,8 +105,9 @@ struct StressCheckComponent: View {
             }
             .padding(.top, 32)
         }
-        .onChange(of: choosedImageName) { newValue in
-            self.choosedStressID(choosedImageName)        }
+        .onChange(of: choosedImageId) { newValue in
+            self.choosedStressID(choosedImageId)
+        }
     }
     
     private func getColors(_ id: String) -> [Color] {
@@ -125,7 +126,7 @@ struct StressCheckComponent: View {
     
     private func changeImage(for value: CGFloat) {
         withAnimation {
-            choosedImageName = stressViewModel[Int(value / 10.0)].id
+            choosedImageId = stressViewModel[Int(value / 10.0)].id
         }
     }
 }

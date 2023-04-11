@@ -31,24 +31,26 @@ struct MoodsWordChooseView: View {
             
             LazyVGrid(columns: flexibleLayout) {
                 let emotions = emotionViewModel[Int(valueModel.value.rounded() / 10.0)]
-
-                ForEach(1...emotions.count, id: \.self) { item in
-                    ZStack {
-                        MoodsWordChooseViewBlock(emotionId: emotions[item - 1].id,
-                                                 emotion: emotions[item - 1].image,
-                                                 emotionTitle: emotions[item - 1].text,
-                                                 selectedMoodId: $selectedMoodId)
-                        .frame(width: 90, height: 95)
-                        .background(.white)
-                        .cornerRadius(10)
-                        .shadow(color: Colors.TextColors.mystic400, radius: 6.0, x: 0, y: 0)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(selectedMoodId == emotions[item - 1].id ?
-                                        Colors.Primary.royalPurple600Purple :
-                                        .white, lineWidth: 1)
+                
+                if !emotions.isEmpty {
+                    ForEach(1...emotions.count, id: \.self) { item in
+                        ZStack {
+                            MoodsWordChooseViewBlock(emotionId: emotions[item - 1].id,
+                                                     emotion: emotions[item - 1].image,
+                                                     emotionTitle: emotions[item - 1].text,
+                                                     selectedMoodId: $selectedMoodId)
+                            .frame(width: 90, height: 95)
+                            .background(.white)
+                            .cornerRadius(10)
+                            .shadow(color: Colors.TextColors.mystic400, radius: 6.0, x: 0, y: 0)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(selectedMoodId == emotions[item - 1].id ?
+                                            Colors.Primary.royalPurple600Purple :
+                                            .white, lineWidth: 1)
+                            }
+                            .padding(.top, 16)
                         }
-                        .padding(.top, 16)
                     }
                 }
             }

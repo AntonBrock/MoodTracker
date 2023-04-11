@@ -33,6 +33,11 @@ extension MoodCheckView {
         }
         
         func fetch(_ viewer: MoodCheckView) {
+            statesViewModel = []
+            emotionsViewModel = []
+            activitiesViewModel = []
+            stressViewModel = []
+            
             self.viewer = viewer
             viewer.showLoader()
             

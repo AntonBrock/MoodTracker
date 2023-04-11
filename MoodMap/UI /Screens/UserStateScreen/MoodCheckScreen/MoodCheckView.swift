@@ -102,7 +102,6 @@ struct MoodCheckView: View {
                                     }
                                     .padding(.top, 10)
                                     
-#warning("TODO: Пока нет лоудера")
                                     if !coordinator.userStateViewModel.statesViewModel.isEmpty {
                                         MoodCheckComponent(statesViewModel: coordinator.userStateViewModel.statesViewModel,
                                                            setChoosedState: { choosedState in
@@ -110,6 +109,7 @@ struct MoodCheckView: View {
                                         }, valueModel: valueModel, value: $value)
                                         .padding(.top, 15)
                                     }
+                                    
                                     if !coordinator.userStateViewModel.emotionsViewModel.isEmpty {
                                         MoodsWordChooseView(emotionViewModel: coordinator.userStateViewModel.emotionsViewModel,
                                                             valueModel: valueModel,
@@ -340,7 +340,14 @@ struct MoodCheckView: View {
             }
         })
         .onAppear {
-            coordinator.userStateViewModel.fetch(self)
+            
+            if coordinator.userStateViewModel.statesViewModel.isEmpty
+                && coordinator.userStateViewModel.activitiesViewModel.isEmpty
+                && coordinator.userStateViewModel.emotionsViewModel.isEmpty
+                && coordinator.userStateViewModel.statesViewModel.isEmpty
+            {
+                coordinator.userStateViewModel.fetch(self)
+            }
         }
     }
     
