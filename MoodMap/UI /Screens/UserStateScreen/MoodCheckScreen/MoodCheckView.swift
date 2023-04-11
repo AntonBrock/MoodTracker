@@ -56,7 +56,6 @@ struct MoodCheckView: View {
                         withAnimation {
                             print(Services.authService.jwtToken)
                             dismiss.callAsFunction()
-//                            isShowingMoodCheckView.toggle()
                         }
                     }
                 

@@ -11,7 +11,21 @@ import YandexMobileAds
 class YandexInterstitialADViewController: UIViewController {
     
     var interstitialAd: YMAInterstitialAd!
-
+    var willDisappear: (() -> Void)
+    var showADASScreen: (() -> Void)
+    
+    init (dismissAction: @escaping (() -> Void),
+          showADASScreen: @escaping (() -> Void)) {
+        self.willDisappear = dismissAction
+        self.showADASScreen = showADASScreen
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func loadInterstitial() {
         self.interstitialAd = YMAInterstitialAd(adUnitID: "demo-interstitial-yandex") // - 2313494 изменить на проде
         self.interstitialAd.delegate = self
@@ -26,6 +40,7 @@ class YandexInterstitialADViewController: UIViewController {
 // MARK: - YMAInterstitialAdDelegate
 extension YandexInterstitialADViewController: YMAInterstitialAdDelegate {
     func interstitialAdDidLoad(_ interstitialAd: YMAInterstitialAd) {
+        showADASScreen()
         presentInterstitial()
         print("Ad loaded")
     }
@@ -64,6 +79,7 @@ extension YandexInterstitialADViewController: YMAInterstitialAdDelegate {
 
     func interstitialAdDidDisappear(_ interstitialAd: YMAInterstitialAd) {
         print("Interstitial ad did disappear")
+        willDisappear()
     }
 
     func interstitialAd(_ interstitialAd: YMAInterstitialAd, willPresentScreen webBrowser: UIViewController?) {

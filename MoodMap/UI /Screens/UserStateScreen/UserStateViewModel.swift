@@ -28,8 +28,8 @@ extension MoodCheckView {
         @Published var choosedStress: String?
         @Published var mindText: String?
         
-        func sendUserStateInfo() {
-            self.sendUserNote()
+        func sendUserStateInfo(view: StressCheckView) {
+            self.sendUserNote(view: view)
         }
         
         func fetch(_ viewer: MoodCheckView) {
@@ -185,9 +185,9 @@ extension MoodCheckView {
             }
         }
         
-        private func sendUserNote() {
+        private func sendUserNote(view: StressCheckView) {
             
-            #warning("TODO: Тут нужно чтобы лоудер был на другом экране")
+            view.showLoader()
             
             guard let stateId = choosedState else { return }
             guard let emotionId = choosedEmotion else { return }
@@ -200,11 +200,8 @@ extension MoodCheckView {
                                                    stressRate: stressNumber,
                                                    text: mindText ?? "") { result in
                 switch result {
-                case .success(let success):
-                    print(success)
-                    #warning("TODO: Показать рекламу, потом закрыть модуль")
-//                    viewer?.showADScreen()
-                    
+                case .success:
+                    view.showAD()
                 case .failure(let error):
                     print(error)
                 }

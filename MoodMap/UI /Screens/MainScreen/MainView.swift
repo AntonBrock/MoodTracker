@@ -20,10 +20,7 @@ struct MainView: View {
     
     @State var isAnimated: Bool = false
     @State var isAnimatedJournalView: Bool = false
-    
-    #warning("TODO: Test")
-    @State var showTestADYandex: Bool = false
-    
+        
     init(
         container: DIContainer,
         animation: Namespace.ID,
@@ -68,8 +65,7 @@ struct MainView: View {
                 createDiaryView()
                     .padding(.top, 10)
                     .onTapGesture {
-//                        coordinator.openDiary() // позже вернуть
-                        showTestADYandex.toggle()
+                        coordinator.openDiary()
                     }
                 
                 QuoteView()
@@ -108,9 +104,6 @@ struct MainView: View {
                     }
             }
         }
-        .sheet(isPresented: $showTestADYandex, content: {
-            YandexInterstitialADView()
-        })
         .onAppear {
             withAnimation(.linear(duration: 0.3)) {
                 self.isAnimated = true

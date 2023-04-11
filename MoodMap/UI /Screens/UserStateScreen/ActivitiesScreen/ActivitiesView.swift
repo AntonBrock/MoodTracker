@@ -80,11 +80,11 @@ struct ActivitiesView: View {
                     destination: {
                         StressCheckView(valueModel: coordinator.sliderValueModele!,
                                         userStateVideModel: coordinator.userStateViewModel,
-                                        stressViewModel: coordinator.userStateViewModel.stressViewModel, saveButtonDidTap: { text, choosedStress in
+                                        stressViewModel: coordinator.userStateViewModel.stressViewModel,
+                                        saveButtonDidTap: { text, choosedStress, view in
                             coordinator.userStateViewModel.choosedStress = choosedStress
                             coordinator.userStateViewModel.mindText = text
-                            
-                            coordinator.userStateViewModel.sendUserStateInfo()
+                            coordinator.userStateViewModel.sendUserStateInfo(view: view)
                         }
                     )
                     .navigationBarHidden(true)
