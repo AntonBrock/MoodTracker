@@ -11,6 +11,7 @@ import UIKit
 enum UserStoryType {
     
     case moodCheckView
+    case mainScreen
     case login
 }
 
@@ -19,6 +20,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
     
     var window: UIWindow?
     var windowScene: UIWindowScene?
+    
+    var isLaunched: Bool = false
         
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         for context in URLContexts {
@@ -54,14 +57,26 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
                 startStory(type: .login,
                            parent: coordinator, container: DIContainer)
             } else {
-                let contentView = ContentView(coordinator: coordinator) //isHiddenTabBar: appState.$isHiddenTabBar
+                let launchScreen = LaunchScreenView(parent: coordinator, container: DIContainer)
                 
                 let window = UIWindow(windowScene: windowScene)
                 self.window = window
                 
-                let vc = UIHostingController(rootView: contentView)
+                let vc = UIHostingController(rootView: launchScreen)
                 window.rootViewController = vc
                 window.makeKeyAndVisible()
+//                if isLaunched {
+//                    let contentView = ContentView(coordinator: coordinator) //isHiddenTabBar: appState.$isHiddenTabBar
+//
+//                    let window = UIWindow(windowScene: windowScene)
+//                    self.window = window
+//
+//                    let vc = UIHostingController(rootView: contentView)
+//                    window.rootViewController = vc
+//                    window.makeKeyAndVisible()
+//                } else {
+//
+//                }
             }
         }
     }
@@ -72,6 +87,15 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
         switch type {
         case .moodCheckView:
             print("1")
+        case .mainScreen:
+            let contentView = ContentView(coordinator: parent) //isHiddenTabBar: appState.$isHiddenTabBar
+            
+            let window = UIWindow(windowScene: windowScene)
+            self.window = window
+            
+            let vc = UIHostingController(rootView: contentView)
+            window.rootViewController = vc
+            window.makeKeyAndVisible()
         case .login:
             let coordinator = LoginViewCoordinator(parent: parent, container: container)
             let view = LoginView(container: container, coordinator: coordinator)

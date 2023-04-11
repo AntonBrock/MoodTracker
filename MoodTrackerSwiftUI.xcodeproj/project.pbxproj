@@ -160,6 +160,10 @@
 		4592522529C6EE73007B1706 /* ReportTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522429C6EE73007B1706 /* ReportTipView.swift */; };
 		4592522729C6EEB6007B1706 /* DayilyCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522629C6EEB6007B1706 /* DayilyCharts.swift */; };
 		4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522829C6EEEE007B1706 /* ActivitiesCharts.swift */; };
+		45B39F8A29E52A4B00852E70 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */; };
+		45B39F8D29E52D6B00852E70 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 45B39F8C29E52D6B00852E70 /* Lottie */; };
+		45B39F9029E52DBC00852E70 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8F29E52DBC00852E70 /* LottieView.swift */; };
+		45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9129E52F7300852E70 /* SplashScreen.json */; };
 		45C200C129D317F80087B0E3 /* String+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C200C029D317F80087B0E3 /* String+Extenstion.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
@@ -307,6 +311,9 @@
 		459B9BCD28D36F3000A4FCD7 /* MoodCheckComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckComponent.swift; sourceTree = "<group>"; };
 		459BB88C2900121500E07BFF /* CutomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutomAlertView.swift; sourceTree = "<group>"; };
 		45A132FD2965C01700EA21A1 /* CalendarViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewRepresentable.swift; sourceTree = "<group>"; };
+		45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		45B39F8F29E52DBC00852E70 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		45B39F9129E52F7300852E70 /* SplashScreen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreen.json; sourceTree = "<group>"; };
 		45B459AA29921D5800890CC9 /* PieSliceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		45B459AB29921D5800890CC9 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		45B998D728EB2CD500C170C8 /* MoodBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodBarCharsView.swift; sourceTree = "<group>"; };
@@ -341,6 +348,7 @@
 				4529AA8329AF1519001D2390 /* BottomSheet in Frameworks */,
 				4529AA7F29AF1519001D2390 /* SwiftUIDatePickerDialog in Frameworks */,
 				4529AA8929AF151A001D2390 /* GoogleSignIn in Frameworks */,
+				45B39F8D29E52D6B00852E70 /* Lottie in Frameworks */,
 				4529AA8529AF1519001D2390 /* SwiftUICharts in Frameworks */,
 				45EC871829E407440018AE91 /* YandexMobileAdsPackage in Frameworks */,
 				4529AA8129AF1519001D2390 /* HorizonCalendar in Frameworks */,
@@ -458,6 +466,7 @@
 		451E6BB629056EC00048714B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				45B39F8E29E52DB400852E70 /* Lottie */,
 				453844D929E40D3500A89FEE /* AD */,
 				451E6BC4290570220048714B /* Charts */,
 				459390DF28F2E5C700A94902 /* SegmentedControlView.swift */,
@@ -486,6 +495,7 @@
 			isa = PBXGroup;
 			children = (
 				451E6BC5290576C50048714B /* BaseViewCoordinator.swift */,
+				45B39F8829E52A3500852E70 /* LaunchScreen */,
 				456750AE29744F9700392992 /* LoginScreen */,
 				452D35262951AA780018A3DA /* MainScreen */,
 				459797F9295C054E0059CAC2 /* Diary */,
@@ -543,6 +553,7 @@
 				45E7503C2920B86500CF9E21 /* Settings.plist */,
 				4529AA6A29AF1470001D2390 /* ContentView.swift */,
 				4529AA6C29AF1471001D2390 /* Assets.xcassets */,
+				45B39F9129E52F7300852E70 /* SplashScreen.json */,
 				4529AA6E29AF1471001D2390 /* Preview Content */,
 			);
 			path = MoodMap;
@@ -866,6 +877,22 @@
 			path = Diary;
 			sourceTree = "<group>";
 		};
+		45B39F8829E52A3500852E70 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		45B39F8E29E52DB400852E70 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				45B39F8F29E52DBC00852E70 /* LottieView.swift */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		45B459A929921D5800890CC9 /* SwiftPieChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -942,6 +969,7 @@
 				4529AA8829AF151A001D2390 /* GoogleSignIn */,
 				4529AA8A29AF151A001D2390 /* GoogleSignInSwift */,
 				45EC871729E407440018AE91 /* YandexMobileAdsPackage */,
+				45B39F8C29E52D6B00852E70 /* Lottie */,
 			);
 			productName = MoodMap;
 			productReference = 4529AA6629AF1470001D2390 /* MoodMap.app */;
@@ -981,6 +1009,7 @@
 				45B459A629921C9D00890CC9 /* XCRemoteSwiftPackageReference "SwiftPieChart" */,
 				457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				45EC871629E407440018AE91 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-swift" */,
+				45B39F8B29E52D6A00852E70 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 4539308728C88EC000A5D828 /* Products */;
 			projectDirPath = "";
@@ -1005,6 +1034,7 @@
 				4529AA9129AF15A9001D2390 /* Inter-Medium.ttf in Resources */,
 				4529AA9229AF15A9001D2390 /* Inter-Regular.ttf in Resources */,
 				4529AA9329AF15A9001D2390 /* Inter-SemiBold.ttf in Resources */,
+				45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */,
 				4529AA7029AF1471001D2390 /* Preview Assets.xcassets in Resources */,
 				4529AA6D29AF1471001D2390 /* Assets.xcassets in Resources */,
 				453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */,
@@ -1085,6 +1115,7 @@
 				4529ABA529AF1940001D2390 /* MTButton.swift in Sources */,
 				4504F00329D9762F0042CF6B /* DiaryModel.swift in Sources */,
 				4529ABA629AF1940001D2390 /* CutomAlertView.swift in Sources */,
+				45B39F9029E52DBC00852E70 /* LottieView.swift in Sources */,
 				4592521B29C6EB9A007B1706 /* WeekAnimationChart.swift in Sources */,
 				4529ABA729AF1940001D2390 /* EmotionBoardView.swift in Sources */,
 				45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */,
@@ -1109,6 +1140,7 @@
 				456A401D29BBA7E500371B5C /* JournalService.swift in Sources */,
 				4529ABB629AF1941001D2390 /* LoginView.swift in Sources */,
 				4529ABB729AF1941001D2390 /* LoginViewCoordinator.swift in Sources */,
+				45B39F8A29E52A4B00852E70 /* LaunchScreenView.swift in Sources */,
 				4529ABB829AF1941001D2390 /* LoginCoordinatorView.swift in Sources */,
 				4529ABB929AF1941001D2390 /* MainView.swift in Sources */,
 				4529ABBA29AF1941001D2390 /* MainViewCoordinator.swift in Sources */,
@@ -1421,6 +1453,14 @@
 				kind = branch;
 			};
 		};
+		45B39F8B29E52D6A00852E70 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.3;
+			};
+		};
 		45B459A629921C9D00890CC9 /* XCRemoteSwiftPackageReference "SwiftPieChart" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ilamanov/SwiftPieChart";
@@ -1500,6 +1540,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		45B39F8C29E52D6B00852E70 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45B39F8B29E52D6A00852E70 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 		45EC871729E407440018AE91 /* YandexMobileAdsPackage */ = {
 			isa = XCSwiftPackageProductDependency;

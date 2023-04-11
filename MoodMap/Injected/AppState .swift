@@ -104,18 +104,18 @@ final class AppState: ObservableObject {
         return decoder
     }()
     
-    
-    
-    func startStory(type: UserStoryType, container: DIContainer) {
-        guard UIApplication.shared.connectedScenes.first?.delegate is SceneDelegate else {
+    func startStory(type: UserStoryType, parent: BaseViewCoordinator, container: DIContainer) {
+        guard let scene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
             fatalError()
         }
+        
+        scene.startStory(type: type, parent: parent, container: container)
     }
     
     func logout(container: DIContainer) {
         jwtToken = nil
         refreshToken = nil
-        startStory(type: .login, container: container)
+        startStory(type: .login, parent: BaseViewCoordinator(container: container), container: container)
     }
     
 //    static var settings = Settings.initializeSettings()
