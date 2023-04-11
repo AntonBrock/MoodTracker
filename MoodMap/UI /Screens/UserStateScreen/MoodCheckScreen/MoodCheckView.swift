@@ -11,6 +11,7 @@ import HorizonCalendar
 struct MoodCheckView: View {
     
     @Environment(\.dismiss) var dismiss
+    
     @ObservedObject var valueModel: SliderValueModele
     @ObservedObject var userStateVideModel: ViewModel
         
@@ -26,6 +27,7 @@ struct MoodCheckView: View {
         self.container = container
         self.coordinator = coordinator
         self.valueModel = valueModel
+        
         self.userStateVideModel = coordinator.userStateViewModel
     }
     
@@ -39,6 +41,8 @@ struct MoodCheckView: View {
     @State var choosedTimeDate = Date()
     
     @State var formatedTimeDate: String = ""
+    
+    @State var isShowLoader: Bool = false
 
     var body: some View {
         
@@ -64,77 +68,82 @@ struct MoodCheckView: View {
             }
             .frame(width: UIScreen.main.bounds.width, height: 48, alignment: .center)
             
-            ZStack {
-                VStack {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        ScrollViewReader { proxy in
-                            VStack {
+            if isShowLoader {
+                LoaderLottieView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                ZStack {
+                    VStack {
+                        ScrollView(.vertical, showsIndicators: false) {
+                            ScrollViewReader { proxy in
                                 VStack {
-                                    Button(action: {
-                                        showDatePicker.toggle()
-                                    }, label: {
-                                        
-                                        Text("\(timeViewText) \(getCurrentTime())")
-                                            .font(.system(size: 16, weight: .medium))
-                                            .foregroundColor(Colors.Primary.blue)
-                                            .padding(.leading, 16)
-                                            .padding(.vertical, 8)
-                                        
-                                        Image("chevronDownIcon")
-                                            .foregroundColor(Colors.TextColors.cello900)
-                                            .frame(width: 25, height: 25, alignment: .center)
-                                            .padding(.trailing, 16)
-                                            .padding(.vertical, 8)
-                                    })
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .fill(Color.white)
-                                            .shadow(color: Colors.TextColors.mystic400, radius: 4, x: 0, y: 0)
-                                    )
-                                }
-                                .padding(.top, 10)
-                                
-                                #warning("TODO: Пока нет лоудера")
-                                if !coordinator.userStateViewModel.statesViewModel.isEmpty {
-                                    MoodCheckComponent(statesViewModel: coordinator.userStateViewModel.statesViewModel,
-                                                       setChoosedState: { choosedState in
-                                        self.userStateVideModel.choosedState = choosedState
-                                    }, valueModel: valueModel, value: $value)
-                                    .padding(.top, 15)
-                                }
-                                if !coordinator.userStateViewModel.emotionsViewModel.isEmpty {
-                                    MoodsWordChooseView(emotionViewModel: coordinator.userStateViewModel.emotionsViewModel,
-                                                        valueModel: valueModel,
-                                                        setChoosedEmotion: { choosedEmotion in
-                                        self.userStateVideModel.choosedEmotion = choosedEmotion
-                                    })
+                                    VStack {
+                                        Button(action: {
+                                            showDatePicker.toggle()
+                                        }, label: {
+                                            
+                                            Text("\(timeViewText) \(getCurrentTime())")
+                                                .font(.system(size: 16, weight: .medium))
+                                                .foregroundColor(Colors.Primary.blue)
+                                                .padding(.leading, 16)
+                                                .padding(.vertical, 8)
+                                            
+                                            Image("chevronDownIcon")
+                                                .foregroundColor(Colors.TextColors.cello900)
+                                                .frame(width: 25, height: 25, alignment: .center)
+                                                .padding(.trailing, 16)
+                                                .padding(.vertical, 8)
+                                        })
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .fill(Color.white)
+                                                .shadow(color: Colors.TextColors.mystic400, radius: 4, x: 0, y: 0)
+                                        )
+                                    }
+                                    .padding(.top, 10)
+                                    
+#warning("TODO: Пока нет лоудера")
+                                    if !coordinator.userStateViewModel.statesViewModel.isEmpty {
+                                        MoodCheckComponent(statesViewModel: coordinator.userStateViewModel.statesViewModel,
+                                                           setChoosedState: { choosedState in
+                                            self.userStateVideModel.choosedState = choosedState
+                                        }, valueModel: valueModel, value: $value)
+                                        .padding(.top, 15)
+                                    }
+                                    if !coordinator.userStateViewModel.emotionsViewModel.isEmpty {
+                                        MoodsWordChooseView(emotionViewModel: coordinator.userStateViewModel.emotionsViewModel,
+                                                            valueModel: valueModel,
+                                                            setChoosedEmotion: { choosedEmotion in
+                                            self.userStateVideModel.choosedEmotion = choosedEmotion
+                                        })
                                         .padding(.top, -20)
                                         .id(1)
+                                    }
                                 }
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                            .background(.white)
-                            .onChange(of: valueModel.value) { _ in
-                                withAnimation {
-                                    proxy.scrollTo(1, anchor: .bottom)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                                .background(.white)
+                                .onChange(of: valueModel.value) { _ in
+                                    withAnimation {
+                                        proxy.scrollTo(1, anchor: .bottom)
+                                    }
                                 }
                             }
                         }
+                        .background(.white)
+                        .padding(.bottom, 72)
                     }
-                    .background(.white)
-                    .padding(.bottom, 72)
-                }
-                
-                VStack {
-                    MTButton(buttonStyle: .fill, title: "Продолжить") {
-                        coordinator.openAcitivitiesScreen(with: userStateVideModel)
+                    
+                    VStack {
+                        MTButton(buttonStyle: .fill, title: "Продолжить") {
+                            coordinator.openAcitivitiesScreen(with: userStateVideModel)
+                        }
+                        .frame(width: UIScreen.main.bounds.width - 32, height: 44, alignment: .bottom)
+                        .padding(.bottom, 24)
                     }
-                    .frame(width: UIScreen.main.bounds.width - 32, height: 44, alignment: .bottom)
-                    .padding(.bottom, 24)
+                    .frame(maxWidth: UIScreen.main.bounds.width - 32, maxHeight: .infinity, alignment: .bottom)
                 }
-                .frame(maxWidth: UIScreen.main.bounds.width - 32, maxHeight: .infinity, alignment: .bottom)
+                .frame(maxWidth: UIScreen.main.bounds.width - 32, maxHeight: .infinity)
             }
-            .frame(maxWidth: UIScreen.main.bounds.width - 32, maxHeight: .infinity)
         }
         .popover(isPresented: $showDatePicker) {
             ZStack {
@@ -331,8 +340,16 @@ struct MoodCheckView: View {
             }
         })
         .onAppear {
-            coordinator.userStateViewModel.fetch()
+            coordinator.userStateViewModel.fetch(self)
         }
+    }
+    
+    func showLoader() {
+        isShowLoader = true
+    }
+    
+    func hideLoader() {
+        isShowLoader = false
     }
     
     private func clearCalendar() {

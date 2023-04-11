@@ -165,6 +165,7 @@
 		45B39F9029E52DBC00852E70 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8F29E52DBC00852E70 /* LottieView.swift */; };
 		45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9129E52F7300852E70 /* SplashScreen.json */; };
 		45B39F9429E5406500852E70 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9329E5406500852E70 /* Launch Screen.storyboard */; };
+		45B39FA229E554B100852E70 /* LoaderLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39FA129E554B100852E70 /* LoaderLottieView.swift */; };
 		45C200C129D317F80087B0E3 /* String+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C200C029D317F80087B0E3 /* String+Extenstion.swift */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
@@ -316,6 +317,7 @@
 		45B39F8F29E52DBC00852E70 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		45B39F9129E52F7300852E70 /* SplashScreen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreen.json; sourceTree = "<group>"; };
 		45B39F9329E5406500852E70 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		45B39FA129E554B100852E70 /* LoaderLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderLottieView.swift; sourceTree = "<group>"; };
 		45B459AA29921D5800890CC9 /* PieSliceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		45B459AB29921D5800890CC9 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		45B998D728EB2CD500C170C8 /* MoodBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodBarCharsView.swift; sourceTree = "<group>"; };
@@ -891,9 +893,18 @@
 		45B39F8E29E52DB400852E70 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				45B39F9829E54D8400852E70 /* Loader */,
 				45B39F8F29E52DBC00852E70 /* LottieView.swift */,
 			);
 			path = Lottie;
+			sourceTree = "<group>";
+		};
+		45B39F9829E54D8400852E70 /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				45B39FA129E554B100852E70 /* LoaderLottieView.swift */,
+			);
+			path = Loader;
 			sourceTree = "<group>";
 		};
 		45B459A929921D5800890CC9 /* SwiftPieChart */ = {
@@ -908,9 +919,9 @@
 		45D6F16A29B6575F007EABFA /* UserStateScreen */ = {
 			isa = PBXGroup;
 			children = (
-				456A400F29B991DA00371B5C /* Model */,
 				45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */,
 				45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */,
+				456A400F29B991DA00371B5C /* Model */,
 				453AAC25295DBFD400CE0F15 /* MoodCheckScreen */,
 				456AA722296E9E9900BD414B /* ActivitiesScreen */,
 				4509075629A8C44800815892 /* StressCheckScreen */,
@@ -1071,6 +1082,7 @@
 				456A401529BA41C200371B5C /* ActivitiesModel.swift in Sources */,
 				4529AB7B29AF193F001D2390 /* Fonts.swift in Sources */,
 				4529AB8429AF193F001D2390 /* Colors.swift in Sources */,
+				45B39FA229E554B100852E70 /* LoaderLottieView.swift in Sources */,
 				4529AB8529AF193F001D2390 /* AppState .swift in Sources */,
 				4529AB8629AF193F001D2390 /* Services.swift in Sources */,
 				456A400A29B75DDB00371B5C /* UserStateService.swift in Sources */,

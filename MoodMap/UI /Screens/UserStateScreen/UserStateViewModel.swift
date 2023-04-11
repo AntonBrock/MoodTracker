@@ -11,6 +11,9 @@ extension MoodCheckView {
     class ViewModel: ObservableObject {
         
         var stateModel: [StatesModel] = []
+        
+        var viewer: MoodCheckView?
+        
         @Published var userStateInfoModel: UserStateInfoModel?
         
         @Published var statesViewModel: [StatesViewModel] = []
@@ -29,16 +32,26 @@ extension MoodCheckView {
             self.sendUserNote()
         }
         
-        func fetch() {
+        func fetch(_ viewer: MoodCheckView) {
+            self.viewer = viewer
+            viewer.showLoader()
+            
             let group = DispatchGroup()
             
             group.enter()
             getStatesList(group)
             
+            group.enter()
+            getEmotionsList(group)
+            
+            group.enter()
+            getActiviriesList(group)
+            
+            group.enter()
+            getStressList(group)
+            
             group.notify(queue: .main) {
-                self.getEmotionsList()
-                self.getActiviriesList()
-                self.getStressList()
+                viewer.hideLoader()
             }
         }
         
@@ -61,7 +74,7 @@ extension MoodCheckView {
             }
         }
         
-        private func getEmotionsList() {
+        private func getEmotionsList(_ group: DispatchGroup) {
             Services.userStateService.getEmotionList { result in
                 switch result {
                 case .success(let emotionsModels):
@@ -124,13 +137,16 @@ extension MoodCheckView {
                     self.emotionsViewModel.append(normalEmotions)
                     self.emotionsViewModel.append(goodEmotions)
                     self.emotionsViewModel.append(veryGoodEmotions)
+                    
                 case .failure(let error):
                     print(error)
                 }
+                
+                group.leave()
             }
         }
         
-        private func getActiviriesList() {
+        private func getActiviriesList(_ group: DispatchGroup) {
             Services.userStateService.getActivitiesList { result in
                 switch result {
                 case .success(let models):
@@ -141,10 +157,12 @@ extension MoodCheckView {
                 case .failure(let error):
                     print(error)
                 }
+                
+                group.leave()
             }
         }
         
-        private func getStressList() {
+        private func getStressList(_ group: DispatchGroup) {
             Services.userStateService.getStressList { result in
                 switch result {
                 case .success(let models):
@@ -153,13 +171,19 @@ extension MoodCheckView {
                         text: $0.text,
                         image: $0.image
                     )}))
+                    
                 case .failure(let error):
                     print(error)
                 }
+                
+                group.leave()
             }
         }
         
         private func sendUserNote() {
+            
+            #warning("TODO: Тут нужно чтобы лоудер был на другом экране")
+            
             guard let stateId = choosedState else { return }
             guard let emotionId = choosedEmotion else { return }
             guard let activities = choosedActivities else { return }
@@ -173,6 +197,9 @@ extension MoodCheckView {
                 switch result {
                 case .success(let success):
                     print(success)
+                    #warning("TODO: Показать рекламу, потом закрыть модуль")
+//                    viewer?.showADScreen()
+                    
                 case .failure(let error):
                     print(error)
                 }

@@ -40,7 +40,7 @@ struct LaunchScreenView: View {
                 LottieView(name: "SplashScreen", loopMode: .loop)
                     .onAppear {
                         // тут делаем запрос на данные для Главного экрана потом и вырубаем либо при показе АТТ, Пушах, Главной
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             withAnimation(.spring()) {
                                 animatedIsFinished = true
                                 isLoadingMainInfo = true
