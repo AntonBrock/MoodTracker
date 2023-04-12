@@ -9,11 +9,28 @@ import SwiftUI
 
 public struct PieChartView: View {
     
-    @Binding var values: [Double]
+    @Binding var values: [Double] {
+        willSet {
+            self.values = []
+        }
+    }
     @Binding var total: Int
-    @Binding var emotionsValuesByCategory: [Double]
-    @Binding var colors: [Color]
-    @Binding var names: [String]
+    @Binding var emotionsValuesByCategory: [Double] {
+        willSet {
+            self.emotionsValuesByCategory = []
+        }
+    }
+    
+    @Binding var colors: [Color] {
+        willSet {
+            self.colors = []
+        }
+    }
+    @Binding var names: [String] {
+        willSet {
+            self.names = []
+        }
+    }
         
     @Binding var emotionCircleViewModel: [EmotionCircleViewModel]?
     
