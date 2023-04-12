@@ -16,8 +16,8 @@ struct JournalCoordinatorView: View {
         NavigationView {
             JournalView(coordinator: coordinator,
                         animation: animation)
-//                .navigationTitle("Журнал")
-//                .navigationBarTitleDisplayMode(.large)
+            .navigationTitle("Журнал")
+            .navigationBarTitleDisplayMode(.large)
         }
     }
 }

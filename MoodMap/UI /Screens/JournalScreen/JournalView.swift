@@ -74,17 +74,11 @@ struct JournalView: View {
                     }
                     .background(.white)
                 }
-                
-                if showMoreInfo {
-                    VStack(alignment: .leading) {
-                        DetailJournalView(showMoreInfo: $showMoreInfo,
-                                          animation: animation,
-                                          model: $currentModel)
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
-                    }
-                    .background(.white)
-                }
             }
+            .sheet(isPresented: $showMoreInfo, content: {
+                DetailJournalView(showMoreInfo: $showMoreInfo, model: $currentModel)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
+            })
             .popover(isPresented: $showDatePicker) {
                 
                 HStack {

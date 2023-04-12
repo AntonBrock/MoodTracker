@@ -10,12 +10,8 @@ import SwiftUI
 struct DetailJournalView: View {
     
     @Binding var showMoreInfo: Bool
-    
-    var animation: Namespace.ID
     @Binding var model: JournalViewModel?
-    
-//    @State var scale: CGFloat = 1
-    
+        
     let column: [GridItem] = [
         GridItem(.flexible())
     ]
@@ -170,8 +166,6 @@ struct DetailJournalView: View {
                 }
                 .padding(.top, 24)
             }
-            .matchedGeometryEffect(id: model?.id, in: animation)
-            .ignoresSafeArea(.all, edges: .top)
         }
     }
     
