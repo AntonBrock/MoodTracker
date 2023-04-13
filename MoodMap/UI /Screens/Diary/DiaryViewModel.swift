@@ -13,16 +13,20 @@ extension DiaryView {
     class ViewModel: ObservableObject {
         
         @Published var diaryViewModel: [DiaryViewModel]?
+        @Published var isShowLoader: Bool = false
         
         init() {
             getDiary()
         }
         
         func getDiary() {
+            isShowLoader = true
+            
             Services.diaryService.fetchDiary { result in
                 switch result {
                 case .success(let models):
                     self.diaryViewModel = self.mappingViewModel(data: models)
+                    self.isShowLoader = false
                 case .failure(let error):
                     print(error)
                 }

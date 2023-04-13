@@ -33,22 +33,30 @@ struct DiaryView: View {
             
             Spacer()
             
-            ScrollView {
-                emptyDiaryView()
-                    .padding(.top, 10)
-                    .onTapGesture {
-                        self.presentNewDiaryPage = true
-                    }
-                
-                ForEach(viewModel.diaryViewModel ?? [], id: \.id) { item in
-                    diaryView(time: item.createdAt, diaryPage: item.message)
-                        .padding(.top, 16)
+            if viewModel.isShowLoader {
+                VStack {
+                    LoaderLottieView()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            } else {
+                ScrollView {
+                    emptyDiaryView()
+                        .padding(.top, 10)
                         .onTapGesture {
-                            self.choosedPage = item
-                            self.presentDetailsPage = true
+                            self.presentNewDiaryPage = true
                         }
+                    
+                    ForEach(viewModel.diaryViewModel ?? [], id: \.id) { item in
+                        diaryView(time: item.createdAt, diaryPage: item.message)
+                            .padding(.top, 16)
+                            .onTapGesture {
+                                self.choosedPage = item
+                                self.presentDetailsPage = true
+                            }
+                    }
                 }
             }
+            
         }
         .sheet(isPresented: $presentDetailsPage, content: {
             DetailsDiaryPage(dismiss: {
