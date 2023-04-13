@@ -17,6 +17,11 @@ struct LaunchScreenView: View {
     let parent: BaseViewCoordinator
     let container: DIContainer
     
+    @State var isNeedShowPushNotificationScreen: Bool = false
+    @State var isShowPushNotificationScreen: Bool = false
+    
+    @State var isShowATTScreen: Bool = false
+    
     init(
         parent: BaseViewCoordinator,
         container: DIContainer
@@ -28,9 +33,27 @@ struct LaunchScreenView: View {
     var body: some View {
         
         ZStack {
-            
             if isLoadingMainInfo {
-                ContentView(coordinator: parent)
+                
+                if !needShowATT() && isShowATTScreen {
+                    if !needShowPushNotification() && isShowPushNotificationScreen {
+                        ContentView(coordinator: parent)
+                    } else {
+                        PushNotificationView(closeAction: {
+                            self.isShowPushNotificationScreen = true
+                        })
+                            .transition(.move(edge: .bottom))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                } else {
+                    ATTView {
+                        AppState.shared.isShowATT = true
+                        self.isShowATTScreen = true
+                    }
+                    .transition(.move(edge: .bottom))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                
             }
             
             ZStack {
@@ -51,10 +74,34 @@ struct LaunchScreenView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .opacity(animatedIsFinished ? 0 : 1)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        .frame(maxWidth: .infinity,
+               maxHeight: .infinity,
+               alignment: .center)
         .onAppear {
             self.isSplashScreenShow.toggle()
         }
-        
+    }
+    
+    private func needShowATT() -> Bool {
+        withAnimation {
+            if let showATT = AppState.shared.isShowATT, showATT {
+                return false
+            } else {
+                return true
+            }
+        }
+    }
+    
+    private func needShowPushNotification() -> Bool {
+        withAnimation {
+            if let rememberNotificationDate = AppState.shared.rememberPushNotificationDate,
+               Date().timeIntervalSince(rememberNotificationDate) > Constants.timeoutRequestNotification {
+                AppState.shared.rememberPushNotificationDate = Date()
+                return true
+            } else if AppState.shared.rememberPushNotificationDate == nil {
+                AppState.shared.rememberPushNotificationDate = Date()
+                return false
+            } else { return false }
+        }
     }
 }

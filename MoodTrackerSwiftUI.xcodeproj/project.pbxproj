@@ -133,11 +133,14 @@
 		4529ABD729AF1942001D2390 /* MoodsWordChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D81C1328D469D800AEF36E /* MoodsWordChooseView.swift */; };
 		4529ABD829AF1967001D2390 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529AA6A29AF1470001D2390 /* ContentView.swift */; };
 		4529EE6529DD24A1004CF900 /* DetailsDiaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529EE6429DD24A1004CF900 /* DetailsDiaryPage.swift */; };
-		452D12B229E7BB0E00875334 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 452D12B129E7BB0E00875334 /* loader.json */; };
 		453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */; };
 		453844DC29E40D5000A89FEE /* YandexInterstitialADView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DB29E40D5000A89FEE /* YandexInterstitialADView.swift */; };
 		453844DE29E40D5800A89FEE /* YandexInterstitialADViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DD29E40D5800A89FEE /* YandexInterstitialADViewController.swift */; };
 		4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544361229CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift */; };
+		4546D58E29E83F1200E69852 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D58D29E83F1200E69852 /* Constants.swift */; };
+		4546D59029E841FC00E69852 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 4546D58F29E841FC00E69852 /* loader.json */; };
+		4546D59329E844CD00E69852 /* PushNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D59229E844CD00E69852 /* PushNotificationView.swift */; };
+		4546D59929E86BFF00E69852 /* ATTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D59829E86BFF00E69852 /* ATTView.swift */; };
 		456A400829B75DD200371B5C /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400729B75DD200371B5C /* UserStateEndPoint.swift */; };
 		456A400A29B75DDB00371B5C /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400929B75DDB00371B5C /* UserStateService.swift */; };
 		456A400C29B76AF800371B5C /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400B29B76AF800371B5C /* JournalViewModel.swift */; };
@@ -209,7 +212,6 @@
 		452AD1B928DB4D9B00225F96 /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
 		452AD1BB28DDBAD200225F96 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		452AD1BD28E1E75200225F96 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
-		452D12B129E7BB0E00875334 /* loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader.json; sourceTree = "<group>"; };
 		452D35172951A8570018A3DA /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		452D35272951AAA20018A3DA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		452D35292951AAAB0018A3DA /* MainViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCoordinator.swift; sourceTree = "<group>"; };
@@ -264,6 +266,10 @@
 		4539309028C88EC400A5D828 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		453AAC26295DBFEB00CE0F15 /* MoodCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckView.swift; sourceTree = "<group>"; };
 		4544361229CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesChartsForAllTime.swift; sourceTree = "<group>"; };
+		4546D58D29E83F1200E69852 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4546D58F29E841FC00E69852 /* loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader.json; sourceTree = "<group>"; };
+		4546D59229E844CD00E69852 /* PushNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationView.swift; sourceTree = "<group>"; };
+		4546D59829E86BFF00E69852 /* ATTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTView.swift; sourceTree = "<group>"; };
 		45470CB328E5BEE1004822E0 /* ActivitiesBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesBarCharsView.swift; sourceTree = "<group>"; };
 		4551C3ED295995E60034665E /* FeelingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingView.swift; sourceTree = "<group>"; };
 		4551C3EF295995FE0034665E /* FeelingViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingViewCoordinator.swift; sourceTree = "<group>"; };
@@ -500,6 +506,8 @@
 		451E6BB729056EC70048714B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				4546D59729E86B8200E69852 /* ATT */,
+				4546D59129E844BF00E69852 /* PushNotification */,
 				451E6BC5290576C50048714B /* BaseViewCoordinator.swift */,
 				45B39F8829E52A3500852E70 /* LaunchScreen */,
 				456750AE29744F9700392992 /* LoginScreen */,
@@ -559,8 +567,8 @@
 				45E7503C2920B86500CF9E21 /* Settings.plist */,
 				4529AA6A29AF1470001D2390 /* ContentView.swift */,
 				4529AA6C29AF1471001D2390 /* Assets.xcassets */,
-				452D12B129E7BB0E00875334 /* loader.json */,
 				45B39F9129E52F7300852E70 /* SplashScreen.json */,
+				4546D58F29E841FC00E69852 /* loader.json */,
 				4529AA6E29AF1471001D2390 /* Preview Content */,
 			);
 			path = MoodMap;
@@ -761,6 +769,22 @@
 			path = MoodCheckScreen;
 			sourceTree = "<group>";
 		};
+		4546D59129E844BF00E69852 /* PushNotification */ = {
+			isa = PBXGroup;
+			children = (
+				4546D59229E844CD00E69852 /* PushNotificationView.swift */,
+			);
+			path = PushNotification;
+			sourceTree = "<group>";
+		};
+		4546D59729E86B8200E69852 /* ATT */ = {
+			isa = PBXGroup;
+			children = (
+				4546D59829E86BFF00E69852 /* ATTView.swift */,
+			);
+			path = ATT;
+			sourceTree = "<group>";
+		};
 		4551C3EC295995D20034665E /* FeelingScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -807,6 +831,7 @@
 			children = (
 				4579220D28CF4FBD00722D16 /* SwiftUISlider.swift */,
 				45D6F15D29B3771B007EABFA /* KeychainHelper.swift */,
+				4546D58D29E83F1200E69852 /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1043,6 +1068,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4529AA9429AF15B8001D2390 /* Settings.plist in Resources */,
+				4546D59029E841FC00E69852 /* loader.json in Resources */,
 				4529AA8C29AF15A9001D2390 /* Inter-Black.ttf in Resources */,
 				4529AA8D29AF15A9001D2390 /* Inter-Bold.ttf in Resources */,
 				4529AA8E29AF15A9001D2390 /* Inter-ExtraBold.ttf in Resources */,
@@ -1053,7 +1079,6 @@
 				4529AA9229AF15A9001D2390 /* Inter-Regular.ttf in Resources */,
 				4529AA9329AF15A9001D2390 /* Inter-SemiBold.ttf in Resources */,
 				45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */,
-				452D12B229E7BB0E00875334 /* loader.json in Resources */,
 				4529AA7029AF1471001D2390 /* Preview Assets.xcassets in Resources */,
 				4529AA6D29AF1471001D2390 /* Assets.xcassets in Resources */,
 				453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */,
@@ -1078,6 +1103,7 @@
 				4529AB7329AF193F001D2390 /* UIDevice+extension.swift in Sources */,
 				4529AB7429AF193F001D2390 /* NetworkService.swift in Sources */,
 				4529AB7529AF193F001D2390 /* ServiceProvider.swift in Sources */,
+				4546D58E29E83F1200E69852 /* Constants.swift in Sources */,
 				4529AB7629AF193F001D2390 /* MainScreenService.swift in Sources */,
 				4529AB7729AF193F001D2390 /* BaseAPI.swift in Sources */,
 				4529AB7829AF193F001D2390 /* MainScreenEndpoint.swift in Sources */,
@@ -1174,6 +1200,7 @@
 				45133A2229AFB97400258072 /* AuthEnpPoint.swift in Sources */,
 				4504F00929D97CAC0042CF6B /* NewDiaryPageView.swift in Sources */,
 				4529ABC229AF1941001D2390 /* JournalCoordinatorView.swift in Sources */,
+				4546D59929E86BFF00E69852 /* ATTView.swift in Sources */,
 				4592521429C4205E007B1706 /* ReportModel.swift in Sources */,
 				4592522529C6EE73007B1706 /* ReportTipView.swift in Sources */,
 				4529ABC329AF1941001D2390 /* ReportScreen.swift in Sources */,
@@ -1201,6 +1228,7 @@
 				4529ABD229AF1942001D2390 /* ActivitiesCoordinatorView.swift in Sources */,
 				456A401129B991E200371B5C /* EmotionsViewModel.swift in Sources */,
 				4529ABD329AF1942001D2390 /* StressCheckComponent.swift in Sources */,
+				4546D59329E844CD00E69852 /* PushNotificationView.swift in Sources */,
 				4592521F29C6ED01007B1706 /* Date+Extenstion.swift in Sources */,
 				4529ABD429AF1942001D2390 /* StressCheckView.swift in Sources */,
 				4529ABD529AF1942001D2390 /* SwiftUISlider.swift in Sources */,
