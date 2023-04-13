@@ -12,6 +12,8 @@ struct WeekAnimationChart: View {
     
     @Binding var weekChartViewModel: [ChartDataViewModel]
     @State var translation: CGFloat = 0
+    
+    @Binding var showLoader: Bool
 
     var body: some View {
         VStack {
@@ -68,16 +70,26 @@ struct WeekAnimationChart: View {
                     }
                     .contentShape(Rectangle())
                 } else {
-                    VStack{
-                        Text("Видим, что пора начать следить за своим психологическим здоровьем\nпосле мы покажем статистику")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .foregroundColor(Colors.TextColors.fiord800)
-                            .font(.system(size: 14, weight: .medium))
-                            .multilineTextAlignment(.center)
+                    if showLoader {
+                        VStack {
+                            LottieView(name: "loader", loopMode: .loop)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+                        .frame(height: 250, alignment: .center)
+                        .cornerRadius(16)
+                    } else {
+                        VStack {
+                            Text("Видим, что пора начать следить за своим психологическим здоровьем\nпосле мы покажем статистику")
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .foregroundColor(Colors.TextColors.fiord800)
+                                .font(.system(size: 14, weight: .medium))
+                                .multilineTextAlignment(.center)
+                        }
+                        .frame(height: 250, alignment: .center)
+                        .background(.white)
+                        .cornerRadius(16)
                     }
-                    .frame(height: 250, alignment: .center)
-                    .background(.white)
-                    .cornerRadius(16)
+                   
                 }
 //                .overlay(
 //                    VStack(spacing: 0) {

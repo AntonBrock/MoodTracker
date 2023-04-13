@@ -11,6 +11,8 @@ import SwiftUI
 extension MainView {
     class ViewModel: ObservableObject {
         
+        @Published var viewer: MainView?
+        
         @Published var emotionCountData: EmotionCountDataViewModel = EmotionCountDataViewModel(
             total: 0,
             common: "",
@@ -32,19 +34,24 @@ extension MainView {
         
         @Published var isEnableTypeOfReprot: [String] = ["Настроение", "Стресс"]
         @Published var isEnableTypeOfReportForRequest: [String] = ["mood", "stress"]
-        
+        @Published var isShowLoader: Bool = false
+
         var selectedTypeOfReport: Int = 0
         
         var firstDayOfWeek: String?
         var lastDayOfWeek: String?
         var shortDateMonth: String?
         var currentYear: String?
-
-        init() {
+        
+        func setupViewer(_ viewer: MainView) {
+            self.viewer = viewer
+            
             fetchMainData()
         }
         
+        
         func fetchMainData() {
+            isShowLoader = true
             
             let formatter = DateFormatter()
             formatter.dateFormat = "dd"
@@ -91,6 +98,7 @@ extension MainView {
                 emotionCircleViewModel: [],
                 dataIsEmpty: true
             )
+            
             fetchMainData()
         }
         
@@ -100,6 +108,7 @@ extension MainView {
                 case .success(let model):
                     self.emotionCountData = self.mappingEmotionCountData(data: model)
                     self.timeData = self.mappingTimeData(data: model)
+                    self.isShowLoader = false
                 case .failure(let error):
                     print(error)
                 }

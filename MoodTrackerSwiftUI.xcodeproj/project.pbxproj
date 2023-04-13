@@ -133,6 +133,7 @@
 		4529ABD729AF1942001D2390 /* MoodsWordChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D81C1328D469D800AEF36E /* MoodsWordChooseView.swift */; };
 		4529ABD829AF1967001D2390 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529AA6A29AF1470001D2390 /* ContentView.swift */; };
 		4529EE6529DD24A1004CF900 /* DetailsDiaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529EE6429DD24A1004CF900 /* DetailsDiaryPage.swift */; };
+		452D12B229E7BB0E00875334 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 452D12B129E7BB0E00875334 /* loader.json */; };
 		453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */; };
 		453844DC29E40D5000A89FEE /* YandexInterstitialADView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DB29E40D5000A89FEE /* YandexInterstitialADView.swift */; };
 		453844DE29E40D5800A89FEE /* YandexInterstitialADViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DD29E40D5800A89FEE /* YandexInterstitialADViewController.swift */; };
@@ -208,6 +209,7 @@
 		452AD1B928DB4D9B00225F96 /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
 		452AD1BB28DDBAD200225F96 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		452AD1BD28E1E75200225F96 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
+		452D12B129E7BB0E00875334 /* loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader.json; sourceTree = "<group>"; };
 		452D35172951A8570018A3DA /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		452D35272951AAA20018A3DA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		452D35292951AAAB0018A3DA /* MainViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCoordinator.swift; sourceTree = "<group>"; };
@@ -557,6 +559,7 @@
 				45E7503C2920B86500CF9E21 /* Settings.plist */,
 				4529AA6A29AF1470001D2390 /* ContentView.swift */,
 				4529AA6C29AF1471001D2390 /* Assets.xcassets */,
+				452D12B129E7BB0E00875334 /* loader.json */,
 				45B39F9129E52F7300852E70 /* SplashScreen.json */,
 				4529AA6E29AF1471001D2390 /* Preview Content */,
 			);
@@ -1050,6 +1053,7 @@
 				4529AA9229AF15A9001D2390 /* Inter-Regular.ttf in Resources */,
 				4529AA9329AF15A9001D2390 /* Inter-SemiBold.ttf in Resources */,
 				45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */,
+				452D12B229E7BB0E00875334 /* loader.json in Resources */,
 				4529AA7029AF1471001D2390 /* Preview Assets.xcassets in Resources */,
 				4529AA6D29AF1471001D2390 /* Assets.xcassets in Resources */,
 				453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */,

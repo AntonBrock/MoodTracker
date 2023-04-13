@@ -38,7 +38,8 @@ struct ReportScreen: View {
     ){
         self.coordinator = coordinator
         self.viewModel = coordinator.viewModel
-        coordinator.viewModel.getDates()
+        
+        self.viewModel.setup()
     }
     
     var body: some View {
@@ -126,7 +127,10 @@ struct ReportScreen: View {
                 if isAnimated {
                     if viewModel.selectedTypeOfReport == 0 || viewModel.selectedTypeOfReport == 1 {
                         if viewModel.dateSelectedIndex == 0 {
-                            WeekAnimationChart(weekChartViewModel: $viewModel.chartDataViewModel)
+                            WeekAnimationChart(
+                                weekChartViewModel: $viewModel.chartDataViewModel,
+                                showLoader: $viewModel.showLoader
+                            )
                                 .transition(.move(edge: .top).combined(with: .opacity))
                         } else {
                             MonthChart(viewModel: viewModel,
@@ -139,6 +143,7 @@ struct ReportScreen: View {
                             emotionColors: $viewModel.emotionCountData.color,
                             emotionTotal: $viewModel.emotionCountData.total,
                             emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel,
+                            isLoading: $viewModel.showLoader,
                             dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty
                         )
                         
@@ -147,6 +152,7 @@ struct ReportScreen: View {
                                 ReportTipView(
                                     text: "Твой уровень стресса в этом месяце в большинстве случаев был ",
                                     selectedText: $viewModel.emotionCountData.common,
+                                    isShowLoader: $viewModel.showLoader,
                                     tipType: .commonEmotionStateStress
                                 )
                                 .padding(.top, -16)
@@ -154,6 +160,7 @@ struct ReportScreen: View {
                                 ReportTipView(
                                     text: "Твоим самым частым настроением этого месяца стало ",
                                     selectedText: $viewModel.emotionCountData.common,
+                                    isShowLoader: $viewModel.showLoader,
                                     tipType: .commonEmotionState
                                 )
                                 .padding(.top, -16)
@@ -164,6 +171,7 @@ struct ReportScreen: View {
                                 ReportTipView(
                                     text: "Твой уровень стресса на этой неделе в большинстве случаев ",
                                     selectedText: $viewModel.emotionCountData.common,
+                                    isShowLoader: $viewModel.showLoader,
                                     tipType: .commonEmotionStateStress
                                 )
                                 .padding(.top, -16)
@@ -171,6 +179,7 @@ struct ReportScreen: View {
                                 ReportTipView(
                                     text: "Твоим самым частым настроением этой недели стало ",
                                     selectedText: $viewModel.emotionCountData.common,
+                                    isShowLoader: $viewModel.showLoader,
                                     tipType: .commonEmotionState
                                 )
                                 .padding(.top, -16)
@@ -185,7 +194,8 @@ struct ReportScreen: View {
                             goodActivitiesViewModel: $viewModel.goodActivitiesDataViewModel,
                             badActivitiesViewModel: $viewModel.badActivitiesDataViewModel,
                             isMonthCurrentTab: $viewModel.isMonthCurrentTab,
-                            isStressCurrentTab: $viewModel.isStressCurrentTab
+                            isStressCurrentTab: $viewModel.isStressCurrentTab,
+                            isShowLoader: $viewModel.showLoader
                         )
                     } else {
                         ActivitiesChartsForAllTime()
@@ -194,7 +204,7 @@ struct ReportScreen: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .onChange(of: viewModel.isLoading, perform: { newValue in
+        .onChange(of: viewModel.showLoader, perform: { newValue in
             withAnimation(.linear(duration: 0.5)) {
                 if !isAnimated {
                     self.isAnimated = true

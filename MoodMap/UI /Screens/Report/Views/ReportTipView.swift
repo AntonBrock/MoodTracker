@@ -20,6 +20,7 @@ struct ReportTipView: View {
     
     @State var text: String = ""
     @Binding var selectedText: String
+    @Binding var isShowLoader: Bool
     
     @State var tipType: TipType = .goodActivities
     
@@ -32,13 +33,24 @@ struct ReportTipView: View {
                 .overlay(
                     HStack {
                         if selectedText == "" {
-                            Text("Мы не нашли за выбранный период твоих данных")
-                                .font(.system(size: 14, weight: .light))
-                                .foregroundColor(Colors.Primary.blue) +
+                            if isShowLoader {
+                                Text("Секунду..")
+                                    .font(.system(size: 14, weight: .light))
+                                    .foregroundColor(Colors.Primary.blue) +
+                                
+                                Text(" уже ищем твои записи")
+                                    .foregroundColor(getColorFor(tipType))
+                                    .font(.system(size: 14, weight: .light))
+                            } else {
+                                Text("Мы не нашли за выбранный период твоих данных")
+                                    .font(.system(size: 14, weight: .light))
+                                    .foregroundColor(Colors.Primary.blue) +
+                                
+                                Text(" начинай следить за своим состоянием")
+                                    .foregroundColor(getColorFor(tipType))
+                                    .font(.system(size: 14, weight: .light))
+                            }
                             
-                            Text(" начинай следить за своим состоянием")
-                                .foregroundColor(getColorFor(tipType))
-                                .font(.system(size: 14, weight: .light))
                         } else {
                             Text(getTitleForTip(tipType).0)
                                 .font(.system(size: 14, weight: .light))

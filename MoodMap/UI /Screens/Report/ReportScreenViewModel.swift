@@ -12,7 +12,7 @@ import HorizonCalendar
 extension ReportScreen {
     
     class ViewModel: ObservableObject {
-        
+                
         @Published var isEnableTypeOfReprot: [String] = ["Настроение", "Стресс"]
         @Published var isEnableTypeOfReportForRequest: [String] = ["mood", "stress"]
 
@@ -49,12 +49,16 @@ extension ReportScreen {
         @Published var lastDayOfWeek: String?
         @Published var currentMonth: String?
         @Published var currentYear: String?
-        @Published var isLoading: Bool = false
-        
         @Published var currentMonthDidChoose: Date?
         
         @Published var isMonthCurrentTab: Bool = false
         @Published var isStressCurrentTab: Bool = false
+        
+        @Published var showLoader: Bool = false
+        
+        func setup() {
+            getDates()
+        }
       
         var selectedTypeOfReport: Int = 0 {
             didSet {
@@ -365,36 +369,35 @@ extension ReportScreen {
         }
         
         func fetchCurrentDate(date: Date,
-                              completion: @escaping ([ReportCurrentViewModel]) -> Void) {
-//            isLoading = true
+                              completion: @escaping ([ReportCurrentViewModel]) -> Void
+        ) {
+            showLoader = true
 
             Services.reportService.fetchCurrentDate(date: date) { result in
                 switch result {
                 case .success(let models):
                     let viewModel = self.mappingCurrentReportViewModel(models: models)
                     completion(viewModel)
+                    self.showLoader = false
                 case .failure(let error):
                     print(error)
                 }
             }
-//            self.isLoading = false
         }
         
         private func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport) {
-            isLoading = true
+            showLoader = true
 
             clearData()
             Services.reportService.fetchReport(from: from, to: to, type: type) { result in
                 switch result {
                 case .success(let model):
                     self.reportViewModel = self.mappingViewModel(data: model)
-                    self.isLoading = false
+                    self.showLoader = false
                 case .failure(let error):
                     print(error)
                 }
             }
-            
-//            isLoading = false
         }
         
         private func clearData() {

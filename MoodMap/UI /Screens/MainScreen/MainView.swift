@@ -20,7 +20,7 @@ struct MainView: View {
     
     @State var isAnimated: Bool = false
     @State var isAnimatedJournalView: Bool = false
-        
+    
     init(
         container: DIContainer,
         animation: Namespace.ID,
@@ -90,6 +90,7 @@ struct MainView: View {
                     emotionColors: $viewModel.emotionCountData.color,
                     emotionTotal: $viewModel.emotionCountData.total,
                     emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel,
+                    isLoading: $viewModel.isShowLoader,
                     dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty
                 )
                 .padding(.top, 16)
@@ -105,6 +106,8 @@ struct MainView: View {
             }
         }
         .onAppear {
+            viewModel.setupViewer(self)
+            
             withAnimation(.linear(duration: 0.3)) {
                 self.isAnimated = true
             }
