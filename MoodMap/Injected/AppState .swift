@@ -19,43 +19,28 @@ final class AppState: ObservableObject {
         static let jwtService = "JWT"
         static let refreshTokenService = "refreshToken"
         static let isAuthorizated = "isAuthorizated"
+    }
+    
+    enum UserDefaultsKeys {
         static let rememberPushNotificationDate = "rememberPushNotificationDate"
         static let isShowATT = "isShowATT"
     }
     
     var rememberPushNotificationDate: Date? {
         get {
-            return KeychainHelper.standard.read(
-                service: KeychainKeys.rememberPushNotificationDate,
-                account: KeychainKeys.accountKey,
-                type: Date.self
-            )
+            return UserDefaults.standard.object(forKey: UserDefaultsKeys.rememberPushNotificationDate) as? Date
         }
         set {
-            KeychainHelper.standard.save(
-                newValue,
-                service: KeychainKeys.rememberPushNotificationDate,
-                account: KeychainKeys.accountKey
-            )
-            objectWillChange.send()
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.rememberPushNotificationDate)
         }
     }
     
     var isShowATT: Bool? {
         get {
-            return KeychainHelper.standard.read(
-                service: KeychainKeys.isShowATT,
-                account: KeychainKeys.accountKey,
-                type: Bool.self
-            )
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isShowATT)
         }
         set {
-            KeychainHelper.standard.save(
-                newValue,
-                service: KeychainKeys.isShowATT,
-                account: KeychainKeys.accountKey
-            )
-            objectWillChange.send()
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isShowATT)
         }
     }
         

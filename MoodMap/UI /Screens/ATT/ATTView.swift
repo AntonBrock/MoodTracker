@@ -12,6 +12,8 @@ struct ATTView: View {
     
     var closeAction: (() -> Void)
     
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         
         VStack {
@@ -82,11 +84,13 @@ struct ATTView: View {
                             // Tracking authorization dialog was shown
                             // and we are authorized
                             print("Authorized")
+                            self.dismiss.callAsFunction()
                             self.closeAction()
                         case .denied:
                             // Tracking authorization dialog was
                             // shown and permission is denied
                             print("Denied")
+                            self.dismiss.callAsFunction()
                             self.closeAction()
                         case .notDetermined:
                             // Tracking authorization dialog has not been shown

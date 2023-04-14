@@ -35,25 +35,29 @@ struct LaunchScreenView: View {
         ZStack {
             if isLoadingMainInfo {
                 
-                if !needShowATT() && isShowATTScreen {
-                    if !needShowPushNotification() && isShowPushNotificationScreen {
-                        ContentView(coordinator: parent)
-                    } else {
-                        PushNotificationView(closeAction: {
-                            self.isShowPushNotificationScreen = true
-                        })
-                            .transition(.move(edge: .bottom))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                } else {
+                if needShowATT() && !isShowATTScreen {
                     ATTView {
                         AppState.shared.isShowATT = true
-                        self.isShowATTScreen = true
+                        withAnimation {
+                            self.isShowATTScreen = true
+                        }
                     }
                     .transition(.move(edge: .bottom))
                     .frame(maxWidth: .infinity, alignment: .leading)
+                } else {
+                    if !isShowPushNotificationScreen && needShowPushNotification() {
+                        PushNotificationView(closeAction: {
+                            withAnimation {
+                                self.isShowPushNotificationScreen = true
+                            }
+                        })
+                            .transition(.move(edge: .bottom))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    } else {
+                        ContentView(coordinator: parent)
+                    }
                 }
-                
+
             }
             
             ZStack {
@@ -78,7 +82,11 @@ struct LaunchScreenView: View {
                maxHeight: .infinity,
                alignment: .center)
         .onAppear {
-            self.isSplashScreenShow.toggle()
+            if let showATT = AppState.shared.isShowATT, showATT {
+                isShowATTScreen = true
+            }
+            
+            isSplashScreenShow.toggle()
         }
     }
     
@@ -100,7 +108,7 @@ struct LaunchScreenView: View {
                 return true
             } else if AppState.shared.rememberPushNotificationDate == nil {
                 AppState.shared.rememberPushNotificationDate = Date()
-                return false
+                return true
             } else { return false }
         }
     }
