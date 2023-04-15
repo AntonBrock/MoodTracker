@@ -46,7 +46,7 @@ extension MainView {
         func setupViewer(_ viewer: MainView) {
             self.viewer = viewer
             
-            fetchMainData()
+//            fetchMainData()
         }
         
         

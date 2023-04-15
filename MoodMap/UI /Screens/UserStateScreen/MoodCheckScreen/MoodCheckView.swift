@@ -31,6 +31,8 @@ struct MoodCheckView: View {
         self.userStateVideModel = coordinator.userStateViewModel
     }
     
+    @State var selectedTime: Date = Date()
+    
     @State private var date = Date()
 
     @State var timeViewText: String = "Сегодня"
@@ -150,7 +152,7 @@ struct MoodCheckView: View {
                     HStack {
                         Button {
                             clearCalendar()
-                            showDatePicker.toggle()
+                            showDatePicker = false
                         } label: {
                             Image("crossIcon")
                                 .resizable()
@@ -197,8 +199,10 @@ struct MoodCheckView: View {
                                 .padding(.leading, 16)
                                 .padding(.vertical, 8)
                                 .onTapGesture {
-                                    showDatePicker.toggle()
-                                    showChoosingTimePicker.toggle()
+                                    showDatePicker = false
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                        self.showChoosingTimePicker = true
+                                    }
                                 }
                            
                         }
@@ -208,6 +212,9 @@ struct MoodCheckView: View {
                         HStack {
                             MTButton(buttonStyle: .outline, title: "Очистить") {
                                 clearCalendar()
+                                withAnimation {
+                                    showDatePicker = false
+                                }
                             }
                             .frame(maxWidth: 160, maxHeight: 48)
                             
@@ -217,62 +224,21 @@ struct MoodCheckView: View {
                                 let formatter = DateFormatter()
                                 formatter.timeStyle = .short
                                 formatter.locale = Locale(identifier: "ru_RU")
-                                let dateString = formatter.string(from: choosedTimeDate)
-                                
-                                self.formatedTimeDate = dateString
-                                self.timeViewText = "\(selectedDay?.description ?? "")"
+                                let dateTimeString = formatter.string(from: choosedTimeDate)
+                                self.formatedTimeDate = dateTimeString
+                               
+                                self.timeViewText = "\(selectedDay?.description ?? "Сегодня")"
                                 withAnimation {
-                                    showChoosingTimePicker.toggle()
+                                    showDatePicker = false
                                 }
                             }
                             .frame(maxWidth: 160, maxHeight: 48)
-                            .disabled(selectedDay == nil)
+//                            .disabled(selectedDay == nil || selectedTime == Date())
                         }
                         .frame(height: 100)
                         .padding(.horizontal, 16)
                     }
                 }
-                
-//                if showChoosingTimePicker {
-//                    VStack {
-//                        VStack(spacing: 16) {
-//
-//                            Text("Выбери время")
-//                                .font(.system(size: 24, weight: .semibold))
-//                                .foregroundColor(Colors.Primary.blue)
-//                                .frame(maxWidth: .infinity, alignment: .leading)
-//                                .padding(.leading, 12)
-//                                .padding(.trailing, 10)
-//                                .padding(.top, 24)
-//
-//                            DatePicker("", selection: $choosedTimeDate,
-//                                       displayedComponents: .hourAndMinute)
-//                                .labelsHidden()
-//
-//                            MTButton(buttonStyle: .fill, title: "Применить") {
-//                                let formatter = DateFormatter()
-//                                formatter.timeStyle = .short
-//                                formatter.locale = Locale(identifier: "ru_RU")
-//                                let dateString = formatter.string(from: choosedTimeDate)
-//
-//                                self.formatedTimeDate = dateString
-//                                self.timeViewText = "\(selectedDay?.description ?? "")"
-//
-//                                withAnimation {
-//                                    showChoosingTimePicker.toggle()
-//                                }
-//                            }
-//                            .frame(width: 135, height: 30, alignment: .bottom)
-//                            .padding(.top, 20)
-//                        }
-//                        .frame(width: 180, height: 180, alignment: .center)
-//                        .padding(.horizontal, 16)
-//                        .background(.white)
-//                        .cornerRadius(10)
-//                    }
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-//                    .background(.black.opacity(0.5))
-//                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
@@ -280,8 +246,10 @@ struct MoodCheckView: View {
             VStack {
                 HStack {
                     Button {
-                        showChoosingTimePicker.toggle()
-                        showDatePicker.toggle()
+                        self.showChoosingTimePicker = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                            self.showDatePicker = true
+                        }
                     } label: {
                         Image("crossIcon")
                             .resizable()
@@ -305,10 +273,17 @@ struct MoodCheckView: View {
                 
                 Spacer()
                 
-                DatePicker("", selection: $choosedTimeDate,
-                           displayedComponents: .hourAndMinute)
+                DatePicker(
+                    "",
+                    selection: $choosedTimeDate,
+                    displayedComponents: .hourAndMinute
+                )
+                .onChange(of: choosedTimeDate, perform: { newValue in
+                    self.selectedTime = newValue
+                })
                 .frame(height: 216)
                 .datePickerStyle(.wheel)
+//                .environment(\.timeZone, TimeZone(secondsFromGMT: +3)!) // forRussia - +3
                 .labelsHidden()
 
                 Spacer()
@@ -318,18 +293,23 @@ struct MoodCheckView: View {
                 VStack {
                     HStack {
                         MTButton(buttonStyle: .outline, title: "Отменить") {
-                            #warning("TODO: Добавить удаление")
-                            showChoosingTimePicker.toggle()
-                            showDatePicker.toggle()
+                            self.selectedTime = Date()
+                            self.showChoosingTimePicker = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                self.showDatePicker = true
+                            }
                         }
                         .frame(maxWidth: 160, maxHeight: 48)
                         
                         Spacer()
                         
-                            #warning("TODO: Не закрывается")
                         MTButton(buttonStyle: .fill, title: "Применить") {
-                            showChoosingTimePicker.toggle()
-                            showDatePicker.toggle()
+                            self.showChoosingTimePicker = false
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                #warning("TODO: Сохранить время")
+                                self.showDatePicker = true
+                            }
                         }
                         .frame(maxWidth: 160, maxHeight: 48)
                     }
@@ -339,7 +319,6 @@ struct MoodCheckView: View {
             }
         })
         .onAppear {
-            
             if coordinator.userStateViewModel.statesViewModel.isEmpty
                 && coordinator.userStateViewModel.activitiesViewModel.isEmpty
                 && coordinator.userStateViewModel.emotionsViewModel.isEmpty
@@ -371,7 +350,7 @@ struct MoodCheckView: View {
             formatter.timeStyle = .short
             formatter.locale = Locale(identifier: "ru_RU")
             
-            let dateString = formatter.string(from: Date())
+            let dateString = formatter.string(from: selectedTime)
             return dateString
         } else {
             return formatedTimeDate
