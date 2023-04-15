@@ -12,6 +12,8 @@ struct PersonalCabinetView: View {
     private unowned let coordinator: PersonalCabinetViewCoordinator
     @ObservedObject var viewModel: ViewModel
     @State var pushNotification: Bool = false
+    
+    @State var showThatTelegramNotInstallView: Bool = false
 
     init(
         coordinator: PersonalCabinetViewCoordinator,
@@ -42,12 +44,12 @@ struct PersonalCabinetView: View {
                     }
                     .frame(width: UIScreen.main.bounds.width - 32, height: 64)
                     
-                    createArrowBlock("Создание пароля")
-                        .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-                        .padding(.trailing, 5)
-                        .onTapGesture {
-                            coordinator.openLoginView()
-                        }
+//                    createArrowBlock("Создание пароля")
+//                        .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+//                        .padding(.trailing, 5)
+//                        .onTapGesture {
+//                            coordinator.openLoginView()
+//                        }
                     
                 }
                 .padding(.horizontal, 24)
@@ -66,18 +68,37 @@ struct PersonalCabinetView: View {
                     createArrowBlock("Поддержка")
                         .frame(width: UIScreen.main.bounds.width - 32, height: 64)
                         .padding(.trailing, 5)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 24)
+                .background(.white)
+                .onTapGesture {
+                    let url = URL.init(string: Constants.urlPathToSupport)!
                     
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+                    } else {
+                        showThatTelegramNotInstallView.toggle()
+                    }
+                }
+                
+                VStack {
                     createArrowBlock("Пользовательское соглашение")
                         .frame(width: UIScreen.main.bounds.width - 32, height: 64)
                         .padding(.trailing, 5)
                     
                 }
+                .frame(maxWidth: .infinity)
                 .padding(.horizontal, 24)
                 .background(.white)
+                .padding(.top, -12)
             }
             .background(Colors.Primary.lightWhite)
         }
         .padding(.bottom, 24)
+        .sheet(isPresented: $showThatTelegramNotInstallView) {
+            Text("Напишите нам на почту info@mapmood.com и мы вам ответим!")
+        }
     }
     
     @ViewBuilder

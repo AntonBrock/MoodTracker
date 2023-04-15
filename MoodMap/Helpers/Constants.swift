@@ -13,6 +13,7 @@ enum Constants {
     /// Если прошло 10 дней то необходимо снова спросить доступ к пушам
 //    static let timeoutRequestNotification: TimeInterval = 60 * 60 * 24 * 10
     
+    static let urlPathToSupport: String = "tg://resolve?domain=moodmapsupport"
     /// Если прошло 10 минут то необходимо снова спросить доступ к пушам
     static let timeoutRequestNotification: TimeInterval = 3 * 10 //60 * 10
 }
