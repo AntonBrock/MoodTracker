@@ -213,6 +213,7 @@ struct MainView: View {
                         .foregroundColor(Colors.Primary.lavender500Purple)
                         .font(.system(size: 10, weight: .medium))
                         .padding(.top, 21)
+                        .padding(.bottom, 22)
                     
                 }
                 .frame(width: 116, height: 120)
@@ -222,6 +223,9 @@ struct MainView: View {
                 .shadow(color: Colors.TextColors.mischka500,
                         radius: 2.0, x: 0.0, y: 0)
                 .padding(.leading, 20)
+                .onTapGesture {
+                    print("open journal")
+                }
                 
                 // Всегда берем 1 элемент, так как нужно показать инфу за текущий день
                 ForEach(viewModel.journalViewModels?[0] ?? [], id: \.self) { item in
@@ -258,6 +262,9 @@ struct MainView: View {
                     .cornerRadius(15)
                     .shadow(color: Colors.TextColors.mischka500,
                             radius: 2.0, x: 0.0, y: 0)
+                    .onTapGesture {
+                        print("Open choosed page in journal ")
+                    }
                 }
             }
             .padding(.top, 10)
