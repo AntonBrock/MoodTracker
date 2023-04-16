@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>tg</string>
-	</array>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>Нам нужно это разрешение для показа рекламы внутри приложения, которая подходит для тебя </string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -29,6 +23,10 @@
 	</array>
 	<key>GIDClientID</key>
 	<string>947104793436-d0ag0du82f66brj6ce1dtqa1i5i3ut4j.apps.googleusercontent.com</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>tg</string>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AvertaDemoPE-ExtraboldItalic.ttf</string>
