@@ -50,7 +50,7 @@ struct MoodCheckView: View {
         
         VStack {
             HStack {
-                Image("leftBackBlackArror")
+                Image("crossIcon")
                     .resizable()
                     .frame(width: 24, height: 24, alignment: .center)
                     .padding(.leading, 18)

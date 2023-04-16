@@ -47,7 +47,7 @@ struct ActivitiesTextViewBlock: View {
                         saveDiaryText!(text)
                         text = ""
                     }
-                    .frame(width: 205, height: 48)
+                    .frame(width: 256, height: 48)
                     .padding(.top, 10)
                 }
                 

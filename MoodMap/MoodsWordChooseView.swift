@@ -39,7 +39,7 @@ struct MoodsWordChooseView: View {
                                                      emotion: emotions[item - 1].image,
                                                      emotionTitle: emotions[item - 1].text,
                                                      selectedMoodId: $selectedMoodId)
-                            .frame(width: 90, height: 95)
+                            .frame(width: 85, height: 90)
                             .background(.white)
                             .cornerRadius(10)
                             .shadow(color: Colors.TextColors.mystic400, radius: 6.0, x: 0, y: 0)
@@ -77,9 +77,13 @@ struct MoodsWordChooseViewBlock: View {
                 .resizable()
                 .frame(width: 38, height: 38)
             Text("\(emotionTitle)")
-                .font(.system(size: 11, weight: .medium))
+                .font(.system(size: 12, weight: .medium))
+                .padding(.horizontal, 10)
                 .foregroundColor(Colors.Primary.blue)
                 .frame(alignment: .center)
+                .fixedSize(horizontal: false, vertical: false)
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
         }
         .onTapGesture {
             self.emotionDidChoosed(id: emotionId)
