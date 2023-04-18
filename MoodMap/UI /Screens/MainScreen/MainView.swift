@@ -224,10 +224,9 @@ struct MainView: View {
                         radius: 2.0, x: 0.0, y: 0)
                 .padding(.leading, 20)
                 .onTapGesture {
-                    print("open journal")
+                    coordinator.openAllJournal()
                 }
                 
-                // Всегда берем 1 элемент, так как нужно показать инфу за текущий день
                 ForEach(viewModel.journalViewModels?[0] ?? [], id: \.self) { item in
                     VStack {
                         Text(item.shortTime)
@@ -263,7 +262,7 @@ struct MainView: View {
                     .shadow(color: Colors.TextColors.mischka500,
                             radius: 2.0, x: 0.0, y: 0)
                     .onTapGesture {
-                        print("Open choosed page in journal ")
+                        coordinator.openDetailsJournal(item)
                     }
                 }
             }

@@ -29,9 +29,9 @@ struct TabBarView: View {
     
     @State var bottomSheetPosition: BottomSheetPosition = .dynamic
     @State var isHiddenTabBar: Bool = false
+    
     @Namespace var animation
     
-//    @State var isShowingMoodView: Bool = false
     @State var value: Double = 20
     @State var isNeedToShowActivities: Bool = false
 
@@ -39,7 +39,6 @@ struct TabBarView: View {
         ZStack {
             GeometryReader { geometry in
                 VStack {
-                    
                     switch viewRouter.currentPage {
                     case .home:
                         MainCoordinatorView(coordinator: coordinator.mainScreenCoordinator, animation: animation)
@@ -52,10 +51,6 @@ struct TabBarView: View {
                     }
                     
                     ZStack {
-//                        if showPopUp {
-//                            PlusMenu(widthAndHeight: geometry.size.width / 7)
-//                                .offset(y: -geometry.size.height / 6)
-//                        }
                         HStack {
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .home, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-home-none-fill", tabName: "home", filledIconName: "tb-ic-home-fill")
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .jurnal, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-jurnall-none-fill", tabName: "jurnal", filledIconName: "tb-ic-jurnall-fill")
@@ -98,6 +93,9 @@ struct TabBarView: View {
             } content: {
                 coordinator.openFeelingScreen()
                     .interactiveDismissDisabled(true)
+            }
+            .onChange(of: viewRouter.currentPage) { newValue in
+                coordinator.isNeedShowTab = newValue
             }
         }
     }

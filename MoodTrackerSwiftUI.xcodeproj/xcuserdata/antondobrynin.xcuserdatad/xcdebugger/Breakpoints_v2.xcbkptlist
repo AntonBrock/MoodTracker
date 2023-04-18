@@ -84,5 +84,189 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F09B8A5D-76C8-4E33-B58A-0251DEC31B25"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoodMap/UI /Screens/BaseViewCoordinator.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "BaseViewCoordinator"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "F09B8A5D-76C8-4E33-B58A-0251DEC31B25 - 48dec1ace912bf82"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of MoodMap.BaseViewCoordinator.isNeedShowTab : MoodMap.Page"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Documents/MoodTracker/MoodMap/UI%20/Screens/BaseViewCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "F09B8A5D-76C8-4E33-B58A-0251DEC31B25 - 720a591fdbb80059"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.BaseViewCoordinator.isNeedShowTab.getter : MoodMap.Page"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Documents/MoodTracker/MoodMap/UI%20/Screens/BaseViewCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  uuid = "F09B8A5D-76C8-4E33-B58A-0251DEC31B25 - f4a16437408f30ad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.BaseViewCoordinator.isNeedShowTab.setter : MoodMap.Page"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Documents/MoodTracker/MoodMap/UI%20/Screens/BaseViewCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "F09B8A5D-76C8-4E33-B58A-0251DEC31B25 - 341f92c741a72c5e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.BaseViewCoordinator.isNeedShowTab.modify : MoodMap.Page"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Documents/MoodTracker/MoodMap/UI%20/Screens/BaseViewCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "F09B8A5D-76C8-4E33-B58A-0251DEC31B25 - 28d0e8ec51a50c12"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.BaseViewCoordinator.isNeedShowTab.modify : MoodMap.Page with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Documents/MoodTracker/MoodMap/UI%20/Screens/BaseViewCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "F09B8A5D-76C8-4E33-B58A-0251DEC31B25 - b574541295bcd84"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.BaseViewCoordinator.$isNeedShowTab.getter : Combine.Published&lt;MoodMap.Page&gt;.Publisher"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Documents/MoodTracker/MoodMap/UI%20/Screens/BaseViewCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "96">
+               </Location>
+               <Location
+                  uuid = "F09B8A5D-76C8-4E33-B58A-0251DEC31B25 - bafc4d4070780188"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.BaseViewCoordinator.$isNeedShowTab.setter : Combine.Published&lt;MoodMap.Page&gt;.Publisher"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Documents/MoodTracker/MoodMap/UI%20/Screens/BaseViewCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "196">
+               </Location>
+               <Location
+                  uuid = "F09B8A5D-76C8-4E33-B58A-0251DEC31B25 - fdc984d339128da9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.BaseViewCoordinator.$isNeedShowTab.modify : Combine.Published&lt;MoodMap.Page&gt;.Publisher"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Documents/MoodTracker/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  uuid = "F09B8A5D-76C8-4E33-B58A-0251DEC31B25 - 880f43be6f8d3435"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.BaseViewCoordinator.$isNeedShowTab.modify : Combine.Published&lt;MoodMap.Page&gt;.Publisher with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Documents/MoodTracker/MoodMap/UI%20/Screens/BaseViewCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  uuid = "F09B8A5D-76C8-4E33-B58A-0251DEC31B25 - 1fe2a6365e273b6b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.BaseViewCoordinator.init(container: MoodMap.DIContainer) -&gt; MoodMap.BaseViewCoordinator"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Documents/MoodTracker/MoodMap/UI%20/Screens/BaseViewCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "1344">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6B24D6EA-CDC1-4E92-BAE7-2DC41453C625"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoodMap/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "changeViewRouter(page:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

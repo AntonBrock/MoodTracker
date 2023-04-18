@@ -11,12 +11,16 @@ struct ContentView: View {
     
     @ObservedObject var coordinator: BaseViewCoordinator
     @StateObject var viewRouter = ViewRouter()
+    
     @State var isHiddenTabBar: Bool = false
-        
+    @State var openJournaTab: Bool = false
+
+    //isHiddenTabBar: $isHiddenTabBar
     var body: some View {
         ZStack {
             TabBarView(viewRouter: viewRouter,
-                       coordinator: coordinator)//isHiddenTabBar: $isHiddenTabBar
+                       coordinator: coordinator)
+            
             if coordinator.showAuthLoginView {
                 VStack {}
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
@@ -57,6 +61,18 @@ struct ContentView: View {
                 }
                 .transition(.move(edge: .bottom))
             }
+        }
+        .onChange(of: coordinator.isNeedShowTab) { newValue in
+            changeViewRouter(page: newValue)
+        }
+    }
+    
+    private func changeViewRouter(page: Page) {
+        switch page {
+        case .jurnal: viewRouter.currentPage = .jurnal
+        case .home: viewRouter.currentPage = .home
+        case .profile: viewRouter.currentPage = .profile
+        case .report: viewRouter.currentPage = .report
         }
     }
 }
