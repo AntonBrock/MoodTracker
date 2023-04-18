@@ -76,7 +76,9 @@ struct JournalView: View {
                                     showMoreInfo.toggle()
     //                                coordinator.isHiddenTabBar(true)
                                 }
-                            }, animation: animation)
+                            }, animation: animation) {
+                                coordinator.openMoodCheckScreen()
+                            }
                         }
                         .background(.white)
                     }

@@ -16,12 +16,17 @@ struct EmotionBoardView: View {
     @State var isNeededLast: Bool = false
     @State var isHidden: Bool = false
     
+    var openMoodCheckScreenDidTap: (() -> Void)
+    
     var body: some View {
         
         if data.isEmpty {
             HStack {
                 EmotionBoardEmtyView()
                     .frame(maxHeight: .infinity, alignment: .top)
+                    .onTapGesture {
+                        openMoodCheckScreenDidTap()
+                    }
             }
             .frame(maxWidth: .infinity, alignment: .top)
             .fixedSize(horizontal: false, vertical: true)

@@ -21,4 +21,8 @@ class JournalViewCoordinator: ObservableObject, Identifiable {
         self.container = container
         self.viewModel = JournalView.ViewModel()
     }
+    
+    func openMoodCheckScreen() {
+        parent.isShowingMoodCheckScreen.toggle()
+    }
 }
