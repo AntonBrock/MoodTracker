@@ -57,13 +57,13 @@ struct AuthMethodsView: View {
                             switch auth.credential {
                             case let credential as ASAuthorizationAppleIDCredential:
                                 
-                                #warning("TODO: Нужно собрать UserID и отправить на наш бэк")
-                                print(credential)
                                 let userId = credential.user
 
                                 let email = credential.email
                                 let firstName = credential.fullName?.givenName
                                 let lastName = credential.fullName?.familyName
+                                
+                                print("userID: \(userId), email: \(email), firstName: \(firstName), lastName: \(lastName) ")
                             default: break
                             }
                         case .failure(let error):

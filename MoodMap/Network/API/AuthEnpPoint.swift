@@ -12,10 +12,11 @@ enum AuthEnpPoint: TargetType {
     
     case singUp(GToken: String)
     case getUserInfo
+    case refreshToken
     
     var baseURL: URL {
         switch self {
-        case .singUp:
+        case .singUp, .refreshToken:
             return URL(string: "https://api.mapmood.com/auth")!
         case .getUserInfo:
             return URL(string: "https://api.mapmood.com/v1/users")!
@@ -24,6 +25,7 @@ enum AuthEnpPoint: TargetType {
     
     var path: String {
         switch self {
+        case .refreshToken: return "/token/refresh"
         case .singUp:
             return "/oauth/google"
         case .getUserInfo:
@@ -35,7 +37,7 @@ enum AuthEnpPoint: TargetType {
         switch self {
         case .singUp:
             return .post
-        case .getUserInfo:
+        case .getUserInfo, .refreshToken:
             return .get
         }
     }
@@ -52,6 +54,9 @@ enum AuthEnpPoint: TargetType {
                 encoding: JSONEncoding.default)
         case .getUserInfo:
             return .requestPlain
+        case .refreshToken:
+            return .requestParameters(parameters: ["refresh_token": AppState.shared.jwtToken ?? ""],
+                                      encoding: JSONEncoding.default)
         }
     }
     
@@ -59,6 +64,7 @@ enum AuthEnpPoint: TargetType {
         switch self {
         case .singUp: return nil
         case .getUserInfo: return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
+        case .refreshToken: return ["Authorization": "Bearer \(AppState.shared.refreshToken ?? "")" ]
         }
     }
     
@@ -66,7 +72,7 @@ enum AuthEnpPoint: TargetType {
         switch self {
         case .singUp:
             return nil
-        case .getUserInfo:
+        case .getUserInfo, .refreshToken:
             return .bearer
         }
     }

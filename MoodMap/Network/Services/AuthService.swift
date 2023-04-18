@@ -10,6 +10,7 @@ import Foundation
 protocol AuthServiceProtocol {
     func singUp(with gToken: String, completion: @escaping(Result<String, Error>) -> Void)
     func getUserInfo(completion: @escaping(Result<UserInfoModel, Error>) -> Void)
+    func refreshToken(completion: @escaping((Result<Bool, Error>) -> Void))
 }
 
 struct AuthService: AuthServiceProtocol {
@@ -78,5 +79,32 @@ struct AuthService: AuthServiceProtocol {
                 completion(.failure(error))
             }
         })
+    }
+    
+    func refreshToken(completion: @escaping((Result<Bool, Error>) -> Void)) {
+        let target = BaseAPI.auth(.refreshToken)
+        
+        let networkService = ServiceProvider().networkService
+        networkService?.request(.target(target)) { (result) in
+            switch result {
+            case let .success(response):
+                guard let json = try? response.mapJSON() as? [String: Any] else {
+                    return
+                }
+                #warning("TODO: Пока что не знаю что тут будет")
+                if let refreshToken = json["refresh_token"] as? String,
+                   let jwtToken = json["access_token"] as? String {
+                    AppState.shared.refreshToken = refreshToken
+                    AppState.shared.jwtToken = jwtToken
+                    completion(.success(true))
+                }
+//                else {
+//                    completion(.failure(CBError.undefined))
+//                }
+                
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
     }
 }
