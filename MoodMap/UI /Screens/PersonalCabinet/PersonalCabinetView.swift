@@ -43,7 +43,7 @@ struct PersonalCabinetView: View {
                         Text("Напоминания")
                     }
                     .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-                    
+                    .tint(Colors.Primary.lavender500Purple)
 //                    createArrowBlock("Создание пароля")
 //                        .frame(width: UIScreen.main.bounds.width - 32, height: 64)
 //                        .padding(.trailing, 5)
