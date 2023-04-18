@@ -22,10 +22,6 @@ struct MainCoordinatorView: View {
                         .navigationBarTitle("")
                         .navigationBarHidden(true)
                 }
-                .navigation(item: $coordinator.journalViewCoordinator) {
-                    JournalView(coordinator: $0,
-                                animation: animation)
-                }
         }
         .accentColor(.black)
     }

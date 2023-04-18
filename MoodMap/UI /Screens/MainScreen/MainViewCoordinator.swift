@@ -13,7 +13,6 @@ class MainViewCoordinator: ObservableObject, Identifiable {
     private unowned let parent: BaseViewCoordinator
     
     @Published var diaryViewCoordinator: DiaryViewCoordinator?
-    @Published var journalViewCoordinator: JournalViewCoordinator?
 
     @ObservedObject var viewModel: MainView.ViewModel
 
@@ -36,10 +35,6 @@ class MainViewCoordinator: ObservableObject, Identifiable {
     
     func openAllJournal() {
         parent.isNeedShowTab = .jurnal
-    }
-    
-    func openDetailsJournal(_ model: JournalViewModel) {
-        print(model.title)
     }
     
     func openMoodCheckScreen() {

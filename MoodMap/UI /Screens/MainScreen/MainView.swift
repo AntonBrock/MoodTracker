@@ -21,6 +21,9 @@ struct MainView: View {
     @State var isAnimated: Bool = false
     @State var isAnimatedJournalView: Bool = false
     
+    @State var showMoreDetailsAboutJournalPage: Bool = false
+    @State var currentSelectedJournalPage: JournalViewModel?
+    
     init(
         container: DIContainer,
         animation: Namespace.ID,
@@ -105,6 +108,13 @@ struct MainView: View {
                     }
             }
         }
+        .sheet(isPresented: $showMoreDetailsAboutJournalPage, content: {
+            DetailJournalView(
+                showMoreInfo: $showMoreDetailsAboutJournalPage,
+                model: $currentSelectedJournalPage
+            )
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
+        })
         .onAppear {
             viewModel.setupViewer(self)
             
@@ -262,7 +272,8 @@ struct MainView: View {
                     .shadow(color: Colors.TextColors.mischka500,
                             radius: 2.0, x: 0.0, y: 0)
                     .onTapGesture {
-                        coordinator.openDetailsJournal(item)
+                        currentSelectedJournalPage = item
+                        showMoreDetailsAboutJournalPage.toggle()
                     }
                 }
             }
