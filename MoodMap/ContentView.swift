@@ -44,6 +44,16 @@ struct ContentView: View {
                     withAnimation {
                         coordinator.isShowingWhyResgistration.toggle()
                     }
+                }, dismissWithAppleIDToken: { appleIDToken in
+                    guard let appleToken = appleIDToken else {
+                        withAnimation {
+                            coordinator.showAuthLoginView.toggle()
+                        }
+                        
+                        return
+                    }
+                    
+                    coordinator.personalCabinetCoordinator.viewModel.singUp(appleIDToken: appleToken)
                 })
                 .zIndex(999999)
             }

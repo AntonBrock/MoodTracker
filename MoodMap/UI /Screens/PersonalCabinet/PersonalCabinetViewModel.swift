@@ -27,6 +27,19 @@ extension PersonalCabinetView {
             }
         }
         
+        func singUp(appleIDToken: String) {
+            Services.authService.singUp(appleIDToken: appleIDToken) { [weak self] result in
+                switch result {
+                case .success(let jwtToken):
+                    AppState.shared.jwtToken = jwtToken
+                    AppState.shared.isLogin = true
+                    self?.getUserInfo()
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
         func getUserInfo() {
             Services.authService.getUserInfo() { [weak self] result in
                 switch result {

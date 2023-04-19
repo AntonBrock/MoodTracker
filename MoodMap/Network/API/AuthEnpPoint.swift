@@ -11,12 +11,14 @@ import Moya
 enum AuthEnpPoint: TargetType {
     
     case singUp(GToken: String)
+    case singUpWithAppleId(AppleID: String)
+    
     case getUserInfo
     case refreshToken
     
     var baseURL: URL {
         switch self {
-        case .singUp, .refreshToken:
+        case .singUp, .refreshToken, .singUpWithAppleId:
             return URL(string: "https://api.mapmood.com/auth")!
         case .getUserInfo:
             return URL(string: "https://api.mapmood.com/v1/users")!
@@ -28,6 +30,7 @@ enum AuthEnpPoint: TargetType {
         case .refreshToken: return "/token/refresh"
         case .singUp:
             return "/oauth/google"
+        case .singUpWithAppleId: return "/oauth/apple"
         case .getUserInfo:
             return "/me"
         }
@@ -35,7 +38,7 @@ enum AuthEnpPoint: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .singUp:
+        case .singUp, .singUpWithAppleId:
             return .post
         case .getUserInfo, .refreshToken:
             return .get
@@ -52,6 +55,10 @@ enum AuthEnpPoint: TargetType {
             return .requestParameters(
                 parameters: ["id_token": GToken],
                 encoding: JSONEncoding.default)
+        case .singUpWithAppleId(let AppleIDToken):
+            return .requestParameters(
+                parameters: ["id_token": AppleIDToken],
+                encoding: JSONEncoding.default)
         case .getUserInfo:
             return .requestPlain
         case .refreshToken:
@@ -62,7 +69,7 @@ enum AuthEnpPoint: TargetType {
     
     var headers: [String: String]? {
         switch self {
-        case .singUp: return nil
+        case .singUp, .singUpWithAppleId: return nil
         case .getUserInfo: return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
         case .refreshToken: return ["Authorization": "Bearer \(AppState.shared.refreshToken ?? "")" ]
         }
@@ -70,7 +77,7 @@ enum AuthEnpPoint: TargetType {
     
     var authorizationType: AuthorizationType? {
         switch self {
-        case .singUp:
+        case .singUp, .singUpWithAppleId:
             return nil
         case .getUserInfo, .refreshToken:
             return .bearer

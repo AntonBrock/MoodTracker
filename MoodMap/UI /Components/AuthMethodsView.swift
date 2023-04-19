@@ -17,7 +17,8 @@ struct AuthMethodsView: View {
     @State var bottomSheetPosition: BottomSheetPosition = .dynamic
     var dismiss: ((String?) -> Void)
     var openAboutRegistration: (() -> Void)
-    
+    var dismissWithAppleIDToken: ((String?) -> Void)
+
     var appleSignInButton: ASAuthorizationAppleIDButton = ASAuthorizationAppleIDButton()
     
     var body: some View {
@@ -63,11 +64,12 @@ struct AuthMethodsView: View {
                                 let firstName = credential.fullName?.givenName
                                 let lastName = credential.fullName?.familyName
                                 
-                                print("userID: \(userId), email: \(email), firstName: \(firstName), lastName: \(lastName) ")
+                                dismissWithAppleIDToken(userId)
                             default: break
                             }
                         case .failure(let error):
                             print(error)
+                            dismissWithAppleIDToken(nil)
                         }
                     }
                     .signInWithAppleButtonStyle(.black)
