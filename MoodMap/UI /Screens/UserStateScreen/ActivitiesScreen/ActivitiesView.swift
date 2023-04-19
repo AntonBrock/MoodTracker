@@ -11,6 +11,7 @@ struct ActivitiesView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    let parent: BaseViewCoordinator
     let container: DIContainer
     private unowned let coordinator: ActivitiesViewCoodinator
     
@@ -18,9 +19,11 @@ struct ActivitiesView: View {
     @State var choosedActivities: [String] = []
     
     init(
+        parent: BaseViewCoordinator,
         container: DIContainer,
         coordinator: ActivitiesViewCoodinator
     ) {
+        self.parent = parent
         self.container = container
         self.coordinator = coordinator
     }
@@ -80,7 +83,7 @@ struct ActivitiesView: View {
                     destination: {
                         StressCheckView(valueModel: coordinator.sliderValueModele!,
                                         userStateVideModel: coordinator.userStateViewModel,
-                                        stressViewModel: coordinator.userStateViewModel.stressViewModel,
+                                        parent: parent, stressViewModel: coordinator.userStateViewModel.stressViewModel,
                                         saveButtonDidTap: { text, choosedStress, view in
                             coordinator.userStateViewModel.choosedStress = choosedStress
                             coordinator.userStateViewModel.mindText = text

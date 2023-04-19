@@ -10,18 +10,17 @@ import SwiftUI
 struct StressCheckView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.dismiss) var dismiss
     
     @ObservedObject var valueModel: SliderStressValueModele
     @ObservedObject var userStateVideModel: MoodCheckView.ViewModel
     
+    var parent: BaseViewCoordinator
     var stressViewModel: [StressViewModel]
 
     @State var yandexInterstitialADView: YandexInterstitialADView?
     @State var text: String = "У меня не выходит из головы "
     
     var saveButtonDidTap: ((_ text: String, _ choosedStress: String, _ view: StressCheckView) -> Void)
-//    var dismissAction: (() -> Void)
     
     @State var choosedStress: String = ""
     @State var isNeedShowAD: Bool = false
@@ -133,7 +132,7 @@ struct StressCheckView: View {
     }
     
     func hideAD() {
-        dismiss.callAsFunction()
+        parent.isShowingMoodCheckScreen = false
     }
 }
     

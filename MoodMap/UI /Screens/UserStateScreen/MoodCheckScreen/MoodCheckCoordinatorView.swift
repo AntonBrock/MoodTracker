@@ -20,7 +20,11 @@ struct MoodCheckCoordinatorView: View {
             MoodCheckView(container: .live, coordinator: coordinator,
                           valueModel: coordinator.sliderValueModele!)
             .navigation(item: $coordinator.activitiesViewCoordinator) {
-                ActivitiesView(container: .live, coordinator: $0)
+                ActivitiesView(
+                    parent: coordinator.parent,
+                    container: .live,
+                    coordinator: $0
+                )
                     .navigationBarHidden(true)
                 }
         }

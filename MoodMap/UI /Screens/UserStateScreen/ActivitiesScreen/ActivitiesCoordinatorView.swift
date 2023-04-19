@@ -17,7 +17,8 @@ struct ActivitiesCoordinatorView: View {
     
     var body: some View {
         NavigationStack {
-            ActivitiesView(container: .live,
+            ActivitiesView(parent: coordinator.parent,
+                           container: .live,
                            coordinator: coordinator)
         }
     }

@@ -9,6 +9,7 @@ import SwiftUI
 
 class ActivitiesViewCoodinator: ObservableObject, Identifiable {
     
+    let parent: BaseViewCoordinator
     private let container: DIContainer
     @Published var sliderValueModele: SliderStressValueModele?
     
@@ -16,9 +17,11 @@ class ActivitiesViewCoodinator: ObservableObject, Identifiable {
 
     // MARK: - Init
     init(
+        parent: BaseViewCoordinator,
         container: DIContainer,
         userStateViewModel: MoodCheckView.ViewModel
     ) {
+        self.parent = parent
         self.container = container
         self.sliderValueModele = SliderStressValueModele()
         self.userStateViewModel = userStateViewModel
