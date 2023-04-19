@@ -58,6 +58,7 @@ struct DiaryView: View {
             }
             
         }
+        .edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $presentDetailsPage, content: {
             DetailsDiaryPage(dismiss: {
                 self.presentDetailsPage = false

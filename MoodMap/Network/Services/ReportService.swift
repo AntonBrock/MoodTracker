@@ -55,7 +55,7 @@ struct ReportService: ReportServiceProtocol {
             switch response {
             case let .success(result):
                 guard let model = try? decoder.decode(ReportModel.self, from: result.data) else {
-                    return
+                    return 
                 }
                 completion(.success(model))
             case let .failure(error):

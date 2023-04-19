@@ -13,7 +13,5 @@ struct DiaryCoordinatorView: View {
     
     var body: some View {
         DiaryView(coordinator: coordinator)
-            .navigationTitle("Дневник благодарности")
-            .navigationBarTitleDisplayMode(.inline)
     }
 }
