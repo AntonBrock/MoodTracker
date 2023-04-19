@@ -70,11 +70,11 @@ struct DetailJournalView: View {
                             LazyHGrid(rows: column, spacing: 8) {
                                 
                                 VStack {
-                                    Image("\(model?.emotionImage)")
+                                    Image("\(model?.emotionImage ?? "")")
                                         .resizable()
                                         .frame(width: 39, height: 38)
                                     
-                                    Text("Не знаю")
+                                    Text(model?.text ?? "")
                                         .foregroundColor(.black)
                                         .font(.system(size: 11))
                                 }
@@ -86,7 +86,7 @@ struct DetailJournalView: View {
                                         .shadow(color: Colors.TextColors.mystic400, radius: 4, x: 0, y: 0)
                                 )
                                 .frame(width: 80, height: 90)
-#warning("TODO: После дороботок вернуть")
+                                #warning("TODO: После дороботок вернуть")
                                 //                            ForEach(0..<model?.emotionImage.count, id: \.self) { i in
                                 //                                VStack {
                                 //                                    Image("\(mockDataFeeling[i].image)")
@@ -108,8 +108,8 @@ struct DetailJournalView: View {
                                 //                            }
                             }
                             .frame(height: 150)
+                            .padding(.leading, 16)
                         }
-                        .padding(.leading, 16)
                     }
                     .background(.white)
                     
@@ -169,29 +169,6 @@ struct DetailJournalView: View {
         }
     }
     
-//    func onChanged(value: DragGesture.Value) {
-//
-//        let scale = value.translation.height / UIScreen.main.bounds.height
-//
-//        withAnimation {
-//            if 1 - scale > 0.7 {
-//                self.scale = 1 - scale
-//            }
-//        }
-//
-//    }
-
-//    func onEnded(value:  DragGesture.Value) {
-//        withAnimation(.spring()) {
-//
-//            if scale < 0.9 {
-//                showMoreInfo.toggle()
-//            }
-//
-//            scale = 1
-//        }
-//    }
-    
     @ViewBuilder
     private func headerView(
         with stateImageName: String,
@@ -234,7 +211,7 @@ struct DetailJournalView: View {
                     .resizable()
                     .frame(width: 200, height: 200, alignment: .trailing)
                     .padding(.trailing, -26)
-                    .padding(.bottom, -100)
+                    .padding(.bottom, -150)
             }
             .frame(maxHeight: .infinity)
             .clipped()
