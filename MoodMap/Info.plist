@@ -27,6 +27,7 @@
 	<string>947104793436-d0ag0du82f66brj6ce1dtqa1i5i3ut4j.apps.googleusercontent.com</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>instagram-stories</string>
 		<string>tg</string>
 	</array>
 	<key>UIAppFonts</key>
