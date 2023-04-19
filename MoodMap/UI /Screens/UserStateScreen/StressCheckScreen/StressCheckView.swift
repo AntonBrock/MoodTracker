@@ -18,7 +18,7 @@ struct StressCheckView: View {
     var stressViewModel: [StressViewModel]
 
     @State var yandexInterstitialADView: YandexInterstitialADView?
-    @State var text: String = ""
+    @State var text: String = "У меня не выходит из головы "
     
     var saveButtonDidTap: ((_ text: String, _ choosedStress: String, _ view: StressCheckView) -> Void)
 //    var dismissAction: (() -> Void)
@@ -70,19 +70,27 @@ struct StressCheckView: View {
                 VStack {
                     ZStack {
                         TextEditor(text: $text)
-                            .frame(width: UIScreen.main.bounds.width - 32, height: 220, alignment: .topLeading)
+                            .frame(maxWidth: UIScreen.main.bounds.width - 32, minHeight: 50, idealHeight: 50, maxHeight: 220, alignment: .topLeading)
                             .font(.system(size: 16))
                             .multilineTextAlignment(.leading)
-                            .font(Fonts.InterRegular16)
+                            .foregroundColor(text == "У меня не выходит из головы "
+                                             ? Colors.TextColors.mischka500
+                                             : Colors.Primary.blue)
                             .colorMultiply(Colors.TextColors.porcelain200)
                             .cornerRadius(10)
-                            .shadow(color: Colors.TextColors.cadetBlue600, radius: 1.5, x: 0.0, y: 0.0)
-                        
-                        Text("\("Расскажи для себя, что тебя беспокоит, то что не выходит из головы")")
-                            .font(.system(size: 16))
-                            .foregroundColor(text == "" ? Colors.TextColors.cadetBlue600 : Colors.Primary.blue)
-                            .frame(maxWidth: .infinity, maxHeight: 220, alignment: .topLeading)
-                            .opacity(text.isEmpty ? 1 : 0)
+                            .shadow(color: Colors.TextColors.cadetBlue600,
+                                    radius: 1.5,
+                                    x: 0.0,
+                                    y: 0.0
+                            )
+                            .onTapGesture {
+                                text = ""
+                            }
+                            .onChange(of: text) { newValue in
+                                if newValue == "" {
+                                    text = "У меня не выходит из головы "
+                                }
+                            }
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -91,6 +99,9 @@ struct StressCheckView: View {
                 .shadow(color: Colors.TextColors.mystic400.opacity(0.3), radius: 4.0, x: 0.0, y: 0.0)
                 
                 MTButton(buttonStyle: .fill, title: "Сохранить", handle: {
+                    if text == "У меня не выходит из головы " {
+                        text = ""
+                    }
                     saveButtonDidTap(text, choosedStress, self)
                 })
                 .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
