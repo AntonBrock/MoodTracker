@@ -10,7 +10,10 @@ import BottomSheet
 
 struct AuthLogoutView: View {
     
-    var dismiss: ((String?) -> Void)
+    var dismiss: (() -> Void)
+    var logoutAction: (() -> Void)
+    var deleteAction: (() -> Void)
+
     @State var bottomSheetPosition: BottomSheetPosition = .dynamicTop
 
     var body: some View {
@@ -28,7 +31,10 @@ struct AuthLogoutView: View {
                     .padding(.top, 14)
                 
                 MTButton(buttonStyle: .outline, title: "Выйти") {
-                    print("Logout Action")
+                    bottomSheetPosition = .absolute(0)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        logoutAction()
+                    }
                 }
                 .frame(maxWidth: 270, maxHeight: 48)
                 .padding(.top, 24)
@@ -36,7 +42,7 @@ struct AuthLogoutView: View {
                 Button {
                     bottomSheetPosition = .absolute(0)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        dismiss(nil)
+                        deleteAction()
                     }
                 } label: {
                     Text("Удалить аккаунт")
@@ -57,9 +63,8 @@ struct AuthLogoutView: View {
         .enableSwipeToDismiss(true)
         .onDismiss {
             bottomSheetPosition = .absolute(0)
-            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                dismiss(nil)
+                dismiss()
             }
         }
     }

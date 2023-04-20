@@ -165,6 +165,7 @@
 		4592522729C6EEB6007B1706 /* DayilyCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522629C6EEB6007B1706 /* DayilyCharts.swift */; };
 		4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522829C6EEEE007B1706 /* ActivitiesCharts.swift */; };
 		45A9F05329F10076002C13C5 /* AuthLogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F05229F10076002C13C5 /* AuthLogoutView.swift */; };
+		45A9F05629F1068B002C13C5 /* AuthDeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F05529F1068B002C13C5 /* AuthDeleteAccountView.swift */; };
 		45B39F8A29E52A4B00852E70 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */; };
 		45B39F8D29E52D6B00852E70 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 45B39F8C29E52D6B00852E70 /* Lottie */; };
 		45B39F9029E52DBC00852E70 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8F29E52DBC00852E70 /* LottieView.swift */; };
@@ -323,6 +324,7 @@
 		459BB88C2900121500E07BFF /* CutomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutomAlertView.swift; sourceTree = "<group>"; };
 		45A132FD2965C01700EA21A1 /* CalendarViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewRepresentable.swift; sourceTree = "<group>"; };
 		45A9F05229F10076002C13C5 /* AuthLogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLogoutView.swift; sourceTree = "<group>"; };
+		45A9F05529F1068B002C13C5 /* AuthDeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDeleteAccountView.swift; sourceTree = "<group>"; };
 		45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		45B39F8F29E52DBC00852E70 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		45B39F9129E52F7300852E70 /* SplashScreen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreen.json; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 		451E6BB629056EC00048714B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				45A9F05429F1066D002C13C5 /* Auth */,
 				45B39F8E29E52DB400852E70 /* Lottie */,
 				453844D929E40D3500A89FEE /* AD */,
 				451E6BC4290570220048714B /* Charts */,
@@ -499,9 +502,6 @@
 				45319EEF296FBAB100D58DCF /* GalleryPhotoPicker.swift */,
 				45319EF1296FBAC300D58DCF /* ImagePicker.swift */,
 				456750B5297451E300392992 /* MTKeyboardView.swift */,
-				45C338F9298406D10043E26C /* AuthHyperString.swift */,
-				4570B8C12985144B0063E2DC /* AuthMethodsView.swift */,
-				45A9F05229F10076002C13C5 /* AuthLogoutView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -913,6 +913,17 @@
 			path = Diary;
 			sourceTree = "<group>";
 		};
+		45A9F05429F1066D002C13C5 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				45C338F9298406D10043E26C /* AuthHyperString.swift */,
+				4570B8C12985144B0063E2DC /* AuthMethodsView.swift */,
+				45A9F05229F10076002C13C5 /* AuthLogoutView.swift */,
+				45A9F05529F1068B002C13C5 /* AuthDeleteAccountView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		45B39F8829E52A3500852E70 /* LaunchScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -1154,6 +1165,7 @@
 				4529AB9E29AF1940001D2390 /* SCDonutPartView.swift in Sources */,
 				456A400C29B76AF800371B5C /* JournalViewModel.swift in Sources */,
 				457F591729C183F100E96E1D /* ReportScreenViewModel.swift in Sources */,
+				45A9F05629F1068B002C13C5 /* AuthDeleteAccountView.swift in Sources */,
 				4529AB9F29AF1940001D2390 /* SCDonutChartView.swift in Sources */,
 				4529ABA029AF1940001D2390 /* ActivitiesBarCharsView.swift in Sources */,
 				4529ABA129AF1940001D2390 /* FeelingCircleChartsView.swift in Sources */,

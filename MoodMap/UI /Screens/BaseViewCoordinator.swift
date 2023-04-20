@@ -23,9 +23,10 @@ class BaseViewCoordinator: ObservableObject {
     @Published var showAuthLoginView: Bool = false
     @Published var showLogoutView: Bool = false
     @Published var isShowingWhyResgistration: Bool = false
-    
+    @Published var showDeleteAccountView: Bool = false
+
     @Published var isShowingMoodCheckScreen: Bool = false
-    @Published var isNeedShowTab: Page = .home 
+    @Published var isNeedShowTab: Page = .home
     
     let container: DIContainer
     

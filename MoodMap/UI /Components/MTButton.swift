@@ -10,6 +10,7 @@ import SwiftUI
 enum MTButtonColorStyle {
     case fill
     case outline
+    case deleteAction
 }
 
 struct MTButton: View {
@@ -27,8 +28,6 @@ struct MTButton: View {
         Button("\(title)") {
             handle()
         }
-//        .fullScreenCover(isPresented: $isPresented, content: ActivitiesView.init)
-//        .multilineTextAlignment(.center)
         .buttonStyle(CBButtonStyle(buttonColorStyle: buttonStyle))
     }
 }
@@ -44,6 +43,7 @@ private extension MTButton {
             switch buttonColorStyle {
             case .fill: return Color.white
             case .outline: return Colors.Primary.lavender500Purple
+            case .deleteAction: return Colors.Secondary.crimson600Red
             }
         }
         
@@ -51,12 +51,13 @@ private extension MTButton {
             switch buttonColorStyle {
             case .fill: return Color.white
             case .outline: return Color.white
+            case .deleteAction: return Color.white
             }
         }
         
         var disabledTextColor: Color {
             switch buttonColorStyle {
-            case .fill, .outline: return Colors.TextColors.mischka500
+            case .fill, .outline, .deleteAction: return Colors.TextColors.mischka500
             }
         }
         
@@ -64,6 +65,7 @@ private extension MTButton {
             switch buttonColorStyle {
             case .fill: return Colors.Primary.lavender500Purple
             case .outline: return Color.white
+            case .deleteAction: return Color.white
             }
         }
         
@@ -71,12 +73,13 @@ private extension MTButton {
             switch buttonColorStyle {
             case .fill: return Colors.Primary.lavender500Purple
             case .outline: return Colors.Primary.lavender500Purple
+            case .deleteAction: return Colors.Secondary.crimson600Red
             }
         }
         
         var disabledBackgroundColor: Color {
             switch buttonColorStyle {
-            case .fill, .outline: return Colors.TextColors.athensGray300
+            case .fill, .outline, .deleteAction: return Colors.TextColors.athensGray300
             }
         }
         
@@ -84,6 +87,8 @@ private extension MTButton {
             switch buttonColorStyle {
             case .fill: return Color.white
             case .outline: return Colors.Primary.lavender500Purple
+            case .deleteAction: return Colors.Secondary.crimson600Red
+
             }
         }
         
@@ -91,6 +96,7 @@ private extension MTButton {
             switch buttonColorStyle {
             case .fill: return Color.white
             case .outline: return Colors.Primary.lavender500Purple
+            case .deleteAction: return Colors.Secondary.crimson600Red
             }
         }
         
@@ -98,6 +104,7 @@ private extension MTButton {
             switch buttonColorStyle {
             case .fill: return Color.white
             case .outline: return Colors.Primary.lavender500Purple
+            case .deleteAction: return Colors.Secondary.crimson600Red
             }
         }
         
