@@ -44,8 +44,8 @@ struct AuthLogoutView: View {
                         .foregroundColor(Colors.Secondary.carnation500Red)
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
-                .padding(.top, 24)
-                .padding(.bottom, 32)
+                .padding(.top, 39)
+                .padding(.bottom, 59)
             }
         }
         .customBackground(
