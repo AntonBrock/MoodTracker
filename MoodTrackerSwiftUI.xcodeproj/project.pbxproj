@@ -164,6 +164,7 @@
 		4592522529C6EE73007B1706 /* ReportTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522429C6EE73007B1706 /* ReportTipView.swift */; };
 		4592522729C6EEB6007B1706 /* DayilyCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522629C6EEB6007B1706 /* DayilyCharts.swift */; };
 		4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522829C6EEEE007B1706 /* ActivitiesCharts.swift */; };
+		45A9F05329F10076002C13C5 /* AuthLogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F05229F10076002C13C5 /* AuthLogoutView.swift */; };
 		45B39F8A29E52A4B00852E70 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */; };
 		45B39F8D29E52D6B00852E70 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 45B39F8C29E52D6B00852E70 /* Lottie */; };
 		45B39F9029E52DBC00852E70 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8F29E52DBC00852E70 /* LottieView.swift */; };
@@ -321,6 +322,7 @@
 		459B9BCD28D36F3000A4FCD7 /* MoodCheckComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckComponent.swift; sourceTree = "<group>"; };
 		459BB88C2900121500E07BFF /* CutomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutomAlertView.swift; sourceTree = "<group>"; };
 		45A132FD2965C01700EA21A1 /* CalendarViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewRepresentable.swift; sourceTree = "<group>"; };
+		45A9F05229F10076002C13C5 /* AuthLogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLogoutView.swift; sourceTree = "<group>"; };
 		45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		45B39F8F29E52DBC00852E70 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		45B39F9129E52F7300852E70 /* SplashScreen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreen.json; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				456750B5297451E300392992 /* MTKeyboardView.swift */,
 				45C338F9298406D10043E26C /* AuthHyperString.swift */,
 				4570B8C12985144B0063E2DC /* AuthMethodsView.swift */,
+				45A9F05229F10076002C13C5 /* AuthLogoutView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1167,6 +1170,7 @@
 				45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */,
 				4529ABA829AF1940001D2390 /* QuoteView.swift in Sources */,
 				457F591B29C184F300E96E1D /* ReportEndPoint.swift in Sources */,
+				45A9F05329F10076002C13C5 /* AuthLogoutView.swift in Sources */,
 				4529ABA929AF1941001D2390 /* ActivitiesTextViewBlock.swift in Sources */,
 				4529ABAA29AF1941001D2390 /* MPErrorFlowView.swift in Sources */,
 				4529ABAB29AF1941001D2390 /* SearchView.swift in Sources */,

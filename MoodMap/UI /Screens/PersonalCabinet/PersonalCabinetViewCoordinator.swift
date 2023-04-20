@@ -38,4 +38,10 @@ class PersonalCabinetViewCoordinator: ObservableObject, Identifiable {
             parent.showAuthLoginView.toggle()
         }
     }
+    
+    func showLogoutView() {
+        withAnimation {
+            parent.showLogoutView.toggle()
+        }
+    }
 }

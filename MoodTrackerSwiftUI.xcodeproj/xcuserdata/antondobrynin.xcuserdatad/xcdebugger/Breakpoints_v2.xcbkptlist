@@ -62,8 +62,8 @@
             filePath = "MoodMap/UI /Screens/BaseViewCoordinator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "BaseViewCoordinator"
             landmarkType = "3">
             <Locations>
@@ -230,8 +230,8 @@
             filePath = "MoodMap/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "changeViewRouter(page:)"
             landmarkType = "7">
          </BreakpointContent>

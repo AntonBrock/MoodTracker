@@ -21,6 +21,20 @@ struct ContentView: View {
             TabBarView(viewRouter: viewRouter,
                        coordinator: coordinator)
             
+            if coordinator.showLogoutView {
+                VStack {}
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    .background(.black.opacity(0.7))
+                    .transition(.opacity)
+                
+                AuthLogoutView(dismiss: { dismiss in
+                    withAnimation {
+                        coordinator.showLogoutView.toggle()
+                    }
+                })
+                .zIndex(999999)
+            }
+            
             if coordinator.showAuthLoginView {
                 VStack {}
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)

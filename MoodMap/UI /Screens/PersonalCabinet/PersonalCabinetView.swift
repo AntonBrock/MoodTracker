@@ -112,7 +112,7 @@ struct PersonalCabinetView: View {
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text(isLogin ? "Бесплатный план" : "Вы не вошли в аккаунт")
+                    Text(isLogin ? "" : "Дэмо просмотр")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(isLogin ? Colors.Primary.lavender500Purple : .white)
                         .lineLimit(1)
@@ -123,13 +123,17 @@ struct PersonalCabinetView: View {
                 
                 HStack {
                     Button {
-                        coordinator.showAuthLoginView()
+                        if AppState.shared.isLogin ?? false {
+                            coordinator.showLogoutView()
+                        } else {
+                            coordinator.showAuthLoginView()
+                        }
                     } label: {
-                        Text(isLogin ? "Выйти" : "Войти в аккаунт")
+                        Text(isLogin ? "Выйти из аккаунта" : "Войти в аккаунт")
                             .foregroundColor(isLogin ? Colors.Primary.honeyFlower700Purple : .white)
                             .font(.system(size: 16, weight: isLogin ? .medium : .bold))
                     }
-                    .frame(width: 160, height: 35)
+                    .frame(width: 200, height: 35)
                     .background(isLogin ? Colors.Primary.moonRaker300Purple : Colors.Primary.lavender500Purple)
                     .cornerRadius(35 / 2)
                 }
