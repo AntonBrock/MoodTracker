@@ -55,6 +55,10 @@ struct AuthService: AuthServiceProtocol {
             case let .success(result):
                 guard let jsonResult = try! result.mapJSON() as? [String: Any] else { return }
                 
+                if let refreshToken = jsonResult["refresh_token"] as? String {
+                    AppState.shared.refreshToken = refreshToken
+                }
+                
                 if let jwtToken = jsonResult["access_token"] as? String {
                     completion(.success(jwtToken))
                 }
@@ -72,6 +76,10 @@ struct AuthService: AuthServiceProtocol {
             switch response {
             case let .success(result):
                 guard let jsonResult = try! result.mapJSON() as? [String: Any] else { return }
+                
+                if let refreshToken = jsonResult["refresh_token"] as? String {
+                    AppState.shared.refreshToken = refreshToken
+                }
                 
                 if let jwtToken = jsonResult["access_token"] as? String {
                     completion(.success(jwtToken))
