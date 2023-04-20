@@ -17,7 +17,7 @@ struct AuthLogoutView: View {
         VStack {}
         .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
         .bottomSheet(bottomSheetPosition: $bottomSheetPosition,
-                     switchablePositions: [.absolute(250)]) {
+                     switchablePositions: [.dynamicTop]) {
             VStack(spacing: 0) {
                 Text("Выход из аккаунта")
                     .frame(maxWidth: .infinity, alignment: .center)
