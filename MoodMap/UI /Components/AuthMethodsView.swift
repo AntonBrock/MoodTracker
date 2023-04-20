@@ -14,7 +14,8 @@ import AuthenticationServices
 
 struct AuthMethodsView: View {
     
-    @State var bottomSheetPosition: BottomSheetPosition = .dynamic
+    @State var bottomSheetPosition: BottomSheetPosition = .dynamicTop
+    
     var dismiss: ((String?) -> Void)
     var openAboutRegistration: (() -> Void)
     var dismissWithAppleIDToken: ((String?) -> Void)
@@ -25,7 +26,7 @@ struct AuthMethodsView: View {
         VStack {}
         .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
         .bottomSheet(bottomSheetPosition: $bottomSheetPosition,
-                     switchablePositions: [.dynamic]) {
+                     switchablePositions: [.dynamicTop]) {
             VStack(spacing: 0) {
                 Text("Персональный\nпомощник")
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -58,13 +59,19 @@ struct AuthMethodsView: View {
                             switch auth.credential {
                             case let credential as ASAuthorizationAppleIDCredential:
                                 
-                                let userId = credential.user
-
-                                let email = credential.email
-                                let firstName = credential.fullName?.givenName
-                                let lastName = credential.fullName?.familyName
+                                guard let appleIDToken = credential.identityToken else {
+                                    print("Unable to fetch identity token")
+                                    dismissWithAppleIDToken(nil)
+                                    return
+                                }
                                 
-                                dismissWithAppleIDToken(userId)
+                                guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+                                    print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+                                    dismissWithAppleIDToken(nil)
+                                    return
+                                }
+                                
+                                dismissWithAppleIDToken(idTokenString)
                             default: break
                             }
                         case .failure(let error):
@@ -130,13 +137,7 @@ struct AuthMethodsView: View {
                 }
                 
                 guard let googleJWTToken = result.user.idToken?.tokenString else { fatalError() }
-                // нужная инфа для пользователя тут нужно распарсить данные и потправляем (email, name,                                                                                                                            locale, notify (true/ false )
-                                                        // отдаем сюда /auth/sign_up -> вернется в ответ наш JWT Token и его сохроняем на клиенте
-                                                        // и делаем запрос
-                                                        
-                // потом будет ручка на получения данных для модели (UserInfoModel)
                 dismiss(googleJWTToken)
-                // If sign in succeeded, display the app's main content View.
             }
     }
 }
