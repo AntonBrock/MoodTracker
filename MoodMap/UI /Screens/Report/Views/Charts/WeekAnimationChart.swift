@@ -44,10 +44,8 @@ struct WeekAnimationChart: View {
                         ForEach (weekChartViewModel) { item in
                             LineMark(
                                 x: .value("day", item.date),
-    //                            y: .value("emotion", item.animate ? item.dayRate : 0)
                                 y: .value("emotion", item.dayRate)
                             )
-    //                        .accessibilityLabel("\(item.emotion)")
                             .foregroundStyle(
                                    .linearGradient(
                                         colors: [ Colors.Secondary.yourPinkRed400,
@@ -62,12 +60,9 @@ struct WeekAnimationChart: View {
                         }
                     }
                     // MARK: Customizing Y-Axis Length
-                    .chartYScale(domain: 1...(max == 0 ? 5 : 5))
+                    .chartYScale(domain: 1...(max == 0 ? 5 : max + 1))
                     .padding(.top, 25)
                     .frame (height: 250)
-                    .onAppear {
-                        animateGraph()
-                    }
                     .contentShape(Rectangle())
                 } else {
                     if showLoader {
@@ -91,104 +86,8 @@ struct WeekAnimationChart: View {
                     }
                    
                 }
-//                .overlay(
-//                    VStack(spacing: 0) {
-//                        Text(currentPlot)
-//                            .font(.caption.bold())
-//                            .foregroundColor(.white)
-//                            .padding(.vertical, 6)
-//                            .padding(.horizontal, 10)
-//                            .background(Color(.red), in: Capsule())
-//                            .offset(x: translation < 10 ? 30 : 0)
-//                            .offset(x: translation > (proxy.size.width - 60) ? -30 : 0)
-//
-//                        Rectangle()
-//                            .fill(Color(.red))
-//                            .frame(width: 1, height: 45)
-//                            .padding(.top)
-//
-//                        Circle()
-//                            .fill(Color(.red))
-//                            .frame(width: 22, height: 22)
-//                            .overlay(
-//                                Circle()
-//                                    .fill(.white)
-//                                    .frame(width: 10, height: 10)
-//                            )
-//
-//                        Rectangle()
-//                            .fill(Color(.red))
-//                            .frame(width: 1, height: 55)
-//
-//                    }
-//                        .frame(width: 80, height: 170)
-//                    // 170 / 2 = 85 - 15 => circle ring
-//                        .offset(y: 70)
-//                        .offset(offset),
-////                        .opacity(showPlot ? 1 : 0),
-//                        alignment: .bottomLeading
-//                )
-//                .gesture(DragGesture().onChanged({ value in
-//                    withAnimation { showPlot = true }
-//
-//                    let translation = value.location.x
-//                    let index = min(Int((translation / width).rounded()), sampleAnalytics.count)
-//                    currentPlot = "\(sampleAnalytics[index].views)"
-//                    self.translation = translation
-//
-//                    offset = CGSize(width: points[index].x, height: points[index].y - points[index].y)
-//                }).onEnded({ value in
-//                    withAnimation { showPlot = false }
-//                }))
             }
         }
         .frame(height: 250)
-//        .overlay(
-//            VStack(alignment: .leading) {
-//                let max = sampleAnalytics.max() ?? 0
-//                Text("\(max)")
-//                    .font(.caption.bold())
-//                Spacer()
-//
-//                Text("$ 0")
-//                    .font(.caption.bold())
-//            }
-//                .frame(maxWidth: .infinity, alignment: .leading)
-//
-//        )
-    }
-    
-    private func animateGraph(fromChange: Bool = false) {
-        for (index, _) in weekChartViewModel.enumerated() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.05) {
-                withAnimation(fromChange ? .easeInOut(duration: 0.8) : .interactiveSpring(response: 0.8, dampingFraction: 0.8, blendDuration: 0.8)) {
-//                    weekChartViewModel[index].animate = true
-                }
-            }
-        }
     }
 }
-
-
-//// MARK: - For LineGraph
-//struct SiteView: Identifiable, Comparable {
-//    static func < (lhs: SiteView, rhs: SiteView) -> Bool {
-//        return rhs != lhs
-//    }
-//
-//    var id = UUID().uuidString
-//    var emotion: Int
-//    var day: String
-//    var animate: Bool = false
-//}
-
-//var sample_analytics: [SiteView] =
-//    [
-//        SiteView (emotion: 2, day: "10\nфер"),
-//        SiteView(emotion: 4, day: "11\nфер"),
-//        SiteView (emotion: 2, day: "12\nфер"),
-//        SiteView (emotion: 1, day: "13\nфер"),
-//        SiteView (emotion: 5, day: "14\nфер"),
-//        SiteView (emotion: 1, day: "15\nфер"),
-//        SiteView (emotion: 4, day: "16\nфер")
-//    ]
