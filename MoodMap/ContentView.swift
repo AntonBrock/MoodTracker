@@ -12,6 +12,8 @@ struct ContentView: View {
     @ObservedObject var coordinator: BaseViewCoordinator
     @StateObject var viewRouter = ViewRouter()
     
+    let notificationCenter = NotificationCenter.default
+
     @State var isHiddenTabBar: Bool = false
     @State var openJournaTab: Bool = false
 
@@ -51,8 +53,23 @@ struct ContentView: View {
                         coordinator.showLogoutView.toggle()
                     }
                 }, logoutAction: {
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        AppState.shared.isLogin = false
+                        AppState.shared.jwtToken = nil
+                        AppState.shared.refreshToken = nil
+                        
+                        notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
+                        
+                        AppState.shared.notificationCenter.post(name: Notification.Name.MainScreenNotification, object: nil)
+                        AppState.shared.notificationCenter.post(name: Notification.Name.JournalScreenNotification, object: nil)
+                    }
+                 
                     withAnimation {
+                        #warning("TODO: Сделать после того как пройдет запрос на выход и придет ответ от бэка")
                         print("Logout action + clear all data")
+                        
+                        notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                             coordinator.showLogoutView.toggle()
                         }
@@ -83,7 +100,10 @@ struct ContentView: View {
                         return
                     }
                     coordinator.personalCabinetCoordinator.viewModel.singUp(with: gToken)
-                        
+                    
+                    notificationCenter.post(name: Notification.Name("MainScreenNotification"), object: nil)
+                    notificationCenter.post(name: Notification.Name("JournalNotification"), object: nil)
+                                        
                     withAnimation {
                         coordinator.showAuthLoginView.toggle()
                     }

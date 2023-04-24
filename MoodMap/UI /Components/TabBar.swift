@@ -34,7 +34,12 @@ struct TabBarView: View {
     
     @State var value: Double = 20
     @State var isNeedToShowActivities: Bool = false
+    
+    let isDisabledTabBarNavigation = NotificationCenter.default.publisher(for: NSNotification.Name("DisabledTabBarNavigation"))
+    let isNotDisabledTabBarNavigation = NotificationCenter.default.publisher(for: NSNotification.Name("NotDisabledTabBarNavigation"))
 
+    @State var disabledTabBar: Bool = false
+    
     var body: some View {
         ZStack {
             GeometryReader { geometry in
@@ -79,6 +84,7 @@ struct TabBarView: View {
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .profile, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-pc-none-fill", tabName: "profile", filledIconName: "tb-ic-pc-fill")
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height / 12)
+                        .disabled(disabledTabBar)
                     }
                     .background(Color.white.clipShape(CustomShape()))
                     .frame(width: geometry.size.width, height: isHiddenTabBar ? 0 : geometry.size.height / 10)
@@ -97,6 +103,18 @@ struct TabBarView: View {
             .onChange(of: viewRouter.currentPage) { newValue in
                 coordinator.isNeedShowTab = newValue
             }
+        }
+        .onReceive(AppState.shared.notificationCenter.publisher(for: NSNotification.Name.MainScreenNotification), perform: { output in
+            coordinator.mainScreenCoordinator.viewModel.fetchMainData()
+        })
+        .onReceive(AppState.shared.notificationCenter.publisher(for: NSNotification.Name.JournalScreenNotification), perform: { output in
+            coordinator.journalCoordinator.viewModel.getJournalViewModel()
+        })
+        .onReceive(isDisabledTabBarNavigation) { (output) in
+            disabledTabBar = true
+        }
+        .onReceive(isNotDisabledTabBarNavigation) { (output) in
+            disabledTabBar = false
         }
     }
 }

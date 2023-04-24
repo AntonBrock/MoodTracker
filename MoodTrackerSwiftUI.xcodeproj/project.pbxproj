@@ -117,9 +117,6 @@
 		4529ABC729AF1941001D2390 /* PersonalCabinetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D35472951CED40018A3DA /* PersonalCabinetView.swift */; };
 		4529ABC829AF1942001D2390 /* PersonalCabinetViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D35492951CEDD0018A3DA /* PersonalCabinetViewCoordinator.swift */; };
 		4529ABC929AF1942001D2390 /* PersonalCabinetCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D354B2951CEE70018A3DA /* PersonalCabinetCoordinatorView.swift */; };
-		4529ABCA29AF1942001D2390 /* FeelingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551C3ED295995E60034665E /* FeelingView.swift */; };
-		4529ABCB29AF1942001D2390 /* FeelingViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551C3EF295995FE0034665E /* FeelingViewCoordinator.swift */; };
-		4529ABCC29AF1942001D2390 /* FeelingCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551C3F1295996070034665E /* FeelingCoordinatorView.swift */; };
 		4529ABCD29AF1942001D2390 /* MoodCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453AAC26295DBFEB00CE0F15 /* MoodCheckView.swift */; };
 		4529ABCE29AF1942001D2390 /* MoodCheckViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456AA720296E9E6600BD414B /* MoodCheckViewCoordinator.swift */; };
 		4529ABCF29AF1942001D2390 /* MoodCheckCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456AA71E296E9E5F00BD414B /* MoodCheckCoordinatorView.swift */; };
@@ -273,9 +270,6 @@
 		4546D59229E844CD00E69852 /* PushNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationView.swift; sourceTree = "<group>"; };
 		4546D59829E86BFF00E69852 /* ATTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTView.swift; sourceTree = "<group>"; };
 		45470CB328E5BEE1004822E0 /* ActivitiesBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesBarCharsView.swift; sourceTree = "<group>"; };
-		4551C3ED295995E60034665E /* FeelingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingView.swift; sourceTree = "<group>"; };
-		4551C3EF295995FE0034665E /* FeelingViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingViewCoordinator.swift; sourceTree = "<group>"; };
-		4551C3F1295996070034665E /* FeelingCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingCoordinatorView.swift; sourceTree = "<group>"; };
 		4551C3F32959A2040034665E /* UIView+extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extenstion.swift"; sourceTree = "<group>"; };
 		456750AF29744FB100392992 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		456750B129744FB800392992 /* LoginViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewCoordinator.swift; sourceTree = "<group>"; };
@@ -519,7 +513,6 @@
 				452D353F2951C46E0018A3DA /* JournalScreen */,
 				451E6BC029056FC40048714B /* Report */,
 				452D35462951CEA80018A3DA /* PersonalCabinet */,
-				4551C3EC295995D20034665E /* FeelingScreen */,
 				45D6F16A29B6575F007EABFA /* UserStateScreen */,
 			);
 			path = Screens;
@@ -786,16 +779,6 @@
 				4546D59829E86BFF00E69852 /* ATTView.swift */,
 			);
 			path = ATT;
-			sourceTree = "<group>";
-		};
-		4551C3EC295995D20034665E /* FeelingScreen */ = {
-			isa = PBXGroup;
-			children = (
-				4551C3ED295995E60034665E /* FeelingView.swift */,
-				4551C3EF295995FE0034665E /* FeelingViewCoordinator.swift */,
-				4551C3F1295996070034665E /* FeelingCoordinatorView.swift */,
-			);
-			path = FeelingScreen;
 			sourceTree = "<group>";
 		};
 		456750AE29744F9700392992 /* LoginScreen */ = {
@@ -1229,11 +1212,8 @@
 				4504F00529D976440042CF6B /* DiaryService.swift in Sources */,
 				4529ABC829AF1942001D2390 /* PersonalCabinetViewCoordinator.swift in Sources */,
 				4529ABC929AF1942001D2390 /* PersonalCabinetCoordinatorView.swift in Sources */,
-				4529ABCA29AF1942001D2390 /* FeelingView.swift in Sources */,
 				45E2876929DB117A00593E7A /* StressViewModel.swift in Sources */,
-				4529ABCB29AF1942001D2390 /* FeelingViewCoordinator.swift in Sources */,
 				4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */,
-				4529ABCC29AF1942001D2390 /* FeelingCoordinatorView.swift in Sources */,
 				4529ABCD29AF1942001D2390 /* MoodCheckView.swift in Sources */,
 				456A400E29B990C900371B5C /* EmotionsModel.swift in Sources */,
 				4529ABCE29AF1942001D2390 /* MoodCheckViewCoordinator.swift in Sources */,

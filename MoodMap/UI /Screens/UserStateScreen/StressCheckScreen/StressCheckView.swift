@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct StressCheckView: View {
-    
+        
     @Environment(\.presentationMode) var presentationMode
     
     @ObservedObject var valueModel: SliderStressValueModele
     @ObservedObject var userStateVideModel: MoodCheckView.ViewModel
+    
+    let notificationCenter = NotificationCenter.default
+    
+    @State var disabledBackButton: Bool = false
     
     var parent: BaseViewCoordinator
     var stressViewModel: [StressViewModel]
@@ -34,6 +38,7 @@ struct StressCheckView: View {
                     .resizable()
                     .frame(width: 24, height: 24, alignment: .center)
                     .padding(.leading, 18)
+                    .disabled(disabledBackButton)
                     .onTapGesture {
                         withAnimation {
                             presentationMode.wrappedValue.dismiss()
@@ -114,6 +119,7 @@ struct StressCheckView: View {
     }
     
     func showLoader() {
+        disabledBackButton.toggle()
         isShowLoader = true
     }
     
@@ -127,11 +133,14 @@ struct StressCheckView: View {
         }, showADASScreen: {
             isNeedShowADAsPage = true
         })
-        
         isNeedShowAD = true
     }
     
     func hideAD() {
+        notificationCenter.post(name: Notification.Name("MainScreenNotification"), object: nil)
+        notificationCenter.post(name: Notification.Name("JournalNotification"), object: nil)
+        
+        disabledBackButton.toggle()
         parent.isShowingMoodCheckScreen = false
     }
 }

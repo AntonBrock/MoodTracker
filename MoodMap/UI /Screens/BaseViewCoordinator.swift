@@ -17,9 +17,7 @@ class BaseViewCoordinator: ObservableObject {
     
     @Published var moodCheckCoordinator: MoodCheckViewCoordinator!
     @Published var activitiesCoordinator: ActivitiesViewCoodinator!
-    
-    @Published var feelingCoordinator: FeelingViewCoordinator!
-    
+        
     @Published var showAuthLoginView: Bool = false
     @Published var showLogoutView: Bool = false
     @Published var isShowingWhyResgistration: Bool = false
@@ -51,10 +49,6 @@ class BaseViewCoordinator: ObservableObject {
         
         self.mainScreenCoordinator = .init(
             parent: self,
-            container: container
-        )
-        
-        self.feelingCoordinator = .init(
             container: container
         )
         

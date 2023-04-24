@@ -16,6 +16,7 @@ struct AuthMethodsView: View {
     
     @State var bottomSheetPosition: BottomSheetPosition = .dynamicTop
     
+    let notificationCenter = NotificationCenter.default
     var dismiss: ((String?) -> Void)
     var openAboutRegistration: (() -> Void)
     var dismissWithAppleIDToken: ((String?) -> Void)
@@ -50,8 +51,10 @@ struct AuthMethodsView: View {
                     .padding(.top, 14)
                     .padding(.bottom, 10)
                 
-                SignInWithAppleButton(
-                    .continue) { request in
+                SignInWithAppleButton(.continue) { request in
+                    
+                        notificationCenter.post(name: Notification.Name("DisabledTabBarNavigation"), object: nil)
+                        notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
                         request.requestedScopes = [.fullName, .email]
                     } onCompletion: { result in
                         switch result {
@@ -61,12 +64,19 @@ struct AuthMethodsView: View {
                                 
                                 guard let appleIDToken = credential.identityToken else {
                                     print("Unable to fetch identity token")
+                                    
+                                    notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
+                                    notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
+                                    
                                     dismissWithAppleIDToken(nil)
                                     return
                                 }
                                 
                                 guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
                                     print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+                                    
+                                    notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
+                                    notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
                                     dismissWithAppleIDToken(nil)
                                     return
                                 }
@@ -76,6 +86,9 @@ struct AuthMethodsView: View {
                             }
                         case .failure(let error):
                             print(error)
+                            
+                            notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
+                            notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
                             dismissWithAppleIDToken(nil)
                         }
                     }
@@ -122,6 +135,9 @@ struct AuthMethodsView: View {
     }
     
     func handleSignInButton() {
+        notificationCenter.post(name: Notification.Name("DisabledTabBarNavigation"), object: nil)
+        notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
+
         let scene = UIApplication.shared.connectedScenes
             .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
 
@@ -133,6 +149,8 @@ struct AuthMethodsView: View {
             withPresenting: rootViewController!) { signInResult, error in
                 guard let result = signInResult else {
                     // Inspect error
+                    notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
+                    notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
                     return
                 }
                 
