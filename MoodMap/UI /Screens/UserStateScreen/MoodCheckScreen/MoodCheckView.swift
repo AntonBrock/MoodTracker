@@ -18,7 +18,7 @@ struct MoodCheckView: View {
     @State var value: Double = 20
     
     let container: DIContainer
-    private unowned let coordinator: MoodCheckViewCoordinator
+    unowned let coordinator: MoodCheckViewCoordinator
     
     init(container: DIContainer,
          coordinator: MoodCheckViewCoordinator,

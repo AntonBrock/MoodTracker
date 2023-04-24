@@ -88,6 +88,12 @@ struct TabBarView: View {
                 .background(.clear)
                 .edgesIgnoringSafeArea(.bottom)
             }
+            .sheet(isPresented: $coordinator.isShowingSharingScreen) {
+                #warning("TODO: Нужно создавать ViewModel")
+                SharingView(viewModel: coordinator.journalCoordinator.viewModel.sharingJournalViewModel) {
+                    coordinator.isShowingSharingScreen = false
+                }
+            }
             .sheet(isPresented: $coordinator.isShowingMoodCheckScreen) {
                 print("dissmiss")
             } content: {

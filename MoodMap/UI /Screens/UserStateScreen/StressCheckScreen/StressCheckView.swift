@@ -121,9 +121,9 @@ struct StressCheckView: View {
         isShowLoader = false
     }
     
-    func showAD() {
+    func showAD(withModel: JournalModel) {
         yandexInterstitialADView = YandexInterstitialADView(willDisappear: {
-            hideAD()
+            hideAD(model: withModel)
         }, showADASScreen: {
             isNeedShowADAsPage = true
         })
@@ -131,8 +131,28 @@ struct StressCheckView: View {
         isNeedShowAD = true
     }
     
-    func hideAD() {
+    func hideAD(model: JournalModel) {
         parent.isShowingMoodCheckScreen = false
+        parent.journalCoordinator.viewModel.sharingJournalViewModel = JournalViewModel(
+            id: model.id,
+            state: userStateVideModel.getState(from: model.stateId) ,
+            title: userStateVideModel.getTitle(with: userStateVideModel.getState(from: model.stateId)),
+            activities: [],
+            color: userStateVideModel.getColors(with: userStateVideModel.getState(from: model.stateId)),
+            stateImage: userStateVideModel.getStateImage(from: model.stateId),
+            emotionImage: "",
+            stressRate: "",
+            text: "",
+            monthTime: "",
+            month: "",
+            monthCurrentTime: "",
+            shortTime: "",
+            longTime: ""
+        )
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            parent.isShowingSharingScreen = true
+        }
     }
 }
     

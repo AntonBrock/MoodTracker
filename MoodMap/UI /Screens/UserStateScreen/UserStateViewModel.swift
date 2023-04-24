@@ -194,17 +194,62 @@ extension MoodCheckView {
             guard let activities = choosedActivities else { return }
             guard let stressNumber = choosedStress else { return }
 
-            Services.journalService.sendUserNote(activities: activities,
-                                                   emotionId: emotionId,
-                                                   stateId: stateId,
-                                                   stressRate: stressNumber,
-                                                   text: mindText ?? "") { result in
+            Services.journalService.sendUserNote(
+                activities: activities,
+                emotionId: emotionId,
+                stateId: stateId,
+                stressRate: stressNumber,
+                text: mindText ?? "") { result in
                 switch result {
-                case .success:
-                    view.showAD()
+                case .success(let model):
+                    view.showAD(withModel: model)
                 case .failure(let error):
                     print(error)
                 }
+            }
+        }
+        
+        func getTitle(with state: JournalViewModel.State) -> String {
+            switch state {
+            case .diary: return "Дневник благодарности"
+            case .veryBad: return "Очень плохо"
+            case .bad: return "Плохо"
+            case .fine: return "Нормально"
+            case .good: return "Хорошо"
+            case .veryGood: return "Очень хорошо"
+            }
+        }
+        
+        func getState(from stringState: String) -> JournalViewModel.State {
+            switch stringState {
+            case "3d07a86f-0b8a-481c-913f-88503d10c8a2": return .veryBad
+            case "b6bdf4d7-dc62-49e4-967e-6855f72c229b": return .bad
+            case "45be90af-0404-42dd-8bbe-66d67787840f": return .fine
+            case "cb79441e-23ef-4e4c-be08-c8ba293d700d": return .good
+            case "85306de6-18d4-4b9f-aef4-cb41ffe31619": return .veryGood
+            default: return .fine
+            }
+        }
+        
+        func getStateImage(from stringUserState: String) -> String {
+            switch stringUserState {
+            case "3d07a86f-0b8a-481c-913f-88503d10c8a2": return "ch-ic-veryBad"
+            case "b6bdf4d7-dc62-49e4-967e-6855f72c229b": return "ch-ic-sad"
+            case "45be90af-0404-42dd-8bbe-66d67787840f": return "ch-ic-fine"
+            case "cb79441e-23ef-4e4c-be08-c8ba293d700d": return "ch-ic-good"
+            case "85306de6-18d4-4b9f-aef4-cb41ffe31619": return "ch-ic-veryGood"
+            default: return "ch-ic-fine"
+            }
+        }
+        
+        func getColors(with state: JournalViewModel.State) -> [Color] {
+            switch state {
+            case .diary: return [Color(hex: "86E9C5"), Color(hex: "0B98C5")]
+            case .veryBad: return [Color(hex: "FFC8C8"), Color(hex: "F95555")]
+            case .bad: return [Color(hex: "7392FC"), Color(hex: "7137AF")]
+            case .fine: return [Color(hex: "BBBAFF"), Color(hex: "973FF4")]
+            case .good: return [Color(hex: "86E9C5"), Color(hex: "11AADF")]
+            case .veryGood: return [Color(hex: "FFC8C8"), Color(hex: "FFC794")]
             }
         }
     }

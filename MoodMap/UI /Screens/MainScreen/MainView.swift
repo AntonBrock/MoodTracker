@@ -68,8 +68,8 @@ struct MainView: View {
                 createDiaryView()
                     .padding(.top, 10)
                     .onTapGesture {
-                        showMoreDetailsAboutJournalPage.toggle()
-//                        coordinator.openDiary()
+//                        showMoreDetailsAboutJournalPage.toggle()
+                        coordinator.openDiary()
                     }
                 
                 QuoteView()
@@ -110,13 +110,14 @@ struct MainView: View {
             }
         }
         .sheet(isPresented: $showMoreDetailsAboutJournalPage, content: {
-            InstagramShareView(viewToShare: self)
+//            InstagramShareView(viewToShare: self)
+//            SharingView()
 
-//            DetailJournalView(
-//                showMoreInfo: $showMoreDetailsAboutJournalPage,
-//                model: $currentSelectedJournalPage
-//            )
-//                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
+            DetailJournalView(
+                showMoreInfo: $showMoreDetailsAboutJournalPage,
+                model: $currentSelectedJournalPage
+            )
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
         })
         .onAppear {
             viewModel.setupViewer(self)

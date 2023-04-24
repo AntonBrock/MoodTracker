@@ -1,7 +1,9 @@
-/*
-See https://developers.facebook.com/docs/instagram/sharing-to-stories/ for full reference.
-*/
-
+//
+//  InstagramSharingUtils.swift
+//  MoodMap
+//
+//  Created by ANTON DOBRYNIN on 20.04.2023.
+//
 import Foundation
 import SwiftUI // You can import UIKit instead if you like, both will work.
 

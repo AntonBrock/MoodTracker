@@ -12,12 +12,13 @@ protocol JournalServiceProtocol {
     func getUserNotesWithDate(from: String,
                               to: String,
                               completion: @escaping(Result<[JournalModel], Error>) -> Void)
-    func sendUserNote(activities: [String],
-                      emotionId: String,
-                      stateId: String,
-                      stressRate: String,
-                      text: String,
-                      completion: @escaping(Result<Bool, Error>) -> Void)
+    func sendUserNote(
+        activities: [String],
+        emotionId: String,
+        stateId: String,
+        stressRate: String,
+        text: String,
+        completion: @escaping(Result<JournalModel, Error>) -> Void)
 }
 
 struct JournalService: JournalServiceProtocol {
@@ -49,23 +50,29 @@ struct JournalService: JournalServiceProtocol {
 
         return decoder
     }()
+    
     func sendUserNote(activities: [String],
                       emotionId: String,
                       stateId: String,
                       stressRate: String,
                       text: String,
-                      completion: @escaping(Result<Bool, Error>) -> Void) {
-        let target = BaseAPI.journal(.sendUserNote(activities: activities,
-                                                     emotionId: emotionId,
-                                                     stateId: stateId,
-                                                     stressRate: stressRate,
-                                                     text: text))
+                      completion: @escaping(Result<JournalModel, Error>) -> Void) {
+        let target = BaseAPI.journal(.sendUserNote(
+            activities: activities,
+            emotionId: emotionId,
+            stateId: stateId,
+            stressRate: stressRate,
+            text: text)
+        )
 
         let networkService = ServiceProvider().networkService
-        networkService?.request(.target(target), completion: { response in
-            switch response {
-            case let .success:
-                completion(.success(true))
+        networkService?.request(.target(target), completion: { result in
+            switch result {
+            case let .success(response):
+                guard let model = try? decoder.decode(JournalModel.self, from: response.data) else {
+                    return
+                }
+                completion(.success(model))
             case let .failure(error):
                 completion(.failure(error))
             }

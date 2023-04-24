@@ -62,8 +62,8 @@
             filePath = "MoodMap/UI /Screens/BaseViewCoordinator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "BaseViewCoordinator"
             landmarkType = "3">
             <Locations>
@@ -233,22 +233,6 @@
             startingLineNumber = "71"
             endingLineNumber = "71"
             landmarkName = "changeViewRouter(page:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FF6D984D-C476-4C23-95CA-994D34BBE3DB"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoodMap/UI /Screens/UserStateScreen/StressCheckScreen/StressCheckView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "hideAD()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

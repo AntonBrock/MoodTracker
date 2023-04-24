@@ -12,6 +12,7 @@ extension JournalView {
     class ViewModel: ObservableObject {
         
         @Published var journalViewModels: [[JournalViewModel]]?
+        @Published var sharingJournalViewModel: JournalViewModel?
         @Published var isShowLoader: Bool = false
         
         init() {

@@ -164,7 +164,6 @@
 		4592522529C6EE73007B1706 /* ReportTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522429C6EE73007B1706 /* ReportTipView.swift */; };
 		4592522729C6EEB6007B1706 /* DayilyCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522629C6EEB6007B1706 /* DayilyCharts.swift */; };
 		4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522829C6EEEE007B1706 /* ActivitiesCharts.swift */; };
-		45A9F04D29F01222002C13C5 /* InstagramShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F04B29F01221002C13C5 /* InstagramShareView.swift */; };
 		45A9F04E29F01222002C13C5 /* InstagramSharingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F04C29F01222002C13C5 /* InstagramSharingUtils.swift */; };
 		45A9F05129F0FE04002C13C5 /* SharingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F05029F0FE04002C13C5 /* SharingView.swift */; };
 		45B39F8A29E52A4B00852E70 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */; };
@@ -324,7 +323,6 @@
 		459B9BCD28D36F3000A4FCD7 /* MoodCheckComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckComponent.swift; sourceTree = "<group>"; };
 		459BB88C2900121500E07BFF /* CutomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutomAlertView.swift; sourceTree = "<group>"; };
 		45A132FD2965C01700EA21A1 /* CalendarViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewRepresentable.swift; sourceTree = "<group>"; };
-		45A9F04B29F01221002C13C5 /* InstagramShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramShareView.swift; sourceTree = "<group>"; };
 		45A9F04C29F01222002C13C5 /* InstagramSharingUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramSharingUtils.swift; sourceTree = "<group>"; };
 		45A9F05029F0FE04002C13C5 /* SharingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingView.swift; sourceTree = "<group>"; };
 		45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
@@ -920,7 +918,6 @@
 		45A9F04F29F0FDF3002C13C5 /* Sharing */ = {
 			isa = PBXGroup;
 			children = (
-				45A9F04B29F01221002C13C5 /* InstagramShareView.swift */,
 				45A9F04C29F01222002C13C5 /* InstagramSharingUtils.swift */,
 				45A9F05029F0FE04002C13C5 /* SharingView.swift */,
 			);
@@ -1128,7 +1125,6 @@
 				4529AB7A29AF193F001D2390 /* AnotherHelpsPreviewModel.swift in Sources */,
 				456A401529BA41C200371B5C /* ActivitiesModel.swift in Sources */,
 				4529AB7B29AF193F001D2390 /* Fonts.swift in Sources */,
-				45A9F04D29F01222002C13C5 /* InstagramShareView.swift in Sources */,
 				4529AB8429AF193F001D2390 /* Colors.swift in Sources */,
 				45B39FA229E554B100852E70 /* LoaderLottieView.swift in Sources */,
 				4529AB8529AF193F001D2390 /* AppState .swift in Sources */,
