@@ -44,38 +44,38 @@ extension MoodCheckView {
             let group = DispatchGroup()
             
             group.enter()
-            getStatesList(group)
+            getStatesList(group) {
+                group.enter()
+                self.getEmotionsList(group)
+            }
             
             group.enter()
-            getEmotionsList(group)
+            self.getActiviriesList(group)
             
             group.enter()
-            getActiviriesList(group)
-            
-            group.enter()
-            getStressList(group)
+            self.getStressList(group)
             
             group.notify(queue: .main) {
-                viewer.hideLoader()
+                self.viewer?.hideLoader()
             }
         }
         
-        private func getStatesList(_ group: DispatchGroup) {
+        private func getStatesList(_ group: DispatchGroup, compeltion: @escaping () -> Void) {
             Services.userStateService.getStateList { result in
                 switch result {
                 case .success(let models):
                     self.stateModel = models
-                    self.statesViewModel.append(contentsOf:
-                                                    models.map({ StatesViewModel(
-                                                         id: $0.id,
-                                                         text: $0.text,
-                                                         image: $0.image)})
-                    )
+                    
+                    for item in self.stateModel {
+                        self.statesViewModel.append(StatesViewModel(id: item.id, text: item.text, image: item.image))
+                    }
+                  
+                    compeltion()
+                    group.leave()
                 case .failure(let error):
                     print(error)
+                    group.leave()
                 }
-                
-                group.leave()
             }
         }
         
@@ -91,7 +91,7 @@ extension MoodCheckView {
                     
                     #warning("TODO: Рефакторинг!!")
                     for model in emotionsModels {
-                        for item in self.stateModel {
+                        for item in self.statesViewModel {
                             if model.stateId == item.id && item.id == "3d07a86f-0b8a-481c-913f-88503d10c8a2" {
                                 veryBadEmotions.append(EmotionsViewModel(id: model.id,
                                                                          text: model.text,
@@ -143,11 +143,11 @@ extension MoodCheckView {
                     self.emotionsViewModel.append(goodEmotions)
                     self.emotionsViewModel.append(veryGoodEmotions)
                     
+                    group.leave()
                 case .failure(let error):
                     print(error)
+                    group.leave()
                 }
-                
-                group.leave()
             }
         }
         
@@ -155,15 +155,18 @@ extension MoodCheckView {
             Services.userStateService.getActivitiesList { result in
                 switch result {
                 case .success(let models):
-                    self.activitiesViewModel = models.map({ ActivitiesViewModel(id: $0.id,
-                                                                                text: $0.text,
-                                                                                language: $0.language,
-                                                                                image: $0.image)})
+                    self.activitiesViewModel = models.map(
+                        { ActivitiesViewModel(
+                            id: $0.id,
+                            text: $0.text,
+                            language: $0.language,
+                            image: $0.image)
+                        })
+                    group.leave()
                 case .failure(let error):
                     print(error)
+                    group.leave()
                 }
-                
-                group.leave()
             }
         }
         
@@ -177,11 +180,11 @@ extension MoodCheckView {
                         image: $0.image
                     )}))
                     
+                    group.leave()
                 case .failure(let error):
                     print(error)
+                    group.leave()
                 }
-                
-                group.leave()
             }
         }
         
