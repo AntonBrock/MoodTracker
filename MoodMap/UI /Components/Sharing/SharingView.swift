@@ -80,7 +80,7 @@ struct SharingView: View {
                     .padding(.leading, 16)
                 } else {
                     Button {
-                        print("SAVE IMAGE TO GALLERY")
+                        UIImageWriteToSavedPhotosAlbum(moodView().asUIImage(), nil, nil, nil)
                     } label: {
                         HStack {
                             Image("ic-sh-download")
@@ -158,42 +158,47 @@ struct SharingView: View {
                 .foregroundColor(Colors.Primary.blue)
                 .padding(.top, 24)
             
-            VStack {
-                Text("Я чувствую себя")
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .foregroundColor(.white)
-                    .font(.system(size: 16, weight: .semibold))
-                    .padding(.top, 25)
-                
-                Text("\(viewModel?.title ?? "")")
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .foregroundColor(.white)
-                    .font(.system(size: 24, weight: .semibold))
-                    .padding(.horizontal, 13)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
-                
-                Spacer()
-                
-                HStack {
-                    Text("MoodMap")
-                        .foregroundColor(.white)
-                        .font(.system(size: 16, weight: .bold))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                        .padding(.leading, 21)
-                        .padding(.bottom, 10)
-                        
-                    Image("\(viewModel?.stateImage ?? "")")
-                        .resizable()
-                        .frame(width: 141, height: 141)
-                        .padding(.trailing, -50)
-                        .padding(.bottom, -50)
-                }
-            }
-            .frame(width: 200, height: 200)
-            .background(LinearGradient(colors: [viewModel?.color[0] ?? .white, viewModel?.color[1] ?? .red], startPoint: .topLeading, endPoint: .bottomTrailing))
-            .cornerRadius(16)
-            .padding(.top, 24)
+            moodView()
         }
+    }
+    
+    @ViewBuilder
+    private func moodView() -> some View {
+        VStack {
+            Text("Я чувствую себя")
+                .frame(maxWidth: .infinity, alignment: .center)
+                .foregroundColor(.white)
+                .font(.system(size: 16, weight: .semibold))
+                .padding(.top, 25)
+            
+            Text("\(viewModel?.title ?? "")")
+                .frame(maxWidth: .infinity, alignment: .center)
+                .foregroundColor(.white)
+                .font(.system(size: 24, weight: .semibold))
+                .padding(.horizontal, 13)
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
+            
+            Spacer()
+            
+            HStack {
+                Text("MoodMap")
+                    .foregroundColor(.white)
+                    .font(.system(size: 16, weight: .bold))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                    .padding(.leading, 21)
+                    .padding(.bottom, 10)
+                    
+                Image("\(viewModel?.stateImage ?? "")")
+                    .resizable()
+                    .frame(width: 141, height: 141)
+                    .padding(.trailing, -50)
+                    .padding(.bottom, -50)
+            }
+        }
+        .frame(width: 200, height: 200)
+        .background(LinearGradient(colors: [viewModel?.color[0] ?? .white, viewModel?.color[1] ?? .red], startPoint: .topLeading, endPoint: .bottomTrailing))
+        .cornerRadius(16)
+        .padding(.top, 24)
     }
 }
