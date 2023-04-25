@@ -23,7 +23,6 @@ class PersonalCabinetViewCoordinator: ObservableObject, Identifiable {
         self.parent = parent
         self.container = container
         self.viewModel = PersonalCabinetView.ViewModel()
-        self.viewModel.isLogin = AppState.shared.isLogin ?? false
     }
     
     func openLoginView() {
@@ -36,6 +35,12 @@ class PersonalCabinetViewCoordinator: ObservableObject, Identifiable {
     func showAuthLoginView() {
         withAnimation {
             parent.showAuthLoginView.toggle()
+        }
+    }
+    
+    func showLogoutView() {
+        withAnimation {
+            parent.showLogoutView.toggle()
         }
     }
 }

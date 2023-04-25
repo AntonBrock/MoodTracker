@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     
     @ObservedObject var viewModel: ViewModel
-
+      
     let container: DIContainer
     var animation: Namespace.ID
 
@@ -378,3 +378,4 @@ struct MainView: View {
         }
     }
 }
+

@@ -9,95 +9,121 @@ import SwiftUI
 
 struct PersonalCabinetView: View {
     
-    private unowned let coordinator: PersonalCabinetViewCoordinator
     @ObservedObject var viewModel: ViewModel
+    private unowned let coordinator: PersonalCabinetViewCoordinator
+        
     @State var pushNotification: Bool = false
-    
     @State var showThatTelegramNotInstallView: Bool = false
-
+    
+    let notificationCenter = NotificationCenter.default
+        
     init(
         coordinator: PersonalCabinetViewCoordinator,
-        showAuthMethodView: Bool = false
+        showAuthMethodView: Bool = false,
+        isLogin: Bool = false
     ){
         self.coordinator = coordinator
-        self.pushNotification = coordinator.viewModel.pushNotification
         self.viewModel = coordinator.viewModel
+//        self.pushNotification = coordinator.viewModel.pushNotification
     }
+    
+    let showLoader = NotificationCenter.default.publisher(for: NSNotification.Name("ShowLoaderPersonalCabinet"))
+    let hideLoader = NotificationCenter.default.publisher(for: NSNotification.Name("HideLoaderPersonalCabinet"))
 
+    @State var showLoaderView: Bool = false
+    
     var body: some View {
         
-        ScrollView {
-            CreateLoginView(isLogin: viewModel.isLogin)
-                .background(.white)
-                .padding(.top, 16)
-                .padding(.horizontal, 24)
-            
-            VStack(spacing: 12) {
-                Text("ОСНОВНОЕ")
-                    .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
-                    .foregroundColor(Colors.Primary.lightGray)
-                    .font(.system(size: 12))
-                
+        VStack {
+            if showLoaderView {
                 VStack {
-                    Toggle(isOn: $pushNotification) {
-                        Text("Напоминания")
+                    LoaderLottieView()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            } else {
+                ScrollView {
+                    CreateLoginView(isLogin: AppState.shared.isLogin ?? false)
+                        .background(.white)
+                        .padding(.top, 16)
+                        .padding(.horizontal, 24)
+                    
+                    VStack(spacing: 12) {
+                        Text("ОСНОВНОЕ")
+                            .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
+                            .foregroundColor(Colors.Primary.lightGray)
+                            .font(.system(size: 12))
+                        
+                        VStack {
+                            Toggle(isOn: $pushNotification) {
+                                Text("Напоминания")
+                            }
+                            .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+                            .tint(Colors.Primary.lavender500Purple)
+                            //                    createArrowBlock("Создание пароля")
+                            //                        .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+                            //                        .padding(.trailing, 5)
+                            //                        .onTapGesture {
+                            //                            coordinator.openLoginView()
+                            //                        }
+                            
+                        }
+                        .padding(.horizontal, 24)
+                        .background(.white)
                     }
-                    .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-                    .tint(Colors.Primary.lavender500Purple)
-//                    createArrowBlock("Создание пароля")
-//                        .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-//                        .padding(.trailing, 5)
-//                        .onTapGesture {
-//                            coordinator.openLoginView()
-//                        }
+                    .background(Colors.Primary.lightWhite)
                     
-                }
-                .padding(.horizontal, 24)
-                .background(.white)
-            }
-            .background(Colors.Primary.lightWhite)
-            
-            VStack(spacing: 12) {
-                Text("ДОПОЛНИТЕЛЬНОЕ")
-                    .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
-                    .foregroundColor(Colors.Primary.lightGray)
-                    .font(.system(size: 12))
-                
-                
-                VStack {
-                    createArrowBlock("Поддержка")
-                        .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-                        .padding(.trailing, 5)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 24)
-                .background(.white)
-                .onTapGesture {
-                    let url = URL.init(string: Constants.urlPathToSupport)!
-                    
-                    if UIApplication.shared.canOpenURL(url) {
-                        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
-                    } else {
-                        showThatTelegramNotInstallView.toggle()
+                    VStack(spacing: 12) {
+                        Text("ДОПОЛНИТЕЛЬНОЕ")
+                            .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
+                            .foregroundColor(Colors.Primary.lightGray)
+                            .font(.system(size: 12))
+                        
+                        
+                        VStack {
+                            createArrowBlock("Поддержка")
+                                .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+                                .padding(.trailing, 5)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, 24)
+                        .background(.white)
+                        .onTapGesture {
+                            let url = URL.init(string: Constants.urlPathToSupport)!
+                            
+                            if UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+                            } else {
+                                showThatTelegramNotInstallView.toggle()
+                            }
+                        }
+                        
+                        VStack {
+                            createArrowBlock("Пользовательское соглашение")
+                                .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+                                .padding(.trailing, 5)
+                            
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, 24)
+                        .background(.white)
+                        .padding(.top, -12)
                     }
+                    .background(Colors.Primary.lightWhite)
                 }
-                
-                VStack {
-                    createArrowBlock("Пользовательское соглашение")
-                        .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-                        .padding(.trailing, 5)
-                    
+                .padding(.bottom, 24)
+                .sheet(isPresented: $showThatTelegramNotInstallView) {
+                    Text("Напишите нам на почту info@mapmood.com и мы вам ответим!")
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 24)
-                .background(.white)
-                .padding(.top, -12)
             }
-            .background(Colors.Primary.lightWhite)
         }
-        .padding(.bottom, 24)
-        .sheet(isPresented: $showThatTelegramNotInstallView) {
-            Text("Напишите нам на почту info@mapmood.com и мы вам ответим!")
+        .onChange(of: pushNotification, perform: { newValue in
+            print(newValue)
+        })
+        .onReceive(showLoader) { (output) in
+            showLoaderView = true
+        }
+        .onReceive(hideLoader) { (output) in
+            showLoaderView = false
         }
     }
     
@@ -106,13 +132,13 @@ struct PersonalCabinetView: View {
         HStack {
             VStack {
                 VStack(spacing: 4) {
-                    Text(isLogin ? "Привет, \(viewModel.userInfoModel?.username ?? "")" : "Привет,")
+                    Text(isLogin ? "Привет, \(viewModel.userInfoModel?.username ?? "")" : "Привет, незнакомец")
                         .font(.system(size: 12, weight: .bold))
                         .foregroundColor(Colors.Primary.lightGray)
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text(isLogin ? "Бесплатный план" : "Вы не вошли в аккаунт")
+                    Text(isLogin ? "" : "Дэмо - режим")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(isLogin ? Colors.Primary.lavender500Purple : .white)
                         .lineLimit(1)
@@ -123,13 +149,17 @@ struct PersonalCabinetView: View {
                 
                 HStack {
                     Button {
-                        coordinator.showAuthLoginView()
+                        if AppState.shared.isLogin ?? false {
+                            coordinator.showLogoutView()
+                        } else {
+                            coordinator.showAuthLoginView()
+                        }
                     } label: {
-                        Text(isLogin ? "Выйти" : "Войти в аккаунт")
+                        Text(isLogin ? "Выйти из аккаунта" : "Войти в аккаунт")
                             .foregroundColor(isLogin ? Colors.Primary.honeyFlower700Purple : .white)
                             .font(.system(size: 16, weight: isLogin ? .medium : .bold))
                     }
-                    .frame(width: 160, height: 35)
+                    .frame(width: 200, height: 35)
                     .background(isLogin ? Colors.Primary.moonRaker300Purple : Colors.Primary.lavender500Purple)
                     .cornerRadius(35 / 2)
                 }

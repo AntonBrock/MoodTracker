@@ -55,7 +55,7 @@ extension ReportScreen {
         @Published var isStressCurrentTab: Bool = false
         
         @Published var showLoader: Bool = false
-        
+                
         func setup() {
             getDates()
         }

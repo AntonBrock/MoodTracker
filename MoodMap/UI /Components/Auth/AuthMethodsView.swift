@@ -14,24 +14,27 @@ import AuthenticationServices
 
 struct AuthMethodsView: View {
     
-    @State var bottomSheetPosition: BottomSheetPosition = .dynamic
+    @State var bottomSheetPosition: BottomSheetPosition = .dynamicTop
+    
+    let notificationCenter = NotificationCenter.default
     var dismiss: ((String?) -> Void)
     var openAboutRegistration: (() -> Void)
-    
+    var dismissWithAppleIDToken: ((String?) -> Void)
+
     var appleSignInButton: ASAuthorizationAppleIDButton = ASAuthorizationAppleIDButton()
     
     var body: some View {
         VStack {}
         .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
         .bottomSheet(bottomSheetPosition: $bottomSheetPosition,
-                     switchablePositions: [.dynamic]) {
+                     switchablePositions: [.dynamicTop]) {
             VStack(spacing: 0) {
                 Text("Персональный\nпомощник")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .fixedSize(horizontal: false, vertical: true)
                     .font(.system(size: 24, weight: .bold))
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.black)
+                    .foregroundColor(Colors.Primary.blue)
                     .padding(.top, 14)
                 
                 Text("Войдите, чтобы получить полную\n статистику вашего настроения")
@@ -48,8 +51,10 @@ struct AuthMethodsView: View {
                     .padding(.top, 14)
                     .padding(.bottom, 10)
                 
-                SignInWithAppleButton(
-                    .continue) { request in
+                SignInWithAppleButton(.continue) { request in
+                    
+                        notificationCenter.post(name: Notification.Name("DisabledTabBarNavigation"), object: nil)
+                        notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
                         request.requestedScopes = [.fullName, .email]
                     } onCompletion: { result in
                         switch result {
@@ -57,17 +62,34 @@ struct AuthMethodsView: View {
                             switch auth.credential {
                             case let credential as ASAuthorizationAppleIDCredential:
                                 
-                                let userId = credential.user
-
-                                let email = credential.email
-                                let firstName = credential.fullName?.givenName
-                                let lastName = credential.fullName?.familyName
+                                guard let appleIDToken = credential.identityToken else {
+                                    print("Unable to fetch identity token")
+                                    
+                                    notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
+                                    notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
+                                    
+                                    dismissWithAppleIDToken(nil)
+                                    return
+                                }
                                 
-                                print("userID: \(userId), email: \(email), firstName: \(firstName), lastName: \(lastName) ")
+                                guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+                                    print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+                                    
+                                    notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
+                                    notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
+                                    dismissWithAppleIDToken(nil)
+                                    return
+                                }
+                                
+                                dismissWithAppleIDToken(idTokenString)
                             default: break
                             }
                         case .failure(let error):
                             print(error)
+                            
+                            notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
+                            notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
+                            dismissWithAppleIDToken(nil)
                         }
                     }
                     .signInWithAppleButtonStyle(.black)
@@ -113,6 +135,9 @@ struct AuthMethodsView: View {
     }
     
     func handleSignInButton() {
+        notificationCenter.post(name: Notification.Name("DisabledTabBarNavigation"), object: nil)
+        notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
+
         let scene = UIApplication.shared.connectedScenes
             .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
 
@@ -124,17 +149,13 @@ struct AuthMethodsView: View {
             withPresenting: rootViewController!) { signInResult, error in
                 guard let result = signInResult else {
                     // Inspect error
+                    notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
+                    notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
                     return
                 }
                 
                 guard let googleJWTToken = result.user.idToken?.tokenString else { fatalError() }
-                // нужная инфа для пользователя тут нужно распарсить данные и потправляем (email, name,                                                                                                                            locale, notify (true/ false )
-                                                        // отдаем сюда /auth/sign_up -> вернется в ответ наш JWT Token и его сохроняем на клиенте
-                                                        // и делаем запрос
-                                                        
-                // потом будет ручка на получения данных для модели (UserInfoModel)
                 dismiss(googleJWTToken)
-                // If sign in succeeded, display the app's main content View.
             }
     }
 }

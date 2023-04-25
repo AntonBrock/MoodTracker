@@ -10,7 +10,7 @@ import SwiftUIDatePickerDialog
 import HorizonCalendar
 
 struct JournalView: View {
-            
+    
     var animation: Namespace.ID
 
     @ObservedObject var viewModel: ViewModel

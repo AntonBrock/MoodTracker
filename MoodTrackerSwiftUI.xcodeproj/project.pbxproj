@@ -117,9 +117,6 @@
 		4529ABC729AF1941001D2390 /* PersonalCabinetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D35472951CED40018A3DA /* PersonalCabinetView.swift */; };
 		4529ABC829AF1942001D2390 /* PersonalCabinetViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D35492951CEDD0018A3DA /* PersonalCabinetViewCoordinator.swift */; };
 		4529ABC929AF1942001D2390 /* PersonalCabinetCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D354B2951CEE70018A3DA /* PersonalCabinetCoordinatorView.swift */; };
-		4529ABCA29AF1942001D2390 /* FeelingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551C3ED295995E60034665E /* FeelingView.swift */; };
-		4529ABCB29AF1942001D2390 /* FeelingViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551C3EF295995FE0034665E /* FeelingViewCoordinator.swift */; };
-		4529ABCC29AF1942001D2390 /* FeelingCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551C3F1295996070034665E /* FeelingCoordinatorView.swift */; };
 		4529ABCD29AF1942001D2390 /* MoodCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453AAC26295DBFEB00CE0F15 /* MoodCheckView.swift */; };
 		4529ABCE29AF1942001D2390 /* MoodCheckViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456AA720296E9E6600BD414B /* MoodCheckViewCoordinator.swift */; };
 		4529ABCF29AF1942001D2390 /* MoodCheckCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456AA71E296E9E5F00BD414B /* MoodCheckCoordinatorView.swift */; };
@@ -166,6 +163,8 @@
 		4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522829C6EEEE007B1706 /* ActivitiesCharts.swift */; };
 		45A9F04E29F01222002C13C5 /* InstagramSharingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F04C29F01222002C13C5 /* InstagramSharingUtils.swift */; };
 		45A9F05129F0FE04002C13C5 /* SharingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F05029F0FE04002C13C5 /* SharingView.swift */; };
+		45A9F05329F10076002C13C5 /* AuthLogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F05229F10076002C13C5 /* AuthLogoutView.swift */; };
+		45A9F05629F1068B002C13C5 /* AuthDeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F05529F1068B002C13C5 /* AuthDeleteAccountView.swift */; };
 		45B39F8A29E52A4B00852E70 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */; };
 		45B39F8D29E52D6B00852E70 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 45B39F8C29E52D6B00852E70 /* Lottie */; };
 		45B39F9029E52DBC00852E70 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8F29E52DBC00852E70 /* LottieView.swift */; };
@@ -273,9 +272,6 @@
 		4546D59229E844CD00E69852 /* PushNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationView.swift; sourceTree = "<group>"; };
 		4546D59829E86BFF00E69852 /* ATTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTView.swift; sourceTree = "<group>"; };
 		45470CB328E5BEE1004822E0 /* ActivitiesBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesBarCharsView.swift; sourceTree = "<group>"; };
-		4551C3ED295995E60034665E /* FeelingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingView.swift; sourceTree = "<group>"; };
-		4551C3EF295995FE0034665E /* FeelingViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingViewCoordinator.swift; sourceTree = "<group>"; };
-		4551C3F1295996070034665E /* FeelingCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingCoordinatorView.swift; sourceTree = "<group>"; };
 		4551C3F32959A2040034665E /* UIView+extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extenstion.swift"; sourceTree = "<group>"; };
 		456750AF29744FB100392992 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		456750B129744FB800392992 /* LoginViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewCoordinator.swift; sourceTree = "<group>"; };
@@ -325,6 +321,8 @@
 		45A132FD2965C01700EA21A1 /* CalendarViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewRepresentable.swift; sourceTree = "<group>"; };
 		45A9F04C29F01222002C13C5 /* InstagramSharingUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramSharingUtils.swift; sourceTree = "<group>"; };
 		45A9F05029F0FE04002C13C5 /* SharingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingView.swift; sourceTree = "<group>"; };
+		45A9F05229F10076002C13C5 /* AuthLogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLogoutView.swift; sourceTree = "<group>"; };
+		45A9F05529F1068B002C13C5 /* AuthDeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDeleteAccountView.swift; sourceTree = "<group>"; };
 		45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		45B39F8F29E52DBC00852E70 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		45B39F9129E52F7300852E70 /* SplashScreen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreen.json; sourceTree = "<group>"; };
@@ -483,6 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				45A9F04F29F0FDF3002C13C5 /* Sharing */,
+				45A9F05429F1066D002C13C5 /* Auth */,
 				45B39F8E29E52DB400852E70 /* Lottie */,
 				453844D929E40D3500A89FEE /* AD */,
 				451E6BC4290570220048714B /* Charts */,
@@ -502,8 +501,6 @@
 				45319EEF296FBAB100D58DCF /* GalleryPhotoPicker.swift */,
 				45319EF1296FBAC300D58DCF /* ImagePicker.swift */,
 				456750B5297451E300392992 /* MTKeyboardView.swift */,
-				45C338F9298406D10043E26C /* AuthHyperString.swift */,
-				4570B8C12985144B0063E2DC /* AuthMethodsView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -521,7 +518,6 @@
 				452D353F2951C46E0018A3DA /* JournalScreen */,
 				451E6BC029056FC40048714B /* Report */,
 				452D35462951CEA80018A3DA /* PersonalCabinet */,
-				4551C3EC295995D20034665E /* FeelingScreen */,
 				45D6F16A29B6575F007EABFA /* UserStateScreen */,
 			);
 			path = Screens;
@@ -790,16 +786,6 @@
 			path = ATT;
 			sourceTree = "<group>";
 		};
-		4551C3EC295995D20034665E /* FeelingScreen */ = {
-			isa = PBXGroup;
-			children = (
-				4551C3ED295995E60034665E /* FeelingView.swift */,
-				4551C3EF295995FE0034665E /* FeelingViewCoordinator.swift */,
-				4551C3F1295996070034665E /* FeelingCoordinatorView.swift */,
-			);
-			path = FeelingScreen;
-			sourceTree = "<group>";
-		};
 		456750AE29744F9700392992 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -922,6 +908,17 @@
 				45A9F05029F0FE04002C13C5 /* SharingView.swift */,
 			);
 			path = Sharing;
+			sourceTree = "<group>";
+		};
+		45A9F05429F1066D002C13C5 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				45C338F9298406D10043E26C /* AuthHyperString.swift */,
+				4570B8C12985144B0063E2DC /* AuthMethodsView.swift */,
+				45A9F05229F10076002C13C5 /* AuthLogoutView.swift */,
+				45A9F05529F1068B002C13C5 /* AuthDeleteAccountView.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		45B39F8829E52A3500852E70 /* LaunchScreen */ = {
@@ -1165,6 +1162,7 @@
 				4529AB9E29AF1940001D2390 /* SCDonutPartView.swift in Sources */,
 				456A400C29B76AF800371B5C /* JournalViewModel.swift in Sources */,
 				457F591729C183F100E96E1D /* ReportScreenViewModel.swift in Sources */,
+				45A9F05629F1068B002C13C5 /* AuthDeleteAccountView.swift in Sources */,
 				4529AB9F29AF1940001D2390 /* SCDonutChartView.swift in Sources */,
 				4529ABA029AF1940001D2390 /* ActivitiesBarCharsView.swift in Sources */,
 				4529ABA129AF1940001D2390 /* FeelingCircleChartsView.swift in Sources */,
@@ -1181,6 +1179,7 @@
 				45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */,
 				4529ABA829AF1940001D2390 /* QuoteView.swift in Sources */,
 				457F591B29C184F300E96E1D /* ReportEndPoint.swift in Sources */,
+				45A9F05329F10076002C13C5 /* AuthLogoutView.swift in Sources */,
 				4529ABA929AF1941001D2390 /* ActivitiesTextViewBlock.swift in Sources */,
 				4529ABAA29AF1941001D2390 /* MPErrorFlowView.swift in Sources */,
 				4529ABAB29AF1941001D2390 /* SearchView.swift in Sources */,
@@ -1229,11 +1228,8 @@
 				4504F00529D976440042CF6B /* DiaryService.swift in Sources */,
 				4529ABC829AF1942001D2390 /* PersonalCabinetViewCoordinator.swift in Sources */,
 				4529ABC929AF1942001D2390 /* PersonalCabinetCoordinatorView.swift in Sources */,
-				4529ABCA29AF1942001D2390 /* FeelingView.swift in Sources */,
 				45E2876929DB117A00593E7A /* StressViewModel.swift in Sources */,
-				4529ABCB29AF1942001D2390 /* FeelingViewCoordinator.swift in Sources */,
 				4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */,
-				4529ABCC29AF1942001D2390 /* FeelingCoordinatorView.swift in Sources */,
 				4529ABCD29AF1942001D2390 /* MoodCheckView.swift in Sources */,
 				456A400E29B990C900371B5C /* EmotionsModel.swift in Sources */,
 				4529ABCE29AF1942001D2390 /* MoodCheckViewCoordinator.swift in Sources */,

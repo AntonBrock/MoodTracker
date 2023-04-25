@@ -9,19 +9,21 @@ import SwiftUI
 
 final class AppState: ObservableObject {
 
+    @Published var settings = Settings.initializeSettings()
+
     static let shared = AppState()
     
-    @Published var settings = Settings.initializeSettings()
-    
+    let notificationCenter = NotificationCenter.default
+        
     enum KeychainKeys {
         static let accountKey = "CHKeychain"
         
         static let jwtService = "JWT"
         static let refreshTokenService = "refreshToken"
-        static let isAuthorizated = "isAuthorizated"
     }
     
     enum UserDefaultsKeys {
+        static let isAuthorizated = "isAuthorizated"
         static let rememberPushNotificationDate = "rememberPushNotificationDate"
         static let isShowATT = "isShowATT"
         static let isNotShowSharingScreen = "isNotShowSharingScreen"
@@ -51,6 +53,15 @@ final class AppState: ObservableObject {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isNotShowSharingScreen)
+        }
+    }
+    
+    var isLogin: Bool? {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isAuthorizated)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isAuthorizated)
         }
     }
         
@@ -84,24 +95,6 @@ final class AppState: ObservableObject {
             KeychainHelper.standard.save(
                 newValue,
                 service: KeychainKeys.refreshTokenService,
-                account: KeychainKeys.accountKey
-            )
-            objectWillChange.send()
-        }
-    }
-    
-    var isLogin: Bool? {
-        get {
-            return KeychainHelper.standard.read(
-                service: KeychainKeys.isAuthorizated,
-                account: KeychainKeys.accountKey,
-                type: Bool.self
-            )
-        }
-        set {
-            KeychainHelper.standard.save(
-                newValue,
-                service: KeychainKeys.isAuthorizated,
                 account: KeychainKeys.accountKey
             )
             objectWillChange.send()
@@ -152,4 +145,9 @@ final class AppState: ObservableObject {
     }
     
 //    static var settings = Settings.initializeSettings()
+}
+
+extension Notification.Name {
+    static let MainScreenNotification = Notification.Name("MainScreenNotification")
+    static let JournalScreenNotification = Notification.Name("JournalScreenNotification")
 }

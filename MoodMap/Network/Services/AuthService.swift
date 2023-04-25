@@ -55,6 +55,32 @@ struct AuthService: AuthServiceProtocol {
             case let .success(result):
                 guard let jsonResult = try! result.mapJSON() as? [String: Any] else { return }
                 
+                if let refreshToken = jsonResult["refresh_token"] as? String {
+                    AppState.shared.refreshToken = refreshToken
+                }
+                
+                if let jwtToken = jsonResult["access_token"] as? String {
+                    completion(.success(jwtToken))
+                }
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        })
+    }
+    
+    func singUp(appleIDToken: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let target = BaseAPI.auth(.singUpWithAppleId(AppleID: appleIDToken))
+        
+        let networkService = ServiceProvider().networkService
+        networkService?.request(.target(target), completion: { response in
+            switch response {
+            case let .success(result):
+                guard let jsonResult = try! result.mapJSON() as? [String: Any] else { return }
+                
+                if let refreshToken = jsonResult["refresh_token"] as? String {
+                    AppState.shared.refreshToken = refreshToken
+                }
+                
                 if let jwtToken = jsonResult["access_token"] as? String {
                     completion(.success(jwtToken))
                 }

@@ -17,12 +17,12 @@ class BaseViewCoordinator: ObservableObject {
     
     @Published var moodCheckCoordinator: MoodCheckViewCoordinator!
     @Published var activitiesCoordinator: ActivitiesViewCoodinator!
-    
-    @Published var feelingCoordinator: FeelingViewCoordinator!
-    
+        
     @Published var showAuthLoginView: Bool = false
+    @Published var showLogoutView: Bool = false
     @Published var isShowingWhyResgistration: Bool = false
-    
+    @Published var showDeleteAccountView: Bool = false
+
     @Published var isShowingMoodCheckScreen: Bool = false
     @Published var isShowingSharingScreen: Bool = false
     @Published var isNeedShowTab: Page = .home 
@@ -50,10 +50,6 @@ class BaseViewCoordinator: ObservableObject {
         
         self.mainScreenCoordinator = .init(
             parent: self,
-            container: container
-        )
-        
-        self.feelingCoordinator = .init(
             container: container
         )
         
