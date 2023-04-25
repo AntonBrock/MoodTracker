@@ -24,6 +24,7 @@ final class AppState: ObservableObject {
     enum UserDefaultsKeys {
         static let rememberPushNotificationDate = "rememberPushNotificationDate"
         static let isShowATT = "isShowATT"
+        static let isNotShowSharingScreen = "isNotShowSharingScreen"
     }
     
     var rememberPushNotificationDate: Date? {
@@ -41,6 +42,15 @@ final class AppState: ObservableObject {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isShowATT)
+        }
+    }
+    
+    var isNotNeedShowSharingScreen: Bool? {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isNotShowSharingScreen)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isNotShowSharingScreen)
         }
     }
         

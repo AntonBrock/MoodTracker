@@ -84,7 +84,16 @@ struct JournalView: View {
                     }
                 }
                 .sheet(isPresented: $showMoreInfo, content: {
-                    DetailJournalView(showMoreInfo: $showMoreInfo, model: $currentModel)
+                    DetailJournalView(
+                        showMoreInfo: $showMoreInfo,
+                        model: $currentModel,
+                        shareStateAction: { model in
+                            coordinator.parent.journalCoordinator.viewModel.sharingJournalViewModel = model
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                coordinator.parent.isShowingSharingScreen = true
+                            }
+                    })
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
                 })
                 .popover(isPresented: $showDatePicker) {

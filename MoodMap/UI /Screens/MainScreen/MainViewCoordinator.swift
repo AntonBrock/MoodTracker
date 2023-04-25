@@ -10,7 +10,7 @@ import SwiftUI
 class MainViewCoordinator: ObservableObject, Identifiable {
     
     private let container: DIContainer
-    private unowned let parent: BaseViewCoordinator
+    unowned let parent: BaseViewCoordinator
     
     @Published var diaryViewCoordinator: DiaryViewCoordinator?
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Photos
 
 struct SharingView: View {
     
@@ -63,8 +64,13 @@ struct SharingView: View {
                     }
                     
                     Button {
-                        print("SAVE IMAGE TO GALLERY")
-                        actionDismiss()
+                        let status = PHPhotoLibrary.authorizationStatus()
+                        if status == .denied || status == .notDetermined {
+                            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString + Bundle.main.bundleIdentifier!)!)
+                        } else {
+                            UIImageWriteToSavedPhotosAlbum(moodView().asUIImage(), nil, nil, nil)
+                            actionDismiss()
+                        }
                     } label: {
                         VStack {
                             Image("ic-sh-download")
@@ -80,7 +86,13 @@ struct SharingView: View {
                     .padding(.leading, 16)
                 } else {
                     Button {
-                        UIImageWriteToSavedPhotosAlbum(moodView().asUIImage(), nil, nil, nil)
+                        let status = PHPhotoLibrary.authorizationStatus()
+                        if status == .denied || status == .notDetermined {
+                            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString + Bundle.main.bundleIdentifier!)!)
+                        } else {
+                            UIImageWriteToSavedPhotosAlbum(moodView().asUIImage(), nil, nil, nil)
+                            actionDismiss()
+                        }
                     } label: {
                         HStack {
                             Image("ic-sh-download")
@@ -114,10 +126,11 @@ struct SharingView: View {
             Button {
                 print("Save to local storage that user don't want to see this screen again ")
                 notShowThisScreen.toggle()
+                AppState.shared.isNotNeedShowSharingScreen = notShowThisScreen
             } label: {
                 
                 HStack {
-                    Image(notShowThisScreen ? "ic-sh-checkboxEnable" : "ic-sh-checkboxEnable")
+                    Image(notShowThisScreen ? "ic-sh-checkbox-selected" : "ic-sh-checkbox-unselected")
                         .resizable()
                         .frame(width: 24, height: 24)
                     
@@ -133,6 +146,9 @@ struct SharingView: View {
             .padding(.bottom, 24)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear() {
+            self.notShowThisScreen = AppState.shared.isNotNeedShowSharingScreen ?? false
+        }
     }
     
     @ViewBuilder
@@ -159,6 +175,7 @@ struct SharingView: View {
                 .padding(.top, 24)
             
             moodView()
+            .padding(.top, 24)
         }
     }
     
@@ -199,6 +216,5 @@ struct SharingView: View {
         .frame(width: 200, height: 200)
         .background(LinearGradient(colors: [viewModel?.color[0] ?? .white, viewModel?.color[1] ?? .red], startPoint: .topLeading, endPoint: .bottomTrailing))
         .cornerRadius(16)
-        .padding(.top, 24)
     }
 }

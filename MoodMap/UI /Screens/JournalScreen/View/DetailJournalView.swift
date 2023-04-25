@@ -16,6 +16,8 @@ struct DetailJournalView: View {
         GridItem(.flexible())
     ]
     
+    var shareStateAction: ((_ model: JournalViewModel) -> Void)
+    
     var body: some View {
         VStack {
             headerView(
@@ -23,7 +25,7 @@ struct DetailJournalView: View {
                 and: model?.title ?? "",
                 and: model?.longTime ?? ""
             )
-            .frame(height: 240)
+            .frame(maxWidth: .infinity, maxHeight: 240)
             .background(GradientRoundedCornersView(gradient: model?.color ?? [],
                                                    tl: 0, tr: 0, bl: 10, br: 10))
             
@@ -175,8 +177,8 @@ struct DetailJournalView: View {
         and stateTitle: String,
         and date: String
     ) -> some View {
-        HStack {
-            VStack {
+        VStack {
+            HStack {
                 Button {
                     withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
                         showMoreInfo.toggle()
@@ -188,6 +190,23 @@ struct DetailJournalView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
+                Button {
+                    guard let model = model else { return }
+                    showMoreInfo.toggle()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                        shareStateAction(model)
+                    }
+                } label: {
+                    Image("ic-sh-download")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 24)
+            
+            HStack {
                 VStack {
                     Text(date)
                         .foregroundColor(.white)
@@ -201,20 +220,18 @@ struct DetailJournalView: View {
                 }
                 .padding(.top, 26)
                 .frame(maxWidth: .infinity, alignment: .leading)
-              
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 27)
-            
-            VStack {
+                
                 Image(stateImageName)
                     .resizable()
-                    .frame(width: 200, height: 200, alignment: .trailing)
+                    .frame(width: 200, height: 200, alignment: .bottomTrailing)
                     .padding(.trailing, -26)
-                    .padding(.bottom, -150)
+                    .padding(.bottom, -50)
+                    .clipped()
             }
-            .frame(maxHeight: .infinity)
-            .clipped()
+            .frame(maxWidth: .infinity, alignment: .bottomLeading)
+            .padding(.leading, 27)
+            .padding(.bottom, -59)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
     }
 }

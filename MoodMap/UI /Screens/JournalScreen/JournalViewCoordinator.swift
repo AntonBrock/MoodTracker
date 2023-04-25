@@ -10,7 +10,7 @@ import SwiftUI
 class JournalViewCoordinator: ObservableObject, Identifiable {
     
     private let container: DIContainer
-    private unowned let parent: BaseViewCoordinator
+    unowned let parent: BaseViewCoordinator
     @ObservedObject var viewModel: JournalView.ViewModel
     
     init(

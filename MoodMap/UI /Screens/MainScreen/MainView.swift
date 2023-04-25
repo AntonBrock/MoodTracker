@@ -110,12 +110,17 @@ struct MainView: View {
             }
         }
         .sheet(isPresented: $showMoreDetailsAboutJournalPage, content: {
-//            InstagramShareView(viewToShare: self)
-//            SharingView()
 
             DetailJournalView(
                 showMoreInfo: $showMoreDetailsAboutJournalPage,
-                model: $currentSelectedJournalPage
+                model: $currentSelectedJournalPage,
+                shareStateAction: { model in
+                    coordinator.parent.journalCoordinator.viewModel.sharingJournalViewModel = model
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        coordinator.parent.isShowingSharingScreen = true
+                    }
+                }
             )
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
         })
