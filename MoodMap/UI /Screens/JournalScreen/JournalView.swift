@@ -191,6 +191,11 @@ struct JournalView: View {
                     .frame(height: 100)
                     .padding(.horizontal, 16)
                 }
+                .onAppear {
+                    if !(AppState.shared.isLogin ?? false) {
+                        viewModel.journalViewModels = []
+                    }
+                }
                 .onChange(of: isChoosindNewDate, perform: { _ in
                     if isRangeCalendarMode {
                         guard let lowerDate = lowerDate,

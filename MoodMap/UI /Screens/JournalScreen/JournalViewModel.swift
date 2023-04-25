@@ -22,9 +22,8 @@ extension JournalView {
         }
         
         func getJournalViewModel() {
-            isShowLoader = true
-            
             if AppState.shared.isLogin ?? false {
+                isShowLoader = true
                 Services.journalService.getUserNotes { result in
                     switch result {
                     case .success(let models):

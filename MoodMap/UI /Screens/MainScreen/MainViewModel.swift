@@ -51,7 +51,6 @@ extension MainView {
         
         
         func fetchMainData() {
-            isShowLoader = true
             
             let formatter = DateFormatter()
             formatter.dateFormat = "dd"
@@ -73,9 +72,30 @@ extension MainView {
             let to = "\(currentYear!)-\(shortDateMonth!)-\(lastDayOfWeek!)"
 
             if AppState.shared.isLogin ?? false {
+                isShowLoader = true
+                
                 getJournalViewModel(from: from, to: to)
                 fetchReport(from: from, to: to,
                             type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood)
+            } else {
+                emotionCountData = EmotionCountDataViewModel(
+                    total: 0,
+                    common: "",
+                    text: [],
+                    color: [],
+                    countState: [],
+                    emotionCircleViewModel: [],
+                    dataIsEmpty: true
+                )
+                
+                timeData = TimeDataViewModel(
+                    bestTime: "",
+                    worstTime: "",
+                    dayParts: "",
+                    dataIsEmpty: true
+                )
+                
+                journalViewModels = []
             }
            
         }
