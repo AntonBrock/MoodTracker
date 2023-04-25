@@ -16,7 +16,7 @@ extension JournalView {
         @Published var isShowLoader: Bool = false
         
         init() {
-//            getJournalViewModel()
+            getJournalViewModel()
         }
         
         func getJournalViewModel() {
