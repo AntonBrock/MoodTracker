@@ -24,7 +24,6 @@ struct PersonalCabinetView: View {
     ){
         self.coordinator = coordinator
         self.viewModel = coordinator.viewModel
-//        self.pushNotification = coordinator.viewModel.pushNotification
     }
     
     let showLoader = NotificationCenter.default.publisher(for: NSNotification.Name("ShowLoaderPersonalCabinet"))
@@ -59,6 +58,21 @@ struct PersonalCabinetView: View {
                             }
                             .frame(width: UIScreen.main.bounds.width - 32, height: 64)
                             .tint(Colors.Primary.lavender500Purple)
+                            .disabled(!(AppState.shared.isLogin ?? false))
+                            .onTapGesture {
+                                if AppState.shared.isLogin ?? false {
+                                    if pushNotification == true {
+                                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString + Bundle.main.bundleIdentifier!)!)
+                                    } else {
+                                        pushNotification = true
+                                    }
+                                } else {
+                                    pushNotification = false
+                                    coordinator.showAuthLoginView()
+                                }
+                            }
+                            
+                            
                             //                    createArrowBlock("Создание пароля")
                             //                        .frame(width: UIScreen.main.bounds.width - 32, height: 64)
                             //                        .padding(.trailing, 5)
@@ -117,7 +131,7 @@ struct PersonalCabinetView: View {
             }
         }
         .onChange(of: pushNotification, perform: { newValue in
-            print(newValue)
+            #warning("TODO: Сделать запрос что юзер включил пуши")
         })
         .onReceive(showLoader) { (output) in
             showLoaderView = true

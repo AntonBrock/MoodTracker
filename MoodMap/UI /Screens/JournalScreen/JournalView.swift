@@ -78,6 +78,10 @@ struct JournalView: View {
                                 }
                             }, animation: animation) {
                                 coordinator.openMoodCheckScreen()
+                            } showAuthViewAction: {
+                                withAnimation {
+                                    coordinator.parent.showAuthLoginView = true
+                                }
                             }
                         }
                         .background(.white)
@@ -191,14 +195,34 @@ struct JournalView: View {
                     if isRangeCalendarMode {
                         guard let lowerDate = lowerDate,
                                 let upperDate = upperDate else {
-                            coordinator.viewModel.getJournalViewModel()
+                            
+                            if AppState.shared.isLogin ?? false {
+                                coordinator.viewModel.getJournalViewModel()
+                            } else {
+                                withAnimation {
+                                    coordinator.parent.showAuthLoginView = true
+                                }
+                            }
                             return
                         }
-                        coordinator.viewModel.getJournalViewModel(from: lowerDate.description,
-                                                                  to: upperDate.description)
+                        
+                        if AppState.shared.isLogin ?? false {
+                            coordinator.viewModel.getJournalViewModel(from: lowerDate.description,
+                                                                      to: upperDate.description)
+                        } else {
+                            withAnimation {
+                                coordinator.parent.showAuthLoginView = true
+                            }
+                        }
                     } else {
                         guard let selectedDay = selectedDay else {
-                            coordinator.viewModel.getJournalViewModel()
+                            if AppState.shared.isLogin ?? false {
+                                coordinator.viewModel.getJournalViewModel()
+                            } else {
+                                withAnimation {
+                                    coordinator.parent.showAuthLoginView = true
+                                }
+                            }
                             return
                         }
                         

@@ -72,8 +72,14 @@ struct TabBarView: View {
                             .offset(y: -geometry.size.height / 8 / 4)
                             .onTapGesture {
                                 
-                                withAnimation {
-                                    coordinator.isShowingMoodCheckScreen.toggle()
+                                if AppState.shared.isLogin ?? false {
+                                    withAnimation {
+                                        coordinator.isShowingMoodCheckScreen.toggle()
+                                    }
+                                } else {
+                                    withAnimation {
+                                        coordinator.showAuthLoginView = true
+                                    }
                                 }
                             }
                             .scaleEffect(showPopUp ? CGFloat(0.9) : 1.0)
@@ -95,7 +101,6 @@ struct TabBarView: View {
                 .edgesIgnoringSafeArea(.bottom)
             }
             .sheet(isPresented: $coordinator.isShowingSharingScreen) {
-                #warning("TODO: Нужно создавать ViewModel")
                 SharingView(viewModel: coordinator.journalCoordinator.viewModel.sharingJournalViewModel) {
                     coordinator.isShowingSharingScreen = false
                 }

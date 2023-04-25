@@ -386,17 +386,21 @@ extension ReportScreen {
         }
         
         private func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport) {
-            showLoader = true
-
-            clearData()
-            Services.reportService.fetchReport(from: from, to: to, type: type) { result in
-                switch result {
-                case .success(let model):
-                    self.reportViewModel = self.mappingViewModel(data: model)
-                    self.showLoader = false
-                case .failure(let error):
-                    print(error)
+            if AppState.shared.isLogin ?? false {
+                showLoader = true
+                
+                clearData()
+                Services.reportService.fetchReport(from: from, to: to, type: type) { result in
+                    switch result {
+                    case .success(let model):
+                        self.reportViewModel = self.mappingViewModel(data: model)
+                        self.showLoader = false
+                    case .failure(let error):
+                        print(error)
+                    }
                 }
+            } else {
+                clearData()
             }
         }
         

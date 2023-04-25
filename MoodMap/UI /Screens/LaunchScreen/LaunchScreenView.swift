@@ -46,18 +46,27 @@ struct LaunchScreenView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 } else {
                     if !isShowPushNotificationScreen && needShowPushNotification() {
-                        PushNotificationView(closeAction: {
-                            withAnimation {
-                                self.isShowPushNotificationScreen = true
+                        if AppState.shared.isLogin ?? false {
+                            if AppState.shared.rememberPushNotificationDate == nil {
+                                ContentView(coordinator: parent)
+                                    .onAppear {
+                                        AppState.shared.rememberPushNotificationDate = Date()
+                                    }
+                            } else {
+                                PushNotificationView(closeAction: {
+                                    withAnimation {
+                                        self.isShowPushNotificationScreen = true
+                                    }
+                                })
                             }
-                        })
-                            .transition(.move(edge: .bottom))
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                           
+                        } else {
+                            ContentView(coordinator: parent)
+                        }
                     } else {
                         ContentView(coordinator: parent)
                     }
                 }
-
             }
             
             ZStack {

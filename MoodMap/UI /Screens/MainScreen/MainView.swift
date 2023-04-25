@@ -54,7 +54,13 @@ struct MainView: View {
                 createChooseStateUser()
                     .padding(.top, 10)
                     .onTapGesture {
-                        coordinator.openMoodCheckScreen()
+                        if AppState.shared.isLogin ?? false {
+                            coordinator.openMoodCheckScreen()
+                        } else {
+                            withAnimation {
+                                coordinator.parent.showAuthLoginView = true
+                            }
+                        }
                     }
                 
                 
@@ -68,8 +74,13 @@ struct MainView: View {
                 createDiaryView()
                     .padding(.top, 10)
                     .onTapGesture {
-//                        showMoreDetailsAboutJournalPage.toggle()
-                        coordinator.openDiary()
+                        if AppState.shared.isLogin ?? false {
+                            coordinator.openDiary()
+                        } else {
+                            withAnimation {
+                                coordinator.parent.showAuthLoginView = true
+                            }
+                        }
                     }
                 
                 QuoteView()

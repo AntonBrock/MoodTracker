@@ -72,8 +72,12 @@ extension MainView {
             let from = "\(currentYear!)-\(shortDateMonth!)-\(firstDayOfWeek!)"
             let to = "\(currentYear!)-\(shortDateMonth!)-\(lastDayOfWeek!)"
 
-            getJournalViewModel(from: from, to: to)
-            fetchReport(from: from, to: to, type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood)
+            if AppState.shared.isLogin ?? false {
+                getJournalViewModel(from: from, to: to)
+                fetchReport(from: from, to: to,
+                            type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood)
+            }
+           
         }
         
         func getJournalViewModel(from: String, to: String) {

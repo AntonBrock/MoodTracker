@@ -17,6 +17,7 @@ struct EmotionBoardView: View {
     @State var isHidden: Bool = false
     
     var openMoodCheckScreenDidTap: (() -> Void)
+    var showAuthViewAction: (() -> Void)
     
     var body: some View {
         
@@ -25,7 +26,11 @@ struct EmotionBoardView: View {
                 EmotionBoardEmtyView()
                     .frame(maxHeight: .infinity, alignment: .top)
                     .onTapGesture {
-                        openMoodCheckScreenDidTap()
+                        if AppState.shared.isLogin ?? false {
+                            openMoodCheckScreenDidTap()
+                        } else {
+                            showAuthViewAction()
+                        }
                     }
             }
             .frame(maxWidth: .infinity, alignment: .top)

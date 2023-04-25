@@ -16,33 +16,39 @@ extension JournalView {
         @Published var isShowLoader: Bool = false
         
         init() {
-            getJournalViewModel()
+            if AppState.shared.isLogin ?? false {
+                getJournalViewModel()
+            }
         }
         
         func getJournalViewModel() {
             isShowLoader = true
             
-            Services.journalService.getUserNotes { result in
-                switch result {
-                case .success(let models):
-                    self.journalViewModels = self.mappingViewModel(data: models)
-                    self.isShowLoader = false
-                case .failure(let error):
-                    print(error)
+            if AppState.shared.isLogin ?? false {
+                Services.journalService.getUserNotes { result in
+                    switch result {
+                    case .success(let models):
+                        self.journalViewModels = self.mappingViewModel(data: models)
+                        self.isShowLoader = false
+                    case .failure(let error):
+                        print(error)
+                    }
                 }
             }
         }
         
         func getJournalViewModel(from: String, to: String) {
-            isShowLoader = true
-            Services.journalService.getUserNotesWithDate(from: from, to: to) { result in
-                switch result {
-                case .success(let models):
-                    self.journalViewModels?.removeAll()
-                    self.journalViewModels = self.mappingViewModel(data: models)
-                    self.isShowLoader = false
-                case .failure(let error):
-                    print(error)
+            if AppState.shared.isLogin ?? false {
+                isShowLoader = true
+                Services.journalService.getUserNotesWithDate(from: from, to: to) { result in
+                    switch result {
+                    case .success(let models):
+                        self.journalViewModels?.removeAll()
+                        self.journalViewModels = self.mappingViewModel(data: models)
+                        self.isShowLoader = false
+                    case .failure(let error):
+                        print(error)
+                    }
                 }
             }
         }
