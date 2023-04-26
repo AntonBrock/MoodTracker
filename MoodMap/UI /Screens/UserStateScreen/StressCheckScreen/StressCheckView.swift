@@ -39,6 +39,7 @@ struct StressCheckView: View {
                     .frame(width: 24, height: 24, alignment: .center)
                     .padding(.leading, 18)
                     .disabled(disabledBackButton)
+                    .opacity(disabledBackButton ? 0.5 : 1)
                     .onTapGesture {
                         withAnimation {
                             presentationMode.wrappedValue.dismiss()

@@ -106,7 +106,9 @@ struct TabBarView: View {
                 }
             }
             .sheet(isPresented: $coordinator.isShowingMoodCheckScreen) {
-                print("dissmiss")
+                print("dissmiss moodCheckScreen ")
+                coordinator.moodCheckCoordinator = nil
+                coordinator.initMoodCheckCoordinator()
             } content: {
                 coordinator.openFeelingScreen()
                     .interactiveDismissDisabled(true)

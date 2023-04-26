@@ -23,11 +23,11 @@ struct WhyRegistrationInfoView: View {
                     .padding(.leading, 18)
                     .onTapGesture {
                         withAnimation {
-                            dismiss()
+                            dismissScreenWithOpenAuthBlock()
                         }
                     }
                 
-                Text("Как себя чувствуешь ?")
+                Text("Зачем нужна учетная запись?")
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(Colors.Primary.blue)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -111,6 +111,7 @@ struct WhyRegistrationInfoView: View {
                             .lineLimit(50)
                     }
                     .padding(.top, 45)
+                    .padding(.bottom, 120)
                 }
                 .padding(.horizontal, 16)
                 

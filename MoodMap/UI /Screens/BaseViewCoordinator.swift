@@ -65,6 +65,13 @@ class BaseViewCoordinator: ObservableObject {
         )
     }
     
+    func initMoodCheckCoordinator() {
+        self.moodCheckCoordinator = .init(
+            parent: self,
+            container: container
+        )
+    }
+    
     func openFeelingScreen() -> some View {
         let coordinator = self.moodCheckCoordinator!
         let feelingView = MoodCheckCoordinatorView(coordinator: coordinator)
