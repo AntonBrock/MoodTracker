@@ -14,6 +14,8 @@ struct MoodCheckView: View {
     
     @ObservedObject var valueModel: SliderValueModele
     @ObservedObject var userStateVideModel: ViewModel
+    
+    let impactLight = UIImpactFeedbackGenerator(style: .light)
         
     @State var value: Double = 20
     
@@ -116,6 +118,15 @@ struct MoodCheckView: View {
                                                             valueModel: valueModel,
                                                             setChoosedEmotion: { choosedEmotion in
                                             self.userStateVideModel.choosedEmotion = choosedEmotion
+                                        }, leftAction: {
+                                            if valueModel.value < 40 {
+                                                valueModel.value = valueModel.value + 10
+                                            }
+                                        }, rightAction: {
+                                            if valueModel.value > 0 {
+                                                valueModel.value = valueModel.value - 10
+                                            }
+                                            
                                         })
                                         .padding(.top, -20)
                                         .id(1)
@@ -125,6 +136,7 @@ struct MoodCheckView: View {
                                 .background(.white)
                                 .onChange(of: valueModel.value) { _ in
                                     withAnimation {
+                                        impactLight.impactOccurred()
                                         proxy.scrollTo(1, anchor: .bottom)
                                     }
                                 }

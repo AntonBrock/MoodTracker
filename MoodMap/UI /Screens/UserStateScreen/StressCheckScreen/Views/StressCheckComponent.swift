@@ -10,7 +10,8 @@ import SwiftUI
 struct StressCheckComponent: View {
     
     var stressViewModel: [StressViewModel] = []
-    
+    let impactLight = UIImpactFeedbackGenerator(style: .light)
+
     struct SliderConfigure {
         static let min: CGFloat = 0
         static let max: CGFloat = 20
@@ -70,6 +71,7 @@ struct StressCheckComponent: View {
                     .zIndex(1)
                     .frame(width: (40 * CGFloat(stressViewModel.count) + 50), height: SliderSize.height, alignment: .leading)
                     .onChange(of: valueModel.value) { newValue in
+                        impactLight.impactOccurred()
                         self.changeImage(for: valueModel.value)
                     }
                 

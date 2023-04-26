@@ -19,6 +19,9 @@ struct MoodsWordChooseView: View {
     
     var setChoosedEmotion: ((String) -> Void)
     
+    var leftAction: (() -> Void)
+    var rightAction: (() -> Void)
+    
     var body: some View {
         VStack {
             Text("Какие эмоции описывают твои чувства лучше всего?")
@@ -55,6 +58,17 @@ struct MoodsWordChooseView: View {
                 }
             }
             .padding(EdgeInsets(top: 8, leading: 16, bottom: 32, trailing: 16))
+            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                .onEnded({ value in
+                    if value.translation.width < 0 {
+                        leftAction()
+                    }
+                    
+                    if value.translation.width > 0 {
+                        rightAction()
+                    }
+                })
+            )
         }
         .onChange(of: selectedMoodId) { newValue in
             setChoosedEmotion(newValue)
