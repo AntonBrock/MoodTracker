@@ -40,7 +40,8 @@ extension MainView {
         
         var firstDayOfWeek: String?
         var lastDayOfWeek: String?
-        var shortDateMonth: String?
+        var shortDateMonthFrom: String?
+        var shortDateMonthTo: String?
         var currentYear: String?
         
         func setupViewer(_ viewer: MainView) {
@@ -51,25 +52,42 @@ extension MainView {
         
         
         func fetchMainData() {
+            let calendar = Calendar.current
+            let date = Date()
             
             let formatter = DateFormatter()
             formatter.dateFormat = "dd"
             let firstDay = Calendar.current.date(byAdding: .day, value: 0, to: Date())
             firstDayOfWeek = formatter.string(from: firstDay!)
            
-            let lastDay = Calendar.current.date(byAdding: .day, value: +1, to: Date())
-            lastDayOfWeek = formatter.string(from: lastDay!)
+            let range = calendar.range(of: .day, in: .month, for: date)!
+            let lastDayOfMonth = range.count
+            
+            if calendar.component(.day, from: date) == lastDayOfMonth {
+                lastDayOfWeek = "01"
+            } else {
+                let lastDay = Calendar.current.date(byAdding: .day, value: +1, to: Date())
+                lastDayOfWeek = formatter.string(from: lastDay!)
+            }
             
             formatter.dateFormat = "MM"
             let shortMonth = Calendar.current.date(byAdding: .month, value: 0, to: Date())
-            shortDateMonth = formatter.string(from: shortMonth!)
+            shortDateMonthFrom = formatter.string(from: shortMonth!)
+            
+            if calendar.component(.day, from: date) == lastDayOfMonth {
+                let shortMonth = Calendar.current.date(byAdding: .month, value: +1, to: Date())
+                shortDateMonthTo = formatter.string(from: shortMonth!)
+            } else {
+                let shortMonth = Calendar.current.date(byAdding: .month, value: 0, to: Date())
+                shortDateMonthTo = formatter.string(from: shortMonth!)
+            }
             
             formatter.dateFormat = "yyyy"
             let year = Calendar.current.date(byAdding: .year, value: 0, to: Date())
             currentYear = formatter.string(from: year!)
             
-            let from = "\(currentYear!)-\(shortDateMonth!)-\(firstDayOfWeek!)"
-            let to = "\(currentYear!)-\(shortDateMonth!)-\(lastDayOfWeek!)"
+            let from = "\(currentYear!)-\(shortDateMonthFrom!)-\(firstDayOfWeek!)"
+            let to = "\(currentYear!)-\(shortDateMonthTo!)-\(lastDayOfWeek!)"
 
             if AppState.shared.isLogin ?? false {
                 isShowLoader = true
