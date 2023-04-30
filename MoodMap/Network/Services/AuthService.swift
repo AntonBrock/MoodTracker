@@ -11,6 +11,9 @@ protocol AuthServiceProtocol {
     func singUp(with gToken: String, completion: @escaping(Result<String, Error>) -> Void)
     func getUserInfo(completion: @escaping(Result<UserInfoModel, Error>) -> Void)
     func refreshToken(completion: @escaping((Result<Bool, Error>) -> Void))
+    func logout(completion: @escaping((Result<Bool, Error>) -> Void))
+    func deleteAccount(completion: @escaping((Result<Bool, Error>) -> Void)) 
+    func setLanguage(completion: @escaping((Result<Bool, Error>) -> Void))
 }
 
 struct AuthService: AuthServiceProtocol {
@@ -107,6 +110,45 @@ struct AuthService: AuthServiceProtocol {
         })
     }
     
+    func logout(completion: @escaping((Result<Bool, Error>) -> Void)) {
+        let target = BaseAPI.auth(.logout)
+        let networkService = ServiceProvider().networkService
+        networkService?.request(.target(target)) { (result) in
+            switch result {
+            case .success:
+                completion(.success(true))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func deleteAccount(completion: @escaping((Result<Bool, Error>) -> Void)) {
+        let target = BaseAPI.auth(.deleteAccount)
+        let networkService = ServiceProvider().networkService
+        networkService?.request(.target(target)) { (result) in
+            switch result {
+            case .success:
+                completion(.success(true))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func setLanguage(completion: @escaping((Result<Bool, Error>) -> Void)) {
+        let target = BaseAPI.auth(.setLanguage)
+        let networkService = ServiceProvider().networkService
+        networkService?.request(.target(target)) { (result) in
+            switch result {
+            case .success:
+                completion(.success(true))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+        
     func refreshToken(completion: @escaping((Result<Bool, Error>) -> Void)) {
         let target = BaseAPI.auth(.refreshToken)
         

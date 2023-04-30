@@ -11,6 +11,8 @@ import BottomSheet
 struct AuthDeleteAccountView: View {
     
     var dismiss: ((Bool) -> Void)
+    var agreeToDeleteAccountAction: (() -> Void)
+    
     @State var bottomSheetPosition: BottomSheetPosition = .dynamicTop
 
     var body: some View {
@@ -46,7 +48,7 @@ struct AuthDeleteAccountView: View {
                 MTButton(buttonStyle: .deleteAction, title: "Удалить мой аккаунт") {
                     bottomSheetPosition = .absolute(0)
                     withAnimation {
-                        dismiss(true)
+                        agreeToDeleteAccountAction()
                     }
                 }
                 .frame(maxWidth: 270, maxHeight: 48)

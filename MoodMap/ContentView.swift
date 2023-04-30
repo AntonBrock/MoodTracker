@@ -35,9 +35,31 @@ struct ContentView: View {
                             coordinator.showDeleteAccountView.toggle()
                         }
                     } else {
-                        coordinator.showDeleteAccountView.toggle()
-                        #warning("Вызвать logout и метод для удаления акка, после обновить экран")
                     }
+                }, agreeToDeleteAccountAction: {
+                    notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
+                    Services.authService.deleteAccount(completion: { result in
+                        switch result {
+                        case .success:
+                            AppState.shared.isLogin = false
+                            AppState.shared.jwtToken = nil
+                            AppState.shared.refreshToken = nil
+                                                            
+                            AppState.shared.notificationCenter.post(name: Notification.Name.MainScreenNotification, object: nil)
+                            AppState.shared.notificationCenter.post(name: Notification.Name.JournalScreenNotification, object: nil)
+                            
+                            notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
+                            
+                            withAnimation {
+                                coordinator.showDeleteAccountView.toggle()
+                            }
+                        case let .failure(error):
+                            print(error)
+                            withAnimation {
+                                coordinator.showDeleteAccountView.toggle()
+                            }
+                        }
+                    })
                 })
                 .zIndex(999999)
             }
@@ -54,32 +76,31 @@ struct ContentView: View {
                     }
                 }, logoutAction: {
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        AppState.shared.isLogin = false
-                        AppState.shared.jwtToken = nil
-                        AppState.shared.refreshToken = nil
-                        
-                        notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
-                        
-                        AppState.shared.notificationCenter.post(name: Notification.Name.MainScreenNotification, object: nil)
-                        AppState.shared.notificationCenter.post(name: Notification.Name.JournalScreenNotification, object: nil)
-                    }
-                 
+                    notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
+                
                     withAnimation {
-                        #warning("TODO: Сделать после того как пройдет запрос на выход и придет ответ от бэка")
-                        print("Logout action + clear all data")
-                        
-                        notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                            coordinator.showLogoutView.toggle()
+                        Services.authService.logout { result in
+                            switch result {
+                            case .success:
+                                AppState.shared.isLogin = false
+                                AppState.shared.jwtToken = nil
+                                AppState.shared.refreshToken = nil
+                                
+                                notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
+                                
+                                AppState.shared.notificationCenter.post(name: Notification.Name.MainScreenNotification, object: nil)
+                                AppState.shared.notificationCenter.post(name: Notification.Name.JournalScreenNotification, object: nil)
+                                
+                                coordinator.showLogoutView.toggle()
+                            case let .failure(error):
+                                print(error)
+                            }
                         }
                     }
                 }, deleteAction: {
                     withAnimation {
                         coordinator.showLogoutView.toggle()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                            coordinator.showDeleteAccountView.toggle()
-                        }
+                        coordinator.showDeleteAccountView.toggle()
                     }
                 })
                 .zIndex(999999)

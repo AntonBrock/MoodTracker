@@ -21,6 +21,17 @@ extension PersonalCabinetView {
                 case .success(let jwtToken):
                     AppState.shared.jwtToken = jwtToken
                     AppState.shared.isLogin = true
+                    self?.setLanguage()
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
+        func setLanguage() {
+            Services.authService.setLanguage { [weak self] result in
+                switch result {
+                case .success:
                     self?.getUserInfo()
                 case .failure(let error):
                     print(error)
@@ -34,7 +45,7 @@ extension PersonalCabinetView {
                 case .success(let jwtToken):
                     AppState.shared.jwtToken = jwtToken
                     AppState.shared.isLogin = true
-                    self?.getUserInfo()
+                    self?.setLanguage()
                 case .failure(let error):
                     print(error)
                 }
