@@ -34,7 +34,7 @@ struct SharingView: View {
                 HStack {
                     if InstagramSharingUtils.canOpenInstagramStories {
                         Button {
-                            InstagramSharingUtils.shareToInstagramStories(sharingView().asUIImage())
+                            InstagramSharingUtils.shareToInstagramStories(moodView().asUIImage())
                             actionDismiss()
                         } label: {
                             HStack {
