@@ -14,6 +14,12 @@ extension PersonalCabinetView {
         @Published var userInfoModel: UserInfoModel?
         
         let notificationCenter = NotificationCenter.default
+        
+        init() {
+            if AppState.shared.isLogin ?? false {
+                getUserInfo()
+            }
+        }
 
         func singUp(with GToken: String) {
             Services.authService.singUp(with: GToken) { [weak self] result in
