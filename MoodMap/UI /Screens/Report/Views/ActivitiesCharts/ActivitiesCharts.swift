@@ -122,14 +122,14 @@ struct ActivitiesCharts: View {
 
         LazyVGrid(columns: flexibleLayout) {
             if !viewModel.activities.isEmpty {
-                ForEach(0..<viewModel.activities.count) { index in
+                ForEach (viewModel.activities, id: \.id) { item in
                     VStack {
                         ZStack {
                             Circle()
                                 .frame(width: 24, height: 24)
                                 .foregroundColor(Colors.Secondary.shamrock600Green)
                                 .overlay {
-                                    Text("\(viewModel.activities[index].count <= 10 ? "\(viewModel.activities[index].count)" : "10+")")
+                                    Text("\(item.count <= 10 ? "\(item.count)" : "10+")")
                                         .font(.system(size: 12, weight: .bold))
                                         .foregroundColor(.white)
                                 }
@@ -141,7 +141,7 @@ struct ActivitiesCharts: View {
                                 .fill(Color.white)
                                 .frame(width: 50, height: 50)
                                 .overlay {
-                                    Image(viewModel.activities[index].image)
+                                    Image(item.image)
                                         .resizable()
                                         .frame(width: 30, height: 30)
                                     
@@ -167,14 +167,14 @@ struct ActivitiesCharts: View {
         LazyVGrid(columns: flexibleLayout) {
             
             if !viewModel.activities.isEmpty {
-                ForEach(0..<viewModel.activities.count) { index in
+                ForEach (viewModel.activities, id: \.id) { item in
                     VStack {
                         ZStack {
                             Circle()
                                 .frame(width: 24, height: 24)
                                 .foregroundColor(Colors.Secondary.malibu600Blue)
                                 .overlay {
-                                    Text("\(viewModel.activities[index].count <= 10 ? "\(viewModel.activities[index].count)": "10+")")
+                                    Text("\(item.count <= 10 ? "\(item.count)": "10+")")
                                         .font(.system(size: 12, weight: .bold))
                                         .foregroundColor(.white)
                                 }
@@ -186,7 +186,7 @@ struct ActivitiesCharts: View {
                                 .fill(Color.white)
                                 .frame(width: 50, height: 50)
                                 .overlay {
-                                    Image(viewModel.activities[index].image)
+                                    Image(item.image)
                                         .resizable()
                                         .frame(width: 30, height: 30)
                                     

@@ -640,7 +640,8 @@ struct GoodActivitiesReportDataViewModel {
     let activities: [GoodActivitiesReportDataActivitiesViewModel]
     var dataIsEmpty: Bool
     
-    struct GoodActivitiesReportDataActivitiesViewModel {
+    struct GoodActivitiesReportDataActivitiesViewModel: Identifiable {
+        let id = UUID().uuidString
         let image: String
         let count: Int
     }
@@ -651,7 +652,8 @@ struct BadActivitiesReportDataViewModel {
     let activities: [BadActivitiesReportDataActivitiesViewModel]
     var dataIsEmpty: Bool
     
-    struct BadActivitiesReportDataActivitiesViewModel {
+    struct BadActivitiesReportDataActivitiesViewModel: Identifiable {
+        let id = UUID().uuidString
         let image: String
         let count: Int
     }
