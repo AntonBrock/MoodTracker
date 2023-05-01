@@ -55,11 +55,15 @@ extension ReportScreen {
         @Published var isStressCurrentTab: Bool = false
         
         @Published var showLoader: Bool = false
-                
-        func setup() {
-            getDates()
+        
+        @Published var firstStartFromDateString: String?
+        @Published var firstStartToDateString: String?
+
+        
+        init() {
+            setup()
         }
-      
+        
         var selectedTypeOfReport: Int = 0 {
             didSet {
                 emotionCountData = EmotionCountDataViewModel(
@@ -108,9 +112,10 @@ extension ReportScreen {
         var shortDateMonthForTo: String?
         var currentShortMonthForFrom: String?
         var currentShortMonthForTo: String?
-        
-        init() {}
-        
+                
+        func setup() {
+            getDates()
+        }
         func getDates() {
             
             let formatter = DateFormatter()
@@ -124,12 +129,10 @@ extension ReportScreen {
             let toDateString = formatter.string(from: toDate)
             
             setTextInformationDate(fromDate, toDate)
-            fetchReport(
-                from: fromDateString,
-                to: toDateString,
-                type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood
-            )
-
+            
+            self.firstStartFromDateString = fromDateString
+            self.firstStartToDateString = toDateString
+            
 //            let isDayInMonthAgoForTheFirstDay = isDayInMonthAgo(day: Int(firstDayOfWeek ?? "") ?? 0)
 //
 //            if isDayInMonthAgoForTheFirstDay {
@@ -145,6 +148,16 @@ extension ReportScreen {
 //                                                       to: Date())
 //                shortDateMonthForFrom = formatter.string(from: shortMonth!)
 //            }
+        }
+        
+        func fetchStartData() {
+            fetchReport(
+                from: firstStartFromDateString ?? "",
+                to: firstStartToDateString ?? "",
+                type: ReportEndPoint.TypeOfReport.init(
+                    rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]
+                ) ?? .mood
+            )
         }
         
         private func setTextInformationDate(_ fromDate: Date, _ toDate: Date) {

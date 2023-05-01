@@ -38,8 +38,6 @@ struct ReportScreen: View {
     ){
         self.coordinator = coordinator
         self.viewModel = coordinator.viewModel
-        
-        self.viewModel.setup()
     }
     
     var body: some View {
@@ -204,6 +202,9 @@ struct ReportScreen: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .onAppear {
+            viewModel.fetchStartData()
         }
         .onChange(of: viewModel.showLoader, perform: { newValue in
             withAnimation(.linear(duration: 0.5)) {
