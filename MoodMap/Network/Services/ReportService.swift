@@ -79,7 +79,9 @@ struct ReportService: ReportServiceProtocol {
         networkService?.request(.target(target), completion: { response in
             switch response {
             case let .success(result):
-                guard let model = try? decoder.decode([ReportCurrentDateModel].self, from: result.data) else { return }
+                guard let model = try? decoder.decode([ReportCurrentDateModel].self, from: result.data) else {
+                    return
+                }
                 complection(.success(model))
             case let .failure(error):
                 complection(.failure(error))

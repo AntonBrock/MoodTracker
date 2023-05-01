@@ -381,11 +381,11 @@ extension ReportScreen {
             )
         }
         
-        func fetchCurrentDate(date: Date,
-                              completion: @escaping ([ReportCurrentViewModel]) -> Void
-        ) {
+        func fetchCurrentDate(
+            date: Date,
+            completion: @escaping ([ReportCurrentViewModel]) -> Void) {
+            
             showLoader = true
-
             Services.reportService.fetchCurrentDate(date: date) { result in
                 switch result {
                 case .success(let models):
