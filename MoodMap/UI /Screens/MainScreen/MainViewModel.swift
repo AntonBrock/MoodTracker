@@ -96,26 +96,8 @@ extension MainView {
                 fetchReport(from: from, to: to,
                             type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood)
             } else {
-                emotionCountData = EmotionCountDataViewModel(
-                    total: 0,
-                    common: "",
-                    text: [],
-                    color: [],
-                    countState: [],
-                    emotionCircleViewModel: [],
-                    dataIsEmpty: true
-                )
-                
-                timeData = TimeDataViewModel(
-                    bestTime: "",
-                    worstTime: "",
-                    dayParts: "",
-                    dataIsEmpty: true
-                )
-                
-                journalViewModels = []
+                clearData()
             }
-           
         }
         
         func getJournalViewModel(from: String, to: String) {
@@ -148,6 +130,11 @@ extension MainView {
             Services.reportService.fetchReport(from: from, to: to, type: type) { result in
                 switch result {
                 case .success(let model):
+                    guard let model = model else {
+                        self.clearData()
+                        self.isShowLoader = false
+                        return
+                    }
                     self.emotionCountData = self.mappingEmotionCountData(data: model)
                     self.timeData = self.mappingTimeData(data: model)
                     self.isShowLoader = false
@@ -155,6 +142,27 @@ extension MainView {
                     print(error)
                 }
             }
+        }
+        
+        private func clearData() {
+            emotionCountData = EmotionCountDataViewModel(
+                total: 0,
+                common: "",
+                text: [],
+                color: [],
+                countState: [],
+                emotionCircleViewModel: [],
+                dataIsEmpty: true
+            )
+            
+            timeData = TimeDataViewModel(
+                bestTime: "",
+                worstTime: "",
+                dayParts: "",
+                dataIsEmpty: true
+            )
+            
+            journalViewModels = []
         }
         
         private func mappingViewModel(data: [JournalModel]) -> [[JournalViewModel]] {

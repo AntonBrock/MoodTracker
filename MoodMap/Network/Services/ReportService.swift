@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ReportServiceProtocol {
-    func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport, completion: @escaping(Result<ReportModel, Error>) -> Void)
+    func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport, completion: @escaping(Result<ReportModel?, Error>) -> Void)
     func fetchCurrentDate(date: Date, complection: @escaping(Result<[ReportCurrentDateModel], Error>) -> Void)
 }
 
@@ -46,7 +46,7 @@ struct ReportService: ReportServiceProtocol {
         from: String,
         to: String,
         type: ReportEndPoint.TypeOfReport,
-        completion: @escaping(Result<ReportModel, Error>) -> Void
+        completion: @escaping(Result<ReportModel?, Error>) -> Void
     ) {
         let target = BaseAPI.report(.getReport(from: from, to: to, type: type))
 
@@ -55,7 +55,8 @@ struct ReportService: ReportServiceProtocol {
             switch response {
             case let .success(result):
                 guard let model = try? decoder.decode(ReportModel.self, from: result.data) else {
-                    return 
+                    completion(.success(nil))
+                    return
                 }
                 completion(.success(model))
             case let .failure(error):

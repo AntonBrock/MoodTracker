@@ -393,6 +393,11 @@ extension ReportScreen {
                 Services.reportService.fetchReport(from: from, to: to, type: type) { result in
                     switch result {
                     case .success(let model):
+                        guard let model = model else {
+                            self.clearData()
+                            self.showLoader = false
+                            return
+                        }
                         self.reportViewModel = self.mappingViewModel(data: model)
                         self.showLoader = false
                     case .failure(let error):
