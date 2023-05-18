@@ -43,8 +43,8 @@ enum AuthEnpPoint: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .singUp, .singUpWithAppleId, .logout, .setLanguage: return .post
-        case .getUserInfo, .refreshToken: return .get
+        case .singUp, .singUpWithAppleId, .logout, .setLanguage, .refreshToken: return .post
+        case .getUserInfo: return .get
         case .deleteAccount: return .delete
         case .updateTimezone: return .put
         }
@@ -77,24 +77,23 @@ enum AuthEnpPoint: TargetType {
         case .updateTimezone: return .requestParameters(parameters: ["timezone": AppState.shared.timezone ?? ""],
                                                          encoding: JSONEncoding.default)
         case .refreshToken:
-            return .requestParameters(parameters: ["refresh_token": AppState.shared.jwtToken ?? ""],
+            return .requestParameters(parameters: ["refresh_token": AppState.shared.refreshToken ?? ""],
                                       encoding: JSONEncoding.default)
         }
     }
     
     var headers: [String: String]? {
         switch self {
-        case .singUp, .singUpWithAppleId: return nil
+        case .singUp, .singUpWithAppleId, .refreshToken: return nil
         case .getUserInfo, .logout, .deleteAccount, .setLanguage, .updateTimezone: return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
-        case .refreshToken: return ["Authorization": "Bearer \(AppState.shared.refreshToken ?? "")" ]
         }
     }
     
     var authorizationType: AuthorizationType? {
         switch self {
-        case .singUp, .singUpWithAppleId:
+        case .singUp, .singUpWithAppleId, .refreshToken:
             return nil
-        case .getUserInfo, .refreshToken, .logout, .deleteAccount, .setLanguage, .updateTimezone:
+        case .getUserInfo, .logout, .deleteAccount, .setLanguage, .updateTimezone:
             return .bearer
         }
     }

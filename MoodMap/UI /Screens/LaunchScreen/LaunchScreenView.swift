@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import JWTDecode
 
 struct LaunchScreenView: View {
     
@@ -97,7 +98,7 @@ struct LaunchScreenView: View {
                         // тут делаем запрос на данные для Главного экрана потом и вырубаем либо при показе АТТ, Пушах, Главной
                         if AppState.shared.isLogin ?? false {
                             getUserInfo {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                     withAnimation(.spring()) {
                                         animatedIsFinished = true
                                         isLoadingMainInfo = true
@@ -105,7 +106,7 @@ struct LaunchScreenView: View {
                                 }
                             }
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                 withAnimation(.spring()) {
                                     animatedIsFinished = true
                                     isLoadingMainInfo = true
@@ -130,13 +131,53 @@ struct LaunchScreenView: View {
     }
     
     func getUserInfo(completion: @escaping (() -> Void)) {
-        Services.authService.getUserInfo() { result in
-            switch result {
-            case .success:
-                completion()
-            case .failure(let error):
-                print(error)
+        if !checkJWTIsValid() {
+            Services.authService.refreshToken { result in
+                switch result {
+                case .success:
+                    completion()
+                case .failure(let error):
+                    print(error)
+                }
             }
+        } else {
+            Services.authService.getUserInfo() { result in
+                switch result {
+                case .success:
+                    completion()
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
+    }
+    
+    private func checkJWTIsValid() -> Bool {
+        guard let token = AppState.shared.jwtToken else { return false }
+        
+        do {
+            let jwt = try decode(jwt: token)
+            
+            // Check expiration
+            if let expiresAt = jwt.expiresAt {
+                let currentDate = Date()
+                
+                if currentDate > expiresAt {
+                    print("Token is expired")
+                    return false
+                } else {
+                    print("Token is valid")
+                    return true
+                }
+            } else {
+                print("Token does not have an expiration claim")
+                return false
+            }
+            
+        } catch {
+            print("Failed to decode JWT token: \(error)")
+            return false
         }
     }
     

@@ -172,6 +172,7 @@
 		45B39F9429E5406500852E70 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9329E5406500852E70 /* Launch Screen.storyboard */; };
 		45B39FA229E554B100852E70 /* LoaderLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39FA129E554B100852E70 /* LoaderLottieView.swift */; };
 		45C200C129D317F80087B0E3 /* String+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C200C029D317F80087B0E3 /* String+Extenstion.swift */; };
+		45D06AF22A1608CB0047D6FA /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 45D06AF12A1608CB0047D6FA /* JWTDecode */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
 		45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16B29B6579B007EABFA /* UserStateViewModel.swift */; };
 		45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F16D29B6586E007EABFA /* UserStateInfoModel.swift */; };
@@ -358,6 +359,7 @@
 			files = (
 				4529AA7929AF1519001D2390 /* Moya in Frameworks */,
 				4529AA7729AF1519001D2390 /* WrappingStack in Frameworks */,
+				45D06AF22A1608CB0047D6FA /* JWTDecode in Frameworks */,
 				4529AA8729AF151A001D2390 /* SwiftPieChart in Frameworks */,
 				4529AA8329AF1519001D2390 /* BottomSheet in Frameworks */,
 				4529AA7F29AF1519001D2390 /* SwiftUIDatePickerDialog in Frameworks */,
@@ -1023,6 +1025,7 @@
 				4529AA8A29AF151A001D2390 /* GoogleSignInSwift */,
 				45EC871729E407440018AE91 /* YandexMobileAdsPackage */,
 				45B39F8C29E52D6B00852E70 /* Lottie */,
+				45D06AF12A1608CB0047D6FA /* JWTDecode */,
 			);
 			productName = MoodMap;
 			productReference = 4529AA6629AF1470001D2390 /* MoodMap.app */;
@@ -1064,6 +1067,7 @@
 				457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				45EC871629E407440018AE91 /* XCRemoteSwiftPackageReference "yandex-ads-sdk-swift" */,
 				45B39F8B29E52D6A00852E70 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				45D06AF02A1608CB0047D6FA /* XCRemoteSwiftPackageReference "JWTDecode" */,
 			);
 			productRefGroup = 4539308728C88EC000A5D828 /* Products */;
 			projectDirPath = "";
@@ -1546,6 +1550,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		45D06AF02A1608CB0047D6FA /* XCRemoteSwiftPackageReference "JWTDecode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		45E750452920BC2D00CF9E21 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -1614,6 +1626,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 45B39F8B29E52D6A00852E70 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		45D06AF12A1608CB0047D6FA /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45D06AF02A1608CB0047D6FA /* XCRemoteSwiftPackageReference "JWTDecode" */;
+			productName = JWTDecode;
 		};
 		45EC871729E407440018AE91 /* YandexMobileAdsPackage */ = {
 			isa = XCSwiftPackageProductDependency;

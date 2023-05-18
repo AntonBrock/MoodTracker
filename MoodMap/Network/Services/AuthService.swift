@@ -177,14 +177,11 @@ struct AuthService: AuthServiceProtocol {
                 #warning("TODO: Пока что не знаю что тут будет")
                 if let refreshToken = json["refresh_token"] as? String,
                    let jwtToken = json["access_token"] as? String {
+                    
                     AppState.shared.refreshToken = refreshToken
                     AppState.shared.jwtToken = jwtToken
                     completion(.success(true))
                 }
-//                else {
-//                    completion(.failure(CBError.undefined))
-//                }
-                
             case let .failure(error):
                 completion(.failure(error))
             }
