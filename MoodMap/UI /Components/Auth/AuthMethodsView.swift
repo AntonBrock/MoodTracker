@@ -56,13 +56,18 @@ struct AuthMethodsView: View {
                             .foregroundColor(.white)
                     }
                     .frame(width: 279, height: 48, alignment: .center)
-                    .background(.black)
-                    .padding(.horizontal, 16)
-                    .padding(.top, 14)
-                    .padding(.bottom, 10)
+                    .background(
+                        RoundedRectangle(
+                            cornerRadius: 8,
+                            style: .continuous
+                        )
+                        .fill(Color.black)
+                    )
                 }
-                .cornerRadius(16)
-                
+                .padding(.horizontal, 16)
+                .padding(.top, 14)
+                .padding(.bottom, 10)
+               
                 SignInWithAppleButton(.continue) { request in
                     
                         notificationCenter.post(name: Notification.Name("DisabledTabBarNavigation"), object: nil)
