@@ -85,7 +85,7 @@ extension JournalView {
             
             let sortedModels = models.sorted(by: { $0.longTime > $1.longTime })
             let modelGroups = Array(Dictionary(grouping: sortedModels){ $0.monthTime }.values)
-            let sortedGroupsModel = modelGroups.sorted(by: { $0[0].month < $1[0].month })
+            let sortedGroupsModel = modelGroups.sorted(by: { $0[0].monthTime > $1[0].monthTime })
             
             return sortedGroupsModel
         }

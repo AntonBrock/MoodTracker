@@ -72,6 +72,7 @@ struct EmotionBoardView: View {
 //                            }
                     }
                 }
+                .frame(maxHeight: .infinity, alignment: .top)
                 
                 Divider()
             }
