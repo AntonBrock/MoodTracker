@@ -86,6 +86,13 @@ struct LaunchScreenView: View {
                                     }
                                 }
                             }
+                        } else {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                withAnimation(.spring()) {
+                                    animatedIsFinished = true
+                                    isLoadingMainInfo = true
+                                }
+                            }
                         }
                     }
             }
