@@ -126,7 +126,39 @@ struct PersonalCabinetView: View {
                 }
                 .padding(.bottom, 24)
                 .sheet(isPresented: $showThatTelegramNotInstallView) {
-                    Text("Напишите нам на почту info@mapmood.com и мы вам ответим!")
+                    VStack {
+                        Image("support_icon")
+                            .resizable()
+                            .frame(width: 200, height: 200, alignment: .center)
+                        
+                        Text("Поддержка рядом")
+                            .font(.system(size: 26, weight: .semibold))
+                            .foregroundColor(Colors.Primary.blue)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding(.top, 49)
+                            .padding(.bottom, 5)
+                        
+                        Text("Напишите нам на почту")
+                            .font(.system(size: 16, weight: .regular))
+                            .foregroundColor(Colors.Primary.blue)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        
+                        Text("info@moodmap.com")
+                            .font(.system(size: 16, weight: .regular))
+                            .foregroundColor(Colors.Primary.lavender500Purple)
+                            .frame(maxWidth: .infinity, alignment: .center)
+
+                        Spacer()
+                        
+                        MTButton(buttonStyle: .outline, title: "Назад") {
+                            showThatTelegramNotInstallView.toggle()
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: 48, alignment: .center)
+                        .padding(.horizontal, 24)
+                        
+                    }
+                    .padding(.top, 85)
+                    .padding(.bottom, 48)
                 }
             }
         }
@@ -199,76 +231,76 @@ struct PersonalCabinetView: View {
         .shadow(color: Colors.TextColors.mystic400, radius: 10, x: 0, y: 0)
     }
     
-    @ViewBuilder
-    private func createAnalyticView() -> some View {
-        HStack(spacing: 16) {
-            VStack(spacing: 14) {
-                Image("emoji_happy")
-                    .resizable()
-                    .frame(width: 38, height: 38)
-                
-                ZStack {
-                    Text("9999")
-                        .foregroundColor(.white)
-                        .font(.system(size: 16))
-                }
-                .frame(width: 86, height: 32)
-                .background(Colors.Primary.lavender500Purple)
-                .cornerRadius(32 / 2)
-                
-                Text("Положительных\nэмоций")
-                    .font(.system(size: 12))
-                    .multilineTextAlignment(.center)
-            }
-            .frame(width: 100)
-            
-            VStack(spacing: 14) {
-                
-                Image("emoji_sad")
-                    .resizable()
-                    .frame(width: 38, height: 38)
-                
-                ZStack {
-                    Text("9999")
-                        .foregroundColor(.white)
-                        .font(.system(size: 16))
-                }
-                .frame(width: 86, height: 32)
-                .background(Colors.Primary.lavender500Purple)
-                .cornerRadius(32 / 2)
-                
-                Text("Отрицательных\nэмоций")
-                    .font(.system(size: 12))
-                    .multilineTextAlignment(.center)
-            }
-            .frame(width: 100)
-
-            VStack(spacing: 14) {
-                Image("emoji_cool")
-                    .resizable()
-                    .frame(width: 38, height: 38)
-                
-                ZStack {
-                    Text("9999")
-                        .foregroundColor(.white)
-                        .font(.system(size: 16))
-                }
-                .frame(width: 86, height: 32)
-                .background(Colors.Primary.lavender500Purple)
-                .cornerRadius(32 / 2)
-                
-                Text("Всего дней\n")
-                    .font(.system(size: 12))
-                    .multilineTextAlignment(.center)
-            }
-            .frame(width: 100)
-
-        }
-        .frame(width: UIScreen.main.bounds.width, height: 128)
-        .padding(.top, 24)
-        .background(.white)
-        
-    }
+//    @ViewBuilder
+//    private func createAnalyticView() -> some View {
+//        HStack(spacing: 16) {
+//            VStack(spacing: 14) {
+//                Image("emoji_happy")
+//                    .resizable()
+//                    .frame(width: 38, height: 38)
+//
+//                ZStack {
+//                    Text("9999")
+//                        .foregroundColor(.white)
+//                        .font(.system(size: 16))
+//                }
+//                .frame(width: 86, height: 32)
+//                .background(Colors.Primary.lavender500Purple)
+//                .cornerRadius(32 / 2)
+//
+//                Text("Положительных\nэмоций")
+//                    .font(.system(size: 12))
+//                    .multilineTextAlignment(.center)
+//            }
+//            .frame(width: 100)
+//
+//            VStack(spacing: 14) {
+//
+//                Image("emoji_sad")
+//                    .resizable()
+//                    .frame(width: 38, height: 38)
+//
+//                ZStack {
+//                    Text("9999")
+//                        .foregroundColor(.white)
+//                        .font(.system(size: 16))
+//                }
+//                .frame(width: 86, height: 32)
+//                .background(Colors.Primary.lavender500Purple)
+//                .cornerRadius(32 / 2)
+//
+//                Text("Отрицательных\nэмоций")
+//                    .font(.system(size: 12))
+//                    .multilineTextAlignment(.center)
+//            }
+//            .frame(width: 100)
+//
+//            VStack(spacing: 14) {
+//                Image("emoji_cool")
+//                    .resizable()
+//                    .frame(width: 38, height: 38)
+//
+//                ZStack {
+//                    Text("9999")
+//                        .foregroundColor(.white)
+//                        .font(.system(size: 16))
+//                }
+//                .frame(width: 86, height: 32)
+//                .background(Colors.Primary.lavender500Purple)
+//                .cornerRadius(32 / 2)
+//
+//                Text("Всего дней\n")
+//                    .font(.system(size: 12))
+//                    .multilineTextAlignment(.center)
+//            }
+//            .frame(width: 100)
+//
+//        }
+//        .frame(width: UIScreen.main.bounds.width, height: 128)
+//        .padding(.top, 24)
+//        .background(.white)
+//
+//    }
     
     @ViewBuilder
     private func createArrowBlock(_ title: String) -> some View {
