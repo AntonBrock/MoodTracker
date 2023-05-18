@@ -164,7 +164,7 @@ struct MainView: View {
                 .padding(.leading, 20)
                 .padding(.top, 10)
             
-            VStack {
+            VStack(spacing: 5) {
                 Text("Как ты себя чувствуешь?")
                     .multilineTextAlignment(.center)
                     .foregroundColor(Colors.Primary.blue)
@@ -175,7 +175,6 @@ struct MainView: View {
                     .foregroundColor(Colors.Primary.lavender500Purple)
                     .font(.system(size: 11, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 5)
             }
         }
         .frame(maxWidth: .infinity, minHeight: 90)
