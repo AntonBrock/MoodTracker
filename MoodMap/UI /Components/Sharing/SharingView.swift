@@ -34,7 +34,7 @@ struct SharingView: View {
                 HStack {
                     if InstagramSharingUtils.canOpenInstagramStories {
                         Button {
-                            InstagramSharingUtils.shareToInstagramStories(moodView().asUIImage())
+                            InstagramSharingUtils.shareToInstagramStories(moodView(hideCorner: true).asUIImage())
                             actionDismiss()
                         } label: {
                             HStack {
@@ -71,7 +71,7 @@ struct SharingView: View {
                             if status == .denied {
                                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString + Bundle.main.bundleIdentifier!)!)
                             } else {
-                                UIImageWriteToSavedPhotosAlbum(moodView().asUIImage(), nil, nil, nil)
+                                UIImageWriteToSavedPhotosAlbum(moodView(hideCorner: true).asUIImage(), nil, nil, nil)
                                 
                                 withAnimation {
                                     showFullSuccessTitle.toggle()
@@ -98,7 +98,7 @@ struct SharingView: View {
                             if status == .denied {
                                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString + Bundle.main.bundleIdentifier!)!)
                             } else {
-                                UIImageWriteToSavedPhotosAlbum(moodView().asUIImage(), nil, nil, nil)
+                                UIImageWriteToSavedPhotosAlbum(moodView(hideCorner: true).asUIImage(), nil, nil, nil)
                                 titleButton = "Изображение сохранено!"
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -211,13 +211,13 @@ struct SharingView: View {
                 .foregroundColor(Colors.Primary.blue)
                 .padding(.top, 24)
             
-            moodView()
+            moodView(hideCorner: false)
             .padding(.top, 24)
         }
     }
     
     @ViewBuilder
-    private func moodView() -> some View {
+    private func moodView(hideCorner: Bool) -> some View {
         VStack {
             Text("Я чувствую себя")
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -252,6 +252,6 @@ struct SharingView: View {
         }
         .frame(width: 200, height: 200)
         .background(LinearGradient(colors: [viewModel?.color[0] ?? .white, viewModel?.color[1] ?? .red], startPoint: .topLeading, endPoint: .bottomTrailing))
-        .cornerRadius(16)
+        .cornerRadius(hideCorner ? 0 : 16)
     }
 }
