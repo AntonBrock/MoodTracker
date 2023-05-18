@@ -171,7 +171,7 @@ struct MainView: View {
                     .font(.system(size: 16, weight: .regular))
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                Text("Поделись тем, что может тебя беспокоить прямо сейчас")
+                Text("Поделись тем, что тебя беспокоит прямо сейчас")
                     .foregroundColor(Colors.Primary.lavender500Purple)
                     .font(.system(size: 11, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)
