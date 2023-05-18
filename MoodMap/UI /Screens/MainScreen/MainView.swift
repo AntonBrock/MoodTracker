@@ -171,10 +171,11 @@ struct MainView: View {
                     .font(.system(size: 16, weight: .regular))
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                Text("Тебя беспокоит что-то? Можешь поделиться?")
+                Text("Поделись тем, что может тебя беспокоить прямо сейчас")
                     .foregroundColor(Colors.Primary.lavender500Purple)
                     .font(.system(size: 11, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 5)
             }
         }
         .frame(maxWidth: .infinity, minHeight: 90)
