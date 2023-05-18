@@ -14,6 +14,7 @@ protocol AuthServiceProtocol {
     func logout(completion: @escaping((Result<Bool, Error>) -> Void))
     func deleteAccount(completion: @escaping((Result<Bool, Error>) -> Void)) 
     func setLanguage(completion: @escaping((Result<Bool, Error>) -> Void))
+    func updateTimezone(completion: @escaping((Result<Bool, Error>) -> Void))
 }
 
 struct AuthService: AuthServiceProtocol {
@@ -148,6 +149,20 @@ struct AuthService: AuthServiceProtocol {
             }
         }
     }
+    
+    func updateTimezone(completion: @escaping((Result<Bool, Error>) -> Void)) {
+        let target = BaseAPI.auth(.updateTimezone)
+        let networkService = ServiceProvider().networkService
+        networkService?.request(.target(target)) { (result) in
+            switch result {
+            case .success:
+                completion(.success(true))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
         
     func refreshToken(completion: @escaping((Result<Bool, Error>) -> Void)) {
         let target = BaseAPI.auth(.refreshToken)

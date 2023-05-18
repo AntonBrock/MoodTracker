@@ -15,6 +15,7 @@ enum AuthEnpPoint: TargetType {
     case logout
     case deleteAccount
     case setLanguage
+    case updateTimezone
     
     case getUserInfo
     case refreshToken
@@ -23,7 +24,7 @@ enum AuthEnpPoint: TargetType {
         switch self {
         case .singUp, .refreshToken, .singUpWithAppleId, .logout:
             return URL(string: "https://api.mapmood.com/auth")!
-        case .getUserInfo, .deleteAccount, .setLanguage:
+        case .getUserInfo, .deleteAccount, .setLanguage, .updateTimezone:
             return URL(string: "https://api.mapmood.com/v1/users")!
         }
     }
@@ -35,6 +36,7 @@ enum AuthEnpPoint: TargetType {
         case .singUp: return "/oauth/google"
         case .singUpWithAppleId: return "/oauth/apple"
         case .getUserInfo, .deleteAccount: return "/me"
+        case .updateTimezone: return "me/settings/timezone"
         case .setLanguage: return "/me/settings"
         }
     }
@@ -44,6 +46,7 @@ enum AuthEnpPoint: TargetType {
         case .singUp, .singUpWithAppleId, .logout, .setLanguage: return .post
         case .getUserInfo, .refreshToken: return .get
         case .deleteAccount: return .delete
+        case .updateTimezone: return .put
         }
     }
     
@@ -54,7 +57,10 @@ enum AuthEnpPoint: TargetType {
     var task: Task {
         switch self {
         case .setLanguage:
-            return .requestParameters(parameters: ["notifications": false, "language": "ru"], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: [
+                "timezone": AppState.shared.timezone ?? "",
+                "notifications": false,
+                "language": "ru"], encoding: JSONEncoding.default)
         case .logout:
             return .requestParameters(parameters: ["access_token": AppState.shared.jwtToken ?? "",
                                                    "refresh_token": AppState.shared.refreshToken ?? ""],
@@ -68,6 +74,8 @@ enum AuthEnpPoint: TargetType {
                 parameters: ["id_token": AppleIDToken],
                 encoding: JSONEncoding.default)
         case .getUserInfo, .deleteAccount: return .requestPlain
+        case .updateTimezone: return .requestParameters(parameters: ["timezone": AppState.shared.timezone ?? ""],
+                                                         encoding: JSONEncoding.default)
         case .refreshToken:
             return .requestParameters(parameters: ["refresh_token": AppState.shared.jwtToken ?? ""],
                                       encoding: JSONEncoding.default)
@@ -77,7 +85,7 @@ enum AuthEnpPoint: TargetType {
     var headers: [String: String]? {
         switch self {
         case .singUp, .singUpWithAppleId: return nil
-        case .getUserInfo, .logout, .deleteAccount, .setLanguage: return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
+        case .getUserInfo, .logout, .deleteAccount, .setLanguage, .updateTimezone: return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
         case .refreshToken: return ["Authorization": "Bearer \(AppState.shared.refreshToken ?? "")" ]
         }
     }
@@ -86,7 +94,7 @@ enum AuthEnpPoint: TargetType {
         switch self {
         case .singUp, .singUpWithAppleId:
             return nil
-        case .getUserInfo, .refreshToken, .logout, .deleteAccount, .setLanguage:
+        case .getUserInfo, .refreshToken, .logout, .deleteAccount, .setLanguage, .updateTimezone:
             return .bearer
         }
     }

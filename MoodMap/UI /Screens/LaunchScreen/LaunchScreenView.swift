@@ -76,6 +76,24 @@ struct LaunchScreenView: View {
                 LottieView(name: "SplashScreen", loopMode: .loop)
                     .onAppear {
                         
+                        let timeZone = TimeZone.current
+                        let timeZoneIdentifier = timeZone.identifier
+                        
+                        if AppState.shared.timezone != nil && timeZoneIdentifier != AppState.shared.timezone {
+                            AppState.shared.timezone = timeZoneIdentifier
+                            // запрос на обновление зоны
+                            Services.authService.updateTimezone { result in
+                                switch result {
+                                case .success:
+                                    print("Success updated timezone")
+                                case .failure(let error):
+                                    print(error)
+                                }
+                            }
+                        } else if AppState.shared.timezone == nil {
+                            AppState.shared.timezone = timeZoneIdentifier
+                        }
+                        
                         // тут делаем запрос на данные для Главного экрана потом и вырубаем либо при показе АТТ, Пушах, Главной
                         if AppState.shared.isLogin ?? false {
                             getUserInfo {

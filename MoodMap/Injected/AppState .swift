@@ -27,6 +27,16 @@ final class AppState: ObservableObject {
         static let rememberPushNotificationDate = "rememberPushNotificationDate"
         static let isShowATT = "isShowATT"
         static let isNotShowSharingScreen = "isNotShowSharingScreen"
+        static let timeZone = "timeZone"
+    }
+    
+    var timezone: String? {
+        get {
+            return UserDefaults.standard.object(forKey: UserDefaultsKeys.timeZone) as? String
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.timeZone)
+        }
     }
     
     var rememberPushNotificationDate: Date? {
