@@ -75,11 +75,16 @@ struct LaunchScreenView: View {
                 
                 LottieView(name: "SplashScreen", loopMode: .loop)
                     .onAppear {
+                        
                         // тут делаем запрос на данные для Главного экрана потом и вырубаем либо при показе АТТ, Пушах, Главной
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            withAnimation(.spring()) {
-                                animatedIsFinished = true
-                                isLoadingMainInfo = true
+                        if AppState.shared.isLogin ?? false {
+                            getUserInfo {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    withAnimation(.spring()) {
+                                        animatedIsFinished = true
+                                        isLoadingMainInfo = true
+                                    }
+                                }
                             }
                         }
                     }
@@ -96,6 +101,17 @@ struct LaunchScreenView: View {
             }
             
             isSplashScreenShow.toggle()
+        }
+    }
+    
+    func getUserInfo(completion: @escaping (() -> Void)) {
+        Services.authService.getUserInfo() { result in
+            switch result {
+            case .success:
+                completion()
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     

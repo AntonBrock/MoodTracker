@@ -49,6 +49,8 @@ struct JournalView: View {
         self.coordinator = coordinator
         self.animation = animation
         self.viewModel = coordinator.viewModel
+        
+        self.viewModel.setupViewer(self)
     }
 
     var body: some View {

@@ -11,11 +11,15 @@ import SwiftUI
 extension JournalView {
     class ViewModel: ObservableObject {
         
+        @Published var viewer: JournalView?
+        
         @Published var journalViewModels: [[JournalViewModel]]?
         @Published var sharingJournalViewModel: JournalViewModel?
         @Published var isShowLoader: Bool = false
         
-        init() {
+        func setupViewer(_ viewer: JournalView) {
+            self.viewer = viewer
+            
             if AppState.shared.isLogin ?? false {
                 getJournalViewModel()
             }
