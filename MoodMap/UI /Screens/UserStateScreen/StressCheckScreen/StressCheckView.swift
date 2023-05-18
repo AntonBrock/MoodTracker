@@ -16,13 +16,15 @@ struct StressCheckView: View {
     
     let notificationCenter = NotificationCenter.default
     
+    @FocusState private var isFocused: Bool
     @State var disabledBackButton: Bool = false
     
     var parent: BaseViewCoordinator
     var stressViewModel: [StressViewModel]
 
     @State var yandexInterstitialADView: YandexInterstitialADView?
-    @State var text: String = "У меня не выходит из головы "
+    @State var text: String = ""
+    var placeholder = "У меня не выходит из головы.."
     
     var saveButtonDidTap: ((_ text: String, _ choosedStress: String, _ view: StressCheckView) -> Void)
     
@@ -78,7 +80,7 @@ struct StressCheckView: View {
                             .frame(maxWidth: UIScreen.main.bounds.width - 32, minHeight: 50, idealHeight: 50, maxHeight: 220, alignment: .topLeading)
                             .font(.system(size: 16))
                             .multilineTextAlignment(.leading)
-                            .foregroundColor(text == "У меня не выходит из головы "
+                            .foregroundColor(!isFocused
                                              ? Colors.TextColors.mischka500
                                              : Colors.Primary.blue)
                             .colorMultiply(Colors.TextColors.porcelain200)
@@ -88,12 +90,12 @@ struct StressCheckView: View {
                                     x: 0.0,
                                     y: 0.0
                             )
-                            .onTapGesture {
-                                text = ""
-                            }
-                            .onChange(of: text) { newValue in
-                                if newValue == "" {
-                                    text = "У меня не выходит из головы "
+                            .submitLabel(.done)
+                            .focused($isFocused)
+                            .onChange(of: text) { _ in
+                                if text.last?.isNewline == .some(true) {
+                                    text.removeLast()
+                                    isFocused = false
                                 }
                             }
                     }
@@ -116,6 +118,9 @@ struct StressCheckView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .sheet(isPresented: $isNeedShowADAsPage) {
             yandexInterstitialADView
+        }
+        .onAppear {
+            text = placeholder
         }
     }
     
