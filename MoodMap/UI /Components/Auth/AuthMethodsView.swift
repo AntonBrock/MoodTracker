@@ -45,11 +45,23 @@ struct AuthMethodsView: View {
                     .foregroundColor(Color(hex: "7A7E80"))
                     .padding(.top, 8)
                 
-                GoogleSignInButton(style: .wide, action: handleSignInButton)
+                Button(action: handleSignInButton) {
+                    HStack {
+                        Image("google_signIn_logo")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                        Text("Продолжить с Google")
+                            .font(.body)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                    }
                     .frame(width: 279, height: 48, alignment: .center)
+                    .background(.black)
                     .padding(.horizontal, 16)
                     .padding(.top, 14)
                     .padding(.bottom, 10)
+                }
+                .cornerRadius(16)
                 
                 SignInWithAppleButton(.continue) { request in
                     
