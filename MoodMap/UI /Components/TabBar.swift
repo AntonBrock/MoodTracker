@@ -21,25 +21,22 @@ enum Page: String {
 
 struct TabBarView: View {
         
+    @Environment(\.dismiss) var dismiss
+    
+    @Namespace var animation
+
     @StateObject var viewRouter: ViewRouter
     @ObservedObject var coordinator: BaseViewCoordinator
     
     @State var showPopUp = true
-    @Environment(\.dismiss) var dismiss
-    
     @State var bottomSheetPosition: BottomSheetPosition = .dynamic
-    @State var isHiddenTabBar: Bool = false
-    
-    @Namespace var animation
-    
     @State var value: Double = 20
     @State var isNeedToShowActivities: Bool = false
-    
+    @State var disabledTabBar: Bool = false
+
     let isDisabledTabBarNavigation = NotificationCenter.default.publisher(for: NSNotification.Name("DisabledTabBarNavigation"))
     let isNotDisabledTabBarNavigation = NotificationCenter.default.publisher(for: NSNotification.Name("NotDisabledTabBarNavigation"))
 
-    @State var disabledTabBar: Bool = false
-    
     var body: some View {
         ZStack {
             GeometryReader { geometry in
@@ -54,7 +51,11 @@ struct TabBarView: View {
                     case .profile:
                         PersonalCabinetCoordinatorView(coordinator: coordinator.personalCabinetCoordinator)
                     }
-                    
+                }
+                .background(.clear)
+                .edgesIgnoringSafeArea(.bottom)
+                
+                VStack {
                     ZStack {
                         HStack {
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .home, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-home-none-fill", tabName: "home", filledIconName: "tb-ic-home-fill")
@@ -92,13 +93,12 @@ struct TabBarView: View {
                         .frame(width: geometry.size.width, height: geometry.size.height / 12)
                         .disabled(disabledTabBar)
                     }
+                    .frame(width: geometry.size.width, height: coordinator.hideCustomTabBar ? 0 : geometry.size.height / 14.5)
                     .background(Color.white.clipShape(CustomShape()))
-                    .frame(width: geometry.size.width, height: isHiddenTabBar ? 0 : geometry.size.height / 10)
                     .shadow(color: Colors.TextColors.mischka500.opacity(0.7), radius: 7, x: 0, y: -5)
-                    .opacity(isHiddenTabBar ? 0 : 1)
+                    .opacity(coordinator.hideCustomTabBar ? 0 : 1) // Не нрав анимация скрытия
                 }
-                .background(.clear)
-                .edgesIgnoringSafeArea(.bottom)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
             .sheet(isPresented: $coordinator.isShowingSharingScreen) {
                 SharingView(viewModel: coordinator.journalCoordinator.viewModel.sharingJournalViewModel) {

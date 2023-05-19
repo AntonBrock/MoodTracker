@@ -31,6 +31,10 @@ class MainViewCoordinator: ObservableObject, Identifiable {
             parent: parent,
             container: container
         )
+        
+        withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
+            parent.hideCustomTabBar = true
+        }
     }
     
     func openAllJournal() {

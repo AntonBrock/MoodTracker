@@ -23,6 +23,7 @@ class BaseViewCoordinator: ObservableObject {
     @Published var isShowingWhyResgistration: Bool = false
     @Published var showDeleteAccountView: Bool = false
 
+    @Published var hideCustomTabBar: Bool = false
     @Published var isShowingMoodCheckScreen: Bool = false
     @Published var isShowingSharingScreen: Bool = false
     @Published var isNeedShowTab: Page = .home 
