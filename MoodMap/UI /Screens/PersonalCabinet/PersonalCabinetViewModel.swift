@@ -39,15 +39,14 @@ extension PersonalCabinetView {
             }
         }
         
-        func singUp(appleIDToken: String, completion: @escaping (() -> Void)) {
+        func singUp(appleIDToken: String) {
             Services.authService.singUp(appleIDToken: appleIDToken) { [weak self] result in
                 switch result {
                 case .success(let jwtToken):
                     AppState.shared.jwtToken = jwtToken
                     AppState.shared.isLogin = true
-                    self?.setLanguage()
                     
-                    completion()
+                    self?.setLanguage()
                 case .failure(let error):
                     print(error)
                 }

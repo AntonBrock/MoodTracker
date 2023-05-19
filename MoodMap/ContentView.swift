@@ -141,9 +141,10 @@ struct ContentView: View {
                         return
                     }
                     
-                    coordinator.personalCabinetCoordinator.viewModel.singUp(appleIDToken: appleToken) {
+                    withAnimation {
                         coordinator.showAuthLoginView.toggle()
                     }
+                    coordinator.personalCabinetCoordinator.viewModel.singUp(appleIDToken: appleToken)
                 })
                 .zIndex(999999)
             }
