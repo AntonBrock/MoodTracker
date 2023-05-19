@@ -11,11 +11,13 @@ struct JournalCoordinatorView: View {
     
     @ObservedObject var coordinator: JournalViewCoordinator
     @Namespace var animation
-
+    
     var body: some View {
         NavigationView {
             JournalView(coordinator: coordinator,
-                        animation: animation)
+                        animation: animation, wasOpenedFromTabBar: {
+                Services.metricsService.sendEventWith(eventName: .openJournalScreen)
+            })
             .navigationTitle("Журнал")
             .navigationBarTitleDisplayMode(.large)
         }

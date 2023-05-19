@@ -75,6 +75,7 @@ struct MainView: View {
                     .padding(.top, 10)
                     .onTapGesture {
                         if AppState.shared.isLogin ?? false {
+                            Services.metricsService.sendEventWith(eventName: .openDiaryScreenButton)
                             coordinator.openDiary()
                         } else {
                             withAnimation {
@@ -255,6 +256,7 @@ struct MainView: View {
                         radius: 2.0, x: 0.0, y: 0)
                 .padding(.leading, 20)
                 .onTapGesture {
+                    Services.metricsService.sendEventWith(eventName: .goToJournalFromMainScreenButton)
                     coordinator.openAllJournal()
                 }
                 

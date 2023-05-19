@@ -149,6 +149,7 @@ struct MoodCheckView: View {
                     
                     VStack {
                         MTButton(buttonStyle: .fill, title: "Продолжить") {
+                            Services.metricsService.sendEventWith(eventName: .stateNextButton)
                             coordinator.openAcitivitiesScreen(with: userStateVideModel)
                         }
                         .frame(width: UIScreen.main.bounds.width - 32, height: 44, alignment: .bottom)

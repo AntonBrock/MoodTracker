@@ -48,6 +48,7 @@ struct AuthDeleteAccountView: View {
                 MTButton(buttonStyle: .deleteAction, title: "Удалить мой аккаунт") {
                     bottomSheetPosition = .absolute(0)
                     withAnimation {
+                        Services.metricsService.sendEventWith(eventName: .deleteAccAgreeButton)
                         agreeToDeleteAccountAction()
                     }
                 }

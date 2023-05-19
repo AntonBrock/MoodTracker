@@ -43,6 +43,7 @@ struct DiaryView: View {
                     emptyDiaryView()
                         .padding(.top, 10)
                         .onTapGesture {
+                            Services.metricsService.sendEventWith(eventName: .createNewDairyPageButton)
                             self.presentNewDiaryPage = true
                         }
                     

@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import UserNotifications
+import Firebase
 
 enum UserStoryType {
     case moodCheckView
@@ -52,6 +53,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             
             let DIContainer = DIContainer(appState: appState, services: services)
             let coordinator = BaseViewCoordinator(container: DIContainer)
+            
+            FirebaseApp.configure()
             
             if false { // check enable codePassword
                 startStory(type: .login,

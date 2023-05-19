@@ -69,7 +69,6 @@ struct AuthMethodsView: View {
                 .padding(.bottom, 10)
                
                 SignInWithAppleButton(.continue) { request in
-                    
                         notificationCenter.post(name: Notification.Name("DisabledTabBarNavigation"), object: nil)
                         notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
                         request.requestedScopes = [.fullName, .email]
@@ -97,7 +96,7 @@ struct AuthMethodsView: View {
                                     dismissWithAppleIDToken(nil)
                                     return
                                 }
-                                
+                                Services.metricsService.sendEventWith(eventName: .singInWithAppleButton)
                                 dismissWithAppleIDToken(idTokenString)
                             default: break
                             }
@@ -172,6 +171,8 @@ struct AuthMethodsView: View {
                 }
                 
                 guard let googleJWTToken = result.user.idToken?.tokenString else { fatalError() }
+                
+                Services.metricsService.sendEventWith(eventName: .singInWithGoogleButton)
                 dismiss(googleJWTToken)
             }
     }

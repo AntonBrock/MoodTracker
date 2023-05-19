@@ -198,6 +198,7 @@ struct PersonalCabinetView: View {
                         if AppState.shared.isLogin ?? false {
                             coordinator.showLogoutView()
                         } else {
+                            Services.metricsService.sendEventWith(eventName: .singInButton)
                             coordinator.showAuthLoginView()
                         }
                     } label: {

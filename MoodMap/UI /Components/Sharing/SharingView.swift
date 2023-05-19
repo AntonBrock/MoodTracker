@@ -35,6 +35,7 @@ struct SharingView: View {
                     if InstagramSharingUtils.canOpenInstagramStories {
                         Button {
                             InstagramSharingUtils.shareToInstagramStories(moodView(hideCorner: true).asUIImage())
+                            Services.metricsService.sendEventWith(eventName: .shareToInstagramButton)
                             actionDismiss()
                         } label: {
                             HStack {
@@ -68,6 +69,7 @@ struct SharingView: View {
                         
                         Button {
                             let status = PHPhotoLibrary.authorizationStatus()
+                            Services.metricsService.sendEventWith(eventName: .saveShareImageButton)
                             if status == .denied {
                                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString + Bundle.main.bundleIdentifier!)!)
                             } else {
@@ -94,7 +96,7 @@ struct SharingView: View {
                     } else {
                         Button {
                             let status = PHPhotoLibrary.authorizationStatus()
-                            
+                            Services.metricsService.sendEventWith(eventName: .saveShareImageButton)
                             if status == .denied {
                                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString + Bundle.main.bundleIdentifier!)!)
                             } else {
@@ -138,6 +140,9 @@ struct SharingView: View {
                 Button {
                     notShowThisScreen.toggle()
                     AppState.shared.isNotNeedShowSharingScreen = notShowThisScreen
+                    if !notShowThisScreen {
+                        Services.metricsService.sendEventWith(eventName: .notAskAboutSharingButton)
+                    }
                 } label: {
                     
                     HStack {

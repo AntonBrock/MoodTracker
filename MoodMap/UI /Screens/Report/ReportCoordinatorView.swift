@@ -11,10 +11,12 @@ struct ReportCoordinatorView: View {
     
     @ObservedObject var coordinator: ReportViewCoordinator
     @State var currentDate: Date = Date()
-
+    
     var body: some View {        
         NavigationView {
-            ReportScreen(coordinator: coordinator)
+            ReportScreen(coordinator: coordinator, wasOpenedFromTabBar: {
+                Services.metricsService.sendEventWith(eventName: .openReportScreen)
+            })
                 .navigationTitle("Отчет")
                 .navigationBarTitleDisplayMode(.large)
         }

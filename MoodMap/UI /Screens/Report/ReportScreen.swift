@@ -15,6 +15,8 @@ struct ReportScreen: View {
     @ObservedObject var viewModel: ViewModel
     private unowned let coordinator: ReportViewCoordinator
         
+    @State var wasOpenedFromTabBar: (() -> Void)?
+
     @State var choosedDate: Date = Date()
     @State var showDatePicker: Bool = false
     @State var isChoosindNewDate: Bool = false
@@ -34,10 +36,16 @@ struct ReportScreen: View {
     var dateTitles: [String] = ["Неделя", "Месяц"] // "Все время"
 
     init(
-        coordinator: ReportViewCoordinator
+        coordinator: ReportViewCoordinator,
+        wasOpenedFromTabBar: (() -> Void)? = nil
     ){
         self.coordinator = coordinator
         self.viewModel = coordinator.viewModel
+        self.wasOpenedFromTabBar = wasOpenedFromTabBar
+        
+        if wasOpenedFromTabBar != nil {
+            wasOpenedFromTabBar!()
+        }
     }
     
     var body: some View {

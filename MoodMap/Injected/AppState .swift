@@ -14,7 +14,7 @@ final class AppState: ObservableObject {
     static let shared = AppState()
     
     let notificationCenter = NotificationCenter.default
-        
+            
     enum KeychainKeys {
         static let accountKey = "CHKeychain"
         

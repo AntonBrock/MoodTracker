@@ -103,7 +103,7 @@ struct ActivitiesView: View {
                 )
                 
                 MTButton(buttonStyle: .fill, title: "Продолжить", handle: {
-//                    coordinator.userStateViewModel.choosedActivities = choosedActivities
+                    Services.metricsService.sendEventWith(eventName: .activitiesNextButton)
                     isShowStressScreen.toggle()
                 })
                 .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))

@@ -13,4 +13,5 @@ struct Services {
     static var journalService: JournalService = JournalService()
     static var reportService: ReportService = ReportService()
     static var diaryService: DiaryService = DiaryService()
+    static let metricsService: MetricsService = MetricsService()
 }

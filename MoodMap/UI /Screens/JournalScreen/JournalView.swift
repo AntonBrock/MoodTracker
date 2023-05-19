@@ -16,6 +16,8 @@ struct JournalView: View {
     @ObservedObject var viewModel: ViewModel
     private unowned let coordinator: JournalViewCoordinator
 
+    @State var wasOpenedFromTabBar: (() -> Void)?
+
     @State var selectedIndex: Int = 0
     @State var showMoreInfo: Bool = false
     @State var currentID: String = ""
@@ -44,13 +46,18 @@ struct JournalView: View {
     init(
         coordinator: JournalViewCoordinator,
         animation: Namespace.ID,
-        showAuthMethodView: Bool = false
+        showAuthMethodView: Bool = false,
+        wasOpenedFromTabBar: (() -> Void)? = nil
     ){
         self.coordinator = coordinator
         self.animation = animation
         self.viewModel = coordinator.viewModel
-        
         self.viewModel.setupViewer(self)
+        self.wasOpenedFromTabBar = wasOpenedFromTabBar
+
+        if wasOpenedFromTabBar != nil {
+            wasOpenedFromTabBar!()
+        }
     }
 
     var body: some View {
@@ -76,7 +83,7 @@ struct JournalView: View {
                                 chooseSelectedModel()
                                 withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
                                     showMoreInfo.toggle()
-    //                                coordinator.isHiddenTabBar(true)
+                                    Services.metricsService.sendEventWith(eventName: .openDetailJournalScreen)
                                 }
                             }, animation: animation) {
                                 coordinator.openMoodCheckScreen()

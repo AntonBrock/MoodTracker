@@ -204,6 +204,7 @@ extension MoodCheckView {
                 text: mindText ?? "") { result in
                 switch result {
                 case .success(let model):
+                    Services.metricsService.sendEventWith(eventName: .createEmotionNoteButton)
                     view.showAD(withModel: model)
                 case .failure(let error):
                     print(error)

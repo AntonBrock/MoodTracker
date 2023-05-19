@@ -37,6 +37,7 @@ extension DiaryView {
             Services.diaryService.setNewDiaryPage(page: text) { result in
                 switch result {
                 case .success(let model):
+                    Services.metricsService.sendEventWith(eventName: .saveNewDiaryPageButton)
                     self.diaryViewModel?.insert(self.mappingSingleViewModel(data: model), at: 0)
                 case .failure(let error):
                     print(error)
