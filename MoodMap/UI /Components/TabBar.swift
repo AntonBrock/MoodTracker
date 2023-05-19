@@ -91,9 +91,10 @@ struct TabBarView: View {
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .profile, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-pc-none-fill", tabName: "profile", filledIconName: "tb-ic-pc-fill")
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height / 12)
+                        .padding(.top, -10)
                         .disabled(disabledTabBar)
                     }
-                    .frame(width: geometry.size.width, height: coordinator.hideCustomTabBar ? 0 : geometry.size.height / 14.5)
+                    .frame(width: geometry.size.width, height: coordinator.hideCustomTabBar ? 0 : geometry.size.height / 13.0)
                     .background(Color.white.clipShape(CustomShape()))
                     .shadow(color: Colors.TextColors.mischka500.opacity(0.7), radius: 7, x: 0, y: -5)
                     .opacity(coordinator.hideCustomTabBar ? 0 : 1) // Не нрав анимация скрытия
