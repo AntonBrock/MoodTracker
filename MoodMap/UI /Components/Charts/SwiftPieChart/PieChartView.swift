@@ -98,7 +98,7 @@ public struct PieChartView: View {
                                     self.activeIndex = -1
                                 }
                         )
-                        .disabled(true)
+//                        .disabled(true)
                         
                         Circle()
                             .fill(self.backgroundColor)

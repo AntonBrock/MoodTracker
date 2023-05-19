@@ -116,9 +116,9 @@ struct MonthChart: View {
     
     private func getColorStress(_ stress: Int) -> Color {
         switch stress {
-        case 1: return Color(hex: "F95555")
-        case 2: return Color(hex: "33D299")
-        case 3: return Color(hex: "B283E4")
+        case 1: return Color(hex: "33D299")
+        case 2: return Color(hex: "B283E4")
+        case 3: return Color(hex: "F95555")
         default: return .white
         }
     }
