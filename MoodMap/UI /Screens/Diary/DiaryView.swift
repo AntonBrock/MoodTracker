@@ -44,6 +44,8 @@ struct DiaryView: View {
                         .padding(.top, 10)
                         .onTapGesture {
                             Services.metricsService.sendEventWith(eventName: .createNewDairyPageButton)
+                            Services.metricsService.sendEventWith(eventType: .createNewDairyPageButton)
+
                             self.presentNewDiaryPage = true
                         }
                     

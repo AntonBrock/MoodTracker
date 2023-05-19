@@ -199,6 +199,8 @@ struct PersonalCabinetView: View {
                             coordinator.showLogoutView()
                         } else {
                             Services.metricsService.sendEventWith(eventName: .singInButton)
+                            Services.metricsService.sendEventWith(eventType: .singInButton)
+
                             coordinator.showAuthLoginView()
                         }
                     } label: {

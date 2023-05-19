@@ -16,6 +16,8 @@ struct ReportCoordinatorView: View {
         NavigationView {
             ReportScreen(coordinator: coordinator, wasOpenedFromTabBar: {
                 Services.metricsService.sendEventWith(eventName: .openReportScreen)
+                Services.metricsService.sendEventWith(eventType: .openReportScreen)
+
             })
                 .navigationTitle("Отчет")
                 .navigationBarTitleDisplayMode(.large)

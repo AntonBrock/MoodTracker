@@ -96,7 +96,10 @@ struct AuthMethodsView: View {
                                     dismissWithAppleIDToken(nil)
                                     return
                                 }
+                                
                                 Services.metricsService.sendEventWith(eventName: .singInWithAppleButton)
+                                Services.metricsService.sendEventWith(eventType: .singInWithAppleButton)
+                                
                                 dismissWithAppleIDToken(idTokenString)
                             default: break
                             }
@@ -173,6 +176,8 @@ struct AuthMethodsView: View {
                 guard let googleJWTToken = result.user.idToken?.tokenString else { fatalError() }
                 
                 Services.metricsService.sendEventWith(eventName: .singInWithGoogleButton)
+                Services.metricsService.sendEventWith(eventType: .singInWithGoogleButton)
+
                 dismiss(googleJWTToken)
             }
     }

@@ -42,7 +42,10 @@ struct AuthLogoutView: View {
                 Button {
                     bottomSheetPosition = .absolute(0)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        
                         Services.metricsService.sendEventWith(eventName: .deleteAccButton)
+                        Services.metricsService.sendEventWith(eventType: .deleteAccButton)
+
                         deleteAction()
                     }
                 } label: {

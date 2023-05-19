@@ -186,6 +186,8 @@
 		45F361AA2A178A5A002CD92B /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 45F361A92A178A5A002CD92B /* FirebaseMessaging */; };
 		45F361AC2A178A5A002CD92B /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 45F361AB2A178A5A002CD92B /* FirebaseRemoteConfig */; };
 		45F361B02A178BAF002CD92B /* MetricsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F361AF2A178BAF002CD92B /* MetricsService.swift */; };
+		45F361B32A17D40C002CD92B /* YandexMobileMetrica in Frameworks */ = {isa = PBXBuildFile; productRef = 45F361B22A17D40C002CD92B /* YandexMobileMetrica */; };
+		45F361B52A17D40C002CD92B /* YandexMobileMetricaCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 45F361B42A17D40C002CD92B /* YandexMobileMetricaCrashes */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -370,6 +372,7 @@
 				4529AA7929AF1519001D2390 /* Moya in Frameworks */,
 				4529AA7729AF1519001D2390 /* WrappingStack in Frameworks */,
 				45D06AF22A1608CB0047D6FA /* JWTDecode in Frameworks */,
+				45F361B52A17D40C002CD92B /* YandexMobileMetricaCrashes in Frameworks */,
 				45F361A82A178A5A002CD92B /* FirebaseCrashlytics in Frameworks */,
 				4529AA8729AF151A001D2390 /* SwiftPieChart in Frameworks */,
 				45F361A62A178A5A002CD92B /* FirebaseAnalytics in Frameworks */,
@@ -379,6 +382,7 @@
 				4529AA8929AF151A001D2390 /* GoogleSignIn in Frameworks */,
 				45B39F8D29E52D6B00852E70 /* Lottie in Frameworks */,
 				4529AA8529AF1519001D2390 /* SwiftUICharts in Frameworks */,
+				45F361B32A17D40C002CD92B /* YandexMobileMetrica in Frameworks */,
 				45EC871829E407440018AE91 /* YandexMobileAdsPackage in Frameworks */,
 				45F361AA2A178A5A002CD92B /* FirebaseMessaging in Frameworks */,
 				4529AA8129AF1519001D2390 /* HorizonCalendar in Frameworks */,
@@ -1055,6 +1059,8 @@
 				45F361A72A178A5A002CD92B /* FirebaseCrashlytics */,
 				45F361A92A178A5A002CD92B /* FirebaseMessaging */,
 				45F361AB2A178A5A002CD92B /* FirebaseRemoteConfig */,
+				45F361B22A17D40C002CD92B /* YandexMobileMetrica */,
+				45F361B42A17D40C002CD92B /* YandexMobileMetricaCrashes */,
 			);
 			productName = MoodMap;
 			productReference = 4529AA6629AF1470001D2390 /* MoodMap.app */;
@@ -1098,6 +1104,7 @@
 				45B39F8B29E52D6A00852E70 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				45D06AF02A1608CB0047D6FA /* XCRemoteSwiftPackageReference "JWTDecode" */,
 				45F361A42A178A5A002CD92B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				45F361B12A17D40C002CD92B /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
 			);
 			productRefGroup = 4539308728C88EC000A5D828 /* Products */;
 			projectDirPath = "";
@@ -1615,6 +1622,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		45F361B12A17D40C002CD92B /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yandexmobile/metrica-sdk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1697,6 +1712,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 45F361A42A178A5A002CD92B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		45F361B22A17D40C002CD92B /* YandexMobileMetrica */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45F361B12A17D40C002CD92B /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			productName = YandexMobileMetrica;
+		};
+		45F361B42A17D40C002CD92B /* YandexMobileMetricaCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45F361B12A17D40C002CD92B /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			productName = YandexMobileMetricaCrashes;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

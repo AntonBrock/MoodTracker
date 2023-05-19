@@ -148,6 +148,7 @@ struct LaunchScreenView: View {
                     AppState.shared.userEmail = model.email
                     AppState.shared.userPushNotification = model.settings.notifications
                     AppState.shared.userLanguage = model.settings.language
+                    
                     completion()
                 case .failure(let error):
                     print(error)

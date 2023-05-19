@@ -196,6 +196,8 @@ struct DetailJournalView: View {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                         Services.metricsService.sendEventWith(eventName: .shareButtonFromJournalPage)
+                        Services.metricsService.sendEventWith(eventType: .shareButtonFromJournalPage)
+
                         shareStateAction(model)
                     }
                 } label: {

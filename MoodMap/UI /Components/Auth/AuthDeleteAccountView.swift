@@ -49,6 +49,8 @@ struct AuthDeleteAccountView: View {
                     bottomSheetPosition = .absolute(0)
                     withAnimation {
                         Services.metricsService.sendEventWith(eventName: .deleteAccAgreeButton)
+                        Services.metricsService.sendEventWith(eventType: .deleteAccAgreeButton)
+
                         agreeToDeleteAccountAction()
                     }
                 }

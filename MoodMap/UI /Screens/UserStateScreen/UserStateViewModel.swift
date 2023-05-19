@@ -205,6 +205,8 @@ extension MoodCheckView {
                 switch result {
                 case .success(let model):
                     Services.metricsService.sendEventWith(eventName: .createEmotionNoteButton)
+                    Services.metricsService.sendEventWith(eventType: .createEmotionNoteButton)
+
                     view.showAD(withModel: model)
                 case .failure(let error):
                     print(error)

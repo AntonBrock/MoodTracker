@@ -16,7 +16,9 @@ struct JournalCoordinatorView: View {
         NavigationView {
             JournalView(coordinator: coordinator,
                         animation: animation, wasOpenedFromTabBar: {
+                
                 Services.metricsService.sendEventWith(eventName: .openJournalScreen)
+                Services.metricsService.sendEventWith(eventType: .openJournalScreen)
             })
             .navigationTitle("Журнал")
             .navigationBarTitleDisplayMode(.large)

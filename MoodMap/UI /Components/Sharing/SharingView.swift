@@ -36,6 +36,8 @@ struct SharingView: View {
                         Button {
                             InstagramSharingUtils.shareToInstagramStories(moodView(hideCorner: true).asUIImage())
                             Services.metricsService.sendEventWith(eventName: .shareToInstagramButton)
+                            Services.metricsService.sendEventWith(eventType: .shareToInstagramButton)
+
                             actionDismiss()
                         } label: {
                             HStack {
@@ -70,6 +72,8 @@ struct SharingView: View {
                         Button {
                             let status = PHPhotoLibrary.authorizationStatus()
                             Services.metricsService.sendEventWith(eventName: .saveShareImageButton)
+                            Services.metricsService.sendEventWith(eventType: .saveShareImageButton)
+
                             if status == .denied {
                                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString + Bundle.main.bundleIdentifier!)!)
                             } else {
@@ -97,6 +101,8 @@ struct SharingView: View {
                         Button {
                             let status = PHPhotoLibrary.authorizationStatus()
                             Services.metricsService.sendEventWith(eventName: .saveShareImageButton)
+                            Services.metricsService.sendEventWith(eventType: .saveShareImageButton)
+
                             if status == .denied {
                                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString + Bundle.main.bundleIdentifier!)!)
                             } else {
@@ -142,6 +148,8 @@ struct SharingView: View {
                     AppState.shared.isNotNeedShowSharingScreen = notShowThisScreen
                     if !notShowThisScreen {
                         Services.metricsService.sendEventWith(eventName: .notAskAboutSharingButton)
+                        Services.metricsService.sendEventWith(eventType: .notAskAboutSharingButton)
+
                     }
                 } label: {
                     

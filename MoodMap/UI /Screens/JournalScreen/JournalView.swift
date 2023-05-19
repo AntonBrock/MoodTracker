@@ -84,6 +84,8 @@ struct JournalView: View {
                                 withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
                                     showMoreInfo.toggle()
                                     Services.metricsService.sendEventWith(eventName: .openDetailJournalScreen)
+                                    Services.metricsService.sendEventWith(eventType: .openDetailJournalScreen)
+
                                 }
                             }, animation: animation) {
                                 coordinator.openMoodCheckScreen()
