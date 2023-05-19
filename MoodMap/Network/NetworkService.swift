@@ -40,36 +40,30 @@ final class NetworkService: BaseService {
             switch result {
             case let .success(response):
                 switch response.statusCode {
+                case 404:
+                    completion(.failure(MMError.defined(.pageNotFound)))
                 case 401:
-//                    completion(.failure(CBError.unauthorized))
-                    completion(.failure(Error.self as! Error))
-                case 400, 403, 500:
+                    completion(.failure(MMError.defined(.tokenUndefined)))
+                case 400, 403, 424, 500:
                     var error: Error
                     if let json = try? response.mapJSON() as? [String: Any] {
                         if let message = json["message"] as? String {
-//                            error = CBError(description: message, code: response.statusCode)
-                            completion(.failure(Error.self as! Error))
+                            error = MMError(message: message)
                         } else if let message = json["error"] as? String {
-//                            error = CBError(description: message, code: response.statusCode)
-                            completion(.failure(Error.self as! Error))
+                            error = MMError(message: message)
                         } else if let message = json["code"] as? String {
-//                            error = CBError(description: message, code: response.statusCode)
-                            completion(.failure(Error.self as! Error))
+                            error = MMError(message: message)
                         } else {
-//                            error = CBError.undefinedError
-                            completion(.failure(Error.self as! Error))
+                            error = MMError.undefined
                         }
                     } else {
-//                        error = CBError.undefinedError
-                        completion(.failure(Error.self as! Error))
+                        error = MMError.undefined
                     }
-                    completion(.failure(Error.self as! Error))
+                    completion(.failure(error))
                 case 429:
-//                    completion(.failure(CBError.undefinedError))
-                    completion(.failure(Error.self as! Error))
+                    completion(.failure(MMError.undefined))
                 case 502:
-//                    completion(.failure(CBError.serverUnavailable))
-                    completion(.failure(Error.self as! Error))
+                    completion(.failure(MMError.defined(.internalDatabaseError)))
                 default:
                     completion(.success(response))
                 }

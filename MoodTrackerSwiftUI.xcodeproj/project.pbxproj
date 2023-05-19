@@ -179,6 +179,7 @@
 		45E2876729DB104A00593E7A /* StressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E2876629DB104A00593E7A /* StressModel.swift */; };
 		45E2876929DB117A00593E7A /* StressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E2876829DB117A00593E7A /* StressViewModel.swift */; };
 		45EC871829E407440018AE91 /* YandexMobileAdsPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 45EC871729E407440018AE91 /* YandexMobileAdsPackage */; };
+		45F361A12A178272002CD92B /* MMError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F361A02A178272002CD92B /* MMError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -349,6 +350,7 @@
 		45E7503A2920B80200CF9E21 /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		45E7503C2920B86500CF9E21 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		45E750432920BA8100CF9E21 /* SynchronizedDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedDictionary.swift; sourceTree = "<group>"; };
+		45F361A02A178272002CD92B /* MMError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMError.swift; sourceTree = "<group>"; };
 		45F88C0A28D8750C00AB6153 /* MTButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -822,6 +824,7 @@
 		4579220C28CF4FAE00722D16 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				45F3619F2A178266002CD92B /* Error */,
 				4579220D28CF4FBD00722D16 /* SwiftUISlider.swift */,
 				45D6F15D29B3771B007EABFA /* KeychainHelper.swift */,
 				4546D58D29E83F1200E69852 /* Constants.swift */,
@@ -997,6 +1000,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		45F3619F2A178266002CD92B /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				45F361A02A178272002CD92B /* MMError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1168,6 +1179,7 @@
 				456A400C29B76AF800371B5C /* JournalViewModel.swift in Sources */,
 				457F591729C183F100E96E1D /* ReportScreenViewModel.swift in Sources */,
 				45A9F05629F1068B002C13C5 /* AuthDeleteAccountView.swift in Sources */,
+				45F361A12A178272002CD92B /* MMError.swift in Sources */,
 				4529AB9F29AF1940001D2390 /* SCDonutChartView.swift in Sources */,
 				4529ABA029AF1940001D2390 /* ActivitiesBarCharsView.swift in Sources */,
 				4529ABA129AF1940001D2390 /* FeelingCircleChartsView.swift in Sources */,
