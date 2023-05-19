@@ -55,7 +55,7 @@ struct CircleEmotionChart: View {
                     } else {
                         if dataIsEmpty {
                             VStack {
-                                Text("Отметь свое состояние\nмы покажет стастистику по настроению")
+                                Text("Начинай отмечать свое состояние\nпотом мы покажем тут статистику")
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .foregroundColor(Colors.TextColors.fiord800)
                                     .font(.system(size: 12, weight: .medium))

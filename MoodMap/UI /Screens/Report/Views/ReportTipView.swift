@@ -42,11 +42,11 @@ struct ReportTipView: View {
                                     .foregroundColor(getColorFor(tipType))
                                     .font(.system(size: 14, weight: .light))
                             } else {
-                                Text("Мы не нашли за выбранный период твоих данных")
+                                Text("Начни свой путь отслеживания своего состояния, ")
                                     .font(.system(size: 14, weight: .light))
                                     .foregroundColor(Colors.Primary.blue) +
                                 
-                                Text(" начинай следить за своим состоянием")
+                                Text(" а мы соберем среднее значение и покажем тебе ☺️")
                                     .foregroundColor(getColorFor(tipType))
                                     .font(.system(size: 14, weight: .light))
                             }
