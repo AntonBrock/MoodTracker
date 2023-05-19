@@ -39,13 +39,15 @@ extension PersonalCabinetView {
             }
         }
         
-        func singUp(appleIDToken: String) {
+        func singUp(appleIDToken: String, completion: @escaping (() -> Void)) {
             Services.authService.singUp(appleIDToken: appleIDToken) { [weak self] result in
                 switch result {
                 case .success(let jwtToken):
                     AppState.shared.jwtToken = jwtToken
                     AppState.shared.isLogin = true
                     self?.setLanguage()
+                    
+                    completion()
                 case .failure(let error):
                     print(error)
                 }
@@ -65,6 +67,11 @@ extension PersonalCabinetView {
 
                     self?.userInfoModel = model
                     self?.pushNotification = model.settings.notifications
+                    
+                    AppState.shared.userName = model.username
+                    AppState.shared.userEmail = model.email
+                    AppState.shared.userPushNotification = model.settings.notifications
+                    AppState.shared.userLanguage = model.settings.language
                 case .failure(let error):
                     print(error)
                 }

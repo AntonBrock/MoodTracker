@@ -28,6 +28,10 @@ final class AppState: ObservableObject {
         static let isShowATT = "isShowATT"
         static let isNotShowSharingScreen = "isNotShowSharingScreen"
         static let timeZone = "timeZone"
+        static let userName = "userName"
+        static let userPushNotification = "userPushNotification"
+        static let userLanguage = "userLanguage"
+        static let userEmail = "userEmail"
     }
     
     var timezone: String? {
@@ -72,6 +76,39 @@ final class AppState: ObservableObject {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isAuthorizated)
+        }
+    }
+    
+    var userName: String? {
+        get {
+            return UserDefaults.standard.string(forKey: UserDefaultsKeys.userName)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userName)
+        }
+    }
+    var userPushNotification: Bool? {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.userPushNotification)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userPushNotification)
+        }
+    }
+    var userLanguage: String? {
+        get {
+            return UserDefaults.standard.string(forKey: UserDefaultsKeys.userLanguage)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userLanguage)
+        }
+    }
+    var userEmail: String? {
+        get {
+            return UserDefaults.standard.string(forKey: UserDefaultsKeys.userEmail)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userEmail)
         }
     }
         

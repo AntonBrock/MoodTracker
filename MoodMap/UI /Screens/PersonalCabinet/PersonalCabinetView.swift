@@ -178,7 +178,7 @@ struct PersonalCabinetView: View {
         HStack {
             VStack {
                 VStack(spacing: 4) {
-                    Text(isLogin ? "Привет, \(viewModel.userInfoModel?.username ?? "")" : "Привет, незнакомец")
+                    Text(isLogin ? "Привет, \(AppState.shared.userName ?? "друг")" : "Привет, незнакомец")
                         .font(.system(size: 12, weight: .bold))
                         .foregroundColor(Colors.Primary.lightGray)
                         .multilineTextAlignment(.leading)
