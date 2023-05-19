@@ -127,7 +127,8 @@ struct ReportScreen: View {
                         if viewModel.dateSelectedIndex == 0 {
                             WeekAnimationChart(
                                 weekChartViewModel: $viewModel.chartDataViewModel,
-                                showLoader: $viewModel.showLoader
+                                showLoader: $viewModel.showLoader,
+                                showNeedMoreData: $viewModel.showNeedMoreData
                             )
                                 .transition(.move(edge: .top).combined(with: .opacity))
                         } else {

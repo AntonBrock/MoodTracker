@@ -55,11 +55,11 @@ extension ReportScreen {
         @Published var isStressCurrentTab: Bool = false
         
         @Published var showLoader: Bool = false
+        @Published var showNeedMoreData: Bool = false
         
         @Published var firstStartFromDateString: String?
         @Published var firstStartToDateString: String?
 
-        
         init() {
             setup()
         }
@@ -79,18 +79,20 @@ extension ReportScreen {
                 if dateSelectedIndex == 0 {
                     if selectedTypeOfReport == 0 {
                         isStressCurrentTab = false
-                        getDates()
+                        
                     }
                     
                     if selectedTypeOfReport == 1 {
                         isStressCurrentTab = true
-                        getDates()
                     }
                 }
                 
                 if dateSelectedIndex == 1 {
                     didChooseMonthTab()
                 }
+                
+                getDates()
+                fetchStartData()
             }
         }
         
@@ -103,8 +105,10 @@ extension ReportScreen {
                 
                 if dateSelectedIndex == 0 {
                     isMonthCurrentTab = false
-                    getDates()
                 }
+                
+                getDates()
+                fetchStartData()
             }
         }
         
@@ -412,7 +416,12 @@ extension ReportScreen {
                             return
                         }
                         self.reportViewModel = self.mappingViewModel(data: model)
-                        self.showLoader = false
+                        if self.reportViewModel?.chartData.count ?? 0 < 4 {
+                            self.showLoader = false
+                            self.showNeedMoreData = true
+                        } else {
+                            self.showLoader = false
+                        }
                     case .failure(let error):
                         print(error)
                     }
