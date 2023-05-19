@@ -109,6 +109,7 @@ struct MoodCheckView: View {
                                         MoodCheckComponent(statesViewModel: coordinator.userStateViewModel.statesViewModel,
                                                            setChoosedState: { choosedState in
                                             self.userStateVideModel.choosedState = choosedState
+                                            self.userStateVideModel.choosedEmotion = nil
                                         }, valueModel: valueModel, value: $value)
                                         .padding(.top, 15)
                                     }
@@ -152,6 +153,8 @@ struct MoodCheckView: View {
                         }
                         .frame(width: UIScreen.main.bounds.width - 32, height: 44, alignment: .bottom)
                         .padding(.bottom, 24)
+                        .disabled(coordinator.userStateViewModel.choosedState == nil || userStateVideModel.choosedEmotion == nil)
+                        .opacity(coordinator.userStateViewModel.choosedState != nil ||  userStateVideModel.choosedEmotion != nil ? 1 : 0.7)
                     }
                     .frame(maxWidth: UIScreen.main.bounds.width - 32, maxHeight: .infinity, alignment: .bottom)
                 }
@@ -331,6 +334,8 @@ struct MoodCheckView: View {
             }
         })
         .onAppear {
+            coordinator.userStateViewModel.choosedState = "45be90af-0404-42dd-8bbe-66d67787840f"
+            
             if coordinator.userStateViewModel.statesViewModel.isEmpty
                 && coordinator.userStateViewModel.activitiesViewModel.isEmpty
                 && coordinator.userStateViewModel.emotionsViewModel.isEmpty

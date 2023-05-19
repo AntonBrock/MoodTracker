@@ -107,6 +107,8 @@ struct ActivitiesView: View {
                     isShowStressScreen.toggle()
                 })
                 .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+                .disabled(choosedActivities.isEmpty)
+                .opacity(choosedActivities.isEmpty ? 0.7 : 1)
             }
         }
         .onAppear {

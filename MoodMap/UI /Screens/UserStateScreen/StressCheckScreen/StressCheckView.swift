@@ -121,6 +121,7 @@ struct StressCheckView: View {
         }
         .onAppear {
             text = placeholder
+            choosedStress = "8b02d308-37fa-41de-bdd2-00303b976031"
         }
     }
     
