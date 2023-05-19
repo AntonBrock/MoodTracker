@@ -138,7 +138,7 @@ struct PersonalCabinetView: View {
                             .padding(.top, 49)
                             .padding(.bottom, 5)
                         
-                        Text("Напишите нам на почту")
+                        Text("Напиши нам на почту")
                             .font(.system(size: 16, weight: .regular))
                             .foregroundColor(Colors.Primary.blue)
                             .frame(maxWidth: .infinity, alignment: .center)
