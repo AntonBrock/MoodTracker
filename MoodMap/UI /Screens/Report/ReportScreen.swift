@@ -197,8 +197,10 @@ struct ReportScreen: View {
                             isStressCurrentTab: $viewModel.isStressCurrentTab,
                             isShowLoader: $viewModel.showLoader
                         )
+                        .padding(.bottom, 90)
                     } else {
                         ActivitiesChartsForAllTime()
+                            .padding(.bottom, 90)
                     }
                 }
             }

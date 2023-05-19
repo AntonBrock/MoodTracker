@@ -97,7 +97,7 @@ struct TabBarView: View {
                     .frame(width: geometry.size.width, height: coordinator.hideCustomTabBar ? 0 : geometry.size.height / 13.0)
                     .background(Color.white.clipShape(CustomShape()))
                     .shadow(color: Colors.TextColors.mischka500.opacity(0.7), radius: 7, x: 0, y: -5)
-                    .opacity(coordinator.hideCustomTabBar ? 0 : 1) // Не нрав анимация скрытия
+                    .opacity(coordinator.hideCustomTabBar ? 0 : 1)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }

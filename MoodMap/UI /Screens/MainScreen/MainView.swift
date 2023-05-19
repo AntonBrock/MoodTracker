@@ -118,6 +118,7 @@ struct MainView: View {
                         viewModel.selectedTypeOfReport = typeSelectedIndex
                         viewModel.segmentDidChange()
                     }
+                    .padding(.bottom, 90)
             }
         }
         .sheet(isPresented: $showMoreDetailsAboutJournalPage, content: {
