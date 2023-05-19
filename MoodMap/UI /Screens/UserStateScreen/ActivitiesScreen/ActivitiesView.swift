@@ -32,7 +32,6 @@ struct ActivitiesView: View {
 
     var body: some View {
         VStack {
-            
             HStack {
                 Image("leftBackBlackArror")
                     .resizable()
@@ -68,8 +67,16 @@ struct ActivitiesView: View {
                             ZStack {
                                 ActivitiesChooseViewBlock(activitiesId: coordinator.userStateViewModel.activitiesViewModel[index].id,
                                                           activitieImageTitle: coordinator.userStateViewModel.activitiesViewModel[index].image,
-                                                          activitieTitle: coordinator.userStateViewModel.activitiesViewModel[index].text) { choosedActivitie in
+                                                          activitieTitle: coordinator.userStateViewModel.activitiesViewModel[index].text,
+                                                          isSelected: coordinator.userStateViewModel.choosedActivities.contains(coordinator.userStateViewModel.activitiesViewModel[index].id)
+                                ) { choosedActivitie in
+                                    coordinator.userStateViewModel.choosedActivities.append(choosedActivitie)
                                     self.choosedActivities.append(choosedActivitie)
+                                } unSelected: { unchoosedActivitie in
+                                    guard let index = choosedActivities.firstIndex(where: { $0 == unchoosedActivitie }) else { return }
+                                    choosedActivities.remove(at: index)
+                                    guard let _index = coordinator.userStateViewModel.choosedActivities.firstIndex(where: { $0 == unchoosedActivitie }) else { return }
+                                    coordinator.userStateViewModel.choosedActivities.remove(at: _index)
                                 }
                             }
                         }
@@ -96,11 +103,14 @@ struct ActivitiesView: View {
                 )
                 
                 MTButton(buttonStyle: .fill, title: "Продолжить", handle: {
-                    coordinator.userStateViewModel.choosedActivities = choosedActivities
+//                    coordinator.userStateViewModel.choosedActivities = choosedActivities
                     isShowStressScreen.toggle()
                 })
                 .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
             }
+        }
+        .onAppear {
+            choosedActivities = coordinator.userStateViewModel.choosedActivities
         }
     }
 }
@@ -115,6 +125,8 @@ struct ActivitiesChooseViewBlock: View {
     @State var isSelected: Bool = false
     
     var setSelected: ((String) -> Void)
+    var unSelected: ((String) -> Void)
+    
     var body: some View {
 
         VStack(spacing: 1) {
@@ -138,8 +150,13 @@ struct ActivitiesChooseViewBlock: View {
         }
         .padding(.top, 16)
         .onTapGesture {
-            isSelected.toggle()
-            setSelected(activitiesId)
+            if isSelected {
+                isSelected.toggle()
+                unSelected(activitiesId)
+            } else {
+                isSelected.toggle()
+                setSelected(activitiesId)
+            }
         }
     }
 }

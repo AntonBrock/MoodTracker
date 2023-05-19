@@ -24,7 +24,7 @@ extension MoodCheckView {
         @Published var choosedTimeDate: Date?
         @Published var choosedState: String?
         @Published var choosedEmotion: String?
-        @Published var choosedActivities: [String]?
+        @Published var choosedActivities: [String] = []
         @Published var choosedStress: String?
         @Published var mindText: String?
         
@@ -194,11 +194,10 @@ extension MoodCheckView {
             
             guard let stateId = choosedState else { return }
             guard let emotionId = choosedEmotion else { return }
-            guard let activities = choosedActivities else { return }
             guard let stressNumber = choosedStress else { return }
 
             Services.journalService.sendUserNote(
-                activities: activities,
+                activities: choosedActivities,
                 emotionId: emotionId,
                 stateId: stateId,
                 stressRate: stressNumber,
