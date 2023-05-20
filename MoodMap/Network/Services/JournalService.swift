@@ -13,6 +13,7 @@ protocol JournalServiceProtocol {
                               to: String,
                               completion: @escaping(Result<[JournalModel], Error>) -> Void)
     func sendUserNote(
+        createdAt: String,
         activities: [String],
         emotionId: String,
         stateId: String,
@@ -51,13 +52,15 @@ struct JournalService: JournalServiceProtocol {
         return decoder
     }()
     
-    func sendUserNote(activities: [String],
+    func sendUserNote(createdAt: String,
+                      activities: [String],
                       emotionId: String,
                       stateId: String,
                       stressRate: String,
                       text: String,
                       completion: @escaping(Result<JournalModel, Error>) -> Void) {
         let target = BaseAPI.journal(.sendUserNote(
+            createdAt: createdAt,
             activities: activities,
             emotionId: emotionId,
             stateId: stateId,

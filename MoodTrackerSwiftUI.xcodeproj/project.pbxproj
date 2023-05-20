@@ -188,6 +188,8 @@
 		45F361B02A178BAF002CD92B /* MetricsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F361AF2A178BAF002CD92B /* MetricsService.swift */; };
 		45F361B32A17D40C002CD92B /* YandexMobileMetrica in Frameworks */ = {isa = PBXBuildFile; productRef = 45F361B22A17D40C002CD92B /* YandexMobileMetrica */; };
 		45F361B52A17D40C002CD92B /* YandexMobileMetricaCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 45F361B42A17D40C002CD92B /* YandexMobileMetricaCrashes */; };
+		45FCD1A62A18B4A300B0DAF0 /* MMErrorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FCD1A52A18B4A300B0DAF0 /* MMErrorProtocol.swift */; };
+		45FCD1A92A18B4C700B0DAF0 /* MMErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FCD1A82A18B4C700B0DAF0 /* MMErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -362,6 +364,8 @@
 		45F361A22A1788E8002CD92B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45F361AF2A178BAF002CD92B /* MetricsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsService.swift; sourceTree = "<group>"; };
 		45F88C0A28D8750C00AB6153 /* MTButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTButton.swift; sourceTree = "<group>"; };
+		45FCD1A52A18B4A300B0DAF0 /* MMErrorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMErrorProtocol.swift; sourceTree = "<group>"; };
+		45FCD1A82A18B4C700B0DAF0 /* MMErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -500,6 +504,7 @@
 		451E6BB629056EC00048714B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				45FCD1A42A18B49600B0DAF0 /* Error */,
 				45A9F04F29F0FDF3002C13C5 /* Sharing */,
 				45A9F05429F1066D002C13C5 /* Auth */,
 				45B39F8E29E52DB400852E70 /* Lottie */,
@@ -1026,6 +1031,15 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		45FCD1A42A18B49600B0DAF0 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				45FCD1A52A18B4A300B0DAF0 /* MMErrorProtocol.swift */,
+				45FCD1A82A18B4C700B0DAF0 /* MMErrorView.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1152,6 +1166,7 @@
 				4529AB7029AF193F001D2390 /* UIView+extenstion.swift in Sources */,
 				45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */,
 				4529AB7129AF193F001D2390 /* UIImage+extension.swift in Sources */,
+				45FCD1A92A18B4C700B0DAF0 /* MMErrorView.swift in Sources */,
 				456A401329BA41BB00371B5C /* StatesModel.swift in Sources */,
 				4529AB7229AF193F001D2390 /* UINavigationController+extention.swift in Sources */,
 				4529AB7329AF193F001D2390 /* UIDevice+extension.swift in Sources */,
@@ -1216,6 +1231,7 @@
 				4529ABA429AF1940001D2390 /* TabBar.swift in Sources */,
 				4529ABA529AF1940001D2390 /* MTButton.swift in Sources */,
 				4504F00329D9762F0042CF6B /* DiaryModel.swift in Sources */,
+				45FCD1A62A18B4A300B0DAF0 /* MMErrorProtocol.swift in Sources */,
 				4529ABA629AF1940001D2390 /* CutomAlertView.swift in Sources */,
 				45B39F9029E52DBC00852E70 /* LottieView.swift in Sources */,
 				4592521B29C6EB9A007B1706 /* WeekAnimationChart.swift in Sources */,

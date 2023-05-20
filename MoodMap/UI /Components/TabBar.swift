@@ -101,6 +101,13 @@ struct TabBarView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
+            .sheet(isPresented: $coordinator.showErrorScreen) {
+                MMErrorView(title: $coordinator.errorTitle, dismissAction: {
+                    coordinator.isShowingMoodCheckScreen = false
+                    coordinator.showErrorScreen = false
+                })
+                    .transition(.move(edge: .bottom))
+            }
             .sheet(isPresented: $coordinator.isShowingSharingScreen) {
                 SharingView(viewModel: coordinator.journalCoordinator.viewModel.sharingJournalViewModel) {
                     coordinator.isShowingSharingScreen = false

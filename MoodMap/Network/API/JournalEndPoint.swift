@@ -10,7 +10,7 @@ import Moya
 
 enum JournalEndPoint: TargetType {
     
-    case sendUserNote(activities: [String], emotionId: String, stateId: String, stressRate: String, text: String)
+    case sendUserNote(createdAt: String, activities: [String], emotionId: String, stateId: String, stressRate: String, text: String)
     case getUserNotes(from: String?, to: String?)
 
     var baseURL: URL {
@@ -54,13 +54,15 @@ enum JournalEndPoint: TargetType {
             } else {
                 return .requestPlain
             }
-        case .sendUserNote(let activities,
+        case .sendUserNote(let createdAt,
+                           let activities,
                            let emotionId,
                            let stateId,
                            let stressRate,
                            let text):
             return .requestParameters(
                 parameters: [
+                    "created_at": createdAt,
                     "activities": activities,
                     "day_rate": 0,
                     "emotion_id": emotionId,
@@ -75,14 +77,14 @@ enum JournalEndPoint: TargetType {
     
     var headers: [String: String]? {
         switch self {
-        case .sendUserNote(_, _, _, _, _), .getUserNotes
+        case .sendUserNote(_, _, _, _, _, _), .getUserNotes
             : return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
         }
     }
     
     var authorizationType: AuthorizationType? {
         switch self {
-        case .sendUserNote(_, _, _, _, _), .getUserNotes
+        case .sendUserNote(_, _, _, _, _, _), .getUserNotes
              :return .bearer
         }
     }

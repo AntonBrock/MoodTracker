@@ -26,7 +26,10 @@ class BaseViewCoordinator: ObservableObject {
     @Published var hideCustomTabBar: Bool = false
     @Published var isShowingMoodCheckScreen: Bool = false
     @Published var isShowingSharingScreen: Bool = false
-    @Published var isNeedShowTab: Page = .home 
+    @Published var isNeedShowTab: Page = .home
+    
+    @Published var showErrorScreen: Bool = false
+    @Published var errorTitle: String = ""
     
     let container: DIContainer
     

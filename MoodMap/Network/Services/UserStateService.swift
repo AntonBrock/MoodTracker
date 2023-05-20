@@ -85,22 +85,26 @@ struct UserStateService: UserStateServiceProtocol {
         })
     }
     
-    func sendUserNote(activities: [String],
+    func sendUserNote(createdAt: String,
+                      activities: [String],
                       emotionId: String,
                       stateId: String,
                       stressRate: String,
                       text: String,
                       completion: @escaping(Result<Bool, Error>) -> Void) {
-        let target = BaseAPI.journal(.sendUserNote(activities: activities,
-                                                     emotionId: emotionId,
-                                                     stateId: stateId,
-                                                     stressRate: stressRate,
-                                                     text: text))
+        let target = BaseAPI.journal(.sendUserNote(
+            createdAt: createdAt,
+            activities: activities,
+            emotionId: emotionId,
+            stateId: stateId,
+            stressRate: stressRate,
+            text: text)
+        )
 
         let networkService = ServiceProvider().networkService
         networkService?.request(.target(target), completion: { response in
             switch response {
-            case let .success:
+            case .success:
                 completion(.success(true))
             case let .failure(error):
                 completion(.failure(error))

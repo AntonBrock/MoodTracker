@@ -106,7 +106,7 @@ struct StressCheckView: View {
                 .shadow(color: Colors.TextColors.mystic400.opacity(0.3), radius: 4.0, x: 0.0, y: 0.0)
                 
                 MTButton(buttonStyle: .fill, title: "Сохранить", handle: {
-                    if text == "У меня не выходит из головы " {
+                    if text == "У меня не выходит из головы.." {
                         text = ""
                     }
                     saveButtonDidTap(text, choosedStress, self)

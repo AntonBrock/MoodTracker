@@ -151,7 +151,8 @@ struct MoodCheckView: View {
                         MTButton(buttonStyle: .fill, title: "Продолжить") {
                             Services.metricsService.sendEventWith(eventName: .stateNextButton)
                             Services.metricsService.sendEventWith(eventType: .stateNextButton)
-
+                            
+                            userStateVideModel.choosedTimeDate = choosedTimeDate
                             coordinator.openAcitivitiesScreen(with: userStateVideModel)
                         }
                         .frame(width: UIScreen.main.bounds.width - 32, height: 44, alignment: .bottom)
@@ -244,7 +245,7 @@ struct MoodCheckView: View {
                                 formatter.locale = Locale(identifier: "ru_RU")
                                 let dateTimeString = formatter.string(from: choosedTimeDate)
                                 self.formatedTimeDate = dateTimeString
-                               
+                                
                                 self.timeViewText = "\(selectedDay?.description ?? "Сегодня")"
                                 withAnimation {
                                     showDatePicker = false

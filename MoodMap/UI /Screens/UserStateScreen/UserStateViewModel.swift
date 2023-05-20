@@ -195,8 +195,12 @@ extension MoodCheckView {
             guard let stateId = choosedState else { return }
             guard let emotionId = choosedEmotion else { return }
             guard let stressNumber = choosedStress else { return }
+            
+            guard let createdAt = choosedTimeDate else { return }
+            let rawUTC = createdAt.timeIntervalSinceReferenceDate
 
             Services.journalService.sendUserNote(
+                createdAt: "\(rawUTC)",
                 activities: choosedActivities,
                 emotionId: emotionId,
                 stateId: stateId,
@@ -209,7 +213,10 @@ extension MoodCheckView {
 
                     view.showAD(withModel: model)
                 case .failure(let error):
-                    print(error)
+                    withAnimation {
+                        self.viewer?.coordinator.parent.showErrorScreen = true
+                        self.viewer?.coordinator.parent.errorTitle = error.localizedDescription
+                    }
                 }
             }
         }
