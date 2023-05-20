@@ -132,6 +132,7 @@
 		453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */; };
 		453844DC29E40D5000A89FEE /* YandexInterstitialADView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DB29E40D5000A89FEE /* YandexInterstitialADView.swift */; };
 		453844DE29E40D5800A89FEE /* YandexInterstitialADViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DD29E40D5800A89FEE /* YandexInterstitialADViewController.swift */; };
+		453ADA122A18DADE00DCC65A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6C29AF1471001D2390 /* Assets.xcassets */; };
 		4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544361229CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift */; };
 		4546D58E29E83F1200E69852 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D58D29E83F1200E69852 /* Constants.swift */; };
 		4546D59029E841FC00E69852 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 4546D58F29E841FC00E69852 /* loader.json */; };
@@ -371,7 +372,6 @@
 		45FCD2802A18BEEE00B0DAF0 /* SplashScreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9129E52F7300852E70 /* SplashScreen.json */; };
 		45FCD2812A18BEEE00B0DAF0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6F29AF1471001D2390 /* Preview Assets.xcassets */; };
 		45FCD2832A18BEEE00B0DAF0 /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */; };
-		45FCD28A2A18C21900B0DAF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6C29AF1471001D2390 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1397,7 +1397,6 @@
 				4529AA9329AF15A9001D2390 /* Inter-SemiBold.ttf in Resources */,
 				45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */,
 				4529AA7029AF1471001D2390 /* Preview Assets.xcassets in Resources */,
-				45FCD28A2A18C21900B0DAF0 /* Assets.xcassets in Resources */,
 				453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1420,6 +1419,7 @@
 				45FCD27F2A18BEEE00B0DAF0 /* Inter-SemiBold.ttf in Resources */,
 				45FCD2802A18BEEE00B0DAF0 /* SplashScreen.json in Resources */,
 				45FCD2812A18BEEE00B0DAF0 /* Preview Assets.xcassets in Resources */,
+				453ADA122A18DADE00DCC65A /* Assets.xcassets in Resources */,
 				45FCD2832A18BEEE00B0DAF0 /* YandexMobileAdsBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

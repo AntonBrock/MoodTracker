@@ -197,10 +197,14 @@ extension MoodCheckView {
             guard let stressNumber = choosedStress else { return }
             
             guard let createdAt = choosedTimeDate else { return }
-            let rawUTC = createdAt.timeIntervalSinceReferenceDate
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+            dateFormatter.timeZone = TimeZone(abbreviation: "UTC") // Set the desired timezone
+            let dateString = dateFormatter.string(from: createdAt)
 
             Services.journalService.sendUserNote(
-                createdAt: "\(rawUTC)",
+                createdAt: dateString,
                 activities: choosedActivities,
                 emotionId: emotionId,
                 stateId: stateId,
