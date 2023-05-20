@@ -132,7 +132,7 @@
 		453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */; };
 		453844DC29E40D5000A89FEE /* YandexInterstitialADView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DB29E40D5000A89FEE /* YandexInterstitialADView.swift */; };
 		453844DE29E40D5800A89FEE /* YandexInterstitialADViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DD29E40D5800A89FEE /* YandexInterstitialADViewController.swift */; };
-		453ADA122A18DADE00DCC65A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6C29AF1471001D2390 /* Assets.xcassets */; };
+		453ADA172A18E39600DCC65A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6C29AF1471001D2390 /* Assets.xcassets */; };
 		4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544361229CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift */; };
 		4546D58E29E83F1200E69852 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D58D29E83F1200E69852 /* Constants.swift */; };
 		4546D59029E841FC00E69852 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 4546D58F29E841FC00E69852 /* loader.json */; };
@@ -1419,7 +1419,7 @@
 				45FCD27F2A18BEEE00B0DAF0 /* Inter-SemiBold.ttf in Resources */,
 				45FCD2802A18BEEE00B0DAF0 /* SplashScreen.json in Resources */,
 				45FCD2812A18BEEE00B0DAF0 /* Preview Assets.xcassets in Resources */,
-				453ADA122A18DADE00DCC65A /* Assets.xcassets in Resources */,
+				453ADA172A18E39600DCC65A /* Assets.xcassets in Resources */,
 				45FCD2832A18BEEE00B0DAF0 /* YandexMobileAdsBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1751,7 +1751,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.30020;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1761,7 +1761,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Предоставь, пожалуйста, доступ к библотеке, чтобы мы смогли сохранить снимок твоего состояния";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Нам нужно это разрешение для показа рекламы внутри приложения, которая подходит для тебя ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -1795,7 +1795,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.30020;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
@@ -1806,7 +1806,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Предоставь, пожалуйста, доступ к библотеке, чтобы мы смогли сохранить снимок твоего состояния";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Нам нужно это разрешение для показа рекламы внутри приложения, которая подходит для тебя ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -1956,7 +1956,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.30020;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1966,7 +1966,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Предоставь, пожалуйста, доступ к библотеке, чтобы мы смогли сохранить снимок твоего состояния";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Нам нужно это разрешение для показа рекламы внутри приложения, которая подходит для тебя ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -2000,7 +2000,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.30020;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
@@ -2011,7 +2011,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Предоставь, пожалуйста, доступ к библотеке, чтобы мы смогли сохранить снимок твоего состояния";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Нам нужно это разрешение для показа рекламы внутри приложения, которая подходит для тебя ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UIStatusBarStyle = "";

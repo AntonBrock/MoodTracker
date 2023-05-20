@@ -197,10 +197,6 @@ struct LaunchScreenView: View {
     }
     
     private func needShowPushNotification() -> Bool {
-        #if DEBUG
-            return false
-        #endif
-        
         withAnimation {
             if let rememberNotificationDate = AppState.shared.rememberPushNotificationDate,
                Date().timeIntervalSince(rememberNotificationDate) > Constants.timeoutRequestNotification {
