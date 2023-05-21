@@ -23,6 +23,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
     var window: UIWindow?
     var windowScene: UIWindowScene?
     
+    static var isAlreadyLaunchedOnce = false
     var isLaunched: Bool = false
         
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -42,7 +43,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         
+        if FirebaseApp.app() == nil {
+            FirebaseApp.configure()
+        }
+        
         if let windowScene = scene as? UIWindowScene {
+            
             self.windowScene = windowScene
 
             clearKeychainIfWillUnistall()
@@ -54,9 +60,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             
             let DIContainer = DIContainer(appState: appState, services: services)
             let coordinator = BaseViewCoordinator(container: DIContainer)
-            
-            FirebaseApp.configure()
-            
+                        
             if false { // check enable codePassword
                 startStory(type: .login,
                            parent: coordinator, container: DIContainer)
@@ -72,6 +76,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
                 window.makeKeyAndVisible()
             }
         }
+    }
+    
+    func sceneDidDisconnect(_ scene: UIScene) {
+        print("End Session")
     }
     
     func startStory(type: UserStoryType, parent: BaseViewCoordinator, container: DIContainer) {
