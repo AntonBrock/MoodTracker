@@ -74,6 +74,11 @@ struct DiaryView: View {
                 viewModel.sendNewDiaryPage(with: newPage)
             }
         }
+        .onDisappear {
+            withAnimation {
+                coordinator.parent.hideCustomTabBar = false
+            }
+        }
     }
     
     @ViewBuilder
@@ -95,7 +100,6 @@ struct DiaryView: View {
                     Button {
                         withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
                             dismiss()
-                            coordinator.parent.hideCustomTabBar = false
                         }
                     } label: {
                         Image("ic-navbar-backIcon-white")

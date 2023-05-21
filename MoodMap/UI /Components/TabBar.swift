@@ -100,6 +100,7 @@ struct TabBarView: View {
                     .opacity(coordinator.hideCustomTabBar ? 0 : 1)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                .edgesIgnoringSafeArea(.bottom)
             }
             .sheet(isPresented: $coordinator.showErrorScreen) {
                 MMErrorView(title: $coordinator.errorTitle, dismissAction: {
