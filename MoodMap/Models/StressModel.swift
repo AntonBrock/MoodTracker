@@ -13,8 +13,6 @@ struct StressModel: Decodable {
     let rate: Int
     let language: String
     let image: String
-    let createdAt: String?
-    let updatedAt: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -22,8 +20,6 @@ struct StressModel: Decodable {
         case rate
         case language
         case image
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
     }
     
     init(from decoder: Decoder) throws {
@@ -33,7 +29,5 @@ struct StressModel: Decodable {
         rate = try container.decode(Int.self, forKey: .rate)
         language = try container.decode(String.self, forKey: .language)
         image = try container.decode(String.self, forKey: .image)
-        createdAt = try container.decode(String.self, forKey: .createdAt)
-        updatedAt = try? container.decode(String.self, forKey: .updatedAt)
     }
 }
