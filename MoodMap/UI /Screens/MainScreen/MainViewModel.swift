@@ -270,7 +270,6 @@ extension MainView {
             formatter.calendar = Calendar(identifier: .iso8601)
             formatter.locale = Locale(identifier: "en_US_POSIX")
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-            formatter.timeZone = TimeZone(identifier: "UTC")
             let timeDate = formatter.string(from: time)
             
             if let timeDate = formatter.date(from: timeDate) {
