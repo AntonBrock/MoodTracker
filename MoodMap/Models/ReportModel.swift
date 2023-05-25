@@ -87,7 +87,7 @@ struct ReportModel: Decodable {
     struct TimeData: Decodable {
         let bestTime: String
         let worstTime: String
-        let dayParts: String?
+        let dayParts: [DayParts]
         
         enum CodingKeys: String, CodingKey {
             case bestTime = "best_time"
@@ -99,7 +99,12 @@ struct ReportModel: Decodable {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             bestTime = try container.decode(String.self, forKey: .bestTime)
             worstTime = try container.decode(String.self, forKey: .worstTime)
-            dayParts = try? container.decode(String.self, forKey: .dayParts)
+            dayParts = try container.decode([DayParts].self, forKey: .dayParts)
+        }
+        
+        struct DayParts: Decodable {
+            let time: String
+            let text: String?
         }
     }
     

@@ -541,11 +541,13 @@ extension ReportScreen {
                 dataIsEmpty: emotionCountData.total == 0 ? true : false
             )
             
+            let dayParts: [DayParts] = getDayParts(model: timeData.dayParts)
+            
             timeDataViewModel = TimeDataViewModel(
                 bestTime: timeData.bestTime,
                 worstTime: timeData.worstTime,
-                dayParts: timeData.dayParts,
-                dataIsEmpty: (timeData.dayParts != nil) ? false : true
+                dayParts: dayParts,
+                dataIsEmpty: dayParts.isEmpty
             )
             
             goodActivitiesReportDataViewModel = GoodActivitiesReportDataViewModel(
@@ -594,6 +596,26 @@ extension ReportScreen {
                 timeData: timeDataViewModel,
                 goodActivitiesReportData: goodActivitiesReportDataViewModel,
                 badActivitiesReportData: badActivitiesReportDataViewModel)
+        }
+        
+        private func getDayParts(model: [ReportModel.TimeData.DayParts]) -> [DayParts] {
+            var dayParts: [DayParts] = []
+            
+            model.forEach { model in
+                switch model.time {
+                case "morning":
+                    dayParts.append(DayParts(time: "Утро", text: model.text ?? "Неизвестно"))
+                case "afternoon":
+                    dayParts.append(DayParts(time: "День", text: model.text ?? "Неизвестно"))
+                case "evening":
+                    dayParts.append(DayParts(time: "Вечер", text: model.text ?? "Неизвестно"))
+                case "night":
+                    dayParts.append(DayParts(time: "Ночь", text: model.text ?? "Нет статистики"))
+                default: return
+                }
+            }
+            
+            return dayParts
         }
         
         private func mappingColorForEmotionStress(with stressTitle: String) -> Color {
@@ -659,8 +681,13 @@ struct EmotionCountDataViewModel: Equatable {
 struct TimeDataViewModel {
     let bestTime: String
     let worstTime: String
-    let dayParts: String?
+    let dayParts: [DayParts]?
     var dataIsEmpty: Bool
+}
+
+struct DayParts {
+    let time: String
+    let text: String?
 }
 
 struct GoodActivitiesReportDataViewModel {

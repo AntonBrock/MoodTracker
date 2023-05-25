@@ -26,7 +26,7 @@ extension MainView {
         @Published var timeData: TimeDataViewModel = TimeDataViewModel(
             bestTime: "",
             worstTime: "",
-            dayParts: "",
+            dayParts: nil,
             dataIsEmpty: true
         )
         
@@ -158,7 +158,7 @@ extension MainView {
             timeData = TimeDataViewModel(
                 bestTime: "",
                 worstTime: "",
-                dayParts: "",
+                dayParts: nil,
                 dataIsEmpty: true
             )
             
@@ -232,15 +232,16 @@ extension MainView {
             let timeData = data.timeData
             var timeDataViewModel: TimeDataViewModel?
 
+            let dayParts: [DayParts] = getDayParts(model: timeData.dayParts)
+
             timeDataViewModel = TimeDataViewModel(
                 bestTime: timeData.bestTime,
                 worstTime: timeData.worstTime,
-                dayParts: timeData.dayParts,
-                dataIsEmpty: timeData.dayParts == nil ? true : false
+                dayParts: dayParts,
+                dataIsEmpty: dayParts.isEmpty
             )
             
             guard let timeDataViewModel = timeDataViewModel else { fatalError() }
-            
             return timeDataViewModel
         }
         
@@ -279,6 +280,26 @@ extension MainView {
             } else {
                 return ""
             }
+        }
+        
+        private func getDayParts(model: [ReportModel.TimeData.DayParts]) -> [DayParts] {
+            var dayParts: [DayParts] = []
+            
+            model.forEach { model in
+                switch model.time {
+                case "morning":
+                    dayParts.append(DayParts(time: "Утро", text: model.text ?? "Неизвестно"))
+                case "afternoon":
+                    dayParts.append(DayParts(time: "День", text: model.text ?? "Неизвестно"))
+                case "evening":
+                    dayParts.append(DayParts(time: "Вечер", text: model.text ?? "Неизвестно"))
+                case "night":
+                    dayParts.append(DayParts(time: "Ночь", text: model.text ?? "Неизвестно"))
+                default: return
+                }
+            }
+            
+            return dayParts
         }
         
         private func getTitle(with state: JournalViewModel.State) -> String {

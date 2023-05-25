@@ -27,15 +27,16 @@ struct DayilyCharts: View {
                         .padding(.top, 16)
                 }
             } else {
+                
                 VStack {
-                    createDaylyView("Утро", state: "Нет данных", colors: [Color(hex: "7392FC"), Color(hex: "FFC8C8")])
-                    createDaylyView("Вечер", state: "Нет данных", colors: [Color(hex: "86E9C5"), Color(hex: "0B98C5")])
+                    createDaylyView("Утро", state: viewModel.dayParts?.filter({ $0.time == "Утро"})[0].text ?? "Нет статистики", colors: [Color(hex: "7392FC"), Color(hex: "FFC8C8")])
+                    createDaylyView("Вечер", state: viewModel.dayParts?.filter({ $0.time == "Вечер"})[0].text ?? "Нет статистики", colors: [Color(hex: "86E9C5"), Color(hex: "0B98C5")])
                         .padding(.top, 16)
                 }
                 
                 VStack {
-                    createDaylyView("День", state: "Нет данных", colors: [Color(hex: "FFC8C8"), Color(hex: "FFC794")])
-                    createDaylyView("Ночь", state: "Нет данных", colors: [Color(hex: "0B98C5"), Color(hex: "7E46B9")])
+                    createDaylyView("День", state: viewModel.dayParts?.filter({ $0.time == "День"})[0].text ?? "Нет статистики", colors: [Color(hex: "FFC8C8"), Color(hex: "FFC794")])
+                    createDaylyView("Ночь", state: viewModel.dayParts?.filter({ $0.time == "Ночь"})[0].text ?? "Нет статистики", colors: [Color(hex: "0B98C5"), Color(hex: "7E46B9")])
                         .padding(.top, 16)
                 }
             }
@@ -58,15 +59,16 @@ struct DayilyCharts: View {
                         Text(title)
                             .font(.system(size: 12, weight: .medium))
                             .foregroundColor(.white.opacity(0.6))
+                            .padding(.top, 5)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 12)
+                    .padding(.top, 18)
 
                     Text(state)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                        .padding(.bottom, 10)
+                        .padding(.bottom, 25)
                         .fixedSize(horizontal: true, vertical: false)
                         .lineLimit(3)
                         .padding(.leading, -5)
