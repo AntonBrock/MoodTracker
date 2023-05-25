@@ -28,7 +28,7 @@ struct ReportTipView: View {
         VStack {
             Capsule()
                 .fill(Color.white)
-                .frame(maxWidth: UIScreen.main.bounds.width - 32, minHeight: 40, maxHeight: .infinity)
+                .frame(maxWidth: UIScreen.main.bounds.width - 32, minHeight: 65, maxHeight: .infinity)
                 .shadow(color: Colors.Primary.lightGray.opacity(0.5), radius: 5, x: 0, y: 0)
                 .overlay(
                     HStack {
@@ -47,8 +47,8 @@ struct ReportTipView: View {
                                     .foregroundColor(Colors.Primary.blue) +
                                 
                                 Text(" а мы соберем среднее значение и покажем тебе ☺️")
-                                    .foregroundColor(getColorFor(tipType))
                                     .font(.system(size: 14, weight: .light))
+                                    .foregroundColor(getColorFor(tipType))
                             }
                             
                         } else {

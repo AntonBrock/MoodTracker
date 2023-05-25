@@ -77,25 +77,26 @@ struct ContentView: View {
                     }
                 }, logoutAction: {
                     
-                    notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
-                
                     withAnimation {
-                        Services.authService.logout { result in
-                            switch result {
-                            case .success:
-                                AppState.shared.isLogin = false
-                                AppState.shared.jwtToken = nil
-                                AppState.shared.refreshToken = nil
-                                
+                        coordinator.showLogoutView.toggle()
+                        notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
+                    }
+                    
+                    Services.authService.logout { result in
+                        switch result {
+                        case .success:
+                            AppState.shared.isLogin = false
+                            AppState.shared.jwtToken = nil
+                            AppState.shared.refreshToken = nil
+                            
+                            withAnimation {
                                 notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
                                 
                                 AppState.shared.notificationCenter.post(name: Notification.Name.MainScreenNotification, object: nil)
                                 AppState.shared.notificationCenter.post(name: Notification.Name.JournalScreenNotification, object: nil)
-                                
-                                coordinator.showLogoutView.toggle()
-                            case let .failure(error):
-                                print(error)
                             }
+                        case let .failure(error):
+                            print(error)
                         }
                     }
                 }, deleteAction: {
