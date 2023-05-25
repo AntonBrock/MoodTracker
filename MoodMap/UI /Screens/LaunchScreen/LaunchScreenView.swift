@@ -202,15 +202,19 @@ struct LaunchScreenView: View {
     }
     
     private func needShowPushNotification() -> Bool {
-        withAnimation {
-            if let rememberNotificationDate = AppState.shared.rememberPushNotificationDate,
-               Date().timeIntervalSince(rememberNotificationDate) > Constants.timeoutRequestNotification {
-                AppState.shared.rememberPushNotificationDate = Date()
-                return true
-            } else if AppState.shared.rememberPushNotificationDate == nil {
-                AppState.shared.rememberPushNotificationDate = Date()
-                return true
-            } else { return false }
-        }
+        #if MoodMap
+            withAnimation {
+                if let rememberNotificationDate = AppState.shared.rememberPushNotificationDate,
+                   Date().timeIntervalSince(rememberNotificationDate) > Constants.timeoutRequestNotification {
+                    AppState.shared.rememberPushNotificationDate = Date()
+                    return true
+                } else if AppState.shared.rememberPushNotificationDate == nil {
+                    AppState.shared.rememberPushNotificationDate = Date()
+                    return true
+                } else { return false }
+            }
+        #endif
+        
+        return false
     }
 }

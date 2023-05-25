@@ -46,11 +46,14 @@ struct PersonalCabinetView: View {
                         .padding(.top, 16)
                         .padding(.horizontal, 24)
                     
+                    #if MoodMap
+                    
                     VStack(spacing: 12) {
                         Text("ОСНОВНОЕ")
                             .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
                             .foregroundColor(Colors.Primary.lightGray)
                             .font(.system(size: 12))
+                        
                         
                         VStack {
                             Toggle(isOn: $pushNotification) {
@@ -86,6 +89,8 @@ struct PersonalCabinetView: View {
                     }
                     .background(Colors.Primary.lightWhite)
                     
+                    #endif
+                    
                     VStack(spacing: 12) {
                         Text("ДОПОЛНИТЕЛЬНОЕ")
                             .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
@@ -111,6 +116,7 @@ struct PersonalCabinetView: View {
                             }
                         }
                         
+                        #if MoodMap
                         VStack {
                             createArrowBlock("Пользовательское соглашение")
                                 .frame(width: UIScreen.main.bounds.width - 32, height: 64)
@@ -121,6 +127,8 @@ struct PersonalCabinetView: View {
                         .padding(.horizontal, 24)
                         .background(.white)
                         .padding(.top, -12)
+                        
+                        #endif
                     }
                     .background(Colors.Primary.lightWhite)
                 }

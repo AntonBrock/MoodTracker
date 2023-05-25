@@ -76,7 +76,7 @@ struct ReportTipView: View {
         case .badActivities: return (text, selectedText)
         case .badActivitiesStress: return (text, selectedText)
         case .commonEmotionState: return (text, selectedText)
-        case .commonEmotionStateStress: return ("Твой уровень стресса на этой неделе в большинстве случаев", selectedText)
+        case .commonEmotionStateStress: return ("Твой уровень стресса на этой неделе в большинстве случаев ", selectedText)
         case .goodActivities: return (text, selectedText)
         case .goodActivitiesStress: return (text, selectedText)
         }
