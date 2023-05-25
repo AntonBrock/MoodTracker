@@ -20,7 +20,7 @@ struct MonthChart: View {
     
     @State var currentDate: Date = Date()
     @State var currentMonth: Int = 0
-
+        
     var body: some View {
         VStack {
             let days: [String] = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"]
@@ -61,8 +61,8 @@ struct MonthChart: View {
                             viewModel?.fetchCurrentDate(
                                 date: currentDate,
                                 completion: { subReportInfo in
-                                    self.subReportInfo = subReportInfo
-                            })
+                                    self.subReportInfo = subReportInfo.sorted(by: { $0.time > $1.time })
+                                })
                         }
                 }
             }

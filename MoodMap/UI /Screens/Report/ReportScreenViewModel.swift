@@ -421,6 +421,7 @@ extension ReportScreen {
                             self.showNeedMoreData = true
                         } else {
                             self.showLoader = false
+                            self.showNeedMoreData = false
                         }
                     case .failure(let error):
                         print(error)
@@ -588,7 +589,7 @@ extension ReportScreen {
             self.badActivitiesDataViewModel = badActivitiesReportDataViewModel
 
             return ReportViewModel(
-                chartData: chartDataViewModel,
+                chartData: chartDataViewModel.sorted(by: { $0.date < $1.date }),
                 emotionCountData: emotionCountDataViewModel,
                 timeData: timeDataViewModel,
                 goodActivitiesReportData: goodActivitiesReportDataViewModel,

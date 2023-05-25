@@ -32,6 +32,8 @@ struct ReportScreen: View {
     @State var isSelectedFirstDateInRange: Bool = false
     @State var isSelectedSecondDateInRange: Bool = false
     @State var isAnimated = true
+    
+    @State var globalLoader: Bool = false
         
     var dateTitles: [String] = ["Неделя", "Месяц"] // "Все время"
 
@@ -112,15 +114,17 @@ struct ReportScreen: View {
                             .foregroundColor(Colors.Primary.blue)
                             .font(.system(size: 14, weight: .semibold))
                             .frame(maxWidth: .infinity, alignment: .center)
+                            .padding(.leading, -48)
                         
-                        Spacer()
+                        //                        Spacer()
                         
-                        Image("rc-ic-information")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .onTapGesture {
-                                informationDidTap()
-                            }
+                        #warning("TODO: Вернем в публичной версии")
+                        //                        Image("rc-ic-information")
+                        //                            .resizable()
+                        //                            .frame(width: 24, height: 24)
+                        //                            .onTapGesture {
+                        //                                informationDidTap()
+                        //                            }
                         
                         
                     }

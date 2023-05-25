@@ -57,7 +57,7 @@ struct WeekAnimationChart: View {
                         .frame(maxHeight: .infinity, alignment: .center)
                     } else {
                         Chart {
-                            ForEach (weekChartViewModel) { item in
+                            ForEach (weekChartViewModel.sorted(by: { $0.date < $1.date })) { item in
                                 LineMark(
                                     x: .value("day", item.date),
                                     y: .value("emotion", item.dayRate)

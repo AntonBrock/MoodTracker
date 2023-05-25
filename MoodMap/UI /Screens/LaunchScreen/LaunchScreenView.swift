@@ -137,7 +137,12 @@ struct LaunchScreenView: View {
                 case .success:
                     completion()
                 case .failure(let error):
-                    print(error)
+                    guard let errorLocaloze = error as? MMError else { return }
+                   
+                    if errorLocaloze == .defined(.tokenUndefined) {
+                        AppState.shared.jwtToken = nil
+                        completion()
+                    }
                 }
             }
         } else {
