@@ -215,14 +215,18 @@ struct MainView: View {
                 Image(getCurrentStateImageByTime())
                     .resizable()
                     .foregroundColor(.green)
-                    .frame(width: 158, height: 158)
+                    .frame(width: 175, height: 145)
             }
             .frame(alignment: .bottomTrailing)
             .padding(.trailing, -20)
             .padding(.top, 40)
         }
         .frame(maxWidth: .infinity, maxHeight: 140.0, alignment: .leading)
-        .background(LinearGradient(colors: getColorByTime(), startPoint: .topLeading, endPoint: .bottomTrailing))
+        .background(LinearGradient(
+            colors: getColorByTime(),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing)
+        )
         .compositingGroup()
         .cornerRadius(20)
         .padding(.horizontal, 20)
@@ -352,11 +356,17 @@ struct MainView: View {
     private func getColorByTime() -> [Color] {
         let hour = Calendar.current.component(.hour, from: Date())
         switch hour {
-        case 6..<12: return [Colors.Secondary.malibu600Blue, Colors.Secondary.yourPinkRed400]
-        case 12: return [Colors.Secondary.yourPinkRed400, Colors.Secondary.peachOrange500Orange]
-        case 13..<17: return [Colors.Secondary.yourPinkRed400, Colors.Secondary.peachOrange500Orange]
-        case 17..<22: return [Colors.Secondary.riptide500Green, Color(hex: "0B98C5")]
-        default: return  [Color(hex: "0B98C5"), Color(hex: "7E46B9")]
+        case 6..<12: return [Color(hex: "7392FC"),
+                             Colors.Secondary.yourPinkRed400]
+        case 12: return [Colors.Secondary.yourPinkRed400,
+                         Colors.Secondary.peachOrange500Orange]
+        case 13..<17: return [Colors.Secondary.yourPinkRed400,
+                              Colors.Secondary.peachOrange500Orange]
+        case 17..<22: return [Color(hex: "86E9C5"),
+                              Color(hex: "0B98C5")]
+        default: return  [Color(hex: "0B98C5"),
+                          Color(hex: "11AADF"),
+                          Color(hex: "7A42B6")]
         }
     }
     
@@ -376,11 +386,11 @@ struct MainView: View {
         let hour = Calendar.current.component(.hour, from: Date())
 
         switch hour {
-        case 6..<12: return "ch-ic-veryGood"
-        case 12: return "ch-ic-veryGood"
-        case 13..<17: return "ch-ic-veryGood"
-        case 17..<22: return "ch-ic-veryGood"
-        default: return "ch-ic-fine"
+        case 6..<12: return "ic-ch-generalIconDay"
+        case 12: return "ic-ch-generalIconDay"
+        case 13..<17: return "ic-ch-generalIconDay"
+        case 17..<22: return "ic-ch-generalIconDay"
+        default: return "ic-ch-nightDay"
         }
     }
     
@@ -388,10 +398,10 @@ struct MainView: View {
         let hour = Calendar.current.component(.hour, from: Date())
 
         switch hour {
-        case 6..<12: return NSLocalizedString("Рад, начать\nдень с тобой", comment: "Рад, начать\nдень с тобой")
+        case 6..<12: return NSLocalizedString("Рады начать\nдень с тобой", comment: "Рады начать\nдень с тобой")
         case 12: return NSLocalizedString("Как приятно,\nчто ты здесь", comment: "Как приятно,\nчто ты здесь")
         case 13..<17: return NSLocalizedString("Как приятно,\nчто ты здесь", comment: "Как приятно,\nчто ты здесь")
-        case 17..<22: return NSLocalizedString("Рад, что ты\nздесь со мной", comment: "Рад, что ты\nздесь со мной")
+        case 17..<22: return NSLocalizedString("Рады, что ты\nздесь со мной", comment: "Рады, что ты\nздесь со мной")
         default: return NSLocalizedString("Спасибо,\nчто ты есть", comment: "Спасибо,\nчто ты есть")
         }
     }

@@ -226,10 +226,10 @@ struct PersonalCabinetView: View {
             }
             
             HStack {
-                Image(isLogin ? "ch-ic-good" : "ch-ic-fine")
+                Image(isLogin ? "ic-loginUser" : "ic-ch-nightDay")
                     .resizable()
                     .foregroundColor(.green)
-                    .frame(width: 135, height: 140)
+                    .frame(width: isLogin ? 155 : 155, height: isLogin ? 150 : 135)
             }
             .frame(maxWidth: 135, maxHeight: 140, alignment: .bottomTrailing)
             .padding(.bottom, -20)
