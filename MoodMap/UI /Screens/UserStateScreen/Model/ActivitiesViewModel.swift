@@ -12,4 +12,6 @@ struct ActivitiesViewModel {
     let text: String
     let language: String
     let image: String
+    let created_at: String?
+    let updated_at: String?
 }

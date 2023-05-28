@@ -75,7 +75,11 @@ struct TabBarView: View {
                                 
                                 if AppState.shared.isLogin ?? false {
                                     withAnimation {
-                                        coordinator.isShowingMoodCheckScreen.toggle()
+                                        if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
+                                            coordinator.showLimitsView = true
+                                        } else {
+                                            coordinator.isShowingMoodCheckScreen.toggle()
+                                        }
                                     }
                                 } else {
                                     withAnimation {
@@ -102,6 +106,12 @@ struct TabBarView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 .edgesIgnoringSafeArea(.bottom)
             }
+            .sheet(isPresented: $coordinator.showLimitsView) {
+                UserLimitsView {
+                    coordinator.showLimitsView = false
+                }
+                    .transition(.move(edge: .bottom))
+            }
             .sheet(isPresented: $coordinator.showErrorScreen) {
                 MMErrorView(title: $coordinator.errorTitle, dismissAction: {
                     coordinator.isShowingMoodCheckScreen = false
@@ -115,7 +125,7 @@ struct TabBarView: View {
                 }
             }
             .sheet(isPresented: $coordinator.isShowingMoodCheckScreen) {
-                print("dissmiss moodCheckScreen ")
+                print("dissmiss moodCheckScreen")
                 coordinator.moodCheckCoordinator = nil
                 coordinator.initMoodCheckCoordinator()
             } content: {

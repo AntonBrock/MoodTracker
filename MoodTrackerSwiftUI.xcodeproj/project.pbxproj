@@ -138,6 +138,8 @@
 		4546D59029E841FC00E69852 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 4546D58F29E841FC00E69852 /* loader.json */; };
 		4546D59329E844CD00E69852 /* PushNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D59229E844CD00E69852 /* PushNotificationView.swift */; };
 		4546D59929E86BFF00E69852 /* ATTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D59829E86BFF00E69852 /* ATTView.swift */; };
+		45660B9B2A23589F00077CBF /* UserLimitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45660B9A2A23589F00077CBF /* UserLimitsView.swift */; };
+		45660B9C2A235B8700077CBF /* UserLimitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45660B9A2A23589F00077CBF /* UserLimitsView.swift */; };
 		456A400829B75DD200371B5C /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400729B75DD200371B5C /* UserStateEndPoint.swift */; };
 		456A400A29B75DDB00371B5C /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400929B75DDB00371B5C /* UserStateService.swift */; };
 		456A400C29B76AF800371B5C /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400B29B76AF800371B5C /* JournalViewModel.swift */; };
@@ -467,6 +469,7 @@
 		4546D59829E86BFF00E69852 /* ATTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTView.swift; sourceTree = "<group>"; };
 		45470CB328E5BEE1004822E0 /* ActivitiesBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesBarCharsView.swift; sourceTree = "<group>"; };
 		4551C3F32959A2040034665E /* UIView+extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extenstion.swift"; sourceTree = "<group>"; };
+		45660B9A2A23589F00077CBF /* UserLimitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLimitsView.swift; sourceTree = "<group>"; };
 		456750AF29744FB100392992 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		456750B129744FB800392992 /* LoginViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewCoordinator.swift; sourceTree = "<group>"; };
 		456750B329744FC100392992 /* LoginCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinatorView.swift; sourceTree = "<group>"; };
@@ -713,6 +716,7 @@
 		451E6BB629056EC00048714B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				45660B972A23588D00077CBF /* Limits */,
 				45FCD1A42A18B49600B0DAF0 /* Error */,
 				45A9F04F29F0FDF3002C13C5 /* Sharing */,
 				45A9F05429F1066D002C13C5 /* Auth */,
@@ -1021,6 +1025,14 @@
 				4546D59829E86BFF00E69852 /* ATTView.swift */,
 			);
 			path = ATT;
+			sourceTree = "<group>";
+		};
+		45660B972A23588D00077CBF /* Limits */ = {
+			isa = PBXGroup;
+			children = (
+				45660B9A2A23589F00077CBF /* UserLimitsView.swift */,
+			);
+			path = Limits;
 			sourceTree = "<group>";
 		};
 		456750AE29744F9700392992 /* LoginScreen */ = {
@@ -1435,6 +1447,7 @@
 				4529AB6F29AF193F001D2390 /* SynchronizedDictionary.swift in Sources */,
 				453844DC29E40D5000A89FEE /* YandexInterstitialADView.swift in Sources */,
 				4529AB7029AF193F001D2390 /* UIView+extenstion.swift in Sources */,
+				45660B9B2A23589F00077CBF /* UserLimitsView.swift in Sources */,
 				45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */,
 				4529AB7129AF193F001D2390 /* UIImage+extension.swift in Sources */,
 				45FCD1A92A18B4C700B0DAF0 /* MMErrorView.swift in Sources */,
@@ -1692,6 +1705,7 @@
 				45FCD2312A18BEEE00B0DAF0 /* MainViewCoordinator.swift in Sources */,
 				45FCD2322A18BEEE00B0DAF0 /* MainCoordinatorView.swift in Sources */,
 				45FCD2332A18BEEE00B0DAF0 /* DiaryView.swift in Sources */,
+				45660B9C2A235B8700077CBF /* UserLimitsView.swift in Sources */,
 				45FCD2342A18BEEE00B0DAF0 /* DiaryViewCoordinator.swift in Sources */,
 				45FCD2352A18BEEE00B0DAF0 /* DiaryCoordinatorView.swift in Sources */,
 				45FCD2362A18BEEE00B0DAF0 /* DetailJournalView.swift in Sources */,

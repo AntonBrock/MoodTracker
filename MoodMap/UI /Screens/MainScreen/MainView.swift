@@ -55,7 +55,11 @@ struct MainView: View {
                     .padding(.top, 10)
                     .onTapGesture {
                         if AppState.shared.isLogin ?? false {
-                            coordinator.openMoodCheckScreen()
+                            if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
+                                coordinator.parent.showLimitsView = true
+                            } else {
+                                coordinator.openMoodCheckScreen()
+                            }
                         } else {
                             withAnimation {
                                 coordinator.parent.showAuthLoginView = true

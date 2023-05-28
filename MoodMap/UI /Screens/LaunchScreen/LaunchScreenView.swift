@@ -98,6 +98,7 @@ struct LaunchScreenView: View {
                         // тут делаем запрос на данные для Главного экрана потом и вырубаем либо при показе АТТ, Пушах, Главной
                         if AppState.shared.isLogin ?? false {
                             getUserInfo {
+                                
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                     withAnimation(.spring()) {
                                         animatedIsFinished = true
@@ -135,7 +136,21 @@ struct LaunchScreenView: View {
             Services.authService.refreshToken { result in
                 switch result {
                 case .success:
-                    completion()
+                    Services.authService.getUserInfo() { result in
+                        switch result {
+                        case let .success(model):
+                            AppState.shared.userName = model.username
+                            AppState.shared.userEmail = model.email
+                            AppState.shared.userPushNotification = model.settings.notifications
+                            AppState.shared.userLanguage = model.settings.language
+                            AppState.shared.userLimits = model.limits[0].currentValue
+                            AppState.shared.maximumValueOfLimits = model.limits[0].maximumValue
+
+                            completion()
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
                 case .failure(let error):
                     guard let errorLocaloze = error as? MMError else { return }
                    
@@ -153,7 +168,8 @@ struct LaunchScreenView: View {
                     AppState.shared.userEmail = model.email
                     AppState.shared.userPushNotification = model.settings.notifications
                     AppState.shared.userLanguage = model.settings.language
-                    
+                    AppState.shared.userLimits = model.limits[0].currentValue
+                    AppState.shared.maximumValueOfLimits = model.limits[0].maximumValue
                     completion()
                 case .failure(let error):
                     print(error)

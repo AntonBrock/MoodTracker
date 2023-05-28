@@ -18,6 +18,7 @@ struct EmotionBoardView: View {
     
     var openMoodCheckScreenDidTap: (() -> Void)
     var showAuthViewAction: (() -> Void)
+    var showLimitsView: (() -> Void)
     
     var body: some View {
         
@@ -27,7 +28,11 @@ struct EmotionBoardView: View {
                     .frame(maxHeight: .infinity, alignment: .top)
                     .onTapGesture {
                         if AppState.shared.isLogin ?? false {
-                            openMoodCheckScreenDidTap()
+                            if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
+                                showLimitsView()
+                            } else {
+                                openMoodCheckScreenDidTap()
+                            }
                         } else {
                             showAuthViewAction()
                         }

@@ -8,17 +8,17 @@
 import Foundation
 
 struct JournalModel: Decodable {
-    
+            
     let id: String
-    let stressRate: String
+    let text: String
     let createdAt: Date
     let updatedAt: Date?
     let stateId: String
     let emotionId: String
-    let text: String
+    let stressRate: String
     let userId: String
     let activities: [ActivitiesModel]
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case text
@@ -28,7 +28,7 @@ struct JournalModel: Decodable {
         case emotionId = "emotion_id"
         case userId = "user_id"
         case stateId = "state_id"
-        case activities
+        case activities = "activities"
     }
     
     init(from decoder: Decoder) throws {

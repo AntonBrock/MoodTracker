@@ -67,10 +67,14 @@ extension JournalView {
                     id: i.id,
                     state: self.getState(from: i.stateId),
                     title: self.getTitle(with: self.getState(from: i.stateId)),
-                    activities: i.activities.map({ ActivitiesViewModel(id: $0.id,
-                                                                       text: $0.text,
-                                                                       language: $0.language,
-                                                                       image: $0.image)}),
+                    activities: i.activities.map({ ActivitiesViewModel(
+                        id: $0.id,
+                        text: $0.text,
+                        language: $0.language,
+                        image: $0.image,
+                        created_at: nil,
+                        updated_at: nil
+                    )}),
                     color: self.getColors(with: self.getState(from: i.stateId)),
                     stateImage: self.getStateImage(from: i.stateId),
                     emotionImage: self.getEmotionImage(from: i.emotionId),

@@ -93,6 +93,10 @@ struct JournalView: View {
                                 withAnimation {
                                     coordinator.parent.showAuthLoginView = true
                                 }
+                            } showLimitsView: {
+                                withAnimation {
+                                    coordinator.parent.showLimitsView = true
+                                }
                             }
                         }
                         .background(.white)

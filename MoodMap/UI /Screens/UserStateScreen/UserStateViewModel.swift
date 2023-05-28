@@ -160,7 +160,10 @@ extension MoodCheckView {
                             id: $0.id,
                             text: $0.text,
                             language: $0.language,
-                            image: $0.image)
+                            image: $0.image,
+                            created_at: nil,
+                            updated_at: nil
+                        )
                         })
                     group.leave()
                 case .failure(let error):

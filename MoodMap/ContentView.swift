@@ -88,7 +88,9 @@ struct ContentView: View {
                             AppState.shared.isLogin = false
                             AppState.shared.jwtToken = nil
                             AppState.shared.refreshToken = nil
-                            
+                            AppState.shared.userLimits = nil
+                            AppState.shared.maximumValueOfLimits = nil
+
                             withAnimation {
                                 notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
                                 

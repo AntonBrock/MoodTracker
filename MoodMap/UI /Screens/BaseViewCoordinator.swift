@@ -19,6 +19,8 @@ class BaseViewCoordinator: ObservableObject {
     @Published var activitiesCoordinator: ActivitiesViewCoodinator!
         
     @Published var showAuthLoginView: Bool = false
+    @Published var showLimitsView: Bool = false
+    
     @Published var showLogoutView: Bool = false
     @Published var isShowingWhyResgistration: Bool = false
     @Published var showDeleteAccountView: Bool = false

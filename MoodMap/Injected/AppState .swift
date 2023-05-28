@@ -32,6 +32,8 @@ final class AppState: ObservableObject {
         static let userPushNotification = "userPushNotification"
         static let userLanguage = "userLanguage"
         static let userEmail = "userEmail"
+        static let userLimits = "userLimits"
+        static let maximumValueOfLimits = "maximumValueOfLimits"
     }
     
     var timezone: String? {
@@ -109,6 +111,24 @@ final class AppState: ObservableObject {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userEmail)
+        }
+    }
+    
+    var userLimits: Int? {
+        get {
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.userLimits)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userLimits)
+        }
+    }
+    
+    var maximumValueOfLimits: Int? {
+        get {
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.maximumValueOfLimits)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.maximumValueOfLimits)
         }
     }
         
