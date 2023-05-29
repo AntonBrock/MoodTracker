@@ -54,9 +54,6 @@ extension PersonalCabinetView {
         }
         
         func getUserInfo() {
-            notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
-            notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
-
             Services.authService.getUserInfo() { [weak self] result in
                 switch result {
                 case .success(let model):
@@ -71,6 +68,12 @@ extension PersonalCabinetView {
                     AppState.shared.userEmail = model.email
                     AppState.shared.userPushNotification = model.settings.notifications
                     AppState.shared.userLanguage = model.settings.language
+                    AppState.shared.userLimits = model.limits[0].currentValue
+                    AppState.shared.maximumValueOfLimits = model.limits[0].maximumValue
+                    AppState.shared.timezone = model.settings.timezone
+                    
+                    self?.notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
+                    self?.notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
                 case .failure(let error):
                     print(error)
                 }
