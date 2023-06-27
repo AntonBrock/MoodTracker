@@ -132,7 +132,6 @@
 		453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */; };
 		453844DC29E40D5000A89FEE /* YandexInterstitialADView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DB29E40D5000A89FEE /* YandexInterstitialADView.swift */; };
 		453844DE29E40D5800A89FEE /* YandexInterstitialADViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DD29E40D5800A89FEE /* YandexInterstitialADViewController.swift */; };
-		453ADA172A18E39600DCC65A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6C29AF1471001D2390 /* Assets.xcassets */; };
 		4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544361229CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift */; };
 		4546D58E29E83F1200E69852 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D58D29E83F1200E69852 /* Constants.swift */; };
 		4546D59029E841FC00E69852 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 4546D58F29E841FC00E69852 /* loader.json */; };
@@ -181,6 +180,7 @@
 		45B721442A4AD44500CAB76B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721432A4AD44500CAB76B /* OneSignalExtension */; };
 		45B721462A4AD46A00CAB76B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721452A4AD46A00CAB76B /* OneSignal */; };
 		45B721482A4AD47000CAB76B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721472A4AD47000CAB76B /* OneSignalExtension */; };
+		45B7214B2A4B093B00CAB76B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6C29AF1471001D2390 /* Assets.xcassets */; };
 		45C200C129D317F80087B0E3 /* String+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C200C029D317F80087B0E3 /* String+Extenstion.swift */; };
 		45D06AF22A1608CB0047D6FA /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 45D06AF12A1608CB0047D6FA /* JWTDecode */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
@@ -1500,6 +1500,7 @@
 				4529AA9329AF15A9001D2390 /* Inter-SemiBold.ttf in Resources */,
 				45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */,
 				4529AA7029AF1471001D2390 /* Preview Assets.xcassets in Resources */,
+				45B7214B2A4B093B00CAB76B /* Assets.xcassets in Resources */,
 				453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1529,7 +1530,6 @@
 				45FCD27F2A18BEEE00B0DAF0 /* Inter-SemiBold.ttf in Resources */,
 				45FCD2802A18BEEE00B0DAF0 /* SplashScreen.json in Resources */,
 				45FCD2812A18BEEE00B0DAF0 /* Preview Assets.xcassets in Resources */,
-				453ADA172A18E39600DCC65A /* Assets.xcassets in Resources */,
 				45FCD2832A18BEEE00B0DAF0 /* YandexMobileAdsBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OneSignal
 
 extension PersonalCabinetView {
     class ViewModel: ObservableObject {
@@ -57,6 +58,16 @@ extension PersonalCabinetView {
             Services.authService.getUserInfo() { [weak self] result in
                 switch result {
                 case .success(let model):
+                    
+                    // Проверка были ли включены пуши у юезра, если не было запроса - спросить
+                    OneSignal.promptForPushNotifications(userResponse: { accepted in
+                        OneSignal.initWithLaunchOptions()
+                        OneSignal.setAppId("da77481a-ba27-43f6-8771-37227b99d2e3")
+                        
+                        // Если пуши включают - задаем id для бэка
+                        OneSignal.setExternalUserId(model.id)
+                        AppState.shared.userPushNotification = true
+                    })
                     
                     AppState.shared.notificationCenter.post(name: Notification.Name.MainScreenNotification, object: nil)
                     AppState.shared.notificationCenter.post(name: Notification.Name.JournalScreenNotification, object: nil)

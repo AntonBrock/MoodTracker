@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UserNotifications
+import OneSignal
 
 struct PushNotificationView: View {
     
@@ -76,7 +77,21 @@ struct PushNotificationView: View {
                     .multilineTextAlignment(.center)
                 
                 MTButton(buttonStyle: .fill, title: "Продолжить") {
-                    print("Show About Push Notification permission and hide screen")
+                    // Проверка были ли включены пуши у юезра, если не было запроса - спросить
+                    
+                    // OneSignal initialization
+                    OneSignal.initWithLaunchOptions()
+                    OneSignal.setAppId("da77481a-ba27-43f6-8771-37227b99d2e3")
+                    
+                    OneSignal.promptForPushNotifications(userResponse: { accepted in
+                        // Если пуши включают - задаем id для бэка
+                        guard let userID = AppState.shared.userID else { return }
+                        OneSignal.setExternalUserId(userID)
+                        
+                        AppState.shared.userPushNotification = true
+                        
+                        closeAction()
+                    })
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 5)

@@ -33,6 +33,7 @@ final class AppState: ObservableObject {
         static let userLanguage = "userLanguage"
         static let userEmail = "userEmail"
         static let userLimits = "userLimits"
+        static let userID = "userID"
         static let maximumValueOfLimits = "maximumValueOfLimits"
     }
     
@@ -120,6 +121,16 @@ final class AppState: ObservableObject {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userLimits)
+        }
+    }
+    
+    var userID: String? {
+        get {
+            return UserDefaults.standard.string(forKey: UserDefaultsKeys.userID)
+
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userID)
         }
     }
     

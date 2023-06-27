@@ -98,7 +98,6 @@ struct LaunchScreenView: View {
                         // тут делаем запрос на данные для Главного экрана потом и вырубаем либо при показе АТТ, Пушах, Главной
                         if AppState.shared.isLogin ?? false {
                             getUserInfo {
-                                
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                     withAnimation(.spring()) {
                                         animatedIsFinished = true
@@ -219,9 +218,22 @@ struct LaunchScreenView: View {
     
     private func needShowPushNotification() -> Bool {
         #if MoodMap
+            var pushNotificaionIsGranded: Bool = false
+            var pushNotificationPermitionIsError: Bool = false
+            let userIsRegistered: Bool = AppState.shared.userID != nil
+            
+            let center = UNUserNotificationCenter.current()
+            center.delegate = self
+            center.requestAuthorization(options: [.sound,.alert,.badge]) { (granted, error) in
+                if let error = error {
+                    pushNotificationPermitionIsError = true
+                }
+                pushNotificaionIsGranded = granted
+            }
+                
             withAnimation {
                 if let rememberNotificationDate = AppState.shared.rememberPushNotificationDate,
-                   Date().timeIntervalSince(rememberNotificationDate) > Constants.timeoutRequestNotification {
+                   Date().timeIntervalSince(rememberNotificationDate) > Constants.timeoutRequestNotification, !pushNotificaionIsGranded && !pushNotificationPermitionIsError && userIsRegistered {
                     AppState.shared.rememberPushNotificationDate = Date()
                     return true
                 } else if AppState.shared.rememberPushNotificationDate == nil {
