@@ -173,6 +173,14 @@
 		45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9129E52F7300852E70 /* SplashScreen.json */; };
 		45B39F9429E5406500852E70 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9329E5406500852E70 /* Launch Screen.storyboard */; };
 		45B39FA229E554B100852E70 /* LoaderLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39FA129E554B100852E70 /* LoaderLottieView.swift */; };
+		45B721332A4AD1F500CAB76B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B721322A4AD1F500CAB76B /* NotificationService.swift */; };
+		45B721372A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 45B721302A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		45B7213E2A4AD2E900CAB76B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 45B7213D2A4AD2E900CAB76B /* OneSignal */; };
+		45B721402A4AD2E900CAB76B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 45B7213F2A4AD2E900CAB76B /* OneSignalExtension */; };
+		45B721422A4AD44000CAB76B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721412A4AD44000CAB76B /* OneSignal */; };
+		45B721442A4AD44500CAB76B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721432A4AD44500CAB76B /* OneSignalExtension */; };
+		45B721462A4AD46A00CAB76B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721452A4AD46A00CAB76B /* OneSignal */; };
+		45B721482A4AD47000CAB76B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721472A4AD47000CAB76B /* OneSignalExtension */; };
 		45C200C129D317F80087B0E3 /* String+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C200C029D317F80087B0E3 /* String+Extenstion.swift */; };
 		45D06AF22A1608CB0047D6FA /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 45D06AF12A1608CB0047D6FA /* JWTDecode */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
@@ -376,6 +384,30 @@
 		45FCD2832A18BEEE00B0DAF0 /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		45B721352A4AD1F500CAB76B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4539307E28C88EC000A5D828 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45B7212F2A4AD1F500CAB76B;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		45B721382A4AD1F500CAB76B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				45B721372A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		45026B4829D7C25E00B6A504 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		4504F00029D974DA0042CF6B /* DiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewModel.swift; sourceTree = "<group>"; };
@@ -527,6 +559,9 @@
 		45B39FA129E554B100852E70 /* LoaderLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderLottieView.swift; sourceTree = "<group>"; };
 		45B459AA29921D5800890CC9 /* PieSliceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		45B459AB29921D5800890CC9 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
+		45B721302A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		45B721322A4AD1F500CAB76B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		45B721342A4AD1F500CAB76B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45B998D728EB2CD500C170C8 /* MoodBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodBarCharsView.swift; sourceTree = "<group>"; };
 		45C200C029D317F80087B0E3 /* String+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extenstion.swift"; sourceTree = "<group>"; };
 		45C338F9298406D10043E26C /* AuthHyperString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHyperString.swift; sourceTree = "<group>"; };
@@ -565,6 +600,7 @@
 				45D06AF22A1608CB0047D6FA /* JWTDecode in Frameworks */,
 				45F361B52A17D40C002CD92B /* YandexMobileMetricaCrashes in Frameworks */,
 				45F361A82A178A5A002CD92B /* FirebaseCrashlytics in Frameworks */,
+				45B7213E2A4AD2E900CAB76B /* OneSignal in Frameworks */,
 				4529AA8729AF151A001D2390 /* SwiftPieChart in Frameworks */,
 				45F361A62A178A5A002CD92B /* FirebaseAnalytics in Frameworks */,
 				4529AA8329AF1519001D2390 /* BottomSheet in Frameworks */,
@@ -574,10 +610,20 @@
 				45B39F8D29E52D6B00852E70 /* Lottie in Frameworks */,
 				4529AA8529AF1519001D2390 /* SwiftUICharts in Frameworks */,
 				45F361B32A17D40C002CD92B /* YandexMobileMetrica in Frameworks */,
+				45B721402A4AD2E900CAB76B /* OneSignalExtension in Frameworks */,
 				45EC871829E407440018AE91 /* YandexMobileAdsPackage in Frameworks */,
 				45F361AA2A178A5A002CD92B /* FirebaseMessaging in Frameworks */,
 				4529AA8129AF1519001D2390 /* HorizonCalendar in Frameworks */,
 				4529AA8B29AF151A001D2390 /* GoogleSignInSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45B7212D2A4AD1F500CAB76B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45B721422A4AD44000CAB76B /* OneSignal in Frameworks */,
+				45B721442A4AD44500CAB76B /* OneSignalExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,6 +636,7 @@
 				45FCD2632A18BEEE00B0DAF0 /* JWTDecode in Frameworks */,
 				45FCD2642A18BEEE00B0DAF0 /* YandexMobileMetricaCrashes in Frameworks */,
 				45FCD2652A18BEEE00B0DAF0 /* FirebaseCrashlytics in Frameworks */,
+				45B721462A4AD46A00CAB76B /* OneSignal in Frameworks */,
 				45FCD2662A18BEEE00B0DAF0 /* SwiftPieChart in Frameworks */,
 				45FCD2672A18BEEE00B0DAF0 /* FirebaseAnalytics in Frameworks */,
 				45FCD2682A18BEEE00B0DAF0 /* BottomSheet in Frameworks */,
@@ -599,6 +646,7 @@
 				45FCD26C2A18BEEE00B0DAF0 /* Lottie in Frameworks */,
 				45FCD26D2A18BEEE00B0DAF0 /* SwiftUICharts in Frameworks */,
 				45FCD26E2A18BEEE00B0DAF0 /* YandexMobileMetrica in Frameworks */,
+				45B721482A4AD47000CAB76B /* OneSignalExtension in Frameworks */,
 				45FCD26F2A18BEEE00B0DAF0 /* YandexMobileAdsPackage in Frameworks */,
 				45FCD2702A18BEEE00B0DAF0 /* FirebaseMessaging in Frameworks */,
 				45FCD2712A18BEEE00B0DAF0 /* HorizonCalendar in Frameworks */,
@@ -968,6 +1016,7 @@
 				453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */,
 				4539308828C88EC000A5D828 /* MoodTrackerSwiftUI */,
 				4529AA6729AF1470001D2390 /* MoodMap */,
+				45B721312A4AD1F500CAB76B /* OneSignalNotificationServiceExtension */,
 				4539308728C88EC000A5D828 /* Products */,
 				4529AA7529AF1519001D2390 /* Frameworks */,
 				45FCD2882A18BEEF00B0DAF0 /* MoodMap copy-Info.plist */,
@@ -979,6 +1028,7 @@
 			children = (
 				4529AA6629AF1470001D2390 /* MoodMap.app */,
 				45FCD2872A18BEEE00B0DAF0 /* MoodMap Beta.app */,
+				45B721302A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1205,6 +1255,15 @@
 			path = SwiftPieChart;
 			sourceTree = "<group>";
 		};
+		45B721312A4AD1F500CAB76B /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				45B721322A4AD1F500CAB76B /* NotificationService.swift */,
+				45B721342A4AD1F500CAB76B /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
 		45D6F16A29B6575F007EABFA /* UserStateScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -1273,10 +1332,12 @@
 				4529AA6229AF1470001D2390 /* Sources */,
 				4529AA6329AF1470001D2390 /* Frameworks */,
 				4529AA6429AF1470001D2390 /* Resources */,
+				45B721382A4AD1F500CAB76B /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				45B721362A4AD1F500CAB76B /* PBXTargetDependency */,
 			);
 			name = MoodMap;
 			packageProductDependencies = (
@@ -1298,10 +1359,33 @@
 				45F361AB2A178A5A002CD92B /* FirebaseRemoteConfig */,
 				45F361B22A17D40C002CD92B /* YandexMobileMetrica */,
 				45F361B42A17D40C002CD92B /* YandexMobileMetricaCrashes */,
+				45B7213D2A4AD2E900CAB76B /* OneSignal */,
+				45B7213F2A4AD2E900CAB76B /* OneSignalExtension */,
 			);
 			productName = MoodMap;
 			productReference = 4529AA6629AF1470001D2390 /* MoodMap.app */;
 			productType = "com.apple.product-type.application";
+		};
+		45B7212F2A4AD1F500CAB76B /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45B7213B2A4AD1F500CAB76B /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				45B7212C2A4AD1F500CAB76B /* Sources */,
+				45B7212D2A4AD1F500CAB76B /* Frameworks */,
+				45B7212E2A4AD1F500CAB76B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			packageProductDependencies = (
+				45B721412A4AD44000CAB76B /* OneSignal */,
+				45B721432A4AD44500CAB76B /* OneSignalExtension */,
+			);
+			productName = OneSignalNotificationServiceExtension;
+			productReference = 45B721302A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		45FCD1AA2A18BEEE00B0DAF0 /* MoodMap Beta */ = {
 			isa = PBXNativeTarget;
@@ -1335,6 +1419,8 @@
 				45FCD1C62A18BEEE00B0DAF0 /* FirebaseRemoteConfig */,
 				45FCD1C72A18BEEE00B0DAF0 /* YandexMobileMetrica */,
 				45FCD1C92A18BEEE00B0DAF0 /* YandexMobileMetricaCrashes */,
+				45B721452A4AD46A00CAB76B /* OneSignal */,
+				45B721472A4AD47000CAB76B /* OneSignalExtension */,
 			);
 			productName = MoodMap;
 			productReference = 45FCD2872A18BEEE00B0DAF0 /* MoodMap Beta.app */;
@@ -1351,6 +1437,9 @@
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					4529AA6529AF1470001D2390 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					45B7212F2A4AD1F500CAB76B = {
 						CreatedOnToolsVersion = 14.1;
 					};
 				};
@@ -1379,6 +1468,7 @@
 				45D06AF02A1608CB0047D6FA /* XCRemoteSwiftPackageReference "JWTDecode" */,
 				45F361A42A178A5A002CD92B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				45F361B12A17D40C002CD92B /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
+				45B7213C2A4AD2E900CAB76B /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
 			);
 			productRefGroup = 4539308728C88EC000A5D828 /* Products */;
 			projectDirPath = "";
@@ -1386,6 +1476,7 @@
 			targets = (
 				4529AA6529AF1470001D2390 /* MoodMap */,
 				45FCD1AA2A18BEEE00B0DAF0 /* MoodMap Beta */,
+				45B7212F2A4AD1F500CAB76B /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1410,6 +1501,13 @@
 				45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */,
 				4529AA7029AF1471001D2390 /* Preview Assets.xcassets in Resources */,
 				453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45B7212E2A4AD1F500CAB76B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1596,6 +1694,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45B7212C2A4AD1F500CAB76B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45B721332A4AD1F500CAB76B /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45FCD1CA2A18BEEE00B0DAF0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1755,10 +1861,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		45B721362A4AD1F500CAB76B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45B7212F2A4AD1F500CAB76B /* OneSignalNotificationServiceExtension */;
+			targetProxy = 45B721352A4AD1F500CAB76B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		4529AA7129AF1471001D2390 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon Main";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
@@ -1803,6 +1918,7 @@
 		4529AA7229AF1471001D2390 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon Main";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
@@ -1961,6 +2077,60 @@
 			};
 			name = Release;
 		};
+		45B721392A4AD1F500CAB76B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		45B7213A2A4AD1F500CAB76B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		45FCD2852A18BEEE00B0DAF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1970,7 +2140,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.50029;
+				CURRENT_PROJECT_VERSION = 1.60029;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2014,7 +2184,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.50029;
+				CURRENT_PROJECT_VERSION = 1.60029;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
@@ -2067,6 +2237,15 @@
 			buildConfigurations = (
 				4539309228C88EC400A5D828 /* Debug */,
 				4539309328C88EC400A5D828 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45B7213B2A4AD1F500CAB76B /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45B721392A4AD1F500CAB76B /* Debug */,
+				45B7213A2A4AD1F500CAB76B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2137,6 +2316,14 @@
 			requirement = {
 				kind = exactVersion;
 				version = 1.0.61;
+			};
+		};
+		45B7213C2A4AD2E900CAB76B /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
 			};
 		};
 		45C338F62983F2E70043E26C /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
@@ -2343,6 +2530,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 45B39F8B29E52D6A00852E70 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		45B7213D2A4AD2E900CAB76B /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45B7213C2A4AD2E900CAB76B /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignal;
+		};
+		45B7213F2A4AD2E900CAB76B /* OneSignalExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45B7213C2A4AD2E900CAB76B /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalExtension;
+		};
+		45B721412A4AD44000CAB76B /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45B7213C2A4AD2E900CAB76B /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignal;
+		};
+		45B721432A4AD44500CAB76B /* OneSignalExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45B7213C2A4AD2E900CAB76B /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalExtension;
+		};
+		45B721452A4AD46A00CAB76B /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45B7213C2A4AD2E900CAB76B /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignal;
+		};
+		45B721472A4AD47000CAB76B /* OneSignalExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45B7213C2A4AD2E900CAB76B /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalExtension;
 		};
 		45D06AF12A1608CB0047D6FA /* JWTDecode */ = {
 			isa = XCSwiftPackageProductDependency;
