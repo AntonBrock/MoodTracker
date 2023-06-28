@@ -25,6 +25,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
     
     static var isAlreadyLaunchedOnce = false
     var isLaunched: Bool = false
+    var previousAuthorizationStatus: UNAuthorizationStatus = .notDetermined
         
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         for context in URLContexts {
@@ -33,7 +34,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             print("host: \(String(describing: context.url.host))")
             print("path: \(context.url.path)")
             print("components: \(context.url.pathComponents)")
-            
         }
     }
     
@@ -50,6 +50,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
         // Remove this method to stop OneSignal Debugging
         OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationSettingsDidChange(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
         if let windowScene = scene as? UIWindowScene {
             
             self.windowScene = windowScene
@@ -65,8 +67,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             let coordinator = BaseViewCoordinator(container: DIContainer)
                         
             if false { // check enable codePassword
-                startStory(type: .login,
-                           parent: coordinator, container: DIContainer)
+                startStory(
+                    type: .login,
+                    parent: coordinator,
+                    container: DIContainer
+                )
             } else {
                 
                 let launchScreen = LaunchScreenView(parent: coordinator, container: DIContainer)
@@ -77,6 +82,24 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
                 let vc = UIHostingController(rootView: launchScreen)
                 window.rootViewController = vc
                 window.makeKeyAndVisible()
+            }
+        }
+    }
+    
+    @objc private func notificationSettingsDidChange(_ notification: Notification) {
+        UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
+            DispatchQueue.main.async {
+                if settings.authorizationStatus == .authorized {
+                    Services.authService.updatePushNotification(updatePushNotificationToggle: true) { result in }
+                    AppState.shared.userPushNotification = true
+                    
+                    OneSignal.initWithLaunchOptions()
+                    OneSignal.setAppId("da77481a-ba27-43f6-8771-37227b99d2e3")
+                    OneSignal.setExternalUserId(AppState.shared.userID ?? "")
+                } else {
+                    Services.authService.updatePushNotification(updatePushNotificationToggle: false) { result in }
+                    AppState.shared.userPushNotification = false
+                }
             }
         }
     }
@@ -124,42 +147,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
         }
     }
 }
-
-//class AppDelegate: NSObject, UIApplicationDelegate {
-//    let gcmMessageIDKey = "gcm.message_id"
-//
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-//
-//        if #available(iOS 10.0, *) {
-//          // For iOS 10 display notification (sent via APNS)
-//          UNUserNotificationCenter.current().delegate = self
-//
-//          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-//          UNUserNotificationCenter.current().requestAuthorization(
-//            options: authOptions,
-//            completionHandler: {_, _ in })
-//        } else {
-//          let settings: UIUserNotificationSettings =
-//          UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-//          application.registerUserNotificationSettings(settings)
-//        }
-//
-//        application.registerForRemoteNotifications()
-//        return true
-//    }
-//
-//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-//                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//
-//      if let messageID = userInfo[gcmMessageIDKey] {
-//        print("Message ID: \(messageID)")
-//      }
-//
-//      print(userInfo)
-//
-//      completionHandler(UIBackgroundFetchResult.newData)
-//    }
-//}
 
 // MARK: - Private methods
 private extension SceneDelegate {

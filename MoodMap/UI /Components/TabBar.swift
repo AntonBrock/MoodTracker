@@ -124,6 +124,13 @@ struct TabBarView: View {
                     coordinator.isShowingSharingScreen = false
                 }
             }
+            .sheet(isPresented: $coordinator.isShowingPushNotificationScreen) {
+                PushNotificationView {
+                    withAnimation {
+                        coordinator.isShowingPushNotificationScreen = false
+                    }
+                }
+            }
             .sheet(isPresented: $coordinator.isShowingMoodCheckScreen) {
                 print("dissmiss moodCheckScreen")
                 coordinator.moodCheckCoordinator = nil

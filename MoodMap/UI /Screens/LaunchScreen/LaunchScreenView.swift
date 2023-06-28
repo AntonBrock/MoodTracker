@@ -46,28 +46,32 @@ struct LaunchScreenView: View {
                     .transition(.move(edge: .bottom))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 } else {
-                    if !isShowPushNotificationScreen && needShowPushNotification() {
-                        if AppState.shared.isLogin ?? false {
-                            if AppState.shared.rememberPushNotificationDate == nil {
-                                ContentView(coordinator: parent)
-                                    .onAppear {
-                                        AppState.shared.rememberPushNotificationDate = Date()
-                                    }
-                            } else {
-                                PushNotificationView(closeAction: {
-                                    withAnimation {
-                                        self.isShowPushNotificationScreen = true
-                                    }
-                                })
-                            }
-                           
-                        } else {
-                            ContentView(coordinator: parent)
-                        }
-                    } else {
-                        ContentView(coordinator: parent)
-                    }
+                    ContentView(coordinator: parent)
                 }
+//                    if !isShowPushNotificationScreen && needShowPushNotification() {
+//                        if AppState.shared.isLogin ?? false {
+//                            if AppState.shared.rememberPushNotificationDate == nil {
+//                                ContentView(coordinator: parent)
+//                                    .onAppear {
+//                                        AppState.shared.rememberPushNotificationDate = Date()
+//                                    }
+//                            } else {
+//                                PushNotificationView {
+//                                    withAnimation {
+////                                        self.isShowPushNotificationScreen = true
+////                                        self.updatePushNotificationSettings(pushNotificationIsEnabled: notificationIsOn) {
+//                                        self.isShowPushNotificationScreen = true
+////                                        }
+//                                    }
+//                                }
+//                            }
+//
+//                        } else {
+//                            ContentView(coordinator: parent)
+//                        }
+//                    } else {
+//                        ContentView(coordinator: parent)
+//                    }
             }
             
             ZStack {
@@ -169,6 +173,7 @@ struct LaunchScreenView: View {
                     AppState.shared.userLanguage = model.settings.language
                     AppState.shared.userLimits = model.limits[0].currentValue
                     AppState.shared.maximumValueOfLimits = model.limits[0].maximumValue
+                    AppState.shared.userID = model.id
                     completion()
                 case .failure(let error):
                     print(error)
@@ -176,6 +181,20 @@ struct LaunchScreenView: View {
             }
         }
         
+    }
+    
+    private func updatePushNotificationSettings(pushNotificationIsEnabled: Bool, completion: @escaping (() -> Void)) {
+        Services.authService.updatePushNotification(
+            updatePushNotificationToggle: pushNotificationIsEnabled) { result in
+                switch result {
+                case let .success(isOn):
+                    AppState.shared.userPushNotification = isOn
+                    completion()
+                case .failure(let error):
+                    AppState.shared.userPushNotification = false
+                    print(error)
+                }
+            }
     }
     
     private func checkJWTIsValid() -> Bool {
@@ -217,32 +236,20 @@ struct LaunchScreenView: View {
     }
     
     private func needShowPushNotification() -> Bool {
-        #if MoodMap
-            var pushNotificaionIsGranded: Bool = false
-            var pushNotificationPermitionIsError: Bool = false
-            let userIsRegistered: Bool = AppState.shared.userID != nil
-            
-            let center = UNUserNotificationCenter.current()
-            center.delegate = self
-            center.requestAuthorization(options: [.sound,.alert,.badge]) { (granted, error) in
-                if let error = error {
-                    pushNotificationPermitionIsError = true
-                }
-                pushNotificaionIsGranded = granted
-            }
-                
-            withAnimation {
-                if let rememberNotificationDate = AppState.shared.rememberPushNotificationDate,
-                   Date().timeIntervalSince(rememberNotificationDate) > Constants.timeoutRequestNotification, !pushNotificaionIsGranded && !pushNotificationPermitionIsError && userIsRegistered {
-                    AppState.shared.rememberPushNotificationDate = Date()
-                    return true
-                } else if AppState.shared.rememberPushNotificationDate == nil {
+        let pushNotificaionIsGranded: Bool = AppState.shared.userPushNotification ?? false
+        let userIsRegistered: Bool = AppState.shared.userID != nil
+        
+        return withAnimation {
+            if let rememberNotificationDate = AppState.shared.rememberPushNotificationDate,
+               Date().timeIntervalSince(rememberNotificationDate) > Constants.timeoutRequestNotification {
+                if !pushNotificaionIsGranded && userIsRegistered {
                     AppState.shared.rememberPushNotificationDate = Date()
                     return true
                 } else { return false }
-            }
-        #endif
-        
-        return false
+            } else if AppState.shared.rememberPushNotificationDate == nil {
+                AppState.shared.rememberPushNotificationDate = Date()
+                return false
+            } else { return false }
+        }
     }
 }

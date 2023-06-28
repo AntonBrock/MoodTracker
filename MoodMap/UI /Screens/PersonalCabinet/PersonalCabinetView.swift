@@ -10,9 +10,9 @@ import SwiftUI
 struct PersonalCabinetView: View {
     
     @ObservedObject var viewModel: ViewModel
-    private unowned let coordinator: PersonalCabinetViewCoordinator
+    unowned let coordinator: PersonalCabinetViewCoordinator
         
-    @State var pushNotification: Bool = false
+    @State var pushNotification: Bool = AppState.shared.userPushNotification ?? false
     @State var showThatTelegramNotInstallView: Bool = false
     
     let notificationCenter = NotificationCenter.default
@@ -24,6 +24,7 @@ struct PersonalCabinetView: View {
     ){
         self.coordinator = coordinator
         self.viewModel = coordinator.viewModel
+        self.viewModel.setupViewer(self)
     }
     
     let showLoader = NotificationCenter.default.publisher(for: NSNotification.Name("ShowLoaderPersonalCabinet"))
@@ -46,51 +47,38 @@ struct PersonalCabinetView: View {
                         .padding(.top, 16)
                         .padding(.horizontal, 24)
                     
-                    #if MoodMap
-                    
-                    VStack(spacing: 12) {
-                        Text("ОСНОВНОЕ")
-                            .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
-                            .foregroundColor(Colors.Primary.lightGray)
-                            .font(.system(size: 12))
-                        
-                        
-                        VStack {
-                            Toggle(isOn: $pushNotification) {
-                                Text("Напоминания")
-                            }
-                            .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-                            .tint(Colors.Primary.lavender500Purple)
-                            .disabled(!(AppState.shared.isLogin ?? false))
-                            .onTapGesture {
-                                if AppState.shared.isLogin ?? false {
-                                    if pushNotification == true {
-                                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString + Bundle.main.bundleIdentifier!)!)
-                                    } else {
-                                        pushNotification = true
-                                    }
-                                } else {
-                                    pushNotification = false
-                                    coordinator.showAuthLoginView()
+                    if AppState.shared.isLogin ?? false {
+                        VStack(spacing: 12) {
+                            Text("ОСНОВНОЕ")
+                                .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
+                                .foregroundColor(Colors.Primary.lightGray)
+                                .font(.system(size: 12))
+                            
+                            VStack {
+                                Toggle(isOn: $pushNotification) {
+                                    Text("Напоминания")
                                 }
+                                .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+                                .tint(Colors.Primary.lavender500Purple)
+                                .disabled(!(AppState.shared.isLogin ?? false))
+                                .onTapGesture {
+                                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString + Bundle.main.bundleIdentifier!)!)
+                                }
+
+    //                    createArrowBlock("Создание пароля")
+    //                        .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+    //                        .padding(.trailing, 5)
+    //                        .onTapGesture {
+    //                            coordinator.openLoginView()
+    //                        }
+                                
                             }
-                            
-                            
-                            //                    createArrowBlock("Создание пароля")
-                            //                        .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-                            //                        .padding(.trailing, 5)
-                            //                        .onTapGesture {
-                            //                            coordinator.openLoginView()
-                            //                        }
-                            
+                            .padding(.horizontal, 24)
+                            .background(.white)
                         }
-                        .padding(.horizontal, 24)
-                        .background(.white)
+                        .background(Colors.Primary.lightWhite)
                     }
-                    .background(Colors.Primary.lightWhite)
-                    
-                    #endif
-                    
+                   
                     VStack(spacing: 12) {
                         Text("ДОПОЛНИТЕЛЬНОЕ")
                             .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
@@ -171,13 +159,15 @@ struct PersonalCabinetView: View {
             }
         }
         .onChange(of: pushNotification, perform: { newValue in
-            #warning("TODO: Сделать запрос что юзер включил пуши")
+            pushNotification = AppState.shared.userPushNotification ?? false
         })
         .onReceive(showLoader) { (output) in
             showLoaderView = true
+            pushNotification = AppState.shared.userPushNotification ?? false
         }
         .onReceive(hideLoader) { (output) in
             showLoaderView = false
+            pushNotification = AppState.shared.userPushNotification ?? false
         }
     }
     

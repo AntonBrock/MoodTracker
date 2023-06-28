@@ -12,6 +12,7 @@ import OneSignal
 struct PushNotificationView: View {
     
     var closeAction: (() -> Void)
+    let notificationCenter = NotificationCenter.default
     
     var body: some View {
         
@@ -77,20 +78,20 @@ struct PushNotificationView: View {
                     .multilineTextAlignment(.center)
                 
                 MTButton(buttonStyle: .fill, title: "Продолжить") {
-                    // Проверка были ли включены пуши у юезра, если не было запроса - спросить
-                    
-                    // OneSignal initialization
-                    OneSignal.initWithLaunchOptions()
-                    OneSignal.setAppId("da77481a-ba27-43f6-8771-37227b99d2e3")
-                    
                     OneSignal.promptForPushNotifications(userResponse: { accepted in
-                        // Если пуши включают - задаем id для бэка
-                        guard let userID = AppState.shared.userID else { return }
-                        OneSignal.setExternalUserId(userID)
-                        
-                        AppState.shared.userPushNotification = true
-                        
-                        closeAction()
+                        if accepted {
+                            AppState.shared.userPushNotification = true
+                            self.notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
+                            self.notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
+                            
+                            closeAction()
+                        } else {
+                            AppState.shared.userPushNotification = false
+                            self.notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
+                            self.notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
+                            
+                            closeAction()
+                        }
                     })
                 }
                 .padding(.horizontal, 24)
@@ -98,6 +99,10 @@ struct PushNotificationView: View {
                 
                 Button {
                     AppState.shared.rememberPushNotificationDate = Date()
+                    AppState.shared.userPushNotification = false
+                    self.notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
+                    self.notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
+                    
                     closeAction()
                 } label: {
                     Text("Не сейчас")

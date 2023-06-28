@@ -63,7 +63,7 @@ struct LoginView: View {
                            wrongPass: $wrongPassword,
                            passwordIsDone: { password in
                 
-#warning("TODO: Пересмотреть")
+                #warning("TODO: Пересмотреть")
                 if firstEnterPassword != "" {
                     if firstEnterPassword == password {
                         self.password.append(password)
