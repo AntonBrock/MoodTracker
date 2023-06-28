@@ -130,6 +130,7 @@ struct TabBarView: View {
                         coordinator.isShowingPushNotificationScreen = false
                     }
                 }
+                    .interactiveDismissDisabled(true)
             }
             .sheet(isPresented: $coordinator.isShowingMoodCheckScreen) {
                 print("dissmiss moodCheckScreen")

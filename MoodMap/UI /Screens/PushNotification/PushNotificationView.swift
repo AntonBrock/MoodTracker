@@ -14,6 +14,8 @@ struct PushNotificationView: View {
     var closeAction: (() -> Void)
     let notificationCenter = NotificationCenter.default
     
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         
         VStack {
@@ -84,12 +86,14 @@ struct PushNotificationView: View {
                             self.notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
                             self.notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
                             
+                            dismiss.callAsFunction()
                             closeAction()
                         } else {
                             AppState.shared.userPushNotification = false
                             self.notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
                             self.notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
                             
+                            dismiss.callAsFunction()
                             closeAction()
                         }
                     })
@@ -103,6 +107,7 @@ struct PushNotificationView: View {
                     self.notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
                     self.notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
                     
+                    dismiss.callAsFunction()
                     closeAction()
                 } label: {
                     Text("Не сейчас")
