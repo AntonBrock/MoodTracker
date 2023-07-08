@@ -151,6 +151,8 @@
 		456A401D29BBA7E500371B5C /* JournalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401C29BBA7E500371B5C /* JournalService.swift */; };
 		456A401F29BBA84400371B5C /* JournalEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401E29BBA84400371B5C /* JournalEndPoint.swift */; };
 		456A402129BC2BC200371B5C /* JournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A402029BC2BC200371B5C /* JournalModel.swift */; };
+		457AC3D02A59645600294BF6 /* PushNotificationTest.apns in Resources */ = {isa = PBXBuildFile; fileRef = 457AC3CF2A59645600294BF6 /* PushNotificationTest.apns */; };
+		457AC3D32A5965BB00294BF6 /* PushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457AC3D22A5965BB00294BF6 /* PushNotificationModel.swift */; };
 		457F591729C183F100E96E1D /* ReportScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591629C183F100E96E1D /* ReportScreenViewModel.swift */; };
 		457F591929C184B900E96E1D /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591829C184B900E96E1D /* ReportService.swift */; };
 		457F591B29C184F300E96E1D /* ReportEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591A29C184F300E96E1D /* ReportEndPoint.swift */; };
@@ -526,6 +528,8 @@
 		4570B8C12985144B0063E2DC /* AuthMethodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodsView.swift; sourceTree = "<group>"; };
 		4579220D28CF4FBD00722D16 /* SwiftUISlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISlider.swift; sourceTree = "<group>"; };
 		457A886429A9FD3400FC7BBB /* WhyRegistrationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyRegistrationInfoView.swift; sourceTree = "<group>"; };
+		457AC3CF2A59645600294BF6 /* PushNotificationTest.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationTest.apns; sourceTree = "<group>"; };
+		457AC3D22A5965BB00294BF6 /* PushNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationModel.swift; sourceTree = "<group>"; };
 		457F591629C183F100E96E1D /* ReportScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportScreenViewModel.swift; sourceTree = "<group>"; };
 		457F591829C184B900E96E1D /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		457F591A29C184F300E96E1D /* ReportEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEndPoint.swift; sourceTree = "<group>"; };
@@ -686,6 +690,7 @@
 		451E6BAF29056E6B0048714B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				457AC3D12A5965A600294BF6 /* PushNotification */,
 				45E7503A2920B80200CF9E21 /* UserInfoModel.swift */,
 				452D352D2951B57F0018A3DA /* AnotherHelpsPreviewModel.swift */,
 				456A400D29B990C900371B5C /* EmotionsModel.swift */,
@@ -858,6 +863,7 @@
 				45B39F9129E52F7300852E70 /* SplashScreen.json */,
 				4546D58F29E841FC00E69852 /* loader.json */,
 				4529AA6E29AF1471001D2390 /* Preview Content */,
+				457AC3CF2A59645600294BF6 /* PushNotificationTest.apns */,
 			);
 			path = MoodMap;
 			sourceTree = "<group>";
@@ -1133,6 +1139,14 @@
 				457A886429A9FD3400FC7BBB /* WhyRegistrationInfoView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		457AC3D12A5965A600294BF6 /* PushNotification */ = {
+			isa = PBXGroup;
+			children = (
+				457AC3D22A5965BB00294BF6 /* PushNotificationModel.swift */,
+			);
+			path = PushNotification;
 			sourceTree = "<group>";
 		};
 		4592521529C6EB2A007B1706 /* Views */ = {
@@ -1486,6 +1500,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				457AC3D02A59645600294BF6 /* PushNotificationTest.apns in Resources */,
 				4529AA9429AF15B8001D2390 /* Settings.plist in Resources */,
 				4546D59029E841FC00E69852 /* loader.json in Resources */,
 				4529AA8C29AF15A9001D2390 /* Inter-Black.ttf in Resources */,
@@ -1677,6 +1692,7 @@
 				456A400E29B990C900371B5C /* EmotionsModel.swift in Sources */,
 				4529ABCE29AF1942001D2390 /* MoodCheckViewCoordinator.swift in Sources */,
 				4529ABCF29AF1942001D2390 /* MoodCheckCoordinatorView.swift in Sources */,
+				457AC3D32A5965BB00294BF6 /* PushNotificationModel.swift in Sources */,
 				45133A1E29AF917800258072 /* PersonalCabinetViewModel.swift in Sources */,
 				4529ABD029AF1942001D2390 /* ActivitiesView.swift in Sources */,
 				4529ABD129AF1942001D2390 /* ActivitiesViewCoodinator.swift in Sources */,

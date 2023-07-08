@@ -50,6 +50,25 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
         // Remove this method to stop OneSignal Debugging
         OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
         
+        #warning("TODO: После прикручивания координации - сделать открытие экранов")
+        let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
+            // This block gets called when the user reacts to a notification received
+            
+            let notification: OSNotification = result.notification
+            print("Message: ", notification.body ?? "empty body")
+            print("badge number: ", notification.badge)
+            print("notification sound: ", notification.sound ?? "No sound")
+            
+            if let additionalData = notification.additionalData {
+                print("additionalData: ", additionalData)
+                if let actionSelected = notification.actionButtons {
+                    print("actionSelected: ", actionSelected)
+                }
+            }
+        }
+        
+        OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
+                        
         NotificationCenter.default.addObserver(self, selector: #selector(notificationSettingsDidChange(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         if let windowScene = scene as? UIWindowScene {
@@ -82,6 +101,21 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
                 let vc = UIHostingController(rootView: launchScreen)
                 window.rootViewController = vc
                 window.makeKeyAndVisible()
+            }
+        }
+    }
+    
+    #warning("TODO: После изменения координации - прикрутить переходы по экранам отсюда")
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        // Handle the received push notification when tapped
+        if let data = userInfo["data"] as? [String: Any] {
+            if let type = data["type"] as? String {
+                if let pushType = PushNotificationModel.PushNotificationModelType(rawValue: type) {
+                    switch pushType {
+                    case .diaryNotes: print("diaryNotes")
+                    default: return
+                    }
+                }
             }
         }
     }

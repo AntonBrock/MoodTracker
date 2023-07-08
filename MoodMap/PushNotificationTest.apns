@@ -1,0 +1,11 @@
+{
+    "Simulator Target Bundle": "ru.moodmap.com",
+    "aps": {
+        "alert": {
+            "body": "Тестовый пуш с payload"
+        },
+    },
+    "data": {
+        "type": "diary_notes_daily_notification"
+    }
+}

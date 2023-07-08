@@ -222,8 +222,8 @@
             filePath = "MoodMap/System/SceneDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "notificationSettingsDidChange(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -231,17 +231,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "83949F46-45E4-4ACF-817F-CD343056E644"
+            uuid = "4177F6CB-9F69-457F-BDF5-52823238BA15"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoodMap/System/SceneDelegate.swift"
+            filePath = "MoodMap/UI /Components/TabBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "notificationSettingsDidChange(_:)"
-            landmarkType = "7">
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "4177F6CB-9F69-457F-BDF5-52823238BA15 - 9be797a5ccf69c23"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0 in MoodMap.TabBarView.body.getter : some"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/UI%20/Components/TabBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "2862">
+               </Location>
+               <Location
+                  uuid = "4177F6CB-9F69-457F-BDF5-52823238BA15 - 5567226bbc0d97d6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #6 () -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0 in MoodMap.TabBarView.body.getter : some"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/UI%20/Components/TabBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "136"
+                  endingLineNumber = "136"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

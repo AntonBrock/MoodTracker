@@ -12,7 +12,7 @@ final class AppState: ObservableObject {
     @Published var settings = Settings.initializeSettings()
 
     static let shared = AppState()
-    
+        
     let notificationCenter = NotificationCenter.default
             
     enum KeychainKeys {
