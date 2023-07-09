@@ -79,7 +79,7 @@ extension JournalView {
                     stateImage: self.getStateImage(from: i.stateId),
                     emotionImage: self.getEmotionImage(from: i.emotionId),
                     stressRate: i.stressRate,
-                    text: i.text,
+                    text: i.text ?? "",
                     monthTime: self.getFormatterTime(with: i.createdAt, and: "MMM dd"),
                     month: self.getFormatterTime(with: i.createdAt, and: "MMM"),
                     monthCurrentTime: self.getFormatterTime(with: i.createdAt, and: "dd"),

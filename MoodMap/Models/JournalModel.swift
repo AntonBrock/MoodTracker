@@ -10,7 +10,7 @@ import Foundation
 struct JournalModel: Decodable {
             
     let id: String
-    let text: String
+    let text: String?
     let createdAt: Date
     let updatedAt: Date?
     let stateId: String
@@ -34,7 +34,7 @@ struct JournalModel: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
-        text = try container.decode(String.self, forKey: .text)
+        text = try? container.decode(String.self, forKey: .text)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
         updatedAt = try? container.decode(Date.self, forKey: .updatedAt)
         stateId = try container.decode(String.self, forKey: .stateId)

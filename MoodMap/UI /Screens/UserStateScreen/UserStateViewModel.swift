@@ -212,7 +212,7 @@ extension MoodCheckView {
                 emotionId: emotionId,
                 stateId: stateId,
                 stressRate: stressNumber,
-                text: mindText ?? "") { result in
+                text: mindText?.isEmpty ?? true ? nil : mindText) { result in
                 switch result {
                 case .success(let model):
                     Services.metricsService.sendEventWith(eventName: .createEmotionNoteButton)

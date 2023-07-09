@@ -10,7 +10,7 @@ import Moya
 
 enum JournalEndPoint: TargetType {
     
-    case sendUserNote(createdAt: String, activities: [String], emotionId: String, stateId: String, stressRate: String, text: String)
+    case sendUserNote(createdAt: String, activities: [String], emotionId: String, stateId: String, stressRate: String, text: String?)
     case getUserNotes(from: String?, to: String?)
 
     var baseURL: URL {
@@ -68,7 +68,7 @@ enum JournalEndPoint: TargetType {
                     "emotion_id": emotionId,
                     "state_id": stateId,
                     "stress_id": stressRate,
-                    "text": text
+                    "text": text ?? nil
                 ],
                 encoding: JSONEncoding.default
             )
