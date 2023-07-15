@@ -150,6 +150,12 @@ struct MainView: View {
                 self.isAnimated = true
             }
             
+            if coordinator.parent.isNeedShowAuthPopupFromLaunchScreen {
+                withAnimation {
+                    coordinator.parent.showAuthLoginView = true
+                }
+            }
+            
             if !(viewModel.journalViewModels?.isEmpty ?? true) {
                 withAnimation(.linear(duration: 0.3)) {
                     self.isAnimatedJournalView = true
@@ -307,8 +313,9 @@ struct MainView: View {
                     .shadow(color: Colors.TextColors.mischka500,
                             radius: 2.0, x: 0.0, y: 0)
                     .onTapGesture {
-                        currentSelectedJournalPage = item
-                        showMoreDetailsAboutJournalPage.toggle()
+                        #warning("TODO: Нужна переработка экрана об эмоции, так как выглядит сыро и не вкусно")
+//                        currentSelectedJournalPage = item
+//                        showMoreDetailsAboutJournalPage.toggle()
                     }
                 }
             }

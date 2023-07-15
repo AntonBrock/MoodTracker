@@ -102,46 +102,5 @@ extension PersonalCabinetView {
                     }
                 }
         }
-        
-//        func setPushNotification() {
-//
-//            self.notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
-//            self.notificationCenter.post(name: Notification.Name("DisabledTabBarNavigation"), object: nil)
-//
-//            // OneSignal initialization
-//
-//            let current = UNUserNotificationCenter.current()
-//
-//            DispatchQueue.main.async {
-//                current.getNotificationSettings(completionHandler: { [weak self] (settings) in
-//                    if settings.authorizationStatus == .denied {
-//                        DispatchQueue.main.async {
-//                            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString + Bundle.main.bundleIdentifier!)!)
-//
-//                            self?.notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
-//                            self?.notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
-//                        }
-//                    }
-//                })
-//            }
-//
-////            OneSignal.promptForPushNotifications(userResponse: { accepted in
-////                if !accepted {
-////
-////                    }
-////                }
-////                else {
-////                    // Если пуши включают - задаем id для бэка
-////                    guard let userID = AppState.shared.userID else { return }
-////                    OneSignal.setExternalUserId(userID)
-////
-////                    AppState.shared.userPushNotification = accepted
-////                    self.updatePushNotificationSettings(pushNotificationIsEnabled: accepted) { [weak self] in
-////                        self?.notificationCenter.post(name: Notification.Name("HideLoaderPersonalCabinet"), object: nil)
-////                        self?.notificationCenter.post(name: Notification.Name("NotDisabledTabBarNavigation"), object: nil)
-////                    }
-////                }
-////            })
-//        }
     }
 }

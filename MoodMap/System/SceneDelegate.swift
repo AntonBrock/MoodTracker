@@ -23,6 +23,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
     var window: UIWindow?
     var windowScene: UIWindowScene?
     
+    @State var isNeedShowAuthFromLaunch: Bool = false
+    
     static var isAlreadyLaunchedOnce = false
     var isLaunched: Bool = false
     var previousAuthorizationStatus: UNAuthorizationStatus = .notDetermined
@@ -149,7 +151,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
         case .moodCheckView:
             print("1")
         case .mainScreen:
-            let contentView = ContentView(coordinator: parent) //isHiddenTabBar: appState.$isHiddenTabBar
+            let contentView = ContentView(
+                coordinator: parent,
+                isNeedShowAuthPopupFromLaunchScreen: $isNeedShowAuthFromLaunch
+            ) //isHiddenTabBar: appState.$isHiddenTabBar
             
             let window = UIWindow(windowScene: windowScene)
             self.window = window

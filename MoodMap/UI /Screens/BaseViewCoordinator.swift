@@ -34,6 +34,8 @@ class BaseViewCoordinator: ObservableObject {
     @Published var showErrorScreen: Bool = false
     @Published var errorTitle: String = ""
     
+    @Published var isNeedShowAuthPopupFromLaunchScreen: Bool = false
+    
     let container: DIContainer
     
     // MARK: - Init

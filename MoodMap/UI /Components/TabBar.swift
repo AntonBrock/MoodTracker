@@ -94,8 +94,8 @@ struct TabBarView: View {
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .report, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-report-none-fill", tabName: "report", filledIconName: "tb-ic-report-fill")
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .profile, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-pc-none-fill", tabName: "profile", filledIconName: "tb-ic-pc-fill")
                         }
-                        .frame(width: geometry.size.width, height: geometry.size.height / 12)
-                        .padding(.top, -10)
+                        .frame(width: geometry.size.width, height: geometry.size.height / 10)
+                        .padding(.top, -20)
                         .disabled(disabledTabBar)
                     }
                     .frame(width: geometry.size.width, height: coordinator.hideCustomTabBar ? 0 : geometry.size.height / 13.0)

@@ -188,7 +188,6 @@ struct AuthService: AuthServiceProtocol {
                 guard let json = try? response.mapJSON() as? [String: Any] else {
                     return
                 }
-                #warning("TODO: Пока что не знаю что тут будет")
                 if let refreshToken = json["refresh_token"] as? String,
                    let jwtToken = json["access_token"] as? String {
                     

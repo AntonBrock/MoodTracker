@@ -22,6 +22,7 @@ struct LaunchScreenView: View {
     @State var isShowPushNotificationScreen: Bool = false
     
     @State var isShowATTScreen: Bool = false
+    @State var isNeedShowAuthPopupFromLaunchScreen: Bool = false
     
     init(
         parent: BaseViewCoordinator,
@@ -35,7 +36,6 @@ struct LaunchScreenView: View {
         
         ZStack {
             if isLoadingMainInfo {
-                
                 if needShowATT() && !isShowATTScreen {
                     ATTView {
                         AppState.shared.isShowATT = true
@@ -46,7 +46,10 @@ struct LaunchScreenView: View {
                     .transition(.move(edge: .bottom))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 } else {
-                    ContentView(coordinator: parent)
+                    ContentView(
+                        coordinator: parent,
+                        isNeedShowAuthPopupFromLaunchScreen: $isNeedShowAuthPopupFromLaunchScreen
+                    )
                 }
 //                    if !isShowPushNotificationScreen && needShowPushNotification() {
 //                        if AppState.shared.isLogin ?? false {
@@ -101,7 +104,9 @@ struct LaunchScreenView: View {
                         
                         // тут делаем запрос на данные для Главного экрана потом и вырубаем либо при показе АТТ, Пушах, Главной
                         if AppState.shared.isLogin ?? false {
-                            getUserInfo {
+                            getUserInfo { needShowAuthPopUp in
+                                isNeedShowAuthPopupFromLaunchScreen = needShowAuthPopUp
+
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                     withAnimation(.spring()) {
                                         animatedIsFinished = true
@@ -110,6 +115,8 @@ struct LaunchScreenView: View {
                                 }
                             }
                         } else {
+                            isNeedShowAuthPopupFromLaunchScreen = true
+
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                 withAnimation(.spring()) {
                                     animatedIsFinished = true
@@ -134,34 +141,47 @@ struct LaunchScreenView: View {
         }
     }
     
-    func getUserInfo(completion: @escaping (() -> Void)) {
+    func getUserInfo(completion: @escaping ((_ needShowAuthPopUp: Bool) -> Void)) {
         if !checkJWTIsValid() {
-            Services.authService.refreshToken { result in
-                switch result {
-                case .success:
-                    Services.authService.getUserInfo() { result in
-                        switch result {
-                        case let .success(model):
-                            AppState.shared.userName = model.username
-                            AppState.shared.userEmail = model.email
-                            AppState.shared.userPushNotification = model.settings.notifications
-                            AppState.shared.userLanguage = model.settings.language
-                            AppState.shared.userLimits = model.limits[0].currentValue
-                            AppState.shared.maximumValueOfLimits = model.limits[0].maximumValue
+            if !checkRefreshTokenIsValid() {
+                Services.authService.refreshToken { result in
+                    switch result {
+                    case .success:
+                        Services.authService.getUserInfo() { result in
+                            switch result {
+                            case let .success(model):
+                                AppState.shared.userName = model.username
+                                AppState.shared.userEmail = model.email
+                                AppState.shared.userPushNotification = model.settings.notifications
+                                AppState.shared.userLanguage = model.settings.language
+                                AppState.shared.userLimits = model.limits[0].currentValue
+                                AppState.shared.maximumValueOfLimits = model.limits[0].maximumValue
 
-                            completion()
-                        case .failure(let error):
-                            print(error)
+                                completion(false)
+                            case .failure(let error):
+                                print(error)
+                            }
+                        }
+                    case .failure(let error):
+                        guard let errorLocaloze = error as? MMError else { return }
+                       
+                        if errorLocaloze == .defined(.tokenUndefined) {
+                            AppState.shared.jwtToken = nil
+                            completion(false)
                         }
                     }
-                case .failure(let error):
-                    guard let errorLocaloze = error as? MMError else { return }
-                   
-                    if errorLocaloze == .defined(.tokenUndefined) {
-                        AppState.shared.jwtToken = nil
-                        completion()
-                    }
                 }
+            } else {
+                AppState.shared.userName = nil
+                AppState.shared.userEmail = nil
+                AppState.shared.userPushNotification = false
+                AppState.shared.userLanguage = "russian"
+                AppState.shared.userLimits = 0
+                AppState.shared.maximumValueOfLimits = 5
+                AppState.shared.isLogin = false
+                AppState.shared.refreshToken = nil
+                AppState.shared.jwtToken = nil
+                completion(true)
             }
         } else {
             Services.authService.getUserInfo() { result in
@@ -174,7 +194,7 @@ struct LaunchScreenView: View {
                     AppState.shared.userLimits = model.limits[0].currentValue
                     AppState.shared.maximumValueOfLimits = model.limits[0].maximumValue
                     AppState.shared.userID = model.id
-                    completion()
+                    completion(false)
                 case .failure(let error):
                     print(error)
                 }
@@ -184,17 +204,19 @@ struct LaunchScreenView: View {
     }
     
     private func updatePushNotificationSettings(pushNotificationIsEnabled: Bool, completion: @escaping (() -> Void)) {
-        Services.authService.updatePushNotification(
-            updatePushNotificationToggle: pushNotificationIsEnabled) { result in
-                switch result {
-                case let .success(isOn):
-                    AppState.shared.userPushNotification = isOn
-                    completion()
-                case .failure(let error):
-                    AppState.shared.userPushNotification = false
-                    print(error)
+        if AppState.shared.isLogin ?? false {
+            Services.authService.updatePushNotification(
+                updatePushNotificationToggle: pushNotificationIsEnabled) { result in
+                    switch result {
+                    case let .success(isOn):
+                        AppState.shared.userPushNotification = isOn
+                        completion()
+                    case .failure(let error):
+                        AppState.shared.userPushNotification = false
+                        print(error)
+                    }
                 }
-            }
+        }
     }
     
     private func checkJWTIsValid() -> Bool {
@@ -221,6 +243,34 @@ struct LaunchScreenView: View {
             
         } catch {
             print("Failed to decode JWT token: \(error)")
+            return false
+        }
+    }
+    
+    private func checkRefreshTokenIsValid() -> Bool {
+        guard let token = AppState.shared.refreshToken else { return false }
+        
+        do {
+            let refresh = try decode(jwt: token)
+            
+            // Check expiration
+            if let expiresAt = refresh.expiresAt {
+                let currentDate = Date()
+                
+                if currentDate > expiresAt {
+                    print("Token is expired")
+                    return false
+                } else {
+                    print("Token is valid")
+                    return true
+                }
+            } else {
+                print("Token does not have an expiration claim")
+                return false
+            }
+            
+        } catch {
+            print("Failed to decode refresh token: \(error)")
             return false
         }
     }

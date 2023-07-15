@@ -17,6 +17,8 @@ struct ContentView: View {
 
     @State var isHiddenTabBar: Bool = false
     @State var openJournaTab: Bool = false
+    
+    @Binding var isNeedShowAuthPopupFromLaunchScreen: Bool
 
     //isHiddenTabBar: $isHiddenTabBar
     var body: some View {
@@ -168,6 +170,9 @@ struct ContentView: View {
         }
         .onChange(of: coordinator.isNeedShowTab) { newValue in
             changeViewRouter(page: newValue)
+        }
+        .onAppear {
+            coordinator.isNeedShowAuthPopupFromLaunchScreen = isNeedShowAuthPopupFromLaunchScreen
         }
     }
     

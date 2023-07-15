@@ -168,6 +168,11 @@ struct StressCheckView: View {
                 longTime: ""
             )
             
+            if var userLimits = AppState.shared.userLimits {
+                userLimits += 1
+                
+                AppState.shared.userLimits = userLimits
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 parent.isShowingSharingScreen = true
             }

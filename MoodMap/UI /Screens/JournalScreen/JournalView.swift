@@ -82,9 +82,10 @@ struct JournalView: View {
                                 currentID = id
                                 chooseSelectedModel()
                                 withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
-                                    showMoreInfo.toggle()
-                                    Services.metricsService.sendEventWith(eventName: .openDetailJournalScreen)
-                                    Services.metricsService.sendEventWith(eventType: .openDetailJournalScreen)
+                                #warning("TODO: Нужна переработка экрана об эмоции, так как выглядит сыро и не вкусно")
+//                                    showMoreInfo.toggle()
+//                                    Services.metricsService.sendEventWith(eventName: .openDetailJournalScreen)
+//                                    Services.metricsService.sendEventWith(eventType: .openDetailJournalScreen)
 
                                 }
                             }, animation: animation) {
@@ -103,12 +104,13 @@ struct JournalView: View {
                     }
                 }
                 .sheet(isPresented: $showMoreInfo, content: {
+                    #warning("TODO: Нужна переработка экрана об эмоции, так как выглядит сыро и не вкусно")
                     DetailJournalView(
                         showMoreInfo: $showMoreInfo,
                         model: $currentModel,
                         shareStateAction: { model in
                             coordinator.parent.journalCoordinator.viewModel.sharingJournalViewModel = model
-                            
+
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                 coordinator.parent.isShowingSharingScreen = true
                             }
