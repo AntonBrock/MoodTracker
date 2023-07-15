@@ -416,7 +416,7 @@ extension ReportScreen {
                             return
                         }
                         self.reportViewModel = self.mappingViewModel(data: model)
-                        if self.reportViewModel?.chartData.count ?? 0 < 4 {
+                        if self.reportViewModel?.chartData.count ?? 0 < 3 {
                             self.showLoader = false
                             self.showNeedMoreData = true
                         } else {

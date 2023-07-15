@@ -150,7 +150,7 @@ struct MainView: View {
                 self.isAnimated = true
             }
             
-            if coordinator.parent.isNeedShowAuthPopupFromLaunchScreen {
+            if coordinator.parent.isNeedShowAuthPopupFromLaunchScreen && AppState.shared.isLogin == false {
                 withAnimation {
                     coordinator.parent.showAuthLoginView = true
                 }
