@@ -24,6 +24,8 @@ struct MainView: View {
     @State var showMoreDetailsAboutJournalPage: Bool = false
     @State var currentSelectedJournalPage: JournalViewModel?
     
+    @State var quoteText: String = "Это нормально ‒ испытывать плохие эмоции. Это не делает тебя плохим человеком."
+    
     init(
         container: DIContainer,
         animation: Namespace.ID,
@@ -32,7 +34,7 @@ struct MainView: View {
         self.container = container
         self.coordinator = coordinator
         self.animation = animation
-        self.viewModel = coordinator.viewModel
+        self.viewModel = coordinator.viewModel        
     }
     
     var body: some View {
@@ -90,7 +92,7 @@ struct MainView: View {
                         }
                     }
                 
-                QuoteView()
+                QuoteView(quote: $quoteText)
                     .padding(.top, 10)
                 
                 Text("Статистика сегодня")

@@ -66,10 +66,6 @@ extension PersonalCabinetView {
                 switch result {
                 case .success(let model):
                                         
-                    withAnimation {
-                        self?.viewer?.coordinator.parent.isShowingPushNotificationScreen = true
-                    }
-                    
                     AppState.shared.notificationCenter.post(name: Notification.Name.MainScreenNotification, object: nil)
                     AppState.shared.notificationCenter.post(name: Notification.Name.JournalScreenNotification, object: nil)
 
@@ -77,12 +73,18 @@ extension PersonalCabinetView {
                     
                     AppState.shared.userName = model.username
                     AppState.shared.userEmail = model.email
-//                    AppState.shared.userPushNotification = model.settings.notifications
+                    AppState.shared.userPushNotification = model.settings.notifications
                     AppState.shared.userLanguage = model.settings.language
                     AppState.shared.userLimits = model.limits[0].currentValue
                     AppState.shared.maximumValueOfLimits = model.limits[0].maximumValue
                     AppState.shared.userID = model.id
                     AppState.shared.timezone = model.settings.timezone
+                    
+                    if !(AppState.shared.userPushNotification ?? false) {
+                        withAnimation {
+                            self?.viewer?.coordinator.parent.isShowingPushNotificationScreen = true
+                        }
+                    }
                 case .failure(let error):
                     print(error)
                 }

@@ -43,9 +43,11 @@ struct ActivitiesTextViewBlock: View {
                 }
                 
                 if type == .diary {
-                    MTButton(buttonStyle: .fill, title: "Сделать запись в дневник ") {
-                        saveDiaryText!(text)
-                        text = ""
+                    MTButton(buttonStyle: .fill, title: "Сделать запись в дневник") {
+                        if !text.isEmpty && !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                            saveDiaryText!(text)
+                            text = ""
+                        }
                     }
                     .frame(width: 256, height: 48)
                     .padding(.top, 10)

@@ -15,6 +15,7 @@ enum BaseAPI {
     case journal(JournalEndPoint)
     case report(ReportEndPoint)
     case diary(DiaryEndPoint)
+    case quotes(QuotesEndPoint)
 }
 
 extension BaseAPI: TargetType {
@@ -27,6 +28,7 @@ extension BaseAPI: TargetType {
         case let .journal(journalEndPoint): return journalEndPoint.baseURL
         case let .report(reportEndPoint): return reportEndPoint.baseURL
         case let .diary(diaryEndPoint): return diaryEndPoint.baseURL
+        case let .quotes(quotesEndPoint): return quotesEndPoint.baseURL
         }
     }
     
@@ -38,6 +40,7 @@ extension BaseAPI: TargetType {
         case let .journal(journalEndPoint): return journalEndPoint.path
         case let .report(reportEndPoint): return reportEndPoint.path
         case let .diary(diaryEndPoint): return diaryEndPoint.path
+        case let .quotes(quotesEndPoint): return quotesEndPoint.path
         }
     }
     
@@ -49,6 +52,7 @@ extension BaseAPI: TargetType {
         case let .journal(journalEndPoint): return journalEndPoint.method
         case let .report(reportEndPoint): return reportEndPoint.method
         case let .diary(diaryEndPoint): return diaryEndPoint.method
+        case let .quotes(quotesEndPoint): return quotesEndPoint.method
         }
     }
     
@@ -60,6 +64,7 @@ extension BaseAPI: TargetType {
         case let .journal(journalEndPoint): return journalEndPoint.sampleData
         case let .report(reportEndPoint): return reportEndPoint.sampleData
         case let .diary(diaryEndPoint): return diaryEndPoint.sampleData
+        case let .quotes(quotesEndPoint): return quotesEndPoint.sampleData
         }
     }
     
@@ -71,6 +76,7 @@ extension BaseAPI: TargetType {
         case let .journal(journalEndPoint): return journalEndPoint.task
         case let .report(reportEndPoint): return reportEndPoint.task
         case let .diary(diaryEndPoint): return diaryEndPoint.task
+        case let .quotes(quotesEndPoint): return quotesEndPoint.task
         }
     }
     
@@ -82,6 +88,7 @@ extension BaseAPI: TargetType {
         case let .journal(journalEndPoint): return journalEndPoint.headers
         case let .report(reportEndPoint): return reportEndPoint.headers
         case let .diary(diaryEndPoint): return diaryEndPoint.headers
+        case let .quotes(quotesEndPoint): return quotesEndPoint.headers
         }
     }
     
@@ -93,6 +100,7 @@ extension BaseAPI: TargetType {
         case let .journal(journalEndPoint): return journalEndPoint.authorizationType
         case let .report(reportEndPoint): return reportEndPoint.authorizationType
         case let .diary(diaryEndPoint): return diaryEndPoint.authorizationType
+        case let .quotes(quotesEndPoint): return quotesEndPoint.authorizationType
         }
     }
 }

@@ -47,9 +47,20 @@ extension MainView {
         func setupViewer(_ viewer: MainView) {
             self.viewer = viewer
             
+            fetchQuotes()
             fetchMainData()
         }
         
+        func fetchQuotes() {
+            Services.quotesService.fetchQuote(language: AppState.shared.userLanguage ?? "russian", completion: { result in
+                switch result {
+                case .success(let quoteModel):
+                    self.viewer?.quoteText = quoteModel.text
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        }
         
         func fetchMainData() {
             let calendar = Calendar.current

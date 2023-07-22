@@ -51,30 +51,6 @@ struct LaunchScreenView: View {
                         isNeedShowAuthPopupFromLaunchScreen: $isNeedShowAuthPopupFromLaunchScreen
                     )
                 }
-//                    if !isShowPushNotificationScreen && needShowPushNotification() {
-//                        if AppState.shared.isLogin ?? false {
-//                            if AppState.shared.rememberPushNotificationDate == nil {
-//                                ContentView(coordinator: parent)
-//                                    .onAppear {
-//                                        AppState.shared.rememberPushNotificationDate = Date()
-//                                    }
-//                            } else {
-//                                PushNotificationView {
-//                                    withAnimation {
-////                                        self.isShowPushNotificationScreen = true
-////                                        self.updatePushNotificationSettings(pushNotificationIsEnabled: notificationIsOn) {
-//                                        self.isShowPushNotificationScreen = true
-////                                        }
-//                                    }
-//                                }
-//                            }
-//
-//                        } else {
-//                            ContentView(coordinator: parent)
-//                        }
-//                    } else {
-//                        ContentView(coordinator: parent)
-//                    }
             }
             
             ZStack {
@@ -87,19 +63,21 @@ struct LaunchScreenView: View {
                         let timeZone = TimeZone.current
                         let timeZoneIdentifier = timeZone.identifier
                         
-                        if AppState.shared.timezone != nil && timeZoneIdentifier != AppState.shared.timezone {
-                            AppState.shared.timezone = timeZoneIdentifier
-                            // запрос на обновление зоны
-                            Services.authService.updateTimezone { result in
-                                switch result {
-                                case .success:
-                                    print("Success updated timezone")
-                                case .failure(let error):
-                                    print(error)
+                        if AppState.shared.isLogin ?? false {
+                            if AppState.shared.timezone != nil && timeZoneIdentifier != AppState.shared.timezone {
+                                AppState.shared.timezone = timeZoneIdentifier
+                                // запрос на обновление зоны
+                                Services.authService.updateTimezone { result in
+                                    switch result {
+                                    case .success:
+                                        print("Success updated timezone")
+                                    case .failure(let error):
+                                        print(error)
+                                    }
                                 }
+                            } else if AppState.shared.timezone == nil {
+                                AppState.shared.timezone = timeZoneIdentifier
                             }
-                        } else if AppState.shared.timezone == nil {
-                            AppState.shared.timezone = timeZoneIdentifier
                         }
                         
                         // тут делаем запрос на данные для Главного экрана потом и вырубаем либо при показе АТТ, Пушах, Главной
@@ -136,7 +114,6 @@ struct LaunchScreenView: View {
             if let showATT = AppState.shared.isShowATT, showATT {
                 isShowATTScreen = true
             }
-            
             isSplashScreenShow.toggle()
         }
     }
@@ -201,22 +178,6 @@ struct LaunchScreenView: View {
             }
         }
         
-    }
-    
-    private func updatePushNotificationSettings(pushNotificationIsEnabled: Bool, completion: @escaping (() -> Void)) {
-        if AppState.shared.isLogin ?? false {
-            Services.authService.updatePushNotification(
-                updatePushNotificationToggle: pushNotificationIsEnabled) { result in
-                    switch result {
-                    case let .success(isOn):
-                        AppState.shared.userPushNotification = isOn
-                        completion()
-                    case .failure(let error):
-                        AppState.shared.userPushNotification = false
-                        print(error)
-                    }
-                }
-        }
     }
     
     private func checkJWTIsValid() -> Bool {

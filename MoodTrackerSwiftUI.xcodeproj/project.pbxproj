@@ -151,6 +151,8 @@
 		456A401D29BBA7E500371B5C /* JournalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401C29BBA7E500371B5C /* JournalService.swift */; };
 		456A401F29BBA84400371B5C /* JournalEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401E29BBA84400371B5C /* JournalEndPoint.swift */; };
 		456A402129BC2BC200371B5C /* JournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A402029BC2BC200371B5C /* JournalModel.swift */; };
+		457A8D682A6BA5E800D1E609 /* QuotesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A8D672A6BA5E800D1E609 /* QuotesService.swift */; };
+		457A8D6A2A6BA66200D1E609 /* QuotesEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A8D692A6BA66200D1E609 /* QuotesEndPoint.swift */; };
 		457AC3D02A59645600294BF6 /* PushNotificationTest.apns in Resources */ = {isa = PBXBuildFile; fileRef = 457AC3CF2A59645600294BF6 /* PushNotificationTest.apns */; };
 		457AC3D32A5965BB00294BF6 /* PushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457AC3D22A5965BB00294BF6 /* PushNotificationModel.swift */; };
 		457F591729C183F100E96E1D /* ReportScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591629C183F100E96E1D /* ReportScreenViewModel.swift */; };
@@ -164,6 +166,7 @@
 		4592522529C6EE73007B1706 /* ReportTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522429C6EE73007B1706 /* ReportTipView.swift */; };
 		4592522729C6EEB6007B1706 /* DayilyCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522629C6EEB6007B1706 /* DayilyCharts.swift */; };
 		4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522829C6EEEE007B1706 /* ActivitiesCharts.swift */; };
+		459CBD132A6BB7E0003936BB /* QuotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBD122A6BB7E0003936BB /* QuotesModel.swift */; };
 		45A9F04E29F01222002C13C5 /* InstagramSharingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F04C29F01222002C13C5 /* InstagramSharingUtils.swift */; };
 		45A9F05129F0FE04002C13C5 /* SharingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F05029F0FE04002C13C5 /* SharingView.swift */; };
 		45A9F05329F10076002C13C5 /* AuthLogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F05229F10076002C13C5 /* AuthLogoutView.swift */; };
@@ -528,6 +531,8 @@
 		4570B8C12985144B0063E2DC /* AuthMethodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodsView.swift; sourceTree = "<group>"; };
 		4579220D28CF4FBD00722D16 /* SwiftUISlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISlider.swift; sourceTree = "<group>"; };
 		457A886429A9FD3400FC7BBB /* WhyRegistrationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyRegistrationInfoView.swift; sourceTree = "<group>"; };
+		457A8D672A6BA5E800D1E609 /* QuotesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesService.swift; sourceTree = "<group>"; };
+		457A8D692A6BA66200D1E609 /* QuotesEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesEndPoint.swift; sourceTree = "<group>"; };
 		457AC3CF2A59645600294BF6 /* PushNotificationTest.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationTest.apns; sourceTree = "<group>"; };
 		457AC3D22A5965BB00294BF6 /* PushNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationModel.swift; sourceTree = "<group>"; };
 		457F591629C183F100E96E1D /* ReportScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportScreenViewModel.swift; sourceTree = "<group>"; };
@@ -551,6 +556,7 @@
 		45979802295C12E10059CAC2 /* MPErrorFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPErrorFlowView.swift; sourceTree = "<group>"; };
 		459B9BCD28D36F3000A4FCD7 /* MoodCheckComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckComponent.swift; sourceTree = "<group>"; };
 		459BB88C2900121500E07BFF /* CutomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutomAlertView.swift; sourceTree = "<group>"; };
+		459CBD122A6BB7E0003936BB /* QuotesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesModel.swift; sourceTree = "<group>"; };
 		45A132FD2965C01700EA21A1 /* CalendarViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewRepresentable.swift; sourceTree = "<group>"; };
 		45A9F04C29F01222002C13C5 /* InstagramSharingUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramSharingUtils.swift; sourceTree = "<group>"; };
 		45A9F05029F0FE04002C13C5 /* SharingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingView.swift; sourceTree = "<group>"; };
@@ -700,6 +706,7 @@
 				4592521329C4205E007B1706 /* ReportModel.swift */,
 				4504F00229D9762F0042CF6B /* DiaryModel.swift */,
 				45E2876629DB104A00593E7A /* StressModel.swift */,
+				459CBD122A6BB7E0003936BB /* QuotesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1301,6 +1308,7 @@
 				457F591829C184B900E96E1D /* ReportService.swift */,
 				4504F00429D976440042CF6B /* DiaryService.swift */,
 				45F361AF2A178BAF002CD92B /* MetricsService.swift */,
+				457A8D672A6BA5E800D1E609 /* QuotesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1315,6 +1323,7 @@
 				456A401E29BBA84400371B5C /* JournalEndPoint.swift */,
 				457F591A29C184F300E96E1D /* ReportEndPoint.swift */,
 				4504F00629D976DC0042CF6B /* DiaryEndPoint.swift */,
+				457A8D692A6BA66200D1E609 /* QuotesEndPoint.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1581,6 +1590,7 @@
 				45B39FA229E554B100852E70 /* LoaderLottieView.swift in Sources */,
 				4529AB8529AF193F001D2390 /* AppState .swift in Sources */,
 				4529AB8629AF193F001D2390 /* Services.swift in Sources */,
+				457A8D6A2A6BA66200D1E609 /* QuotesEndPoint.swift in Sources */,
 				456A400A29B75DDB00371B5C /* UserStateService.swift in Sources */,
 				4529AB8729AF193F001D2390 /* SceneDelegate.swift in Sources */,
 				45D6F16C29B6579B007EABFA /* UserStateViewModel.swift in Sources */,
@@ -1588,6 +1598,7 @@
 				4529AB8929AF1940001D2390 /* DIContinainer.swift in Sources */,
 				4529AB8A29AF1940001D2390 /* PieSliceView.swift in Sources */,
 				4529AB8B29AF1940001D2390 /* PieChartView.swift in Sources */,
+				457A8D682A6BA5E800D1E609 /* QuotesService.swift in Sources */,
 				456A402129BC2BC200371B5C /* JournalModel.swift in Sources */,
 				4529AB8C29AF1940001D2390 /* GeometryProxy+Shortcuts.swift in Sources */,
 				4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */,
@@ -1602,6 +1613,7 @@
 				4529AB9629AF1940001D2390 /* SCPiePart.swift in Sources */,
 				4529AB9729AF1940001D2390 /* SCDataPoint.swift in Sources */,
 				4529AB9829AF1940001D2390 /* SCDonutPart.swift in Sources */,
+				459CBD132A6BB7E0003936BB /* QuotesModel.swift in Sources */,
 				4529AB9929AF1940001D2390 /* NumberFormatter+Defaults.swift in Sources */,
 				4529AB9A29AF1940001D2390 /* SCPalletes.swift in Sources */,
 				4529AB9B29AF1940001D2390 /* SCCaptionsView.swift in Sources */,
@@ -2156,7 +2168,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.80009;
+				CURRENT_PROJECT_VERSION = 1.807015;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2200,7 +2212,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.80009;
+				CURRENT_PROJECT_VERSION = 1.807015;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;

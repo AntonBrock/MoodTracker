@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct QuoteView: View {
-    
-    var quote: String = "Это нормально ‒ испытывать плохие эмоции. Это не делает тебя плохим человеком."
+        
+    @Binding var quote: String
     
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
-            Text(quote)
+            Text("\(quote)")
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
                 .font(.system(size: 16, weight: .light))

@@ -123,18 +123,20 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
     }
     
     @objc private func notificationSettingsDidChange(_ notification: Notification) {
-        UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
             DispatchQueue.main.async {
-                if settings.authorizationStatus == .authorized {
-                    Services.authService.updatePushNotification(updatePushNotificationToggle: true) { result in }
-                    AppState.shared.userPushNotification = true
-                    
-                    OneSignal.initWithLaunchOptions()
-                    OneSignal.setAppId("da77481a-ba27-43f6-8771-37227b99d2e3")
-                    OneSignal.setExternalUserId(AppState.shared.userID ?? "")
-                } else {
-                    Services.authService.updatePushNotification(updatePushNotificationToggle: false) { result in }
-                    AppState.shared.userPushNotification = false
+                if AppState.shared.isLogin ?? false {
+                    if settings.authorizationStatus == .authorized {
+                        Services.authService.updatePushNotification(updatePushNotificationToggle: true) { result in }
+                        AppState.shared.userPushNotification = true
+                        
+                        OneSignal.initWithLaunchOptions()
+                        OneSignal.setAppId("da77481a-ba27-43f6-8771-37227b99d2e3")
+                        OneSignal.setExternalUserId(AppState.shared.userID ?? "")
+                    } else {
+                        Services.authService.updatePushNotification(updatePushNotificationToggle: false) { result in }
+                        AppState.shared.userPushNotification = false
+                    }
                 }
             }
         }

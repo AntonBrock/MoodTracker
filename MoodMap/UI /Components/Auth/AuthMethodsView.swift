@@ -69,7 +69,6 @@ struct AuthMethodsView: View {
                 .padding(.bottom, 10)
                
                 SignInWithAppleButton(.continue) { request in
-//                        notificationCenter.post(name: Notification.Name("DisabledTabBarNavigation"), object: nil)
                         notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
                         request.requestedScopes = [.fullName, .email]
                     } onCompletion: { result in
@@ -154,7 +153,6 @@ struct AuthMethodsView: View {
     }
     
     func handleSignInButton() {
-//        notificationCenter.post(name: Notification.Name("DisabledTabBarNavigation"), object: nil)
         notificationCenter.post(name: Notification.Name("ShowLoaderPersonalCabinet"), object: nil)
 
         let scene = UIApplication.shared.connectedScenes
