@@ -24,9 +24,9 @@ enum AuthEnpPoint: TargetType {
     var baseURL: URL {
         switch self {
         case .singUp, .refreshToken, .singUpWithAppleId, .logout:
-            return URL(string: "https://api.mapmood.com/auth")!
+            return URL(string: "\(AppState.shared.baseURL)/auth")!
         case .getUserInfo, .deleteAccount, .setLanguage, .updateTimezone, .updatePushNotificationToggle:
-            return URL(string: "https://api.mapmood.com/v1/users")!
+            return URL(string: "\(AppState.shared.baseURL)/v1/users")!
         }
     }
     

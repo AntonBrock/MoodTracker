@@ -21,7 +21,7 @@ enum ReportEndPoint: TargetType {
     var baseURL: URL {
         switch self {
         case .getReport, .currentReportDay:
-            return URL(string: "https://api.mapmood.com/v1")!
+            return URL(string: "\(AppState.shared.baseURL)/v1")!
         }
     }
     

@@ -7,9 +7,7 @@
 
 import Foundation
 
-protocol MainScreenServiceProtocol {
-//    func getUserInfo(completion: @escaping(Result<UserInfoModel, Error>) -> Void)
-}
+protocol MainScreenServiceProtocol {}
 
 struct MainScreenService: MainScreenServiceProtocol {
     
@@ -41,29 +39,6 @@ struct MainScreenService: MainScreenServiceProtocol {
 
         return decoder
     }()
-    
-//    func getUserInfo(completion: @escaping(Result<UserInfoModel, Error>) -> Void) {
-//        let target = BaseAPI.mainScreen(.getUserInfo)
-//
-//        let networkService = ServiceProvider().networkService
-//        networkService?.request(.target(target), completion: { response in
-//            switch response {
-//            case let .success(result):
-//                do {
-//                    let decoder = JSONDecoder()
-//                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-////                    let models = try decoder.decode(UserInfoModel.self, from: result.data)
-//
-//                    completion(.success(models))
-//                } catch {
-////                    let error = CBError.daDataError
-//                    completion(.failure(error))
-//                }
-//            case let .failure(error):
-//                completion(.failure(error))
-//            }
-//        })
-//    }
 }
 
 struct StubMainScreen: MainScreenServiceProtocol {

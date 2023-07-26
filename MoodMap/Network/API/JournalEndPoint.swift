@@ -16,7 +16,7 @@ enum JournalEndPoint: TargetType {
     var baseURL: URL {
         switch self {
         case .sendUserNote, .getUserNotes:
-            return URL(string: "https://api.mapmood.com/v1")!
+            return URL(string: "\(AppState.shared.baseURL)/v1")!
         }
     }
     

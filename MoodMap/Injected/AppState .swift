@@ -14,6 +14,18 @@ final class AppState: ObservableObject {
     static let shared = AppState()
         
     let notificationCenter = NotificationCenter.default
+    
+    var baseURL: String {
+        get {
+            #if RELEASE
+                return "https://api.mapmood.com"
+            #endif
+            
+            #if DEBUG
+                return "https://api.dev.mapmood.com"
+            #endif
+        }
+    }
             
     enum KeychainKeys {
         static let accountKey = "CHKeychain"

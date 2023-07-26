@@ -44,7 +44,6 @@
 		4529AB7529AF193F001D2390 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E750362920B7B300CF9E21 /* ServiceProvider.swift */; };
 		4529AB7629AF193F001D2390 /* MainScreenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E750382920B7D100CF9E21 /* MainScreenService.swift */; };
 		4529AB7729AF193F001D2390 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E750302920B6E700CF9E21 /* BaseAPI.swift */; };
-		4529AB7829AF193F001D2390 /* MainScreenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E750322920B73200CF9E21 /* MainScreenEndpoint.swift */; };
 		4529AB7929AF193F001D2390 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7503A2920B80200CF9E21 /* UserInfoModel.swift */; };
 		4529AB7A29AF193F001D2390 /* AnotherHelpsPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D352D2951B57F0018A3DA /* AnotherHelpsPreviewModel.swift */; };
 		4529AB7B29AF193F001D2390 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D35172951A8570018A3DA /* Fonts.swift */; };
@@ -220,7 +219,6 @@
 		45FCD1D72A18BEEE00B0DAF0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D58D29E83F1200E69852 /* Constants.swift */; };
 		45FCD1D82A18BEEE00B0DAF0 /* MainScreenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E750382920B7D100CF9E21 /* MainScreenService.swift */; };
 		45FCD1D92A18BEEE00B0DAF0 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E750302920B6E700CF9E21 /* BaseAPI.swift */; };
-		45FCD1DA2A18BEEE00B0DAF0 /* MainScreenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E750322920B73200CF9E21 /* MainScreenEndpoint.swift */; };
 		45FCD1DB2A18BEEE00B0DAF0 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7503A2920B80200CF9E21 /* UserInfoModel.swift */; };
 		45FCD1DC2A18BEEE00B0DAF0 /* AnotherHelpsPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452D352D2951B57F0018A3DA /* AnotherHelpsPreviewModel.swift */; };
 		45FCD1DD2A18BEEE00B0DAF0 /* ActivitiesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401429BA41C200371B5C /* ActivitiesModel.swift */; };
@@ -583,7 +581,6 @@
 		45E2876629DB104A00593E7A /* StressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressModel.swift; sourceTree = "<group>"; };
 		45E2876829DB117A00593E7A /* StressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressViewModel.swift; sourceTree = "<group>"; };
 		45E750302920B6E700CF9E21 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
-		45E750322920B73200CF9E21 /* MainScreenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenEndpoint.swift; sourceTree = "<group>"; };
 		45E750342920B78700CF9E21 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		45E750362920B7B300CF9E21 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		45E750382920B7D100CF9E21 /* MainScreenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenService.swift; sourceTree = "<group>"; };
@@ -1317,7 +1314,6 @@
 			isa = PBXGroup;
 			children = (
 				45E750302920B6E700CF9E21 /* BaseAPI.swift */,
-				45E750322920B73200CF9E21 /* MainScreenEndpoint.swift */,
 				45133A2129AFB97400258072 /* AuthEnpPoint.swift */,
 				456A400729B75DD200371B5C /* UserStateEndPoint.swift */,
 				456A401E29BBA84400371B5C /* JournalEndPoint.swift */,
@@ -1581,7 +1577,6 @@
 				4546D58E29E83F1200E69852 /* Constants.swift in Sources */,
 				4529AB7629AF193F001D2390 /* MainScreenService.swift in Sources */,
 				4529AB7729AF193F001D2390 /* BaseAPI.swift in Sources */,
-				4529AB7829AF193F001D2390 /* MainScreenEndpoint.swift in Sources */,
 				4529AB7929AF193F001D2390 /* UserInfoModel.swift in Sources */,
 				4529AB7A29AF193F001D2390 /* AnotherHelpsPreviewModel.swift in Sources */,
 				456A401529BA41C200371B5C /* ActivitiesModel.swift in Sources */,
@@ -1749,7 +1744,6 @@
 				45FCD1D72A18BEEE00B0DAF0 /* Constants.swift in Sources */,
 				45FCD1D82A18BEEE00B0DAF0 /* MainScreenService.swift in Sources */,
 				45FCD1D92A18BEEE00B0DAF0 /* BaseAPI.swift in Sources */,
-				45FCD1DA2A18BEEE00B0DAF0 /* MainScreenEndpoint.swift in Sources */,
 				45FCD1DB2A18BEEE00B0DAF0 /* UserInfoModel.swift in Sources */,
 				45FCD1DC2A18BEEE00B0DAF0 /* AnotherHelpsPreviewModel.swift in Sources */,
 				45FCD1DD2A18BEEE00B0DAF0 /* ActivitiesModel.swift in Sources */,

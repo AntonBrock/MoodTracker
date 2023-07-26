@@ -18,7 +18,7 @@ enum UserStateEndPoint: TargetType {
     var baseURL: URL {
         switch self {
         case .getStateList, .getEmotionsList, .getActivitiesList, .getStressList:
-            return URL(string: "https://api.mapmood.com/v1")!
+            return URL(string: "\(AppState.shared.baseURL)/v1")!
         }
     }
     

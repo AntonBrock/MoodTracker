@@ -18,7 +18,7 @@ enum DiaryEndPoint: TargetType {
     var baseURL: URL {
         switch self {
         case .getDiary, .setNewPage:
-            return URL(string: "https://api.mapmood.com/v1")!
+            return URL(string: "\(AppState.shared.baseURL)/v1")!
         }
     }
     
