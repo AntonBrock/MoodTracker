@@ -27,7 +27,21 @@ class YandexInterstitialADViewController: UIViewController {
     }
     
     func loadInterstitial() {
-        self.interstitialAd = YMAInterstitialAd(adUnitID: "demo-interstitial-yandex") // - 2313494 изменить на проде
+        var id: String = ""
+        
+        #if DEBUG
+            id = "demo-interstitial-yandex"
+        #endif
+        
+        #if MoodMapBeta
+            id = "demo-interstitial-yandex"
+        #endif
+        
+        #if RELEASE
+            id = "2313494"
+        #endif
+        
+        self.interstitialAd = YMAInterstitialAd(adUnitID: id)
         self.interstitialAd.delegate = self
         self.interstitialAd.load()
     }

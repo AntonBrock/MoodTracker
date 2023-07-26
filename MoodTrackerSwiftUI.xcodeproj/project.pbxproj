@@ -593,7 +593,7 @@
 		45F88C0A28D8750C00AB6153 /* MTButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTButton.swift; sourceTree = "<group>"; };
 		45FCD1A52A18B4A300B0DAF0 /* MMErrorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMErrorProtocol.swift; sourceTree = "<group>"; };
 		45FCD1A82A18B4C700B0DAF0 /* MMErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMErrorView.swift; sourceTree = "<group>"; };
-		45FCD2872A18BEEE00B0DAF0 /* MoodMap Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MoodMap Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		45FCD2872A18BEEE00B0DAF0 /* MoodMapBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoodMapBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FCD2882A18BEEF00B0DAF0 /* MoodMap copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MoodMap copy-Info.plist"; path = "/Users/antondobrynin/Desktop/MoodTracker/MoodMap copy-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -1037,7 +1037,7 @@
 			isa = PBXGroup;
 			children = (
 				4529AA6629AF1470001D2390 /* MoodMap.app */,
-				45FCD2872A18BEEE00B0DAF0 /* MoodMap Beta.app */,
+				45FCD2872A18BEEE00B0DAF0 /* MoodMapBeta.app */,
 				45B721302A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
@@ -1406,9 +1406,9 @@
 			productReference = 45B721302A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		45FCD1AA2A18BEEE00B0DAF0 /* MoodMap Beta */ = {
+		45FCD1AA2A18BEEE00B0DAF0 /* MoodMapBeta */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45FCD2842A18BEEE00B0DAF0 /* Build configuration list for PBXNativeTarget "MoodMap Beta" */;
+			buildConfigurationList = 45FCD2842A18BEEE00B0DAF0 /* Build configuration list for PBXNativeTarget "MoodMapBeta" */;
 			buildPhases = (
 				45FCD1CA2A18BEEE00B0DAF0 /* Sources */,
 				45FCD2602A18BEEE00B0DAF0 /* Frameworks */,
@@ -1418,7 +1418,7 @@
 			);
 			dependencies = (
 			);
-			name = "MoodMap Beta";
+			name = MoodMapBeta;
 			packageProductDependencies = (
 				45FCD1AB2A18BEEE00B0DAF0 /* WrappingStack */,
 				45FCD1AD2A18BEEE00B0DAF0 /* Moya */,
@@ -1442,7 +1442,7 @@
 				45B721472A4AD47000CAB76B /* OneSignalExtension */,
 			);
 			productName = MoodMap;
-			productReference = 45FCD2872A18BEEE00B0DAF0 /* MoodMap Beta.app */;
+			productReference = 45FCD2872A18BEEE00B0DAF0 /* MoodMapBeta.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1494,7 +1494,7 @@
 			projectRoot = "";
 			targets = (
 				4529AA6529AF1470001D2390 /* MoodMap */,
-				45FCD1AA2A18BEEE00B0DAF0 /* MoodMap Beta */,
+				45FCD1AA2A18BEEE00B0DAF0 /* MoodMapBeta */,
 				45B7212F2A4AD1F500CAB76B /* OneSignalNotificationServiceExtension */,
 			);
 		};
@@ -2272,7 +2272,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		45FCD2842A18BEEE00B0DAF0 /* Build configuration list for PBXNativeTarget "MoodMap Beta" */ = {
+		45FCD2842A18BEEE00B0DAF0 /* Build configuration list for PBXNativeTarget "MoodMapBeta" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45FCD2852A18BEEE00B0DAF0 /* Debug */,

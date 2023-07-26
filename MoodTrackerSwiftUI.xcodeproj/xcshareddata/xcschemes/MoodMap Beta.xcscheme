@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "45FCD1AA2A18BEEE00B0DAF0"
-               BuildableName = "MoodMap Beta.app"
-               BlueprintName = "MoodMap Beta"
+               BuildableName = "MoodMapBeta.app"
+               BlueprintName = "MoodMapBeta"
                ReferencedContainer = "container:MoodTrackerSwiftUI.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,14 +45,14 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "45FCD1AA2A18BEEE00B0DAF0"
-            BuildableName = "MoodMap Beta.app"
-            BlueprintName = "MoodMap Beta"
+            BuildableName = "MoodMapBeta.app"
+            BlueprintName = "MoodMapBeta"
             ReferencedContainer = "container:MoodTrackerSwiftUI.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "45FCD1AA2A18BEEE00B0DAF0"
-            BuildableName = "MoodMap Beta.app"
-            BlueprintName = "MoodMap Beta"
+            BuildableName = "MoodMapBeta.app"
+            BlueprintName = "MoodMapBeta"
             ReferencedContainer = "container:MoodTrackerSwiftUI.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -73,7 +73,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Debug"
-      customArchiveName = "MoodMap Beta"
+      customArchiveName = "MoodMapBeta"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
