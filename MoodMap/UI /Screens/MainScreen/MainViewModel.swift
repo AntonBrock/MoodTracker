@@ -47,14 +47,31 @@ extension MainView {
         func setupViewer(_ viewer: MainView) {
             self.viewer = viewer
             
-            fetchQuotes()
+            if isNeedUpdateQuote() {
+                fetchQuotes()
+            } else {
+                self.viewer?.quoteText = AppState.shared.quoteText ?? "Это нормально ‒ испытывать плохие эмоции. Это не делает тебя плохим человеком"
+            }
+            
             fetchMainData()
+        }
+        
+        func isNeedUpdateQuote() -> Bool {
+            if let updateQuotesDate = AppState.shared.updateQuotesDate,
+               Date().timeIntervalSince(updateQuotesDate) > Constants.timeoutRequestQuotes {
+                AppState.shared.updateQuotesDate = Date()
+                return true
+            } else if AppState.shared.updateQuotesDate == nil {
+                AppState.shared.updateQuotesDate = Date()
+                return false
+            } else { return false }
         }
         
         func fetchQuotes() {
             Services.quotesService.fetchQuote(language: AppState.shared.userLanguage ?? "russian", completion: { result in
                 switch result {
                 case .success(let quoteModel):
+                    AppState.shared.quoteText = quoteModel.text
                     self.viewer?.quoteText = quoteModel.text
                 case .failure(let error):
                     print(error)

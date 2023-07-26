@@ -37,6 +37,8 @@ final class AppState: ObservableObject {
     enum UserDefaultsKeys {
         static let isAuthorizated = "isAuthorizated"
         static let rememberPushNotificationDate = "rememberPushNotificationDate"
+        static let quoteText = "quoteText"
+        static let updateQuotesDate = "updateQuotesDate"
         static let isShowATT = "isShowATT"
         static let isNotShowSharingScreen = "isNotShowSharingScreen"
         static let timeZone = "timeZone"
@@ -64,6 +66,24 @@ final class AppState: ObservableObject {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.rememberPushNotificationDate)
+        }
+    }
+    
+    var quoteText: String? {
+        get {
+            return UserDefaults.standard.object(forKey: UserDefaultsKeys.quoteText) as? String
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.quoteText)
+        }
+    }
+    
+    var updateQuotesDate: Date? {
+        get {
+            return UserDefaults.standard.object(forKey: UserDefaultsKeys.updateQuotesDate) as? Date
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.updateQuotesDate)
         }
     }
     
