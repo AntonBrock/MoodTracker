@@ -17,13 +17,8 @@ final class AppState: ObservableObject {
     
     var baseURL: String {
         get {
-            #if RELEASE
-                return "https://api.mapmood.com"
-            #endif
-            
-            #if DEBUG
-                return "https://api.dev.mapmood.com"
-            #endif
+            let baseURL = Bundle.main.infoDictionary?["BaseURL"]! ?? "https://api.mapmood.com"
+            return "https://\(baseURL)"
         }
     }
             

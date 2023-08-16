@@ -8,16 +8,8 @@
 import Foundation
 
 enum Constants {
-    
-    #if DEBUG
-    /// Если прошло 10 дней то необходимо снова спросить доступ к пушам
-    static let timeoutRequestNotification: TimeInterval = 60 * 60 * 24 * 10
-    #endif
-    
-    #if RELEASE
-    /// Если прошло 10 минут то необходимо снова спросить доступ к пушам
-    static let timeoutRequestNotification: TimeInterval = 60 * 10
-    #endif
+    /// Если прошло 1 дней то необходимо снова спросить доступ к пушам
+    static let timeoutRequestNotification: TimeInterval = 60 * 60 * 24 * 1
 
     /// Ссылка для Support в телеграм
     static let urlPathToSupport: String = "tg://resolve?domain=moodmapsupport"

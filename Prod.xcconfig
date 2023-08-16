@@ -1,0 +1,13 @@
+//
+//  PROD.xcconfig
+//  MoodTrackerSwiftUI
+//
+//  Created by ANTON DOBRYNIN on 16.08.2023.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+BASE_URL = api.mapmood.com
+CLIENT_ID = 947104793436-q0pa4cs7pg1nj3na7tn43rm5qg6rgh6b.apps.googleusercontent.com
+URL_SCHEMES_GOOGLE = com.googleusercontent.apps.947104793436-q0pa4cs7pg1nj3na7tn43rm5qg6rgh6b

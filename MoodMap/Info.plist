@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BaseURL</key>
+	<string>$(SCHEME)${BASE_URL}</string>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>Russian</string>
@@ -13,21 +15,16 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.947104793436-d0ag0du82f66brj6ce1dtqa1i5i3ut4j</string>
+				<string>$(SCHEME)${URL_SCHEMES_GOOGLE}</string>
 			</array>
 		</dict>
 	</array>
 	<key>GIDClientID</key>
-	<string>947104793436-d0ag0du82f66brj6ce1dtqa1i5i3ut4j.apps.googleusercontent.com</string>
+	<string>$(SCHEME)${CLIENT_ID}</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>instagram-stories</string>
 		<string>tg</string>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>AvertaDemoPE-ExtraboldItalic.ttf</string>
-		<string>AvertaDemoPE-Regular.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

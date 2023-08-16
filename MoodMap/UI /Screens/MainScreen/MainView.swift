@@ -34,7 +34,9 @@ struct MainView: View {
         self.container = container
         self.coordinator = coordinator
         self.animation = animation
-        self.viewModel = coordinator.viewModel        
+        self.viewModel = coordinator.viewModel
+        
+        print(AppState.shared.baseURL)
     }
     
     var body: some View {
