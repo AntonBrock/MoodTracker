@@ -63,6 +63,8 @@ struct LaunchScreenView: View {
                         let timeZone = TimeZone.current
                         let timeZoneIdentifier = timeZone.identifier
                         
+                        AppState.shared.timezone = timeZoneIdentifier
+                        
                         if AppState.shared.isLogin ?? false {
                             if AppState.shared.timezone != nil && timeZoneIdentifier != AppState.shared.timezone {
                                 AppState.shared.timezone = timeZoneIdentifier
@@ -75,8 +77,6 @@ struct LaunchScreenView: View {
                                         print(error)
                                     }
                                 }
-                            } else if AppState.shared.timezone == nil {
-                                AppState.shared.timezone = timeZoneIdentifier
                             }
                         }
                         
