@@ -13,11 +13,16 @@ class YandexInterstitialADViewController: UIViewController {
     var interstitialAd: YMAInterstitialAd!
     var willDisappear: (() -> Void)
     var showADASScreen: (() -> Void)
+    var hideADScreen: (() -> Void)
     
-    init (dismissAction: @escaping (() -> Void),
-          showADASScreen: @escaping (() -> Void)) {
+    init (
+        dismissAction: @escaping (() -> Void),
+        showADASScreen: @escaping (() -> Void),
+        hideADScreen: @escaping (() -> Void)
+    ) {
         self.willDisappear = dismissAction
         self.showADASScreen = showADASScreen
+        self.hideADScreen = hideADScreen
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -64,6 +69,7 @@ extension YandexInterstitialADViewController: YMAInterstitialAdDelegate {
     }
 
     func interstitialAdDidFail(toPresent interstitialAd: YMAInterstitialAd, error: Error) {
+        hideADScreen()
         print("Failed to present interstitial. Error: \(error)")
     }
 

@@ -120,7 +120,7 @@ struct LaunchScreenView: View {
     
     func getUserInfo(completion: @escaping ((_ needShowAuthPopUp: Bool) -> Void)) {
         if !checkJWTIsValid() {
-            if !checkRefreshTokenIsValid() {
+            if checkRefreshTokenIsValid() {
                 Services.authService.refreshToken { result in
                     switch result {
                     case .success:

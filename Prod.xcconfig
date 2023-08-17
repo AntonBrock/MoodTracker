@@ -7,8 +7,9 @@
 
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
+// 2313494
 
 BASE_URL = api.mapmood.com
 CLIENT_ID = 947104793436-q0pa4cs7pg1nj3na7tn43rm5qg6rgh6b.apps.googleusercontent.com
 URL_SCHEMES_GOOGLE = com.googleusercontent.apps.947104793436-q0pa4cs7pg1nj3na7tn43rm5qg6rgh6b
-YANDEX_AD_ID = 2313494
+YANDEX_AD_ID = R-M-2313494-1

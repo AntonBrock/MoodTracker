@@ -201,11 +201,35 @@ extension MoodCheckView {
             
             guard let createdAt = choosedTimeDate else { return }
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            dateFormatter.timeZone = TimeZone(abbreviation: "UTC") // Set the desired timezone
-            let dateString = dateFormatter.string(from: createdAt)
+            var dateString: String = ""
+            
+            let locale = NSLocale.current
+            let formatter: String = DateFormatter.dateFormat(fromTemplate: "j", options:0, locale: locale)!
+            
+            if formatter.contains("a") {
+                // phone is set to 12 hours
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd h:mm:ss a Z"
+                dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                
+                let dateString12Hour = dateFormatter.string(from: createdAt)
+                let date = dateFormatter.date(from: dateString12Hour)
+                
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+                dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
 
+                let date24 = dateFormatter.string(from: date!)
+                
+                dateString = date24
+            } else {
+                // phone is set 24 hours
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+                dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+                
+                dateString = dateFormatter.string(from: createdAt)
+            }
+            
             Services.journalService.sendUserNote(
                 createdAt: dateString,
                 activities: choosedActivities,
