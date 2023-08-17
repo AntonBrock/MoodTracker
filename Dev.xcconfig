@@ -11,3 +11,4 @@
 BASE_URL = api.dev.mapmood.com
 CLIENT_ID = 947104793436-d0ag0du82f66brj6ce1dtqa1i5i3ut4j.apps.googleusercontent.com
 URL_SCHEMES_GOOGLE = com.googleusercontent.apps.947104793436-d0ag0du82f66brj6ce1dtqa1i5i3ut4j
+YANDEX_AD_ID = demo-interstitial-yandex
