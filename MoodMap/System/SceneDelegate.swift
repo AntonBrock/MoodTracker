@@ -10,6 +10,7 @@ import UIKit
 import UserNotifications
 import OneSignal
 import Firebase
+import FacebookCore
 
 enum UserStoryType {
     case moodCheckView
@@ -30,13 +31,30 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
     var previousAuthorizationStatus: UNAuthorizationStatus = .notDetermined
         
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        for context in URLContexts {
-            print("url: \(context.url.absoluteURL)")
-            print("scheme: \(String(describing: context.url.scheme))")
-            print("host: \(String(describing: context.url.host))")
-            print("path: \(context.url.path)")
-            print("components: \(context.url.pathComponents)")
+        guard let url = URLContexts.first?.url else {
+            return
         }
+        
+        ApplicationDelegate.shared.application(
+            UIApplication.shared,
+            open: url,
+            sourceApplication: nil,
+            annotation: [UIApplication.OpenURLOptionsKey.annotation]
+        )
+        
+//        for context in URLContexts {
+//            ApplicationDelegate.shared.application(
+//                UIApplication.shared,
+//                open: url,
+//                sourceApplication: nil,
+//                annotation: [UIApplication.OpenURLOptionsKey.annotation]
+//            )
+//            print("url: \(context.url.absoluteURL)")
+//            print("scheme: \(String(describing: context.url.scheme))")
+//            print("host: \(String(describing: context.url.host))")
+//            print("path: \(context.url.path)")
+//            print("components: \(context.url.pathComponents)")
+//        }
     }
     
     func scene(

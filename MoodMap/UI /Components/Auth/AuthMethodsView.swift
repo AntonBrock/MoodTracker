@@ -131,9 +131,9 @@ struct AuthMethodsView: View {
                 .padding(.top, 29)
                 
                 AuthHyperString()
-                    .frame(maxWidth: 300, maxHeight: 80)
+                    .frame(maxWidth: 300, maxHeight: 110)
                     .padding(.top, 20)
-                    .padding(.bottom, -20)
+                    .padding(.bottom, -25)
             }
         }
         .customBackground(

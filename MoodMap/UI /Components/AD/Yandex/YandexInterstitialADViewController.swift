@@ -49,7 +49,6 @@ extension YandexInterstitialADViewController: YMAInterstitialAdDelegate {
     func interstitialAdDidLoad(_ interstitialAd: YMAInterstitialAd) {
         showADASScreen()
         presentInterstitial()
-        print("Ad loaded")
     }
 
     func interstitialAdDidFail(toLoad interstitialAd: YMAInterstitialAd, error: Error) {
@@ -69,7 +68,9 @@ extension YandexInterstitialADViewController: YMAInterstitialAdDelegate {
     }
 
     func interstitialAdDidFail(toPresent interstitialAd: YMAInterstitialAd, error: Error) {
-        hideADScreen()
+        if Bundle.main.infoDictionary?["YandexADID"]! == nil {
+            hideADScreen()
+        }
         print("Failed to present interstitial. Error: \(error)")
     }
 

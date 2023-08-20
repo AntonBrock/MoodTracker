@@ -136,6 +136,8 @@
 		4546D59029E841FC00E69852 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 4546D58F29E841FC00E69852 /* loader.json */; };
 		4546D59329E844CD00E69852 /* PushNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D59229E844CD00E69852 /* PushNotificationView.swift */; };
 		4546D59929E86BFF00E69852 /* ATTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D59829E86BFF00E69852 /* ATTView.swift */; };
+		454FE49E2A920D7B00BC86FE /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 454FE49D2A920D7B00BC86FE /* FacebookCore */; };
+		454FE4A02A920D7B00BC86FE /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 454FE49F2A920D7B00BC86FE /* FacebookShare */; };
 		45660B9B2A23589F00077CBF /* UserLimitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45660B9A2A23589F00077CBF /* UserLimitsView.swift */; };
 		45660B9C2A235B8700077CBF /* UserLimitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45660B9A2A23589F00077CBF /* UserLimitsView.swift */; };
 		456A400829B75DD200371B5C /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A400729B75DD200371B5C /* UserStateEndPoint.swift */; };
@@ -620,7 +622,9 @@
 				4529AA8529AF1519001D2390 /* SwiftUICharts in Frameworks */,
 				45F361B32A17D40C002CD92B /* YandexMobileMetrica in Frameworks */,
 				45B721402A4AD2E900CAB76B /* OneSignalExtension in Frameworks */,
+				454FE49E2A920D7B00BC86FE /* FacebookCore in Frameworks */,
 				45EC871829E407440018AE91 /* YandexMobileAdsPackage in Frameworks */,
+				454FE4A02A920D7B00BC86FE /* FacebookShare in Frameworks */,
 				45F361AA2A178A5A002CD92B /* FirebaseMessaging in Frameworks */,
 				4529AA8129AF1519001D2390 /* HorizonCalendar in Frameworks */,
 				4529AA8B29AF151A001D2390 /* GoogleSignInSwift in Frameworks */,
@@ -1384,6 +1388,8 @@
 				45F361B42A17D40C002CD92B /* YandexMobileMetricaCrashes */,
 				45B7213D2A4AD2E900CAB76B /* OneSignal */,
 				45B7213F2A4AD2E900CAB76B /* OneSignalExtension */,
+				454FE49D2A920D7B00BC86FE /* FacebookCore */,
+				454FE49F2A920D7B00BC86FE /* FacebookShare */,
 			);
 			productName = MoodMap;
 			productReference = 4529AA6629AF1470001D2390 /* MoodMap.app */;
@@ -1492,6 +1498,7 @@
 				45F361A42A178A5A002CD92B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				45F361B12A17D40C002CD92B /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
 				45B7213C2A4AD2E900CAB76B /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+				454FE49C2A920D7B00BC86FE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 4539308728C88EC000A5D828 /* Products */;
 			projectDirPath = "";
@@ -1969,7 +1976,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0820;
+				CURRENT_PROJECT_VERSION = 1.0821;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2144,7 +2151,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0820;
+				CURRENT_PROJECT_VERSION = 1.0821;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
@@ -2318,6 +2325,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
+			};
+		};
+		454FE49C2A920D7B00BC86FE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
 			};
 		};
 		457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
@@ -2559,6 +2574,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 457A885E29A9FC6F00FC7BBB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		454FE49D2A920D7B00BC86FE /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 454FE49C2A920D7B00BC86FE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		454FE49F2A920D7B00BC86FE /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 454FE49C2A920D7B00BC86FE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
 		};
 		45B39F8C29E52D6B00852E70 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

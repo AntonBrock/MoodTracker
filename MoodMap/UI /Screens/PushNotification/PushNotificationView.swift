@@ -74,7 +74,7 @@ struct PushNotificationView: View {
             Spacer()
             
             VStack {
-                Text("Разрешить присылать пуши\nможно на следующем экране")
+                Text("Разрешить присылать Пуши\nможно на следующем экране")
                     .foregroundColor(Colors.Primary.lightGray)
                     .font(.system(size: 14, weight: .regular))
                     .multilineTextAlignment(.center)

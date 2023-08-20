@@ -141,7 +141,6 @@ struct StressCheckView: View {
             isNeedShowADAsPage = true
         }, hideADScreen: {
             hideAD(model: withModel)
-            isNeedShowADAsPage = false
         })
         isNeedShowAD = true
     }

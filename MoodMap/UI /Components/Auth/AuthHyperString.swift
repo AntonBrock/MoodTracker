@@ -17,17 +17,17 @@ struct AuthHyperString: UIViewRepresentable {
             NSAttributedString.Key.foregroundColor: UIColor(Color(hex: "B4B6B8"))
         ]
         
-        let attributedText = NSMutableAttributedString(string: "Нажимая на кнопку «Войти через Google/Apple», вы принимаете")
+        let attributedText = NSMutableAttributedString(string: "Нажимая на кнопки «Продолжить с Google/Apple», вы принимаете нашу:")
         attributedText.addAttributes(standartTextAttributes, range: attributedText.range) // check extention
         
         let hyperlinkTextAttributes: [NSAttributedString.Key : Any] = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 11),
             NSAttributedString.Key.foregroundColor: UIColor(Color(hex: "B283E4")),
             NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
-            NSAttributedString.Key.link: "https://stackoverflow.com"
+            NSAttributedString.Key.link: "https://mapmood.com/privacy"
         ]
         
-        let textWithHyperlink = NSMutableAttributedString(string: " правила ")
+        let textWithHyperlink = NSMutableAttributedString(string: " политику конфидициальности ")
         textWithHyperlink.addAttributes(hyperlinkTextAttributes, range: textWithHyperlink.range)
         attributedText.append(textWithHyperlink)
         
@@ -39,10 +39,10 @@ struct AuthHyperString: UIViewRepresentable {
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 11),
             NSAttributedString.Key.foregroundColor: UIColor(Color(hex: "B283E4")),
             NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
-            NSAttributedString.Key.link: "https://stackoverflow.com"
+            NSAttributedString.Key.link: "https://mapmood.com/terms"
         ]
         
-        let endOfAttrString = NSMutableAttributedString(string: " политику сервиса")
+        let endOfAttrString = NSMutableAttributedString(string: " правила использования приложения")
         endOfAttrString.addAttributes(hyperlinkTextAttributesTwo, range: endOfAttrString.range)
         attributedText.append(endOfAttrString)
                 

@@ -36,7 +36,7 @@ struct TabBarView: View {
 
     let isDisabledTabBarNavigation = NotificationCenter.default.publisher(for: NSNotification.Name("DisabledTabBarNavigation"))
     let isNotDisabledTabBarNavigation = NotificationCenter.default.publisher(for: NSNotification.Name("NotDisabledTabBarNavigation"))
-
+    
     var body: some View {
         ZStack {
             GeometryReader { geometry in
@@ -143,6 +143,9 @@ struct TabBarView: View {
             .onChange(of: viewRouter.currentPage) { newValue in
                 coordinator.isNeedShowTab = newValue
             }
+        }
+        .onAppear {
+            PersonalCabinetCoordinatorView(coordinator: coordinator.personalCabinetCoordinator)
         }
         .onReceive(AppState.shared.notificationCenter.publisher(for: NSNotification.Name.MainScreenNotification), perform: { output in
             coordinator.mainScreenCoordinator.viewModel.fetchMainData()

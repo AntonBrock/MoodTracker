@@ -18,9 +18,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>$(SCHEME)${URL_SCHEMES_GOOGLE}</string>
+                <string>309076024863926</string>
 			</array>
 		</dict>
 	</array>
+    <key>FacebookAppID</key>
+    <string>309076024863926</string>
+    <key>FacebookClientToken</key>
+    <string>438a54aa657e5a06348f31c15dfad575</string>
+    <key>FacebookDisplayName</key>
+    <string>MoodMap</string>
 	<key>GIDClientID</key>
 	<string>$(SCHEME)${CLIENT_ID}</string>
 	<key>LSApplicationQueriesSchemes</key>
