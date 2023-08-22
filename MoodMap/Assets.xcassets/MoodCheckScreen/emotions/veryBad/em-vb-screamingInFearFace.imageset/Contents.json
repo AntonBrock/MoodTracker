@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "face-screaming-in-fear.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

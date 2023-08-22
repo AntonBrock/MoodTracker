@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "happy-face-with-enlarged-eyes.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
