@@ -159,6 +159,7 @@
 		457F591729C183F100E96E1D /* ReportScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591629C183F100E96E1D /* ReportScreenViewModel.swift */; };
 		457F591929C184B900E96E1D /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591829C184B900E96E1D /* ReportService.swift */; };
 		457F591B29C184F300E96E1D /* ReportEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591A29C184F300E96E1D /* ReportEndPoint.swift */; };
+		45884FF82A97E992003A3D8A /* WebViewUIViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45884FF72A97E992003A3D8A /* WebViewUIViewRepresentable.swift */; };
 		4592521429C4205E007B1706 /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592521329C4205E007B1706 /* ReportModel.swift */; };
 		4592521B29C6EB9A007B1706 /* WeekAnimationChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592521A29C6EB9A007B1706 /* WeekAnimationChart.swift */; };
 		4592521D29C6EBA2007B1706 /* MonthChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592521C29C6EBA2007B1706 /* MonthChart.swift */; };
@@ -540,6 +541,7 @@
 		457F591629C183F100E96E1D /* ReportScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportScreenViewModel.swift; sourceTree = "<group>"; };
 		457F591829C184B900E96E1D /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		457F591A29C184F300E96E1D /* ReportEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEndPoint.swift; sourceTree = "<group>"; };
+		45884FF72A97E992003A3D8A /* WebViewUIViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewUIViewRepresentable.swift; sourceTree = "<group>"; };
 		4592521329C4205E007B1706 /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
 		4592521A29C6EB9A007B1706 /* WeekAnimationChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekAnimationChart.swift; sourceTree = "<group>"; };
 		4592521C29C6EBA2007B1706 /* MonthChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthChart.swift; sourceTree = "<group>"; };
@@ -802,6 +804,7 @@
 				45319EEF296FBAB100D58DCF /* GalleryPhotoPicker.swift */,
 				45319EF1296FBAC300D58DCF /* ImagePicker.swift */,
 				456750B5297451E300392992 /* MTKeyboardView.swift */,
+				45884FF72A97E992003A3D8A /* WebViewUIViewRepresentable.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1648,6 +1651,7 @@
 				4504F00329D9762F0042CF6B /* DiaryModel.swift in Sources */,
 				45FCD1A62A18B4A300B0DAF0 /* MMErrorProtocol.swift in Sources */,
 				4529ABA629AF1940001D2390 /* CutomAlertView.swift in Sources */,
+				45884FF82A97E992003A3D8A /* WebViewUIViewRepresentable.swift in Sources */,
 				45B39F9029E52DBC00852E70 /* LottieView.swift in Sources */,
 				4592521B29C6EB9A007B1706 /* WeekAnimationChart.swift in Sources */,
 				4529ABA729AF1940001D2390 /* EmotionBoardView.swift in Sources */,

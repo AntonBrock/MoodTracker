@@ -59,6 +59,8 @@ extension ReportScreen {
         
         @Published var firstStartFromDateString: String?
         @Published var firstStartToDateString: String?
+        
+        @Published var pieSliceData: [PieSliceData] = []
 
         init() {
             setup()
@@ -444,6 +446,7 @@ extension ReportScreen {
                 emotionCircleViewModel: [],
                 dataIsEmpty: true
             )
+            pieSliceData = []
             timeDataViewModel = TimeDataViewModel(
                 bestTime: "",
                 worstTime: "",
@@ -589,6 +592,25 @@ extension ReportScreen {
             self.timeDataViewModel = timeDataViewModel
             self.goodActivitiesDataViewModel = goodActivitiesReportDataViewModel
             self.badActivitiesDataViewModel = badActivitiesReportDataViewModel
+            
+            let sum = self.emotionCountData.countState.reduce(0, +)
+            var endDeg: Double = 0
+            var tempSlices: [PieSliceData] = []
+            
+            for i in emotionalCircleViewModel {
+                let degrees: Double = (Double(i.value) ?? 0) * 360 / sum
+                tempSlices.append(
+                    PieSliceData(
+                        startAngle: Angle(degrees: endDeg),
+                        endAngle: Angle(degrees: endDeg + degrees),
+                        text: String(format: "%.2f", sum),
+                        color: i.color)
+                )
+                endDeg += degrees
+            }
+            
+            self.pieSliceData = tempSlices
+            
 
             return ReportViewModel(
                 chartData: chartDataViewModel.sorted(by: { $0.date < $1.date }),

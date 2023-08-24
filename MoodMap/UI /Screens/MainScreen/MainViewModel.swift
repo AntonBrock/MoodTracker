@@ -35,6 +35,8 @@ extension MainView {
         @Published var isEnableTypeOfReprot: [String] = ["Настроение", "Стресс"]
         @Published var isEnableTypeOfReportForRequest: [String] = ["mood", "stress"]
         @Published var isShowLoader: Bool = false
+        
+        @Published var pieSliceData: [PieSliceData] = []
 
         var selectedTypeOfReport: Int = 0
         
@@ -190,6 +192,7 @@ extension MainView {
                 dataIsEmpty: true
             )
             
+            pieSliceData = []
             journalViewModels = []
         }
         
@@ -256,7 +259,25 @@ extension MainView {
 
             self.emotionCountData = emotionCountDataViewModel
             emotionCountDataViewModel.emotionCircleViewModel = emotionalCircleViewModel
-
+            
+            let sum = self.emotionCountData.countState.reduce(0, +)
+            var endDeg: Double = 0
+            var tempSlices: [PieSliceData] = []
+            
+            for i in emotionalCircleViewModel {
+                let degrees: Double = (Double(i.value) ?? 0) * 360 / sum
+                tempSlices.append(
+                    PieSliceData(
+                        startAngle: Angle(degrees: endDeg),
+                        endAngle: Angle(degrees: endDeg + degrees),
+                        text: String(format: "2f", sum),
+                        color: i.color)
+                )
+                endDeg += degrees
+            }
+            
+            self.pieSliceData = tempSlices
+            
             return emotionCountDataViewModel
         }
         

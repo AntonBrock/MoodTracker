@@ -115,7 +115,8 @@ struct MainView: View {
                     emotionTotal: $viewModel.emotionCountData.total,
                     emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel,
                     isLoading: $viewModel.isShowLoader,
-                    dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty
+                    dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty,
+                    emotionSlices: $viewModel.pieSliceData
                 )
                 .padding(.top, 16)
                 .padding(.horizontal, 10)

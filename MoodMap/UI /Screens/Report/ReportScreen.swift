@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftUICharts
 import Charts
 import HorizonCalendar
+import WebKit
 
 struct ReportScreen: View {
     
@@ -34,6 +35,7 @@ struct ReportScreen: View {
     @State var isAnimated = true
     
     @State var globalLoader: Bool = false
+    @State private var isWebViewPresented = false
         
     var dateTitles: [String] = ["Неделя", "Месяц"] // "Все время"
 
@@ -116,15 +118,14 @@ struct ReportScreen: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .padding(.leading, -48)
                         
-                        //                        Spacer()
+                        Spacer()
                         
-                        #warning("TODO: Вернем в публичной версии")
-                        //                        Image("rc-ic-information")
-                        //                            .resizable()
-                        //                            .frame(width: 24, height: 24)
-                        //                            .onTapGesture {
-                        //                                informationDidTap()
-                        //                            }
+                        Image("rc-ic-information")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .onTapGesture {
+                                informationDidTap()
+                            }
                         
                         
                     }
@@ -156,7 +157,8 @@ struct ReportScreen: View {
                             emotionTotal: $viewModel.emotionCountData.total,
                             emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel,
                             isLoading: $viewModel.showLoader,
-                            dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty
+                            dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty,
+                            emotionSlices: $viewModel.pieSliceData
                         )
                         
                         if viewModel.isMonthCurrentTab {
@@ -228,6 +230,9 @@ struct ReportScreen: View {
                 }
             }
         })
+        .sheet(isPresented: $isWebViewPresented) {
+            WebView(urlString: "https://mapmood.com/analytics")
+        }
     }
     
     private func calendarViewDidTap() {
@@ -265,7 +270,7 @@ struct ReportScreen: View {
     }
     
     private func informationDidTap() {
-        print("informationDidTap")
+        isWebViewPresented = true
     }
 }
 

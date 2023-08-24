@@ -47,6 +47,7 @@ struct PieSlice: View {
 
 @available(OSX 10.15, *)
 struct PieSliceData {
+    var id = UUID()
     var startAngle: Angle
     var endAngle: Angle
     var text: String

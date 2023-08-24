@@ -33,7 +33,12 @@ public struct PieChartView: View {
     }
         
     @Binding var emotionCircleViewModel: [EmotionCircleViewModel]?
-    
+    @Binding var slices: [PieSliceData] {
+        willSet {
+            self.slices = []
+        }
+    }
+
     public let formatter: (Double) -> String
     
     public var backgroundColor: Color = .white
@@ -41,34 +46,15 @@ public struct PieChartView: View {
     public var innerRadiusFraction: CGFloat = 0.70
     
     @State private var activeIndex: Int = -1
-    
-    var slices: [PieSliceData] {
-        let sum = values.reduce(0, +)
-        var endDeg: Double = 0
-        var tempSlices: [PieSliceData] = []
         
-        for i in emotionCircleViewModel! {
-            let degrees: Double = (Double(i.value) ?? 0) * 360 / sum
-            tempSlices.append(
-                PieSliceData(
-                    startAngle: Angle(degrees: endDeg),
-                    endAngle: Angle(degrees: endDeg + degrees),
-                    text: String(format: "2f", sum),
-                    color: i.color)
-            )
-            endDeg += degrees
-        }
-        return tempSlices
-    }
-    
     public var body: some View {
         GeometryReader { geometry in
             HStack {
                 ZStack {
-                    if !slices.isEmpty && slices.count <= names.count {
-                        ForEach(0..<values.count) { i in
-                            PieSlice(pieSliceData: slices[i])
-                                .scaleEffect(activeIndex == i ? 1.10 : 1)
+                    if !slices.isEmpty && values.count == slices.count {
+                        ForEach(Array(slices.enumerated()), id: \.offset) { index, slice in
+                            PieSlice(pieSliceData: slice)
+                                .scaleEffect(activeIndex == index ? 1.10 : 1)
                                 .animation(Animation.spring())
                         }
                         .frame(width: widthFraction * geometry.size.width, height: widthFraction * geometry.size.width)
@@ -98,8 +84,7 @@ public struct PieChartView: View {
                                     self.activeIndex = -1
                                 }
                         )
-//                        .disabled(true)
-                        
+                        .disabled(true) // Отключаем выделение и нажатие 
                         Circle()
                             .fill(self.backgroundColor)
                             .frame(width: widthFraction * geometry.size.width * innerRadiusFraction,
