@@ -182,7 +182,7 @@ struct PersonalCabinetView: View {
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text(isLogin ? "" : "Дэмо - режим")
+                    Text(isLogin ? "" : "Демо - режим")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(isLogin ? Colors.Primary.lavender500Purple : .white)
                         .lineLimit(1)
