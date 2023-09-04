@@ -10,10 +10,6 @@ import SwiftUI
 import HorizonCalendar
 
 struct CalendarViewRepresentable: UIViewRepresentable {
-    
-//    @Binding var startDate: Date
-//    @Binding var endDate: Date
-    
     var isWeeklyCalendar: Bool = false
 
     var lowerDate: Day?
@@ -25,12 +21,12 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     func makeUIView(context: Context) -> CalendarView {
         let calendarView = CalendarView(initialContent: makeContent())
         calendarView.daySelectionHandler = onSelect
-        
         return calendarView
     }
     
     func updateUIView(_ uiView: CalendarView, context: Context) {
         uiView.setContent(self.makeContent())
+        uiView.scroll(toDayContaining: Date(), scrollPosition: .firstFullyVisiblePosition, animated: true)
     }
 
     func makeCoordinator() -> Coordinator {
@@ -39,6 +35,8 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     
     private func makeContent() -> CalendarViewContent {
         var calendar = Calendar(identifier: .gregorian)
+        
+        #warning("TODO: В будущем локаль разная")
         calendar.locale = Locale(identifier: "ru_RU")
        
         let selectedDay = self.selectedDay
@@ -47,15 +45,15 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         let upperDate = self.upperDate
         
         let startDate = Date() //когда учетка была создана дата
-        let threeMonthsFromToday = Calendar.current.date(byAdding: DateComponents(month: 12), to: startDate)!
-        
+        let twelveMonthsAgo = Calendar.current.date(byAdding: DateComponents(month: -12), to: startDate)!
+                
         var dateRangeToHighlight: ClosedRange<Date>
         var overlaidItemLocation: CalendarViewContent.OverlaidItemLocation = .day(containingDate: Date())
 
         if let lowerDate = lowerDate {
             overlaidItemLocation = .day(containingDate: calendar.date(from: lowerDate.components) ?? Date())
         }
-        
+                
         if let lowerDate = lowerDate,
             let upperDate = upperDate,
             let lowerDayDate = calendar.date(from: lowerDate.components),
@@ -72,7 +70,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         
         return CalendarViewContent(
           calendar: calendar,
-          visibleDateRange: startDate...threeMonthsFromToday,
+          visibleDateRange: twelveMonthsAgo...startDate,
           monthsLayout: .vertical(options: VerticalMonthsLayoutOptions())
         )
         .overlayItemProvider(for: [overlaidItemLocation]) { overlayLayoutContext in
@@ -136,6 +134,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         }
     }
 }
+
 struct DayLabel: CalendarItemViewRepresentable {
     
     /// Properties that are set once when we initialize the view.
