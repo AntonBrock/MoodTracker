@@ -95,7 +95,7 @@ struct MainView: View {
                 QuoteView(quote: $quoteText)
                     .padding(.top, 10)
                 
-                Text("Статистика сегодня")
+                Text("Сегодня")
                     .foregroundColor(Colors.Primary.blue)
                     .font(.system(size: 20, weight: .semibold))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
