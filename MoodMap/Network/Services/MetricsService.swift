@@ -71,22 +71,21 @@ protocol YMetricsServiceProtocol {
     func sendProfile(profileType: YMetricsProfileType)
 }
 
-
 class MetricsService: MetricsServiceProtocol {
     
     var profile: YMMMutableUserProfile?
 
     init() {
-        #if RELEASE
-        let configuration = YMMYandexMetricaConfiguration.init(apiKey: _YMMApiKey)
-        configuration?.sessionTimeout = 15
-        configuration?.logs = false
+        if AppState.shared.isLogin ?? false {
+            let configuration = YMMYandexMetricaConfiguration.init(apiKey: _YMMApiKey)
+            configuration?.sessionTimeout = 15
+            configuration?.logs = false
 
-        YMMYandexMetrica.activate(with: configuration!)
+            YMMYandexMetrica.activate(with: configuration!)
 
-        profile = YMMMutableUserProfile()
-        YMMYandexMetrica.setUserProfileID(String(AppState.shared.userEmail ?? ""))
-        #endif
+            profile = YMMMutableUserProfile()
+            YMMYandexMetrica.setUserProfileID(String(AppState.shared.userEmail ?? ""))
+        }
     }
     
     func sendEventWith(eventName: MetricsEventName) {
