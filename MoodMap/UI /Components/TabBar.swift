@@ -40,6 +40,8 @@ struct TabBarView: View {
     var body: some View {
         ZStack {
             GeometryReader { geometry in
+                let isiPhoneXOrNewer = geometry.size.height >= 812
+                
                 VStack {
                     switch viewRouter.currentPage {
                     case .home:
@@ -94,11 +96,11 @@ struct TabBarView: View {
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .report, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-report-none-fill", tabName: "report", filledIconName: "tb-ic-report-fill")
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .profile, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-pc-none-fill", tabName: "profile", filledIconName: "tb-ic-pc-fill")
                         }
-                        .frame(width: geometry.size.width, height: geometry.size.height / 10)
-                        .padding(.top, -20)
+                        .frame(width: geometry.size.width, height: isiPhoneXOrNewer ? geometry.size.height / 10.0 : geometry.size.height / 12.0)
+                        .padding(.top, isiPhoneXOrNewer ? -20 : -5)
                         .disabled(disabledTabBar)
                     }
-                    .frame(width: geometry.size.width, height: coordinator.hideCustomTabBar ? 0 : geometry.size.height / 13.0)
+                    .frame(width: geometry.size.width, height: coordinator.hideCustomTabBar ? 0 : isiPhoneXOrNewer ? geometry.size.height / 10 : geometry.size.height / 12.0)
                     .background(Color.white.clipShape(CustomShape()))
                     .shadow(color: Colors.TextColors.mischka500.opacity(0.7), radius: 7, x: 0, y: -5)
                     .opacity(coordinator.hideCustomTabBar ? 0 : 1)

@@ -62,8 +62,8 @@
             filePath = "MoodMap/UI /Components/TabBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -110,8 +110,8 @@
             filePath = "MoodMap/UI /Components/TabBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
