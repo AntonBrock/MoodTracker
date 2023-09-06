@@ -52,6 +52,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
         
         if FirebaseApp.app() == nil {
             FirebaseApp.configure()
+            _ = RCValues.sharedInstance
         }
         
         // Remove this method to stop OneSignal Debugging

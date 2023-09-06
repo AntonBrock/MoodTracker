@@ -23,7 +23,7 @@ struct MainView: View {
     
     @State var showMoreDetailsAboutJournalPage: Bool = false
     @State var currentSelectedJournalPage: JournalViewModel?
-    
+        
     @State var quoteText: String = "Это нормально ‒ испытывать плохие эмоции. Это не делает тебя плохим человеком."
     
     init(
@@ -69,28 +69,11 @@ struct MainView: View {
                         }
                     }
                 
+                if RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .reconfigureMainScreen) {
+                    reconfigureMainScreen()
+                }
                 
-                Text("Эмоциональная поддержка")
-                    .foregroundColor(Colors.Primary.blue)
-                    .font(.system(size: 20, weight: .semibold))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 20)
-                
-                createDiaryView()
-                    .padding(.top, 10)
-                    .onTapGesture {
-                        if AppState.shared.isLogin ?? false {
-                            Services.metricsService.sendEventWith(eventName: .openDiaryScreenButton)
-                            Services.metricsService.sendEventWith(eventType: .openDiaryScreenButton)
-
-                            coordinator.openDiary()
-                        } else {
-                            withAnimation {
-                                coordinator.parent.showAuthLoginView = true
-                            }
-                        }
-                    }
+                diaryBlock()
                 
                 QuoteView(quote: $quoteText)
                     .padding(.top, 10)
@@ -129,6 +112,7 @@ struct MainView: View {
                         viewModel.segmentDidChange()
                     }
                     .padding(.bottom, 90)
+                
             }
         }
         .sheet(isPresented: $showMoreDetailsAboutJournalPage, content: {
@@ -170,6 +154,41 @@ struct MainView: View {
                 self.isAnimatedJournalView = true
             }
         }
+    }
+    
+    @ViewBuilder
+    private func diaryBlock() -> some View {
+        Text("Эмоциональная поддержка")
+            .foregroundColor(Colors.Primary.blue)
+            .font(.system(size: 20, weight: .semibold))
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+        
+        createDiaryView()
+            .padding(.top, 10)
+            .onTapGesture {
+                if AppState.shared.isLogin ?? false {
+                    Services.metricsService.sendEventWith(eventName: .openDiaryScreenButton)
+                    Services.metricsService.sendEventWith(eventType: .openDiaryScreenButton)
+
+                    coordinator.openDiary()
+                } else {
+                    withAnimation {
+                        coordinator.parent.showAuthLoginView = true
+                    }
+                }
+            }
+    }
+    
+    @ViewBuilder
+    private func reconfigureMainScreen() -> some View {
+        Text("Ура конфиг работает!")
+            .foregroundColor(Colors.Primary.blue)
+            .font(.system(size: 20, weight: .semibold))
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
     }
     
     @ViewBuilder

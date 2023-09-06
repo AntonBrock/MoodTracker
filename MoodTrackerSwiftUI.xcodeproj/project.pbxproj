@@ -131,6 +131,8 @@
 		453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */; };
 		453844DC29E40D5000A89FEE /* YandexInterstitialADView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DB29E40D5000A89FEE /* YandexInterstitialADView.swift */; };
 		453844DE29E40D5800A89FEE /* YandexInterstitialADViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453844DD29E40D5800A89FEE /* YandexInterstitialADViewController.swift */; };
+		4543F54C2AA85FA6004140AD /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543F54B2AA85FA6004140AD /* RemoteConfig.swift */; };
+		4543F54D2AA865C8004140AD /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543F54B2AA85FA6004140AD /* RemoteConfig.swift */; };
 		4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544361229CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift */; };
 		4546D58E29E83F1200E69852 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D58D29E83F1200E69852 /* Constants.swift */; };
 		4546D59029E841FC00E69852 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 4546D58F29E841FC00E69852 /* loader.json */; };
@@ -502,6 +504,7 @@
 		453AAC26295DBFEB00CE0F15 /* MoodCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckView.swift; sourceTree = "<group>"; };
 		4543479B2A8CFBA100DA0EA6 /* Prod.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Prod.xcconfig; sourceTree = "<group>"; };
 		4543479C2A8CFBB500DA0EA6 /* Dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Dev.xcconfig; sourceTree = "<group>"; };
+		4543F54B2AA85FA6004140AD /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		4544361229CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesChartsForAllTime.swift; sourceTree = "<group>"; };
 		4546D58D29E83F1200E69852 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4546D58F29E841FC00E69852 /* loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader.json; sourceTree = "<group>"; };
@@ -756,6 +759,7 @@
 				451E6BC7290577220048714B /* SceneDelegate.swift */,
 				451E6BBC29056F490048714B /* AppEnvironment.swift */,
 				451E6BBE29056F540048714B /* DIContinainer.swift */,
+				4543F54B2AA85FA6004140AD /* RemoteConfig.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -1636,6 +1640,7 @@
 				4529AB9C29AF1940001D2390 /* SCChartWrapperView.swift in Sources */,
 				4529AB9D29AF1940001D2390 /* SCDonutView.swift in Sources */,
 				4529AB9E29AF1940001D2390 /* SCDonutPartView.swift in Sources */,
+				4543F54C2AA85FA6004140AD /* RemoteConfig.swift in Sources */,
 				456A400C29B76AF800371B5C /* JournalViewModel.swift in Sources */,
 				457F591729C183F100E96E1D /* ReportScreenViewModel.swift in Sources */,
 				45A9F05629F1068B002C13C5 /* AuthDeleteAccountView.swift in Sources */,
@@ -1805,6 +1810,7 @@
 				45FCD2062A18BEEE00B0DAF0 /* ReportScreenViewModel.swift in Sources */,
 				45FCD2072A18BEEE00B0DAF0 /* AuthDeleteAccountView.swift in Sources */,
 				45FCD2082A18BEEE00B0DAF0 /* MMError.swift in Sources */,
+				4543F54D2AA865C8004140AD /* RemoteConfig.swift in Sources */,
 				45FCD2092A18BEEE00B0DAF0 /* SCDonutChartView.swift in Sources */,
 				45FCD20A2A18BEEE00B0DAF0 /* ActivitiesBarCharsView.swift in Sources */,
 				45FCD20B2A18BEEE00B0DAF0 /* FeelingCircleChartsView.swift in Sources */,
@@ -1986,7 +1992,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoodMap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Предоставь, пожалуйста, доступ к библотеке, чтобы мы смогли сохранить снимок твоего состояния";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Нам нужно это разрешение для показа рекламы внутри приложения, которая подходит для тебя ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2162,7 +2168,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoodMap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Предоставь, пожалуйста, доступ к библотеке, чтобы мы смогли сохранить снимок твоего состояния";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Нам нужно это разрешение для показа рекламы внутри приложения, которая подходит для тебя ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
