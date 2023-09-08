@@ -23,6 +23,8 @@ struct MainView: View {
     
     @State var showMoreDetailsAboutJournalPage: Bool = false
     @State var currentSelectedJournalPage: JournalViewModel?
+    
+    @State private var isWebBetaViewPresented = false
         
     @State var quoteText: String = "Это нормально ‒ испытывать плохие эмоции. Это не делает тебя плохим человеком."
     
@@ -69,6 +71,13 @@ struct MainView: View {
                         }
                     }
                 
+                if Bundle.main.executableURL!.lastPathComponent == "MoodMapBeta" {
+                    createBetaBlock()
+                        .onTapGesture {
+                            isWebBetaViewPresented = true
+                        }
+                }
+                
                 if RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .reconfigureMainScreen) {
                     reconfigureMainScreen()
                 }
@@ -78,31 +87,7 @@ struct MainView: View {
                 QuoteView(quote: $quoteText)
                     .padding(.top, 10)
                 
-                Text("Сегодня")
-                    .foregroundColor(Colors.Primary.blue)
-                    .font(.system(size: 20, weight: .semibold))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 20)
-                
-                SegmentedControlView(countOfItems: 2, segments: viewModel.isEnableTypeOfReprot,
-                                     selectedIndex: $typeSelectedIndex,
-                                     currentTab: viewModel.isEnableTypeOfReprot[typeSelectedIndex])
-                .padding(.top, 16)
-                .padding(.horizontal, 20)
-                
-                CircleEmotionChart(
-                    emotionStateCounts: $viewModel.emotionCountData.countState,
-                    emotionNames: $viewModel.emotionCountData.text,
-                    emotionColors: $viewModel.emotionCountData.color,
-                    emotionTotal: $viewModel.emotionCountData.total,
-                    emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel,
-                    isLoading: $viewModel.isShowLoader,
-                    dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty,
-                    emotionSlices: $viewModel.pieSliceData
-                )
-                .padding(.top, 16)
-                .padding(.horizontal, 10)
+                createTodayBlock()
                 
                 DayilyCharts(viewModel: $viewModel.timeData)
                     .padding(.top, 16)
@@ -130,6 +115,9 @@ struct MainView: View {
             )
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
         })
+        .sheet(isPresented: $isWebBetaViewPresented) {
+            WebView(urlString: "https://mapmood.com/beta/ru")
+        }
         .onAppear {
             viewModel.setupViewer(self)
             
@@ -179,6 +167,73 @@ struct MainView: View {
                     }
                 }
             }
+    }
+    
+    @ViewBuilder
+    private func createBetaBlock() -> some View {
+        Text("Привет в MoodMap - Бета")
+            .foregroundColor(Colors.Primary.blue)
+            .font(.system(size: 20, weight: .semibold))
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+        
+        VStack(alignment: .center, spacing: 16) {
+            ZStack {
+                Image("betaCover")
+                    .resizable()
+                    .frame(maxWidth: .infinity, maxHeight: 120)
+                    .aspectRatio(1, contentMode: .fill)
+                
+                VStack {}
+                    .frame(maxWidth: .infinity, minHeight: 120)
+                    .background(LinearGradient(colors: [Colors.Primary.honeyFlower700Purple,
+                                                        Color(hex: "0B98C5")],
+                                               startPoint: .topLeading,
+                                               endPoint: .bottomTrailing).opacity(0.9))
+                
+                Text("Нажми чтобы узнать больше о бета-версиях!\n")
+                    .foregroundColor(.white )
+                    .font(.system(size: 20, weight: .semibold))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                    .padding(.leading, 16)
+                    .padding(.bottom, 16)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 120)
+        .cornerRadius(20)
+        .padding(.horizontal, 20)
+        .shadow(color: Colors.TextColors.mischka500,
+                radius: 3.0, x: 1.0, y: 0)
+    }
+    
+    @ViewBuilder
+    private func createTodayBlock() -> some View {
+        Text("Сегодня")
+            .foregroundColor(Colors.Primary.blue)
+            .font(.system(size: 20, weight: .semibold))
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+        
+        SegmentedControlView(countOfItems: 2, segments: viewModel.isEnableTypeOfReprot,
+                             selectedIndex: $typeSelectedIndex,
+                             currentTab: viewModel.isEnableTypeOfReprot[typeSelectedIndex])
+        .padding(.top, 16)
+        .padding(.horizontal, 20)
+        
+        CircleEmotionChart(
+            emotionStateCounts: $viewModel.emotionCountData.countState,
+            emotionNames: $viewModel.emotionCountData.text,
+            emotionColors: $viewModel.emotionCountData.color,
+            emotionTotal: $viewModel.emotionCountData.total,
+            emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel,
+            isLoading: $viewModel.isShowLoader,
+            dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty,
+            emotionSlices: $viewModel.pieSliceData
+        )
+        .padding(.top, 16)
+        .padding(.horizontal, 10)
     }
     
     @ViewBuilder

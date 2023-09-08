@@ -171,6 +171,16 @@
 		4592522729C6EEB6007B1706 /* DayilyCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522629C6EEB6007B1706 /* DayilyCharts.swift */; };
 		4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592522829C6EEEE007B1706 /* ActivitiesCharts.swift */; };
 		459CBD132A6BB7E0003936BB /* QuotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBD122A6BB7E0003936BB /* QuotesModel.swift */; };
+		45A2B3702AAAF28200643C78 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 45A2B36F2AAAF28200643C78 /* FacebookCore */; };
+		45A2B3722AAAF29D00643C78 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 45A2B3712AAAF29D00643C78 /* FacebookShare */; };
+		45A2B3732AAAF2BD00643C78 /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 45B721302A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		45A2B3772AAAF2E400643C78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6C29AF1471001D2390 /* Assets.xcassets */; };
+		45A2B3782AAAF2E800643C78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6C29AF1471001D2390 /* Assets.xcassets */; };
+		45A2B3792AAAF30900643C78 /* WebViewUIViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45884FF72A97E992003A3D8A /* WebViewUIViewRepresentable.swift */; };
+		45A2B37A2AAAF32100643C78 /* QuotesEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A8D692A6BA66200D1E609 /* QuotesEndPoint.swift */; };
+		45A2B37B2AAAF33900643C78 /* QuotesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A8D672A6BA5E800D1E609 /* QuotesService.swift */; };
+		45A2B37C2AAAF35400643C78 /* QuotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBD122A6BB7E0003936BB /* QuotesModel.swift */; };
+		45A2B37D2AAAF36C00643C78 /* PushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457AC3D22A5965BB00294BF6 /* PushNotificationModel.swift */; };
 		45A9F04E29F01222002C13C5 /* InstagramSharingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F04C29F01222002C13C5 /* InstagramSharingUtils.swift */; };
 		45A9F05129F0FE04002C13C5 /* SharingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F05029F0FE04002C13C5 /* SharingView.swift */; };
 		45A9F05329F10076002C13C5 /* AuthLogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A9F05229F10076002C13C5 /* AuthLogoutView.swift */; };
@@ -189,7 +199,6 @@
 		45B721442A4AD44500CAB76B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721432A4AD44500CAB76B /* OneSignalExtension */; };
 		45B721462A4AD46A00CAB76B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721452A4AD46A00CAB76B /* OneSignal */; };
 		45B721482A4AD47000CAB76B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721472A4AD47000CAB76B /* OneSignalExtension */; };
-		45B7214C2A4B174F00CAB76B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6C29AF1471001D2390 /* Assets.xcassets */; };
 		45C200C129D317F80087B0E3 /* String+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C200C029D317F80087B0E3 /* String+Extenstion.swift */; };
 		45D06AF22A1608CB0047D6FA /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 45D06AF12A1608CB0047D6FA /* JWTDecode */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
@@ -393,6 +402,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		45A2B3742AAAF2BD00643C78 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4539307E28C88EC000A5D828 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45B7212F2A4AD1F500CAB76B;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
 		45B721352A4AD1F500CAB76B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4539307E28C88EC000A5D828 /* Project object */;
@@ -403,6 +419,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		45A2B3762AAAF2BD00643C78 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				45A2B3732AAAF2BD00643C78 /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45B721382A4AD1F500CAB76B /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -665,7 +692,9 @@
 				45FCD26D2A18BEEE00B0DAF0 /* SwiftUICharts in Frameworks */,
 				45FCD26E2A18BEEE00B0DAF0 /* YandexMobileMetrica in Frameworks */,
 				45B721482A4AD47000CAB76B /* OneSignalExtension in Frameworks */,
+				45A2B3702AAAF28200643C78 /* FacebookCore in Frameworks */,
 				45FCD26F2A18BEEE00B0DAF0 /* YandexMobileAdsPackage in Frameworks */,
+				45A2B3722AAAF29D00643C78 /* FacebookShare in Frameworks */,
 				45FCD2702A18BEEE00B0DAF0 /* FirebaseMessaging in Frameworks */,
 				45FCD2712A18BEEE00B0DAF0 /* HorizonCalendar in Frameworks */,
 				45FCD2722A18BEEE00B0DAF0 /* GoogleSignInSwift in Frameworks */,
@@ -1430,10 +1459,12 @@
 				45FCD1CA2A18BEEE00B0DAF0 /* Sources */,
 				45FCD2602A18BEEE00B0DAF0 /* Frameworks */,
 				45FCD2732A18BEEE00B0DAF0 /* Resources */,
+				45A2B3762AAAF2BD00643C78 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				45A2B3752AAAF2BD00643C78 /* PBXTargetDependency */,
 			);
 			name = MoodMapBeta;
 			packageProductDependencies = (
@@ -1457,6 +1488,8 @@
 				45FCD1C92A18BEEE00B0DAF0 /* YandexMobileMetricaCrashes */,
 				45B721452A4AD46A00CAB76B /* OneSignal */,
 				45B721472A4AD47000CAB76B /* OneSignalExtension */,
+				45A2B36F2AAAF28200643C78 /* FacebookCore */,
+				45A2B3712AAAF29D00643C78 /* FacebookShare */,
 			);
 			productName = MoodMap;
 			productReference = 45FCD2872A18BEEE00B0DAF0 /* MoodMapBeta.app */;
@@ -1529,6 +1562,7 @@
 				4529AA8C29AF15A9001D2390 /* Inter-Black.ttf in Resources */,
 				4529AA8D29AF15A9001D2390 /* Inter-Bold.ttf in Resources */,
 				4529AA8E29AF15A9001D2390 /* Inter-ExtraBold.ttf in Resources */,
+				45A2B3782AAAF2E800643C78 /* Assets.xcassets in Resources */,
 				4529AA8F29AF15A9001D2390 /* Inter-ExtraLight.ttf in Resources */,
 				4529AA9029AF15A9001D2390 /* Inter-Light.ttf in Resources */,
 				45B39F9429E5406500852E70 /* Launch Screen.storyboard in Resources */,
@@ -1538,7 +1572,6 @@
 				4529AA9329AF15A9001D2390 /* Inter-SemiBold.ttf in Resources */,
 				45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */,
 				4529AA7029AF1471001D2390 /* Preview Assets.xcassets in Resources */,
-				45B7214C2A4B174F00CAB76B /* Assets.xcassets in Resources */,
 				453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1568,6 +1601,7 @@
 				45FCD27F2A18BEEE00B0DAF0 /* Inter-SemiBold.ttf in Resources */,
 				45FCD2802A18BEEE00B0DAF0 /* SplashScreen.json in Resources */,
 				45FCD2812A18BEEE00B0DAF0 /* Preview Assets.xcassets in Resources */,
+				45A2B3772AAAF2E400643C78 /* Assets.xcassets in Resources */,
 				45FCD2832A18BEEE00B0DAF0 /* YandexMobileAdsBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1774,6 +1808,7 @@
 				45FCD1E22A18BEEE00B0DAF0 /* Services.swift in Sources */,
 				45FCD1E32A18BEEE00B0DAF0 /* UserStateService.swift in Sources */,
 				45FCD1E42A18BEEE00B0DAF0 /* SceneDelegate.swift in Sources */,
+				45A2B37A2AAAF32100643C78 /* QuotesEndPoint.swift in Sources */,
 				45FCD1E52A18BEEE00B0DAF0 /* UserStateViewModel.swift in Sources */,
 				45FCD1E62A18BEEE00B0DAF0 /* AppEnvironment.swift in Sources */,
 				45FCD1E72A18BEEE00B0DAF0 /* DIContinainer.swift in Sources */,
@@ -1796,6 +1831,7 @@
 				45FCD1F82A18BEEE00B0DAF0 /* NumberFormatter+Defaults.swift in Sources */,
 				45FCD1F92A18BEEE00B0DAF0 /* SCPalletes.swift in Sources */,
 				45FCD1FA2A18BEEE00B0DAF0 /* SCCaptionsView.swift in Sources */,
+				45A2B37C2AAAF35400643C78 /* QuotesModel.swift in Sources */,
 				45FCD1FB2A18BEEE00B0DAF0 /* String+Extenstion.swift in Sources */,
 				45FCD1FC2A18BEEE00B0DAF0 /* CircleEmotionChart.swift in Sources */,
 				45FCD1FD2A18BEEE00B0DAF0 /* DetailsDiaryPage.swift in Sources */,
@@ -1836,6 +1872,7 @@
 				45FCD21F2A18BEEE00B0DAF0 /* CalendarRange.swift in Sources */,
 				45FCD2202A18BEEE00B0DAF0 /* DayilyCharts.swift in Sources */,
 				45FCD2212A18BEEE00B0DAF0 /* CalendarTooltipView.swift in Sources */,
+				45A2B37B2AAAF33900643C78 /* QuotesService.swift in Sources */,
 				45FCD2222A18BEEE00B0DAF0 /* AttachmentView.swift in Sources */,
 				45FCD2232A18BEEE00B0DAF0 /* DiaryEndPoint.swift in Sources */,
 				45FCD2242A18BEEE00B0DAF0 /* GalleryPhotoPicker.swift in Sources */,
@@ -1844,6 +1881,7 @@
 				45FCD2272A18BEEE00B0DAF0 /* AuthHyperString.swift in Sources */,
 				45FCD2282A18BEEE00B0DAF0 /* MonthChart.swift in Sources */,
 				45FCD2292A18BEEE00B0DAF0 /* AuthMethodsView.swift in Sources */,
+				45A2B3792AAAF30900643C78 /* WebViewUIViewRepresentable.swift in Sources */,
 				45FCD22A2A18BEEE00B0DAF0 /* BaseViewCoordinator.swift in Sources */,
 				45FCD22B2A18BEEE00B0DAF0 /* JournalService.swift in Sources */,
 				45FCD22C2A18BEEE00B0DAF0 /* LoginView.swift in Sources */,
@@ -1890,6 +1928,7 @@
 				45FCD2542A18BEEE00B0DAF0 /* ActivitiesViewCoodinator.swift in Sources */,
 				45FCD2552A18BEEE00B0DAF0 /* ActivitiesCoordinatorView.swift in Sources */,
 				45FCD2562A18BEEE00B0DAF0 /* EmotionsViewModel.swift in Sources */,
+				45A2B37D2AAAF36C00643C78 /* PushNotificationModel.swift in Sources */,
 				45FCD2572A18BEEE00B0DAF0 /* StressCheckComponent.swift in Sources */,
 				45FCD2582A18BEEE00B0DAF0 /* PushNotificationView.swift in Sources */,
 				45FCD2592A18BEEE00B0DAF0 /* Date+Extenstion.swift in Sources */,
@@ -1905,6 +1944,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		45A2B3752AAAF2BD00643C78 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45B7212F2A4AD1F500CAB76B /* OneSignalNotificationServiceExtension */;
+			targetProxy = 45A2B3742AAAF2BD00643C78 /* PBXContainerItemProxy */;
+		};
 		45B721362A4AD1F500CAB76B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 45B7212F2A4AD1F500CAB76B /* OneSignalNotificationServiceExtension */;
@@ -2031,13 +2075,13 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0324;
+				CURRENT_PROJECT_VERSION = 1.0406;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MoodMap copy-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "MoodMap Beta";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Предоставь, пожалуйста, доступ к библотеке, чтобы мы смогли сохранить снимок твоего состояния";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Нам нужно это разрешение для показа рекламы внутри приложения, которая подходит для тебя ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2053,7 +2097,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2207,14 +2251,14 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0324;
+				CURRENT_PROJECT_VERSION = 1.0406;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MoodMap copy-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "MoodMap Beta";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Предоставь, пожалуйста, доступ к библотеке, чтобы мы смогли сохранить снимок твоего состояния";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Нам нужно это разрешение для показа рекламы внутри приложения, которая подходит для тебя ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2230,7 +2274,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2591,6 +2635,16 @@
 			productName = FacebookCore;
 		};
 		454FE49F2A920D7B00BC86FE /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 454FE49C2A920D7B00BC86FE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
+		};
+		45A2B36F2AAAF28200643C78 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 454FE49C2A920D7B00BC86FE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		45A2B3712AAAF29D00643C78 /* FacebookShare */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 454FE49C2A920D7B00BC86FE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookShare;
