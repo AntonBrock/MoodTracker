@@ -203,7 +203,8 @@ struct ReportScreen: View {
                         
                         DayilyCharts(viewModel: $viewModel.timeDataViewModel)
                             .padding(.top, 16)
-                                                
+                        
+                        
                         ActivitiesCharts(
                             goodActivitiesViewModel: $viewModel.goodActivitiesDataViewModel,
                             badActivitiesViewModel: $viewModel.badActivitiesDataViewModel,
@@ -211,6 +212,19 @@ struct ReportScreen: View {
                             isStressCurrentTab: $viewModel.isStressCurrentTab,
                             isShowLoader: $viewModel.showLoader
                         )
+                        
+                        HStack(alignment: .top) {
+                            Image("rc-ic-information")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                
+                            Text("Обрати внимание, каждый день мы занимаемся похожими активностями, именно поэтому активности повторяются. Наша цель проанализировать твое состояние и показать, какая именно активность влияет на твое настроение или стресс больше, чем другая!")
+                                .foregroundColor(Colors.Primary.blue)
+                                .font(.system(size: 16))
+                                .padding(.leading, 8)
+                        }
+                        .padding(.top, 5)
+                        .padding(.horizontal, 16)
                         .padding(.bottom, 90)
                     } else {
                         ActivitiesChartsForAllTime()

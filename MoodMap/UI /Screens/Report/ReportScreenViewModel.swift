@@ -617,7 +617,8 @@ extension ReportScreen {
                 emotionCountData: emotionCountDataViewModel,
                 timeData: timeDataViewModel,
                 goodActivitiesReportData: goodActivitiesReportDataViewModel,
-                badActivitiesReportData: badActivitiesReportDataViewModel)
+                badActivitiesReportData: badActivitiesReportDataViewModel
+            )
         }
         
         private func getDayParts(model: [ReportModel.TimeData.DayParts]) -> [DayParts] {

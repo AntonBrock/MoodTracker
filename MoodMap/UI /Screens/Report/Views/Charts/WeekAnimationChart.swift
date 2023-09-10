@@ -31,9 +31,7 @@ struct WeekAnimationChart: View {
     
     @ViewBuilder
     func AnimationChart() -> some View {
-        let max = weekChartViewModel.max { item1, item2 in
-            return item2.dayRate > item1.dayRate
-        }?.dayRate ?? 0
+        let max = weekChartViewModel.max(by: { $0.dayRate < $1.dayRate })?.dayRate ?? 0
         
         GeometryReader { proxy in
 //            let height = proxy.size.height
@@ -71,11 +69,10 @@ struct WeekAnimationChart: View {
                                         endPoint: .top
                                     )
                                 )
-                                .alignsMarkStylesWithPlotArea()
+//                                .alignsMarkStylesWithPlotArea()
                                 .interpolationMethod(.catmullRom)
                             }
                         }
-                        // MARK: Customizing Y-Axis Length
                         .chartYScale(domain: 1...(max == 0 ? 5 : max + 1))
                         .padding(.top, 25)
                         .frame (height: 250)

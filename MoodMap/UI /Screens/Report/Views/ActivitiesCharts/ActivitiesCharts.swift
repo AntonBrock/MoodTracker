@@ -76,7 +76,7 @@ struct ActivitiesCharts: View {
                 if isStressCurrentTab {
                     ReportTipView(
                         text: "Самое тревожное в этом месяце ",
-                        selectedText: $goodActivitiesViewModel.bestActivity,
+                        selectedText: $badActivitiesViewModel.worstActivity,
                         isShowLoader: $isShowLoader,
                         tipType: .badActivitiesStress
                     )
@@ -84,7 +84,7 @@ struct ActivitiesCharts: View {
                 } else {
                     ReportTipView(
                         text: "Активность, которая тебя радовала больше всего в этом месяце ",
-                        selectedText: $goodActivitiesViewModel.bestActivity,
+                        selectedText: $badActivitiesViewModel.worstActivity,
                         isShowLoader: $isShowLoader,
                         tipType: .badActivities
                     )
@@ -94,7 +94,7 @@ struct ActivitiesCharts: View {
                 if isStressCurrentTab {
                     ReportTipView(
                         text: "Самое тревожное на этой неделе ",
-                        selectedText: $goodActivitiesViewModel.bestActivity,
+                        selectedText: $badActivitiesViewModel.worstActivity,
                         isShowLoader: $isShowLoader,
                         tipType: .badActivitiesStress
                     )
