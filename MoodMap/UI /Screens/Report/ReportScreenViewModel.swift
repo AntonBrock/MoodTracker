@@ -28,6 +28,8 @@ extension ReportScreen {
         )
         
         @Published var chartDataViewModel: [ChartDataViewModel] = []
+        @Published var prevWeekChartDataViewModel: [ChartDataViewModel] = []
+        
         @Published var timeDataViewModel: TimeDataViewModel = TimeDataViewModel(
             bestTime: "",
             worstTime: "",
@@ -111,6 +113,7 @@ extension ReportScreen {
                 
                 getDates()
                 fetchStartData()
+                fetchPrevWeekData()
             }
         }
         
@@ -122,8 +125,8 @@ extension ReportScreen {
         func setup() {
             getDates()
         }
+        
         func getDates() {
-            
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
             
@@ -138,22 +141,6 @@ extension ReportScreen {
             
             self.firstStartFromDateString = fromDateString
             self.firstStartToDateString = toDateString
-            
-//            let isDayInMonthAgoForTheFirstDay = isDayInMonthAgo(day: Int(firstDayOfWeek ?? "") ?? 0)
-//
-//            if isDayInMonthAgoForTheFirstDay {
-//                formatter.dateFormat = "MM"
-//                let shortMonth = Calendar.current.date(byAdding: .month,
-//                                                       value: -1,
-//                                                       to: Date())
-//                shortDateMonthForFrom = formatter.string(from: shortMonth!)
-//            } else {
-//                formatter.dateFormat = "MM"
-//                let shortMonth = Calendar.current.date(byAdding: .month,
-//                                                       value: 0,
-//                                                       to: Date())
-//                shortDateMonthForFrom = formatter.string(from: shortMonth!)
-//            }
         }
         
         func fetchStartData() {
@@ -164,6 +151,53 @@ extension ReportScreen {
                     rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]
                 ) ?? .mood
             )
+            
+            fetchPrevWeekData()
+        }
+        
+        func fetchPrevWeekData() {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            
+            let currentDayFrom = "\(currentYear!)-\(currentShortMonthForFrom!)-\(firstDayOfWeek!)"
+            let currentDayTo = "\(currentYear!)-\(currentShortMonthForTo!)-\(lastDayOfWeek!)"
+            
+            guard let dateFrom = formatter.date(from: currentDayFrom) else {
+                return
+            }
+            
+            guard let dateTo = formatter.date(from: currentDayTo) else {
+                return
+            }
+
+            let calendar = Calendar.current
+            let oneWeekAgoFrom = calendar.date(byAdding: .day, value: -7, to: dateFrom)!
+            let oneWeekAgoTo = calendar.date(byAdding: .day, value: -7, to: dateTo)!
+
+            let oneWeekAgoFromString = formatter.string(from: oneWeekAgoFrom)
+            let oneWeekAgoToString = formatter.string(from: oneWeekAgoTo)
+            
+            if AppState.shared.isLogin ?? false {
+                Services.reportService.fetchReport(
+                    from: oneWeekAgoFromString,
+                    to: oneWeekAgoToString,
+                    type: ReportEndPoint.TypeOfReport.init(rawValue: isEnableTypeOfReportForRequest[selectedTypeOfReport]) ?? .mood
+                ) { result in
+                    switch result {
+                    case .success(let model):
+                        guard let model = model else {
+                            self.prevWeekChartDataViewModel = []
+                            return
+                        }
+                        
+                        self.prevWeekChartDataViewModel = self.mappingPrevWeekChartModel(data: model)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            } else {
+                self.prevWeekChartDataViewModel = []
+            }
         }
         
         private func setTextInformationDate(_ fromDate: Date, _ toDate: Date) {
@@ -436,6 +470,7 @@ extension ReportScreen {
         
         private func clearData() {
             chartDataViewModel = []
+            prevWeekChartDataViewModel = []
             
             emotionCountData = EmotionCountDataViewModel(
                 total: 0,
@@ -506,6 +541,7 @@ extension ReportScreen {
             let badActivitiesReportData = data.badActivitiesReportData
             
             var chartDataViewModel: [ChartDataViewModel] = []
+            
             var emotionCountDataViewModel: EmotionCountDataViewModel?
             var timeDataViewModel: TimeDataViewModel?
             var goodActivitiesReportDataViewModel: GoodActivitiesReportDataViewModel?
@@ -619,6 +655,37 @@ extension ReportScreen {
                 goodActivitiesReportData: goodActivitiesReportDataViewModel,
                 badActivitiesReportData: badActivitiesReportDataViewModel
             )
+        }
+        
+        private func mappingPrevWeekChartModel(data: ReportModel) -> [ChartDataViewModel] {
+            let chartData = data.chartData
+
+            var prevWeekChartsDataViewModel: [ChartDataViewModel] = []
+            
+            chartData.forEach { model in
+                let dateFormatterGet = DateFormatter()
+                dateFormatterGet.dateFormat = "yyyy-MM-dd"
+
+                let dateFormatterPrint = DateFormatter()
+                dateFormatterPrint.dateFormat = "MMM dd"
+                
+                if let date = dateFormatterGet.date(from: model.date) {
+                    prevWeekChartsDataViewModel.append(ChartDataViewModel(
+                        date: dateFormatterPrint.string(from: date),
+                        date2: model.date.toDate(.isoDate) ?? Date(),
+                        dayRate: model.dayRate,
+                        description: model.description.compactMap({ ChartDataViewModel.ChartDataDescriptionViewModel(
+                            stateText: $0.stateText,
+                            rate: $0.rate,
+                            count: $0.count)})
+                        )
+                    )
+                } else {
+                   print("There was an error decoding the string")
+                }
+            }
+            
+            return prevWeekChartsDataViewModel
         }
         
         private func getDayParts(model: [ReportModel.TimeData.DayParts]) -> [DayParts] {

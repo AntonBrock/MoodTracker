@@ -140,6 +140,7 @@ struct ReportScreen: View {
                         if viewModel.dateSelectedIndex == 0 {
                             WeekAnimationChart(
                                 weekChartViewModel: $viewModel.chartDataViewModel,
+                                prevWeekChartsViewModel: $viewModel.prevWeekChartDataViewModel,
                                 showLoader: $viewModel.showLoader,
                                 showNeedMoreData: $viewModel.showNeedMoreData
                             )
@@ -268,11 +269,13 @@ struct ReportScreen: View {
     private func toBeforeWeekDidTap() {
         viewModel.chartDataViewModel = []
         viewModel.toBeforeWeekDidTap()
+        viewModel.fetchPrevWeekData()
     }
     
     private func toNextWeekDidTap() {
         viewModel.chartDataViewModel = []
         viewModel.toNextWeekDidTap()
+        viewModel.fetchPrevWeekData()
     }
     
     private func toBeforeMonthDidTap() {
