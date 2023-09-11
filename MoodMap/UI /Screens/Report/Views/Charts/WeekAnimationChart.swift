@@ -34,6 +34,7 @@ struct WeekAnimationChart: View {
     @ViewBuilder
     func AnimationChart() -> some View {
         let max = weekChartViewModel.max(by: { $0.dayRate < $1.dayRate })?.dayRate ?? 0
+        let maxForPrevWeek = prevWeekChartsViewModel.max(by: { $0.dayRate < $1.dayRate})?.dayRate ?? 0
         
         GeometryReader { proxy in
             ZStack {
@@ -81,13 +82,13 @@ struct WeekAnimationChart: View {
                                 }
                                 .opacity(0.4)
                             }
-                            .chartYScale(domain: 1...(max == 0 ? 5 : max + 1))
+                            .chartYScale(domain: 1...(maxForPrevWeek == 0 ? 5 : maxForPrevWeek + 1))
                             .frame(maxHeight: 200)
                             .contentShape(Rectangle())
                             .chartYAxis(.hidden)
                             .chartLegend(.hidden)
                             .chartXAxis(.hidden)
-                            .opacity(0.5)
+                            .opacity(prevWeekChartsViewModel.count <= 2 ? 0 : 0.5)
 
                             // Chart for current week
                             Chart {
@@ -142,7 +143,7 @@ struct WeekAnimationChart: View {
                                 .resizable()
                                 .frame(width: 100, height: 100)
                             
-                            Text("За этот период состояние было отмечено 0 раз,\n действуй, а после мы покажем твою статистику")
+                            Text(AppState.shared.isLogin ?? false ? "За этот период состояние было отмечено 0 раз,\n отметь свое состояние, после мы покажем твою статистику" : "Авторизуйся и начни отмечать свое состояние, чтобы мы смогли показать статистику")
                                 .frame(maxWidth: .infinity, alignment: .center)
                                 .foregroundColor(Colors.TextColors.fiord800)
                                 .font(.system(size: 14, weight: .medium))

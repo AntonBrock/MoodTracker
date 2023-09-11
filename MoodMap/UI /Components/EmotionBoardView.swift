@@ -146,6 +146,7 @@ struct EmotionBoardDateView: View {
                 .foregroundColor(Colors.TextColors.fiord800)
         }
         .frame(maxWidth: 70, maxHeight: .infinity, alignment: .top)
+//        .padding(.leading, 16)
         .fixedSize(horizontal: true, vertical: true)
     }
 }
