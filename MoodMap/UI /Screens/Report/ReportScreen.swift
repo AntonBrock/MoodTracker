@@ -140,6 +140,7 @@ struct ReportScreen: View {
                         if viewModel.dateSelectedIndex == 0 {
                             WeekAnimationChart(
                                 weekChartViewModel: $viewModel.chartDataViewModel,
+                                prevWeekChartsViewModel: $viewModel.prevWeekChartDataViewModel,
                                 showLoader: $viewModel.showLoader,
                                 showNeedMoreData: $viewModel.showNeedMoreData
                             )
@@ -218,12 +219,12 @@ struct ReportScreen: View {
                                 .resizable()
                                 .frame(width: 24, height: 24)
                                 
-                            Text("Обрати внимание, каждый день мы занимаемся похожими активностями, именно поэтому активности повторяются. Наша цель проанализировать твое состояние и показать, какая именно активность влияет на твое настроение или стресс больше, чем другая!")
+                            Text("Обрати внимание, каждый день мы занимаемся похожими активностями, именно поэтому активности повторяются.\n\nНаша цель проанализировать твое состояние и показать, какая именно активность влияет на твое настроение или стресс больше, чем другая!")
                                 .foregroundColor(Colors.Primary.blue)
                                 .font(.system(size: 16))
                                 .padding(.leading, 8)
+                                .padding(.trailing, 8)
                         }
-                        .padding(.top, 5)
                         .padding(.horizontal, 16)
                         .padding(.bottom, 90)
                     } else {
@@ -268,11 +269,13 @@ struct ReportScreen: View {
     private func toBeforeWeekDidTap() {
         viewModel.chartDataViewModel = []
         viewModel.toBeforeWeekDidTap()
+        viewModel.fetchPrevWeekData()
     }
     
     private func toNextWeekDidTap() {
         viewModel.chartDataViewModel = []
         viewModel.toNextWeekDidTap()
+        viewModel.fetchPrevWeekData()
     }
     
     private func toBeforeMonthDidTap() {
