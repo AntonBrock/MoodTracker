@@ -422,11 +422,8 @@ struct BreathView: View {
             }
         }
         .onDisappear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                withAnimation { [weak coordinator] in
-                    guard let coordinator else {
-                        return
-                    }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                withAnimation {
                     coordinator.parent.hideCustomTabBar = false
                 }
             }
