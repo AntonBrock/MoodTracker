@@ -46,6 +46,7 @@ final class AppState: ObservableObject {
         static let userLimits = "userLimits"
         static let userID = "userID"
         static let maximumValueOfLimits = "maximumValueOfLimits"
+        static let isCompletedMoodCheck = "isCompletedMoodCheck"
     }
     
     var timezone: String? {
@@ -169,6 +170,15 @@ final class AppState: ObservableObject {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.maximumValueOfLimits)
+        }
+    }
+    
+    var isCompletedMoodCheck: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isCompletedMoodCheck)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isCompletedMoodCheck)
         }
     }
         

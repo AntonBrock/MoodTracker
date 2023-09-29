@@ -13,6 +13,12 @@ extension MainView {
         
         @Published var viewer: MainView?
         
+        @Published var moodCheckViewModel: MoodCheckViewModel = MoodCheckViewModel(
+            isCheckStateUser: false,
+            isCreateNewDiaryNote: false,
+            isBreathActivity: false
+        )
+        
         @Published var emotionCountData: EmotionCountDataViewModel = EmotionCountDataViewModel(
             total: 0,
             common: "",
@@ -154,6 +160,32 @@ extension MainView {
             )
             
             fetchMainData()
+        }
+        
+        func getMoodCheck(completion: @escaping (() -> Void)) {
+            if AppState.shared.isLogin ?? false {
+                Services.userStateService.getMoodCheck { [weak self] response in
+                    switch response {
+                    case .success(let model):
+                        guard let self else {
+                            return
+                        }
+                        self.moodCheckViewModel = MoodCheckViewModel(
+                            isCheckStateUser: model.isCheckStateUser,
+                            isCreateNewDiaryNote: model.isCreateNewDiaryNote,
+                            isBreathActivity: model.isBreathActivity
+                        )
+                        
+                        if !model.isCheckStateUser || !model.isBreathActivity || !model.isCreateNewDiaryNote {
+                            AppState.shared.isCompletedMoodCheck = false
+                        }
+                        completion()
+                    case .failure(let error):
+                        print(error)
+                        completion()
+                    }
+                }
+            }
         }
         
         private func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport) {

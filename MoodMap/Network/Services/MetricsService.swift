@@ -15,6 +15,7 @@ private let _YMMApiKey = "4b568161-7c73-4320-a811-c913cbb383c0"
 enum MetricsEventName: String {
     case singInWithGoogleButton = "singInWithGoogleButton"
     case createEmotionNoteButton = "createEmotionNoteButton"
+    case createEmotionNoteButtonFromTopBlock = "createEmotionNoteButtonFromTopBlock"
     case stateNextButton = "stateNextButton"
     case openJournalScreen = "openJournalScreen"
     case shareToInstagramButton = "shareToInstagramButton"
@@ -32,6 +33,20 @@ enum MetricsEventName: String {
     case goToJournalFromMainScreenButton = "goToJournalFromMainScreenButton"
     case deleteAccButton = "deleteAccButton"
     case openReportScreen = "openReportScreen"
+    // Breath
+    case openBreathScreen = "openBreathScreen"
+    case choosedStepThreeBreath = "choosedStepThreeBreath"
+    case choosedStepFourBreath = "choosedStepFourBreath"
+    case choosedStepFiveBreath = "choosedStepFiveBreath"
+    case choosedDefaultThemeBreath = "choosedDefaultThemeBreath"
+    case choosedBirdsThemeBreath = "choosedBirdsThemeBreath"
+    case choosedNightForestThemeBreath = "choosedNightForestThemeBreath"
+    case choosedOceanThemeBreath = "choosedOceanThemeBreath"
+    case choosedRainThemeBreath = "choosedRainThemeBreath"
+    case startBreath = "startBreathPractice"
+    case endEarlyBreathPracice = "endEarlyBreathPracice"
+    case endHalfBreathPractice = "endHalfBreathPractice"
+    case endFullBreathPractice = "endFullBreathPractice"
 }
 
 protocol MetricsServiceProtocol {
@@ -41,6 +56,7 @@ protocol MetricsServiceProtocol {
 enum YMetricsEventType: String {
     case singInWithGoogleButton = "singInWithGoogleButton"
     case createEmotionNoteButton = "createEmotionNoteButton"
+    case createEmotionNoteButtonFromTopBlock = "createEmotionNoteButtonFromTopBlock"
     case stateNextButton = "stateNextButton"
     case openJournalScreen = "openJournalScreen"
     case shareToInstagramButton = "shareToInstagramButton"
@@ -58,6 +74,20 @@ enum YMetricsEventType: String {
     case goToJournalFromMainScreenButton = "goToJournalFromMainScreenButton"
     case deleteAccButton = "deleteAccButton"
     case openReportScreen = "openReportScreen"
+    // Breath
+    case openBreathScreen = "openBreathScreen"
+    case choosedStepThreeBreath = "choosedStepThreeBreath"
+    case choosedStepFourBreath = "choosedStepFourBreath"
+    case choosedStepFiveBreath = "choosedStepFiveBreath"
+    case choosedDefaultThemeBreath = "choosedDefaultThemeBreath"
+    case choosedBirdsThemeBreath = "choosedBirdsThemeBreath"
+    case choosedNightForestThemeBreath = "choosedNightForestThemeBreath"
+    case choosedOceanThemeBreath = "choosedOceanThemeBreath"
+    case choosedRainThemeBreath = "choosedRainThemeBreath"
+    case startBreath = "startBreathPractice"
+    case endEarlyBreathPracice = "endEarlyBreathPracice"
+    case endHalfBreathPractice = "endHalfBreathPractice"
+    case endFullBreathPractice = "endFullBreathPractice"
 }
 
 public enum YMetricsProfileType {
@@ -96,6 +126,8 @@ class MetricsService: MetricsServiceProtocol {
             message = "iOS: Активности были выбраны и кнопка 'Продолжить' нажата"
         case .createEmotionNoteButton:
             message = "iOS: Кнопка 'Сохранить' нажата и запись создана"
+        case .createEmotionNoteButtonFromTopBlock:
+            message = "iOS: Нажали создать запись кнопку наверху"
         case .createNewDairyPageButton:
             message = "iOS: Кнопка 'Создать запись в дневнике благодарности' нажата"
         case .deleteAccAgreeButton:
@@ -130,6 +162,32 @@ class MetricsService: MetricsServiceProtocol {
             message = "iOS: Нажали кнопку 'Продолжить' после выбора состояния и настроения"
         case .openReportScreen:
             message = "iOS: Зашли в отчет через ТабБар"
+        case .openBreathScreen:
+            message = "iOS: Был открыт экран Дыхательной практики"
+        case .choosedStepThreeBreath:
+            message = "iOS: Выбрано 3 подхода в Дыхательной практики"
+        case .choosedStepFourBreath:
+            message = "iOS: Выбрано 4 подхода в Дыхательной практики"
+        case .choosedStepFiveBreath:
+            message = "iOS: Выбрано 5 подхода в Дыхательной практики"
+        case .choosedDefaultThemeBreath:
+            message = "iOS: Выбрана тема по-умолчанию в Дыхательной практики"
+        case .choosedBirdsThemeBreath:
+            message = "iOS: Выбрана тема Птицы в Дыхательной практики"
+        case .choosedNightForestThemeBreath:
+            message = "iOS: Выбрана тема Ночь в лесу в Дыхательной практики"
+        case .choosedOceanThemeBreath:
+            message = "iOS: Выбрана тема Океан в Дыхательной практики"
+        case .choosedRainThemeBreath:
+            message = "iOS: Выбрана тема Дождь в Дыхательной практики"
+        case .startBreath:
+            message = "iOS: Пользователь нажал на Кнопку запуска Дыхательной практики"
+        case .endEarlyBreathPracice:
+            message = "iOS: Пользователь завершил практику без прогресса"
+        case .endHalfBreathPractice:
+            message = "iOS: Пользователь завершил практику на половине прогресса"
+        case .endFullBreathPractice:
+            message = "iOS: Пользователь завершил практику полностью"
         }
         
         let parameters = ["message": message]
@@ -143,6 +201,8 @@ class MetricsService: MetricsServiceProtocol {
         switch eventType {
         case .activitiesNextButton:
             message = "iOS: Активности были выбраны и кнопка 'Продолжить' нажата"
+        case .createEmotionNoteButtonFromTopBlock:
+            message = "iOS: Нажали создать запись кнопку наверху"
         case .createEmotionNoteButton:
             message = "iOS: Кнопка 'Сохранить' нажата и запись создана"
         case .createNewDairyPageButton:
@@ -179,6 +239,32 @@ class MetricsService: MetricsServiceProtocol {
             message = "iOS: Нажали кнопку 'Продолжить' после выбора состояния и настроения"
         case .openReportScreen:
             message = "iOS: Зашли в отчет через ТабБар"
+        case .openBreathScreen:
+            message = "iOS: Был открыт экран Дыхательной практики"
+        case .choosedStepThreeBreath:
+            message = "iOS: Выбрано 3 подхода в Дыхательной практики"
+        case .choosedStepFourBreath:
+            message = "iOS: Выбрано 4 подхода в Дыхательной практики"
+        case .choosedStepFiveBreath:
+            message = "iOS: Выбрано 5 подхода в Дыхательной практики"
+        case .choosedDefaultThemeBreath:
+            message = "iOS: Выбрана тема по-умолчанию в Дыхательной практики"
+        case .choosedBirdsThemeBreath:
+            message = "iOS: Выбрана тема Птицы в Дыхательной практики"
+        case .choosedNightForestThemeBreath:
+            message = "iOS: Выбрана тема Ночь в лесу в Дыхательной практики"
+        case .choosedOceanThemeBreath:
+            message = "iOS: Выбрана тема Океан в Дыхательной практики"
+        case .choosedRainThemeBreath:
+            message = "iOS: Выбрана тема Дождь в Дыхательной практики"
+        case .startBreath:
+            message = "iOS: Пользователь нажал на Кнопку запуска Дыхательной практики"
+        case .endEarlyBreathPracice:
+            message = "iOS: Пользователь завершил практику без прогресса"
+        case .endHalfBreathPractice:
+            message = "iOS: Пользователь завершил практику на половине прогресса"
+        case .endFullBreathPractice:
+            message = "iOS: Пользователь завершил практику полностью"
         }
         
         let parameters = [eventType.rawValue: message]
