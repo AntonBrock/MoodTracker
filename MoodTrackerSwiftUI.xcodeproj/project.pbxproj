@@ -208,16 +208,6 @@
 		45B6EEF22AC6FFE400344EC5 /* PausableAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EEF02AC6FFE400344EC5 /* PausableAnimation.swift */; };
 		45B6EEF42AC6FFFB00344EC5 /* MoodCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EEF32AC6FFFB00344EC5 /* MoodCheckModel.swift */; };
 		45B6EEF52AC6FFFB00344EC5 /* MoodCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EEF32AC6FFFB00344EC5 /* MoodCheckModel.swift */; };
-		45B6EEF72AC7001A00344EC5 /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EEF62AC7001A00344EC5 /* UserStateService.swift */; };
-		45B6EEF82AC7001A00344EC5 /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EEF62AC7001A00344EC5 /* UserStateService.swift */; };
-		45B6EEFA2AC7005700344EC5 /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EEF92AC7005700344EC5 /* UserStateEndPoint.swift */; };
-		45B6EEFB2AC7005700344EC5 /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EEF92AC7005700344EC5 /* UserStateEndPoint.swift */; };
-		45B6EEFD2AC7008A00344EC5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EEFC2AC7008A00344EC5 /* MainView.swift */; };
-		45B6EEFE2AC7008A00344EC5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EEFC2AC7008A00344EC5 /* MainView.swift */; };
-		45B6EF002AC7009C00344EC5 /* MainViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EEFF2AC7009C00344EC5 /* MainViewCoordinator.swift */; };
-		45B6EF012AC7009C00344EC5 /* MainViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EEFF2AC7009C00344EC5 /* MainViewCoordinator.swift */; };
-		45B6EF032AC700A800344EC5 /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF022AC700A800344EC5 /* MainCoordinatorView.swift */; };
-		45B6EF042AC700A800344EC5 /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF022AC700A800344EC5 /* MainCoordinatorView.swift */; };
 		45B6EF072AC701FB00344EC5 /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 45B6EF062AC701FB00344EC5 /* ConfettiSwiftUI */; };
 		45B6EF092AC707F800344EC5 /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 45B6EF082AC707F800344EC5 /* ConfettiSwiftUI */; };
 		45B6EF0F2AC7084600344EC5 /* BreathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF0B2AC7084500344EC5 /* BreathView.swift */; };
@@ -228,6 +218,16 @@
 		45B6EF142AC7084600344EC5 /* BreathViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF0D2AC7084500344EC5 /* BreathViewModel.swift */; };
 		45B6EF152AC7084600344EC5 /* BreathViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF0E2AC7084500344EC5 /* BreathViewCoordinator.swift */; };
 		45B6EF162AC7084600344EC5 /* BreathViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF0E2AC7084500344EC5 /* BreathViewCoordinator.swift */; };
+		45B6EF182AC7197000344EC5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF172AC7197000344EC5 /* MainView.swift */; };
+		45B6EF192AC7197000344EC5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF172AC7197000344EC5 /* MainView.swift */; };
+		45B6EF1B2AC7198500344EC5 /* MainViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF1A2AC7198500344EC5 /* MainViewCoordinator.swift */; };
+		45B6EF1C2AC7198500344EC5 /* MainViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF1A2AC7198500344EC5 /* MainViewCoordinator.swift */; };
+		45B6EF1E2AC7199600344EC5 /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF1D2AC7199600344EC5 /* MainCoordinatorView.swift */; };
+		45B6EF1F2AC7199600344EC5 /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF1D2AC7199600344EC5 /* MainCoordinatorView.swift */; };
+		45B6EF212AC719C200344EC5 /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF202AC719C200344EC5 /* UserStateService.swift */; };
+		45B6EF222AC719C200344EC5 /* UserStateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF202AC719C200344EC5 /* UserStateService.swift */; };
+		45B6EF242AC7F51E00344EC5 /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF232AC7F51E00344EC5 /* UserStateEndPoint.swift */; };
+		45B6EF252AC7F51E00344EC5 /* UserStateEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6EF232AC7F51E00344EC5 /* UserStateEndPoint.swift */; };
 		45B721332A4AD1F500CAB76B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B721322A4AD1F500CAB76B /* NotificationService.swift */; };
 		45B721372A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 45B721302A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		45B7213E2A4AD2E900CAB76B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 45B7213D2A4AD2E900CAB76B /* OneSignal */; };
@@ -641,15 +641,15 @@
 		45B6EEED2AC6FFD000344EC5 /* MoodCheckViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoodCheckViewModel.swift; sourceTree = "<group>"; };
 		45B6EEF02AC6FFE400344EC5 /* PausableAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PausableAnimation.swift; sourceTree = "<group>"; };
 		45B6EEF32AC6FFFB00344EC5 /* MoodCheckModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoodCheckModel.swift; sourceTree = "<group>"; };
-		45B6EEF62AC7001A00344EC5 /* UserStateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserStateService.swift; path = "../../../../../Downloads/MoodTracker-feature-breath_technical/MoodMap/Network/Services/UserStateService.swift"; sourceTree = "<group>"; };
-		45B6EEF92AC7005700344EC5 /* UserStateEndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserStateEndPoint.swift; path = "../../../../../Downloads/MoodTracker-feature-breath_technical/MoodMap/Network/API/UserStateEndPoint.swift"; sourceTree = "<group>"; };
-		45B6EEFC2AC7008A00344EC5 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainView.swift; path = "../../../../../../Downloads/MoodTracker-feature-breath_technical/MoodMap/UI /Screens/MainScreen/MainView.swift"; sourceTree = "<group>"; };
-		45B6EEFF2AC7009C00344EC5 /* MainViewCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewCoordinator.swift; path = "../../../../../../Downloads/MoodTracker-feature-breath_technical/MoodMap/UI /Screens/MainScreen/MainViewCoordinator.swift"; sourceTree = "<group>"; };
-		45B6EF022AC700A800344EC5 /* MainCoordinatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainCoordinatorView.swift; path = "../../../../../../Downloads/MoodTracker-feature-breath_technical/MoodMap/UI /Screens/MainScreen/MainCoordinatorView.swift"; sourceTree = "<group>"; };
 		45B6EF0B2AC7084500344EC5 /* BreathView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreathView.swift; sourceTree = "<group>"; };
 		45B6EF0C2AC7084500344EC5 /* BreathCoordinatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreathCoordinatorView.swift; sourceTree = "<group>"; };
 		45B6EF0D2AC7084500344EC5 /* BreathViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreathViewModel.swift; sourceTree = "<group>"; };
 		45B6EF0E2AC7084500344EC5 /* BreathViewCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreathViewCoordinator.swift; sourceTree = "<group>"; };
+		45B6EF172AC7197000344EC5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		45B6EF1A2AC7198500344EC5 /* MainViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCoordinator.swift; sourceTree = "<group>"; };
+		45B6EF1D2AC7199600344EC5 /* MainCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorView.swift; sourceTree = "<group>"; };
+		45B6EF202AC719C200344EC5 /* UserStateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateService.swift; sourceTree = "<group>"; };
+		45B6EF232AC7F51E00344EC5 /* UserStateEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStateEndPoint.swift; sourceTree = "<group>"; };
 		45B721302A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B721322A4AD1F500CAB76B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		45B721342A4AD1F500CAB76B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1006,10 +1006,10 @@
 			isa = PBXGroup;
 			children = (
 				45B6EEEC2AC6FFD000344EC5 /* Entity */,
-				45B6EEFC2AC7008A00344EC5 /* MainView.swift */,
-				45B6EEFF2AC7009C00344EC5 /* MainViewCoordinator.swift */,
-				45B6EF022AC700A800344EC5 /* MainCoordinatorView.swift */,
 				45026B4829D7C25E00B6A504 /* MainViewModel.swift */,
+				45B6EF172AC7197000344EC5 /* MainView.swift */,
+				45B6EF1A2AC7198500344EC5 /* MainViewCoordinator.swift */,
+				45B6EF1D2AC7199600344EC5 /* MainCoordinatorView.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -1455,13 +1455,13 @@
 			isa = PBXGroup;
 			children = (
 				45E750382920B7D100CF9E21 /* MainScreenService.swift */,
-				45B6EEF62AC7001A00344EC5 /* UserStateService.swift */,
 				45133A1F29AFB88900258072 /* AuthService.swift */,
 				456A401C29BBA7E500371B5C /* JournalService.swift */,
 				457F591829C184B900E96E1D /* ReportService.swift */,
 				4504F00429D976440042CF6B /* DiaryService.swift */,
 				45F361AF2A178BAF002CD92B /* MetricsService.swift */,
 				457A8D672A6BA5E800D1E609 /* QuotesService.swift */,
+				45B6EF202AC719C200344EC5 /* UserStateService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1469,13 +1469,13 @@
 		45E7502F2920B6D900CF9E21 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				45B6EEF92AC7005700344EC5 /* UserStateEndPoint.swift */,
 				45E750302920B6E700CF9E21 /* BaseAPI.swift */,
 				45133A2129AFB97400258072 /* AuthEnpPoint.swift */,
 				456A401E29BBA84400371B5C /* JournalEndPoint.swift */,
 				457F591A29C184F300E96E1D /* ReportEndPoint.swift */,
 				4504F00629D976DC0042CF6B /* DiaryEndPoint.swift */,
 				457A8D692A6BA66200D1E609 /* QuotesEndPoint.swift */,
+				45B6EF232AC7F51E00344EC5 /* UserStateEndPoint.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1744,7 +1744,6 @@
 				45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */,
 				4529AB7129AF193F001D2390 /* UIImage+extension.swift in Sources */,
 				45FCD1A92A18B4C700B0DAF0 /* MMErrorView.swift in Sources */,
-				45B6EEF72AC7001A00344EC5 /* UserStateService.swift in Sources */,
 				45B6EEE72AC6FF8800344EC5 /* BreathViewComponent.swift in Sources */,
 				456A401329BA41BB00371B5C /* StatesModel.swift in Sources */,
 				4529AB7229AF193F001D2390 /* UINavigationController+extention.swift in Sources */,
@@ -1811,6 +1810,7 @@
 				4529ABA029AF1940001D2390 /* ActivitiesBarCharsView.swift in Sources */,
 				4529ABA129AF1940001D2390 /* FeelingCircleChartsView.swift in Sources */,
 				4529ABA229AF1940001D2390 /* MoodBarCharsView.swift in Sources */,
+				45B6EF1B2AC7198500344EC5 /* MainViewCoordinator.swift in Sources */,
 				4529ABA329AF1940001D2390 /* SegmentedControlView.swift in Sources */,
 				4529ABA429AF1940001D2390 /* TabBar.swift in Sources */,
 				4529ABA529AF1940001D2390 /* MTButton.swift in Sources */,
@@ -1824,6 +1824,7 @@
 				4529ABA729AF1940001D2390 /* EmotionBoardView.swift in Sources */,
 				45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */,
 				4529ABA829AF1940001D2390 /* QuoteView.swift in Sources */,
+				45B6EF1E2AC7199600344EC5 /* MainCoordinatorView.swift in Sources */,
 				457F591B29C184F300E96E1D /* ReportEndPoint.swift in Sources */,
 				45A9F05329F10076002C13C5 /* AuthLogoutView.swift in Sources */,
 				4529ABA929AF1941001D2390 /* ActivitiesTextViewBlock.swift in Sources */,
@@ -1845,6 +1846,7 @@
 				4529ABB429AF1941001D2390 /* AuthMethodsView.swift in Sources */,
 				4529ABB529AF1941001D2390 /* BaseViewCoordinator.swift in Sources */,
 				456A401D29BBA7E500371B5C /* JournalService.swift in Sources */,
+				45B6EF212AC719C200344EC5 /* UserStateService.swift in Sources */,
 				4529ABB629AF1941001D2390 /* LoginView.swift in Sources */,
 				45B6EF0F2AC7084600344EC5 /* BreathView.swift in Sources */,
 				4529ABB729AF1941001D2390 /* LoginViewCoordinator.swift in Sources */,
@@ -1863,14 +1865,12 @@
 				4529ABC229AF1941001D2390 /* JournalCoordinatorView.swift in Sources */,
 				4546D59929E86BFF00E69852 /* ATTView.swift in Sources */,
 				4592521429C4205E007B1706 /* ReportModel.swift in Sources */,
-				45B6EF002AC7009C00344EC5 /* MainViewCoordinator.swift in Sources */,
-				45B6EF032AC700A800344EC5 /* MainCoordinatorView.swift in Sources */,
 				4592522529C6EE73007B1706 /* ReportTipView.swift in Sources */,
 				4529ABC329AF1941001D2390 /* ReportScreen.swift in Sources */,
+				45B6EF242AC7F51E00344EC5 /* UserStateEndPoint.swift in Sources */,
 				45A9F04E29F01222002C13C5 /* InstagramSharingUtils.swift in Sources */,
 				4529ABC429AF1941001D2390 /* ReportViewCoordinator.swift in Sources */,
 				4529ABC529AF1941001D2390 /* ReportCoordinatorView.swift in Sources */,
-				45B6EEFD2AC7008A00344EC5 /* MainView.swift in Sources */,
 				4529ABC629AF1941001D2390 /* WhyRegistrationInfoView.swift in Sources */,
 				4529ABC729AF1941001D2390 /* PersonalCabinetView.swift in Sources */,
 				456A401729BA424200371B5C /* ActivitiesViewModel.swift in Sources */,
@@ -1883,7 +1883,6 @@
 				4544361329CC7B51008E2D45 /* ActivitiesChartsForAllTime.swift in Sources */,
 				4529ABCD29AF1942001D2390 /* MoodCheckView.swift in Sources */,
 				456A400E29B990C900371B5C /* EmotionsModel.swift in Sources */,
-				45B6EEFA2AC7005700344EC5 /* UserStateEndPoint.swift in Sources */,
 				4529ABCE29AF1942001D2390 /* MoodCheckViewCoordinator.swift in Sources */,
 				4529ABCF29AF1942001D2390 /* MoodCheckCoordinatorView.swift in Sources */,
 				457AC3D32A5965BB00294BF6 /* PushNotificationModel.swift in Sources */,
@@ -1897,6 +1896,7 @@
 				45B6EEEA2AC6FFB600344EC5 /* MMCircleButton.swift in Sources */,
 				4592521F29C6ED01007B1706 /* Date+Extenstion.swift in Sources */,
 				4529ABD429AF1942001D2390 /* StressCheckView.swift in Sources */,
+				45B6EF182AC7197000344EC5 /* MainView.swift in Sources */,
 				4529ABD529AF1942001D2390 /* SwiftUISlider.swift in Sources */,
 				4529ABD629AF1942001D2390 /* MoodCheckComponent.swift in Sources */,
 				4529ABD729AF1942001D2390 /* MoodsWordChooseView.swift in Sources */,
@@ -1925,7 +1925,6 @@
 				45FCD1D02A18BEEE00B0DAF0 /* UIImage+extension.swift in Sources */,
 				45FCD1D12A18BEEE00B0DAF0 /* MMErrorView.swift in Sources */,
 				45FCD1D22A18BEEE00B0DAF0 /* StatesModel.swift in Sources */,
-				45B6EEF82AC7001A00344EC5 /* UserStateService.swift in Sources */,
 				45B6EEE82AC6FF8800344EC5 /* BreathViewComponent.swift in Sources */,
 				45FCD1D32A18BEEE00B0DAF0 /* UINavigationController+extention.swift in Sources */,
 				45FCD1D42A18BEEE00B0DAF0 /* UIDevice+extension.swift in Sources */,
@@ -1992,6 +1991,7 @@
 				45FCD20D2A18BEEE00B0DAF0 /* MoodBarCharsView.swift in Sources */,
 				45FCD20E2A18BEEE00B0DAF0 /* SegmentedControlView.swift in Sources */,
 				45FCD20F2A18BEEE00B0DAF0 /* TabBar.swift in Sources */,
+				45B6EF1C2AC7198500344EC5 /* MainViewCoordinator.swift in Sources */,
 				45FCD2102A18BEEE00B0DAF0 /* MTButton.swift in Sources */,
 				45FCD2112A18BEEE00B0DAF0 /* DiaryModel.swift in Sources */,
 				45FCD2122A18BEEE00B0DAF0 /* MMErrorProtocol.swift in Sources */,
@@ -2005,6 +2005,7 @@
 				45FCD2192A18BEEE00B0DAF0 /* ReportEndPoint.swift in Sources */,
 				45FCD21A2A18BEEE00B0DAF0 /* AuthLogoutView.swift in Sources */,
 				45FCD21B2A18BEEE00B0DAF0 /* ActivitiesTextViewBlock.swift in Sources */,
+				45B6EF1F2AC7199600344EC5 /* MainCoordinatorView.swift in Sources */,
 				45FCD21C2A18BEEE00B0DAF0 /* MPErrorFlowView.swift in Sources */,
 				45FCD21D2A18BEEE00B0DAF0 /* SearchView.swift in Sources */,
 				45FCD21E2A18BEEE00B0DAF0 /* CalendarViewRepresentable.swift in Sources */,
@@ -2026,6 +2027,7 @@
 				45FCD22A2A18BEEE00B0DAF0 /* BaseViewCoordinator.swift in Sources */,
 				45FCD22B2A18BEEE00B0DAF0 /* JournalService.swift in Sources */,
 				45FCD22C2A18BEEE00B0DAF0 /* LoginView.swift in Sources */,
+				45B6EF222AC719C200344EC5 /* UserStateService.swift in Sources */,
 				45FCD22D2A18BEEE00B0DAF0 /* LoginViewCoordinator.swift in Sources */,
 				45B6EF102AC7084600344EC5 /* BreathView.swift in Sources */,
 				45FCD22E2A18BEEE00B0DAF0 /* LaunchScreenView.swift in Sources */,
@@ -2044,14 +2046,12 @@
 				45FCD23C2A18BEEE00B0DAF0 /* JournalCoordinatorView.swift in Sources */,
 				45FCD23D2A18BEEE00B0DAF0 /* ATTView.swift in Sources */,
 				45FCD23E2A18BEEE00B0DAF0 /* ReportModel.swift in Sources */,
-				45B6EF012AC7009C00344EC5 /* MainViewCoordinator.swift in Sources */,
-				45B6EF042AC700A800344EC5 /* MainCoordinatorView.swift in Sources */,
 				45FCD23F2A18BEEE00B0DAF0 /* ReportTipView.swift in Sources */,
 				45FCD2402A18BEEE00B0DAF0 /* ReportScreen.swift in Sources */,
+				45B6EF252AC7F51E00344EC5 /* UserStateEndPoint.swift in Sources */,
 				45FCD2412A18BEEE00B0DAF0 /* InstagramSharingUtils.swift in Sources */,
 				45FCD2422A18BEEE00B0DAF0 /* ReportViewCoordinator.swift in Sources */,
 				45FCD2432A18BEEE00B0DAF0 /* ReportCoordinatorView.swift in Sources */,
-				45B6EEFE2AC7008A00344EC5 /* MainView.swift in Sources */,
 				45FCD2442A18BEEE00B0DAF0 /* WhyRegistrationInfoView.swift in Sources */,
 				45FCD2452A18BEEE00B0DAF0 /* PersonalCabinetView.swift in Sources */,
 				45FCD2462A18BEEE00B0DAF0 /* ActivitiesViewModel.swift in Sources */,
@@ -2064,7 +2064,6 @@
 				45FCD24D2A18BEEE00B0DAF0 /* ActivitiesChartsForAllTime.swift in Sources */,
 				45FCD24E2A18BEEE00B0DAF0 /* MoodCheckView.swift in Sources */,
 				45FCD24F2A18BEEE00B0DAF0 /* EmotionsModel.swift in Sources */,
-				45B6EEFB2AC7005700344EC5 /* UserStateEndPoint.swift in Sources */,
 				45FCD2502A18BEEE00B0DAF0 /* MoodCheckViewCoordinator.swift in Sources */,
 				45FCD2512A18BEEE00B0DAF0 /* MoodCheckCoordinatorView.swift in Sources */,
 				45FCD2522A18BEEE00B0DAF0 /* PersonalCabinetViewModel.swift in Sources */,
@@ -2078,6 +2077,7 @@
 				45B6EEEB2AC6FFB600344EC5 /* MMCircleButton.swift in Sources */,
 				45FCD2592A18BEEE00B0DAF0 /* Date+Extenstion.swift in Sources */,
 				45FCD25A2A18BEEE00B0DAF0 /* StressCheckView.swift in Sources */,
+				45B6EF192AC7197000344EC5 /* MainView.swift in Sources */,
 				45FCD25B2A18BEEE00B0DAF0 /* SwiftUISlider.swift in Sources */,
 				45FCD25C2A18BEEE00B0DAF0 /* MoodCheckComponent.swift in Sources */,
 				45FCD25D2A18BEEE00B0DAF0 /* MoodsWordChooseView.swift in Sources */,
@@ -2175,10 +2175,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0529.2;
+				CURRENT_PROJECT_VERSION = 1.0530;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoodMap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
@@ -2221,10 +2221,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0529.2;
+				CURRENT_PROJECT_VERSION = 1.0530;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MoodMap copy-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
@@ -2352,11 +2352,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0529.2;
+				CURRENT_PROJECT_VERSION = 1.0530;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoodMap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
@@ -2399,11 +2399,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0529.2;
+				CURRENT_PROJECT_VERSION = 1.0530;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MoodMap copy-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;

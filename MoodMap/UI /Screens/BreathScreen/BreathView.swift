@@ -10,7 +10,7 @@ import BottomSheet
 
 struct BreathView: View {
     
-    @Environment(\.dismiss) var dismiss
+//    @Environment(\.dismiss) var dismiss
 
     @ObservedObject var viewModel: ViewModel
     private unowned let coordinator: BreathViewCoordinator
@@ -419,13 +419,6 @@ struct BreathView: View {
                             self.bottomSheetPosition = .dynamicTop
                         }
                     }
-            }
-        }
-        .onDisappear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                withAnimation {
-                    coordinator.parent.hideCustomTabBar = false
-                }
             }
         }
         .sheet(isPresented: $isBreathComponentVisible) {
