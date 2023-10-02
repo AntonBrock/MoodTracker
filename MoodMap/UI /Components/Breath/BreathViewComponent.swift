@@ -584,6 +584,7 @@ struct BreathViewComponent: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
+            progressForAnalycis = progressForPractice
             timerManager.startTimer()
             isNeedToShowStartText = true
         }
@@ -851,7 +852,6 @@ struct BreathViewComponent: View {
     private func getAdviceForProgress(maxProgress: Int, currentProgress: Int) -> String {
         
         var text: String = ""
-        // Если юзер выбрал 3 подхода
         if maxProgress == 3 {
             if currentProgress == 3 {
                 text = "Даже небольшая практика может помочь снизить твой уровень стресса и тревожности"
@@ -876,7 +876,7 @@ struct BreathViewComponent: View {
             if currentProgress == 5 || currentProgress == 4 {
                 text = "Даже небольшая практика может помочь снизить твой уровень стресса и тревожности"
             }
-            if currentProgress == 3 || currentProgress == 2{
+            if currentProgress == 3 || currentProgress == 2 {
                 text = "Регулярная практика помогает более эффективно справляться со стрессом и адаптироваться к нему"
             }
             if currentProgress == 1 || currentProgress == 0 {

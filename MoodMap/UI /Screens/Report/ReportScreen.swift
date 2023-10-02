@@ -246,7 +246,7 @@ struct ReportScreen: View {
             }
         })
         .sheet(isPresented: $isWebViewPresented) {
-            WebView(urlString: "https://mapmood.com/analytics")
+            WebView(urlString: "https://mapmood.com/analytics/ru")
         }
     }
     

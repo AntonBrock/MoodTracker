@@ -82,7 +82,6 @@ struct TabBarView: View {
                                                 }
                                             }
                                         })
-                                        .shadow(color: Colors.Primary.lavender500Purple.opacity(0.7), radius: 7, x: 0, y: -5)
                                     )
                             }
                             .frame(width: 50, height: 50)

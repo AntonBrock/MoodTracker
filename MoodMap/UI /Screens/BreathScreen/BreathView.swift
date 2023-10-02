@@ -113,7 +113,8 @@ struct BreathView: View {
                         .padding()
                         
                         Button("\(textForButton)") {
-                            
+                            progressForPractice = isSelectedThreeStages ? 3 : isSelectedFourStages ? 4 : 5
+                            progressForAnalycis = isSelectedThreeStages ? 3 : isSelectedFourStages ? 4 : 5
                             sendMetrics()
                             isBreathComponentVisible.toggle()
                         }
