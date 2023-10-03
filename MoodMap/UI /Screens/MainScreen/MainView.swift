@@ -52,6 +52,11 @@ struct MainView: View {
         ZStack {
             ScrollView {
                 VStack {
+                    
+                    if RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .moodWeenEvent) {
+                        moodWeenEventBlock()
+                    }
+                    
                     if isAnimated {
                         VStack {
                             createEmotionalHeader()
@@ -99,27 +104,7 @@ struct MainView: View {
                         }
                     }
                     
-                    Text("Эмоциональная поддержка")
-                        .foregroundColor(Colors.Primary.blue)
-                        .font(.system(size: 20, weight: .semibold))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                        .padding(.horizontal, 20)
-                        .padding(.top, 20)
-                    
-                    createDiaryView()
-                        .padding(.top, 10)
-                        .onTapGesture {
-                            if AppState.shared.isLogin ?? false {
-                                Services.metricsService.sendEventWith(eventName: .openDiaryScreenButton)
-                                Services.metricsService.sendEventWith(eventType: .openDiaryScreenButton)
-                                
-                                coordinator.openDiary()
-                            } else {
-                                withAnimation {
-                                    coordinator.parent.showAuthLoginView = true
-                                }
-                            }
-                        }
+                    diaryBlock()
                     
                     QuoteView(quote: $quoteText)
                         .padding(.top, 10)
@@ -217,97 +202,7 @@ struct MainView: View {
             }
             
             if isSheetAboutMoodCheckPresent {
-                VStack {}
-                    .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: .infinity)
-                    .background(.black.opacity(0.7))
-                    .transition(.opacity)
-                
-                    .bottomSheet(bottomSheetPosition: $bottomSheetPosition,
-                                 switchablePositions: [.dynamicTop]) {
-                        VStack(spacing: 0) {
-                            
-                            Text("Эмоциональный чек-лист")
-                                .font(.system(size: 24, weight: .semibold))
-                                .foregroundColor(Colors.Primary.blue)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.trailing, 10)
-                                .padding(.top, 5)
-                            
-                            Text("Эмоциональный чек-лист - это инструмент саморазвития, который помогает лучше понимать себя и управлять своими эмоциями, чтобы достичь более сбалансированной жизни\n")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Colors.Primary.blue)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.trailing, 21)
-                                .padding(.top, 20)
-                                .multilineTextAlignment(.leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                            
-                            Text("Ежедневно чек-лист обновляется и включает в себя 3 состовляющие - это состояние, дахание и дневник. Каждый новый день, вы будете видеть что чек-лист пустой и вы можете заполнить его\n")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Colors.Primary.blue)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.trailing, 21)
-                                .multilineTextAlignment(.leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                           
-                            Text("Состояние - нужно отметить свое состояние, хотя бы 1 раз! Дыхание - вам нужно завершить практику минимум на 30%. Дневник - запщите свои мысли на текущий день, с помощью Дневника Благодарности\n")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Colors.Primary.blue)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.trailing, 21)
-                                .multilineTextAlignment(.leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                            
-                            Text("Каждый из аспектов этого чек-листа сможет помочь лучше себя понимать и чувствовать. Конечно, как только вы завершите весь чек-лист на текущий день - мы покажем это и спрячем его")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Colors.Primary.blue)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.trailing, 21)
-                                .multilineTextAlignment(.leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                           
-                            MTButton(buttonStyle: .fill, title: "Понятно") {
-                                withAnimation {
-                                    bottomSheetPosition = .absolute(0)
-                                    isSheetAboutMoodCheckPresent.toggle()
-                                    
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                        withAnimation {
-                                            self.bottomSheetPosition = .dynamicTop
-                                            self.coordinator.parent.hideCustomTabBar = false
-                                        }
-                                    }
-                                }
-                            }
-                            .frame(width: 230, height: 48, alignment: .top)
-                            .padding(.top, 10)
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.top, 14)
-                        .padding(.bottom, 20)
-                    }
-                    .customBackground(
-                        Color.white
-                            .cornerRadius(16, corners: [.topLeft, .topRight])
-                            .shadow(color: .white, radius: 0, x: 0, y: 0)
-                    )
-                    .enableTapToDismiss(true)
-                    .enableSwipeToDismiss(false)
-                    .enableContentDrag(false)
-                    .onDismiss {
-                        withAnimation {
-                            bottomSheetPosition = .absolute(0)
-                            isSheetAboutMoodCheckPresent.toggle()
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                withAnimation {
-                                    self.bottomSheetPosition = .dynamicTop
-                                    self.coordinator.parent.hideCustomTabBar = false
-                                }
-                            }
-                        }
-                    }
-                    .zIndex(9999999)
+                moodcheckViewBlock()
             }
         }
         .onDisappear {
@@ -345,6 +240,147 @@ struct MainView: View {
                 }
             }
         }
+    }
+    
+    
+    @ViewBuilder
+    private func diaryBlock() -> some View {
+        Text("Эмоциональная поддержка")
+            .foregroundColor(Colors.Primary.blue)
+            .font(.system(size: 20, weight: .semibold))
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+        
+        createDiaryView()
+            .padding(.top, 10)
+            .onTapGesture {
+                if AppState.shared.isLogin ?? false {
+                    Services.metricsService.sendEventWith(eventName: .openDiaryScreenButton)
+                    Services.metricsService.sendEventWith(eventType: .openDiaryScreenButton)
+                    
+                    coordinator.openDiary()
+                } else {
+                    withAnimation {
+                        coordinator.parent.showAuthLoginView = true
+                    }
+                }
+            }
+    }
+    
+    @ViewBuilder
+    private func moodcheckViewBlock() -> some View {
+        VStack {}
+            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: .infinity)
+            .background(.black.opacity(0.7))
+            .transition(.opacity)
+        
+            .bottomSheet(bottomSheetPosition: $bottomSheetPosition,
+                         switchablePositions: [.dynamicTop]) {
+                VStack(spacing: 0) {
+                    
+                    Text("Эмоциональный чек-лист")
+                        .font(.system(size: 24, weight: .semibold))
+                        .foregroundColor(Colors.Primary.blue)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, 10)
+                        .padding(.top, 5)
+                    
+                    Text("Эмоциональный чек-лист - это инструмент саморазвития, который помогает лучше понимать себя и управлять своими эмоциями, чтобы достичь более сбалансированной жизни\n")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Colors.Primary.blue)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, 21)
+                        .padding(.top, 20)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    Text("Ежедневно чек-лист обновляется и включает в себя 3 состовляющие - это состояние, дахание и дневник. Каждый новый день, вы будете видеть что чек-лист пустой и вы можете заполнить его\n")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Colors.Primary.blue)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, 21)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                   
+                    Text("Состояние - нужно отметить свое состояние, хотя бы 1 раз! Дыхание - вам нужно завершить практику минимум на 30%. Дневник - запщите свои мысли на текущий день, с помощью Дневника Благодарности\n")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Colors.Primary.blue)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, 21)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    Text("Каждый из аспектов этого чек-листа сможет помочь лучше себя понимать и чувствовать. Конечно, как только вы завершите весь чек-лист на текущий день - мы покажем это и спрячем его")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Colors.Primary.blue)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, 21)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                   
+                    MTButton(buttonStyle: .fill, title: "Понятно") {
+                        withAnimation {
+                            bottomSheetPosition = .absolute(0)
+                            isSheetAboutMoodCheckPresent.toggle()
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                withAnimation {
+                                    self.bottomSheetPosition = .dynamicTop
+                                    self.coordinator.parent.hideCustomTabBar = false
+                                }
+                            }
+                        }
+                    }
+                    .frame(width: 230, height: 48, alignment: .top)
+                    .padding(.top, 10)
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 14)
+                .padding(.bottom, 20)
+            }
+            .customBackground(
+                Color.white
+                    .cornerRadius(16, corners: [.topLeft, .topRight])
+                    .shadow(color: .white, radius: 0, x: 0, y: 0)
+            )
+            .enableTapToDismiss(true)
+            .enableSwipeToDismiss(false)
+            .enableContentDrag(false)
+            .onDismiss {
+                withAnimation {
+                    bottomSheetPosition = .absolute(0)
+                    isSheetAboutMoodCheckPresent.toggle()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        withAnimation {
+                            self.bottomSheetPosition = .dynamicTop
+                            self.coordinator.parent.hideCustomTabBar = false
+                        }
+                    }
+                }
+            }
+            .zIndex(9999999)
+    }
+    
+    @ViewBuilder
+    private func moodWeenEventBlock() -> some View {
+        Text("MoodWeenISEnabled")
+            .foregroundColor(Colors.Primary.blue)
+            .font(.system(size: 20, weight: .semibold))
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+    }
+    
+    @ViewBuilder
+    private func reconfigureMainScreen() -> some View {
+        Text("Ура конфиг работает!")
+            .foregroundColor(Colors.Primary.blue)
+            .font(.system(size: 20, weight: .semibold))
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
     }
     
     @ViewBuilder

@@ -54,6 +54,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             FirebaseApp.configure()
             _ = RCValues.sharedInstance
         }
+                
+        print("OSUSERID: \(AppState.shared.userID)")
         
         // Remove this method to stop OneSignal Debugging
         OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)

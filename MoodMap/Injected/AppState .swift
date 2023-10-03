@@ -47,6 +47,10 @@ final class AppState: ObservableObject {
         static let userID = "userID"
         static let maximumValueOfLimits = "maximumValueOfLimits"
         static let isCompletedMoodCheck = "isCompletedMoodCheck"
+        static let isMoodMapIconWasSeted = "isMoodMapIconWasSeted"
+        
+        //MoodWeen
+        static let isMoodWeenIconWasSeted = "isMoodWeenIconWasSeted"
     }
     
     var timezone: String? {
@@ -182,6 +186,24 @@ final class AppState: ObservableObject {
         }
     }
         
+    // MoodWeen
+    var isMoodWeenIconWasSeted: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isMoodWeenIconWasSeted)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isMoodWeenIconWasSeted)
+        }
+    }
+    
+    var isMoodMapIconWasSeted: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isMoodMapIconWasSeted)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isMoodMapIconWasSeted)
+        }
+    }
     var jwtToken: String? {
         get {
             return KeychainHelper.standard.read(
