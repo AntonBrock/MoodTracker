@@ -22,6 +22,16 @@ struct MainCoordinatorView: View {
                         .navigationBarTitle("")
                         .navigationBarHidden(true)
                 }
+                .navigation(item: $coordinator.breathCoordinator) {
+                    BreathCoordinatorView(coordinator: $0)
+                        .navigationBarHidden(false)
+                        .tint(.white)
+                        .onDisappear {
+                            withAnimation {
+                                coordinator.parent.hideCustomTabBar = false
+                            }
+                        }
+                }
         }
         .accentColor(.black)
     }

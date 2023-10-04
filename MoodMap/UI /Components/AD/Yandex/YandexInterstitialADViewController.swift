@@ -32,7 +32,7 @@ class YandexInterstitialADViewController: UIViewController {
     }
     
     func loadInterstitial() {
-        let id = Bundle.main.infoDictionary?["YandexADID"]! ?? "demo-interstitial-yandex"
+        let id = Bundle.main.infoDictionary?["YandexADID"] ?? "R-M-2313494-1"
         
         self.interstitialAd = YMAInterstitialAd(adUnitID: "\(id)")
         self.interstitialAd.delegate = self
@@ -68,8 +68,10 @@ extension YandexInterstitialADViewController: YMAInterstitialAdDelegate {
     }
 
     func interstitialAdDidFail(toPresent interstitialAd: YMAInterstitialAd, error: Error) {
-        if Bundle.main.infoDictionary?["YandexADID"]! == nil {
-            hideADScreen()
+        if Bundle.main.executableURL!.lastPathComponent != "MoodMapBeta" {
+            if Bundle.main.infoDictionary?["YandexADID"]! == nil {
+                hideADScreen()
+            }
         }
         print("Failed to present interstitial. Error: \(error)")
     }

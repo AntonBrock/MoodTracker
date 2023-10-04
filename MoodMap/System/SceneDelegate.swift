@@ -11,6 +11,7 @@ import UserNotifications
 import OneSignal
 import Firebase
 import FacebookCore
+import JWTDecode
 
 enum UserStoryType {
     case moodCheckView
@@ -41,20 +42,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             sourceApplication: nil,
             annotation: [UIApplication.OpenURLOptionsKey.annotation]
         )
-        
-//        for context in URLContexts {
-//            ApplicationDelegate.shared.application(
-//                UIApplication.shared,
-//                open: url,
-//                sourceApplication: nil,
-//                annotation: [UIApplication.OpenURLOptionsKey.annotation]
-//            )
-//            print("url: \(context.url.absoluteURL)")
-//            print("scheme: \(String(describing: context.url.scheme))")
-//            print("host: \(String(describing: context.url.host))")
-//            print("path: \(context.url.path)")
-//            print("components: \(context.url.pathComponents)")
-//        }
     }
     
     func scene(
@@ -65,6 +52,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
         
         if FirebaseApp.app() == nil {
             FirebaseApp.configure()
+            _ = RCValues.sharedInstance
         }
         
         // Remove this method to stop OneSignal Debugging
@@ -205,6 +193,51 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             UserDefaults.standard.set(true, forKey: "alreadyInstalled")
         }
     }
+    
+    func sceneWillEnterForeground(_ scene: UIScene) {
+    #warning("TODO: Костыль, который нужно будет вынести в AppState - потому что повторяется в Launch скрине")
+        if AppState.shared.isLogin ?? false {
+            if !checkJWTIsValid() {
+                if checkRefreshTokenIsValid() {
+                    Services.authService.refreshToken { result in
+                        switch result {
+                        case .success:
+                            Services.authService.getUserInfo() { result in
+                                switch result {
+                                case let .success(model):
+                                    AppState.shared.userName = model.username
+                                    AppState.shared.userEmail = model.email
+                                    AppState.shared.userPushNotification = model.settings.notifications
+                                    AppState.shared.userLanguage = model.settings.language
+                                    AppState.shared.userLimits = model.limits[0].currentValue
+                                    AppState.shared.maximumValueOfLimits = model.limits[0].maximumValue
+                                case .failure(let error):
+                                    print(error)
+                                }
+                            }
+                        case .failure(let error):
+                            guard let errorLocaloze = error as? MMError else { return }
+                            
+                            if errorLocaloze == .defined(.tokenUndefined) {
+                                AppState.shared.jwtToken = nil
+                            }
+                        }
+                    }
+                } else {
+                    AppState.shared.userName = nil
+                    AppState.shared.userEmail = nil
+                    AppState.shared.userPushNotification = false
+                    AppState.shared.userLanguage = "russian"
+                    AppState.shared.userLimits = 0
+                    AppState.shared.maximumValueOfLimits = 5
+                    AppState.shared.isLogin = false
+                    AppState.shared.refreshToken = nil
+                    AppState.shared.jwtToken = nil
+                }
+            }
+        }
+    }
+    
 }
 
 // MARK: - Private methods
@@ -260,6 +293,63 @@ private extension SceneDelegate {
 
             UITabBar.appearance().standardAppearance = appearance
             UITabBar.appearance().scrollEdgeAppearance = UITabBar.appearance().standardAppearance
+        }
+    }
+    
+    #warning("TODO: Костыль, который нужно будет вынести в AppState - потому что повторяется в Launch скрине")
+    private func checkJWTIsValid() -> Bool {
+        guard let token = AppState.shared.jwtToken else { return false }
+        
+        do {
+            let jwt = try decode(jwt: token)
+            
+            // Check expiration
+            if let expiresAt = jwt.expiresAt {
+                let currentDate = Date()
+                
+                if currentDate > expiresAt {
+                    print("Token is expired")
+                    return false
+                } else {
+                    print("Token is valid")
+                    return true
+                }
+            } else {
+                print("Token does not have an expiration claim")
+                return false
+            }
+            
+        } catch {
+            print("Failed to decode JWT token: \(error)")
+            return false
+        }
+    }
+    
+    private func checkRefreshTokenIsValid() -> Bool {
+        guard let token = AppState.shared.refreshToken else { return false }
+        
+        do {
+            let refresh = try decode(jwt: token)
+            
+            // Check expiration
+            if let expiresAt = refresh.expiresAt {
+                let currentDate = Date()
+                
+                if currentDate > expiresAt {
+                    print("Token is expired")
+                    return false
+                } else {
+                    print("Token is valid")
+                    return true
+                }
+            } else {
+                print("Token does not have an expiration claim")
+                return false
+            }
+            
+        } catch {
+            print("Failed to decode refresh token: \(error)")
+            return false
         }
     }
 }

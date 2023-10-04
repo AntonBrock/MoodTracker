@@ -40,6 +40,8 @@ struct TabBarView: View {
     var body: some View {
         ZStack {
             GeometryReader { geometry in
+                let isiPhoneXOrNewer = geometry.size.height >= 812
+                
                 VStack {
                     switch viewRouter.currentPage {
                     case .home:
@@ -63,42 +65,36 @@ struct TabBarView: View {
                             
                             ZStack {
                                 Circle()
-                                    .foregroundColor(Colors.Primary.lavender500Purple)
-                                    .frame(width: geometry.size.width / 7, height: geometry.size.width / 7)
-                                
-                                Image("tb-ic-plus")
-                                    .resizable()
-                                    .frame(width: 25 , height: 25)
+                                    .overlay(
+                                        PulseButton(color: Colors.Primary.lavender500Purple, buttonWidth: 50, numberOfOuterCircles: 4,
+                                                    animationDuration: 2.5, action: {
+                                            if AppState.shared.isLogin ?? false {
+                                                withAnimation {
+                                                    if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
+                                                        coordinator.showLimitsView = true
+                                                    } else {
+                                                        coordinator.isShowingMoodCheckScreen.toggle()
+                                                    }
+                                                }
+                                            } else {
+                                                withAnimation {
+                                                    coordinator.showAuthLoginView = true
+                                                }
+                                            }
+                                        })
+                                    )
                             }
-                            .offset(y: -geometry.size.height / 8 / 4)
-                            .onTapGesture {
-                                
-                                if AppState.shared.isLogin ?? false {
-                                    withAnimation {
-                                        if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
-                                            coordinator.showLimitsView = true
-                                        } else {
-                                            coordinator.isShowingMoodCheckScreen.toggle()
-                                        }
-                                    }
-                                } else {
-                                    withAnimation {
-                                        coordinator.showAuthLoginView = true
-                                    }
-                                }
-                            }
-                            .scaleEffect(showPopUp ? CGFloat(0.9) : 1.0)
-                            .animation(Animation.spring(response: 0.35, dampingFraction: 0.35, blendDuration: 1), value: showPopUp)
-                            .shadow(color: Colors.Primary.lavender500Purple.opacity(0.5), radius: 5, x: 0, y: 9)
+                            .frame(width: 50, height: 50)
+                            .padding(.top, -45)
                             
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .report, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-report-none-fill", tabName: "report", filledIconName: "tb-ic-report-fill")
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .profile, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-pc-none-fill", tabName: "profile", filledIconName: "tb-ic-pc-fill")
                         }
-                        .frame(width: geometry.size.width, height: geometry.size.height / 10)
-                        .padding(.top, -20)
+                        .frame(width: geometry.size.width, height: isiPhoneXOrNewer ? geometry.size.height / 10.0 : geometry.size.height / 12.0)
+                        .padding(.top, isiPhoneXOrNewer ? -20 : -5)
                         .disabled(disabledTabBar)
                     }
-                    .frame(width: geometry.size.width, height: coordinator.hideCustomTabBar ? 0 : geometry.size.height / 13.0)
+                    .frame(width: geometry.size.width, height: coordinator.hideCustomTabBar ? 0 : isiPhoneXOrNewer ? geometry.size.height / 10 : geometry.size.height / 12.0)
                     .background(Color.white.clipShape(CustomShape()))
                     .shadow(color: Colors.TextColors.mischka500.opacity(0.7), radius: 7, x: 0, y: -5)
                     .opacity(coordinator.hideCustomTabBar ? 0 : 1)
@@ -149,6 +145,7 @@ struct TabBarView: View {
         }
         .onReceive(AppState.shared.notificationCenter.publisher(for: NSNotification.Name.MainScreenNotification), perform: { output in
             coordinator.mainScreenCoordinator.viewModel.fetchMainData()
+            coordinator.mainScreenCoordinator.viewModel.viewer?.getMoodCeck()
         })
         .onReceive(AppState.shared.notificationCenter.publisher(for: NSNotification.Name.JournalScreenNotification), perform: { output in
             coordinator.journalCoordinator.viewModel.getJournalViewModel()
@@ -159,40 +156,6 @@ struct TabBarView: View {
         .onReceive(isNotDisabledTabBarNavigation) { (output) in
             disabledTabBar = false
         }
-    }
-}
-
-struct PlusMenu: View {
-    
-    let widthAndHeight: CGFloat
-    
-    var body: some View {
-        HStack(spacing: 50) {
-            ZStack {
-                Circle()
-                    .frame(width: widthAndHeight, height: widthAndHeight)
-                
-                Image(systemName: "record.circle")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(15)
-                    .frame(width: widthAndHeight, height: widthAndHeight)
-            }
-
-            ZStack {
-                Circle()
-                    .frame(width: widthAndHeight, height: widthAndHeight)
-                
-                Image(systemName: "folder")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(15)
-                    .frame(width: widthAndHeight, height: widthAndHeight)
-                    .foregroundColor(.white)
-                
-            }
-        }
-        .transition(.scale)
     }
 }
 

@@ -13,6 +13,12 @@ extension MainView {
         
         @Published var viewer: MainView?
         
+        @Published var moodCheckViewModel: MoodCheckViewModel = MoodCheckViewModel(
+            isCheckStateUser: false,
+            isCreateNewDiaryNote: false,
+            isBreathActivity: false
+        )
+        
         @Published var emotionCountData: EmotionCountDataViewModel = EmotionCountDataViewModel(
             total: 0,
             common: "",
@@ -35,6 +41,8 @@ extension MainView {
         @Published var isEnableTypeOfReprot: [String] = ["Настроение", "Стресс"]
         @Published var isEnableTypeOfReportForRequest: [String] = ["mood", "stress"]
         @Published var isShowLoader: Bool = false
+        
+        @Published var pieSliceData: [PieSliceData] = []
 
         var selectedTypeOfReport: Int = 0
         
@@ -154,6 +162,32 @@ extension MainView {
             fetchMainData()
         }
         
+        func getMoodCheck(completion: @escaping (() -> Void)) {
+            if AppState.shared.isLogin ?? false {
+                Services.userStateService.getMoodCheck { [weak self] response in
+                    switch response {
+                    case .success(let model):
+                        guard let self else {
+                            return
+                        }
+                        self.moodCheckViewModel = MoodCheckViewModel(
+                            isCheckStateUser: model.isCheckStateUser,
+                            isCreateNewDiaryNote: model.isCreateNewDiaryNote,
+                            isBreathActivity: model.isBreathActivity
+                        )
+                        
+                        if !model.isCheckStateUser || !model.isBreathActivity || !model.isCreateNewDiaryNote {
+                            AppState.shared.isCompletedMoodCheck = false
+                        }
+                        completion()
+                    case .failure(let error):
+                        print(error)
+                        completion()
+                    }
+                }
+            }
+        }
+        
         private func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport) {
             Services.reportService.fetchReport(from: from, to: to, type: type) { result in
                 switch result {
@@ -190,6 +224,7 @@ extension MainView {
                 dataIsEmpty: true
             )
             
+            pieSliceData = []
             journalViewModels = []
         }
         
@@ -256,7 +291,25 @@ extension MainView {
 
             self.emotionCountData = emotionCountDataViewModel
             emotionCountDataViewModel.emotionCircleViewModel = emotionalCircleViewModel
-
+            
+            let sum = self.emotionCountData.countState.reduce(0, +)
+            var endDeg: Double = 0
+            var tempSlices: [PieSliceData] = []
+            
+            for i in emotionalCircleViewModel {
+                let degrees: Double = (Double(i.value) ?? 0) * 360 / sum
+                tempSlices.append(
+                    PieSliceData(
+                        startAngle: Angle(degrees: endDeg),
+                        endAngle: Angle(degrees: endDeg + degrees),
+                        text: String(format: "2f", sum),
+                        color: i.color)
+                )
+                endDeg += degrees
+            }
+            
+            self.pieSliceData = tempSlices
+            
             return emotionCountDataViewModel
         }
         

@@ -51,10 +51,7 @@ extension DiaryView {
             var viewModel: [DiaryViewModel] = []
             
             let formatter = DateFormatter()
-            formatter.calendar = Calendar(identifier: .iso8601)
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            formatter.timeZone = TimeZone(identifier: "UTC")
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
             
             for item in data {
                 let message = item.diaryPage
@@ -62,8 +59,8 @@ extension DiaryView {
                 var stringDate: String = ""
                 
                 if let timeDate = formatter.date(from: item.createdAt) {
-                    formatter.dateFormat = "dd MMMM YYYY HH:MM"
-                    formatter.locale = Locale(identifier: "ru_RU") // Тут настройка от потом языка!
+                    formatter.dateFormat = "dd MMMM yyyy, в HH:mm"
+                    formatter.locale = Locale(identifier: "ru_RU")
                     stringDate = formatter.string(from: timeDate)
                 }
                 

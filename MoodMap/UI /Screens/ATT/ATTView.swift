@@ -23,6 +23,7 @@ struct ATTView: View {
                 .padding(.top, 44)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 24)
+                .padding(.trailing, 24)
             
             HStack {
                 Image("ic-lock")

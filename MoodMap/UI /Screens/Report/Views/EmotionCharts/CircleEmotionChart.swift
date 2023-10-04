@@ -24,6 +24,8 @@ struct CircleEmotionChart: View {
     
     @Binding var isLoading: Bool
     @Binding var dataIsEmpty: Bool
+    
+    @Binding var emotionSlices: [PieSliceData]
 
     var body: some View {
         RoundedRectangle(cornerRadius: 17)
@@ -39,7 +41,8 @@ struct CircleEmotionChart: View {
                         colors: $emotionColors,
                         names: $emotionNames,
                         emotionCircleViewModel: $emotionCircleViewModel,
-                        formatter: { value in String(format: "2f", value) }
+                        slices: $emotionSlices,
+                        formatter: { value in String(format: "%.2f", value) }
                     )
                     .frame(width: UIScreen.main.bounds.width - 32, height: 135, alignment: .center)
                     .background(.white)

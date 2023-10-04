@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import BottomSheet
+import ConfettiSwiftUI
 
 struct MainView: View {
     
@@ -20,11 +22,20 @@ struct MainView: View {
     
     @State var isAnimated: Bool = false
     @State var isAnimatedJournalView: Bool = false
+    @State var isAnimatedMoodCheck: Bool = false
     
     @State var showMoreDetailsAboutJournalPage: Bool = false
     @State var currentSelectedJournalPage: JournalViewModel?
     
+    @State var isSheetAboutMoodCheckPresent: Bool = false
+    @State var isCompletedMoodCheck: Bool = false
+    
     @State var quoteText: String = "Это нормально ‒ испытывать плохие эмоции. Это не делает тебя плохим человеком."
+    @State var bottomSheetPosition: BottomSheetPosition = .dynamicTop
+    
+    @State var confettiCannon: Int = 0
+    
+    let notificationCenter = NotificationCenter.default
     
     init(
         container: DIContainer,
@@ -38,168 +49,314 @@ struct MainView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                if isAnimated {
-                    createEmotionalHeader()
+        ZStack {
+            ScrollView {
+                VStack {
+                    if isAnimated {
+                        VStack {
+                            createEmotionalHeader()
+                                .padding(.top, 16)
+                                .transition(.move(edge: .top))
+                                .zIndex(99999)
+                            
+                            if isAnimatedMoodCheck {
+                                createMoodCheck(
+                                    isCompletedUserCheck: viewModel.moodCheckViewModel.isCheckStateUser,
+                                    isCompletedBreathCheck: viewModel.moodCheckViewModel.isBreathActivity,
+                                    isCompletedDiaryCheck: viewModel.moodCheckViewModel.isCreateNewDiaryNote
+                                )
+                                    .shadow(color: Colors.Primary.lavender500Purple.opacity(0.5), radius: 10, x: 0, y: 0)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(Colors.Primary.lavender500Purple, lineWidth: 1)
+                                            .padding(.horizontal, 35)
+                                    )
+                                    .padding(.top, isCompletedMoodCheck ? -85 : -25)
+                                    .transition(.move(edge: .top))
+                                    .onTapGesture {
+                                        
+                                        withAnimation {
+                                            bottomSheetPosition = .absolute(0)
+                                            self.coordinator.parent.hideCustomTabBar = true
+                                            
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                                withAnimation {
+                                                    isSheetAboutMoodCheckPresent.toggle()
+                                                    self.bottomSheetPosition = .dynamicTop
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .confettiCannon(counter: $confettiCannon, num: 50, confettiSize: 15, rainHeight: 150, openingAngle: Angle.degrees(-120), radius: 300)
+                            }
+                        }
+                    }
+                    
+                    if !(viewModel.journalViewModels?.isEmpty ?? true) {
+                        if isAnimatedJournalView {
+                            createJournalView()
+                                .transition(.move(edge: .leading).combined(with: .opacity))
+                        }
+                    }
+                    
+                    Text("Эмоциональная поддержка")
+                        .foregroundColor(Colors.Primary.blue)
+                        .font(.system(size: 20, weight: .semibold))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 20)
+                    
+                    createDiaryView()
+                        .padding(.top, 10)
+                        .onTapGesture {
+                            if AppState.shared.isLogin ?? false {
+                                Services.metricsService.sendEventWith(eventName: .openDiaryScreenButton)
+                                Services.metricsService.sendEventWith(eventType: .openDiaryScreenButton)
+                                
+                                coordinator.openDiary()
+                            } else {
+                                withAnimation {
+                                    coordinator.parent.showAuthLoginView = true
+                                }
+                            }
+                        }
+                    
+                    QuoteView(quote: $quoteText)
+                        .padding(.top, 10)
+                    
+                    moodBreathView()
+                        .onTapGesture {
+                            if AppState.shared.isLogin ?? false {
+                                Services.metricsService.sendEventWith(eventName: .openBreathScreen)
+                                Services.metricsService.sendEventWith(eventType: .openBreathScreen)
+                                
+                                coordinator.openBreathScreen()
+                            } else {
+                                withAnimation {
+                                    coordinator.parent.showAuthLoginView = true
+                                }
+                            }
+                        }
+                    
+                    Text("Статистика сегодня")
+                        .foregroundColor(Colors.Primary.blue)
+                        .font(.system(size: 20, weight: .semibold))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 20)
+                    
+                    SegmentedControlView(countOfItems: 2, segments: viewModel.isEnableTypeOfReprot,
+                                         selectedIndex: $typeSelectedIndex,
+                                         currentTab: viewModel.isEnableTypeOfReprot[typeSelectedIndex])
+                    .padding(.top, 16)
+                    .padding(.horizontal, 20)
+                    
+                    CircleEmotionChart(
+                        emotionStateCounts: $viewModel.emotionCountData.countState,
+                        emotionNames: $viewModel.emotionCountData.text,
+                        emotionColors: $viewModel.emotionCountData.color,
+                        emotionTotal: $viewModel.emotionCountData.total,
+                        emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel,
+                        isLoading: $viewModel.isShowLoader,
+                        dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty,
+                        emotionSlices: $viewModel.pieSliceData
+                    )
+                    .padding(.top, 16)
+                    .padding(.horizontal, 10)
+                    
+                    DayilyCharts(viewModel: $viewModel.timeData)
                         .padding(.top, 16)
-                        .transition(.move(edge: .top).combined(with: .opacity))
+                        .padding(.horizontal, 10)
+                        .onChange(of: typeSelectedIndex) { newValue in
+                            viewModel.selectedTypeOfReport = typeSelectedIndex
+                            viewModel.segmentDidChange()
+                        }
+                        .padding(.bottom, 90)
+                }
+            }
+            .sheet(isPresented: $showMoreDetailsAboutJournalPage, content: {
+                
+                DetailJournalView(
+                    showMoreInfo: $showMoreDetailsAboutJournalPage,
+                    model: $currentSelectedJournalPage,
+                    shareStateAction: { model in
+                        coordinator.parent.journalCoordinator.viewModel.sharingJournalViewModel = model
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            coordinator.parent.isShowingSharingScreen = true
+                        }
+                    }
+                )
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
+            })
+            .onAppear {
+                viewModel.setupViewer(self)
+                
+                withAnimation(.linear(duration: 0.3)) {
+                    self.isAnimated = true
+                }
+                
+                if coordinator.parent.isNeedShowAuthPopupFromLaunchScreen && AppState.shared.isLogin == false {
+                    withAnimation {
+                        coordinator.parent.showAuthLoginView = true
+                    }
                 }
                 
                 if !(viewModel.journalViewModels?.isEmpty ?? true) {
-                    if isAnimatedJournalView {
-                        createJournalView()
-                            .transition(.move(edge: .leading).combined(with: .opacity))
+                    withAnimation(.linear(duration: 0.3)) {
+                        self.isAnimatedJournalView = true
                     }
                 }
                 
-                createChooseStateUser()
-                    .padding(.top, 10)
-                    .onTapGesture {
-                        if AppState.shared.isLogin ?? false {
-                            if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
-                                coordinator.parent.showLimitsView = true
-                            } else {
-                                coordinator.openMoodCheckScreen()
-                            }
-                        } else {
-                            withAnimation {
-                                coordinator.parent.showAuthLoginView = true
-                            }
-                        }
-                    }
-                
-                
-                Text("Эмоциональная поддержка")
-                    .foregroundColor(Colors.Primary.blue)
-                    .font(.system(size: 20, weight: .semibold))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 20)
-                
-                createDiaryView()
-                    .padding(.top, 10)
-                    .onTapGesture {
-                        if AppState.shared.isLogin ?? false {
-                            Services.metricsService.sendEventWith(eventName: .openDiaryScreenButton)
-                            Services.metricsService.sendEventWith(eventType: .openDiaryScreenButton)
-
-                            coordinator.openDiary()
-                        } else {
-                            withAnimation {
-                                coordinator.parent.showAuthLoginView = true
-                            }
-                        }
-                    }
-                
-                QuoteView(quote: $quoteText)
-                    .padding(.top, 10)
-                
-                Text("Статистика сегодня")
-                    .foregroundColor(Colors.Primary.blue)
-                    .font(.system(size: 20, weight: .semibold))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 20)
-                
-                SegmentedControlView(countOfItems: 2, segments: viewModel.isEnableTypeOfReprot,
-                                     selectedIndex: $typeSelectedIndex,
-                                     currentTab: viewModel.isEnableTypeOfReprot[typeSelectedIndex])
-                .padding(.top, 16)
-                .padding(.horizontal, 20)
-                
-                CircleEmotionChart(
-                    emotionStateCounts: $viewModel.emotionCountData.countState,
-                    emotionNames: $viewModel.emotionCountData.text,
-                    emotionColors: $viewModel.emotionCountData.color,
-                    emotionTotal: $viewModel.emotionCountData.total,
-                    emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel,
-                    isLoading: $viewModel.isShowLoader,
-                    dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty
-                )
-                .padding(.top, 16)
-                .padding(.horizontal, 10)
-                
-                DayilyCharts(viewModel: $viewModel.timeData)
-                    .padding(.top, 16)
-                    .padding(.horizontal, 10)
-                    .onChange(of: typeSelectedIndex) { newValue in
-                        viewModel.selectedTypeOfReport = typeSelectedIndex
-                        viewModel.segmentDidChange()
-                    }
-                    .padding(.bottom, 90)
+                getMoodCeck()
             }
-        }
-        .sheet(isPresented: $showMoreDetailsAboutJournalPage, content: {
-
-            DetailJournalView(
-                showMoreInfo: $showMoreDetailsAboutJournalPage,
-                model: $currentSelectedJournalPage,
-                shareStateAction: { model in
-                    coordinator.parent.journalCoordinator.viewModel.sharingJournalViewModel = model
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        coordinator.parent.isShowingSharingScreen = true
-                    }
-                }
-            )
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .leading)
-        })
-        .onAppear {
-            viewModel.setupViewer(self)
-            
-            withAnimation(.linear(duration: 0.3)) {
-                self.isAnimated = true
-            }
-            
-            if coordinator.parent.isNeedShowAuthPopupFromLaunchScreen && AppState.shared.isLogin == false {
-                withAnimation {
-                    coordinator.parent.showAuthLoginView = true
-                }
-            }
-            
-            if !(viewModel.journalViewModels?.isEmpty ?? true) {
+            .onChange(of: viewModel.journalViewModels) { newValue in
                 withAnimation(.linear(duration: 0.3)) {
                     self.isAnimatedJournalView = true
                 }
             }
+            
+            if isSheetAboutMoodCheckPresent {
+                VStack {}
+                    .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: .infinity)
+                    .background(.black.opacity(0.7))
+                    .transition(.opacity)
+                
+                    .bottomSheet(bottomSheetPosition: $bottomSheetPosition,
+                                 switchablePositions: [.dynamicTop]) {
+                        VStack(spacing: 0) {
+                            
+                            Text("Эмоциональный чек-лист")
+                                .font(.system(size: 24, weight: .semibold))
+                                .foregroundColor(Colors.Primary.blue)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.trailing, 10)
+                                .padding(.top, 5)
+                            
+                            Text("Эмоциональный чек-лист - это инструмент саморазвития, который помогает лучше понимать себя и управлять своими эмоциями, чтобы достичь более сбалансированной жизни\n")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(Colors.Primary.blue)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.trailing, 21)
+                                .padding(.top, 20)
+                                .multilineTextAlignment(.leading)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            Text("Ежедневно чек-лист обновляется и включает в себя 3 состовляющие - это состояние, дахание и дневник. Каждый новый день, вы будете видеть что чек-лист пустой и вы можете заполнить его\n")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(Colors.Primary.blue)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.trailing, 21)
+                                .multilineTextAlignment(.leading)
+                                .fixedSize(horizontal: false, vertical: true)
+                           
+                            Text("Состояние - нужно отметить свое состояние, хотя бы 1 раз! Дыхание - вам нужно завершить практику минимум на 30%. Дневник - запщите свои мысли на текущий день, с помощью Дневника Благодарности\n")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(Colors.Primary.blue)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.trailing, 21)
+                                .multilineTextAlignment(.leading)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            Text("Каждый из аспектов этого чек-листа сможет помочь лучше себя понимать и чувствовать. Конечно, как только вы завершите весь чек-лист на текущий день - мы покажем это и спрячем его")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(Colors.Primary.blue)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.trailing, 21)
+                                .multilineTextAlignment(.leading)
+                                .fixedSize(horizontal: false, vertical: true)
+                           
+                            MTButton(buttonStyle: .fill, title: "Понятно") {
+                                withAnimation {
+                                    bottomSheetPosition = .absolute(0)
+                                    isSheetAboutMoodCheckPresent.toggle()
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                        withAnimation {
+                                            self.bottomSheetPosition = .dynamicTop
+                                            self.coordinator.parent.hideCustomTabBar = false
+                                        }
+                                    }
+                                }
+                            }
+                            .frame(width: 230, height: 48, alignment: .top)
+                            .padding(.top, 10)
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.top, 14)
+                        .padding(.bottom, 20)
+                    }
+                    .customBackground(
+                        Color.white
+                            .cornerRadius(16, corners: [.topLeft, .topRight])
+                            .shadow(color: .white, radius: 0, x: 0, y: 0)
+                    )
+                    .enableTapToDismiss(true)
+                    .enableSwipeToDismiss(false)
+                    .enableContentDrag(false)
+                    .onDismiss {
+                        withAnimation {
+                            bottomSheetPosition = .absolute(0)
+                            isSheetAboutMoodCheckPresent.toggle()
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                withAnimation {
+                                    self.bottomSheetPosition = .dynamicTop
+                                    self.coordinator.parent.hideCustomTabBar = false
+                                }
+                            }
+                        }
+                    }
+                    .zIndex(9999999)
+            }
         }
-        .onChange(of: viewModel.journalViewModels) { newValue in
-            withAnimation(.linear(duration: 0.3)) {
-                self.isAnimatedJournalView = true
+        .onDisappear {
+            withAnimation {
+                if isCompletedMoodCheck {
+                    isCompletedMoodCheck.toggle()
+                }
+            }
+        }
+    }
+    
+    func getMoodCeck() {
+        viewModel.getMoodCheck {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                withAnimation(.linear(duration: 0.4)) {
+                    self.isAnimatedMoodCheck = true
+                }
+                
+                if viewModel.moodCheckViewModel.isCheckStateUser && viewModel.moodCheckViewModel.isBreathActivity && viewModel.moodCheckViewModel.isCreateNewDiaryNote && !AppState.shared.isCompletedMoodCheck {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        confettiCannon = 1
+                        withAnimation {
+                            isCompletedMoodCheck.toggle()
+                            AppState.shared.isCompletedMoodCheck = true
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        withAnimation {
+                            if AppState.shared.isCompletedMoodCheck {
+                                isCompletedMoodCheck.toggle()
+                            }
+                        }
+                    }
+                }
             }
         }
     }
     
     @ViewBuilder
-    private func createChooseStateUser() -> some View {
-        HStack {
-            Image("ic-ch-mood")
-                .resizable()
-                .frame(width: 50, height: 52)
-                .padding(.leading, 20)
-                .padding(.top, 10)
-            
-            VStack(spacing: 5) {
-                Text("Как ты себя чувствуешь?")
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Colors.Primary.blue)
-                    .font(.system(size: 16, weight: .regular))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                Text("Поделись тем, что тебя беспокоит прямо сейчас")
-                    .foregroundColor(Colors.Primary.lavender500Purple)
-                    .font(.system(size: 11, weight: .medium))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-        }
-        .frame(maxWidth: .infinity, minHeight: 90)
-        .background(.white)
-        .cornerRadius(20)
-        .padding(.horizontal, 20)
-        .shadow(color: Colors.Primary.lavender500Purple,
-                radius: 4.0, x: 1.0, y: 1.0)
+    private func moodBreathView() -> some View {
+        Text("Практики")
+            .foregroundColor(Colors.Primary.blue)
+            .font(.system(size: 20, weight: .semibold))
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
         
+        createMoodBreathCover()
     }
     
     @ViewBuilder
@@ -242,44 +399,118 @@ struct MainView: View {
         .compositingGroup()
         .cornerRadius(20)
         .padding(.horizontal, 20)
-        .shadow(color: Colors.TextColors.mystic400,
+        .shadow(color: Colors.TextColors.slateGray700.opacity(0.5),
                 radius: 10, x: 0, y: 0)
+    }
+    
+    @ViewBuilder
+    private func createMoodCheck(isCompletedUserCheck: Bool, isCompletedBreathCheck: Bool, isCompletedDiaryCheck: Bool) -> some View {
+        HStack() {
+            VStack(spacing: 5) {
+                Image(isCompletedUserCheck ? "ic-ms-moodCheck_selected" : "ic-ms-moodCheck_unselected")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .padding(.top, 5)
+                
+                Text("Состояние")
+                    .foregroundColor(Colors.Primary.lavender500Purple)
+                    .font(.system(size: 12, weight: .medium))
+                    .fixedSize(horizontal: true, vertical: true)
+                    .padding(.top, -5)
+                    .padding(.horizontal, 5)
+            }
+            
+            VStack {}
+                .frame(width: 35, height: 2, alignment: .center)
+                .background(Colors.TextColors.athensGray300)
+            
+            VStack(spacing: 5) {
+                Image(isCompletedBreathCheck ? "ic-ms-moodCheck_selected" : "ic-ms-moodCheck_unselected")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .padding(.top, 5)
+                
+                Text("Дыхание")
+                    .foregroundColor(Colors.Primary.lavender500Purple)
+                    .font(.system(size: 12, weight: .medium))
+                    .fixedSize(horizontal: true, vertical: true)
+                    .padding(.top, -5)
+                    .padding(.horizontal, 5)
+            }
+            
+            VStack {}
+                .frame(width: 35, height: 2, alignment: .center)
+                .background(Colors.TextColors.athensGray300)
+
+            VStack() {
+                Image(isCompletedDiaryCheck ? "ic-ms-moodCheck_selected" : "ic-ms-moodCheck_unselected")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .padding(.top, 5)
+                
+                Text("Дневник")
+                    .foregroundColor(Colors.Primary.lavender500Purple)
+                    .font(.system(size: 12, weight: .medium))
+                    .fixedSize(horizontal: true, vertical: true)
+                    .padding(.top, -5)
+                    .padding(.horizontal, 5)
+            }
+           
+        }
+        .frame(maxWidth: .infinity, minHeight: 90, alignment: .center)
+        .background(.white)
+        .compositingGroup()
+        .cornerRadius(20)
+        .padding(.horizontal, 35)
     }
     
     @ViewBuilder
     private func createJournalView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 6) {
-                VStack {
-                    Image("ic-jn-openJournal")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .aspectRatio(1, contentMode: .fit)
-                    .padding(.top, 10)
-                   
-                    Text("Посмотреть журнал")
-                        .frame(maxWidth: .infinity,
-                               maxHeight: .infinity, alignment: .center)
-                        .foregroundColor(Colors.Primary.lavender500Purple)
-                        .font(.system(size: 10, weight: .medium))
-                        .padding(.top, 21)
-                        .padding(.bottom, 22)
-                    
-                }
-                .frame(width: 116, height: 120)
-                .compositingGroup()
-                .background(.white)
-                .cornerRadius(15)
-                .shadow(color: Colors.TextColors.mischka500,
-                        radius: 2.0, x: 0.0, y: 0)
-                .padding(.leading, 20)
-                .onTapGesture {
-                    Services.metricsService.sendEventWith(eventName: .goToJournalFromMainScreenButton)
-                    Services.metricsService.sendEventWith(eventType: .goToJournalFromMainScreenButton)
-
-                    coordinator.openAllJournal()
-                }
                 
+                if viewModel.journalViewModels?.count ?? 0 < 5 {
+                    VStack {
+                        Image("ic-ch-mood")
+                            .resizable()
+                            .frame(width: 50, height: 52)
+                            .padding(.leading, 15)
+                            .padding(.top, 20)
+                       
+                        Text("Создай новую запись")
+                            .frame(maxWidth: .infinity,
+                                   maxHeight: .infinity, alignment: .center)
+                            .foregroundColor(Colors.Primary.lavender500Purple)
+                            .font(.system(size: 9, weight: .semibold))
+                            .lineLimit(0)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.bottom, 22)
+                        
+                    }
+                    .frame(width: 116, height: 120)
+                    .compositingGroup()
+                    .background(.white)
+                    .cornerRadius(15)
+                    .shadow(color: Colors.TextColors.mischka500,
+                            radius: 2.0, x: 0.0, y: 0)
+                    .padding(.leading, 20)
+                    .onTapGesture {
+                        if AppState.shared.isLogin ?? false {
+                            if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
+                                coordinator.parent.showLimitsView = true
+                            } else {
+                                Services.metricsService.sendEventWith(eventName: .createEmotionNoteButtonFromTopBlock)
+                                coordinator.openMoodCheckScreen()
+                            }
+                        } else {
+                            withAnimation {
+                                coordinator.parent.showAuthLoginView = true
+                            }
+                        }
+                    }
+                }
+               
                 ForEach(viewModel.journalViewModels?[0] ?? [], id: \.self) { item in
                     VStack {
                         Text(item.shortTime)
@@ -357,6 +588,30 @@ struct MainView: View {
                 radius: 3.0, x: 1.0, y: 0)
     }
     
+    @ViewBuilder
+    private func createMoodBreathCover() -> some View {
+        VStack(alignment: .center, spacing: 16) {
+            ZStack {
+                Image("ic-ms-mainBreathCover")
+                    .resizable()
+                    .frame(maxWidth: .infinity, maxHeight: 140)
+                    .aspectRatio(1, contentMode: .fill)
+
+                Text("Дыхательная\nпрактика 4-7-8")
+                    .foregroundColor(.white)
+                    .font(.system(size: 22, weight: .semibold))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                    .padding(.leading, 26)
+                    .padding(.bottom, 26)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 140)
+        .cornerRadius(20)
+        .padding(.horizontal, 10)
+        .shadow(color: Colors.TextColors.mischka500,
+                radius: 3.0, x: 1.0, y: 0)
+    }
+    
     private func getStressTitle(_ stressRate: String) -> String {
         switch stressRate {
         case "fd3f28e0-273b-4a18-8aa8-56e85c9943c0": return "Низкий стресс"
@@ -419,4 +674,3 @@ struct MainView: View {
         }
     }
 }
-

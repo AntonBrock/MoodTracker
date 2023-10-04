@@ -11,11 +11,10 @@ import SwiftUI
 struct MoodsWordChooseView: View {
     
     var emotionViewModel: [[EmotionsViewModel]] = []
-    private let flexibleLayout = Array(repeating: GridItem(.flexible(),
-                                                           spacing: 35), count: 4)
+    private let flexibleLayout = Array(repeating: GridItem(.flexible(), spacing: 35), count: 4)
 
     @ObservedObject var valueModel: SliderValueModele
-    @State var selectedMoodId: String = "" // later change string to Int
+    @State var selectedMoodId: String = ""
     
     var setChoosedEmotion: ((String) -> Void)
     
@@ -94,9 +93,9 @@ struct MoodsWordChooseViewBlock: View {
                 .font(.system(size: 12, weight: .medium))
                 .padding(.horizontal, 10)
                 .foregroundColor(Colors.Primary.blue)
-                .frame(alignment: .center)
-                .fixedSize(horizontal: false, vertical: false)
-                .lineLimit(2)
+                .frame(maxWidth: .infinity)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
                 .multilineTextAlignment(.center)
         }
         .onTapGesture {

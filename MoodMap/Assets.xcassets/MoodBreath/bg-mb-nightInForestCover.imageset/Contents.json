@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Иллюстрации Лес.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
