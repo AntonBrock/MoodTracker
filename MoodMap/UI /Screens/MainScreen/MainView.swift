@@ -34,6 +34,8 @@ struct MainView: View {
     @State var bottomSheetPosition: BottomSheetPosition = .dynamicTop
     
     @State var confettiCannon: Int = 0
+    @State var moodWeenShimmerAnimation: Bool = false
+    @State var isScalingLeftMoodWeenAnimation: Bool = false
     
     let notificationCenter = NotificationCenter.default
     
@@ -52,9 +54,12 @@ struct MainView: View {
         ZStack {
             ScrollView {
                 VStack {
-                    
                     if RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .moodWeenEvent) {
                         moodWeenEventBlock()
+                            .padding(.top, 16)
+                            .onTapGesture {
+                                coordinator.parent.isShowingMoodWeenEventScreen = true
+                            }
                     }
                     
                     if isAnimated {
@@ -160,7 +165,6 @@ struct MainView: View {
                 }
             }
             .sheet(isPresented: $showMoreDetailsAboutJournalPage, content: {
-                
                 DetailJournalView(
                     showMoreInfo: $showMoreDetailsAboutJournalPage,
                     model: $currentSelectedJournalPage,
@@ -193,6 +197,16 @@ struct MainView: View {
                     }
                 }
                 
+                #warning("TODO: Проверять на доступность события + что юзеру уже показывали сами экран")
+                coordinator.parent.isShowingMoodWeenEventScreen = true
+
+                withAnimation(
+                    Animation.linear(duration: 4.0).repeatForever(autoreverses: false)
+                ){
+                    moodWeenShimmerAnimation.toggle()
+                }
+                
+                isScalingLeftMoodWeenAnimation.toggle()
                 getMoodCeck()
             }
             .onChange(of: viewModel.journalViewModels) { newValue in
@@ -241,7 +255,6 @@ struct MainView: View {
             }
         }
     }
-    
     
     @ViewBuilder
     private func diaryBlock() -> some View {
@@ -365,12 +378,70 @@ struct MainView: View {
     
     @ViewBuilder
     private func moodWeenEventBlock() -> some View {
-        Text("MoodWeenISEnabled")
-            .foregroundColor(Colors.Primary.blue)
-            .font(.system(size: 20, weight: .semibold))
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .padding(.horizontal, 20)
-            .padding(.top, 20)
+        ZStack {
+            Image("ic-ms-moodWeenSoon")
+                .resizable()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .opacity(0.95)
+            
+            HStack(spacing: 0) {
+                Image("ic-ms-moodWeenSoon")
+                    .resizable()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .mask(
+                Rectangle()
+                    .fill(
+                        LinearGradient(gradient: .init(colors: [Color.white.opacity(0.5),Color.white,Color.white.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
+                    )
+                    .rotationEffect(.init(degrees: 70))
+                    .padding(20)
+                    .offset(x: -250)
+                    .offset(x: moodWeenShimmerAnimation ? 500 : 0)
+            )
+            
+            HStack {
+                VStack {
+                    Text("Событие")
+                        .foregroundColor(.white.opacity(0.6))
+                        .font(.system(size: 16, weight: .semibold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text("MoodWeen")
+                        .foregroundColor(.white)
+                        .font(.system(size: 20, weight: .bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(maxWidth: .infinity, alignment: .bottomLeading)
+                
+                HStack {
+                    Image("ic-ms-moodWeenTime")
+                        .resizable()
+                        .frame(width: 15, height: 15)
+                    
+                    Text(viewModel.getTimeForMoodWeenEvent())
+                        .foregroundColor(.white)
+                        .font(.system(size: 14, weight: .semibold))
+                        .padding(.leading, 6)
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 16)
+        }
+        .frame(maxWidth: .infinity, maxHeight: 83)
+        .padding(.horizontal, 16)
+        .rotation3DEffect(
+            .degrees(isScalingLeftMoodWeenAnimation ? 1.5 : -1.5),
+            axis: (x: 0.0, y: 0.2, z: 0.0)
+        )
+        .animation(
+            Animation.easeInOut(duration: 1.5)
+                .repeatForever(autoreverses: true)
+        )
+        .shadow(color: Colors.TextColors.slateGray700.opacity(0.3),
+                radius: 10, x: 0, y: 0)
     }
     
     @ViewBuilder
