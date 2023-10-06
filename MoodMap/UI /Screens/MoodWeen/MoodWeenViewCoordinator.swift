@@ -9,18 +9,21 @@ import SwiftUI
 
 class MoodWeenViewCoordinator: ObservableObject, Identifiable {
     
-//    private let container: DIContainer
-//    unowned let parent: BaseViewCoordinator
     
     @ObservedObject var viewModel: MoodWeenView.ViewModel
+    
+    @Published var articles: Articles?
+
 
     // MARK: - Init
-    init(
-//        parent: BaseViewCoordinator,
-//        container: DIContainer
-    ) {
-//        self.parent = parent
-//        self.container = container
+    init() {
         self.viewModel = MoodWeenView.ViewModel()
+    }
+    
+    func openArticle() {
+        articles = Articles(
+            articles: $viewModel.articles,
+            header: $viewModel.header
+        )
     }
 }

@@ -246,6 +246,8 @@
 		45B721442A4AD44500CAB76B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721432A4AD44500CAB76B /* OneSignalExtension */; };
 		45B721462A4AD46A00CAB76B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721452A4AD46A00CAB76B /* OneSignal */; };
 		45B721482A4AD47000CAB76B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721472A4AD47000CAB76B /* OneSignalExtension */; };
+		45B93A5A2ACFD8A400B05795 /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B93A592ACFD8A400B05795 /* Articles.swift */; };
+		45B93A5B2ACFD8A400B05795 /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B93A592ACFD8A400B05795 /* Articles.swift */; };
 		45C200C129D317F80087B0E3 /* String+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C200C029D317F80087B0E3 /* String+Extenstion.swift */; };
 		45D06AF22A1608CB0047D6FA /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 45D06AF12A1608CB0047D6FA /* JWTDecode */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
@@ -668,6 +670,7 @@
 		45B721302A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B721322A4AD1F500CAB76B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		45B721342A4AD1F500CAB76B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45B93A592ACFD8A400B05795 /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
 		45B998D728EB2CD500C170C8 /* MoodBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodBarCharsView.swift; sourceTree = "<group>"; };
 		45C200C029D317F80087B0E3 /* String+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extenstion.swift"; sourceTree = "<group>"; };
 		45C338F9298406D10043E26C /* AuthHyperString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHyperString.swift; sourceTree = "<group>"; };
@@ -963,6 +966,7 @@
 		452440AF2ACD38AD002B7F91 /* MoodWeen */ = {
 			isa = PBXGroup;
 			children = (
+				45B93A552ACFD84C00B05795 /* Views */,
 				452440B02ACD38FC002B7F91 /* MoodWeenView.swift */,
 				452440B32ACD3906002B7F91 /* MoodWeenViewCoordinator.swift */,
 				452440B62ACD390F002B7F91 /* MoodWeenCoordinatorView.swift */,
@@ -1474,6 +1478,14 @@
 			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
+		45B93A552ACFD84C00B05795 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				45B93A592ACFD8A400B05795 /* Articles.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		45D6F16A29B6575F007EABFA /* UserStateScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -1809,6 +1821,7 @@
 				456A402129BC2BC200371B5C /* JournalModel.swift in Sources */,
 				4529AB8C29AF1940001D2390 /* GeometryProxy+Shortcuts.swift in Sources */,
 				4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */,
+				45B93A5A2ACFD8A400B05795 /* Articles.swift in Sources */,
 				4529AB8D29AF1940001D2390 /* View+ReadValues.swift in Sources */,
 				453844DE29E40D5800A89FEE /* YandexInterstitialADViewController.swift in Sources */,
 				4529AB8E29AF1940001D2390 /* Path+Shortcuts.swift in Sources */,
@@ -1995,6 +2008,7 @@
 				45FCD1EC2A18BEEE00B0DAF0 /* ActivitiesCharts.swift in Sources */,
 				45FCD1ED2A18BEEE00B0DAF0 /* View+ReadValues.swift in Sources */,
 				45FCD1EE2A18BEEE00B0DAF0 /* YandexInterstitialADViewController.swift in Sources */,
+				45B93A5B2ACFD8A400B05795 /* Articles.swift in Sources */,
 				45FCD1EF2A18BEEE00B0DAF0 /* Path+Shortcuts.swift in Sources */,
 				45FCD1F02A18BEEE00B0DAF0 /* View+Environment.swift in Sources */,
 				45FCD1F12A18BEEE00B0DAF0 /* Font+Shortcuts.swift in Sources */,

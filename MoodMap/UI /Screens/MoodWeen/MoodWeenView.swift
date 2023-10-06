@@ -14,6 +14,8 @@ struct MoodWeenView: View {
     private var coordinator: MoodWeenViewCoordinator
     var close: (() -> Void)?
     
+    @State var open: Bool = false
+    
     init(closeDismiss: (() -> Void)? = nil){
         self.coordinator = MoodWeenViewCoordinator()
         self.viewModel = coordinator.viewModel
@@ -56,7 +58,7 @@ struct MoodWeenView: View {
                     .font(.system(size: 36, weight: .bold))
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .padding(.top, 50)
+            .padding(.top, 65)
 
             Spacer()
             
@@ -67,21 +69,14 @@ struct MoodWeenView: View {
                     Image("ic-main-banner-whatIsMoodWenn")
                         .resizable()
                         .frame(width: 125, height: 125)
+                        .onTapGesture {
+                            open.toggle()
+                        }
                     
                     Image("ic-main-banner-game")
                         .resizable()
                         .frame(width: 125, height: 125)
                 }
-                HStack(spacing: 16) {
-                    Image("ic-main-banner-movies")
-                        .resizable()
-                        .frame(width: 125, height: 125)
-                    
-                    Image("ic-main-banner-howMoodMapHelps")
-                        .resizable()
-                        .frame(width: 125, height: 125)
-                }
-                
                 MTButton(buttonStyle: .fill, title: "Назад") {
                     dismiss.callAsFunction()
                 }
@@ -92,5 +87,11 @@ struct MoodWeenView: View {
             .padding(.bottom, 80)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .sheet(isPresented: $open) {
+            Articles(articles: $viewModel.articles, header: $viewModel.header)
+        }
+        .onAppear {
+            viewModel.setupViewer(self)
+        }
     }
 }
