@@ -13,6 +13,7 @@ class MoodWeenViewCoordinator: ObservableObject, Identifiable {
     @ObservedObject var viewModel: MoodWeenView.ViewModel
     
     @Published var articles: Articles?
+    @Published var game: MoodWeenGame?
 
 
     // MARK: - Init
@@ -25,5 +26,9 @@ class MoodWeenViewCoordinator: ObservableObject, Identifiable {
             articles: $viewModel.articles,
             header: $viewModel.header
         )
+    }
+    
+    func openGame() {
+        game = MoodWeenGame()
     }
 }

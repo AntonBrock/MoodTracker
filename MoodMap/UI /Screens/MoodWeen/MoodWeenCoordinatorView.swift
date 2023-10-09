@@ -20,6 +20,10 @@ struct MoodWeenCoordinatorView: View {
                         .navigationBarHidden(false)
                         .tint(.white)
                 }
+                .navigation(item: $coordinator.game) { _ in
+                    MoodWeenGame()
+                        .navigationBarHidden(false)
+                }
         }
     }
 }

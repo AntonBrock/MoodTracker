@@ -159,6 +159,8 @@
 		456A401D29BBA7E500371B5C /* JournalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401C29BBA7E500371B5C /* JournalService.swift */; };
 		456A401F29BBA84400371B5C /* JournalEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401E29BBA84400371B5C /* JournalEndPoint.swift */; };
 		456A402129BC2BC200371B5C /* JournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A402029BC2BC200371B5C /* JournalModel.swift */; };
+		456D82312AD3CD2C00D0C2F6 /* MoodWeenGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456D82302AD3CD2C00D0C2F6 /* MoodWeenGame.swift */; };
+		456D82322AD3CD2C00D0C2F6 /* MoodWeenGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456D82302AD3CD2C00D0C2F6 /* MoodWeenGame.swift */; };
 		457A8D682A6BA5E800D1E609 /* QuotesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A8D672A6BA5E800D1E609 /* QuotesService.swift */; };
 		457A8D6A2A6BA66200D1E609 /* QuotesEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A8D692A6BA66200D1E609 /* QuotesEndPoint.swift */; };
 		457AC3D02A59645600294BF6 /* PushNotificationTest.apns in Resources */ = {isa = PBXBuildFile; fileRef = 457AC3CF2A59645600294BF6 /* PushNotificationTest.apns */; };
@@ -605,6 +607,7 @@
 		456AA720296E9E6600BD414B /* MoodCheckViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckViewCoordinator.swift; sourceTree = "<group>"; };
 		456AA723296E9FBB00BD414B /* ActivitiesViewCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewCoodinator.swift; sourceTree = "<group>"; };
 		456AA725296E9FC200BD414B /* ActivitiesCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesCoordinatorView.swift; sourceTree = "<group>"; };
+		456D82302AD3CD2C00D0C2F6 /* MoodWeenGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodWeenGame.swift; sourceTree = "<group>"; };
 		4570B8C12985144B0063E2DC /* AuthMethodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodsView.swift; sourceTree = "<group>"; };
 		4579220D28CF4FBD00722D16 /* SwiftUISlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISlider.swift; sourceTree = "<group>"; };
 		457A886429A9FD3400FC7BBB /* WhyRegistrationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyRegistrationInfoView.swift; sourceTree = "<group>"; };
@@ -1482,6 +1485,7 @@
 			isa = PBXGroup;
 			children = (
 				45B93A592ACFD8A400B05795 /* Articles.swift */,
+				456D82302AD3CD2C00D0C2F6 /* MoodWeenGame.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1925,6 +1929,7 @@
 				45A9F04E29F01222002C13C5 /* InstagramSharingUtils.swift in Sources */,
 				4529ABC429AF1941001D2390 /* ReportViewCoordinator.swift in Sources */,
 				4529ABC529AF1941001D2390 /* ReportCoordinatorView.swift in Sources */,
+				456D82312AD3CD2C00D0C2F6 /* MoodWeenGame.swift in Sources */,
 				4529ABC629AF1941001D2390 /* WhyRegistrationInfoView.swift in Sources */,
 				4529ABC729AF1941001D2390 /* PersonalCabinetView.swift in Sources */,
 				456A401729BA424200371B5C /* ActivitiesViewModel.swift in Sources */,
@@ -2112,6 +2117,7 @@
 				45FCD2412A18BEEE00B0DAF0 /* InstagramSharingUtils.swift in Sources */,
 				45FCD2422A18BEEE00B0DAF0 /* ReportViewCoordinator.swift in Sources */,
 				45FCD2432A18BEEE00B0DAF0 /* ReportCoordinatorView.swift in Sources */,
+				456D82322AD3CD2C00D0C2F6 /* MoodWeenGame.swift in Sources */,
 				45FCD2442A18BEEE00B0DAF0 /* WhyRegistrationInfoView.swift in Sources */,
 				45FCD2452A18BEEE00B0DAF0 /* PersonalCabinetView.swift in Sources */,
 				45FCD2462A18BEEE00B0DAF0 /* ActivitiesViewModel.swift in Sources */,

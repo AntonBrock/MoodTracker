@@ -15,6 +15,7 @@ struct MoodWeenView: View {
     var close: (() -> Void)?
     
     @State var open: Bool = false
+    @State var openGame: Bool = false
     
     init(closeDismiss: (() -> Void)? = nil){
         self.coordinator = MoodWeenViewCoordinator()
@@ -76,6 +77,9 @@ struct MoodWeenView: View {
                     Image("ic-main-banner-game")
                         .resizable()
                         .frame(width: 125, height: 125)
+                        .onTapGesture {
+                            openGame.toggle()
+                        }
                 }
                 MTButton(buttonStyle: .fill, title: "Назад") {
                     dismiss.callAsFunction()
@@ -89,6 +93,9 @@ struct MoodWeenView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .sheet(isPresented: $open) {
             Articles(articles: $viewModel.articles, header: $viewModel.header)
+        }
+        .sheet(isPresented: $openGame) {
+            MoodWeenGame()
         }
         .onAppear {
             viewModel.setupViewer(self)
