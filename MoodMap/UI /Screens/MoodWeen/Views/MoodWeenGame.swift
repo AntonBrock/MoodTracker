@@ -19,6 +19,14 @@ struct MoodWeenGame: View {
     @State private var currentIndex = 0
     @State private var rotationAngle: Double = 0
     
+    @State private var maxValueForGame: Int = 5
+    @State private var currentValueGame: Int = 0
+    
+    @State private var isEnableGame: Bool = false
+    
+    @State private var remainingTime: TimeInterval = 0
+    @State private var isTimerRunning = false
+    
     let images = [
         "ic-game-pump-firstState",
         "ic-game-pump-secondState",
@@ -33,6 +41,15 @@ struct MoodWeenGame: View {
                 .resizable()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             
+            Text("Следующий уровень через: \(formattedTime)")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                .padding(.top, 20)
+                .padding(.trailing, 20)
+                .foregroundColor(.white)
+                .font(.system(size: 16, weight: .bold))
+                .opacity(currentIndex != 4 || remainingTime != 0 ? 1 : 0)
+                .transition(.opacity)
+            
             VStack {
                 Image(images[currentIndex])
                     .resizable()
@@ -44,40 +61,61 @@ struct MoodWeenGame: View {
                     .gesture(
                         LongPressGesture(minimumDuration: 1.0)
                             .onChanged { _ in
-                                if !isUpgrading {
-                                    isShake = true
-                                    isShakeProgress += 1
-                                    
-                                    let generator = UIImpactFeedbackGenerator(style: .medium)
-                                    generator.impactOccurred()
+                                
+                                print(isEnableGame)
+                                
+                                isShake = true
+                                isShakeProgress += 1
+                                
+                                let generator = UIImpactFeedbackGenerator(style: .medium)
+                                generator.impactOccurred()
+                                if currentIndex != 4 {
                                     if isShakeProgress == 7 {
                                         isShakeProgress = 0
                                         currentIndex = (currentIndex + 1) % images.count
-                                        isShake = false
                                         
+                                        currentValueGame += 1
+                                        AppState.shared.moodWeenGameStage = currentValueGame
+                                        isEnableGame = false
+                                        AppState.shared.moodWeenGameIsEnabled = false
+                                        
+                                        remainingTime = 1 * 10 * 1 //24 * 60 * 60 = 24 часа
+                                        stopTimer()
+                                        startTimer()
+                                        
+                                        isShake = false
                                         withAnimation(.easeInOut(duration: 0.3)) {
                                             isUpgrading = true
                                         }
                                     }
-                                    withAnimation(Animation.spring(response: 0.2, dampingFraction: 0.2, blendDuration: 0.2)) {
-                                        isShake = false
-                                    }
+                                }
+                                withAnimation(Animation.spring(response: 0.2, dampingFraction: 0.2, blendDuration: 0.2)) {
+                                    isShake = false
                                 }
                             }
                             .onEnded { _ in }
                     )
+                    .disabled(!isEnableGame)
 
-                Text("Тыкай на тыкву,\nчтобы повысить ее уровень")
+                Text(currentIndex != 4 ? "Тыкай на тыкву,\nчтобы повысить ее уровень" : "Отличного тебе MoodWeen'а")
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .font(.system(size: 18, weight: .bold))
                     .padding(.top, 30)
+                
+                ProgressView(value: CGFloat(CGFloat((currentValueGame * 100) / maxValueForGame) / 100))
+                    .frame(maxWidth: .infinity, maxHeight: 10, alignment: .bottom)
+                    .progressViewStyle(
+                        BarProgressStyle(color: Color(hex: "FF9635"), height: 10, labelFontStyle: .system(size: 16), backgroundColor: UIColor(Color(hex: "4872C9")))
+                    )
+                    .padding(.top, 45)
+                    .padding(.horizontal, 24)
 
                 MTButton(buttonStyle: .fill, title: "Назад") {
                     dismiss.callAsFunction()
                 }
                 .frame(maxWidth: 227, maxHeight: 48, alignment: .bottom)
-                .padding(.top, 45)
+                .padding(.top, 20)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .padding(.top, 50)
@@ -85,5 +123,71 @@ struct MoodWeenGame: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
+        .onAppear {
+            if let savedTime = UserDefaults.standard.value(forKey: "remainingTime") as? TimeInterval {
+                isTimerRunning = true
+                remainingTime = savedTime
+            } else {
+                remainingTime = 0
+            }
+            
+            // Calculate time elapsed since the app was last active and adjust remainingTime
+            if let lastActiveDate = UserDefaults.standard.object(forKey: "lastActiveDate") as? Date {
+                let elapsedTime = Date().timeIntervalSince(lastActiveDate)
+                if elapsedTime < remainingTime {
+                    remainingTime -= elapsedTime
+                } else {
+                    remainingTime = 0
+                }
+            }
+                        
+            withAnimation {
+                currentValueGame = AppState.shared.moodWeenGameStage
+                currentIndex = currentValueGame - 1
+            }
+            
+            if currentValueGame == 0 {
+                AppState.shared.moodWeenGameIsEnabled = true
+            }
+                        
+            currentValueGame += 1
+            isEnableGame = currentIndex >= 4 ? false : AppState.shared.moodWeenGameIsEnabled
+            
+            startTimer()
+        }
+        .onDisappear {
+            UserDefaults.standard.set(Date(), forKey: "lastActiveDate")
+            stopTimer()
+        }
+    }
+    
+    private func startTimer() {
+        isTimerRunning = true
+        UserDefaults.standard.set(remainingTime, forKey: "remainingTime")
+        if isTimerRunning {
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                if remainingTime > 0 {
+                    remainingTime -= 1
+                    UserDefaults.standard.set(remainingTime, forKey: "remainingTime")
+                } else {
+                    stopTimer()
+                    isEnableGame = currentIndex <= 4
+                    timer.invalidate()
+                }
+            }
+        }
+       
+    }
+    
+    private func stopTimer() {
+        isTimerRunning = false
+        UserDefaults.standard.set(remainingTime, forKey: "remainingTime")
+    }
+    
+    var formattedTime: String {
+        print(remainingTime)
+        let hours = Int(remainingTime) / 3600
+        let minutes = (Int(remainingTime) % 3600) / 60
+        return String(format: "%02d : %02d ", hours, minutes)
     }
 }

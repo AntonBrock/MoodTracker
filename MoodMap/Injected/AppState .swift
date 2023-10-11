@@ -51,6 +51,8 @@ final class AppState: ObservableObject {
         
         //MoodWeen
         static let isMoodWeenIconWasSeted = "isMoodWeenIconWasSeted"
+        static let currentValueGame = "currentValueGame"
+        static let moodWeenGameIsEnabled = "moodWeenGameIsEnabled"
     }
     
     var timezone: String? {
@@ -204,6 +206,25 @@ final class AppState: ObservableObject {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isMoodMapIconWasSeted)
         }
     }
+    
+    var moodWeenGameStage: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentValueGame)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.currentValueGame)
+        }
+    }
+    
+    var moodWeenGameIsEnabled: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.moodWeenGameIsEnabled)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.moodWeenGameIsEnabled)
+        }
+    }
+    
     var jwtToken: String? {
         get {
             return KeychainHelper.standard.read(

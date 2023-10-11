@@ -151,7 +151,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
-        print("End Session")
+        UserDefaults.standard.set(Date(), forKey: "lastActiveDate")
     }
     
     func startStory(type: UserStoryType, parent: BaseViewCoordinator, container: DIContainer) {
