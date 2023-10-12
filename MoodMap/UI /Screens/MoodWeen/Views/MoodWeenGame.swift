@@ -185,7 +185,6 @@ struct MoodWeenGame: View {
     }
     
     var formattedTime: String {
-        print(remainingTime)
         let hours = Int(remainingTime) / 3600
         let minutes = (Int(remainingTime) % 3600) / 60
         return String(format: "%02d : %02d ", hours, minutes)

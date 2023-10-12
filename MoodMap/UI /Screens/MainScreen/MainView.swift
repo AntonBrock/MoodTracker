@@ -18,6 +18,23 @@ struct MainView: View {
 
     private unowned let coordinator: MainViewCoordinator
     
+    var formattedTime: String {
+        if Int(remainingTime) <= 0 {
+           return "Сегодня кульминация события"
+        } else {
+            let days = Int(remainingTime) / (3600 * 24)
+            let hours = (Int(remainingTime) % (3600 * 24)) / 3600
+            
+            var hoursString = ""
+            if hours > 0 {
+                hoursString = String(format: "%02d ", hours)
+                hoursString += (hours == 1 || (days == 0 && hours % 10 == 1 && hours % 100 != 11)) ? "Час" : "Часов"
+            }
+            
+            return "\(days > 0 ? String(format: "%02d Дней ", days) : "")\(hoursString)"
+        }
+    }
+    
     @State var typeSelectedIndex: Int = 0
     
     @State var isAnimated: Bool = false
@@ -36,6 +53,10 @@ struct MainView: View {
     @State var confettiCannon: Int = 0
     @State var moodWeenShimmerAnimation: Bool = false
     @State var isScalingLeftMoodWeenAnimation: Bool = false
+    
+    // For MoodWeen
+    @State private var remainingTime: TimeInterval = 0
+    @State private var isTimerRunning = false
     
     let notificationCenter = NotificationCenter.default
     
@@ -219,13 +240,68 @@ struct MainView: View {
                 moodcheckViewBlock()
             }
         }
+        .onAppear {
+            timeToEvent()
+            startTimer()
+        }
         .onDisappear {
+            stopTimer()
+            
             withAnimation {
                 if isCompletedMoodCheck {
                     isCompletedMoodCheck.toggle()
                 }
             }
         }
+    }
+    
+    let calendar = Calendar.current
+    
+    func timeToEvent() {
+        var components = DateComponents()
+        components.year = 2023
+        components.month = 11
+        components.day = 1
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        
+        if let targetDate = calendar.date(from: components) {
+            // Получите текущую дату и время
+            let currentDate = Date()
+            
+            // Вычислите разницу между текущей датой и желаемой датой
+            let timeDifference = calendar.dateComponents([.second], from: currentDate, to: targetDate)
+            
+            if let secondsRemaining = timeDifference.second {
+                if secondsRemaining > 0 {
+                    print("До 1 ноября осталось \(secondsRemaining) секунд")
+                    
+                    remainingTime = TimeInterval(secondsRemaining)
+                } else {
+                    remainingTime = 0
+                    print("1 ноября уже наступил")
+                }
+            }
+        }
+    }
+    
+    func startTimer() {
+        isTimerRunning = true
+        if isTimerRunning {
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                if remainingTime > 0 {
+                    remainingTime -= 1
+                } else {
+                    stopTimer()
+                    timer.invalidate()
+                }
+            }
+        }
+    }
+    
+    func stopTimer() {
+        isTimerRunning = false
     }
     
     func getMoodCeck() {
@@ -419,7 +495,7 @@ struct MainView: View {
                         .resizable()
                         .frame(width: 15, height: 15)
                     
-                    Text(viewModel.getTimeForMoodWeenEvent())
+                    Text(formattedTime)
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .semibold))
                         .padding(.leading, 6)
@@ -433,9 +509,7 @@ struct MainView: View {
         .frame(maxWidth: .infinity, maxHeight: 83)
         .padding(.horizontal, 16)
         .rotation3DEffect(
-            .degrees(isScalingLeftMoodWeenAnimation ? 1.5 : -1.5),
-            axis: (x: 0.0, y: 0.2, z: 0.0)
-        )
+            .degrees(isScalingLeftMoodWeenAnimation ? 1.5 : -1.5), axis: (x: 0.0, y: 0.2, z: 0.0))
         .animation(
             Animation.easeInOut(duration: 1.5)
                 .repeatForever(autoreverses: true)

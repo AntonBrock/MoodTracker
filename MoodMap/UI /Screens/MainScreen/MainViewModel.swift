@@ -188,10 +188,6 @@ extension MainView {
             }
         }
         
-        func getTimeForMoodWeenEvent() -> String {
-            return "TIME"
-        }
-        
         private func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport) {
             Services.reportService.fetchReport(from: from, to: to, type: type) { result in
                 switch result {
