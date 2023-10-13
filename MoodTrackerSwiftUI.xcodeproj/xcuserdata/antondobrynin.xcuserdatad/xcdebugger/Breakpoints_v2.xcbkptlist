@@ -373,47 +373,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "813DACEC-D559-48B6-A6ED-1EBB5D5790EA"
+            uuid = "6A1E55C1-6C91-4D6E-B744-1779928E04BC"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoodMap/UI /Screens/MainScreen/MainView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "498"
-            endingLineNumber = "498"
-            landmarkName = "moodWeenEventBlock()"
-            landmarkType = "7">
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "MainView"
+            landmarkType = "14">
             <Locations>
                <Location
-                  uuid = "813DACEC-D559-48B6-A6ED-1EBB5D5790EA - 46674e92ea1e0c6"
+                  uuid = "6A1E55C1-6C91-4D6E-B744-1779928E04BC - 237433e73cfd124d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.mask&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in MoodMap.MainView.moodWeenEventBlock() -&gt; some"
+                  symbolName = "property wrapper backing initializer of MoodMap.MainView.remainingTime : Swift.Double"
                   moduleName = "MoodMap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/antondobrynin/Documents/MoodTracker/MoodMap/UI%20/Screens/MainScreen/MainView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "498"
-                  endingLineNumber = "498"
-                  offsetFromSymbolStart = "3620">
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "21">
                </Location>
                <Location
-                  uuid = "813DACEC-D559-48B6-A6ED-1EBB5D5790EA - d1d59f299c6d24ce"
+                  uuid = "6A1E55C1-6C91-4D6E-B744-1779928E04BC - e29b1bf3b8cffe04"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.mask&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in MoodMap.MainView.moodWeenEventBlock() -&gt; some"
+                  symbolName = "MoodMap.MainView.init(container: MoodMap.DIContainer, animation: SwiftUI.Namespace.ID, coordinator: MoodMap.MainViewCoordinator) -&gt; MoodMap.MainView"
                   moduleName = "MoodMap"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/antondobrynin/Documents/MoodTracker/MoodMap/UI%20/Screens/MainScreen/MainView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "499"
-                  endingLineNumber = "499"
-                  offsetFromSymbolStart = "137">
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "970">
                </Location>
             </Locations>
          </BreakpointContent>

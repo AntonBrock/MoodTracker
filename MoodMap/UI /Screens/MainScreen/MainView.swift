@@ -28,10 +28,10 @@ struct MainView: View {
             var hoursString = ""
             if hours > 0 {
                 hoursString = String(format: "%02d ", hours)
-                hoursString += (hours == 1 || (days == 0 && hours % 10 == 1 && hours % 100 != 11)) ? "Час" : "Часов"
+                hoursString += (hours == 1 || (days == 0 && hours % 10 == 1 && hours % 100 != 11)) ? "Ч" : "Ч"
             }
             
-            return "\(days > 0 ? String(format: "%02d Дней ", days) : "")\(hoursString)"
+            return "\(days > 0 ? String(format: "%02d Д ", days) : "")\(hoursString)"
         }
     }
     
@@ -52,7 +52,7 @@ struct MainView: View {
     
     @State var confettiCannon: Int = 0
     @State var moodWeenShimmerAnimation: Bool = false
-    @State var isScalingLeftMoodWeenAnimation: Bool = false
+    @State var isScalingLeftMoodWeenAnimation: Bool = true
     
     // For MoodWeen
     @State private var remainingTime: TimeInterval = 0
@@ -86,7 +86,7 @@ struct MainView: View {
                     if isAnimated {
                         VStack {
                             createEmotionalHeader()
-                                .padding(.top, 16)
+                                .padding(.top, 12)
                                 .transition(.move(edge: .top))
                                 .zIndex(99999)
                             
@@ -221,13 +221,15 @@ struct MainView: View {
                 #warning("TODO: Проверять на доступность события + что юзеру уже показывали сами экран")
                 coordinator.parent.isShowingMoodWeenEventScreen = true
 
-                withAnimation(
-                    Animation.linear(duration: 4.0).repeatForever(autoreverses: false)
-                ){
+                withAnimation(Animation.linear(duration: 4.0).repeatForever(autoreverses: false)) {
                     moodWeenShimmerAnimation.toggle()
                 }
                 
-                isScalingLeftMoodWeenAnimation.toggle()
+                
+                withAnimation(Animation.linear(duration: 1.5).repeatForever(autoreverses: true)) {
+                    isScalingLeftMoodWeenAnimation.toggle()
+                }
+                
                 getMoodCeck()
             }
             .onChange(of: viewModel.journalViewModels) { newValue in
@@ -275,12 +277,7 @@ struct MainView: View {
             
             if let secondsRemaining = timeDifference.second {
                 if secondsRemaining > 0 {
-                    print("До 1 ноября осталось \(secondsRemaining) секунд")
-                    
                     remainingTime = TimeInterval(secondsRemaining)
-                } else {
-                    remainingTime = 0
-                    print("1 ноября уже наступил")
                 }
             }
         }
@@ -458,7 +455,7 @@ struct MainView: View {
             Image("ic-ms-moodWeenSoon")
                 .resizable()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .opacity(0.95)
+                .opacity(0.97)
             
             HStack(spacing: 0) {
                 Image("ic-ms-moodWeenSoon")
@@ -509,11 +506,7 @@ struct MainView: View {
         .frame(maxWidth: .infinity, maxHeight: 83)
         .padding(.horizontal, 16)
         .rotation3DEffect(
-            .degrees(isScalingLeftMoodWeenAnimation ? 1.5 : -1.5), axis: (x: 0.0, y: 0.2, z: 0.0))
-        .animation(
-            Animation.easeInOut(duration: 1.5)
-                .repeatForever(autoreverses: true)
-        )
+            .degrees(isScalingLeftMoodWeenAnimation ? 1.1 : -1.1), axis: (x: 0.0, y: 0.2, z: 0.0))
         .shadow(color: Colors.TextColors.slateGray700.opacity(0.3),
                 radius: 10, x: 0, y: 0)
     }
@@ -542,7 +535,12 @@ struct MainView: View {
     
     @ViewBuilder
     private func createEmotionalHeader() -> some View {
-        HStack {
+        
+        ZStack {
+            Image(getCurrentStateImageByTime())
+                .resizable()
+                .frame(maxWidth: .infinity, maxHeight: 170.0, alignment: .leading)
+        
             VStack {
                 Text(getCurrentTimeDay())
                     .font(.system(size: 16, weight: .semibold))
@@ -560,24 +558,8 @@ struct MainView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
-            
-            HStack {
-                Image(getCurrentStateImageByTime())
-                    .resizable()
-                    .foregroundColor(.green)
-                    .frame(width: 175, height: 145)
-            }
-            .frame(alignment: .bottomTrailing)
-            .padding(.trailing, -20)
-            .padding(.top, 40)
         }
-        .frame(maxWidth: .infinity, maxHeight: 140.0, alignment: .leading)
-        .background(LinearGradient(
-            colors: getColorByTime(),
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing)
-        )
-        .compositingGroup()
+        .frame(maxWidth: .infinity, maxHeight: 170.0, alignment: .leading)
         .cornerRadius(20)
         .padding(.horizontal, 20)
         .shadow(color: Colors.TextColors.slateGray700.opacity(0.5),
@@ -835,11 +817,11 @@ struct MainView: View {
         let hour = Calendar.current.component(.hour, from: Date())
 
         switch hour {
-        case 6..<12: return "ic-ch-generalIconDay"
-        case 12: return "ic-ch-generalIconDay"
-        case 13..<17: return "ic-ch-generalIconDay"
-        case 17..<22: return "ic-ch-generalIconDay"
-        default: return "ic-ch-nightDay"
+        case 6..<12: return "ic-ms-dt-morning"
+        case 12: return "ic-ms-dt-morning"
+        case 13..<17: return "ic-ms-dt-day"
+        case 17..<22: return "ic-ms-dt-evening"
+        default: return "ic-ms-dt-night"
         }
     }
     
