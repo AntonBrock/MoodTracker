@@ -539,6 +539,7 @@ struct MainView: View {
         ZStack {
             Image(getCurrentStateImageByTime())
                 .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(maxWidth: .infinity, maxHeight: 170.0, alignment: .leading)
         
             VStack {

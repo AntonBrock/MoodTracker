@@ -59,7 +59,8 @@ extension JournalView {
         private func mappingViewModel(data: [JournalModel]) -> [[JournalViewModel]] {
             var models: [JournalViewModel] = []
             let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "en_US_POSIX")
+//            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.locale = Locale(identifier: "ru_RU")
             formatter.dateFormat = "MMM dd"
                                     
             for i in data {
@@ -73,7 +74,11 @@ extension JournalView {
                         language: $0.language,
                         image: $0.image,
                         created_at: nil,
-                        updated_at: nil
+                        updated_at: nil,
+                        isEventIcon: $0.text == "Декор дома"
+                        || $0.text == "Резка тыквы"
+                        || $0.text == "Аксессуары"
+                        || $0.text == "Костюм"
                     )}),
                     color: self.getColors(with: self.getState(from: i.stateId)),
                     stateImage: self.getStateImage(from: i.stateId),
@@ -84,7 +89,8 @@ extension JournalView {
                     month: self.getFormatterTime(with: i.createdAt, and: "MMM"),
                     monthCurrentTime: self.getFormatterTime(with: i.createdAt, and: "dd"),
                     shortTime: self.getFormatterTime(with: i.createdAt, and: "HH:mm"),
-                    longTime: self.getFormatterTime(with: i.createdAt, and: "dd MMM yyyy, HH:mm")))
+                    longTime: self.getFormatterTime(with: i.createdAt, and: "dd MMM yyyy, HH:mm"),
+                    isMoodWeenEvent: i.isMoodWeenEvent))
             }
             
             let sortedModels = models.sorted(by: { $0.longTime > $1.longTime })
@@ -197,4 +203,5 @@ struct JournalViewModel: Hashable {
     let monthCurrentTime: String
     let shortTime: String
     let longTime: String
+    let isMoodWeenEvent: Bool?
 }

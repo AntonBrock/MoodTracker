@@ -120,6 +120,7 @@ struct UserStateService: UserStateServiceProtocol {
                       stateId: String,
                       stressRate: String,
                       text: String,
+                      isMoodWeenEvent: Bool?,
                       completion: @escaping(Result<Bool, Error>) -> Void) {
         let target = BaseAPI.journal(.sendUserNote(
             createdAt: createdAt,
@@ -127,7 +128,8 @@ struct UserStateService: UserStateServiceProtocol {
             emotionId: emotionId,
             stateId: stateId,
             stressRate: stressRate,
-            text: text)
+            text: text,
+            isMoodWeenEvent: isMoodWeenEvent)
         )
 
         let networkService = ServiceProvider().networkService
