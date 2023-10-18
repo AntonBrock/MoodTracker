@@ -20,7 +20,7 @@ struct MainView: View {
     
     var formattedTime: String {
         if Int(remainingTime) <= 0 {
-           return "Сегодня кульминация события"
+           return ""
         } else {
             let days = Int(remainingTime) / (3600 * 24)
             let hours = (Int(remainingTime) % (3600 * 24)) / 3600
@@ -53,6 +53,7 @@ struct MainView: View {
     @State var confettiCannon: Int = 0
     @State var moodWeenShimmerAnimation: Bool = false
     @State var isScalingLeftMoodWeenAnimation: Bool = true
+    
     
     // For MoodWeen
     @State private var remainingTime: TimeInterval = 0
@@ -277,7 +278,7 @@ struct MainView: View {
             
             if let secondsRemaining = timeDifference.second {
                 if secondsRemaining > 0 {
-                    remainingTime = TimeInterval(secondsRemaining)
+                    remainingTime =  100 * 10 * 20 // TimeInterval(secondsRemaining)
                 }
             }
         }
@@ -452,13 +453,13 @@ struct MainView: View {
     @ViewBuilder
     private func moodWeenEventBlock() -> some View {
         ZStack {
-            Image("ic-ms-moodWeenSoon")
+            Image(formattedTime == "" ? "ic-ms-moodWeenToday" : "ic-ms-moodWeenSoon")
                 .resizable()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .opacity(0.97)
             
             HStack(spacing: 0) {
-                Image("ic-ms-moodWeenSoon")
+                Image(formattedTime == "" ? "ic-ms-moodWeenToday" : "ic-ms-moodWeenSoon")
                     .resizable()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -475,7 +476,7 @@ struct MainView: View {
             
             HStack {
                 VStack {
-                    Text("Событие")
+                    Text(formattedTime == "" ? "Сегодня" : "Событие")
                         .foregroundColor(.white.opacity(0.6))
                         .font(.system(size: 16, weight: .semibold))
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -498,6 +499,7 @@ struct MainView: View {
                         .padding(.leading, 6)
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
+                .opacity(formattedTime == "" ? 0 : 1)
 
             }
             .padding(.horizontal, 16)

@@ -47,7 +47,7 @@ struct MoodWeenGame: View {
                 .padding(.trailing, 20)
                 .foregroundColor(.white)
                 .font(.system(size: 16, weight: .bold))
-                .opacity(currentIndex != 4 || remainingTime != 0 ? 1 : 0)
+                .opacity(remainingTime != 0.0 ? 1 : 0)
                 .transition(.opacity)
             
             VStack {
@@ -61,9 +61,7 @@ struct MoodWeenGame: View {
                     .gesture(
                         LongPressGesture(minimumDuration: 1.0)
                             .onChanged { _ in
-                                
-                                print(isEnableGame)
-                                
+                                                                
                                 isShake = true
                                 isShakeProgress += 1
                                 
@@ -79,7 +77,11 @@ struct MoodWeenGame: View {
                                         isEnableGame = false
                                         AppState.shared.moodWeenGameIsEnabled = false
                                         
-                                        remainingTime = 1 * 10 * 1 //24 * 60 * 60 = 24 часа
+                                        if currentValueGame == 4 {
+                                            remainingTime = 0.0
+                                        } else {
+                                            remainingTime = 24 * 60 * 60
+                                        }
                                         stopTimer()
                                         startTimer()
                                         
@@ -103,7 +105,7 @@ struct MoodWeenGame: View {
                     .font(.system(size: 18, weight: .bold))
                     .padding(.top, 30)
                 
-                ProgressView(value: CGFloat(CGFloat((currentValueGame * 100) / maxValueForGame) / 100))
+                ProgressView(value: CGFloat(CGFloat(((currentValueGame + 1) * 100) / maxValueForGame) / 100))
                     .frame(maxWidth: .infinity, maxHeight: 10, alignment: .bottom)
                     .progressViewStyle(
                         BarProgressStyle(color: Color(hex: "FF9635"), height: 10, labelFontStyle: .system(size: 16), backgroundColor: UIColor(Color(hex: "4872C9")))
@@ -128,7 +130,7 @@ struct MoodWeenGame: View {
                 isTimerRunning = true
                 remainingTime = savedTime
             } else {
-                remainingTime = 0
+                remainingTime = 0.0
             }
             
             // Calculate time elapsed since the app was last active and adjust remainingTime
@@ -137,20 +139,24 @@ struct MoodWeenGame: View {
                 if elapsedTime < remainingTime {
                     remainingTime -= elapsedTime
                 } else {
-                    remainingTime = 0
+                    remainingTime = 0.0
                 }
             }
                         
             withAnimation {
                 currentValueGame = AppState.shared.moodWeenGameStage
-                currentIndex = currentValueGame - 1
+                
+                if currentIndex > 0 {
+                    currentIndex = currentValueGame - 1
+                } else {
+                    currentIndex = currentValueGame
+                }
             }
             
             if currentValueGame == 0 {
                 AppState.shared.moodWeenGameIsEnabled = true
             }
                         
-            currentValueGame += 1
             isEnableGame = currentIndex >= 4 ? false : AppState.shared.moodWeenGameIsEnabled
             
             startTimer()
@@ -166,17 +172,17 @@ struct MoodWeenGame: View {
         UserDefaults.standard.set(remainingTime, forKey: "remainingTime")
         if isTimerRunning {
             Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                if remainingTime > 0 {
+                if remainingTime > 0.0 {
                     remainingTime -= 1
                     UserDefaults.standard.set(remainingTime, forKey: "remainingTime")
                 } else {
                     stopTimer()
                     isEnableGame = currentIndex <= 4
+                    remainingTime = 0.0
                     timer.invalidate()
                 }
             }
         }
-       
     }
     
     private func stopTimer() {
@@ -187,6 +193,6 @@ struct MoodWeenGame: View {
     var formattedTime: String {
         let hours = Int(remainingTime) / 3600
         let minutes = (Int(remainingTime) % 3600) / 60
-        return String(format: "%02d : %02d ", hours, minutes)
+        return String(format: "%02d Ч : %02d М", hours, minutes)
     }
 }
