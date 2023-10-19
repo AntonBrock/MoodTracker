@@ -53,6 +53,7 @@ final class AppState: ObservableObject {
         static let isMoodWeenIconWasSeted = "isMoodWeenIconWasSeted"
         static let currentValueGame = "currentValueGame"
         static let moodWeenGameIsEnabled = "moodWeenGameIsEnabled"
+        static let moodWeenBannerShownFirstTime = "moodWeenBannerShownFirstTime"
     }
     
     var timezone: String? {
@@ -222,6 +223,15 @@ final class AppState: ObservableObject {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.moodWeenGameIsEnabled)
+        }
+    }
+    
+    var moodWeenBannerShownFirstTime: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.moodWeenBannerShownFirstTime)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.moodWeenBannerShownFirstTime)
         }
     }
     

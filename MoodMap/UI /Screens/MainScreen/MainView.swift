@@ -220,7 +220,10 @@ struct MainView: View {
                 }
                 
                 #warning("TODO: Проверять на доступность события + что юзеру уже показывали сами экран")
-                coordinator.parent.isShowingMoodWeenEventScreen = true
+                if !AppState.shared.moodWeenBannerShownFirstTime {
+                    coordinator.parent.isShowingMoodWeenEventScreen = true
+                    AppState.shared.moodWeenBannerShownFirstTime = true
+                }
 
                 withAnimation(Animation.linear(duration: 4.0).repeatForever(autoreverses: false)) {
                     moodWeenShimmerAnimation.toggle()
@@ -278,7 +281,7 @@ struct MainView: View {
             
             if let secondsRemaining = timeDifference.second {
                 if secondsRemaining > 0 {
-                    remainingTime =  100 * 10 * 20 // TimeInterval(secondsRemaining)
+                    remainingTime = TimeInterval(secondsRemaining)
                 }
             }
         }
