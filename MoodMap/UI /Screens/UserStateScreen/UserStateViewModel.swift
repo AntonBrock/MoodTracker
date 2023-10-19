@@ -162,9 +162,26 @@ extension MoodCheckView {
                             language: $0.language,
                             image: $0.image,
                             created_at: nil,
-                            updated_at: nil
-                        )
-                        })
+                            updated_at: nil,
+                            isEventIcon: $0.text == "Декор дома"
+                            || $0.text == "Резка тыквы"
+                            || $0.text == "Аксессуары"
+                            || $0.text == "Костюм"
+                        )}
+                    )
+                    .sorted(by: { (activity1, activity2) in
+                        let priorityActivities = ["Декор дома", "Резка тыквы", "Аксессуары", "Костюм"]
+                        let isPriority1 = priorityActivities.contains(activity1.text)
+                        let isPriority2 = priorityActivities.contains(activity2.text)
+                        
+                        if isPriority1 && !isPriority2 {
+                            return true
+                        } else if !isPriority1 && isPriority2 {
+                            return false
+                        } else {
+                            return activity1.id > activity2.id
+                        }
+                    })
                     group.leave()
                 case .failure(let error):
                     print(error)
@@ -230,13 +247,16 @@ extension MoodCheckView {
                 dateString = dateFormatter.string(from: createdAt)
             }
             
+            let isMoodWeenEvent = RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .moodWeenEvent) ? true : nil
+            
             Services.journalService.sendUserNote(
                 createdAt: dateString,
                 activities: choosedActivities,
                 emotionId: emotionId,
                 stateId: stateId,
                 stressRate: stressNumber,
-                text: mindText?.isEmpty ?? true ? nil : mindText) { result in
+                text: mindText?.isEmpty ?? true ? nil : mindText,
+                isMoodWeenEvent: isMoodWeenEvent) { result in
                 switch result {
                 case .success(let model):
                     Services.metricsService.sendEventWith(eventName: .createEmotionNoteButton)

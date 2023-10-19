@@ -14,7 +14,7 @@ class MainViewCoordinator: ObservableObject, Identifiable {
     
     @Published var diaryViewCoordinator: DiaryViewCoordinator?
     @Published var breathCoordinator: BreathViewCoordinator?
-
+    
     @ObservedObject var viewModel: MainView.ViewModel
 
     // MARK: - Init

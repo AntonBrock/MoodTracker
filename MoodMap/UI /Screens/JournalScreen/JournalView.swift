@@ -77,17 +77,18 @@ struct JournalView: View {
                 ZStack {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 12) {
-                            EmotionBoardView(data: coordinator.viewModel.journalViewModels ?? [],
-                                             wasTouched: { id in
-                                currentID = id
-                                chooseSelectedModel()
-                                withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
-                                #warning("TODO: Нужна переработка экрана об эмоции, так как выглядит сыро и не вкусно")
-//                                    showMoreInfo.toggle()
-//                                    Services.metricsService.sendEventWith(eventName: .openDetailJournalScreen)
-//                                    Services.metricsService.sendEventWith(eventType: .openDetailJournalScreen)
+                            EmotionBoardView(
+                                data: coordinator.viewModel.journalViewModels ?? [],
+                                wasTouched: { id in
+                                    currentID = id
+                                    chooseSelectedModel()
+                                    withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
+                                    #warning("TODO: Нужна переработка экрана об эмоции, так как выглядит сыро и не вкусно")
+    //                                    showMoreInfo.toggle()
+    //                                    Services.metricsService.sendEventWith(eventName: .openDetailJournalScreen)
+    //                                    Services.metricsService.sendEventWith(eventType: .openDetailJournalScreen)
 
-                                }
+                                    }
                             }, animation: animation) {
                                 coordinator.openMoodCheckScreen()
                             } showAuthViewAction: {
@@ -291,40 +292,5 @@ struct JournalView: View {
         upperDate = nil
         selectedDay = nil
         rangeDays = nil
-        
-//        isSelectedFirstDateInRange.toggle()
-//        isSelectedSecondDateInRange.toggle()
     }
 }
-
-
-
-//            SegmentedControlView(countOfItems: 2, segments: titles, selectedIndex: $selectedIndex, currentTab: titles[0])
-//                .padding(.vertical, 24)
-//                .padding(.horizontal, 16)
-////                    SegmentedControlView(countOfItems: 4, segments: dates, currentTab: dates[0], styleSegmentControl: .gray)
-//            if selectedIndex == 0 {
-//
-//                VStack(spacing: 12) {
-//                    MoodBarCharsView()
-//
-//                    ActivitiesBarCharsView()
-//
-//                    FeelingCircleChartsView(completed: 3)
-//
-//                    Spacer()
-//                }
-//            } else {
-//                VStack(spacing: 12) {
-//                   EmotionBoardView()
-//
-//                    EmotionBoardView(emotionBoardViewModels: [])
-//
-//                    EmotionBoardView(emotionBoardViewModels: [
-//                        EmotionBoardViewModel(data: "12:20", emotionTitle: "Very happy", activities: [ActivitiesViewModel(name: "travel")], color: .cyan, emotionImage: "happy"),
-//                        EmotionBoardViewModel(data: "12:20", emotionTitle: "Very happy", activities: [ActivitiesViewModel(name: "travel")], color: .indigo, emotionImage: "happy")
-//                    ])
-//
-//                    Spacer()
-//                }
-//            }

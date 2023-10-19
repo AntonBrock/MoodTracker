@@ -18,6 +18,23 @@ struct MainView: View {
 
     private unowned let coordinator: MainViewCoordinator
     
+    var formattedTime: String {
+        if Int(remainingTime) <= 0 {
+           return ""
+        } else {
+            let days = Int(remainingTime) / (3600 * 24)
+            let hours = (Int(remainingTime) % (3600 * 24)) / 3600
+            
+            var hoursString = ""
+            if hours > 0 {
+                hoursString = String(format: "%02d ", hours)
+                hoursString += (hours == 1 || (days == 0 && hours % 10 == 1 && hours % 100 != 11)) ? "Ч" : "Ч"
+            }
+            
+            return "\(days > 0 ? String(format: "%02d Д ", days) : "")\(hoursString)"
+        }
+    }
+    
     @State var typeSelectedIndex: Int = 0
     
     @State var isAnimated: Bool = false
@@ -34,6 +51,13 @@ struct MainView: View {
     @State var bottomSheetPosition: BottomSheetPosition = .dynamicTop
     
     @State var confettiCannon: Int = 0
+    @State var moodWeenShimmerAnimation: Bool = false
+    @State var isScalingLeftMoodWeenAnimation: Bool = true
+    
+    
+    // For MoodWeen
+    @State private var remainingTime: TimeInterval = 0
+    @State private var isTimerRunning = false
     
     let notificationCenter = NotificationCenter.default
     
@@ -52,10 +76,18 @@ struct MainView: View {
         ZStack {
             ScrollView {
                 VStack {
+                    if RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .moodWeenEvent) {
+                        moodWeenEventBlock()
+                            .padding(.top, 16)
+                            .onTapGesture {
+                                coordinator.parent.isShowingMoodWeenEventScreen = true
+                            }
+                    }
+                    
                     if isAnimated {
                         VStack {
                             createEmotionalHeader()
-                                .padding(.top, 16)
+                                .padding(.top, 12)
                                 .transition(.move(edge: .top))
                                 .zIndex(99999)
                             
@@ -99,27 +131,7 @@ struct MainView: View {
                         }
                     }
                     
-                    Text("Эмоциональная поддержка")
-                        .foregroundColor(Colors.Primary.blue)
-                        .font(.system(size: 20, weight: .semibold))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                        .padding(.horizontal, 20)
-                        .padding(.top, 20)
-                    
-                    createDiaryView()
-                        .padding(.top, 10)
-                        .onTapGesture {
-                            if AppState.shared.isLogin ?? false {
-                                Services.metricsService.sendEventWith(eventName: .openDiaryScreenButton)
-                                Services.metricsService.sendEventWith(eventType: .openDiaryScreenButton)
-                                
-                                coordinator.openDiary()
-                            } else {
-                                withAnimation {
-                                    coordinator.parent.showAuthLoginView = true
-                                }
-                            }
-                        }
+                    diaryBlock()
                     
                     QuoteView(quote: $quoteText)
                         .padding(.top, 10)
@@ -175,7 +187,6 @@ struct MainView: View {
                 }
             }
             .sheet(isPresented: $showMoreDetailsAboutJournalPage, content: {
-                
                 DetailJournalView(
                     showMoreInfo: $showMoreDetailsAboutJournalPage,
                     model: $currentSelectedJournalPage,
@@ -208,6 +219,21 @@ struct MainView: View {
                     }
                 }
                 
+                #warning("TODO: Проверять на доступность события + что юзеру уже показывали сами экран")
+                if !AppState.shared.moodWeenBannerShownFirstTime {
+                    coordinator.parent.isShowingMoodWeenEventScreen = true
+                    AppState.shared.moodWeenBannerShownFirstTime = true
+                }
+
+                withAnimation(Animation.linear(duration: 4.0).repeatForever(autoreverses: false)) {
+                    moodWeenShimmerAnimation.toggle()
+                }
+                
+                
+                withAnimation(Animation.linear(duration: 1.5).repeatForever(autoreverses: true)) {
+                    isScalingLeftMoodWeenAnimation.toggle()
+                }
+                
                 getMoodCeck()
             }
             .onChange(of: viewModel.journalViewModels) { newValue in
@@ -217,106 +243,66 @@ struct MainView: View {
             }
             
             if isSheetAboutMoodCheckPresent {
-                VStack {}
-                    .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: .infinity)
-                    .background(.black.opacity(0.7))
-                    .transition(.opacity)
-                
-                    .bottomSheet(bottomSheetPosition: $bottomSheetPosition,
-                                 switchablePositions: [.dynamicTop]) {
-                        VStack(spacing: 0) {
-                            
-                            Text("Эмоциональный чек-лист")
-                                .font(.system(size: 24, weight: .semibold))
-                                .foregroundColor(Colors.Primary.blue)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.trailing, 10)
-                                .padding(.top, 5)
-                            
-                            Text("Эмоциональный чек-лист - это инструмент саморазвития, который помогает лучше понимать себя и управлять своими эмоциями, чтобы достичь более сбалансированной жизни\n")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Colors.Primary.blue)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.trailing, 21)
-                                .padding(.top, 20)
-                                .multilineTextAlignment(.leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                            
-                            Text("Ежедневно чек-лист обновляется и включает в себя 3 состовляющие - это состояние, дахание и дневник. Каждый новый день, вы будете видеть что чек-лист пустой и вы можете заполнить его\n")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Colors.Primary.blue)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.trailing, 21)
-                                .multilineTextAlignment(.leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                           
-                            Text("Состояние - нужно отметить свое состояние, хотя бы 1 раз! Дыхание - вам нужно завершить практику минимум на 30%. Дневник - запщите свои мысли на текущий день, с помощью Дневника Благодарности\n")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Colors.Primary.blue)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.trailing, 21)
-                                .multilineTextAlignment(.leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                            
-                            Text("Каждый из аспектов этого чек-листа сможет помочь лучше себя понимать и чувствовать. Конечно, как только вы завершите весь чек-лист на текущий день - мы покажем это и спрячем его")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Colors.Primary.blue)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.trailing, 21)
-                                .multilineTextAlignment(.leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                           
-                            MTButton(buttonStyle: .fill, title: "Понятно") {
-                                withAnimation {
-                                    bottomSheetPosition = .absolute(0)
-                                    isSheetAboutMoodCheckPresent.toggle()
-                                    
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                        withAnimation {
-                                            self.bottomSheetPosition = .dynamicTop
-                                            self.coordinator.parent.hideCustomTabBar = false
-                                        }
-                                    }
-                                }
-                            }
-                            .frame(width: 230, height: 48, alignment: .top)
-                            .padding(.top, 10)
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.top, 14)
-                        .padding(.bottom, 20)
-                    }
-                    .customBackground(
-                        Color.white
-                            .cornerRadius(16, corners: [.topLeft, .topRight])
-                            .shadow(color: .white, radius: 0, x: 0, y: 0)
-                    )
-                    .enableTapToDismiss(true)
-                    .enableSwipeToDismiss(false)
-                    .enableContentDrag(false)
-                    .onDismiss {
-                        withAnimation {
-                            bottomSheetPosition = .absolute(0)
-                            isSheetAboutMoodCheckPresent.toggle()
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                withAnimation {
-                                    self.bottomSheetPosition = .dynamicTop
-                                    self.coordinator.parent.hideCustomTabBar = false
-                                }
-                            }
-                        }
-                    }
-                    .zIndex(9999999)
+                moodcheckViewBlock()
             }
         }
+        .onAppear {
+            timeToEvent()
+            startTimer()
+        }
         .onDisappear {
+            stopTimer()
+            
             withAnimation {
                 if isCompletedMoodCheck {
                     isCompletedMoodCheck.toggle()
                 }
             }
         }
+    }
+    
+    let calendar = Calendar.current
+    
+    func timeToEvent() {
+        var components = DateComponents()
+        components.year = 2023
+        components.month = 11
+        components.day = 1
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        
+        if let targetDate = calendar.date(from: components) {
+            // Получите текущую дату и время
+            let currentDate = Date()
+            
+            // Вычислите разницу между текущей датой и желаемой датой
+            let timeDifference = calendar.dateComponents([.second], from: currentDate, to: targetDate)
+            
+            if let secondsRemaining = timeDifference.second {
+                if secondsRemaining > 0 {
+                    remainingTime = TimeInterval(secondsRemaining)
+                }
+            }
+        }
+    }
+    
+    func startTimer() {
+        isTimerRunning = true
+        if isTimerRunning {
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                if remainingTime > 0 {
+                    remainingTime -= 1
+                } else {
+                    stopTimer()
+                    timer.invalidate()
+                }
+            }
+        }
+    }
+    
+    func stopTimer() {
+        isTimerRunning = false
     }
     
     func getMoodCeck() {
@@ -348,6 +334,199 @@ struct MainView: View {
     }
     
     @ViewBuilder
+    private func diaryBlock() -> some View {
+        Text("Эмоциональная поддержка")
+            .foregroundColor(Colors.Primary.blue)
+            .font(.system(size: 20, weight: .semibold))
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+        
+        createDiaryView()
+            .padding(.top, 10)
+            .onTapGesture {
+                if AppState.shared.isLogin ?? false {
+                    Services.metricsService.sendEventWith(eventName: .openDiaryScreenButton)
+                    Services.metricsService.sendEventWith(eventType: .openDiaryScreenButton)
+                    
+                    coordinator.openDiary()
+                } else {
+                    withAnimation {
+                        coordinator.parent.showAuthLoginView = true
+                    }
+                }
+            }
+    }
+    
+    @ViewBuilder
+    private func moodcheckViewBlock() -> some View {
+        VStack {}
+            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: .infinity)
+            .background(.black.opacity(0.7))
+            .transition(.opacity)
+        
+            .bottomSheet(bottomSheetPosition: $bottomSheetPosition,
+                         switchablePositions: [.dynamicTop]) {
+                VStack(spacing: 0) {
+                    
+                    Text("Эмоциональный чек-лист")
+                        .font(.system(size: 24, weight: .semibold))
+                        .foregroundColor(Colors.Primary.blue)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, 10)
+                        .padding(.top, 5)
+                    
+                    Text("Эмоциональный чек-лист - это инструмент саморазвития, который помогает лучше понимать себя и управлять своими эмоциями, чтобы достичь более сбалансированной жизни\n")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Colors.Primary.blue)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, 21)
+                        .padding(.top, 20)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    Text("Ежедневно чек-лист обновляется и включает в себя 3 состовляющие - это состояние, дахание и дневник. Каждый новый день, вы будете видеть что чек-лист пустой и вы можете заполнить его\n")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Colors.Primary.blue)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, 21)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                   
+                    Text("Состояние - нужно отметить свое состояние, хотя бы 1 раз! Дыхание - вам нужно завершить практику минимум на 30%. Дневник - запщите свои мысли на текущий день, с помощью Дневника Благодарности\n")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Colors.Primary.blue)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, 21)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    Text("Каждый из аспектов этого чек-листа сможет помочь лучше себя понимать и чувствовать. Конечно, как только вы завершите весь чек-лист на текущий день - мы покажем это и спрячем его")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Colors.Primary.blue)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, 21)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                   
+                    MTButton(buttonStyle: .fill, title: "Понятно") {
+                        withAnimation {
+                            bottomSheetPosition = .absolute(0)
+                            isSheetAboutMoodCheckPresent.toggle()
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                withAnimation {
+                                    self.bottomSheetPosition = .dynamicTop
+                                    self.coordinator.parent.hideCustomTabBar = false
+                                }
+                            }
+                        }
+                    }
+                    .frame(width: 230, height: 48, alignment: .top)
+                    .padding(.top, 10)
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 14)
+                .padding(.bottom, 20)
+            }
+            .customBackground(
+                Color.white
+                    .cornerRadius(16, corners: [.topLeft, .topRight])
+                    .shadow(color: .white, radius: 0, x: 0, y: 0)
+            )
+            .enableTapToDismiss(true)
+            .enableSwipeToDismiss(false)
+            .enableContentDrag(false)
+            .onDismiss {
+                withAnimation {
+                    bottomSheetPosition = .absolute(0)
+                    isSheetAboutMoodCheckPresent.toggle()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        withAnimation {
+                            self.bottomSheetPosition = .dynamicTop
+                            self.coordinator.parent.hideCustomTabBar = false
+                        }
+                    }
+                }
+            }
+            .zIndex(9999999)
+    }
+    
+    @ViewBuilder
+    private func moodWeenEventBlock() -> some View {
+        ZStack {
+            Image(formattedTime == "" ? "ic-ms-moodWeenToday" : "ic-ms-moodWeenSoon")
+                .resizable()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .opacity(0.97)
+            
+            HStack(spacing: 0) {
+                Image(formattedTime == "" ? "ic-ms-moodWeenToday" : "ic-ms-moodWeenSoon")
+                    .resizable()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .mask(
+                Rectangle()
+                    .fill(
+                        LinearGradient(gradient: .init(colors: [Color.white.opacity(0.5),Color.white,Color.white.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
+                    )
+                    .rotationEffect(.init(degrees: 70))
+                    .padding(20)
+                    .offset(x: -250)
+                    .offset(x: moodWeenShimmerAnimation ? 500 : 0)
+            )
+            
+            HStack {
+                VStack {
+                    Text(formattedTime == "" ? "Сегодня" : "Событие")
+                        .foregroundColor(.white.opacity(0.6))
+                        .font(.system(size: 16, weight: .semibold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text("MoodWeen")
+                        .foregroundColor(.white)
+                        .font(.system(size: 20, weight: .bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(maxWidth: .infinity, alignment: .bottomLeading)
+                
+                HStack {
+                    Image("ic-ms-moodWeenTime")
+                        .resizable()
+                        .frame(width: 15, height: 15)
+                    
+                    Text(formattedTime)
+                        .foregroundColor(.white)
+                        .font(.system(size: 14, weight: .semibold))
+                        .padding(.leading, 6)
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .opacity(formattedTime == "" ? 0 : 1)
+
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 16)
+        }
+        .frame(maxWidth: .infinity, maxHeight: 83)
+        .padding(.horizontal, 16)
+        .rotation3DEffect(
+            .degrees(isScalingLeftMoodWeenAnimation ? 1.1 : -1.1), axis: (x: 0.0, y: 0.2, z: 0.0))
+        .shadow(color: Colors.TextColors.slateGray700.opacity(0.3),
+                radius: 10, x: 0, y: 0)
+    }
+    
+    @ViewBuilder
+    private func reconfigureMainScreen() -> some View {
+        Text("Ура конфиг работает!")
+            .foregroundColor(Colors.Primary.blue)
+            .font(.system(size: 20, weight: .semibold))
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+    }
+    
+    @ViewBuilder
     private func moodBreathView() -> some View {
         Text("Практики")
             .foregroundColor(Colors.Primary.blue)
@@ -361,7 +540,13 @@ struct MainView: View {
     
     @ViewBuilder
     private func createEmotionalHeader() -> some View {
-        HStack {
+        
+        ZStack {
+            Image(getCurrentStateImageByTime())
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: .infinity, maxHeight: 170.0, alignment: .leading)
+        
             VStack {
                 Text(getCurrentTimeDay())
                     .font(.system(size: 16, weight: .semibold))
@@ -379,24 +564,8 @@ struct MainView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
-            
-            HStack {
-                Image(getCurrentStateImageByTime())
-                    .resizable()
-                    .foregroundColor(.green)
-                    .frame(width: 175, height: 145)
-            }
-            .frame(alignment: .bottomTrailing)
-            .padding(.trailing, -20)
-            .padding(.top, 40)
         }
-        .frame(maxWidth: .infinity, maxHeight: 140.0, alignment: .leading)
-        .background(LinearGradient(
-            colors: getColorByTime(),
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing)
-        )
-        .compositingGroup()
+        .frame(maxWidth: .infinity, maxHeight: 170.0, alignment: .leading)
         .cornerRadius(20)
         .padding(.horizontal, 20)
         .shadow(color: Colors.TextColors.slateGray700.opacity(0.5),
@@ -654,11 +823,11 @@ struct MainView: View {
         let hour = Calendar.current.component(.hour, from: Date())
 
         switch hour {
-        case 6..<12: return "ic-ch-generalIconDay"
-        case 12: return "ic-ch-generalIconDay"
-        case 13..<17: return "ic-ch-generalIconDay"
-        case 17..<22: return "ic-ch-generalIconDay"
-        default: return "ic-ch-nightDay"
+        case 6..<12: return "ic-ms-dt-morning"
+        case 12: return "ic-ms-dt-morning"
+        case 13..<17: return "ic-ms-dt-day"
+        case 17..<22: return "ic-ms-dt-evening"
+        default: return "ic-ms-dt-night"
         }
     }
     
