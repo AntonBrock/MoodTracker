@@ -219,8 +219,7 @@ struct MainView: View {
                     }
                 }
                 
-                #warning("TODO: Проверять на доступность события + что юзеру уже показывали сами экран")
-                if !AppState.shared.moodWeenBannerShownFirstTime {
+                if !AppState.shared.moodWeenBannerShownFirstTime && RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .moodWeenEvent) {
                     coordinator.parent.isShowingMoodWeenEventScreen = true
                     AppState.shared.moodWeenBannerShownFirstTime = true
                 }
