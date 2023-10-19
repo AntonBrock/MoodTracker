@@ -34,7 +34,7 @@ struct LaunchScreenView: View {
         // MoodWeen
         if RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .moodWeenEvent) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                if !AppState.shared.isMoodWeenIconWasSeted && {
+                if !AppState.shared.isMoodWeenIconWasSeted  {
                     UIApplication.shared.setAlternateIconName("MoodWeenIcon") { error in
                         if let error {
                             AppState.shared.isMoodWeenIconWasSeted = false
