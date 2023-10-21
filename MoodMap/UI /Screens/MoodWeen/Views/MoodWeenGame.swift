@@ -54,10 +54,11 @@ struct MoodWeenGame: View {
                 Image(images[currentIndex])
                     .resizable()
                     .frame(maxWidth: 251, maxHeight: 241)
-                    .offset(x: isShake ? 30 : 0)
+                    .offset(x: isShake ? 60 : 0)
                     .shadow(color: Colors.TextColors.mystic400, radius: 10, x: 0, y: 0)
                     .rotation3DEffect(.degrees(isUpgrading ? 180 : 0), axis: (x: 0, y: 1, z: 0))
                     .animation(.default, value: isUpgrading)
+                    .animation(.default, value: isShake)
                     .gesture(
                         LongPressGesture(minimumDuration: 1.0)
                             .onChanged { _ in
@@ -91,7 +92,7 @@ struct MoodWeenGame: View {
                                         }
                                     }
                                 }
-                                withAnimation(Animation.spring(response: 0.2, dampingFraction: 0.2, blendDuration: 0.2)) {
+                                withAnimation(Animation.spring(response: 0.1, dampingFraction: 0.1, blendDuration: 0.1)) {
                                     isShake = false
                                 }
                             }
