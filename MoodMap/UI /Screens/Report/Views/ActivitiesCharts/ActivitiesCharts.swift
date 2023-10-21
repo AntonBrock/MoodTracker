@@ -19,7 +19,8 @@ struct ActivitiesCharts: View {
     
     var body: some View {
         VStack {
-            if !goodActivitiesViewModel.dataIsEmpty {
+            if let goodActivitiesViewModel = goodActivitiesViewModel,
+                !goodActivitiesViewModel.dataIsEmpty {
                 createGoodActivitiesView(goodActivitiesViewModel)
             } else {
                 createEmptyAcitiviewsView()
@@ -64,7 +65,8 @@ struct ActivitiesCharts: View {
 
             }
             
-            if !badActivitiesViewModel.dataIsEmpty {
+            if let badActivitiesViewModel = badActivitiesViewModel,
+                !badActivitiesViewModel.dataIsEmpty {
                 createBadActivitiesView(badActivitiesViewModel)
             } else {
                 createEmptyAcitiviewsView()
