@@ -177,7 +177,13 @@ struct PersonalCabinetView: View {
     
     @ViewBuilder
     private func CreateLoginView(isLogin: Bool) -> some View {
-        HStack {
+        
+        ZStack {
+            Image(isLogin ? "ic-lk-authBackground" : "ic-lk-notauthBackground")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: .infinity, maxHeight: 170, alignment: .leading)
+        
             VStack {
                 VStack(spacing: 4) {
                     Text(isLogin ? "Привет, \(AppState.shared.userName ?? "друг")" : "Привет, это")
@@ -193,7 +199,7 @@ struct PersonalCabinetView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(EdgeInsets(top: -24, leading: 16, bottom: 0, trailing: 0))
+                .padding(EdgeInsets(top: -24, leading: 20, bottom: 0, trailing: 0))
                 
                 HStack {
                     Button {
@@ -219,21 +225,12 @@ struct PersonalCabinetView: View {
                 .padding(.bottom, -24)
             }
             
-            HStack {
-                Image(isLogin ? "ic-loginUser" : "ic-ch-nightDay")
-                    .resizable()
-                    .foregroundColor(.green)
-                    .frame(width: isLogin ? 155 : 155, height: isLogin ? 150 : 135)
-            }
-            .frame(maxWidth: 135, maxHeight: 140, alignment: .bottomTrailing)
-            .padding(.bottom, -20)
-            .padding(.trailing, -20)
         }
-        .frame(maxWidth: .infinity, maxHeight: 140, alignment: .leading)
-        .background(isLogin ? Color(hex: "F0E8FA") : Color(hex: "333877"))
-        .compositingGroup()
-        .cornerRadius(15)
-        .shadow(color: Colors.TextColors.mystic400, radius: 10, x: 0, y: 0)
+        .frame(maxWidth: .infinity, maxHeight: 170.0, alignment: .leading)
+        .cornerRadius(20)
+        .padding(.horizontal, 5)
+        .shadow(color: Colors.TextColors.slateGray700.opacity(0.5),
+                radius: 10, x: 0, y: 0)
     }
     
     @ViewBuilder

@@ -18,6 +18,7 @@ struct JournalModel: Decodable {
     let stressRate: String
     let userId: String
     let activities: [ActivitiesModel]
+    let isMoodWeenEvent: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -29,6 +30,7 @@ struct JournalModel: Decodable {
         case userId = "user_id"
         case stateId = "state_id"
         case activities = "activities"
+        case isMoodWeenEvent = "is_moodween_event"
     }
     
     init(from decoder: Decoder) throws {
@@ -42,5 +44,6 @@ struct JournalModel: Decodable {
         emotionId = try container.decode(String.self, forKey: .emotionId)
         userId = try container.decode(String.self, forKey: .userId)
         activities = try container.decode([ActivitiesModel].self, forKey: .activities)
+        isMoodWeenEvent = try? container.decode(Bool.self, forKey: .isMoodWeenEvent)
     }
 }

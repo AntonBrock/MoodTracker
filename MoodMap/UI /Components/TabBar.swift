@@ -136,6 +136,12 @@ struct TabBarView: View {
                 coordinator.openFeelingScreen()
                     .interactiveDismissDisabled(true)
             }
+            .fullScreenCover(isPresented: $coordinator.isShowingMoodWeenEventScreen) {
+                MoodWeenView(closeDismiss: {
+                    coordinator.isShowingMoodWeenEventScreen = false
+                })
+                    .transition(.move(edge: .bottom))
+            }
             .onChange(of: viewRouter.currentPage) { newValue in
                 coordinator.isNeedShowTab = newValue
             }

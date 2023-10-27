@@ -896,6 +896,8 @@ struct BarProgressStyle: ProgressViewStyle {
     var color: Color = .purple
     var height: Double = 20.0
     var labelFontStyle: Font = .body
+    
+    var backgroundColor: UIColor = .systemGray5
  
     func makeBody(configuration: Configuration) -> some View {
  
@@ -906,7 +908,7 @@ struct BarProgressStyle: ProgressViewStyle {
                 configuration.label
                     .font(labelFontStyle)
                 RoundedRectangle(cornerRadius: 10.0)
-                    .fill(Color(uiColor: .systemGray5))
+                    .fill(Color(uiColor: backgroundColor))
                     .frame(height: height)
                     .frame(width: geometry.size.width)
                     .overlay(alignment: .leading) {

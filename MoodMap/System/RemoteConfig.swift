@@ -11,6 +11,7 @@ class RCValues {
     
     enum RemoteKeys: String {
         case reconfigureMainScreen = "mainScreen_update_position"
+        case moodWeenEvent = "moodWeen"
     }
     
     static let sharedInstance = RCValues()
@@ -22,7 +23,8 @@ class RCValues {
     
     private func loadDefaultValues() {
         let appDefaults: [String: Any?] = [
-            RemoteKeys.reconfigureMainScreen.rawValue : false
+            RemoteKeys.reconfigureMainScreen.rawValue : false,
+            RemoteKeys.moodWeenEvent.rawValue : false
         ]
         RemoteConfig.remoteConfig().setDefaults(appDefaults as? [String: NSObject])
     }

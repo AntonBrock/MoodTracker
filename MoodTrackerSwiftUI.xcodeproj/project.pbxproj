@@ -16,6 +16,14 @@
 		45133A1E29AF917800258072 /* PersonalCabinetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45133A1D29AF917800258072 /* PersonalCabinetViewModel.swift */; };
 		45133A2029AFB88900258072 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45133A1F29AFB88900258072 /* AuthService.swift */; };
 		45133A2229AFB97400258072 /* AuthEnpPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45133A2129AFB97400258072 /* AuthEnpPoint.swift */; };
+		452440B12ACD38FC002B7F91 /* MoodWeenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452440B02ACD38FC002B7F91 /* MoodWeenView.swift */; };
+		452440B22ACD38FC002B7F91 /* MoodWeenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452440B02ACD38FC002B7F91 /* MoodWeenView.swift */; };
+		452440B42ACD3906002B7F91 /* MoodWeenViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452440B32ACD3906002B7F91 /* MoodWeenViewCoordinator.swift */; };
+		452440B52ACD3906002B7F91 /* MoodWeenViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452440B32ACD3906002B7F91 /* MoodWeenViewCoordinator.swift */; };
+		452440B72ACD390F002B7F91 /* MoodWeenCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452440B62ACD390F002B7F91 /* MoodWeenCoordinatorView.swift */; };
+		452440B82ACD390F002B7F91 /* MoodWeenCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452440B62ACD390F002B7F91 /* MoodWeenCoordinatorView.swift */; };
+		452440BA2ACD3918002B7F91 /* MoodWeenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452440B92ACD3918002B7F91 /* MoodWeenViewModel.swift */; };
+		452440BB2ACD3918002B7F91 /* MoodWeenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452440B92ACD3918002B7F91 /* MoodWeenViewModel.swift */; };
 		4529AA7029AF1471001D2390 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6F29AF1471001D2390 /* Preview Assets.xcassets */; };
 		4529AA7729AF1519001D2390 /* WrappingStack in Frameworks */ = {isa = PBXBuildFile; productRef = 4529AA7629AF1519001D2390 /* WrappingStack */; };
 		4529AA7929AF1519001D2390 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 4529AA7829AF1519001D2390 /* Moya */; };
@@ -135,6 +143,8 @@
 		4546D59029E841FC00E69852 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 4546D58F29E841FC00E69852 /* loader.json */; };
 		4546D59329E844CD00E69852 /* PushNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D59229E844CD00E69852 /* PushNotificationView.swift */; };
 		4546D59929E86BFF00E69852 /* ATTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D59829E86BFF00E69852 /* ATTView.swift */; };
+		454A19402ACC55FA00B3EC6B /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A193F2ACC55FA00B3EC6B /* ShimmerView.swift */; };
+		454A19412ACC560100B3EC6B /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A193F2ACC55FA00B3EC6B /* ShimmerView.swift */; };
 		454FE49E2A920D7B00BC86FE /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 454FE49D2A920D7B00BC86FE /* FacebookCore */; };
 		454FE4A02A920D7B00BC86FE /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 454FE49F2A920D7B00BC86FE /* FacebookShare */; };
 		45660B9B2A23589F00077CBF /* UserLimitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45660B9A2A23589F00077CBF /* UserLimitsView.swift */; };
@@ -149,6 +159,8 @@
 		456A401D29BBA7E500371B5C /* JournalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401C29BBA7E500371B5C /* JournalService.swift */; };
 		456A401F29BBA84400371B5C /* JournalEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A401E29BBA84400371B5C /* JournalEndPoint.swift */; };
 		456A402129BC2BC200371B5C /* JournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A402029BC2BC200371B5C /* JournalModel.swift */; };
+		456D82312AD3CD2C00D0C2F6 /* MoodWeenGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456D82302AD3CD2C00D0C2F6 /* MoodWeenGame.swift */; };
+		456D82322AD3CD2C00D0C2F6 /* MoodWeenGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456D82302AD3CD2C00D0C2F6 /* MoodWeenGame.swift */; };
 		457A8D682A6BA5E800D1E609 /* QuotesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A8D672A6BA5E800D1E609 /* QuotesService.swift */; };
 		457A8D6A2A6BA66200D1E609 /* QuotesEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A8D692A6BA66200D1E609 /* QuotesEndPoint.swift */; };
 		457AC3D02A59645600294BF6 /* PushNotificationTest.apns in Resources */ = {isa = PBXBuildFile; fileRef = 457AC3CF2A59645600294BF6 /* PushNotificationTest.apns */; };
@@ -236,6 +248,8 @@
 		45B721442A4AD44500CAB76B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721432A4AD44500CAB76B /* OneSignalExtension */; };
 		45B721462A4AD46A00CAB76B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721452A4AD46A00CAB76B /* OneSignal */; };
 		45B721482A4AD47000CAB76B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 45B721472A4AD47000CAB76B /* OneSignalExtension */; };
+		45B93A5A2ACFD8A400B05795 /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B93A592ACFD8A400B05795 /* Articles.swift */; };
+		45B93A5B2ACFD8A400B05795 /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B93A592ACFD8A400B05795 /* Articles.swift */; };
 		45C200C129D317F80087B0E3 /* String+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C200C029D317F80087B0E3 /* String+Extenstion.swift */; };
 		45D06AF22A1608CB0047D6FA /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 45D06AF12A1608CB0047D6FA /* JWTDecode */; };
 		45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F15D29B3771B007EABFA /* KeychainHelper.swift */; };
@@ -499,6 +513,10 @@
 		451E6BC7290577220048714B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		451E6BC9290578130048714B /* ReportViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewCoordinator.swift; sourceTree = "<group>"; };
 		451E6BCB290578360048714B /* ReportCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCoordinatorView.swift; sourceTree = "<group>"; };
+		452440B02ACD38FC002B7F91 /* MoodWeenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodWeenView.swift; sourceTree = "<group>"; };
+		452440B32ACD3906002B7F91 /* MoodWeenViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodWeenViewCoordinator.swift; sourceTree = "<group>"; };
+		452440B62ACD390F002B7F91 /* MoodWeenCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodWeenCoordinatorView.swift; sourceTree = "<group>"; };
+		452440B92ACD3918002B7F91 /* MoodWeenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodWeenViewModel.swift; sourceTree = "<group>"; };
 		4529AA6629AF1470001D2390 /* MoodMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoodMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4529AA6A29AF1470001D2390 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4529AA6C29AF1471001D2390 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -567,6 +585,7 @@
 		4546D59229E844CD00E69852 /* PushNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationView.swift; sourceTree = "<group>"; };
 		4546D59829E86BFF00E69852 /* ATTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTView.swift; sourceTree = "<group>"; };
 		45470CB328E5BEE1004822E0 /* ActivitiesBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesBarCharsView.swift; sourceTree = "<group>"; };
+		454A193F2ACC55FA00B3EC6B /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
 		4551C3F32959A2040034665E /* UIView+extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extenstion.swift"; sourceTree = "<group>"; };
 		45660B9A2A23589F00077CBF /* UserLimitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLimitsView.swift; sourceTree = "<group>"; };
 		456750AF29744FB100392992 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -588,6 +607,7 @@
 		456AA720296E9E6600BD414B /* MoodCheckViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCheckViewCoordinator.swift; sourceTree = "<group>"; };
 		456AA723296E9FBB00BD414B /* ActivitiesViewCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewCoodinator.swift; sourceTree = "<group>"; };
 		456AA725296E9FC200BD414B /* ActivitiesCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesCoordinatorView.swift; sourceTree = "<group>"; };
+		456D82302AD3CD2C00D0C2F6 /* MoodWeenGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodWeenGame.swift; sourceTree = "<group>"; };
 		4570B8C12985144B0063E2DC /* AuthMethodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodsView.swift; sourceTree = "<group>"; };
 		4579220D28CF4FBD00722D16 /* SwiftUISlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUISlider.swift; sourceTree = "<group>"; };
 		457A886429A9FD3400FC7BBB /* WhyRegistrationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhyRegistrationInfoView.swift; sourceTree = "<group>"; };
@@ -653,6 +673,7 @@
 		45B721302A4AD1F500CAB76B /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B721322A4AD1F500CAB76B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		45B721342A4AD1F500CAB76B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45B93A592ACFD8A400B05795 /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
 		45B998D728EB2CD500C170C8 /* MoodBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodBarCharsView.swift; sourceTree = "<group>"; };
 		45C200C029D317F80087B0E3 /* String+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extenstion.swift"; sourceTree = "<group>"; };
 		45C338F9298406D10043E26C /* AuthHyperString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHyperString.swift; sourceTree = "<group>"; };
@@ -865,6 +886,7 @@
 		451E6BB629056EC00048714B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				454A193E2ACC55DD00B3EC6B /* ShimmerEffectView */,
 				45B6EEE52AC6FF8800344EC5 /* Breath */,
 				45B6EEE12AC6FF8200344EC5 /* SiriAnimation */,
 				45B6EEDD2AC6FF7B00344EC5 /* PulseButton */,
@@ -900,6 +922,7 @@
 		451E6BB729056EC70048714B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				452440AF2ACD38AD002B7F91 /* MoodWeen */,
 				4546D59729E86B8200E69852 /* ATT */,
 				4546D59129E844BF00E69852 /* PushNotification */,
 				451E6BC5290576C50048714B /* BaseViewCoordinator.swift */,
@@ -941,6 +964,18 @@
 				45B998D728EB2CD500C170C8 /* MoodBarCharsView.swift */,
 			);
 			path = Charts;
+			sourceTree = "<group>";
+		};
+		452440AF2ACD38AD002B7F91 /* MoodWeen */ = {
+			isa = PBXGroup;
+			children = (
+				45B93A552ACFD84C00B05795 /* Views */,
+				452440B02ACD38FC002B7F91 /* MoodWeenView.swift */,
+				452440B32ACD3906002B7F91 /* MoodWeenViewCoordinator.swift */,
+				452440B62ACD390F002B7F91 /* MoodWeenCoordinatorView.swift */,
+				452440B92ACD3918002B7F91 /* MoodWeenViewModel.swift */,
+			);
+			path = MoodWeen;
 			sourceTree = "<group>";
 		};
 		4529AA6729AF1470001D2390 /* MoodMap */ = {
@@ -1187,6 +1222,14 @@
 				4546D59829E86BFF00E69852 /* ATTView.swift */,
 			);
 			path = ATT;
+			sourceTree = "<group>";
+		};
+		454A193E2ACC55DD00B3EC6B /* ShimmerEffectView */ = {
+			isa = PBXGroup;
+			children = (
+				454A193F2ACC55FA00B3EC6B /* ShimmerView.swift */,
+			);
+			path = ShimmerEffectView;
 			sourceTree = "<group>";
 		};
 		45660B972A23588D00077CBF /* Limits */ = {
@@ -1436,6 +1479,15 @@
 				45B721342A4AD1F500CAB76B /* Info.plist */,
 			);
 			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		45B93A552ACFD84C00B05795 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				45B93A592ACFD8A400B05795 /* Articles.swift */,
+				456D82302AD3CD2C00D0C2F6 /* MoodWeenGame.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		45D6F16A29B6575F007EABFA /* UserStateScreen */ = {
@@ -1750,6 +1802,7 @@
 				4529AB7329AF193F001D2390 /* UIDevice+extension.swift in Sources */,
 				4529AB7429AF193F001D2390 /* NetworkService.swift in Sources */,
 				4529AB7529AF193F001D2390 /* ServiceProvider.swift in Sources */,
+				452440B12ACD38FC002B7F91 /* MoodWeenView.swift in Sources */,
 				4546D58E29E83F1200E69852 /* Constants.swift in Sources */,
 				4529AB7629AF193F001D2390 /* MainScreenService.swift in Sources */,
 				4529AB7729AF193F001D2390 /* BaseAPI.swift in Sources */,
@@ -1772,9 +1825,11 @@
 				456A402129BC2BC200371B5C /* JournalModel.swift in Sources */,
 				4529AB8C29AF1940001D2390 /* GeometryProxy+Shortcuts.swift in Sources */,
 				4592522929C6EEEE007B1706 /* ActivitiesCharts.swift in Sources */,
+				45B93A5A2ACFD8A400B05795 /* Articles.swift in Sources */,
 				4529AB8D29AF1940001D2390 /* View+ReadValues.swift in Sources */,
 				453844DE29E40D5800A89FEE /* YandexInterstitialADViewController.swift in Sources */,
 				4529AB8E29AF1940001D2390 /* Path+Shortcuts.swift in Sources */,
+				452440B42ACD3906002B7F91 /* MoodWeenViewCoordinator.swift in Sources */,
 				4529AB9129AF1940001D2390 /* View+Environment.swift in Sources */,
 				4529AB9229AF1940001D2390 /* Font+Shortcuts.swift in Sources */,
 				4529AB9329AF1940001D2390 /* CGPoint+Shortcuts.swift in Sources */,
@@ -1795,6 +1850,7 @@
 				457F591929C184B900E96E1D /* ReportService.swift in Sources */,
 				45E2876729DB104A00593E7A /* StressModel.swift in Sources */,
 				456A401929BAE1BB00371B5C /* StatesViewModel.swift in Sources */,
+				452440B72ACD390F002B7F91 /* MoodWeenCoordinatorView.swift in Sources */,
 				45B6EF112AC7084600344EC5 /* BreathCoordinatorView.swift in Sources */,
 				4529AB9C29AF1940001D2390 /* SCChartWrapperView.swift in Sources */,
 				4529AB9D29AF1940001D2390 /* SCDonutView.swift in Sources */,
@@ -1813,6 +1869,7 @@
 				45B6EF1B2AC7198500344EC5 /* MainViewCoordinator.swift in Sources */,
 				4529ABA329AF1940001D2390 /* SegmentedControlView.swift in Sources */,
 				4529ABA429AF1940001D2390 /* TabBar.swift in Sources */,
+				454A19402ACC55FA00B3EC6B /* ShimmerView.swift in Sources */,
 				4529ABA529AF1940001D2390 /* MTButton.swift in Sources */,
 				4504F00329D9762F0042CF6B /* DiaryModel.swift in Sources */,
 				45B6EEEE2AC6FFD000344EC5 /* MoodCheckViewModel.swift in Sources */,
@@ -1851,6 +1908,7 @@
 				45B6EF0F2AC7084600344EC5 /* BreathView.swift in Sources */,
 				4529ABB729AF1941001D2390 /* LoginViewCoordinator.swift in Sources */,
 				45B39F8A29E52A4B00852E70 /* LaunchScreenView.swift in Sources */,
+				452440BA2ACD3918002B7F91 /* MoodWeenViewModel.swift in Sources */,
 				4529ABB829AF1941001D2390 /* LoginCoordinatorView.swift in Sources */,
 				4529ABBC29AF1941001D2390 /* DiaryView.swift in Sources */,
 				4529ABBD29AF1941001D2390 /* DiaryViewCoordinator.swift in Sources */,
@@ -1871,6 +1929,7 @@
 				45A9F04E29F01222002C13C5 /* InstagramSharingUtils.swift in Sources */,
 				4529ABC429AF1941001D2390 /* ReportViewCoordinator.swift in Sources */,
 				4529ABC529AF1941001D2390 /* ReportCoordinatorView.swift in Sources */,
+				456D82312AD3CD2C00D0C2F6 /* MoodWeenGame.swift in Sources */,
 				4529ABC629AF1941001D2390 /* WhyRegistrationInfoView.swift in Sources */,
 				4529ABC729AF1941001D2390 /* PersonalCabinetView.swift in Sources */,
 				456A401729BA424200371B5C /* ActivitiesViewModel.swift in Sources */,
@@ -1931,6 +1990,7 @@
 				45FCD1D52A18BEEE00B0DAF0 /* NetworkService.swift in Sources */,
 				45FCD1D62A18BEEE00B0DAF0 /* ServiceProvider.swift in Sources */,
 				45FCD1D72A18BEEE00B0DAF0 /* Constants.swift in Sources */,
+				452440B22ACD38FC002B7F91 /* MoodWeenView.swift in Sources */,
 				45FCD1D82A18BEEE00B0DAF0 /* MainScreenService.swift in Sources */,
 				45FCD1D92A18BEEE00B0DAF0 /* BaseAPI.swift in Sources */,
 				45FCD1DB2A18BEEE00B0DAF0 /* UserInfoModel.swift in Sources */,
@@ -1953,9 +2013,11 @@
 				45FCD1EC2A18BEEE00B0DAF0 /* ActivitiesCharts.swift in Sources */,
 				45FCD1ED2A18BEEE00B0DAF0 /* View+ReadValues.swift in Sources */,
 				45FCD1EE2A18BEEE00B0DAF0 /* YandexInterstitialADViewController.swift in Sources */,
+				45B93A5B2ACFD8A400B05795 /* Articles.swift in Sources */,
 				45FCD1EF2A18BEEE00B0DAF0 /* Path+Shortcuts.swift in Sources */,
 				45FCD1F02A18BEEE00B0DAF0 /* View+Environment.swift in Sources */,
 				45FCD1F12A18BEEE00B0DAF0 /* Font+Shortcuts.swift in Sources */,
+				452440B52ACD3906002B7F91 /* MoodWeenViewCoordinator.swift in Sources */,
 				45FCD1F22A18BEEE00B0DAF0 /* CGPoint+Shortcuts.swift in Sources */,
 				45FCD1F32A18BEEE00B0DAF0 /* SCCircleChartPart.swift in Sources */,
 				45FCD1F42A18BEEE00B0DAF0 /* SCDataPointProtocol.swift in Sources */,
@@ -1976,6 +2038,7 @@
 				45FCD2012A18BEEE00B0DAF0 /* StatesViewModel.swift in Sources */,
 				45FCD2022A18BEEE00B0DAF0 /* SCChartWrapperView.swift in Sources */,
 				45FCD2032A18BEEE00B0DAF0 /* SCDonutView.swift in Sources */,
+				452440B82ACD390F002B7F91 /* MoodWeenCoordinatorView.swift in Sources */,
 				45B6EF122AC7084600344EC5 /* BreathCoordinatorView.swift in Sources */,
 				45FCD2042A18BEEE00B0DAF0 /* SCDonutPartView.swift in Sources */,
 				45FCD2052A18BEEE00B0DAF0 /* JournalViewModel.swift in Sources */,
@@ -1994,6 +2057,7 @@
 				45B6EF1C2AC7198500344EC5 /* MainViewCoordinator.swift in Sources */,
 				45FCD2102A18BEEE00B0DAF0 /* MTButton.swift in Sources */,
 				45FCD2112A18BEEE00B0DAF0 /* DiaryModel.swift in Sources */,
+				454A19412ACC560100B3EC6B /* ShimmerView.swift in Sources */,
 				45FCD2122A18BEEE00B0DAF0 /* MMErrorProtocol.swift in Sources */,
 				45FCD2132A18BEEE00B0DAF0 /* CutomAlertView.swift in Sources */,
 				45B6EEEF2AC6FFD000344EC5 /* MoodCheckViewModel.swift in Sources */,
@@ -2032,6 +2096,7 @@
 				45B6EF102AC7084600344EC5 /* BreathView.swift in Sources */,
 				45FCD22E2A18BEEE00B0DAF0 /* LaunchScreenView.swift in Sources */,
 				45FCD22F2A18BEEE00B0DAF0 /* LoginCoordinatorView.swift in Sources */,
+				452440BB2ACD3918002B7F91 /* MoodWeenViewModel.swift in Sources */,
 				45FCD2332A18BEEE00B0DAF0 /* DiaryView.swift in Sources */,
 				45660B9C2A235B8700077CBF /* UserLimitsView.swift in Sources */,
 				45FCD2342A18BEEE00B0DAF0 /* DiaryViewCoordinator.swift in Sources */,
@@ -2052,6 +2117,7 @@
 				45FCD2412A18BEEE00B0DAF0 /* InstagramSharingUtils.swift in Sources */,
 				45FCD2422A18BEEE00B0DAF0 /* ReportViewCoordinator.swift in Sources */,
 				45FCD2432A18BEEE00B0DAF0 /* ReportCoordinatorView.swift in Sources */,
+				456D82322AD3CD2C00D0C2F6 /* MoodWeenGame.swift in Sources */,
 				45FCD2442A18BEEE00B0DAF0 /* WhyRegistrationInfoView.swift in Sources */,
 				45FCD2452A18BEEE00B0DAF0 /* PersonalCabinetView.swift in Sources */,
 				45FCD2462A18BEEE00B0DAF0 /* ActivitiesViewModel.swift in Sources */,
@@ -2175,7 +2241,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.051002;
+				CURRENT_PROJECT_VERSION = 1.061020;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
@@ -2198,7 +2264,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.6;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2221,7 +2287,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.051002;
+				CURRENT_PROJECT_VERSION = 1.061020;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
@@ -2244,7 +2310,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.6;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2352,7 +2418,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.051002;
+				CURRENT_PROJECT_VERSION = 1.061020;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
@@ -2376,7 +2442,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.6;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2399,7 +2465,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.051002;
+				CURRENT_PROJECT_VERSION = 1.061020;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
@@ -2423,7 +2489,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.6;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
