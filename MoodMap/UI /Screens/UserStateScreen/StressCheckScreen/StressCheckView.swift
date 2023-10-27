@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BottomSheet
 
 struct StressCheckView: View {
         
@@ -32,6 +33,8 @@ struct StressCheckView: View {
     @State var isNeedShowAD: Bool = false
     @State var isNeedShowADAsPage: Bool = false
     @State var isShowLoader: Bool = false
+    
+    @State var bottomSheetPosition: BottomSheetPosition = .relative(0.125)
     
     private let images: [String] = ["emoji_cool", "emoji_sad", "emoji_happy"]
     
@@ -80,7 +83,11 @@ struct StressCheckView: View {
                                         .frame(maxWidth: 300, maxHeight: .infinity, alignment: .top)
                                 }
                                 .frame(maxWidth: 300, maxHeight: .infinity, alignment: .top)
-                                .background(selectedViewIndex == index ? .white : Colors.Primary.blue.opacity(0.3))
+                                .background(
+                                    Image(index == 0 ? "ic-mc-lowStressBackground" : index == 1 ? "ic-mc-mediumStressBackground" : index == 2 ? "ic-mc-hightStressBackground" : "")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                )
                                 .cornerRadius (25)
                                 .opacity (selectedViewIndex == index ? 1.0 : 0.5)
                                 .scaleEffect(selectedViewIndex == index ? 1.2 : 0.8)
@@ -107,52 +114,14 @@ struct StressCheckView: View {
                         )
                     }
                 }
-//                StressCheckComponent(stressViewModel: stressViewModel,
-//                                     valueModel: valueModel,
-//                                     choosedStressID: { choosedStress in
-//                    self.choosedStress = choosedStress
-//                })
-//                .padding(.top, 50)
-//                .id(1)
                 
-//                VStack {
-//                    ZStack {
-//                        TextEditor(text: $text)
-//                            .frame(maxWidth: UIScreen.main.bounds.width - 32, minHeight: 50, idealHeight: 50, maxHeight: 220, alignment: .topLeading)
-//                            .font(.system(size: 16))
-//                            .multilineTextAlignment(.leading)
-//                            .foregroundColor(!isFocused
-//                                             ? Colors.TextColors.mischka500
-//                                             : Colors.Primary.blue)
-//                            .colorMultiply(Colors.TextColors.porcelain200)
-//                            .cornerRadius(10)
-//                            .shadow(color: Colors.TextColors.cadetBlue600,
-//                                    radius: 1.5,
-//                                    x: 0.0,
-//                                    y: 0.0
-//                            )
-//                            .submitLabel(.done)
-//                            .focused($isFocused)
-//                            .onChange(of: text) { _ in
-//                                if text.last?.isNewline == .some(true) {
-//                                    text.removeLast()
-//                                    isFocused = false
-//                                }
-//                            }
+//                MTButton(buttonStyle: .fill, title: "Сохранить запись", handle: {
+//                    if text == "У меня не выходит из головы.." {
+//                        text = ""
 //                    }
-//                }
-//                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-//                .padding(EdgeInsets(top: 0, leading: 25, bottom: 0, trailing: 25))
-//                .cornerRadius(10)
-//                .shadow(color: Colors.TextColors.mystic400.opacity(0.3), radius: 4.0, x: 0.0, y: 0.0)
-                
-                MTButton(buttonStyle: .fill, title: "Сохранить", handle: {
-                    if text == "У меня не выходит из головы.." {
-                        text = ""
-                    }
-                    saveButtonDidTap(text, choosedStress, self)
-                })
-                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+//                    saveButtonDidTap(text, choosedStress, self)
+//                })
+//                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
             }
             
         }
@@ -164,6 +133,40 @@ struct StressCheckView: View {
             text = placeholder
             choosedStress = "8b02d308-37fa-41de-bdd2-00303b976031"
         }
+        .bottomSheet(
+            bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
+            .relativeBottom(0.125),
+            .relative(0.125),
+            .relativeTop(0.975)
+        ], headerContent: {
+            VStack {
+                Text("Нажми, чтобы записать свои мысли")
+                    .foregroundColor(Colors.Primary.blue)
+                    .font(.system(size: 16, weight: .medium))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                MTButton(buttonStyle: .fill, title: "Сохранить запись", handle: {
+                    if text == "У меня не выходит из головы.." {
+                        text = ""
+                    }
+                    saveButtonDidTap(text, choosedStress, self)
+                })
+                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+            }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 5)
+            .padding([.horizontal, .bottom])
+            .onTapGesture {
+                self.bottomSheetPosition = .relativeTop(0.975)
+            }
+        }
+        ){
+         
+        }
+        .enableAppleScrollBehavior()
+        .enableBackgroundBlur()//false
+        .backgroundBlurMaterial(bottomSheetPosition == .relative(0.125) ? .light(.default) : bottomSheetPosition == .relativeBottom(0.125) ?  .light(.default) : .dark(.thin))
+        .customBackground(.white)
     }
     
     func showLoader() {
@@ -226,13 +229,23 @@ struct StressCheckView: View {
     @ViewBuilder
     private func createStressView(_ index: Int) -> some View {
         VStack {
+            HStack {
+                Image(index == 0 ? "ic-mc-lowStressElement" : index == 1 ? "ic-mc-mediumStressElement" : index == 2 ? "ic-mc-hightStressElement" : "")
+                    .resizable()
+                    .frame(
+                        width: index == 0 ? 130 : index == 1 ? 174 : index == 2 ? 200 : 0,
+                        height: index == 0 ? 130 : index == 1 ? 119 : index == 2 ? 130 : 0
+                    )
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.top, 20)
             
             HStack {
-                Text(index == 0 ? "Нет стресса или низкий" : index == 1 ? "Средний стресс" : index == 2 ? "Высокий стресс" : "")
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(Colors.Primary.blue)
+                Text(index == 0 ? "Отсутствует или низкий стресс" : index == 1 ? "Средний стресс" : index == 2 ? "Высокий стресс" : "")
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 24)
+                    .padding(.top, 10)
             }
             
             Text(index == 0
@@ -240,20 +253,13 @@ struct StressCheckView: View {
                  : index == 1
                  ? "Средний стресс - может стать проблемой, если его игнорировать.\n\nВажно обращать внимание на физические и психологические симптомы, так как они могут привести к более серьезным проблемам со здоровьем, если не управлять ими"
                  : index == 2
-                 ? "Высокий стресс - может иметь серьезные последствия для здоровья, включая болезни сердца, депрессию и другие психические расстройства.\n\nЕсли ты ощущаешь высокий стресс, важно обратиться за помощью, как к профессионалам в области здоровья, так и к близким друзьям и семье.\n\nСтрессоустойчивость и умение управлять эмоциями могут способствовать восстановлению"
+                 ? "Высокий стресс - может иметь серьезные последствия для здоровья, включая болезни сердца, депрессию и другие психические расстройства.\n\nЕсли ты ощущаешь высокий стресс, важно обратиться за помощью, как к профессионалам в области здоровья, так и к близким друзьям и семье"
                  : "")
                 .font(.system(size: 14, weight: .regular))
-                .foregroundColor(Colors.Primary.blue.opacity(0.8))
+                .foregroundColor(.white)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-                .padding(.top, 24)
-            
-            Text("Мы собираем для тебя аналитику, которая может помочь тебе понять, что вызывает тот или иной уровень стресса")
-                .font(.system(size: 12, weight: .light))
-                .foregroundColor(Colors.Primary.blue.opacity(0.8))
-                .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity, alignment: .topLeading)
-                .padding(.top, 16)
+                .padding(.top, 5)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(.horizontal, 16)
