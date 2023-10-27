@@ -19,6 +19,7 @@ protocol JournalServiceProtocol {
         stateId: String,
         stressRate: String,
         text: String?,
+        isMoodWeenEvent: Bool?,
         completion: @escaping(Result<JournalModel, Error>) -> Void)
 }
 
@@ -58,6 +59,7 @@ struct JournalService: JournalServiceProtocol {
                       stateId: String,
                       stressRate: String,
                       text: String?,
+                      isMoodWeenEvent: Bool?,
                       completion: @escaping(Result<JournalModel, Error>) -> Void) {
         let target = BaseAPI.journal(.sendUserNote(
             createdAt: createdAt,
@@ -65,7 +67,8 @@ struct JournalService: JournalServiceProtocol {
             emotionId: emotionId,
             stateId: stateId,
             stressRate: stressRate,
-            text: text ?? nil)
+            text: text ?? nil,
+            isMoodWeenEvent: isMoodWeenEvent ?? nil)
         )
 
         let networkService = ServiceProvider().networkService

@@ -30,6 +30,29 @@ struct LaunchScreenView: View {
     ) {
         self.parent = parent
         self.container = container
+        
+        // MoodWeen
+        if RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .moodWeenEvent) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                if !AppState.shared.isMoodWeenIconWasSeted  {
+                    UIApplication.shared.setAlternateIconName("MoodWeenIcon") { error in
+                        if let error {
+                            AppState.shared.isMoodWeenIconWasSeted = false
+                            UIApplication.shared.setAlternateIconName(nil)
+                        } else {
+                            AppState.shared.isMoodWeenIconWasSeted = true
+                        }
+                    }
+                }
+            }
+        } else {
+            if !AppState.shared.isMoodMapIconWasSeted {
+                AppState.shared.isMoodMapIconWasSeted = true
+                UIApplication.shared.setAlternateIconName(nil)
+            } else {
+                AppState.shared.isMoodMapIconWasSeted = false
+            }
+        }
     }
     
     var body: some View {
@@ -73,10 +96,20 @@ struct LaunchScreenView: View {
                                     switch result {
                                     case .success:
                                         print("Success updated timezone")
-                                    case .failure(let error):
-                                        print(error)
+                                    case .failure:
+                                        isNeedShowAuthPopupFromLaunchScreen = true
+                                        withAnimation(.spring()) {
+                                            animatedIsFinished = true
+                                            isLoadingMainInfo = true
+                                        }
                                     }
                                 }
+                            }
+                        } else {
+                            isNeedShowAuthPopupFromLaunchScreen = true
+                            withAnimation(.spring()) {
+                                animatedIsFinished = true
+                                isLoadingMainInfo = true
                             }
                         }
                         
@@ -107,9 +140,11 @@ struct LaunchScreenView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .opacity(animatedIsFinished ? 0 : 1)
         }
-        .frame(maxWidth: .infinity,
-               maxHeight: .infinity,
-               alignment: .center)
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .center
+        )
         .onAppear {
             if let showATT = AppState.shared.isShowATT, showATT {
                 isShowATTScreen = true
@@ -135,16 +170,56 @@ struct LaunchScreenView: View {
                                 AppState.shared.maximumValueOfLimits = model.limits[0].maximumValue
 
                                 completion(false)
-                            case .failure(let error):
-                                print(error)
+                            case .failure:
+                                AppState.shared.userName = nil
+                                AppState.shared.userEmail = nil
+                                AppState.shared.userPushNotification = false
+                                AppState.shared.userLanguage = "russian"
+                                AppState.shared.userLimits = 0
+                                AppState.shared.maximumValueOfLimits = 5
+                                AppState.shared.isLogin = false
+                                AppState.shared.refreshToken = nil
+                                AppState.shared.jwtToken = nil
+                                completion(true)
                             }
                         }
                     case .failure(let error):
-                        guard let errorLocaloze = error as? MMError else { return }
+                        guard let errorLocaloze = error as? MMError else {
+                            AppState.shared.userName = nil
+                            AppState.shared.userEmail = nil
+                            AppState.shared.userPushNotification = false
+                            AppState.shared.userLanguage = "russian"
+                            AppState.shared.userLimits = 0
+                            AppState.shared.maximumValueOfLimits = 5
+                            AppState.shared.isLogin = false
+                            AppState.shared.refreshToken = nil
+                            AppState.shared.jwtToken = nil
+                            completion(true)
+                            return
+                        }
                        
                         if errorLocaloze == .defined(.tokenUndefined) {
+                            AppState.shared.userName = nil
+                            AppState.shared.userEmail = nil
+                            AppState.shared.userPushNotification = false
+                            AppState.shared.userLanguage = "russian"
+                            AppState.shared.userLimits = 0
+                            AppState.shared.maximumValueOfLimits = 5
+                            AppState.shared.isLogin = false
+                            AppState.shared.refreshToken = nil
                             AppState.shared.jwtToken = nil
-                            completion(false)
+                            completion(true)
+                        } else {
+                            AppState.shared.userName = nil
+                            AppState.shared.userEmail = nil
+                            AppState.shared.userPushNotification = false
+                            AppState.shared.userLanguage = "russian"
+                            AppState.shared.userLimits = 0
+                            AppState.shared.maximumValueOfLimits = 5
+                            AppState.shared.isLogin = false
+                            AppState.shared.refreshToken = nil
+                            AppState.shared.jwtToken = nil
+                            completion(true)
                         }
                     }
                 }
@@ -172,12 +247,20 @@ struct LaunchScreenView: View {
                     AppState.shared.maximumValueOfLimits = model.limits[0].maximumValue
                     AppState.shared.userID = model.id
                     completion(false)
-                case .failure(let error):
-                    print(error)
+                case .failure:
+                    AppState.shared.userName = nil
+                    AppState.shared.userEmail = nil
+                    AppState.shared.userPushNotification = false
+                    AppState.shared.userLanguage = "russian"
+                    AppState.shared.userLimits = 0
+                    AppState.shared.maximumValueOfLimits = 5
+                    AppState.shared.isLogin = false
+                    AppState.shared.refreshToken = nil
+                    AppState.shared.jwtToken = nil
+                    completion(true)
                 }
             }
         }
-        
     }
     
     private func checkJWTIsValid() -> Bool {

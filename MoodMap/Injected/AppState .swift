@@ -17,7 +17,9 @@ final class AppState: ObservableObject {
     
     var baseURL: String {
         get {
-            let baseURL = Bundle.main.infoDictionary?["BaseURL"]! ?? "https://api.mapmood.com"
+            guard let baseURL = Bundle.main.infoDictionary?["BaseURL"] else {
+                return "https://api.dev.mapmood.com"
+            }
             return "https://\(baseURL)"
         }
     }
@@ -44,6 +46,14 @@ final class AppState: ObservableObject {
         static let userLimits = "userLimits"
         static let userID = "userID"
         static let maximumValueOfLimits = "maximumValueOfLimits"
+        static let isCompletedMoodCheck = "isCompletedMoodCheck"
+        static let isMoodMapIconWasSeted = "isMoodMapIconWasSeted"
+        
+        //MoodWeen
+        static let isMoodWeenIconWasSeted = "isMoodWeenIconWasSeted"
+        static let currentValueGame = "currentValueGame"
+        static let moodWeenGameIsEnabled = "moodWeenGameIsEnabled"
+        static let moodWeenBannerShownFirstTime = "moodWeenBannerShownFirstTime"
     }
     
     var timezone: String? {
@@ -169,7 +179,62 @@ final class AppState: ObservableObject {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.maximumValueOfLimits)
         }
     }
+    
+    var isCompletedMoodCheck: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isCompletedMoodCheck)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isCompletedMoodCheck)
+        }
+    }
         
+    // MoodWeen
+    var isMoodWeenIconWasSeted: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isMoodWeenIconWasSeted)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isMoodWeenIconWasSeted)
+        }
+    }
+    
+    var isMoodMapIconWasSeted: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isMoodMapIconWasSeted)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isMoodMapIconWasSeted)
+        }
+    }
+    
+    var moodWeenGameStage: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentValueGame)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.currentValueGame)
+        }
+    }
+    
+    var moodWeenGameIsEnabled: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.moodWeenGameIsEnabled)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.moodWeenGameIsEnabled)
+        }
+    }
+    
+    var moodWeenBannerShownFirstTime: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.moodWeenBannerShownFirstTime)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.moodWeenBannerShownFirstTime)
+        }
+    }
+    
     var jwtToken: String? {
         get {
             return KeychainHelper.standard.read(

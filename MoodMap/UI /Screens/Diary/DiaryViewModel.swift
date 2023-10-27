@@ -52,7 +52,6 @@ extension DiaryView {
             
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
-            formatter.locale = Locale(identifier: "ru_RU")
             
             for item in data {
                 let message = item.diaryPage

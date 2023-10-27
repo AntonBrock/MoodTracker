@@ -140,6 +140,7 @@ struct ReportScreen: View {
                         if viewModel.dateSelectedIndex == 0 {
                             WeekAnimationChart(
                                 weekChartViewModel: $viewModel.chartDataViewModel,
+                                prevWeekChartsViewModel: $viewModel.prevWeekChartDataViewModel,
                                 showLoader: $viewModel.showLoader,
                                 showNeedMoreData: $viewModel.showNeedMoreData
                             )
@@ -203,7 +204,8 @@ struct ReportScreen: View {
                         
                         DayilyCharts(viewModel: $viewModel.timeDataViewModel)
                             .padding(.top, 16)
-                                                
+                        
+                        
                         ActivitiesCharts(
                             goodActivitiesViewModel: $viewModel.goodActivitiesDataViewModel,
                             badActivitiesViewModel: $viewModel.badActivitiesDataViewModel,
@@ -211,6 +213,19 @@ struct ReportScreen: View {
                             isStressCurrentTab: $viewModel.isStressCurrentTab,
                             isShowLoader: $viewModel.showLoader
                         )
+                        
+                        HStack(alignment: .top) {
+                            Image("rc-ic-information")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                
+                            Text("Обрати внимание, каждый день мы занимаемся похожими активностями, именно поэтому активности повторяются.\n\nНаша цель проанализировать твое состояние и показать, какая именно активность влияет на твое настроение или стресс больше, чем другая!")
+                                .foregroundColor(Colors.Primary.blue)
+                                .font(.system(size: 16))
+                                .padding(.leading, 8)
+                                .padding(.trailing, 8)
+                        }
+                        .padding(.horizontal, 16)
                         .padding(.bottom, 90)
                     } else {
                         ActivitiesChartsForAllTime()
@@ -231,7 +246,7 @@ struct ReportScreen: View {
             }
         })
         .sheet(isPresented: $isWebViewPresented) {
-            WebView(urlString: "https://mapmood.com/analytics")
+            WebView(urlString: "https://mapmood.com/analytics/ru")
         }
     }
     
@@ -254,11 +269,13 @@ struct ReportScreen: View {
     private func toBeforeWeekDidTap() {
         viewModel.chartDataViewModel = []
         viewModel.toBeforeWeekDidTap()
+        viewModel.fetchPrevWeekData()
     }
     
     private func toNextWeekDidTap() {
         viewModel.chartDataViewModel = []
         viewModel.toNextWeekDidTap()
+        viewModel.fetchPrevWeekData()
     }
     
     private func toBeforeMonthDidTap() {

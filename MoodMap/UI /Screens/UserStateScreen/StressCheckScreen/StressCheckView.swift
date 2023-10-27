@@ -208,7 +208,8 @@ struct StressCheckView: View {
                 month: "",
                 monthCurrentTime: "",
                 shortTime: "",
-                longTime: ""
+                longTime: "",
+                isMoodWeenEvent: false
             )
             
             if var userLimits = AppState.shared.userLimits {

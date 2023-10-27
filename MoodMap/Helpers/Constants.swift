@@ -13,6 +13,8 @@ enum Constants {
 
     /// Ссылка для Support в телеграм
     static let urlPathToSupport: String = "tg://resolve?domain=moodmapsupport"
+    /// Ссылка для Политику
+    static let urlPathToPolitic: String = "https://mapmood.com/privacy/ru"
     
     /// Если прошло 31 дней то необходимо снова сделать запрос на цитату и обновить ее на главном экране, а также сохранить в локальное хранилище
     static let timeoutRequestQuotes: TimeInterval = 60 * 60 * 24 * 31

@@ -14,10 +14,12 @@ enum UserStateEndPoint: TargetType {
     case getEmotionsList
     case getActivitiesList
     case getStressList
+    case getMoodCheck
+    case postMoodBreathCheck
     
     var baseURL: URL {
         switch self {
-        case .getStateList, .getEmotionsList, .getActivitiesList, .getStressList:
+        case .getStateList, .getEmotionsList, .getActivitiesList, .getStressList, .getMoodCheck, .postMoodBreathCheck:
             return URL(string: "\(AppState.shared.baseURL)/v1")!
         }
     }
@@ -28,6 +30,8 @@ enum UserStateEndPoint: TargetType {
         case .getEmotionsList: return "/emotions"
         case .getActivitiesList: return "/activities"
         case .getStressList: return "/stress"
+        case .getMoodCheck: return "users/me/activities"
+        case .postMoodBreathCheck: return "users/me/activities/breath"
         }
     }
     
@@ -36,8 +40,10 @@ enum UserStateEndPoint: TargetType {
         case .getStateList,
              .getEmotionsList,
              .getActivitiesList,
-             .getStressList:
+             .getStressList, .getMoodCheck:
             return .get
+        case .postMoodBreathCheck:
+            return .post
         }
     }
     
@@ -50,8 +56,9 @@ enum UserStateEndPoint: TargetType {
         case .getStateList,
              .getEmotionsList,
              .getActivitiesList,
-             .getStressList:
+             .getStressList, .getMoodCheck:
             return .requestParameters(parameters: ["language": "ru"], encoding: URLEncoding.queryString)
+        case .postMoodBreathCheck: return .requestPlain
         }
     }
     
@@ -60,8 +67,9 @@ enum UserStateEndPoint: TargetType {
         case .getStateList,
              .getEmotionsList,
              .getActivitiesList,
-             .getStressList
-            : return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
+             .getStressList,
+             .getMoodCheck,
+             .postMoodBreathCheck: return ["Authorization": "Bearer \(AppState.shared.jwtToken ?? "")"]
         }
     }
     
@@ -70,8 +78,9 @@ enum UserStateEndPoint: TargetType {
         case .getStateList,
              .getEmotionsList,
              .getActivitiesList,
-             .getStressList
-             :return .bearer
+             .getStressList,
+             .postMoodBreathCheck,
+             .getMoodCheck: return .bearer
         }
     }
     

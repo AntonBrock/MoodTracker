@@ -54,31 +54,19 @@ struct EmotionBoardView: View {
             ForEach(data, id: \.self) { item in
                 HStack {
                     VStack {
-                        EmotionBoardDateView(monthTitle: item[0].month,
-                                             monthDate: item[0].monthCurrentTime)
+                        EmotionBoardDateView(
+                            monthTitle: item[0].month,
+                            monthDate: item[0].monthCurrentTime)
                     }
                     .frame(maxHeight: .infinity, alignment: .top)
                     .padding(.leading, 16)
 
                     if !isNeededLast {
                         EmotionBoardIsNotNeededLast(item: item)
-                    } else {
-//                        EmotionBoardDataView(activities: data[item].activities,
-//                                             data: data[0].shortTime,
-//                                             emotionTitle: data[0].title,
-//                                             emotionImage: data[0].stateImage,
-//                                             color: data[0].color,
-//                                             animation: animation)
-//                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
-//                            .onTapGesture {
-//                                withAnimation {
-//                                    wasTouched(data[0].id)
-//                                }
-//                            }
                     }
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
-                
+
                 Divider()
             }
         }
@@ -97,7 +85,7 @@ struct EmotionBoardView: View {
             .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)).animation(.linear).combined(with: .opacity))
         } else {
             EmotionBoardDataView(model: item[0], animation: animation)
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0))
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
             .onTapGesture {
                 withAnimation {
                     wasTouched(item[0].id)
@@ -165,38 +153,30 @@ struct EmotionBoardDataView: View {
     
     var body: some View {
         HStack {
-            VStack {
-                Text(model.shortTime)
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundColor(.white.opacity(0.8))
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 14)
+            ZStack {
+                Image(getBackgroundNameForMoodWeenEvent(for: model.title, isMoodWeenEvent: model.isMoodWeenEvent ?? false))
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity, minHeight: 115.0, maxHeight: 115.0)
                 
-                Text(model.title)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                VStack {
+                    Text(model.shortTime)
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(.white.opacity(0.8))
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 16)
+                    
+                    Text(model.title)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
-                HStack {
-                    ForEach(0..<model.activities.count, id: \.self) { item in
-                        if item == 0 {
-                            Text(model.activities[item].text)
-                                .font(.system(size: 12, weight: .medium))
-                                .multilineTextAlignment(.center)
-                                .fixedSize(horizontal: true, vertical: true)
-                                .foregroundColor(.white)
-                                .cornerRadius(7)
-                                .padding(.horizontal, 14)
-                                .padding(.vertical, 8)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 45, style: .circular)
-                                        .fill(.white.opacity(0.3))
-                                }
-                            
-                            if model.activities.count > 1 {
-                                Text("+ \(model.activities.count - 1)")
+                    HStack {
+                        ForEach(0..<model.activities.count, id: \.self) { item in
+                            if item == 0 {
+                                Text(model.activities[item].text)
                                     .font(.system(size: 12, weight: .medium))
                                     .multilineTextAlignment(.center)
                                     .fixedSize(horizontal: true, vertical: true)
@@ -208,34 +188,65 @@ struct EmotionBoardDataView: View {
                                         RoundedRectangle(cornerRadius: 45, style: .circular)
                                             .fill(.white.opacity(0.3))
                                     }
+                                
+                                if model.activities.count > 1 {
+                                    Text("+ \(model.activities.count - 1)")
+                                        .font(.system(size: 12, weight: .medium))
+                                        .multilineTextAlignment(.center)
+                                        .fixedSize(horizontal: true, vertical: true)
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 14)
+                                        .padding(.vertical, 8)
+                                        .cornerRadius(7)
+                                        .background {
+                                            RoundedRectangle(cornerRadius: 45, style: .circular)
+                                                .fill(.white.opacity(0.3))
+                                        }
+                                }
                             }
                         }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
-            
-            HStack {
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 0))
+                
                 Image(model.stateImage)
                     .resizable()
-                    .foregroundColor(.green)
-                    .frame(width: 135, height: 135)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 115, height: 115)
+                    .padding(.bottom, -20)
+                    .clipped()
+                    .frame(
+                        maxWidth: .infinity,
+                        minHeight: 115.0,
+                        maxHeight: 115.0,
+                        alignment: .bottomTrailing
+                    )
+                    .mask(
+                        Image(getBackgroundNameForMoodWeenEvent(for: model.title, isMoodWeenEvent: model.isMoodWeenEvent ?? false))
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: .infinity, minHeight: 115.0, maxHeight: 115.0)
+                    )
             }
-            .frame(alignment: .bottomTrailing)
-            .padding(.trailing, -20)
-            .padding(.top, 40)
-//            .clipped()
         }
-        .frame(maxWidth: .infinity, maxHeight: 120.0, alignment: .leading)
-        .background(LinearGradient(colors: model.color, startPoint: .topLeading, endPoint: .bottomTrailing))
+        .frame(maxWidth: .infinity, minHeight: 120.0, maxHeight: 120.0, alignment: .leading)
         .compositingGroup()
         .cornerRadius(15)
         .padding(.horizontal, 24)
-        .shadow(color: Colors.TextColors.mystic400,
-                radius: 10, x: 0, y: 0)
+        .shadow(color: Colors.TextColors.mystic400, radius: 10, x: 0, y: 0)
+    }
+    
+    private func getBackgroundNameForMoodWeenEvent(for title: String, isMoodWeenEvent: Bool) -> String {
+        switch title {
+        case "Очень хорошо": return isMoodWeenEvent ? "ic-js-moodween-background-veryGood" : "ic-js-background-veryGood"
+        case "Хорошо": return isMoodWeenEvent ? "ic-js-moodween-background-good" : "ic-js-background-good"
+        case "Нормально": return isMoodWeenEvent ? "ic-js-moodween-background-normal" : "ic-js-background-normal"
+        case "Плохо": return isMoodWeenEvent ? "ic-js-moodween-background-bad" : "ic-js-background-bad"
+        case "Очень плохо": return isMoodWeenEvent ? "ic-js-moodween-background-veryBad" : "ic-js-background-veryBad"
+        default: return ""
+        }
     }
 }
 
@@ -255,40 +266,8 @@ struct EmotionBoardEmtyView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: 120.0, alignment: .center)
         .background(Color.white)
-//        .compositingGroup()
         .cornerRadius(15)
         .padding(.horizontal, 24)
         .shadow(color: Colors.TextColors.mystic400, radius: 10, x: 0, y: 0)
     }
 }
-
-
-
-
-//                        if emotionBoardViewModels.count > 1 {
-//                            if !isNeededLast {
-//                                VStack {
-//                                    Image(systemName: "chevron.up")
-//                                        .resizable()
-//                                        .frame(width: 20, height: 10, alignment: .center)
-//                                        .foregroundColor(Colors.TextColors.fiord800)
-//                                        .rotationEffect(.radians(isHidden ? 2 * -.pi : .pi))
-//
-//                                    Divider()
-//                                        .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
-//
-//                                    Image(systemName: "chevron.down")
-//                                        .resizable()
-//                                        .frame(width: 20, height: 10, alignment: .center)
-//                                        .foregroundColor(Colors.TextColors.fiord800)
-//                                        .rotationEffect(.radians(isHidden ? 2 * -.pi  : .pi))
-//                                }
-//                                .frame(width: 35, height: 80, alignment: .center)
-//                                .background(.white)
-//                                .compositingGroup()
-//                                .cornerRadius(50 / 2)
-//                                .shadow(color: Colors.TextColors.mystic400, radius: 10, x: 0, y: 0)
-//                                .onTapGesture { hide() }
-//                                .padding(.top, 24)
-//                            }
-//                        }

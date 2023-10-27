@@ -104,7 +104,6 @@ struct PersonalCabinetView: View {
                             }
                         }
                         
-                        #if MoodMap
                         VStack {
                             createArrowBlock("Пользовательское соглашение")
                                 .frame(width: UIScreen.main.bounds.width - 32, height: 64)
@@ -115,8 +114,13 @@ struct PersonalCabinetView: View {
                         .padding(.horizontal, 24)
                         .background(.white)
                         .padding(.top, -12)
-                        
-                        #endif
+                        .onTapGesture {
+                            let url = URL.init(string: Constants.urlPathToPolitic)!
+                            
+                            if UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+                            }
+                        }
                     }
                     .background(Colors.Primary.lightWhite)
                 }
@@ -173,7 +177,13 @@ struct PersonalCabinetView: View {
     
     @ViewBuilder
     private func CreateLoginView(isLogin: Bool) -> some View {
-        HStack {
+        
+        ZStack {
+            Image(isLogin ? "ic-lk-authBackground" : "ic-lk-notauthBackground")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: .infinity, maxHeight: 170, alignment: .leading)
+        
             VStack {
                 VStack(spacing: 4) {
                     Text(isLogin ? "Привет, \(AppState.shared.userName ?? "друг")" : "Привет, это")
@@ -189,7 +199,7 @@ struct PersonalCabinetView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(EdgeInsets(top: -24, leading: 16, bottom: 0, trailing: 0))
+                .padding(EdgeInsets(top: -24, leading: 20, bottom: 0, trailing: 0))
                 
                 HStack {
                     Button {
@@ -215,93 +225,13 @@ struct PersonalCabinetView: View {
                 .padding(.bottom, -24)
             }
             
-            HStack {
-                Image(isLogin ? "ic-loginUser" : "ic-ch-nightDay")
-                    .resizable()
-                    .foregroundColor(.green)
-                    .frame(width: isLogin ? 155 : 155, height: isLogin ? 150 : 135)
-            }
-            .frame(maxWidth: 135, maxHeight: 140, alignment: .bottomTrailing)
-            .padding(.bottom, -20)
-            .padding(.trailing, -20)
         }
-        .frame(maxWidth: .infinity, maxHeight: 140, alignment: .leading)
-        .background(isLogin ? Color(hex: "F0E8FA") : Color(hex: "333877"))
-        .compositingGroup()
-        .cornerRadius(15)
-        .shadow(color: Colors.TextColors.mystic400, radius: 10, x: 0, y: 0)
+        .frame(maxWidth: .infinity, maxHeight: 170.0, alignment: .leading)
+        .cornerRadius(20)
+        .padding(.horizontal, 5)
+        .shadow(color: Colors.TextColors.slateGray700.opacity(0.5),
+                radius: 10, x: 0, y: 0)
     }
-    
-//    @ViewBuilder
-//    private func createAnalyticView() -> some View {
-//        HStack(spacing: 16) {
-//            VStack(spacing: 14) {
-//                Image("emoji_happy")
-//                    .resizable()
-//                    .frame(width: 38, height: 38)
-//
-//                ZStack {
-//                    Text("9999")
-//                        .foregroundColor(.white)
-//                        .font(.system(size: 16))
-//                }
-//                .frame(width: 86, height: 32)
-//                .background(Colors.Primary.lavender500Purple)
-//                .cornerRadius(32 / 2)
-//
-//                Text("Положительных\nэмоций")
-//                    .font(.system(size: 12))
-//                    .multilineTextAlignment(.center)
-//            }
-//            .frame(width: 100)
-//
-//            VStack(spacing: 14) {
-//
-//                Image("emoji_sad")
-//                    .resizable()
-//                    .frame(width: 38, height: 38)
-//
-//                ZStack {
-//                    Text("9999")
-//                        .foregroundColor(.white)
-//                        .font(.system(size: 16))
-//                }
-//                .frame(width: 86, height: 32)
-//                .background(Colors.Primary.lavender500Purple)
-//                .cornerRadius(32 / 2)
-//
-//                Text("Отрицательных\nэмоций")
-//                    .font(.system(size: 12))
-//                    .multilineTextAlignment(.center)
-//            }
-//            .frame(width: 100)
-//
-//            VStack(spacing: 14) {
-//                Image("emoji_cool")
-//                    .resizable()
-//                    .frame(width: 38, height: 38)
-//
-//                ZStack {
-//                    Text("9999")
-//                        .foregroundColor(.white)
-//                        .font(.system(size: 16))
-//                }
-//                .frame(width: 86, height: 32)
-//                .background(Colors.Primary.lavender500Purple)
-//                .cornerRadius(32 / 2)
-//
-//                Text("Всего дней\n")
-//                    .font(.system(size: 12))
-//                    .multilineTextAlignment(.center)
-//            }
-//            .frame(width: 100)
-//
-//        }
-//        .frame(width: UIScreen.main.bounds.width, height: 128)
-//        .padding(.top, 24)
-//        .background(.white)
-//
-//    }
     
     @ViewBuilder
     private func createArrowBlock(_ title: String) -> some View {

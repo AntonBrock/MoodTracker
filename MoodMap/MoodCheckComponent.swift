@@ -94,7 +94,6 @@ struct MoodCheckComponent: View {
         .onChange(of: choosedImageName) { newValue in
             self.setChoosedState(choosedImageId)
         }
-        
     }
     
     private func changeImage(for value: CGFloat) {

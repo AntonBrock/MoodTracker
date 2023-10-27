@@ -13,6 +13,12 @@ extension MainView {
         
         @Published var viewer: MainView?
         
+        @Published var moodCheckViewModel: MoodCheckViewModel = MoodCheckViewModel(
+            isCheckStateUser: false,
+            isCreateNewDiaryNote: false,
+            isBreathActivity: false
+        )
+        
         @Published var emotionCountData: EmotionCountDataViewModel = EmotionCountDataViewModel(
             total: 0,
             common: "",
@@ -156,6 +162,32 @@ extension MainView {
             fetchMainData()
         }
         
+        func getMoodCheck(completion: @escaping (() -> Void)) {
+            if AppState.shared.isLogin ?? false {
+                Services.userStateService.getMoodCheck { [weak self] response in
+                    switch response {
+                    case .success(let model):
+                        guard let self else {
+                            return
+                        }
+                        self.moodCheckViewModel = MoodCheckViewModel(
+                            isCheckStateUser: model.isCheckStateUser,
+                            isCreateNewDiaryNote: model.isCreateNewDiaryNote,
+                            isBreathActivity: model.isBreathActivity
+                        )
+                        
+                        if !model.isCheckStateUser || !model.isBreathActivity || !model.isCreateNewDiaryNote {
+                            AppState.shared.isCompletedMoodCheck = false
+                        }
+                        completion()
+                    case .failure(let error):
+                        print(error)
+                        completion()
+                    }
+                }
+            }
+        }
+        
         private func fetchReport(from: String, to: String, type: ReportEndPoint.TypeOfReport) {
             Services.reportService.fetchReport(from: from, to: to, type: type) { result in
                 switch result {
@@ -213,7 +245,11 @@ extension MainView {
                         language: $0.language,
                         image: $0.image,
                         created_at: nil,
-                        updated_at: nil
+                        updated_at: nil,
+                        isEventIcon: $0.text == "Декор дома"
+                        || $0.text == "Резка тыквы"
+                        || $0.text == "Аксессуары"
+                        || $0.text == "Костюм"
                     )}),
                     color: self.getColors(with: self.getState(from: i.stateId)),
                     stateImage: self.getStateImage(from: i.stateId),
@@ -224,12 +260,14 @@ extension MainView {
                     month: self.getFormatterTime(with: i.createdAt, and: "MMM"),
                     monthCurrentTime: self.getFormatterTime(with: i.createdAt, and: "dd"),
                     shortTime: self.getFormatterTime(with: i.createdAt, and: "HH:mm"),
-                    longTime: self.getFormatterTime(with: i.createdAt, and: "dd MMM yyyy, HH:mm")))
+                    longTime: self.getFormatterTime(with: i.createdAt, and: "dd MMM yyyy, HH:mm"),
+                    isMoodWeenEvent: i.isMoodWeenEvent))
             }
             
             let sortedModels = models.sorted(by: { $0.longTime > $1.longTime })
-            let modelGroups = Array(Dictionary(grouping: sortedModels){ $0.monthTime }.values)
-            let sortedGroupsModel = modelGroups.sorted(by: { $0[0].month < $1[0].month })
+            let modelGroups = Array(Dictionary(grouping: sortedModels) { $0.monthTime }.values)
+            var sortedGroupsModel = modelGroups.sorted(by: { $0[0].month > $1[0].month })
+            sortedGroupsModel.reverse()
             
             return sortedGroupsModel
         }

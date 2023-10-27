@@ -85,12 +85,42 @@ struct UserStateService: UserStateServiceProtocol {
         })
     }
     
+    func getMoodCheck(completion: @escaping(Result<MoodCheckModel, Error>) -> Void) {
+        let target = BaseAPI.userState(.getMoodCheck)
+        let networkService = ServiceProvider().networkService
+        networkService?.request(.target(target), completion: { response in
+            switch response {
+            case let .success(result):
+                guard let model = try? JSONDecoder().decode(MoodCheckModel.self, from: result.data) else {
+                    return
+                }
+                completion(.success(model))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        })
+    }
+    
+    func postBreathCheck(completion: @escaping(Result<Bool, Error>) -> Void) {
+        let target = BaseAPI.userState(.postMoodBreathCheck)
+        let networkService = ServiceProvider().networkService
+        networkService?.request(.target(target), completion: { response in
+            switch response {
+            case .success:
+                completion(.success(true))
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        })
+    }
+    
     func sendUserNote(createdAt: String,
                       activities: [String],
                       emotionId: String,
                       stateId: String,
                       stressRate: String,
                       text: String,
+                      isMoodWeenEvent: Bool?,
                       completion: @escaping(Result<Bool, Error>) -> Void) {
         let target = BaseAPI.journal(.sendUserNote(
             createdAt: createdAt,
@@ -98,7 +128,8 @@ struct UserStateService: UserStateServiceProtocol {
             emotionId: emotionId,
             stateId: stateId,
             stressRate: stressRate,
-            text: text)
+            text: text,
+            isMoodWeenEvent: isMoodWeenEvent)
         )
 
         let networkService = ServiceProvider().networkService

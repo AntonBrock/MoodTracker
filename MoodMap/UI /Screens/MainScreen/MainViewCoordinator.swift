@@ -13,7 +13,8 @@ class MainViewCoordinator: ObservableObject, Identifiable {
     unowned let parent: BaseViewCoordinator
     
     @Published var diaryViewCoordinator: DiaryViewCoordinator?
-
+    @Published var breathCoordinator: BreathViewCoordinator?
+    
     @ObservedObject var viewModel: MainView.ViewModel
 
     // MARK: - Init
@@ -43,5 +44,16 @@ class MainViewCoordinator: ObservableObject, Identifiable {
     
     func openMoodCheckScreen() {
         parent.isShowingMoodCheckScreen.toggle()
+    }
+    
+    func openBreathScreen() {
+        breathCoordinator = .init(
+            parent: parent,
+            container: container
+        )
+        
+        withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
+            parent.hideCustomTabBar = true
+        }
     }
 }

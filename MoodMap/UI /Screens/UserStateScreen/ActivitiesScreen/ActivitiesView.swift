@@ -65,10 +65,13 @@ struct ActivitiesView: View {
                         
                         ForEach(0..<coordinator.userStateViewModel.activitiesViewModel.count) { index in
                             ZStack {
-                                ActivitiesChooseViewBlock(activitiesId: coordinator.userStateViewModel.activitiesViewModel[index].id,
-                                                          activitieImageTitle: coordinator.userStateViewModel.activitiesViewModel[index].image,
-                                                          activitieTitle: coordinator.userStateViewModel.activitiesViewModel[index].text,
-                                                          isSelected: coordinator.userStateViewModel.choosedActivities.contains(coordinator.userStateViewModel.activitiesViewModel[index].id)
+                                ActivitiesChooseViewBlock(
+                                    activitiesId: coordinator.userStateViewModel.activitiesViewModel[index].id,
+                                    activitieImageTitle: coordinator.userStateViewModel.activitiesViewModel[index].image,
+                                    activitieTitle: coordinator.userStateViewModel.activitiesViewModel[index].text,
+                                    isEventIcon: coordinator.userStateViewModel.activitiesViewModel[index].isEventIcon,
+                                    isSelected: coordinator.userStateViewModel.choosedActivities.contains(
+                                        coordinator.userStateViewModel.activitiesViewModel[index].id)
                                 ) { choosedActivitie in
                                     coordinator.userStateViewModel.choosedActivities.append(choosedActivitie)
                                     self.choosedActivities.append(choosedActivitie)
@@ -88,13 +91,14 @@ struct ActivitiesView: View {
                 NavigationLink(
                     isActive: $isShowStressScreen,
                     destination: {
-                        StressCheckView(valueModel: coordinator.sliderValueModele!,
-                                        userStateVideModel: coordinator.userStateViewModel,
-                                        parent: parent, stressViewModel: coordinator.userStateViewModel.stressViewModel,
-                                        saveButtonDidTap: { text, choosedStress, view in
-                            coordinator.userStateViewModel.choosedStress = choosedStress
-                            coordinator.userStateViewModel.mindText = text
-                            coordinator.userStateViewModel.sendUserStateInfo(view: view)
+                        StressCheckView(
+                            valueModel: coordinator.sliderValueModele!,
+                            userStateVideModel: coordinator.userStateViewModel,
+                            parent: parent, stressViewModel: coordinator.userStateViewModel.stressViewModel,
+                            saveButtonDidTap: { text, choosedStress, view in
+                                coordinator.userStateViewModel.choosedStress = choosedStress
+                                coordinator.userStateViewModel.mindText = text
+                                coordinator.userStateViewModel.sendUserStateInfo(view: view)
                         }
                     )
                     .navigationBarHidden(true)
@@ -125,8 +129,9 @@ struct ActivitiesChooseViewBlock: View {
     var activitiesId: String
     var activitieImageTitle: String
     var activitieTitle: String
+    var isEventIcon: Bool? = false
 
-    @State var isSelected: Bool = false
+    @State var isSelected: Bool
     
     var setSelected: ((String) -> Void)
     var unSelected: ((String) -> Void)
@@ -148,9 +153,12 @@ struct ActivitiesChooseViewBlock: View {
         .shadow(color: Colors.TextColors.mystic400, radius: 6.0, x: 0, y: 0)
         .overlay {
             RoundedRectangle(cornerRadius: 10)
-                .stroke(isSelected ?
-                        Colors.Primary.royalPurple600Purple :
-                        .white, lineWidth: 1)
+                .stroke(
+                    isSelected && isEventIcon ?? false ? Color(hex: "FF9635") :
+                    isEventIcon ?? false ? Colors.Secondary.malibu600Blue :
+                    isSelected ? Colors.Primary.royalPurple600Purple : Color.white,
+                    lineWidth: 1
+                )
         }
         .padding(.top, 16)
         .onTapGesture {
