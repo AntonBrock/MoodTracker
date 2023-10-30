@@ -25,7 +25,7 @@ struct StressCheckView: View {
 
     @State var yandexInterstitialADView: YandexInterstitialADView?
     @State var text: String = ""
-    var placeholder = "У меня не выходит из головы.."
+    @FocusState private var focusField: Bool
     
     var saveButtonDidTap: ((_ text: String, _ choosedStress: String, _ view: StressCheckView) -> Void)
     
@@ -114,14 +114,6 @@ struct StressCheckView: View {
                         )
                     }
                 }
-                
-//                MTButton(buttonStyle: .fill, title: "Сохранить запись", handle: {
-//                    if text == "У меня не выходит из головы.." {
-//                        text = ""
-//                    }
-//                    saveButtonDidTap(text, choosedStress, self)
-//                })
-//                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
             }
             
         }
@@ -130,7 +122,6 @@ struct StressCheckView: View {
             yandexInterstitialADView
         }
         .onAppear {
-            text = placeholder
             choosedStress = "8b02d308-37fa-41de-bdd2-00303b976031"
         }
         .bottomSheet(
@@ -145,10 +136,27 @@ struct StressCheckView: View {
                     .font(.system(size: 16, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
+                VStack {
+                    TextEditor(text: $text)
+                        .foregroundStyle(Colors.Primary.blue)
+                        .focused($focusField)
+                        .multilineTextAlignment(.leading)
+                        .lineLimit(35)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Spacer()
+                                
+                                Button("Готово") {
+                                    self.focusField = false
+                                    self.bottomSheetPosition = .relative(0.125)
+                                }
+                            }
+                        }
+                }
+                .frame(maxWidth: .infinity, maxHeight: focusField ? .infinity : 10, alignment: .leading)
+                .padding(.horizontal, -5)
+                                
                 MTButton(buttonStyle: .fill, title: "Сохранить запись", handle: {
-                    if text == "У меня не выходит из головы.." {
-                        text = ""
-                    }
                     saveButtonDidTap(text, choosedStress, self)
                 })
                 .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
@@ -158,15 +166,22 @@ struct StressCheckView: View {
             .padding([.horizontal, .bottom])
             .onTapGesture {
                 self.bottomSheetPosition = .relativeTop(0.975)
+                self.focusField = true
+            }
+        })
+        {}
+        .enableAppleScrollBehavior(false)
+        .enableBackgroundBlur()
+        .backgroundBlurMaterial(bottomSheetPosition == .relative(0.125) ? .systemLight : bottomSheetPosition == .relativeBottom(0.125) ? .systemLight : .dark(.thin))
+        .customBackground(.white)
+        .enableSwipeToDismiss(false)
+        .onChange(of: bottomSheetPosition) { newValue in
+            if newValue == .relative(0.125) {
+                self.focusField = false
+            } else if newValue == .relativeTop(0.975) {
+                self.focusField = true
             }
         }
-        ){
-         
-        }
-        .enableAppleScrollBehavior()
-        .enableBackgroundBlur()//false
-        .backgroundBlurMaterial(bottomSheetPosition == .relative(0.125) ? .light(.default) : bottomSheetPosition == .relativeBottom(0.125) ?  .light(.default) : .dark(.thin))
-        .customBackground(.white)
     }
     
     func showLoader() {
