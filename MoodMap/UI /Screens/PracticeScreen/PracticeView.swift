@@ -102,7 +102,7 @@ struct PracticeView: View {
                 
                 Text("Дневник\nблагодарности")
                     .foregroundColor(.white )
-                    .font(.system(size: 20, weight: .semibold))
+                    .font(.system(size: 22, weight: .semibold))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                     .padding(.leading, 26)
                     .padding(.bottom, 26)
