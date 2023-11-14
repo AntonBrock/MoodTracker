@@ -18,6 +18,8 @@ enum MetricsEventName: String {
     case createEmotionNoteButtonFromTopBlock = "createEmotionNoteButtonFromTopBlock"
     case stateNextButton = "stateNextButton"
     case openJournalScreen = "openJournalScreen"
+    case openPracticeScreen = "openPracticeScreen"
+
     case shareToInstagramButton = "shareToInstagramButton"
     case deleteAccAgreeButton = "deleteAccAgreeButton"
     case singInButton = "singInButton"
@@ -59,6 +61,8 @@ enum YMetricsEventType: String {
     case createEmotionNoteButtonFromTopBlock = "createEmotionNoteButtonFromTopBlock"
     case stateNextButton = "stateNextButton"
     case openJournalScreen = "openJournalScreen"
+    case openPracticeScreen = "openPracticeScreen"
+
     case shareToInstagramButton = "shareToInstagramButton"
     case deleteAccAgreeButton = "deleteAccAgreeButton"
     case singInButton = "singInButton"
@@ -144,6 +148,8 @@ class MetricsService: MetricsServiceProtocol {
             message = "iOS: С Главного экрана открыли Дневник благодарности"
         case .openJournalScreen:
             message = "iOS: Открыли журнал по табу"
+        case .openPracticeScreen:
+            message = "iOS: Открыли Практики по табу"
         case .saveNewDiaryPageButton:
             message = "iOS: Сохранили новую запись в Дневнике благодарности"
         case .saveShareImageButton:
@@ -221,6 +227,8 @@ class MetricsService: MetricsServiceProtocol {
             message = "iOS: С Главного экрана открыли Дневник благодарности"
         case .openJournalScreen:
             message = "iOS: Открыли журнал по табу"
+        case .openPracticeScreen:
+            message = "iOS: Открыли Практики по табу"
         case .saveNewDiaryPageButton:
             message = "iOS: Сохранили новую запись в Дневнике благодарности"
         case .saveShareImageButton:

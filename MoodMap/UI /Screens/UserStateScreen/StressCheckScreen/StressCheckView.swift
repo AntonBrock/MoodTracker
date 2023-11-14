@@ -55,7 +55,7 @@ struct StressCheckView: View {
                             presentationMode.wrappedValue.dismiss()
                         }
                     }
-                Text("Уровень стресса")
+                Text("Укажи уровень стресса")
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(Colors.Primary.blue)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)

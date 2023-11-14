@@ -15,6 +15,7 @@ class ViewRouter: ObservableObject {
 enum Page: String {
     case home
     case jurnal
+    case practice
     case report
     case profile
 }
@@ -48,6 +49,8 @@ struct TabBarView: View {
                         MainCoordinatorView(coordinator: coordinator.mainScreenCoordinator, animation: animation)
                     case .jurnal:
                         JournalCoordinatorView(coordinator: coordinator.journalCoordinator)
+                    case .practice:
+                        PracticeCoordinatorView(coordinator: coordinator.practiceCoordinator)
                     case .report:
                         ReportCoordinatorView(coordinator: coordinator.reportCoordinator)
                     case .profile:
@@ -61,7 +64,9 @@ struct TabBarView: View {
                     ZStack {
                         HStack {
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .home, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-home-none-fill", tabName: "home", filledIconName: "tb-ic-home-fill")
-                            TabBarIcon(viewRouter: viewRouter, assignedPage: .jurnal, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-jurnall-none-fill", tabName: "jurnal", filledIconName: "tb-ic-jurnall-fill")
+//                            TabBarIcon(viewRouter: viewRouter, assignedPage: .jurnal, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-jurnall-none-fill", tabName: "jurnal", filledIconName: "tb-ic-jurnall-fill")
+                            TabBarIcon(viewRouter: viewRouter, assignedPage: .practice, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-practice-none-fill", tabName: "jurnal", filledIconName: "tb-ic-practice-fill")
+
                             
                             ZStack {
                                 Circle()

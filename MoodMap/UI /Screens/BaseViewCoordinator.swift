@@ -13,6 +13,7 @@ class BaseViewCoordinator: ObservableObject {
     @Published var reportCoordinator: ReportViewCoordinator!
     @Published var mainScreenCoordinator: MainViewCoordinator!
     @Published var journalCoordinator: JournalViewCoordinator!
+    @Published var practiceCoordinator: PracticeViewCoordinator!
     @Published var personalCabinetCoordinator: PersonalCabinetViewCoordinator!
     
     @Published var moodCheckCoordinator: MoodCheckViewCoordinator!
@@ -50,6 +51,11 @@ class BaseViewCoordinator: ObservableObject {
         )
         
         self.journalCoordinator = .init(
+            parent: self,
+            container: container
+        )
+        
+        self.practiceCoordinator = .init(
             parent: self,
             container: container
         )
