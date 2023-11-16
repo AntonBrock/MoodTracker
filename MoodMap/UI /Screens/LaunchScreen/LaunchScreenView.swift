@@ -31,28 +31,8 @@ struct LaunchScreenView: View {
         self.parent = parent
         self.container = container
         
-        // MoodWeen
-        if RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .moodWeenEvent) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                if !AppState.shared.isMoodWeenIconWasSeted  {
-                    UIApplication.shared.setAlternateIconName("MoodWeenIcon") { error in
-                        if let error {
-                            AppState.shared.isMoodWeenIconWasSeted = false
-                            UIApplication.shared.setAlternateIconName(nil)
-                        } else {
-                            AppState.shared.isMoodWeenIconWasSeted = true
-                        }
-                    }
-                }
-            }
-        } else {
-            if !AppState.shared.isMoodMapIconWasSeted {
-                AppState.shared.isMoodMapIconWasSeted = true
-                UIApplication.shared.setAlternateIconName(nil)
-            } else {
-                AppState.shared.isMoodMapIconWasSeted = false
-            }
-        }
+        #warning("TODO: Возвращаем иконку в этой версии на оригинальную")
+        UIApplication.shared.setAlternateIconName(nil)
     }
     
     var body: some View {

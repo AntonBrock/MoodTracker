@@ -48,12 +48,6 @@ final class AppState: ObservableObject {
         static let maximumValueOfLimits = "maximumValueOfLimits"
         static let isCompletedMoodCheck = "isCompletedMoodCheck"
         static let isMoodMapIconWasSeted = "isMoodMapIconWasSeted"
-        
-        //MoodWeen
-        static let isMoodWeenIconWasSeted = "isMoodWeenIconWasSeted"
-        static let currentValueGame = "currentValueGame"
-        static let moodWeenGameIsEnabled = "moodWeenGameIsEnabled"
-        static let moodWeenBannerShownFirstTime = "moodWeenBannerShownFirstTime"
     }
     
     var timezone: String? {
@@ -186,52 +180,6 @@ final class AppState: ObservableObject {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isCompletedMoodCheck)
-        }
-    }
-        
-    // MoodWeen
-    var isMoodWeenIconWasSeted: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isMoodWeenIconWasSeted)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isMoodWeenIconWasSeted)
-        }
-    }
-    
-    var isMoodMapIconWasSeted: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.isMoodMapIconWasSeted)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.isMoodMapIconWasSeted)
-        }
-    }
-    
-    var moodWeenGameStage: Int {
-        get {
-            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.currentValueGame)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.currentValueGame)
-        }
-    }
-    
-    var moodWeenGameIsEnabled: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.moodWeenGameIsEnabled)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.moodWeenGameIsEnabled)
-        }
-    }
-    
-    var moodWeenBannerShownFirstTime: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.moodWeenBannerShownFirstTime)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.moodWeenBannerShownFirstTime)
         }
     }
     

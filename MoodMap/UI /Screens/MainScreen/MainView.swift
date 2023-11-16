@@ -76,14 +76,6 @@ struct MainView: View {
         ZStack {
             ScrollView {
                 VStack {
-                    if RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .moodWeenEvent) {
-                        moodWeenEventBlock()
-                            .padding(.top, 16)
-                            .onTapGesture {
-                                coordinator.parent.isShowingMoodWeenEventScreen = true
-                            }
-                    }
-                    
                     if isAnimated {
                         VStack {
                             createEmotionalHeader()
@@ -124,31 +116,18 @@ struct MainView: View {
                         }
                     }
                     
-                    if !(viewModel.journalViewModels?.isEmpty ?? true) {
-                        if isAnimatedJournalView {
-                            createJournalView()
-                                .transition(.move(edge: .leading).combined(with: .opacity))
-                        }
+                    if isAnimatedJournalView {
+                        createJournalView()
+                            .transition(.move(edge: .leading).combined(with: .opacity))
                     }
                     
-                    diaryBlock()
-                    
+                    Text("Мотивация дня")
+                        .foregroundColor(Colors.Primary.blue)
+                        .font(.system(size: 20, weight: .semibold))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
                     QuoteView(quote: $quoteText)
                         .padding(.top, 10)
-                    
-                    moodBreathView()
-                        .onTapGesture {
-                            if AppState.shared.isLogin ?? false {
-                                Services.metricsService.sendEventWith(eventName: .openBreathScreen)
-                                Services.metricsService.sendEventWith(eventType: .openBreathScreen)
-                                
-                                coordinator.openBreathScreen()
-                            } else {
-                                withAnimation {
-                                    coordinator.parent.showAuthLoginView = true
-                                }
-                            }
-                        }
                     
                     Text("Статистика сегодня")
                         .foregroundColor(Colors.Primary.blue)
@@ -214,15 +193,11 @@ struct MainView: View {
                 }
                 
                 if !(viewModel.journalViewModels?.isEmpty ?? true) {
-                    withAnimation(.linear(duration: 0.3)) {
+                    withAnimation(.linear(duration: 0.5)) {
                         self.isAnimatedJournalView = true
                     }
                 }
                 
-                if !AppState.shared.moodWeenBannerShownFirstTime && RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .moodWeenEvent) {
-                    coordinator.parent.isShowingMoodWeenEventScreen = true
-                    AppState.shared.moodWeenBannerShownFirstTime = true
-                }
 
                 withAnimation(Animation.linear(duration: 4.0).repeatForever(autoreverses: false)) {
                     moodWeenShimmerAnimation.toggle()
@@ -236,7 +211,7 @@ struct MainView: View {
                 getMoodCeck()
             }
             .onChange(of: viewModel.journalViewModels) { newValue in
-                withAnimation(.linear(duration: 0.3)) {
+                withAnimation(.linear(duration: 0.5)) {
                     self.isAnimatedJournalView = true
                 }
             }
@@ -330,31 +305,6 @@ struct MainView: View {
                 }
             }
         }
-    }
-    
-    @ViewBuilder
-    private func diaryBlock() -> some View {
-        Text("Эмоциональная поддержка")
-            .foregroundColor(Colors.Primary.blue)
-            .font(.system(size: 20, weight: .semibold))
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .padding(.horizontal, 20)
-            .padding(.top, 20)
-        
-        createDiaryView()
-            .padding(.top, 10)
-            .onTapGesture {
-                if AppState.shared.isLogin ?? false {
-                    Services.metricsService.sendEventWith(eventName: .openDiaryScreenButton)
-                    Services.metricsService.sendEventWith(eventType: .openDiaryScreenButton)
-                    
-                    coordinator.openDiary()
-                } else {
-                    withAnimation {
-                        coordinator.parent.showAuthLoginView = true
-                    }
-                }
-            }
     }
     
     @ViewBuilder
@@ -526,18 +476,6 @@ struct MainView: View {
     }
     
     @ViewBuilder
-    private func moodBreathView() -> some View {
-        Text("Практики")
-            .foregroundColor(Colors.Primary.blue)
-            .font(.system(size: 20, weight: .semibold))
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .padding(.horizontal, 20)
-            .padding(.top, 20)
-        
-        createMoodBreathCover()
-    }
-    
-    @ViewBuilder
     private func createEmotionalHeader() -> some View {
         
         ZStack {
@@ -635,149 +573,151 @@ struct MainView: View {
     @ViewBuilder
     private func createJournalView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 6) {
-                
-                if viewModel.journalViewModels?.count ?? 0 < 5 {
-                    VStack {
-                        Image("ic-ch-mood")
-                            .resizable()
-                            .frame(width: 50, height: 52)
-                            .padding(.leading, 15)
-                            .padding(.top, 20)
-                       
-                        Text("Создай новую запись")
-                            .frame(maxWidth: .infinity,
-                                   maxHeight: .infinity, alignment: .center)
-                            .foregroundColor(Colors.Primary.lavender500Purple)
-                            .font(.system(size: 9, weight: .semibold))
-                            .lineLimit(0)
-                            .multilineTextAlignment(.center)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.bottom, 22)
-                        
+            HStack(spacing: 10) {
+                if let journalViewModels = viewModel.journalViewModels {
+                    if journalViewModels.isEmpty {
+                        createFirstJournalView()
+                        .padding(.horizontal, 18)
+                    } else {
+                        journalViews()
+                        .padding(.horizontal, 18)
                     }
-                    .frame(width: 116, height: 120)
-                    .compositingGroup()
-                    .background(.white)
-                    .cornerRadius(15)
-                    .shadow(color: Colors.TextColors.mischka500,
-                            radius: 2.0, x: 0.0, y: 0)
-                    .padding(.leading, 20)
-                    .onTapGesture {
-                        if AppState.shared.isLogin ?? false {
-                            if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
-                                coordinator.parent.showLimitsView = true
-                            } else {
-                                Services.metricsService.sendEventWith(eventName: .createEmotionNoteButtonFromTopBlock)
-                                coordinator.openMoodCheckScreen()
-                            }
-                        } else {
-                            withAnimation {
-                                coordinator.parent.showAuthLoginView = true
-                            }
-                        }
-                    }
-                }
-               
-                ForEach(viewModel.journalViewModels?[0] ?? [], id: \.self) { item in
-                    VStack {
-                        Text(item.shortTime)
-                            .frame(maxWidth: .infinity,
-                                   maxHeight: .infinity, alignment: .center)
-                            .foregroundColor(.white)
-                            .font(.system(size: 12, weight: .semibold))
-                            .padding(.top, 14)
-                        
-                        Text(item.title)
-                            .frame(maxWidth: .infinity,
-                                   maxHeight: .infinity, alignment: .center)
-                            .foregroundColor(.white)
-                            .font(.system(size: 16, weight: .semibold))
-                            .padding(.horizontal, 5)
-                            .lineLimit(2)
-                            .multilineTextAlignment(.center)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.top, 4)
-                       
-                        Text(getStressTitle(item.stressRate))
-                            .frame(maxWidth: .infinity,
-                                   maxHeight: .infinity, alignment: .bottom)
-                            .foregroundColor(.white)
-                            .font(.system(size: 10, weight: .semibold))
-                            .padding(.bottom, 22)
-                        
-                    }
-                    .frame(width: 116, height: 120)
-                    .compositingGroup()
-                    .background(LinearGradient(colors: item.color, startPoint: .topLeading, endPoint: .bottomTrailing))
-                    .cornerRadius(15)
-                    .shadow(color: Colors.TextColors.mischka500,
-                            radius: 2.0, x: 0.0, y: 0)
-                    .onTapGesture {
-                        #warning("TODO: Нужна переработка экрана об эмоции, так как выглядит сыро и не вкусно")
-//                        currentSelectedJournalPage = item
-//                        showMoreDetailsAboutJournalPage.toggle()
-                    }
+                } else {
+                    createFirstJournalView()
+                    .padding(.horizontal, 18)
                 }
             }
-            .padding(.top, 10)
+            .padding(.top, 15)
             .padding(.bottom, 10)
         }
+        .padding(.horizontal, 18)
     }
     
     @ViewBuilder
-    private func createDiaryView() -> some View {
-        VStack(alignment: .center, spacing: 16) {
-            ZStack {
-                Image("dairyHelperCover")
-                    .resizable()
-                    .frame(maxWidth: .infinity, maxHeight: 120)
-                    .aspectRatio(1, contentMode: .fill)
-                
-                VStack {}
-                    .frame(maxWidth: .infinity, minHeight: 120)
-                    .background(LinearGradient(colors: [Colors.Secondary.shamrock600Green,
-                                                        Color(hex: "0B98C5")],
-                                               startPoint: .topLeading,
-                                               endPoint: .bottomTrailing).opacity(0.9))
-                
-                Text("Дневник\nблагодарности")
-                    .foregroundColor(.white )
-                    .font(.system(size: 20, weight: .semibold))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                    .padding(.leading, 16)
-                    .padding(.bottom, 16)
+    private func createFirstJournalView() -> some View {
+        VStack {
+            Image("ic-ch-mood")
+                .resizable()
+                .frame(width: 50, height: 52)
+                .padding(.leading, 15)
+                .padding(.top, 20)
+           
+            Text("Создать запись")
+                .frame(maxWidth: .infinity,
+                       maxHeight: .infinity, alignment: .center)
+                .foregroundColor(Colors.Primary.lavender500Purple)
+                .font(.system(size: 9, weight: .semibold))
+                .lineLimit(0)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 22)
+            
+        }
+        .frame(width: 116, height: 120)
+        .compositingGroup()
+        .background(.white)
+        .cornerRadius(15)
+        .shadow(color: Colors.TextColors.mischka500,
+                radius: 2.0, x: 0.0, y: 0)
+        .onTapGesture {
+            if AppState.shared.isLogin ?? false {
+                if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
+                    coordinator.parent.showLimitsView = true
+                } else {
+                    Services.metricsService.sendEventWith(eventName: .createEmotionNoteButtonFromTopBlock)
+                    coordinator.openMoodCheckScreen()
+                }
+            } else {
+                withAnimation {
+                    coordinator.parent.showAuthLoginView = true
+                }
             }
         }
-        .frame(maxWidth: .infinity, minHeight: 120)
-        .cornerRadius(20)
-        .padding(.horizontal, 20)
-        .shadow(color: Colors.TextColors.mischka500,
-                radius: 3.0, x: 1.0, y: 0)
     }
     
     @ViewBuilder
-    private func createMoodBreathCover() -> some View {
-        VStack(alignment: .center, spacing: 16) {
+    private func journalViews() -> some View {
+        ForEach(viewModel.journalViewModels?[0] ?? [], id: \.self) { item in
             ZStack {
-                Image("ic-ms-mainBreathCover")
+                Image(getBackgroundNameForMoodWeenEvent(for: item.title))
                     .resizable()
-                    .frame(maxWidth: .infinity, maxHeight: 140)
-                    .aspectRatio(1, contentMode: .fill)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(minWidth: 200, maxWidth: 200, minHeight: 130, maxHeight: 130)
+                
+                VStack {
+                    Text(item.shortTime)
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.white.opacity(0.8))
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 16)
+                    
+                    Text(item.title)
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text(getStressTitle(item.stressRate))
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
-                Text("Дыхательная\nпрактика 4-7-8")
-                    .foregroundColor(.white)
-                    .font(.system(size: 22, weight: .semibold))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                    .padding(.leading, 26)
-                    .padding(.bottom, 26)
+                    HStack {
+                        activitesViews(item)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                }
+                .frame(maxWidth: .infinity, maxHeight: 170.0, alignment: .leading)
             }
         }
-        .frame(maxWidth: .infinity, minHeight: 140)
-        .cornerRadius(20)
-        .padding(.horizontal, 10)
-        .shadow(color: Colors.TextColors.mischka500,
-                radius: 3.0, x: 1.0, y: 0)
+    }
+    
+    @ViewBuilder
+    private func activitesViews(_ journalModel: JournalViewModel) -> some View {
+        ForEach(0..<journalModel.activities.count, id: \.self) { element in
+            if element == 0 {
+                Text(journalModel.activities[element].text)
+                    .font(.system(size: 12, weight: .medium))
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: true, vertical: true)
+                    .foregroundColor(.white)
+                    .cornerRadius(7)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 8)
+                    .background {
+                        RoundedRectangle(cornerRadius: 45, style: .circular)
+                            .fill(.white.opacity(0.3))
+                    }
+                
+                if journalModel.activities.count > 1 {
+                    Text("+ \(journalModel.activities.count - 1)")
+                        .font(.system(size: 12, weight: .medium))
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: true, vertical: true)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 8)
+                        .cornerRadius(7)
+                        .background {
+                            RoundedRectangle(cornerRadius: 45, style: .circular)
+                                .fill(.white.opacity(0.3))
+                        }
+                }
+            }
+        }
+    }
+    
+    private func getBackgroundNameForMoodWeenEvent(for title: String) -> String {
+        switch title {
+        case "Очень хорошо": return "ic-js-background-veryGood"
+        case "Хорошо": return "ic-js-background-good"
+        case "Нормально": return "ic-js-background-normal"
+        case "Плохо": return "ic-js-background-bad"
+        case "Очень плохо": return "ic-js-background-veryBad"
+        default: return ""
+        }
     }
     
     private func getStressTitle(_ stressRate: String) -> String {

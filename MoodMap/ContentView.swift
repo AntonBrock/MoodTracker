@@ -178,10 +178,11 @@ struct ContentView: View {
     
     private func changeViewRouter(page: Page) {
         switch page {
-        case .jurnal: viewRouter.currentPage = .jurnal
         case .home: viewRouter.currentPage = .home
-        case .profile: viewRouter.currentPage = .profile
+        case .jurnal: viewRouter.currentPage = .jurnal
+        case .practice: viewRouter.currentPage = .practice
         case .report: viewRouter.currentPage = .report
+        case .profile: viewRouter.currentPage = .profile
         }
     }
 }

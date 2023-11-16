@@ -82,20 +82,23 @@ struct MoodCheckView: View {
                                 VStack {
                                     VStack {
                                         Button(action: {
-                                            showDatePicker.toggle()
+                                             #warning("TODO: Вернуть в будущем")
+//                                            showDatePicker.toggle()
                                         }, label: {
                                             
                                             Text("\(timeViewText) \(getCurrentTime())")
                                                 .font(.system(size: 16, weight: .medium))
                                                 .foregroundColor(Colors.Primary.blue)
-                                                .padding(.leading, 16)
+                                                .padding(.horizontal, 16)
                                                 .padding(.vertical, 8)
                                             
-                                            Image("chevronDownIcon")
-                                                .foregroundColor(Colors.TextColors.cello900)
-                                                .frame(width: 25, height: 25, alignment: .center)
-                                                .padding(.trailing, 16)
-                                                .padding(.vertical, 8)
+                                                #warning("TODO: Вернуть в будущем")
+
+//                                            Image("chevronDownIcon")
+//                                                .foregroundColor(Colors.TextColors.cello900)
+//                                                .frame(width: 25, height: 25, alignment: .center)
+//                                                .padding(.trailing, 16)
+//                                                .padding(.vertical, 8)
                                         })
                                         .background(
                                             RoundedRectangle(cornerRadius: 20)

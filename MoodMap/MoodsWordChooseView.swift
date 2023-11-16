@@ -23,7 +23,7 @@ struct MoodsWordChooseView: View {
     
     var body: some View {
         VStack {
-            Text("Какие эмоции описывают твои чувства лучше всего?")
+            Text("Какая эмоция лучше всего описывает твои чувства сейчас?")
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .font(.system(size: 16, weight: .medium))

@@ -123,6 +123,12 @@ struct PersonalCabinetView: View {
                         }
                     }
                     .background(Colors.Primary.lightWhite)
+                    
+                    Text("Версия приложения: \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "")")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                        .foregroundColor(Colors.Primary.lightGray)
+                        .font(.system(size: 12))
+                        .padding(.top, 10)
                 }
                 .padding(.bottom, 24)
                 .sheet(isPresented: $showThatTelegramNotInstallView) {
