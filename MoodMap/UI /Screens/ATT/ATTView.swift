@@ -79,29 +79,32 @@ struct ATTView: View {
                     .multilineTextAlignment(.center)
                 
                 MTButton(buttonStyle: .fill, title: "Продолжить") {
-                    ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                        switch status {
-                        case .authorized:
-                            // Tracking authorization dialog was shown
-                            // and we are authorized
-                            print("Authorized")
-                            self.dismiss.callAsFunction()
-                            self.closeAction()
-                        case .denied:
-                            // Tracking authorization dialog was
-                            // shown and permission is denied
-                            print("Denied")
-                            self.dismiss.callAsFunction()
-                            self.closeAction()
-                        case .notDetermined:
-                            // Tracking authorization dialog has not been shown
-                            print("Not Determined")
-                        case .restricted:
-                            print("Restricted")
-                        @unknown default:
-                            print("Unknown")
-                        }
-                    })
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                            switch status {
+                            case .authorized:
+                                // Tracking authorization dialog was shown
+                                // and we are authorized
+                                self.dismiss.callAsFunction()
+                                self.closeAction()
+                            case .denied:
+                                // Tracking authorization dialog was
+                                // shown and permission is denied
+                                self.dismiss.callAsFunction()
+                                self.closeAction()
+                            case .notDetermined:
+                                // Tracking authorization dialog has not been shown
+                                self.dismiss.callAsFunction()
+                                self.closeAction()
+                            case .restricted:
+                                self.dismiss.callAsFunction()
+                                self.closeAction()
+                            @unknown default:
+                                self.dismiss.callAsFunction()
+                                self.closeAction()
+                            }
+                        })
+                    }
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 5)
