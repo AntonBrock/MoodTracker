@@ -586,14 +586,18 @@ struct MainView: View {
     private func createJournalView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
-                if ((viewModel.journalViewModels?.isEmpty) == nil) {
+                if let journalViewModels = viewModel.journalViewModels {
+                    if journalViewModels.isEmpty {
+                        createFirstJournalView()
+                        .padding(.horizontal, 18)
+                    } else {
+                        journalViews()
+                        .padding(.horizontal, 18)
+                    }
+                } else {
                     createFirstJournalView()
                     .padding(.horizontal, 18)
-                } else {
-                    journalViews()
-                    .padding(.horizontal, 18)
                 }
-               
             }
             .padding(.top, 15)
             .padding(.bottom, 10)

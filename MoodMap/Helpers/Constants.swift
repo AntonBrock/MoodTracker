@@ -16,6 +16,6 @@ enum Constants {
     /// Ссылка для Политику
     static let urlPathToPolitic: String = "https://mapmood.com/privacy/ru"
     
-    /// Если прошло 31 дней то необходимо снова сделать запрос на цитату и обновить ее на главном экране, а также сохранить в локальное хранилище
-    static let timeoutRequestQuotes: TimeInterval = 60 * 60 * 24 * 31
+    /// Если прошло 1 дней то необходимо снова сделать запрос на цитату и обновить ее на главном экране, а также сохранить в локальное хранилище
+    static let timeoutRequestQuotes: TimeInterval = 86400 // Для теста - 120
 }

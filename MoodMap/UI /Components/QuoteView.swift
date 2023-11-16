@@ -21,7 +21,7 @@ struct QuoteView: View {
                 Text("\(quote)")
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
-                    .font(.system(size: 16, weight: .light))
+                    .font(.system(size: 15, weight: .medium))
                     .lineSpacing(4.0)
                     .padding(.horizontal, 12)
                     .shadow(color: Colors.TextColors.cadetBlue600.opacity(0.5),

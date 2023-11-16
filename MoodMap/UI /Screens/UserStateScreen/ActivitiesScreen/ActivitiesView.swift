@@ -51,7 +51,7 @@ struct ActivitiesView: View {
             .frame(width: UIScreen.main.bounds.width, height: 48, alignment: .center)
             
             VStack {
-                Text("Выбери активность, которая повлияла на твое состояние, так мы сможем ее отследить")
+                Text("Выбери активности, которые повлияли на твое состояние сейчас, так мы сможем ее отследить")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(Colors.Primary.blue)
                     .font(.system(size: 16, weight: .medium))

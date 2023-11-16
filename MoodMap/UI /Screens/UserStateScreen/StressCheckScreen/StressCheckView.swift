@@ -157,7 +157,18 @@ struct StressCheckView: View {
                 .padding(.horizontal, -5)
                                 
                 MTButton(buttonStyle: .fill, title: "Сохранить запись", handle: {
+                    
+                    switch selectedViewIndex {
+                    case 0: choosedStress = "fd3f28e0-273b-4a18-8aa8-56e85c9943c0"
+                    case 1: choosedStress = "8b02d308-37fa-41de-bdd2-00303b976031"
+                    case 2: choosedStress = "42148e04-8ba7-468d-8ce6-4f25987bdbdf"
+                    default:
+                        choosedStress = "8b02d308-37fa-41de-bdd2-00303b976031"
+                    }
+                    
                     saveButtonDidTap(text, choosedStress, self)
+                    print(selectedViewIndex)
+                    
                 })
                 .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
             }
@@ -168,6 +179,8 @@ struct StressCheckView: View {
                 self.bottomSheetPosition = .relativeTop(0.975)
                 self.focusField = true
             }
+            .opacity(isShowLoader ? 0 : 1)
+            .transition(.opacity)
         })
         {}
         .enableAppleScrollBehavior(false)
@@ -186,11 +199,15 @@ struct StressCheckView: View {
     
     func showLoader() {
         disabledBackButton.toggle()
-        isShowLoader = true
+        withAnimation {
+            self.isShowLoader = true
+        }
     }
     
     func hideLoader() {
-        isShowLoader = false
+        withAnimation {
+            self.isShowLoader = false
+        }
     }
     
     func showAD(withModel: JournalModel) {

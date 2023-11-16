@@ -20,6 +20,11 @@ struct PracticeCoordinatorView: View {
                 Services.metricsService.sendEventWith(eventName: .openPracticeScreen)
                 Services.metricsService.sendEventWith(eventType: .openPracticeScreen)
             })
+            .navigation(item: $coordinator.diaryViewCoordinator) {
+                DiaryCoordinatorView(coordinator: $0)
+                    .navigationBarTitle("")
+                    .navigationBarHidden(true)
+            }
             .navigation(item: $coordinator.breathCoordinator) {
                 BreathCoordinatorView(coordinator: $0)
                     .navigationBarHidden(false)
@@ -32,6 +37,7 @@ struct PracticeCoordinatorView: View {
             }
             .navigationTitle("Практики")
             .navigationBarTitleDisplayMode(.large)
+            .accentColor(.black)
         }
     }
 }
