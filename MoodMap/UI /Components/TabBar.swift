@@ -69,24 +69,24 @@ struct TabBarView: View {
                             ZStack {
                                 Circle()
                                     .overlay(
-                                        PulseButton(color: Colors.Primary.lavender500Purple, buttonWidth: 50, numberOfOuterCircles: 4,
-                                                    animationDuration: 2.5, action: {
-                                            
+                                        PulseButton(color: Colors.Primary.lavender500Purple,
+                                                    buttonWidth: 50,
+                                                    numberOfOuterCircles: 4,
+                                                    animationDuration: 2.5,
+                                                    action: {
+                                            if AppState.shared.isLogin ?? false {
+                                                withAnimation {
+                                                    if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
+                                                        coordinator.showLimitsView = true
+                                                    } else {
                                                         coordinator.isShowingMoodCheckScreen.toggle()
-                                                        #warning("TODO: Вернуть")
-//                                            if AppState.shared.isLogin ?? false {
-//                                                withAnimation {
-//                                                    if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
-//                                                        coordinator.showLimitsView = true
-//                                                    } else {
-//                                                        coordinator.isShowingMoodCheckScreen.toggle()
-//                                                    }
-//                                                }
-//                                            } else {
-//                                                withAnimation {
-//                                                    coordinator.showAuthLoginView = true
-//                                                }
-//                                            }
+                                                    }
+                                                }
+                                            } else {
+                                                withAnimation {
+                                                    coordinator.showAuthLoginView = true
+                                                }
+                                            }
                                         })
                                     )
                             }

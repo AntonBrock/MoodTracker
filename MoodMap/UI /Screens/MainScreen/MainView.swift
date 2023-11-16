@@ -76,14 +76,6 @@ struct MainView: View {
         ZStack {
             ScrollView {
                 VStack {
-                    if RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .moodWeenEvent) {
-                        moodWeenEventBlock()
-                            .padding(.top, 16)
-                            .onTapGesture {
-                                coordinator.parent.isShowingMoodWeenEventScreen = true
-                            }
-                    }
-                    
                     if isAnimated {
                         VStack {
                             createEmotionalHeader()
@@ -206,10 +198,6 @@ struct MainView: View {
                     }
                 }
                 
-                if !AppState.shared.moodWeenBannerShownFirstTime && RCValues.sharedInstance.isEnableMainConfiguraation(forKey: .moodWeenEvent) {
-                    coordinator.parent.isShowingMoodWeenEventScreen = true
-                    AppState.shared.moodWeenBannerShownFirstTime = true
-                }
 
                 withAnimation(Animation.linear(duration: 4.0).repeatForever(autoreverses: false)) {
                     moodWeenShimmerAnimation.toggle()

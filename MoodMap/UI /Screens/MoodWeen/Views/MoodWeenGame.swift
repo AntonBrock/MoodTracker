@@ -74,9 +74,9 @@ struct MoodWeenGame: View {
                                         currentIndex = (currentIndex + 1) % images.count
                                         
                                         currentValueGame += 1
-                                        AppState.shared.moodWeenGameStage = currentValueGame
+//                                        AppState.shared.moodWeenGameStage = currentValueGame
                                         isEnableGame = false
-                                        AppState.shared.moodWeenGameIsEnabled = false
+//                                        AppState.shared.moodWeenGameIsEnabled = false
                                         
                                         if currentValueGame == 4 {
                                             remainingTime = 0.0
@@ -145,7 +145,7 @@ struct MoodWeenGame: View {
             }
                         
             withAnimation {
-                currentValueGame = AppState.shared.moodWeenGameStage
+//                currentValueGame = AppState.shared.moodWeenGameStage
                 
                 if currentIndex > 0 {
                     currentIndex = currentValueGame - 1
@@ -155,10 +155,10 @@ struct MoodWeenGame: View {
             }
             
             if currentValueGame == 0 {
-                AppState.shared.moodWeenGameIsEnabled = true
+//                AppState.shared.moodWeenGameIsEnabled = true
             }
                         
-            isEnableGame = currentIndex >= 4 ? false : AppState.shared.moodWeenGameIsEnabled
+//            isEnableGame = currentIndex >= 4 ? false : AppState.shared.moodWeenGameIsEnabled
             
             startTimer()
         }

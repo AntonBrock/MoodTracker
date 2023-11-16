@@ -31,12 +31,8 @@ struct LaunchScreenView: View {
         self.parent = parent
         self.container = container
         
-        if !AppState.shared.isMoodMapIconWasSeted {
-            AppState.shared.isMoodMapIconWasSeted = true
-            UIApplication.shared.setAlternateIconName(nil)
-        } else {
-            AppState.shared.isMoodMapIconWasSeted = false
-        }
+        #warning("TODO: Возвращаем иконку в этой версии на оригинальную")
+        UIApplication.shared.setAlternateIconName(nil)
     }
     
     var body: some View {
