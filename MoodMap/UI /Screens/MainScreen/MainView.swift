@@ -191,13 +191,10 @@ struct MainView: View {
                         coordinator.parent.showAuthLoginView = true
                     }
                 }
-                
-                if !(viewModel.journalViewModels?.isEmpty ?? true) {
-                    withAnimation(.linear(duration: 0.5)) {
-                        self.isAnimatedJournalView = true
-                    }
+
+                withAnimation(.linear(duration: 0.5)) {
+                    self.isAnimatedJournalView = true
                 }
-                
 
                 withAnimation(Animation.linear(duration: 4.0).repeatForever(autoreverses: false)) {
                     moodWeenShimmerAnimation.toggle()

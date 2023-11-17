@@ -10,7 +10,8 @@ import SwiftUI
 struct DiaryView: View {
     
     @Environment(\.dismiss) var dismiss
-    
+    @Environment(\.presentationMode) var presentationMode
+
     @ObservedObject var viewModel: ViewModel
     private unowned let coordinator: DiaryViewCoordinator
     
@@ -79,6 +80,7 @@ struct DiaryView: View {
                 coordinator.parent.hideCustomTabBar = false
             }
         }
+        .disableSwipeBack()
     }
     
     @ViewBuilder
@@ -185,5 +187,38 @@ struct DiaryView: View {
         .padding(.horizontal, 20)
         .shadow(color: Colors.TextColors.mystic400,
                 radius: 3.0, x: 1.0, y: 1.0)
+    }
+}
+
+extension View {
+    func disableSwipeBack() -> some View {
+        self.background(
+            DisableSwipeBackView()
+        )
+    }
+}
+
+struct DisableSwipeBackView: UIViewControllerRepresentable {
+    
+    typealias UIViewControllerType = DisableSwipeBackViewController
+    
+    
+    func makeUIViewController(context: Context) -> UIViewControllerType {
+        UIViewControllerType()
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+    }
+}
+
+class DisableSwipeBackViewController: UIViewController {
+    
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+        if let parent = parent?.parent,
+           let navigationController = parent.navigationController,
+           let interactivePopGestureRecognizer = navigationController.interactivePopGestureRecognizer {
+            navigationController.view.removeGestureRecognizer(interactivePopGestureRecognizer)
+        }
     }
 }
