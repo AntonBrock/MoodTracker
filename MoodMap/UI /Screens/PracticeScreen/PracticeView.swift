@@ -37,20 +37,7 @@ struct PracticeView: View {
             ScrollView {
                 VStack {
                     diaryBlock()
-                    
                     moodBreathView()
-                        .onTapGesture {
-                            if AppState.shared.isLogin ?? false {
-                                Services.metricsService.sendEventWith(eventName: .openBreathScreen)
-                                Services.metricsService.sendEventWith(eventType: .openBreathScreen)
-
-                                coordinator.openBreathScreen()
-                            } else {
-                                withAnimation {
-                                    coordinator.parent.showAuthLoginView = true
-                                }
-                            }
-                        }
                 }
             }
             .onAppear {
@@ -125,7 +112,57 @@ struct PracticeView: View {
             .padding(.horizontal, 20)
             .padding(.top, 20)
         
+        createSimpleBreathCover()
+            .onTapGesture {
+                if AppState.shared.isLogin ?? false {
+//                    Services.metricsService.sendEventWith(eventName: .openBreathScreen)
+//                    Services.metricsService.sendEventWith(eventType: .openBreathScreen)
+
+                    coordinator.openSimpleBreathScreen()
+                } else {
+                    withAnimation {
+                        coordinator.parent.showAuthLoginView = true
+                    }
+                }
+            }
+        
         createMoodBreathCover()
+            .onTapGesture {
+                if AppState.shared.isLogin ?? false {
+                    Services.metricsService.sendEventWith(eventName: .openBreathScreen)
+                    Services.metricsService.sendEventWith(eventType: .openBreathScreen)
+
+                    coordinator.openBreathScreen()
+                } else {
+                    withAnimation {
+                        coordinator.parent.showAuthLoginView = true
+                    }
+                }
+            }
+    }
+    
+    @ViewBuilder
+    private func createSimpleBreathCover() -> some View {
+        VStack(alignment: .center, spacing: 16) {
+            ZStack {
+                Image("ic-pc-simpleBreath")
+                    .resizable()
+                    .frame(maxWidth: .infinity, maxHeight: 140)
+                    .aspectRatio(1, contentMode: .fill)
+
+                Text("Дыхательная практика\nУпрощенная")
+                    .foregroundColor(.white)
+                    .font(.system(size: 22, weight: .semibold))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                    .padding(.leading, 26)
+                    .padding(.bottom, 26)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 140)
+        .cornerRadius(20)
+        .padding(.horizontal, 10)
+        .shadow(color: Colors.TextColors.mischka500,
+                radius: 3.0, x: 1.0, y: 0)
     }
     
     @ViewBuilder

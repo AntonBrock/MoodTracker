@@ -35,6 +35,16 @@ struct PracticeCoordinatorView: View {
                         }
                     }
             }
+            .navigation(item: $coordinator.simpleBreathCoordinator) {
+                SimpleBreathCoordinatorView(coordinator: $0)
+                    .navigationBarHidden(false)
+                    .tint(.white)
+                    .onDisappear {
+                        withAnimation {
+                            coordinator.parent.hideCustomTabBar = false
+                        }
+                    }
+            }
             .navigationTitle("Практики")
             .navigationBarTitleDisplayMode(.large)
             .accentColor(.black)
