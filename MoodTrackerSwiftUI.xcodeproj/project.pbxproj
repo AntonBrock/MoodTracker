@@ -169,8 +169,6 @@
 		457F591929C184B900E96E1D /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591829C184B900E96E1D /* ReportService.swift */; };
 		457F591B29C184F300E96E1D /* ReportEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591A29C184F300E96E1D /* ReportEndPoint.swift */; };
 		45884FF82A97E992003A3D8A /* WebViewUIViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45884FF72A97E992003A3D8A /* WebViewUIViewRepresentable.swift */; };
-		458F038F2B0DDF5300EA7C39 /* JustBreatheDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F038D2B0DDF5300EA7C39 /* JustBreatheDetailsView.swift */; };
-		458F03902B0DDF5300EA7C39 /* JustBreatheDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F038D2B0DDF5300EA7C39 /* JustBreatheDetailsView.swift */; };
 		458F03912B0DDF5300EA7C39 /* JustBreathe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F038E2B0DDF5300EA7C39 /* JustBreathe.swift */; };
 		458F03922B0DDF5300EA7C39 /* JustBreathe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F038E2B0DDF5300EA7C39 /* JustBreathe.swift */; };
 		458F03952B0DE28300EA7C39 /* SimpleBreathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F03942B0DE28300EA7C39 /* SimpleBreathView.swift */; };
@@ -639,7 +637,6 @@
 		457F591829C184B900E96E1D /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		457F591A29C184F300E96E1D /* ReportEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEndPoint.swift; sourceTree = "<group>"; };
 		45884FF72A97E992003A3D8A /* WebViewUIViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewUIViewRepresentable.swift; sourceTree = "<group>"; };
-		458F038D2B0DDF5300EA7C39 /* JustBreatheDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustBreatheDetailsView.swift; sourceTree = "<group>"; };
 		458F038E2B0DDF5300EA7C39 /* JustBreathe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustBreathe.swift; sourceTree = "<group>"; };
 		458F03942B0DE28300EA7C39 /* SimpleBreathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBreathView.swift; sourceTree = "<group>"; };
 		458F03972B0DE28F00EA7C39 /* SimpleBreathCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBreathCoordinatorView.swift; sourceTree = "<group>"; };
@@ -1334,7 +1331,6 @@
 			isa = PBXGroup;
 			children = (
 				458F038E2B0DDF5300EA7C39 /* JustBreathe.swift */,
-				458F038D2B0DDF5300EA7C39 /* JustBreatheDetailsView.swift */,
 			);
 			path = SimpleBreathPractice;
 			sourceTree = "<group>";
@@ -1965,7 +1961,6 @@
 				4529ABAF29AF1941001D2390 /* AttachmentView.swift in Sources */,
 				4504F00729D976DC0042CF6B /* DiaryEndPoint.swift in Sources */,
 				4529ABB029AF1941001D2390 /* GalleryPhotoPicker.swift in Sources */,
-				458F038F2B0DDF5300EA7C39 /* JustBreatheDetailsView.swift in Sources */,
 				4529ABB129AF1941001D2390 /* ImagePicker.swift in Sources */,
 				4529ABB229AF1941001D2390 /* MTKeyboardView.swift in Sources */,
 				45B6EEE32AC6FF8200344EC5 /* SiriAnimation.swift in Sources */,
@@ -2163,7 +2158,6 @@
 				45FCD2242A18BEEE00B0DAF0 /* GalleryPhotoPicker.swift in Sources */,
 				45FCD2252A18BEEE00B0DAF0 /* ImagePicker.swift in Sources */,
 				45FCD2262A18BEEE00B0DAF0 /* MTKeyboardView.swift in Sources */,
-				458F03902B0DDF5300EA7C39 /* JustBreatheDetailsView.swift in Sources */,
 				45FCD2272A18BEEE00B0DAF0 /* AuthHyperString.swift in Sources */,
 				45FCD2282A18BEEE00B0DAF0 /* MonthChart.swift in Sources */,
 				45B6EEE42AC6FF8200344EC5 /* SiriAnimation.swift in Sources */,

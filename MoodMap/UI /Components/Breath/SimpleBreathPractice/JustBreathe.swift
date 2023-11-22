@@ -19,74 +19,114 @@ struct JustBreathe: View {
     @State private var showLeftStroke = false
     @State private var changeColor = false
     
+    @State private var breatheIn = true
+    @State private var breatheOut = false
+    
+    @State private var isStarted: Bool = false
+    
     var body: some View {
-        VStack {
-            Spacer()
+        ZStack {
+            Image("bg-mb-defaultCover")
+            .resizable()
+            .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
+            .edgesIgnoringSafeArea(.all)
+            .overlay(
+                Rectangle()
+                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                    .background(
+                        LinearGradient(colors: [Color(hex: "BBBAFF"), Color(hex: "973FF4")], startPoint: .top, endPoint: .bottom)
+                    )
+                    .opacity(0.4)
+            )
             
-            // Pull content from DetailsViwl.swift
-            JustBreatheDetailsView()
-            
-            Spacer()
-            
-            ZStack {
-                
-                Image("flower") // Middle
-                    .scaleEffect(grow ? 1 : 0.5, anchor: .bottom)
-                    .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: grow)
-                
-                Image("flower")  // Middle left
-                    .rotationEffect(.degrees( rotateMiddleLeft ? -25 : -5), anchor: .bottom)
-                    .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: rotateMiddleLeft)
-                    .onAppear {
-                        rotateMiddleLeft.toggle()
+            VStack {
+                VStack {
+                    ZStack {
+                        Text("Выдыхай..")
+                            .opacity(breatheOut ? 0 : 1) // Opacity animation
+                            .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: breatheOut)
+                            .foregroundColor(.white)
+                            .font(.system(size: 26, weight: .bold))
+                        
+                        Text("Вдыхай..")
+                            .opacity(breatheIn ? 0 : 1)
+                            .scaleEffect(breatheIn ? 0 : 1, anchor: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: breatheIn)
+                            .foregroundColor(.white)
+                            .font(.system(size: 26, weight: .bold))
                     }
+                    .onAppear() {
+                        breatheOut.toggle()
+                        breatheIn.toggle()
+                    }
+                    .padding(.top, 50)
+                }
                 
-                Image("flower")  // Middle right
-                    .rotationEffect(.degrees( rotateMiddleRight ? 25 : 5), anchor: .bottom)
-                    .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: rotateMiddleRight)
+                Spacer()
                 
+                ZStack {
+                    Image("flower") // Middle
+                        .scaleEffect(grow ? 1 : 0.5, anchor: .bottom)
+                        .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: grow)
+                    
+                    Image("flower")  // Middle left
+                        .rotationEffect(.degrees( rotateMiddleLeft ? -25 : -5), anchor: .bottom)
+                        .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: rotateMiddleLeft)
+                        .onAppear {
+                            rotateMiddleLeft.toggle()
+                        }
+                    
+                    Image("flower")  // Middle right
+                        .rotationEffect(.degrees( rotateMiddleRight ? 25 : 5), anchor: .bottom)
+                        .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: rotateMiddleRight)
+                    
+                    
+                    Image("flower")  // Left
+                        .rotationEffect(.degrees( rotateFarLeft ? -50 : -10), anchor: .bottom)
+                        .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: rotateFarLeft)
+                    
+                    Image("flower")  // Right
+                        .rotationEffect(.degrees( rotateFarRight ? 50 : 10), anchor: .bottom)
+                        .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: rotateFarRight)
+                    
+                    Circle()  // Quarter dotted circle left
+                        .trim(from: showLeftStroke ? 0 : 1/4, to: 1/4)
+                        .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round, dash: [1, 14]))
+                        .frame(width: 215, height: 215, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+                        .rotationEffect(.degrees(-180), anchor: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .offset(x: 0, y: -25)
+                        .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: showLeftStroke)
+                    
+                    Circle()  // Quarter dotted circle right
+                        .trim(from: 0, to: showRightStroke ? 1/4 : 0)
+                        .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round, dash: [1, 14]))
+                        .frame(width: 215, height: 215, alignment: .center)
+                        .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+                        .rotationEffect(.degrees(-90), anchor: .center)
+                        .offset(x: 0, y: -25)
+                        .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: showRightStroke)
+                    
+                }
+                .shadow(radius: showShadow ? 20 : 0)
+                .hueRotation(Angle(degrees: changeColor ? -235 : 45))
+                .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: changeColor)
                 
-                Image("flower")  // Left
-                    .rotationEffect(.degrees( rotateFarLeft ? -50 : -10), anchor: .bottom)
-                    .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: rotateFarLeft)
+                Spacer()
                 
-                Image("flower")  // Right
-                    .rotationEffect(.degrees( rotateFarRight ? 50 : 10), anchor: .bottom)
-                    .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: rotateFarRight)
+                Button(isStarted ? "Завершить" : "Начать") {
+                    isStarted.toggle()
+                }
+                .frame(width: 240, height: 60)
+                .background(Colors.Primary.lavender500Purple)
+                .cornerRadius(20)
+
                 
-                Circle()  // Quarter dotted circle left
-                    .trim(from: showLeftStroke ? 0 : 1/4, to: 1/4)
-                    .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round, dash: [1, 14]))
-                    .frame(width: 215, height: 215, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-                    .rotationEffect(.degrees(-180), anchor: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .offset(x: 0, y: -25)
-                    .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: showLeftStroke)
+                Spacer()
                 
-                Circle()  // Quarter dotted circle right
-                    .trim(from: 0, to: showRightStroke ? 1/4 : 0)
-                    .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round, dash: [1, 14]))
-                    .frame(width: 215, height: 215, alignment: .center)
-                    .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-                    .rotationEffect(.degrees(-90), anchor: .center)
-                    .offset(x: 0, y: -25)
-                    .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: showRightStroke)
-                
-            } // Container for flower
-            .shadow(radius: showShadow ? 20 : 0) // Switching from flat to elevation
-            .hueRotation(Angle(degrees: changeColor ? -235 : 45)) // Animating Chroma
-            .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: changeColor)
-            
-            Spacer()
-            
-            Button("End"){
-                print("End button tapped!")
-            }
-            .buttonStyle(.borderedProminent)
-            
-            Spacer()
-            
-        } // Container for all views
+            } // Container for all views
+        }
         .onAppear {
             changeColor.toggle()
             showShadow.toggle()

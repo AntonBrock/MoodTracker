@@ -174,7 +174,7 @@ struct PracticeView: View {
                     .frame(maxWidth: .infinity, maxHeight: 140)
                     .aspectRatio(1, contentMode: .fill)
 
-                Text("Дыхательная\nпрактика 4-7-8")
+                Text("Дыхательная практика\n4-7-8")
                     .foregroundColor(.white)
                     .font(.system(size: 22, weight: .semibold))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
