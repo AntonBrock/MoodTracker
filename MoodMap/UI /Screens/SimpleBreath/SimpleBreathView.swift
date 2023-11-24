@@ -10,9 +10,11 @@ import BottomSheet
 
 struct SimpleBreathView: View {
     
+    @Environment(\.dismiss) var dismiss
+
     @ObservedObject var viewModel: ViewModel
     private unowned let coordinator: SimpleBreathViewCoordinator
-    
+        
     // MARK: - Init
     init(
         coordinator: SimpleBreathViewCoordinator
@@ -25,7 +27,10 @@ struct SimpleBreathView: View {
         
     var body: some View {
         VStack {
-            JustBreathe()
+            JustBreathe {
+                // Вызвать метод для дых практики
+                dismiss.callAsFunction()
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct JustBreathe: View {
-    
+        
+    var callDismissAction: (() -> Void)
+
     @State private var grow = false // Scale the middle from 0.5 to 1
     @State private var rotateFarRight = false
     @State private var rotateFarLeft = false
@@ -56,12 +58,10 @@ struct JustBreathe: View {
                             .foregroundColor(.white)
                             .font(.system(size: 26, weight: .bold))
                     }
-                    .onAppear() {
-                        breatheOut.toggle()
-                        breatheIn.toggle()
-                    }
                     .padding(.top, 50)
                 }
+                .opacity(isStarted ? 1 : 0)
+                .transition(.opacity)
                 
                 Spacer()
                 
@@ -73,9 +73,9 @@ struct JustBreathe: View {
                     Image("flower")  // Middle left
                         .rotationEffect(.degrees( rotateMiddleLeft ? -25 : -5), anchor: .bottom)
                         .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: rotateMiddleLeft)
-                        .onAppear {
-                            rotateMiddleLeft.toggle()
-                        }
+//                        .onAppear {
+//                            rotateMiddleLeft.toggle()
+//                        }
                     
                     Image("flower")  // Middle right
                         .rotationEffect(.degrees( rotateMiddleRight ? 25 : 5), anchor: .bottom)
@@ -116,33 +116,52 @@ struct JustBreathe: View {
                 Spacer()
                 
                 Button(isStarted ? "Завершить" : "Начать") {
-                    isStarted.toggle()
+                    
+                    if isStarted {
+                      
+                        withAnimation {
+                            isStarted = false
+                            breatheOut = false
+                            breatheIn = true
+                            
+                            grow = false
+                            rotateFarRight = false
+                            rotateFarLeft = false
+                            rotateMiddleLeft = false
+                            rotateMiddleRight = false
+                            showShadow = false
+                            showRightStroke = false
+                            showLeftStroke = false
+                            changeColor = false
+                        }
+                        
+                        callDismissAction()
+                    } else {
+                        withAnimation {
+                            isStarted = true
+                            
+                            breatheOut.toggle()
+                            breatheIn.toggle()
+                            
+                            grow.toggle()
+                            rotateFarRight.toggle()
+                            rotateFarLeft.toggle()
+                            rotateMiddleLeft.toggle()
+                            rotateMiddleRight.toggle()
+                            showShadow.toggle()
+                            showRightStroke.toggle()
+                            showLeftStroke.toggle()
+                            changeColor.toggle()
+                        }
+                    }
                 }
                 .frame(width: 240, height: 60)
                 .background(Colors.Primary.lavender500Purple)
                 .cornerRadius(20)
-
                 
                 Spacer()
                 
-            } // Container for all views
+            }
         }
-        .onAppear {
-            changeColor.toggle()
-            showShadow.toggle()
-            showRightStroke.toggle()
-            showLeftStroke.toggle()
-            rotateFarRight.toggle()
-            rotateFarLeft.toggle()
-            rotateMiddleRight.toggle()
-            grow.toggle()
-        }
-    }
-}
-
-struct JustBreathe_Previews: PreviewProvider {
-    static var previews: some View {
-        JustBreathe()
-            .preferredColorScheme(.dark)
     }
 }
