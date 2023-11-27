@@ -2319,10 +2319,12 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.071117;
+				CURRENT_PROJECT_VERSION = 1.0827;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = NO;
 				EXCLUDED_ARCHS = "";
+				GCC_NO_COMMON_BLOCKS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoodMap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
@@ -2342,8 +2344,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.70;
-				OTHER_LDFLAGS = "";
+				MARKETING_VERSION = 1.0.80;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-ld64",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2365,10 +2370,12 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.071117;
+				CURRENT_PROJECT_VERSION = 1.0827;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
 				EXCLUDED_ARCHS = "";
+				GCC_NO_COMMON_BLOCKS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MoodMap copy-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
@@ -2388,7 +2395,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.70;
+				MARKETING_VERSION = 1.0.80;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2496,11 +2503,12 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.071117;
+				CURRENT_PROJECT_VERSION = 1.0827;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
+				GCC_NO_COMMON_BLOCKS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoodMap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
@@ -2520,8 +2528,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.70;
-				OTHER_LDFLAGS = "";
+				MARKETING_VERSION = 1.0.80;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-ld64",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2543,11 +2554,12 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.071117;
+				CURRENT_PROJECT_VERSION = 1.0827;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
+				GCC_NO_COMMON_BLOCKS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MoodMap copy-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
@@ -2567,7 +2579,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.70;
+				MARKETING_VERSION = 1.0.80;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2758,8 +2770,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yandexmobile/yandex-ads-sdk-swift";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.4.0;
+				kind = exactVersion;
+				version = 5.5.0;
 			};
 		};
 		45F361A42A178A5A002CD92B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {

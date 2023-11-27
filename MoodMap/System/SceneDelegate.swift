@@ -26,6 +26,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
     var windowScene: UIWindowScene?
     
     @State var isNeedShowAuthFromLaunch: Bool = false
+
+    var baseCoordinator: BaseViewCoordinator?
     
     static var isAlreadyLaunchedOnce = false
     var isLaunched: Bool = false
@@ -54,7 +56,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             FirebaseApp.configure()
             _ = RCValues.sharedInstance
         }
-                
+        
+        if let shortcutItem = connectionOptions.shortcutItem {
+            handleShortcutItem(shortcutItem)
+        }
+                        
         print("OSUSERID: \(AppState.shared.userID)")
         
         // Remove this method to stop OneSignal Debugging
@@ -94,6 +100,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             
             let DIContainer = DIContainer(appState: appState, services: services)
             let coordinator = BaseViewCoordinator(container: DIContainer)
+            
+            self.baseCoordinator = coordinator
                         
             if false { // check enable codePassword
                 startStory(
@@ -107,6 +115,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
                 
                 let window = UIWindow(windowScene: windowScene)
                 self.window = window
+                
+                self.baseCoordinator = coordinator
                 
                 let vc = UIHostingController(rootView: launchScreen)
                 window.rootViewController = vc
@@ -165,6 +175,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
                 coordinator: parent,
                 isNeedShowAuthPopupFromLaunchScreen: $isNeedShowAuthFromLaunch
             ) //isHiddenTabBar: appState.$isHiddenTabBar
+            
+            self.baseCoordinator = parent
             
             let window = UIWindow(windowScene: windowScene)
             self.window = window
@@ -240,6 +252,34 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
         }
     }
     
+    // Shortcast actions
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        handleShortcutItem(shortcutItem)
+        completionHandler(true)
+    }
+
+    
+    func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) {
+        if shortcutItem.type == "createNewNote" {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                guard let baseCoordinator = self.baseCoordinator else {
+                    return
+                }
+                if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
+                    baseCoordinator.showLimitsView = true
+                } else {
+                    baseCoordinator.isShowingMoodCheckScreen = true
+                }
+            }
+        }
+        
+        if shortcutItem.type == "voteInAppStore" {
+            if let url = URL(string: "https://itunes.apple.com/us/app/apple-store/id6447796423?mt=8") {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
 }
 
 // MARK: - Private methods

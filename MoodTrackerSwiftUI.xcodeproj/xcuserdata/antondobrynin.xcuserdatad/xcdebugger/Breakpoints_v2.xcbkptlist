@@ -32,7 +32,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "203"
             endingLineNumber = "203"
-            landmarkName = "hideAD(model:)"
+            landmarkName = "showLoader()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -359,22 +359,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "33E90948-AE25-4F66-AB1F-F449F4EC940D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoodMap/UI /Screens/UserStateScreen/UserStateViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "sendUserNote(view:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "9E35A087-15A1-4D4E-90E9-CEE7C614175C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -514,6 +498,230 @@
             endingLineNumber = "171"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7781A705-DB2F-4579-ADF4-414533F2B71A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoodMap/System/SceneDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "startStory(type:parent:container:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7781A705-DB2F-4579-ADF4-414533F2B71A - b85607199ec380ea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.SceneDelegate.startStory(type: MoodMap.UserStoryType, parent: MoodMap.BaseViewCoordinator, container: MoodMap.DIContainer) -&gt; ()"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/System/SceneDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "179"
+                  endingLineNumber = "179"
+                  offsetFromSymbolStart = "660">
+               </Location>
+               <Location
+                  uuid = "7781A705-DB2F-4579-ADF4-414533F2B71A - b85607199ec380ea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.SceneDelegate.startStory(type: MoodMap.UserStoryType, parent: MoodMap.BaseViewCoordinator, container: MoodMap.DIContainer) -&gt; ()"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/System/SceneDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "179"
+                  endingLineNumber = "179"
+                  offsetFromSymbolStart = "572">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1011BF85-755A-4635-B052-A6DE25F60520"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoodMap/System/SceneDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "startStory(type:parent:container:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1011BF85-755A-4635-B052-A6DE25F60520 - b85607199ec38676"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.SceneDelegate.startStory(type: MoodMap.UserStoryType, parent: MoodMap.BaseViewCoordinator, container: MoodMap.DIContainer) -&gt; ()"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/System/SceneDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "191"
+                  endingLineNumber = "191"
+                  offsetFromSymbolStart = "1032">
+               </Location>
+               <Location
+                  uuid = "1011BF85-755A-4635-B052-A6DE25F60520 - b85607199ec38676"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.SceneDelegate.startStory(type: MoodMap.UserStoryType, parent: MoodMap.BaseViewCoordinator, container: MoodMap.DIContainer) -&gt; ()"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/System/SceneDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "191"
+                  endingLineNumber = "191"
+                  offsetFromSymbolStart = "1000">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D1A1229E-421F-4AB7-B2B5-2EE13C984CB5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoodMap/UI /Screens/UserStateScreen/UserStateViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "sendUserNote(view:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "39E084BC-9F23-47EB-9C2B-F45DF0A15D20"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoodMap/UI /Screens/UserStateScreen/StressCheckScreen/StressCheckView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "showAD(withModel:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "39E084BC-9F23-47EB-9C2B-F45DF0A15D20 - ff4478275f3ec53e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.StressCheckView.showAD(withModel: MoodMap.JournalModel) -&gt; ()"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/UI%20/Screens/UserStateScreen/StressCheckScreen/StressCheckView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "214"
+                  endingLineNumber = "214"
+                  offsetFromSymbolStart = "304">
+               </Location>
+               <Location
+                  uuid = "39E084BC-9F23-47EB-9C2B-F45DF0A15D20 - 2876649a62b36b8b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in MoodMap.StressCheckView.showAD(withModel: MoodMap.JournalModel) -&gt; ()"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/UI%20/Screens/UserStateScreen/StressCheckScreen/StressCheckView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "215"
+                  endingLineNumber = "215"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1039B455-F9AE-45FA-967A-333314A35721"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoodMap/UI /Screens/UserStateScreen/StressCheckScreen/StressCheckView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9BDFDFFC-1171-4171-9D71-1B01A64DD9B4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoodMap/UI /Components/AD/Yandex/YandexInterstitialADView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "makeUIViewController(context:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9BDFDFFC-1171-4171-9D71-1B01A64DD9B4 - 5c72a67700d980df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoodMap.YandexInterstitialADView.makeUIViewController(context: SwiftUI.UIViewControllerRepresentableContext&lt;MoodMap.YandexInterstitialADView&gt;) -&gt; MoodMap.YandexInterstitialADViewController"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/UI%20/Components/AD/Yandex/YandexInterstitialADView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "9BDFDFFC-1171-4171-9D71-1B01A64DD9B4 - 485b79ba0455fd42"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in MoodMap.YandexInterstitialADView.makeUIViewController(context: SwiftUI.UIViewControllerRepresentableContext&lt;MoodMap.YandexInterstitialADView&gt;) -&gt; MoodMap.YandexInterstitialADViewController"
+                  moduleName = "MoodMap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/UI%20/Components/AD/Yandex/YandexInterstitialADView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
