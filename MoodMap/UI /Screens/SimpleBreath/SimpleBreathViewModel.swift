@@ -17,5 +17,16 @@ extension SimpleBreathView {
         func setupViewer(_ viewer: SimpleBreathView) {
             self.viewer = viewer
         }
+        
+        func sendBreathCheck(compeltion: @escaping (() -> Void)) {
+            Services.userStateService.postBreathCheck { result in
+                switch result {
+                case .success:
+                    compeltion()
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
 }

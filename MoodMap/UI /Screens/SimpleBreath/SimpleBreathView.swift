@@ -23,13 +23,17 @@ struct SimpleBreathView: View {
         self.viewModel = coordinator.viewModel
         
         viewModel.setupViewer(self)
+        
+        Services.metricsService.sendEventWith(eventName: .openSimpleBreathScreen)
+        Services.metricsService.sendEventWith(eventType: .openSimpleBreathScreen)
     }
         
     var body: some View {
         VStack {
             JustBreathe {
-                // Вызвать метод для дых практики
-                dismiss.callAsFunction()
+                viewModel.sendBreathCheck {
+                    dismiss.callAsFunction()
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

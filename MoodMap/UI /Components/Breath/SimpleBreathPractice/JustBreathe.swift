@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import CoreHaptics
 
 struct JustBreathe: View {
         
     var callDismissAction: (() -> Void)
 
-    @State private var grow = false // Scale the middle from 0.5 to 1
+    @State private var grow = false
     @State private var rotateFarRight = false
     @State private var rotateFarLeft = false
     @State private var rotateMiddleLeft = false
@@ -73,14 +74,10 @@ struct JustBreathe: View {
                     Image("flower")  // Middle left
                         .rotationEffect(.degrees( rotateMiddleLeft ? -25 : -5), anchor: .bottom)
                         .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: rotateMiddleLeft)
-//                        .onAppear {
-//                            rotateMiddleLeft.toggle()
-//                        }
-                    
+
                     Image("flower")  // Middle right
                         .rotationEffect(.degrees( rotateMiddleRight ? 25 : 5), anchor: .bottom)
                         .animation(.easeInOut(duration: 2).delay(2).repeatForever(autoreverses: true), value: rotateMiddleRight)
-                    
                     
                     Image("flower")  // Left
                         .rotationEffect(.degrees( rotateFarLeft ? -50 : -10), anchor: .bottom)
@@ -160,8 +157,8 @@ struct JustBreathe: View {
                 .cornerRadius(20)
                 
                 Spacer()
-                
             }
+            .padding(.bottom, 90)
         }
     }
 }
