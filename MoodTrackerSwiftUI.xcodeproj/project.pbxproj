@@ -143,6 +143,12 @@
 		4546D59029E841FC00E69852 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 4546D58F29E841FC00E69852 /* loader.json */; };
 		4546D59329E844CD00E69852 /* PushNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D59229E844CD00E69852 /* PushNotificationView.swift */; };
 		4546D59929E86BFF00E69852 /* ATTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D59829E86BFF00E69852 /* ATTView.swift */; };
+		454828372B2052FB00C0B8EE /* SplashScreenFlower.json in Resources */ = {isa = PBXBuildFile; fileRef = 454828362B2052FB00C0B8EE /* SplashScreenFlower.json */; };
+		454828382B2052FB00C0B8EE /* SplashScreenFlower.json in Resources */ = {isa = PBXBuildFile; fileRef = 454828362B2052FB00C0B8EE /* SplashScreenFlower.json */; };
+		4548283A2B20534300C0B8EE /* SplashScreenLines.json in Resources */ = {isa = PBXBuildFile; fileRef = 454828392B20534300C0B8EE /* SplashScreenLines.json */; };
+		4548283B2B20534300C0B8EE /* SplashScreenLines.json in Resources */ = {isa = PBXBuildFile; fileRef = 454828392B20534300C0B8EE /* SplashScreenLines.json */; };
+		4548283D2B20536000C0B8EE /* SplashScreenStarts.json in Resources */ = {isa = PBXBuildFile; fileRef = 4548283C2B20536000C0B8EE /* SplashScreenStarts.json */; };
+		4548283E2B20536000C0B8EE /* SplashScreenStarts.json in Resources */ = {isa = PBXBuildFile; fileRef = 4548283C2B20536000C0B8EE /* SplashScreenStarts.json */; };
 		454A19402ACC55FA00B3EC6B /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A193F2ACC55FA00B3EC6B /* ShimmerView.swift */; };
 		454A19412ACC560100B3EC6B /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A193F2ACC55FA00B3EC6B /* ShimmerView.swift */; };
 		454FE49E2A920D7B00BC86FE /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 454FE49D2A920D7B00BC86FE /* FacebookCore */; };
@@ -213,7 +219,6 @@
 		45B39F8A29E52A4B00852E70 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */; };
 		45B39F8D29E52D6B00852E70 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 45B39F8C29E52D6B00852E70 /* Lottie */; };
 		45B39F9029E52DBC00852E70 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8F29E52DBC00852E70 /* LottieView.swift */; };
-		45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9129E52F7300852E70 /* SplashScreen.json */; };
 		45B39F9429E5406500852E70 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9329E5406500852E70 /* Launch Screen.storyboard */; };
 		45B39FA229E554B100852E70 /* LoaderLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39FA129E554B100852E70 /* LoaderLottieView.swift */; };
 		45B6EED52AC6FF5100344EC5 /* birds.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 45B6EED12AC6FF5000344EC5 /* birds.mp3 */; };
@@ -460,7 +465,6 @@
 		45FCD27D2A18BEEE00B0DAF0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45F361A22A1788E8002CD92B /* GoogleService-Info.plist */; };
 		45FCD27E2A18BEEE00B0DAF0 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452D35342951BE550018A3DA /* Inter-Regular.ttf */; };
 		45FCD27F2A18BEEE00B0DAF0 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452D35302951BE550018A3DA /* Inter-SemiBold.ttf */; };
-		45FCD2802A18BEEE00B0DAF0 /* SplashScreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9129E52F7300852E70 /* SplashScreen.json */; };
 		45FCD2812A18BEEE00B0DAF0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6F29AF1471001D2390 /* Preview Assets.xcassets */; };
 		45FCD2832A18BEEE00B0DAF0 /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */; };
 /* End PBXBuildFile section */
@@ -603,6 +607,9 @@
 		4546D59229E844CD00E69852 /* PushNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationView.swift; sourceTree = "<group>"; };
 		4546D59829E86BFF00E69852 /* ATTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTView.swift; sourceTree = "<group>"; };
 		45470CB328E5BEE1004822E0 /* ActivitiesBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesBarCharsView.swift; sourceTree = "<group>"; };
+		454828362B2052FB00C0B8EE /* SplashScreenFlower.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreenFlower.json; sourceTree = "<group>"; };
+		454828392B20534300C0B8EE /* SplashScreenLines.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreenLines.json; sourceTree = "<group>"; };
+		4548283C2B20536000C0B8EE /* SplashScreenStarts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreenStarts.json; sourceTree = "<group>"; };
 		454A193F2ACC55FA00B3EC6B /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
 		4551C3F32959A2040034665E /* UIView+extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extenstion.swift"; sourceTree = "<group>"; };
 		45660B9A2A23589F00077CBF /* UserLimitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLimitsView.swift; sourceTree = "<group>"; };
@@ -672,7 +679,6 @@
 		45A9F05529F1068B002C13C5 /* AuthDeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDeleteAccountView.swift; sourceTree = "<group>"; };
 		45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		45B39F8F29E52DBC00852E70 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		45B39F9129E52F7300852E70 /* SplashScreen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreen.json; sourceTree = "<group>"; };
 		45B39F9329E5406500852E70 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		45B39FA129E554B100852E70 /* LoaderLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderLottieView.swift; sourceTree = "<group>"; };
 		45B459AA29921D5800890CC9 /* PieSliceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
@@ -1027,7 +1033,9 @@
 				45F361A22A1788E8002CD92B /* GoogleService-Info.plist */,
 				4529AA6A29AF1470001D2390 /* ContentView.swift */,
 				4529AA6C29AF1471001D2390 /* Assets.xcassets */,
-				45B39F9129E52F7300852E70 /* SplashScreen.json */,
+				454828362B2052FB00C0B8EE /* SplashScreenFlower.json */,
+				4548283C2B20536000C0B8EE /* SplashScreenStarts.json */,
+				454828392B20534300C0B8EE /* SplashScreenLines.json */,
 				4546D58F29E841FC00E69852 /* loader.json */,
 				4529AA6E29AF1471001D2390 /* Preview Content */,
 				457AC3CF2A59645600294BF6 /* PushNotificationTest.apns */,
@@ -1783,6 +1791,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4548283A2B20534300C0B8EE /* SplashScreenLines.json in Resources */,
 				457AC3D02A59645600294BF6 /* PushNotificationTest.apns in Resources */,
 				4529AA9429AF15B8001D2390 /* Settings.plist in Resources */,
 				4546D59029E841FC00E69852 /* loader.json in Resources */,
@@ -1790,6 +1799,7 @@
 				4529AA8D29AF15A9001D2390 /* Inter-Bold.ttf in Resources */,
 				45B6EEDB2AC6FF5100344EC5 /* rainSound.mp3 in Resources */,
 				4529AA8E29AF15A9001D2390 /* Inter-ExtraBold.ttf in Resources */,
+				454828372B2052FB00C0B8EE /* SplashScreenFlower.json in Resources */,
 				45A2B3782AAAF2E800643C78 /* Assets.xcassets in Resources */,
 				4529AA8F29AF15A9001D2390 /* Inter-ExtraLight.ttf in Resources */,
 				45B6EED72AC6FF5100344EC5 /* nightInForest.mp3 in Resources */,
@@ -1797,10 +1807,10 @@
 				45B39F9429E5406500852E70 /* Launch Screen.storyboard in Resources */,
 				4529AA9129AF15A9001D2390 /* Inter-Medium.ttf in Resources */,
 				45B6EED52AC6FF5100344EC5 /* birds.mp3 in Resources */,
+				4548283D2B20536000C0B8EE /* SplashScreenStarts.json in Resources */,
 				45F361A32A1788E8002CD92B /* GoogleService-Info.plist in Resources */,
 				4529AA9229AF15A9001D2390 /* Inter-Regular.ttf in Resources */,
 				4529AA9329AF15A9001D2390 /* Inter-SemiBold.ttf in Resources */,
-				45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */,
 				45B6EED92AC6FF5100344EC5 /* ocean.mp3 in Resources */,
 				4529AA7029AF1471001D2390 /* Preview Assets.xcassets in Resources */,
 				453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */,
@@ -1818,6 +1828,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				454828382B2052FB00C0B8EE /* SplashScreenFlower.json in Resources */,
 				45FCD2742A18BEEE00B0DAF0 /* Settings.plist in Resources */,
 				45FCD2752A18BEEE00B0DAF0 /* loader.json in Resources */,
 				45FCD2762A18BEEE00B0DAF0 /* Inter-Black.ttf in Resources */,
@@ -1831,10 +1842,11 @@
 				45FCD27D2A18BEEE00B0DAF0 /* GoogleService-Info.plist in Resources */,
 				45FCD27E2A18BEEE00B0DAF0 /* Inter-Regular.ttf in Resources */,
 				45FCD27F2A18BEEE00B0DAF0 /* Inter-SemiBold.ttf in Resources */,
-				45FCD2802A18BEEE00B0DAF0 /* SplashScreen.json in Resources */,
+				4548283E2B20536000C0B8EE /* SplashScreenStarts.json in Resources */,
 				45B6EED62AC6FF5100344EC5 /* birds.mp3 in Resources */,
 				45FCD2812A18BEEE00B0DAF0 /* Preview Assets.xcassets in Resources */,
 				45B6EEDA2AC6FF5100344EC5 /* ocean.mp3 in Resources */,
+				4548283B2B20534300C0B8EE /* SplashScreenLines.json in Resources */,
 				45A2B3772AAAF2E400643C78 /* Assets.xcassets in Resources */,
 				45B6EEDC2AC6FF5100344EC5 /* rainSound.mp3 in Resources */,
 				45FCD2832A18BEEE00B0DAF0 /* YandexMobileAdsBundle.bundle in Resources */,
