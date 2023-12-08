@@ -24,6 +24,8 @@ struct LaunchScreenView: View {
     @State var isShowATTScreen: Bool = false
     @State var isNeedShowAuthPopupFromLaunchScreen: Bool = false
     
+    @State private var isShowLogo: Bool = false
+    
     init(
         parent: BaseViewCoordinator,
         container: DIContainer
@@ -57,10 +59,21 @@ struct LaunchScreenView: View {
             }
             
             ZStack {
-                Color("LaunchScreenBG")
+                Image("ic-ls-bg")
+                    .resizable()
                     .ignoresSafeArea()
                 
-                LottieView(name: "SplashScreen", loopMode: .loop)
+                LottieView(name: "SplashScreenLines", loopMode: .playOnce, animationSpeed: 0.3)
+                
+                
+                Image("moodmapLogo")
+                    .resizable()
+                    .frame(width: 156, height: 91)
+                    .opacity(isShowLogo ? 1 : 0)
+                    .transition(.opacity)
+                    .padding(.top, -200)
+                                        
+                LottieView(name: "SplashScreenFlower", loopMode: .playOnce, animationSpeed: 0.5)
                     .onAppear {
                         
                         let timeZone = TimeZone.current
@@ -87,9 +100,12 @@ struct LaunchScreenView: View {
                             }
                         } else {
                             isNeedShowAuthPopupFromLaunchScreen = true
-                            withAnimation(.spring()) {
-                                animatedIsFinished = true
-                                isLoadingMainInfo = true
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                                withAnimation(.spring()) {
+                                    animatedIsFinished = true
+                                    isLoadingMainInfo = true
+                                }
                             }
                         }
                         
@@ -98,7 +114,7 @@ struct LaunchScreenView: View {
                             getUserInfo { needShowAuthPopUp in
                                 isNeedShowAuthPopupFromLaunchScreen = needShowAuthPopUp
 
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
                                     withAnimation(.spring()) {
                                         animatedIsFinished = true
                                         isLoadingMainInfo = true
@@ -108,7 +124,7 @@ struct LaunchScreenView: View {
                         } else {
                             isNeedShowAuthPopupFromLaunchScreen = true
 
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
                                 withAnimation(.spring()) {
                                     animatedIsFinished = true
                                     isLoadingMainInfo = true
@@ -116,6 +132,14 @@ struct LaunchScreenView: View {
                             }
                         }
                     }
+                    
+                LottieView(name: "SplashScreenStarts", loopMode: .autoReverse, animationSpeed: 0.4)
+                    .onAppear {
+                        withAnimation(.linear(duration: 1.4)) {
+                            isShowLogo.toggle()
+                        }
+                    }
+
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .opacity(animatedIsFinished ? 0 : 1)

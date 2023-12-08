@@ -15,6 +15,7 @@ class PracticeViewCoordinator: ObservableObject, Identifiable {
     
     @Published var diaryViewCoordinator: DiaryViewCoordinator?
     @Published var breathCoordinator: BreathViewCoordinator?
+    @Published var simpleBreathCoordinator: SimpleBreathViewCoordinator?
     
     init(
         parent: BaseViewCoordinator,
@@ -38,6 +39,17 @@ class PracticeViewCoordinator: ObservableObject, Identifiable {
     
     func openBreathScreen() {
         breathCoordinator = .init(
+            parent: parent,
+            container: container
+        )
+        
+        withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.2)) {
+            parent.hideCustomTabBar = true
+        }
+    }
+    
+    func openSimpleBreathScreen() {
+        simpleBreathCoordinator = .init(
             parent: parent,
             container: container
         )

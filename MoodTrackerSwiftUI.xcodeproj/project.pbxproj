@@ -143,6 +143,12 @@
 		4546D59029E841FC00E69852 /* loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 4546D58F29E841FC00E69852 /* loader.json */; };
 		4546D59329E844CD00E69852 /* PushNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D59229E844CD00E69852 /* PushNotificationView.swift */; };
 		4546D59929E86BFF00E69852 /* ATTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4546D59829E86BFF00E69852 /* ATTView.swift */; };
+		454828372B2052FB00C0B8EE /* SplashScreenFlower.json in Resources */ = {isa = PBXBuildFile; fileRef = 454828362B2052FB00C0B8EE /* SplashScreenFlower.json */; };
+		454828382B2052FB00C0B8EE /* SplashScreenFlower.json in Resources */ = {isa = PBXBuildFile; fileRef = 454828362B2052FB00C0B8EE /* SplashScreenFlower.json */; };
+		4548283A2B20534300C0B8EE /* SplashScreenLines.json in Resources */ = {isa = PBXBuildFile; fileRef = 454828392B20534300C0B8EE /* SplashScreenLines.json */; };
+		4548283B2B20534300C0B8EE /* SplashScreenLines.json in Resources */ = {isa = PBXBuildFile; fileRef = 454828392B20534300C0B8EE /* SplashScreenLines.json */; };
+		4548283D2B20536000C0B8EE /* SplashScreenStarts.json in Resources */ = {isa = PBXBuildFile; fileRef = 4548283C2B20536000C0B8EE /* SplashScreenStarts.json */; };
+		4548283E2B20536000C0B8EE /* SplashScreenStarts.json in Resources */ = {isa = PBXBuildFile; fileRef = 4548283C2B20536000C0B8EE /* SplashScreenStarts.json */; };
 		454A19402ACC55FA00B3EC6B /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A193F2ACC55FA00B3EC6B /* ShimmerView.swift */; };
 		454A19412ACC560100B3EC6B /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454A193F2ACC55FA00B3EC6B /* ShimmerView.swift */; };
 		454FE49E2A920D7B00BC86FE /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 454FE49D2A920D7B00BC86FE /* FacebookCore */; };
@@ -169,6 +175,16 @@
 		457F591929C184B900E96E1D /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591829C184B900E96E1D /* ReportService.swift */; };
 		457F591B29C184F300E96E1D /* ReportEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F591A29C184F300E96E1D /* ReportEndPoint.swift */; };
 		45884FF82A97E992003A3D8A /* WebViewUIViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45884FF72A97E992003A3D8A /* WebViewUIViewRepresentable.swift */; };
+		458F03912B0DDF5300EA7C39 /* JustBreathe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F038E2B0DDF5300EA7C39 /* JustBreathe.swift */; };
+		458F03922B0DDF5300EA7C39 /* JustBreathe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F038E2B0DDF5300EA7C39 /* JustBreathe.swift */; };
+		458F03952B0DE28300EA7C39 /* SimpleBreathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F03942B0DE28300EA7C39 /* SimpleBreathView.swift */; };
+		458F03962B0DE28300EA7C39 /* SimpleBreathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F03942B0DE28300EA7C39 /* SimpleBreathView.swift */; };
+		458F03982B0DE28F00EA7C39 /* SimpleBreathCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F03972B0DE28F00EA7C39 /* SimpleBreathCoordinatorView.swift */; };
+		458F03992B0DE28F00EA7C39 /* SimpleBreathCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F03972B0DE28F00EA7C39 /* SimpleBreathCoordinatorView.swift */; };
+		458F039B2B0DE29500EA7C39 /* SimpleBreathViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F039A2B0DE29500EA7C39 /* SimpleBreathViewModel.swift */; };
+		458F039C2B0DE29500EA7C39 /* SimpleBreathViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F039A2B0DE29500EA7C39 /* SimpleBreathViewModel.swift */; };
+		458F039E2B0DE29D00EA7C39 /* SimpleBreathViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F039D2B0DE29D00EA7C39 /* SimpleBreathViewCoordinator.swift */; };
+		458F039F2B0DE29D00EA7C39 /* SimpleBreathViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F039D2B0DE29D00EA7C39 /* SimpleBreathViewCoordinator.swift */; };
 		4592521429C4205E007B1706 /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592521329C4205E007B1706 /* ReportModel.swift */; };
 		4592521B29C6EB9A007B1706 /* WeekAnimationChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592521A29C6EB9A007B1706 /* WeekAnimationChart.swift */; };
 		4592521D29C6EBA2007B1706 /* MonthChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4592521C29C6EBA2007B1706 /* MonthChart.swift */; };
@@ -203,7 +219,6 @@
 		45B39F8A29E52A4B00852E70 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */; };
 		45B39F8D29E52D6B00852E70 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 45B39F8C29E52D6B00852E70 /* Lottie */; };
 		45B39F9029E52DBC00852E70 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39F8F29E52DBC00852E70 /* LottieView.swift */; };
-		45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9129E52F7300852E70 /* SplashScreen.json */; };
 		45B39F9429E5406500852E70 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9329E5406500852E70 /* Launch Screen.storyboard */; };
 		45B39FA229E554B100852E70 /* LoaderLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B39FA129E554B100852E70 /* LoaderLottieView.swift */; };
 		45B6EED52AC6FF5100344EC5 /* birds.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 45B6EED12AC6FF5000344EC5 /* birds.mp3 */; };
@@ -450,7 +465,6 @@
 		45FCD27D2A18BEEE00B0DAF0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45F361A22A1788E8002CD92B /* GoogleService-Info.plist */; };
 		45FCD27E2A18BEEE00B0DAF0 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452D35342951BE550018A3DA /* Inter-Regular.ttf */; };
 		45FCD27F2A18BEEE00B0DAF0 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 452D35302951BE550018A3DA /* Inter-SemiBold.ttf */; };
-		45FCD2802A18BEEE00B0DAF0 /* SplashScreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 45B39F9129E52F7300852E70 /* SplashScreen.json */; };
 		45FCD2812A18BEEE00B0DAF0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529AA6F29AF1471001D2390 /* Preview Assets.xcassets */; };
 		45FCD2832A18BEEE00B0DAF0 /* YandexMobileAdsBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 453844D729E40CCD00A89FEE /* YandexMobileAdsBundle.bundle */; };
 /* End PBXBuildFile section */
@@ -593,6 +607,9 @@
 		4546D59229E844CD00E69852 /* PushNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationView.swift; sourceTree = "<group>"; };
 		4546D59829E86BFF00E69852 /* ATTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTView.swift; sourceTree = "<group>"; };
 		45470CB328E5BEE1004822E0 /* ActivitiesBarCharsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesBarCharsView.swift; sourceTree = "<group>"; };
+		454828362B2052FB00C0B8EE /* SplashScreenFlower.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreenFlower.json; sourceTree = "<group>"; };
+		454828392B20534300C0B8EE /* SplashScreenLines.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreenLines.json; sourceTree = "<group>"; };
+		4548283C2B20536000C0B8EE /* SplashScreenStarts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreenStarts.json; sourceTree = "<group>"; };
 		454A193F2ACC55FA00B3EC6B /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
 		4551C3F32959A2040034665E /* UIView+extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extenstion.swift"; sourceTree = "<group>"; };
 		45660B9A2A23589F00077CBF /* UserLimitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLimitsView.swift; sourceTree = "<group>"; };
@@ -627,6 +644,11 @@
 		457F591829C184B900E96E1D /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		457F591A29C184F300E96E1D /* ReportEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEndPoint.swift; sourceTree = "<group>"; };
 		45884FF72A97E992003A3D8A /* WebViewUIViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewUIViewRepresentable.swift; sourceTree = "<group>"; };
+		458F038E2B0DDF5300EA7C39 /* JustBreathe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustBreathe.swift; sourceTree = "<group>"; };
+		458F03942B0DE28300EA7C39 /* SimpleBreathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBreathView.swift; sourceTree = "<group>"; };
+		458F03972B0DE28F00EA7C39 /* SimpleBreathCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBreathCoordinatorView.swift; sourceTree = "<group>"; };
+		458F039A2B0DE29500EA7C39 /* SimpleBreathViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBreathViewModel.swift; sourceTree = "<group>"; };
+		458F039D2B0DE29D00EA7C39 /* SimpleBreathViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBreathViewCoordinator.swift; sourceTree = "<group>"; };
 		4592521329C4205E007B1706 /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
 		4592521A29C6EB9A007B1706 /* WeekAnimationChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekAnimationChart.swift; sourceTree = "<group>"; };
 		4592521C29C6EBA2007B1706 /* MonthChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthChart.swift; sourceTree = "<group>"; };
@@ -657,7 +679,6 @@
 		45A9F05529F1068B002C13C5 /* AuthDeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDeleteAccountView.swift; sourceTree = "<group>"; };
 		45B39F8929E52A4B00852E70 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		45B39F8F29E52DBC00852E70 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		45B39F9129E52F7300852E70 /* SplashScreen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SplashScreen.json; sourceTree = "<group>"; };
 		45B39F9329E5406500852E70 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		45B39FA129E554B100852E70 /* LoaderLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderLottieView.swift; sourceTree = "<group>"; };
 		45B459AA29921D5800890CC9 /* PieSliceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
@@ -948,6 +969,7 @@
 				452D35462951CEA80018A3DA /* PersonalCabinet */,
 				45D6F16A29B6575F007EABFA /* UserStateScreen */,
 				45B6EF0A2AC7084500344EC5 /* BreathScreen */,
+				458F03932B0DE26400EA7C39 /* SimpleBreath */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1011,7 +1033,9 @@
 				45F361A22A1788E8002CD92B /* GoogleService-Info.plist */,
 				4529AA6A29AF1470001D2390 /* ContentView.swift */,
 				4529AA6C29AF1471001D2390 /* Assets.xcassets */,
-				45B39F9129E52F7300852E70 /* SplashScreen.json */,
+				454828362B2052FB00C0B8EE /* SplashScreenFlower.json */,
+				4548283C2B20536000C0B8EE /* SplashScreenStarts.json */,
+				454828392B20534300C0B8EE /* SplashScreenLines.json */,
 				4546D58F29E841FC00E69852 /* loader.json */,
 				4529AA6E29AF1471001D2390 /* Preview Content */,
 				457AC3CF2A59645600294BF6 /* PushNotificationTest.apns */,
@@ -1311,6 +1335,25 @@
 			path = PushNotification;
 			sourceTree = "<group>";
 		};
+		458F038C2B0DDF2300EA7C39 /* SimpleBreathPractice */ = {
+			isa = PBXGroup;
+			children = (
+				458F038E2B0DDF5300EA7C39 /* JustBreathe.swift */,
+			);
+			path = SimpleBreathPractice;
+			sourceTree = "<group>";
+		};
+		458F03932B0DE26400EA7C39 /* SimpleBreath */ = {
+			isa = PBXGroup;
+			children = (
+				458F03942B0DE28300EA7C39 /* SimpleBreathView.swift */,
+				458F03972B0DE28F00EA7C39 /* SimpleBreathCoordinatorView.swift */,
+				458F039A2B0DE29500EA7C39 /* SimpleBreathViewModel.swift */,
+				458F039D2B0DE29D00EA7C39 /* SimpleBreathViewCoordinator.swift */,
+			);
+			path = SimpleBreath;
+			sourceTree = "<group>";
+		};
 		4592521529C6EB2A007B1706 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1472,6 +1515,7 @@
 		45B6EEE52AC6FF8800344EC5 /* Breath */ = {
 			isa = PBXGroup;
 			children = (
+				458F038C2B0DDF2300EA7C39 /* SimpleBreathPractice */,
 				45B6EEE62AC6FF8800344EC5 /* BreathViewComponent.swift */,
 			);
 			path = Breath;
@@ -1747,6 +1791,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4548283A2B20534300C0B8EE /* SplashScreenLines.json in Resources */,
 				457AC3D02A59645600294BF6 /* PushNotificationTest.apns in Resources */,
 				4529AA9429AF15B8001D2390 /* Settings.plist in Resources */,
 				4546D59029E841FC00E69852 /* loader.json in Resources */,
@@ -1754,6 +1799,7 @@
 				4529AA8D29AF15A9001D2390 /* Inter-Bold.ttf in Resources */,
 				45B6EEDB2AC6FF5100344EC5 /* rainSound.mp3 in Resources */,
 				4529AA8E29AF15A9001D2390 /* Inter-ExtraBold.ttf in Resources */,
+				454828372B2052FB00C0B8EE /* SplashScreenFlower.json in Resources */,
 				45A2B3782AAAF2E800643C78 /* Assets.xcassets in Resources */,
 				4529AA8F29AF15A9001D2390 /* Inter-ExtraLight.ttf in Resources */,
 				45B6EED72AC6FF5100344EC5 /* nightInForest.mp3 in Resources */,
@@ -1761,10 +1807,10 @@
 				45B39F9429E5406500852E70 /* Launch Screen.storyboard in Resources */,
 				4529AA9129AF15A9001D2390 /* Inter-Medium.ttf in Resources */,
 				45B6EED52AC6FF5100344EC5 /* birds.mp3 in Resources */,
+				4548283D2B20536000C0B8EE /* SplashScreenStarts.json in Resources */,
 				45F361A32A1788E8002CD92B /* GoogleService-Info.plist in Resources */,
 				4529AA9229AF15A9001D2390 /* Inter-Regular.ttf in Resources */,
 				4529AA9329AF15A9001D2390 /* Inter-SemiBold.ttf in Resources */,
-				45B39F9229E52F7300852E70 /* SplashScreen.json in Resources */,
 				45B6EED92AC6FF5100344EC5 /* ocean.mp3 in Resources */,
 				4529AA7029AF1471001D2390 /* Preview Assets.xcassets in Resources */,
 				453844D829E40CCD00A89FEE /* YandexMobileAdsBundle.bundle in Resources */,
@@ -1782,6 +1828,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				454828382B2052FB00C0B8EE /* SplashScreenFlower.json in Resources */,
 				45FCD2742A18BEEE00B0DAF0 /* Settings.plist in Resources */,
 				45FCD2752A18BEEE00B0DAF0 /* loader.json in Resources */,
 				45FCD2762A18BEEE00B0DAF0 /* Inter-Black.ttf in Resources */,
@@ -1795,10 +1842,11 @@
 				45FCD27D2A18BEEE00B0DAF0 /* GoogleService-Info.plist in Resources */,
 				45FCD27E2A18BEEE00B0DAF0 /* Inter-Regular.ttf in Resources */,
 				45FCD27F2A18BEEE00B0DAF0 /* Inter-SemiBold.ttf in Resources */,
-				45FCD2802A18BEEE00B0DAF0 /* SplashScreen.json in Resources */,
+				4548283E2B20536000C0B8EE /* SplashScreenStarts.json in Resources */,
 				45B6EED62AC6FF5100344EC5 /* birds.mp3 in Resources */,
 				45FCD2812A18BEEE00B0DAF0 /* Preview Assets.xcassets in Resources */,
 				45B6EEDA2AC6FF5100344EC5 /* ocean.mp3 in Resources */,
+				4548283B2B20534300C0B8EE /* SplashScreenLines.json in Resources */,
 				45A2B3772AAAF2E400643C78 /* Assets.xcassets in Resources */,
 				45B6EEDC2AC6FF5100344EC5 /* rainSound.mp3 in Resources */,
 				45FCD2832A18BEEE00B0DAF0 /* YandexMobileAdsBundle.bundle in Resources */,
@@ -1816,6 +1864,7 @@
 				4529AB6F29AF193F001D2390 /* SynchronizedDictionary.swift in Sources */,
 				453844DC29E40D5000A89FEE /* YandexInterstitialADView.swift in Sources */,
 				4529AB7029AF193F001D2390 /* UIView+extenstion.swift in Sources */,
+				458F03952B0DE28300EA7C39 /* SimpleBreathView.swift in Sources */,
 				45660B9B2A23589F00077CBF /* UserLimitsView.swift in Sources */,
 				45D6F15E29B3771B007EABFA /* KeychainHelper.swift in Sources */,
 				4529AB7129AF193F001D2390 /* UIImage+extension.swift in Sources */,
@@ -1859,6 +1908,7 @@
 				4529AB9329AF1940001D2390 /* CGPoint+Shortcuts.swift in Sources */,
 				4529AB9429AF1940001D2390 /* SCCircleChartPart.swift in Sources */,
 				4529AB9529AF1940001D2390 /* SCDataPointProtocol.swift in Sources */,
+				458F039B2B0DE29500EA7C39 /* SimpleBreathViewModel.swift in Sources */,
 				45A932142B035E8600E25FA3 /* PracticeViewCoordinator.swift in Sources */,
 				4529AB9629AF1940001D2390 /* SCPiePart.swift in Sources */,
 				4529AB9729AF1940001D2390 /* SCDataPoint.swift in Sources */,
@@ -1896,6 +1946,7 @@
 				4529ABA329AF1940001D2390 /* SegmentedControlView.swift in Sources */,
 				4529ABA429AF1940001D2390 /* TabBar.swift in Sources */,
 				454A19402ACC55FA00B3EC6B /* ShimmerView.swift in Sources */,
+				458F039E2B0DE29D00EA7C39 /* SimpleBreathViewCoordinator.swift in Sources */,
 				4529ABA529AF1940001D2390 /* MTButton.swift in Sources */,
 				4504F00329D9762F0042CF6B /* DiaryModel.swift in Sources */,
 				45B6EEEE2AC6FFD000344EC5 /* MoodCheckViewModel.swift in Sources */,
@@ -1904,6 +1955,7 @@
 				45884FF82A97E992003A3D8A /* WebViewUIViewRepresentable.swift in Sources */,
 				45B39F9029E52DBC00852E70 /* LottieView.swift in Sources */,
 				4592521B29C6EB9A007B1706 /* WeekAnimationChart.swift in Sources */,
+				458F03982B0DE28F00EA7C39 /* SimpleBreathCoordinatorView.swift in Sources */,
 				4529ABA729AF1940001D2390 /* EmotionBoardView.swift in Sources */,
 				45D6F16E29B6586E007EABFA /* UserStateInfoModel.swift in Sources */,
 				4529ABA829AF1940001D2390 /* QuoteView.swift in Sources */,
@@ -1978,6 +2030,7 @@
 				45A932172B035E9500E25FA3 /* PracticeCoordinatorView.swift in Sources */,
 				4529ABD229AF1942001D2390 /* ActivitiesCoordinatorView.swift in Sources */,
 				456A401129B991E200371B5C /* EmotionsViewModel.swift in Sources */,
+				458F03912B0DDF5300EA7C39 /* JustBreathe.swift in Sources */,
 				4529ABD329AF1942001D2390 /* StressCheckComponent.swift in Sources */,
 				4546D59329E844CD00E69852 /* PushNotificationView.swift in Sources */,
 				45B6EEEA2AC6FFB600344EC5 /* MMCircleButton.swift in Sources */,
@@ -2008,6 +2061,7 @@
 				45FCD1CC2A18BEEE00B0DAF0 /* SynchronizedDictionary.swift in Sources */,
 				45FCD1CD2A18BEEE00B0DAF0 /* YandexInterstitialADView.swift in Sources */,
 				45FCD1CE2A18BEEE00B0DAF0 /* UIView+extenstion.swift in Sources */,
+				458F03962B0DE28300EA7C39 /* SimpleBreathView.swift in Sources */,
 				45FCD1CF2A18BEEE00B0DAF0 /* KeychainHelper.swift in Sources */,
 				45FCD1D02A18BEEE00B0DAF0 /* UIImage+extension.swift in Sources */,
 				45FCD1D12A18BEEE00B0DAF0 /* MMErrorView.swift in Sources */,
@@ -2051,6 +2105,7 @@
 				45FCD1F42A18BEEE00B0DAF0 /* SCDataPointProtocol.swift in Sources */,
 				45FCD1F52A18BEEE00B0DAF0 /* SCPiePart.swift in Sources */,
 				45FCD1F62A18BEEE00B0DAF0 /* SCDataPoint.swift in Sources */,
+				458F039C2B0DE29500EA7C39 /* SimpleBreathViewModel.swift in Sources */,
 				45A932152B035E8600E25FA3 /* PracticeViewCoordinator.swift in Sources */,
 				45FCD1F72A18BEEE00B0DAF0 /* SCDonutPart.swift in Sources */,
 				45FCD1F82A18BEEE00B0DAF0 /* NumberFormatter+Defaults.swift in Sources */,
@@ -2088,6 +2143,7 @@
 				45FCD2102A18BEEE00B0DAF0 /* MTButton.swift in Sources */,
 				45FCD2112A18BEEE00B0DAF0 /* DiaryModel.swift in Sources */,
 				454A19412ACC560100B3EC6B /* ShimmerView.swift in Sources */,
+				458F039F2B0DE29D00EA7C39 /* SimpleBreathViewCoordinator.swift in Sources */,
 				45FCD2122A18BEEE00B0DAF0 /* MMErrorProtocol.swift in Sources */,
 				45FCD2132A18BEEE00B0DAF0 /* CutomAlertView.swift in Sources */,
 				45B6EEEF2AC6FFD000344EC5 /* MoodCheckViewModel.swift in Sources */,
@@ -2096,6 +2152,7 @@
 				45FCD2162A18BEEE00B0DAF0 /* EmotionBoardView.swift in Sources */,
 				45FCD2172A18BEEE00B0DAF0 /* UserStateInfoModel.swift in Sources */,
 				45FCD2182A18BEEE00B0DAF0 /* QuoteView.swift in Sources */,
+				458F03992B0DE28F00EA7C39 /* SimpleBreathCoordinatorView.swift in Sources */,
 				45FCD2192A18BEEE00B0DAF0 /* ReportEndPoint.swift in Sources */,
 				45FCD21A2A18BEEE00B0DAF0 /* AuthLogoutView.swift in Sources */,
 				45FCD21B2A18BEEE00B0DAF0 /* ActivitiesTextViewBlock.swift in Sources */,
@@ -2170,6 +2227,7 @@
 				45A932182B035E9500E25FA3 /* PracticeCoordinatorView.swift in Sources */,
 				45FCD2562A18BEEE00B0DAF0 /* EmotionsViewModel.swift in Sources */,
 				45A2B37D2AAAF36C00643C78 /* PushNotificationModel.swift in Sources */,
+				458F03922B0DDF5300EA7C39 /* JustBreathe.swift in Sources */,
 				45FCD2572A18BEEE00B0DAF0 /* StressCheckComponent.swift in Sources */,
 				45FCD2582A18BEEE00B0DAF0 /* PushNotificationView.swift in Sources */,
 				45B6EEEB2AC6FFB600344EC5 /* MMCircleButton.swift in Sources */,
@@ -2273,10 +2331,12 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.071117;
+				CURRENT_PROJECT_VERSION = 1.0827;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = NO;
 				EXCLUDED_ARCHS = "";
+				GCC_NO_COMMON_BLOCKS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoodMap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
@@ -2296,8 +2356,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.70;
-				OTHER_LDFLAGS = "-ObjC";
+				MARKETING_VERSION = 1.0.80;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-ld64",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2319,10 +2382,12 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.071117;
+				CURRENT_PROJECT_VERSION = 1.0827;
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
 				EXCLUDED_ARCHS = "";
+				GCC_NO_COMMON_BLOCKS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MoodMap copy-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
@@ -2342,7 +2407,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.70;
+				MARKETING_VERSION = 1.0.80;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2450,11 +2515,12 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.071117;
+				CURRENT_PROJECT_VERSION = 1.0827;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
+				GCC_NO_COMMON_BLOCKS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoodMap/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
@@ -2474,8 +2540,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.70;
-				OTHER_LDFLAGS = "-ObjC";
+				MARKETING_VERSION = 1.0.80;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-ld64",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2497,11 +2566,12 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = MoodMap/MoodMap.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.071117;
+				CURRENT_PROJECT_VERSION = 1.0827;
 				DEVELOPMENT_ASSET_PATHS = "\"MoodMap/Preview Content\"";
 				DEVELOPMENT_TEAM = L6QZ8MR9Z8;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
+				GCC_NO_COMMON_BLOCKS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MoodMap copy-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MoodMap;
@@ -2521,7 +2591,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.70;
+				MARKETING_VERSION = 1.0.80;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.moodmap.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2712,8 +2782,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yandexmobile/yandex-ads-sdk-swift";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.4.0;
+				kind = exactVersion;
+				version = 5.5.0;
 			};
 		};
 		45F361A42A178A5A002CD92B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {

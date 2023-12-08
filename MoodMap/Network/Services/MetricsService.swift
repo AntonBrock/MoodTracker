@@ -49,6 +49,8 @@ enum MetricsEventName: String {
     case endEarlyBreathPracice = "endEarlyBreathPracice"
     case endHalfBreathPractice = "endHalfBreathPractice"
     case endFullBreathPractice = "endFullBreathPractice"
+    
+    case openSimpleBreathScreen = "openSimpleBreathScreen"
 }
 
 protocol MetricsServiceProtocol {
@@ -92,6 +94,8 @@ enum YMetricsEventType: String {
     case endEarlyBreathPracice = "endEarlyBreathPracice"
     case endHalfBreathPractice = "endHalfBreathPractice"
     case endFullBreathPractice = "endFullBreathPractice"
+    
+    case openSimpleBreathScreen = "openSimpleBreathScreen"
 }
 
 public enum YMetricsProfileType {
@@ -194,6 +198,8 @@ class MetricsService: MetricsServiceProtocol {
             message = "iOS: Пользователь завершил практику на половине прогресса"
         case .endFullBreathPractice:
             message = "iOS: Пользователь завершил практику полностью"
+        case .openSimpleBreathScreen:
+            message = "iOS: Пользователь открыл упрощенную дыхательную практику"
         }
         
         let parameters = ["message": message]
@@ -273,6 +279,8 @@ class MetricsService: MetricsServiceProtocol {
             message = "iOS: Пользователь завершил практику на половине прогресса"
         case .endFullBreathPractice:
             message = "iOS: Пользователь завершил практику полностью"
+        case .openSimpleBreathScreen:
+            message = "iOS: Пользователь открыл упрощенную дыхательную практику"
         }
         
         let parameters = [eventType.rawValue: message]
