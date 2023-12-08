@@ -3,41 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIcons</key>
-	<dict>
-		<key>CFBundleAlternateIcons</key>
-		<dict>
-			<key>MoodWeenIcon</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>MoodWeenIcon</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
-		</dict>
-	</dict>
-	<key>UIApplicationShortcutItems</key>
-	<array>
-		<dict>
-			<key>UIApplicationShortcutItemType</key>
-			<string>createNewNote</string>
-			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>plus.square.fill</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Создать запись дня</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>Нам важно твое мнение</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>voteInAppStore</string>
-			<key>UIApplicationShortcutItemIconSymbolName</key>
-			<string>rectangle.and.pencil.and.ellipsis</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Оценка в AppStore</string>
-		</dict>
-	</array>
+	<dict/>
 	<key>MinimumFetchIntervalRemoteConfig</key>
 	<string>$(SCHEME)${MINIMUM_FETCH_INTERVAL}</string>
 	<key>YandexADID</key>
