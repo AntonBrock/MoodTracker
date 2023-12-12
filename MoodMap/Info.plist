@@ -21,6 +21,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>moodmap</string>
 				<string>$(SCHEME)${URL_SCHEMES_GOOGLE}</string>
 				<string>fb309076024863926</string>
 			</array>

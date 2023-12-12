@@ -175,7 +175,7 @@ struct ContentView: View {
             coordinator.isNeedShowAuthPopupFromLaunchScreen = isNeedShowAuthPopupFromLaunchScreen
         }
     }
-    
+        
     private func changeViewRouter(page: Page) {
         switch page {
         case .home: viewRouter.currentPage = .home
