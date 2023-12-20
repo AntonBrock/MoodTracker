@@ -13,7 +13,8 @@ struct PracticeView: View {
     
     @ObservedObject var viewModel: ViewModel
     private unowned let coordinator: PracticeViewCoordinator
-    
+    @Environment(\.colorScheme) var colorScheme
+
     @State var wasOpenedFromTabBar: (() -> Void)?
     
     init(
@@ -34,6 +35,9 @@ struct PracticeView: View {
     
     var body: some View {
         ZStack {
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
+            
             ScrollView {
                 VStack {
                     diaryBlock()
@@ -55,7 +59,7 @@ struct PracticeView: View {
     @ViewBuilder
     private func diaryBlock() -> some View {
         Text("Эмоциональная поддержка")
-            .foregroundColor(Colors.Primary.blue)
+            .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
             .font(.system(size: 20, weight: .semibold))
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, 20)
@@ -98,7 +102,7 @@ struct PracticeView: View {
         .frame(maxWidth: .infinity, minHeight: 140)
         .cornerRadius(20)
         .padding(.horizontal, 10)
-        .shadow(color: Colors.TextColors.mischka500,
+        .shadow(color:  colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.mischka500,
                 radius: 3.0, x: 1.0, y: 0)
     }
     
@@ -106,7 +110,7 @@ struct PracticeView: View {
     @ViewBuilder
     private func moodBreathView() -> some View {
         Text("Практики")
-            .foregroundColor(Colors.Primary.blue)
+            .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
             .font(.system(size: 20, weight: .semibold))
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, 20)
@@ -161,7 +165,7 @@ struct PracticeView: View {
         .frame(maxWidth: .infinity, minHeight: 140)
         .cornerRadius(20)
         .padding(.horizontal, 10)
-        .shadow(color: Colors.TextColors.mischka500,
+        .shadow(color:  colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.mischka500,
                 radius: 3.0, x: 1.0, y: 0)
     }
     
@@ -185,7 +189,7 @@ struct PracticeView: View {
         .frame(maxWidth: .infinity, minHeight: 140)
         .cornerRadius(20)
         .padding(.horizontal, 10)
-        .shadow(color: Colors.TextColors.mischka500,
+        .shadow(color: colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.mischka500,
                 radius: 3.0, x: 1.0, y: 0)
     }
 }

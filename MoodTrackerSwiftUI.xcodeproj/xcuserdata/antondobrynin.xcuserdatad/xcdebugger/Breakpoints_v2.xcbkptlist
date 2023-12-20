@@ -46,8 +46,8 @@
             filePath = "MoodMap/UI /Components/TabBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "MoodMap/UI /Screens/PersonalCabinet/PersonalCabinetCoordinatorView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
             landmarkName = "init(coordinator:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +158,8 @@
             filePath = "MoodMap/UI /Screens/Report/Views/Charts/WeekAnimationChart.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "AnimationChart()"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "MoodMap/UI /Screens/LaunchScreen/LaunchScreenView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
             landmarkName = "getUserInfo(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -318,8 +318,8 @@
             filePath = "MoodMap/UI /Screens/MainScreen/MainView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "MainView"
             landmarkType = "14">
             <Locations>
@@ -478,8 +478,8 @@
             filePath = "MoodMap/UI /Screens/MainScreen/MainView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "639"
-            endingLineNumber = "639"
+            startingLineNumber = "646"
+            endingLineNumber = "646"
             landmarkName = "journalViews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -510,42 +510,10 @@
             filePath = "MoodMap/System/SceneDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "startStory(type:parent:container:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "7781A705-DB2F-4579-ADF4-414533F2B71A - b85607199ec380ea"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MoodMap.SceneDelegate.startStory(type: MoodMap.UserStoryType, parent: MoodMap.BaseViewCoordinator, container: MoodMap.DIContainer) -&gt; ()"
-                  moduleName = "MoodMap"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/System/SceneDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "179"
-                  endingLineNumber = "179"
-                  offsetFromSymbolStart = "660">
-               </Location>
-               <Location
-                  uuid = "7781A705-DB2F-4579-ADF4-414533F2B71A - b85607199ec380ea"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MoodMap.SceneDelegate.startStory(type: MoodMap.UserStoryType, parent: MoodMap.BaseViewCoordinator, container: MoodMap.DIContainer) -&gt; ()"
-                  moduleName = "MoodMap"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/System/SceneDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "179"
-                  endingLineNumber = "179"
-                  offsetFromSymbolStart = "572">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -558,42 +526,10 @@
             filePath = "MoodMap/System/SceneDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "startStory(type:parent:container:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1011BF85-755A-4635-B052-A6DE25F60520 - b85607199ec38676"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MoodMap.SceneDelegate.startStory(type: MoodMap.UserStoryType, parent: MoodMap.BaseViewCoordinator, container: MoodMap.DIContainer) -&gt; ()"
-                  moduleName = "MoodMap"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/System/SceneDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "191"
-                  endingLineNumber = "191"
-                  offsetFromSymbolStart = "1032">
-               </Location>
-               <Location
-                  uuid = "1011BF85-755A-4635-B052-A6DE25F60520 - b85607199ec38676"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MoodMap.SceneDelegate.startStory(type: MoodMap.UserStoryType, parent: MoodMap.BaseViewCoordinator, container: MoodMap.DIContainer) -&gt; ()"
-                  moduleName = "MoodMap"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/antondobrynin/Desktop/MoodTracker/MoodMap/System/SceneDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "191"
-                  endingLineNumber = "191"
-                  offsetFromSymbolStart = "1000">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -750,8 +686,8 @@
             filePath = "MoodMap/System/SceneDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "scene(_:willConnectTo:options:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -15,6 +15,7 @@ struct SegmentedControlView: View {
     }
     
     @Namespace var animation
+    @Environment(\.colorScheme) var colorScheme
     
     var countOfItems: Int = 0
     var segments: [String] = []
@@ -29,11 +30,13 @@ struct SegmentedControlView: View {
         VStack {
             HStack {
                 ForEach(segments, id: \.self) { segment in
-                    
                     Text("\(segment)")
                         .fontWeight(.medium)
                         .padding(.vertical, 12)
-                        .frame(maxWidth: UIScreen.main.bounds.width - 32 / CGFloat(countOfItems), maxHeight: styleSegmentControl == .default ? 40 : 35, alignment: .center)
+                        .frame(
+                            maxWidth: UIScreen.main.bounds.width - 32 / CGFloat(countOfItems),
+                            maxHeight: styleSegmentControl == .default ? 40 : 35, alignment: .center
+                        )
                         .background(
                             ZStack {
                                 if currentTab == "\(segment)" {
@@ -58,15 +61,15 @@ struct SegmentedControlView: View {
                             }
                         }
                     
-                    if styleSegmentControl == .gray && currentTab != "\(segment)" {
-                        Divider()
-                    }
+                        if styleSegmentControl == .gray && currentTab != "\(segment)" {
+                            Divider()
+                        }
                 }
             }
             .frame(maxHeight: styleSegmentControl == .default ? 40 : 35, alignment: .center)
-            .background(styleSegmentControl == .default ? .white : Colors.TextColors.porcelain200)
+            .background(styleSegmentControl == .default && colorScheme == .dark ? Colors.Primary.moodDarkBackground : styleSegmentControl == .default && colorScheme != .dark ? .white : Colors.TextColors.porcelain200)
             .cornerRadius(25)
-            .shadow(color: styleSegmentControl == .default ? Colors.TextColors.mischka500 : .white, radius: 8, x: 0, y: 0)
+            .shadow(color: styleSegmentControl == .default && colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.mischka500, radius: 8, x: 0, y: 0)
 
         }
     }

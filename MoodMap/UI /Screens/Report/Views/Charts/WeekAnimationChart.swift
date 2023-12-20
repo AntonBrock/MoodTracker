@@ -10,6 +10,8 @@ import Charts
 
 struct WeekAnimationChart: View {
     
+    @Environment(\.colorScheme) var colorScheme
+    
     @Binding var weekChartViewModel: [ChartDataViewModel]
     @Binding var prevWeekChartsViewModel: [ChartDataViewModel]
     
@@ -25,7 +27,7 @@ struct WeekAnimationChart: View {
         .padding()
         .background {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .fill(.white.shadow(.drop(radius: 2)))
+                .fill(colorScheme == .dark ? Colors.Primary.moodDarkBackground.shadow(.drop(radius: 2)) : Color.white.shadow(.drop(radius: 2)))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding()
@@ -47,12 +49,13 @@ struct WeekAnimationChart: View {
                             
                             Text("Недостаточно данных, чтобы мы смогли подсчитать среднюю оценку,\n тебе нужно больше отмечать свое состояние")
                                 .frame(maxWidth: .infinity, alignment: .center)
-                                .foregroundColor(Colors.Primary.blue)
+                                .foregroundColor(colorScheme == .dark ? Colors.TextColors.cadetBlue600 : Colors.Primary.blue)
                                 .font(.system(size: 14, weight: .medium))
                                 .multilineTextAlignment(.center)
-                                .padding(.top, 5)
+                                .padding(.top, 25)
                         }
                         .frame(maxHeight: .infinity, alignment: .center)
+                        
                     } else {
                         
                         // Charts for prevweek
@@ -99,9 +102,10 @@ struct WeekAnimationChart: View {
                                     )
                                     .foregroundStyle(
                                         .linearGradient(
-                                            colors: [ Colors.Secondary.yourPinkRed400,
-                                                      Colors.Secondary.melrose500Blue,
-                                                      Colors.Secondary.cruise400Green],
+                                            colors: [Colors.Secondary.yourPinkRed400,
+                                                     Colors.Secondary.melrose500Blue,
+                                                     Colors.Secondary.cruise400Green
+                                                    ],
                                             startPoint: .bottom,
                                             endPoint: .top
                                         )
@@ -145,12 +149,12 @@ struct WeekAnimationChart: View {
                             
                             Text(AppState.shared.isLogin ?? false ? "За этот период состояние было отмечено 0 раз,\n отметь свое состояние, после мы покажем твою статистику" : "Авторизуйся и начни отмечать свое состояние, чтобы мы смогли показать статистику")
                                 .frame(maxWidth: .infinity, alignment: .center)
-                                .foregroundColor(Colors.TextColors.fiord800)
+                                .foregroundColor(colorScheme == .dark ? Colors.TextColors.cadetBlue600 : Colors.TextColors.fiord800)
                                 .font(.system(size: 14, weight: .medium))
                                 .multilineTextAlignment(.center)
                         }
                         .frame(height: 250, alignment: .center)
-                        .background(.white)
+                        .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
                         .cornerRadius(16)
                         
                     }

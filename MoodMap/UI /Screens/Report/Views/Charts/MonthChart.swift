@@ -11,6 +11,8 @@ struct MonthChart: View {
     
     @State var viewModel: ReportScreen.ViewModel?
     
+    @Environment(\.colorScheme) var colorScheme
+    
     @Binding var monthChartViewModel: [ChartDataViewModel]
     @Binding var showLoader: Bool
 
@@ -22,6 +24,7 @@ struct MonthChart: View {
     @State var currentMonth: Int = 0
         
     var body: some View {
+        
         VStack {
             let days: [String] = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"]
             HStack(spacing: 0) {
@@ -41,9 +44,11 @@ struct MonthChart: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 6)
                                 .stroke(
-                                    Colors.Primary.lightGray.opacity(
-                                        isSameDay(date1: Date(), date2: currentDate) ? 0.0 : 0.5),
-                                    lineWidth: 1)
+                                    colorScheme == .dark
+                                    ? Colors.Primary.moodDarkBackground.opacity( isSameDay(date1: Date(), date2: currentDate) ? 0.0 : 0.5)
+                                    : Colors.Primary.lightGray.opacity( isSameDay(date1: Date(), date2: currentDate) ? 0.0 : 0.5),
+                                    lineWidth: 1
+                                )
                                 .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
                         )
                         .onTapGesture {
@@ -128,7 +133,7 @@ struct MonthChart: View {
         VStack(spacing: 20) {
             Text("\(getFormattedChoosedDate(currentDate))")
                 .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(Colors.Primary.blue)
+                .foregroundColor(colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.Primary.blue)
                 .frame(maxWidth: .infinity, alignment: .center)
 
             if monthChartViewModel.first(where: { task in
@@ -204,7 +209,7 @@ struct MonthChart: View {
                     .background(
                         Color.white
                             .clipShape(RoundedRectangle(cornerRadius: 16))
-                            .shadow(color: Colors.TextColors.cadetBlue600.opacity(0.5), radius: 5)
+                            .shadow(color: colorScheme == .dark ? Colors.TextColors.athensGray300 : Colors.TextColors.cadetBlue600.opacity(0.5), radius: 5)
                     )
                 }
             }
@@ -241,7 +246,10 @@ struct MonthChart: View {
                 }) {
                     Text("\(value.day)")
                         .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(isSameDay(date1: task.date2, date2: currentDate) ? Colors.Primary.blue : Colors.Primary.blue)
+                        .foregroundColor(
+//                            isSameDay(date1: task.date2, date2: currentDate) ? Colors.Primary.blue : Colors.Primary.blue
+                            colorScheme == .dark ? Colors.TextColors.athensGray300 : Colors.Primary.blue
+                        )
                         .frame(maxWidth: .infinity)
                     
                     Spacer()
@@ -259,7 +267,13 @@ struct MonthChart: View {
                 } else {
                     Text("\(value.day)")
                         .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? Colors.Primary.lavender500Purple : Colors.Primary.blue)
+                        .foregroundColor(
+                            isSameDay(date1: value.date, date2: currentDate) 
+                            ? Colors.Primary.lavender500Purple
+                            : colorScheme == .dark
+                            ? Colors.TextColors.athensGray300
+                            : Colors.Primary.blue
+                        )
                         .frame(maxWidth: .infinity)
 
                     Spacer()

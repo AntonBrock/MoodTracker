@@ -19,6 +19,7 @@ struct Colors {
         static let lavender500Purple: Color = Color(hex: "#B283E4")
         static let perfume400Purple: Color = Color(hex: "#CDA8F5")
         static let moonRaker300Purple: Color = Color(hex: "#E2CEF7")
+        static let moodDarkBackground: Color = Color(hex: "#24324E")
     }
     
     struct Secondary {

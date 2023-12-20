@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ReportTipView: View {
     
+    @Environment(\.colorScheme) var colorScheme
+    
     enum TipType {
         case goodActivities
         case goodActivitiesStress
@@ -27,38 +29,42 @@ struct ReportTipView: View {
     var body: some View {
         VStack {
             Capsule()
-                .fill(Color.white)
+                .fill(colorScheme == .dark ? Colors.Primary.moodDarkBackground : Color.white)
                 .frame(maxWidth: UIScreen.main.bounds.width - 32, minHeight: 65, maxHeight: .infinity)
-                .shadow(color: Colors.Primary.lightGray.opacity(0.5), radius: 5, x: 0, y: 0)
+                .shadow(color: colorScheme == .dark 
+                        ? Colors.Primary.moodDarkBackground.opacity(0.5)
+                        : Colors.Primary.lightGray.opacity(0.5),
+                        radius: 5, x: 0, y: 0
+                )
                 .overlay(
                     HStack {
                         if selectedText == "" {
                             if isShowLoader {
                                 Text("Секунду..")
-                                    .font(.system(size: 14, weight: .light))
-                                    .foregroundColor(Colors.Primary.blue) +
+                                    .font(.system(size: 14, weight: .regular))
+                                    .foregroundColor(colorScheme == .dark ? Colors.TextColors.cadetBlue600 : Colors.Primary.blue) +
                                 
                                 Text(" уже ищем твои записи")
                                     .foregroundColor(getColorFor(tipType))
-                                    .font(.system(size: 14, weight: .light))
+                                    .font(.system(size: 14, weight: .regular))
                             } else {
-                                Text("Начни свой путь отслеживания своего состояния, ")
-                                    .font(.system(size: 14, weight: .light))
-                                    .foregroundColor(Colors.Primary.blue) +
+                                Text("В демо-режиме")
+                                    .font(.system(size: 14, weight: .regular))
+                                    .foregroundColor(colorScheme == .dark ? Colors.TextColors.cadetBlue600 : Colors.Primary.blue) +
                                 
-                                Text(" а мы соберем среднее значение и покажем тебе ☺️")
-                                    .font(.system(size: 14, weight: .light))
+                                Text(" нет информации")
+                                    .font(.system(size: 14, weight: .regular))
                                     .foregroundColor(getColorFor(tipType))
                             }
                             
                         } else {
                             Text(getTitleForTip(tipType).0)
-                                .font(.system(size: 14, weight: .light))
-                                .foregroundColor(Colors.Primary.blue) +
+                                .font(.system(size: 14, weight: .regular))
+                                .foregroundColor(colorScheme == .dark ? Colors.TextColors.cadetBlue600 : Colors.Primary.blue) +
                             
                             Text(getTitleForTip(tipType).1)
                                 .foregroundColor(getColorFor(tipType))
-                                .font(.system(size: 14, weight: .light))
+                                .font(.system(size: 14, weight: .regular))
                         }
                      
                     }
@@ -93,7 +99,7 @@ struct ReportTipView: View {
             case "Высокий": return Color(hex: "FFC8C8")
             case "Средний": return Color(hex: "B283E4")
             case "Низкий": return Color(hex: "86E9C5")
-            default: return Colors.TextColors.slateGray700
+            default: return colorScheme == .dark ? .white : Colors.TextColors.slateGray700
             }
         case .commonEmotionState:
             switch selectedText {
@@ -102,7 +108,7 @@ struct ReportTipView: View {
             case "Нормально": return Color(hex: "B283E4")
             case "Хорошо": return Color(hex: "86E9C5")
             case "Очень хорошо": return Color(hex: "FFC794")
-            default: return Colors.TextColors.slateGray700
+            default: return colorScheme == .dark ? .white : Colors.TextColors.slateGray700
             }
         }
     }

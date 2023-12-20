@@ -48,7 +48,7 @@ struct AuthHyperString: UIViewRepresentable {
                 
         let textView = UITextView()
         textView.attributedText = attributedText
-        
+        textView.backgroundColor = .clear
         textView.isEditable = false
         textView.textAlignment = .center
         textView.isSelectable = true

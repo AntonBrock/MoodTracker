@@ -12,6 +12,7 @@ import ConfettiSwiftUI
 struct MainView: View {
     
     @ObservedObject var viewModel: ViewModel
+    @Environment(\.colorScheme) var colorScheme
       
     let container: DIContainer
     var animation: Namespace.ID
@@ -74,6 +75,9 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
+
             ScrollView {
                 VStack {
                     if isAnimated {
@@ -122,23 +126,26 @@ struct MainView: View {
                     }
                     
                     Text("Мотивация дня")
-                        .foregroundColor(Colors.Primary.blue)
+                        .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
                         .font(.system(size: 20, weight: .semibold))
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                         .padding(.horizontal, 20)
+                    
                     QuoteView(quote: $quoteText)
                         .padding(.top, 10)
                     
                     Text("Статистика сегодня")
-                        .foregroundColor(Colors.Primary.blue)
+                        .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
                         .font(.system(size: 20, weight: .semibold))
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                         .padding(.horizontal, 20)
                         .padding(.top, 20)
                     
-                    SegmentedControlView(countOfItems: 2, segments: viewModel.isEnableTypeOfReprot,
-                                         selectedIndex: $typeSelectedIndex,
-                                         currentTab: viewModel.isEnableTypeOfReprot[typeSelectedIndex])
+                    SegmentedControlView(
+                        countOfItems: 2, segments: viewModel.isEnableTypeOfReprot,
+                        selectedIndex: $typeSelectedIndex,
+                        currentTab: viewModel.isEnableTypeOfReprot[typeSelectedIndex]
+                    )
                     .padding(.top, 16)
                     .padding(.horizontal, 20)
                     
@@ -502,7 +509,7 @@ struct MainView: View {
         .frame(maxWidth: .infinity, maxHeight: 170.0, alignment: .leading)
         .cornerRadius(20)
         .padding(.horizontal, 20)
-        .shadow(color: Colors.TextColors.slateGray700.opacity(0.5),
+        .shadow(color: colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.slateGray700.opacity(0.5),
                 radius: 10, x: 0, y: 0)
     }
     
@@ -612,9 +619,9 @@ struct MainView: View {
         }
         .frame(width: 116, height: 120)
         .compositingGroup()
-        .background(.white)
+        .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
         .cornerRadius(15)
-        .shadow(color: Colors.TextColors.mischka500,
+        .shadow(color: colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.mischka500,
                 radius: 2.0, x: 0.0, y: 0)
         .onTapGesture {
             if AppState.shared.isLogin ?? false {

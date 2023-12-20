@@ -2,14 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleIcons</key>
-	<dict/>
-	<key>MinimumFetchIntervalRemoteConfig</key>
-	<string>$(SCHEME)${MINIMUM_FETCH_INTERVAL}</string>
-	<key>YandexADID</key>
-	<string>$(SCHEME)${YANDEX_AD_ID}</string>
 	<key>BaseURL</key>
 	<string>$(SCHEME)${BASE_URL}</string>
+	<key>CFBundleIcons</key>
+	<dict/>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>Russian</string>
@@ -40,6 +36,8 @@
 		<string>instagram-stories</string>
 		<string>tg</string>
 	</array>
+	<key>MinimumFetchIntervalRemoteConfig</key>
+	<string>$(SCHEME)${MINIMUM_FETCH_INTERVAL}</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -62,5 +60,7 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
+	<key>YandexADID</key>
+	<string>$(SCHEME)${YANDEX_AD_ID}</string>
 </dict>
 </plist>

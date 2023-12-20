@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ActivitiesCharts: View {
     
+    @Environment(\.colorScheme) var colorScheme
+
     @Binding var goodActivitiesViewModel: GoodActivitiesReportDataViewModel
     @Binding var badActivitiesViewModel: BadActivitiesReportDataViewModel
     
@@ -136,7 +138,7 @@ struct ActivitiesCharts: View {
                                 .zIndex(9999999)
                             
                             Rectangle()
-                                .fill(Color.white)
+                                .fill(colorScheme == .dark ? Colors.Primary.moodDarkBackground : Color.white)
                                 .frame(width: 50, height: 50)
                                 .overlay {
                                     Image(item.image)
@@ -181,8 +183,9 @@ struct ActivitiesCharts: View {
                                 .zIndex(9999999)
                             
                             Rectangle()
-                                .fill(Color.white)
+                                .fill(colorScheme == .dark ? Colors.Primary.moodDarkBackground : Color.white)
                                 .frame(width: 50, height: 50)
+                                .cornerRadius(16)
                                 .overlay {
                                     Image(item.image)
                                         .resizable()
@@ -221,8 +224,9 @@ struct ActivitiesCharts: View {
                             .zIndex(9999999)
                         
                         Rectangle()
-                            .fill(Color.white)
+                            .fill(colorScheme == .dark ? Colors.Primary.moodDarkBackground : Color.white)
                             .frame(width: 50, height: 50)
+                            .cornerRadius(16)
                             .overlay {
                                 Image("")
                                     .resizable()

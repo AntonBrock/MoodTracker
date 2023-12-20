@@ -13,6 +13,8 @@ import WebKit
 
 struct ReportScreen: View {
     
+    @Environment(\.colorScheme) var colorScheme
+
     @ObservedObject var viewModel: ViewModel
     private unowned let coordinator: ReportViewCoordinator
         
@@ -53,187 +55,188 @@ struct ReportScreen: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                if isAnimated {
-                    SegmentedControlView(countOfItems: 3, segments: viewModel.isEnableTypeOfReprot,
-                                         selectedIndex: $viewModel.selectedTypeOfReport,
-                                         currentTab: viewModel.isEnableTypeOfReprot[0])
-                    .padding(.top, 16)
-                    .padding(.horizontal, 16)
-                    .transition(.move(edge: .top).combined(with: .opacity))
-                    
-                    SegmentedControlView(countOfItems: 2, segments: dateTitles,
-                                         selectedIndex: $viewModel.dateSelectedIndex,
-                                         currentTab: dateTitles[0])
-                    .padding(.top, 10)
-                    .padding(.horizontal, 16)
-                    .transition(.move(edge: .top).combined(with: .opacity))
-                }
-                
-                if viewModel.selectedTypeOfReport != 2 {
-                    HStack {
-                        if viewModel.dateSelectedIndex == 0 {
-                            HStack {
-                                Image("rc-ic-toBeforeWeek")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                    .onTapGesture {
-                                        toBeforeWeekDidTap()
-                                    }
-                                
-                                Image("rc-ic-toNextWeek")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                    .onTapGesture {
-                                        toNextWeekDidTap()
-                                    }
-                            }
-                        }
+        ZStack {
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
+            
+            ScrollView {
+                VStack {
+                    if isAnimated {
+                        SegmentedControlView(countOfItems: 3, segments: viewModel.isEnableTypeOfReprot,
+                                             selectedIndex: $viewModel.selectedTypeOfReport,
+                                             currentTab: viewModel.isEnableTypeOfReprot[0])
+                        .padding(.top, 16)
+                        .padding(.horizontal, 16)
+                        .transition(.move(edge: .top).combined(with: .opacity))
                         
-                        if viewModel.dateSelectedIndex == 1 {
-                            HStack {
-                                Image("rc-ic-toBeforeWeek")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                    .onTapGesture {
-                                        toBeforeMonthDidTap()
-                                    }
-                                
-                                Image("rc-ic-toNextWeek")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                    .onTapGesture {
-                                        toNextMonthDidTap()
-                                    }
-                            }
-                        }
-                        
-                        
-                        Spacer()
-                        
-                        Text(viewModel.dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!).\(coordinator.viewModel.currentShortMonthForFrom!) - \(coordinator.viewModel.lastDayOfWeek!).\(coordinator.viewModel.currentShortMonthForTo!), \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.shortDateMonthForTo!), \(coordinator.viewModel.currentYear!)")
-                            .foregroundColor(Colors.Primary.blue)
-                            .font(.system(size: 14, weight: .semibold))
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.leading, -48)
-                        
-                        Spacer()
-                        
-                        Image("rc-ic-information")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .onTapGesture {
-                                informationDidTap()
-                            }
-                        
-                        
+                        SegmentedControlView(countOfItems: 2, segments: dateTitles,
+                                             selectedIndex: $viewModel.dateSelectedIndex,
+                                             currentTab: dateTitles[0])
+                        .padding(.top, 10)
+                        .padding(.horizontal, 16)
+                        .transition(.move(edge: .top).combined(with: .opacity))
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, 22)
-                    .padding(.leading, 16)
-                    .padding(.trailing, 16)
-                }
-                
-                if isAnimated {
-                    if viewModel.selectedTypeOfReport == 0 || viewModel.selectedTypeOfReport == 1 {
-                        if viewModel.dateSelectedIndex == 0 {
-                            WeekAnimationChart(
-                                weekChartViewModel: $viewModel.chartDataViewModel,
-                                prevWeekChartsViewModel: $viewModel.prevWeekChartDataViewModel,
-                                showLoader: $viewModel.showLoader,
-                                showNeedMoreData: $viewModel.showNeedMoreData
-                            )
-                                .transition(.move(edge: .top).combined(with: .opacity))
-                        } else {
-                            MonthChart(viewModel: viewModel,
-                                       monthChartViewModel: $viewModel.chartDataViewModel,
-                                       showLoader: $viewModel.showLoader)
-                        }
-                        
-                        CircleEmotionChart(
-                            emotionStateCounts: $viewModel.emotionCountData.countState,
-                            emotionNames: $viewModel.emotionCountData.text,
-                            emotionColors: $viewModel.emotionCountData.color,
-                            emotionTotal: $viewModel.emotionCountData.total,
-                            emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel,
-                            isLoading: $viewModel.showLoader,
-                            dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty,
-                            emotionSlices: $viewModel.pieSliceData
-                        )
-                        
-                        if viewModel.isMonthCurrentTab {
-                            if viewModel.isStressCurrentTab {
-                                ReportTipView(
-                                    text: "Твой уровень стресса в этом месяце в большинстве случаев был ",
-                                    selectedText: $viewModel.emotionCountData.common,
-                                    isShowLoader: $viewModel.showLoader,
-                                    tipType: .commonEmotionStateStress
-                                )
-                                .padding(.top, -16)
-                            } else {
-                                ReportTipView(
-                                    text: "Твоим самым частым настроением этого месяца стало ",
-                                    selectedText: $viewModel.emotionCountData.common,
-                                    isShowLoader: $viewModel.showLoader,
-                                    tipType: .commonEmotionState
-                                )
-                                .padding(.top, -16)
+                    
+                    if viewModel.selectedTypeOfReport != 2 {
+                        HStack {
+                            if viewModel.dateSelectedIndex == 0 {
+                                HStack {
+                                    Image(colorScheme == .dark ? "rc-ic-toBeforeWeek-dark" : "rc-ic-toBeforeWeek")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                        .onTapGesture {
+                                            toBeforeWeekDidTap()
+                                        }
+                                    
+                                    Image(colorScheme == .dark ? "rc-ic-toNextWeek-dark" : "rc-ic-toNextWeek")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                        .onTapGesture {
+                                            toNextWeekDidTap()
+                                        }
+                                }
                             }
                             
-                        } else {
-                            if viewModel.isStressCurrentTab {
-                                ReportTipView(
-                                    text: "Твой уровень стресса на этой неделе в большинстве случаев ",
-                                    selectedText: $viewModel.emotionCountData.common,
-                                    isShowLoader: $viewModel.showLoader,
-                                    tipType: .commonEmotionStateStress
-                                )
-                                .padding(.top, -16)
-                            } else {
-                                ReportTipView(
-                                    text: "Твоим самым частым настроением этой недели стало ",
-                                    selectedText: $viewModel.emotionCountData.common,
-                                    isShowLoader: $viewModel.showLoader,
-                                    tipType: .commonEmotionState
-                                )
-                                .padding(.top, -16)
+                            if viewModel.dateSelectedIndex == 1 {
+                                HStack {
+                                    Image(colorScheme == .dark ? "rc-ic-toBeforeWeek-dark" : "rc-ic-toBeforeWeek")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                        .onTapGesture {
+                                            toBeforeMonthDidTap()
+                                        }
+                                    
+                                    Image(colorScheme == .dark ? "rc-ic-toNextWeek-dark" : "rc-ic-toNextWeek")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                        .onTapGesture {
+                                            toNextMonthDidTap()
+                                        }
+                                }
                             }
+                            
+                            Spacer()
+                            
+                            Text(viewModel.dateSelectedIndex == 0 ? "\(coordinator.viewModel.firstDayOfWeek!).\(coordinator.viewModel.currentShortMonthForFrom!) - \(coordinator.viewModel.lastDayOfWeek!).\(coordinator.viewModel.currentShortMonthForTo!), \(coordinator.viewModel.currentYear!)" : "\(coordinator.viewModel.shortDateMonthForTo!), \(coordinator.viewModel.currentYear!)")
+                                .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
+                                .font(.system(size: 14, weight: .semibold))
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding(.leading, -48)
+                            
+                            Spacer()
+                            
+//                            Image("rc-ic-information")
+//                                .resizable()
+//                                .frame(width: 24, height: 24)
+//                                .onTapGesture {
+//                                    informationDidTap()
+//                                }
                         }
-                       
-                        
-                        DayilyCharts(viewModel: $viewModel.timeDataViewModel)
-                            .padding(.top, 16)
-                        
-                        
-                        ActivitiesCharts(
-                            goodActivitiesViewModel: $viewModel.goodActivitiesDataViewModel,
-                            badActivitiesViewModel: $viewModel.badActivitiesDataViewModel,
-                            isMonthCurrentTab: $viewModel.isMonthCurrentTab,
-                            isStressCurrentTab: $viewModel.isStressCurrentTab,
-                            isShowLoader: $viewModel.showLoader
-                        )
-                        
-                        HStack(alignment: .top) {
-                            Image("rc-ic-information")
-                                .resizable()
-                                .frame(width: 24, height: 24)
+                        .frame(maxWidth: .infinity)
+                        .padding(.top, 22)
+                        .padding(.leading, 16)
+                        .padding(.trailing, 16)
+                    }
+                    
+                    if isAnimated {
+                        if viewModel.selectedTypeOfReport == 0 || viewModel.selectedTypeOfReport == 1 {
+                            if viewModel.dateSelectedIndex == 0 {
+                                WeekAnimationChart(
+                                    weekChartViewModel: $viewModel.chartDataViewModel,
+                                    prevWeekChartsViewModel: $viewModel.prevWeekChartDataViewModel,
+                                    showLoader: $viewModel.showLoader,
+                                    showNeedMoreData: $viewModel.showNeedMoreData
+                                )
+                                .transition(.move(edge: .top).combined(with: .opacity))
+                            } else {
+                                MonthChart(viewModel: viewModel,
+                                           monthChartViewModel: $viewModel.chartDataViewModel,
+                                           showLoader: $viewModel.showLoader)
+                            }
+                            
+                            CircleEmotionChart(
+                                emotionStateCounts: $viewModel.emotionCountData.countState,
+                                emotionNames: $viewModel.emotionCountData.text,
+                                emotionColors: $viewModel.emotionCountData.color,
+                                emotionTotal: $viewModel.emotionCountData.total,
+                                emotionCircleViewModel: $viewModel.emotionCountData.emotionCircleViewModel,
+                                isLoading: $viewModel.showLoader,
+                                dataIsEmpty: $viewModel.emotionCountData.dataIsEmpty,
+                                emotionSlices: $viewModel.pieSliceData
+                            )
+                            
+                            if viewModel.isMonthCurrentTab {
+                                if viewModel.isStressCurrentTab {
+                                    ReportTipView(
+                                        text: "Твой уровень стресса в этом месяце в большинстве случаев был ",
+                                        selectedText: $viewModel.emotionCountData.common,
+                                        isShowLoader: $viewModel.showLoader,
+                                        tipType: .commonEmotionStateStress
+                                    )
+                                    .padding(.top, -16)
+                                } else {
+                                    ReportTipView(
+                                        text: "Твоим самым частым настроением этого месяца стало ",
+                                        selectedText: $viewModel.emotionCountData.common,
+                                        isShowLoader: $viewModel.showLoader,
+                                        tipType: .commonEmotionState
+                                    )
+                                    .padding(.top, -16)
+                                }
                                 
-                            Text("Обрати внимание, каждый день мы занимаемся похожими активностями, именно поэтому активности повторяются.\n\nНаша цель проанализировать твое состояние и показать, какая именно активность влияет на твое настроение или стресс больше, чем другая!")
-                                .foregroundColor(Colors.Primary.blue)
-                                .font(.system(size: 16))
-                                .padding(.leading, 8)
-                                .padding(.trailing, 8)
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.bottom, 90)
-                    } else {
-                        ActivitiesChartsForAllTime()
+                            } else {
+                                if viewModel.isStressCurrentTab {
+                                    ReportTipView(
+                                        text: "Твой уровень стресса на этой неделе в большинстве случаев ",
+                                        selectedText: $viewModel.emotionCountData.common,
+                                        isShowLoader: $viewModel.showLoader,
+                                        tipType: .commonEmotionStateStress
+                                    )
+                                    .padding(.top, -16)
+                                } else {
+                                    ReportTipView(
+                                        text: "Твоим самым частым настроением этой недели стало ",
+                                        selectedText: $viewModel.emotionCountData.common,
+                                        isShowLoader: $viewModel.showLoader,
+                                        tipType: .commonEmotionState
+                                    )
+                                    .padding(.top, -16)
+                                }
+                            }
+                            
+                            
+                            DayilyCharts(viewModel: $viewModel.timeDataViewModel)
+                                .padding(.top, 16)
+                            
+                            ActivitiesCharts(
+                                goodActivitiesViewModel: $viewModel.goodActivitiesDataViewModel,
+                                badActivitiesViewModel: $viewModel.badActivitiesDataViewModel,
+                                isMonthCurrentTab: $viewModel.isMonthCurrentTab,
+                                isStressCurrentTab: $viewModel.isStressCurrentTab,
+                                isShowLoader: $viewModel.showLoader
+                            )
+                            
+                            HStack(alignment: .top) {
+                                Image("rc-ic-information")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                
+                                Text("Обрати внимание, каждый день мы занимаемся похожими активностями, именно поэтому активности повторяются.\n\nНаша цель проанализировать твое состояние и показать, какая именно активность влияет на твое настроение или стресс больше, чем другая!")
+                                    .foregroundColor(colorScheme == .dark ? Colors.TextColors.cadetBlue600 : Colors.Primary.blue)
+                                    .font(.system(size: 16))
+                                    .padding(.leading, 8)
+                                    .padding(.trailing, 8)
+                            }
+                            .padding(.horizontal, 16)
                             .padding(.bottom, 90)
+                        } else {
+                            ActivitiesChartsForAllTime()
+                                .padding(.bottom, 90)
+                        }
                     }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onAppear {
             viewModel.fetchStartData()

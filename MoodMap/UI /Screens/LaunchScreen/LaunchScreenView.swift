@@ -7,6 +7,7 @@
 
 import SwiftUI
 import JWTDecode
+import CommonCore
 
 struct LaunchScreenView: View {
     
@@ -17,7 +18,8 @@ struct LaunchScreenView: View {
     
     let parent: BaseViewCoordinator
     let container: DIContainer
-    
+    @Environment(\.colorScheme) var colorScheme
+
     @State var isNeedShowPushNotificationScreen: Bool = false
     @State var isShowPushNotificationScreen: Bool = false
     
@@ -55,6 +57,7 @@ struct LaunchScreenView: View {
                         coordinator: parent,
                         isNeedShowAuthPopupFromLaunchScreen: $isNeedShowAuthPopupFromLaunchScreen
                     )
+                    .preferredColorScheme(colorScheme)
                 }
             }
             
@@ -350,4 +353,25 @@ struct LaunchScreenView: View {
             } else { return false }
         }
     }
+}
+
+// MARK: - Theme
+extension Theme {
+  var userInterfaceStyle: UIUserInterfaceStyle {
+    switch self {
+      case .light:
+        return .light
+      case .dark:
+        return .dark
+    }
+  }
+    
+  var colorScheme: ColorScheme? {
+    switch self {
+      case .light:
+        return .light
+      case .dark:
+        return .dark
+    }
+  }
 }

@@ -10,8 +10,7 @@ import SwiftUI
 struct PersonalCabinetCoordinatorView: View {
     
     @ObservedObject var coordinator: PersonalCabinetViewCoordinator
-//    @Binding var isShowingTabBar: Bool
-    
+
     init(coordinator: PersonalCabinetViewCoordinator) {
         self.coordinator = coordinator
         self.coordinator.parent.personalCabinetCoordinator.viewModel.viewer = PersonalCabinetView(coordinator: coordinator)
@@ -22,6 +21,7 @@ struct PersonalCabinetCoordinatorView: View {
             PersonalCabinetView(coordinator: coordinator)
                 .navigationTitle("Профиль")
                 .navigationBarTitleDisplayMode(.large)
+//                .accentColor(colorScheme != .dark ? .white : Colors.Primary.moodDarkBackground)
                 .navigation(item: $coordinator.passwordScreen) {
                     LoginCoordinatorView(coordinator: $0)
                 }

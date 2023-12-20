@@ -28,7 +28,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
     @State var isNeedShowAuthFromLaunch: Bool = false
 
     var baseCoordinator: BaseViewCoordinator?
-    
+    @Environment(\.colorScheme) var colorScheme
+
     static var isAlreadyLaunchedOnce = false
     var isLaunched: Bool = false
     var previousAuthorizationStatus: UNAuthorizationStatus = .notDetermined
@@ -44,6 +45,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate, UIApplicationDele
             sourceApplication: nil,
             annotation: [UIApplication.OpenURLOptionsKey.annotation]
         )
+        
+        UINavigationBar.appearance().largeTitleTextAttributes = [
+            .foregroundColor: colorScheme == .dark ? Color.red : Color.red
+       ]
     }
     
     func scene(

@@ -10,7 +10,8 @@ import SwiftUI
 struct QuoteView: View {
         
     @Binding var quote: String
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
             ZStack {
@@ -31,7 +32,7 @@ struct QuoteView: View {
         .frame(maxWidth: .infinity, minHeight: 120)
         .cornerRadius(20)
         .padding(.horizontal, 16)
-        .shadow(color: Colors.TextColors.mischka500,
+        .shadow(color: colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.mischka500,
                 radius: 3.0, x: 1.0, y: 0)
     }
     

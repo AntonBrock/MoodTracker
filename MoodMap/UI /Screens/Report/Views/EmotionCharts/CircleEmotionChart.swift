@@ -16,6 +16,8 @@ struct EmotionCircleViewModel: Identifiable {
 
 struct CircleEmotionChart: View {
         
+    @Environment(\.colorScheme) var colorScheme
+
     @Binding var emotionStateCounts: [Double]
     @Binding var emotionNames: [String]
     @Binding var emotionColors: [Color]
@@ -30,7 +32,7 @@ struct CircleEmotionChart: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 17)
             .frame(width: UIScreen.main.bounds.width - 32, height: 135, alignment: .center)
-            .background(.white)
+            .background(.clear)
             .clipped()
             .overlay {
                 if !emotionStateCounts.isEmpty {
@@ -45,8 +47,7 @@ struct CircleEmotionChart: View {
                         formatter: { value in String(format: "%.2f", value) }
                     )
                     .frame(width: UIScreen.main.bounds.width - 32, height: 135, alignment: .center)
-                    .background(.white)
-                    .cornerRadius(16)
+                    .background(.clear)
                 } else {
                     if isLoading {
                         VStack {
@@ -60,17 +61,20 @@ struct CircleEmotionChart: View {
                             VStack {
                                 Text("Начинай отмечать свое состояние\nпотом мы покажем тут статистику")
                                     .frame(maxWidth: .infinity, alignment: .center)
-                                    .foregroundColor(Colors.TextColors.fiord800)
+                                    .foregroundColor(colorScheme == .dark ? .white.opacity(0.8) : Colors.TextColors.fiord800)
                                     .font(.system(size: 12, weight: .medium))
                                     .multilineTextAlignment(.center)
                             }
                             .frame(width: UIScreen.main.bounds.width - 32, height: 135, alignment: .center)
-                            .background(.white)
+                            .background(colorScheme == .dark ? Color("Background") : .white)
                             .cornerRadius(16)
                         }
                     }
                 }
             }
-            .shadow(color: Colors.Primary.lightGray.opacity(0.2), radius: 5, x: 0, y: 0)
+            .shadow(
+                color: colorScheme == .dark  ? Colors.Primary.moodDarkBackground : Colors.Primary.lightGray.opacity(0.2),
+                radius: 5, x: 0, y: 0
+            )
     }
 }

@@ -15,11 +15,14 @@ import AuthenticationServices
 struct AuthMethodsView: View {
     
     @State var bottomSheetPosition: BottomSheetPosition = .dynamicTop
+    @Environment(\.colorScheme) var colorScheme
     
     let notificationCenter = NotificationCenter.default
     var dismiss: ((String?) -> Void)
     var openAboutRegistration: (() -> Void)
     var dismissWithAppleIDToken: ((String?) -> Void)
+    
+    @State var color: Color = .black
 
     var appleSignInButton: ASAuthorizationAppleIDButton = ASAuthorizationAppleIDButton()
     
@@ -34,7 +37,7 @@ struct AuthMethodsView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .font(.system(size: 24, weight: .bold))
                     .multilineTextAlignment(.center)
-                    .foregroundColor(Colors.Primary.blue)
+                    .foregroundColor(colorScheme == .dark ? Colors.Primary.lightGray : Colors.Primary.blue)
                     .padding(.top, 14)
                 
                 Text("Войдите, чтобы получить полную\n статистику вашего настроения")
@@ -43,7 +46,7 @@ struct AuthMethodsView: View {
                     .font(.system(size: 16, weight: .regular))
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color(hex: "7A7E80"))
-                    .padding(.top, 8)
+                    .padding(.top, 18)
                 
                 Button(action: handleSignInButton) {
                     HStack {
@@ -112,32 +115,18 @@ struct AuthMethodsView: View {
                     }
                     .signInWithAppleButtonStyle(.black)
                     .frame(width: 279, height: 48)
-                    .padding(.top, 14)
+                    .padding(.top, 8)
                     .cornerRadius(8)
                 
-                Button {
-                    openAboutRegistration()
-                    
-                    bottomSheetPosition = .absolute(0)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        dismiss(nil)
-                    }
-                } label: {
-                    Text("Зачем нужна учетная запись?")
-                        .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(Colors.Primary.royalPurple600Purple.opacity(0.7))
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
-                .padding(.top, 29)
-                
                 AuthHyperString()
-                    .frame(maxWidth: 300, maxHeight: 110)
+                    .frame(maxWidth: 300, maxHeight: 140)
+                    .background(.clear)
                     .padding(.top, 20)
-                    .padding(.bottom, -25)
+                    .padding(.bottom, -35)
             }
         }
         .customBackground(
-            Color.white
+            color
                 .cornerRadius(16, corners: [.topLeft, .topRight])
                 .shadow(color: .white, radius: 0, x: 0, y: 0)
         )
@@ -149,6 +138,9 @@ struct AuthMethodsView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 dismiss(nil)
             }
+        }
+        .onAppear {
+            color = colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white
         }
     }
     
