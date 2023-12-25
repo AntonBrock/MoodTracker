@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ActivitiesTextViewBlock: View {
     
+    @Environment(\.colorScheme) var colorScheme
+    
     enum TextViewType {
         case activities
         case diary
@@ -22,7 +24,10 @@ struct ActivitiesTextViewBlock: View {
     var saveDiaryText: ((_ text: String) -> Void)?
 
     var body: some View {
-        VStack {
+        ZStack {
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
+            
             VStack {
                 ZStack {
                     TextEditor(text: $text)
@@ -68,19 +73,9 @@ struct ActivitiesTextViewBlock: View {
             }
             .frame(maxWidth: .infinity, maxHeight: type == .diary ? 324 : .infinity, alignment: .center)
             .padding(EdgeInsets(top: 12, leading: 16, bottom: 12, trailing: 16))
-            .background(.white)
+            .background(colorScheme == .dark ? Color("Background") : .white)
             .cornerRadius(10)
-//            .shadow(color: Colors.TextColors.mystic400, radius: 4.0, x: 0.0, y: 0.0)
-
-//            if type == .diary {
-//                MTButton(buttonStyle: .outline, title: "Мои записи") {
-//                    print("Open next Screen")
-//                }
-//                .frame(width: 205, height: 48)
-//                .padding(.top, 16)
-//            }
             
         }
-//        .padding(.bottom, 48)
     }
 }

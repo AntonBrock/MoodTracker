@@ -11,21 +11,31 @@ struct NewDiaryPageView: View {
     
     var dismiss: (() -> Void)
     var saveNewDiaryPage: ((_ text: String) -> Void)
-    
-    var body: some View {
-        
-        headerView()
-            .frame(height: 240)
-         
-        ActivitiesTextViewBlock(subPlaceholder: "Запишите, за что испытываете чувство благодарности",
-                                type: .diary, saveDiaryText: { text in
-            self.saveNewDiaryPage(text)
-            self.dismiss()
-        })
-            .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
-        
-        Spacer()
 
+    @Environment(\.colorScheme) var colorScheme
+
+    var body: some View {
+        ZStack {
+            Color("Background")
+                .ignoresSafeArea()
+            
+            VStack {
+                headerView()
+                    .frame(height: 240)
+                 
+                ActivitiesTextViewBlock(
+                    subPlaceholder: "Запишите, за что испытываете чувство благодарности",
+                    type: .diary, saveDiaryText: { text in
+                        self.saveNewDiaryPage(text)
+                        self.dismiss()
+                    }
+                )
+                .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .clear)
+                .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
+                
+                Spacer()
+            }
+        }
     }
     
     @ViewBuilder
@@ -33,8 +43,13 @@ struct NewDiaryPageView: View {
         ZStack {
             VStack {}
                 .frame(maxWidth: .infinity, minHeight: 240)
-                .background(GradientRoundedCornersView(gradient: [Color(hex: "53B6BE"), Color(hex: "479096")],
-                                                       tl: 0, tr: 0, bl: 10, br: 10).opacity(0.95))
+                .background(
+                    GradientRoundedCornersView(
+                        gradient: [Color(hex: "53B6BE"), Color(hex: "479096")],
+                        tl: 0, tr: 0, bl: 10, br: 10
+                    )
+                    .opacity(0.95)
+                )
                 
             VStack {
                 Text("За что\nты благодаришь?")

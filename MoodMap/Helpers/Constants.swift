@@ -13,6 +13,8 @@ enum Constants {
 
     /// Ссылка для Support в телеграм
     static let urlPathToSupport: String = "tg://resolve?domain=moodmapsupport"
+    /// Ссылка для Сервер Жизни
+    static let urlPathToLiveServer: String = "tg://resolve?domain=moodmapserverstatus"
     /// Ссылка для Политику
     static let urlPathToPolitic: String = "https://mapmood.com/privacy/ru"
     

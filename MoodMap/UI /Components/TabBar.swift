@@ -128,11 +128,11 @@ struct TabBarView: View {
                 })
                     .transition(.move(edge: .bottom))
             }
-            .sheet(isPresented: $coordinator.isShowingSharingScreen) {
-                SharingView(viewModel: coordinator.journalCoordinator.viewModel.sharingJournalViewModel) {
-                    coordinator.isShowingSharingScreen = false
-                }
-            }
+//            .sheet(isPresented: $coordinator.isShowingSharingScreen) {
+//                SharingView(viewModel: coordinator.journalCoordinator.viewModel.sharingJournalViewModel) {
+//                    coordinator.isShowingSharingScreen = false
+//                }
+//            }
             .sheet(isPresented: $coordinator.isShowingPushNotificationScreen) {
                 PushNotificationView {
                     withAnimation {

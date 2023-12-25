@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PersonalCabinetCoordinatorView: View {
     
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var coordinator: PersonalCabinetViewCoordinator
 
     init(coordinator: PersonalCabinetViewCoordinator) {
@@ -17,11 +18,14 @@ struct PersonalCabinetCoordinatorView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             PersonalCabinetView(coordinator: coordinator)
                 .navigationTitle("Профиль")
+                .toolbarBackground(
+                    colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white,
+                    for: .navigationBar
+                )
                 .navigationBarTitleDisplayMode(.large)
-//                .accentColor(colorScheme != .dark ? .white : Colors.Primary.moodDarkBackground)
                 .navigation(item: $coordinator.passwordScreen) {
                     LoginCoordinatorView(coordinator: $0)
                 }

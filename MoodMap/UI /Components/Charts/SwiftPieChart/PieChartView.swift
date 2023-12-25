@@ -9,6 +9,7 @@ import SwiftUI
 
 public struct PieChartView: View {
     
+    @Environment(\.colorScheme) var colorScheme
     @Binding var values: [Double] {
         willSet {
             self.values = []
@@ -55,7 +56,9 @@ public struct PieChartView: View {
                         ForEach(Array(slices.enumerated()), id: \.offset) { index, slice in
                             PieSlice(pieSliceData: slice)
                                 .scaleEffect(activeIndex == index ? 1.10 : 1)
-                                .animation(Animation.spring())
+                                .animation(
+                                    Animation.spring()
+                                )
                         }
                         .frame(width: widthFraction * geometry.size.width, height: widthFraction * geometry.size.width)
                         .gesture(
@@ -87,8 +90,10 @@ public struct PieChartView: View {
                         .disabled(true) // Отключаем выделение и нажатие 
                         Circle()
                             .fill(self.backgroundColor)
-                            .frame(width: widthFraction * geometry.size.width * innerRadiusFraction,
-                                   height: widthFraction * geometry.size.width * innerRadiusFraction)
+                            .frame(
+                                width: widthFraction * geometry.size.width * innerRadiusFraction,
+                                height: widthFraction * geometry.size.width * innerRadiusFraction
+                            )
                         
                         VStack {
                             Text(self.activeIndex == -1 ? "\(total)" : "\(Int(values[self.activeIndex]))")
@@ -105,8 +110,10 @@ public struct PieChartView: View {
                 
                 setChartRows()
             }
+            .cornerRadius(16)
             .frame(maxWidth: .infinity, maxHeight: 135, alignment: .center)
-            .background(backgroundColor)
+            .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : backgroundColor)
+            .cornerRadius(16)
         }
     }
     
@@ -121,7 +128,8 @@ public struct PieChartView: View {
 
 struct PieChartRows: View {
     var emotionCircleViewModel: [EmotionCircleViewModel]?
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         VStack {
             ForEach(emotionCircleViewModel ?? [], id: \.name) { i in
@@ -130,7 +138,7 @@ struct PieChartRows: View {
                         .fill(i.color)
                         .frame(width: 10, height: 10)
                     Text(i.name)
-                        .foregroundColor(Colors.Primary.blue)
+                        .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
                         .font(.system(size: 14, weight: .regular))
                         .padding(.leading, 10)
                     
@@ -138,7 +146,7 @@ struct PieChartRows: View {
                     
                     VStack(alignment: .trailing) {
                         Text(i.value)
-                            .foregroundColor(Colors.Primary.lightGray)
+                            .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.lightGray)
                             .font(.system(size: 14, weight: .light))
 
                     }
@@ -148,6 +156,7 @@ struct PieChartRows: View {
             }
         }
         .frame(maxHeight: .infinity,  alignment: .center)
+        .cornerRadius(16)
         .padding(.top, 10)
     }
 }

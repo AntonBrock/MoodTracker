@@ -237,6 +237,7 @@ struct ReportScreen: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
+            .scrollIndicators(.hidden)
         }
         .onAppear {
             viewModel.fetchStartData()

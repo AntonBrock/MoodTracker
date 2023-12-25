@@ -111,22 +111,42 @@ struct PersonalCabinetView: View {
                             }
                             
                             VStack {
-                                createArrowBlock("Пользовательское соглашение")
+                                createArrowBlock("Состояние приложения")
                                     .frame(width: UIScreen.main.bounds.width - 32, height: 64)
                                     .padding(.trailing, 5)
-                                
                             }
                             .frame(maxWidth: .infinity)
                             .padding(.horizontal, 24)
                             .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
-                            .padding(.top, -12)
                             .onTapGesture {
-                                let url = URL.init(string: Constants.urlPathToPolitic)!
+                                let url = URL.init(string: Constants.urlPathToSupport)!
                                 
                                 if UIApplication.shared.canOpenURL(url) {
                                     UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+                                } else {
+                                    showThatTelegramNotInstallView.toggle()
                                 }
                             }
+                            
+                            #warning("TODO: Пока скрываем блок")
+                            
+//                            VStack {
+//                                createArrowBlock("Пользовательское соглашение")
+//                                    .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+//                                    .padding(.trailing, 5)
+//                                
+//                            }
+//                            .frame(maxWidth: .infinity)
+//                            .padding(.horizontal, 24)
+//                            .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
+//                            .padding(.top, -12)
+//                            .onTapGesture {
+//                                let url = URL.init(string: Constants.urlPathToPolitic)!
+//                                
+//                                if UIApplication.shared.canOpenURL(url) {
+//                                    UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+//                                }
+//                            }
                         }
                         .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.Primary.lightWhite)
 
@@ -138,39 +158,46 @@ struct PersonalCabinetView: View {
                     }
                     .padding(.bottom, 24)
                     .sheet(isPresented: $showThatTelegramNotInstallView) {
-                        VStack {
-                            Image("support_icon")
-                                .resizable()
-                                .frame(width: 200, height: 200, alignment: .center)
+                        ZStack {
+                            Color("Background")
+                                .ignoresSafeArea()
                             
-                            Text("Поддержка рядом")
-                                .font(.system(size: 26, weight: .semibold))
-                                .foregroundColor(Colors.Primary.blue)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .padding(.top, 49)
-                                .padding(.bottom, 5)
-                            
-                            Text("Напиши нам на почту")
-                                .font(.system(size: 16, weight: .regular))
-                                .foregroundColor(Colors.Primary.blue)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                            
-                            Text("info@moodmap.com")
-                                .font(.system(size: 16, weight: .regular))
-                                .foregroundColor(Colors.Primary.lavender500Purple)
-                                .frame(maxWidth: .infinity, alignment: .center)
+                            VStack {
+                                Image("support_icon")
+                                    .resizable()
+                                    .frame(width: 200, height: 200, alignment: .center)
+                                
+                                Text("Поддержка рядом")
+                                    .font(.system(size: 26, weight: .semibold))
+                                    .foregroundColor(colorScheme == .dark ? Colors.Primary.lightWhite : Colors.Primary.blue)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .padding(.top, 49)
+                                    .padding(.bottom, 5)
+                                
+                                Text("Напиши нам на почту")
+                                    .font(.system(size: 16, weight: .regular))
+                                    .foregroundColor(colorScheme == .dark ? Colors.Primary.lightWhite : Colors.Primary.blue)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                
+                                Text("anton.brock1@gmail.com")
+                                    .font(.system(size: 16, weight: .regular))
+                                    .foregroundColor(Colors.Primary.lavender500Purple)
+                                    .frame(maxWidth: .infinity, alignment: .center)
 
-                            Spacer()
-                            
-                            MTButton(buttonStyle: .outline, title: "Назад") {
-                                showThatTelegramNotInstallView.toggle()
+                                Spacer()
+                                
+                                MTButton(buttonStyle: .outline, title: "Назад") {
+                                    showThatTelegramNotInstallView.toggle()
+                                }
+                                .frame(maxWidth: .infinity, maxHeight: 48, alignment: .center)
+                                .padding(.horizontal, 24)
+                                
                             }
-                            .frame(maxWidth: .infinity, maxHeight: 48, alignment: .center)
-                            .padding(.horizontal, 24)
-                            
+                            .frame(maxHeight: .infinity)
+                            .background(colorScheme == .dark ? Color("Background") : .white)
+                            .padding(.top, 85)
+                            .padding(.bottom, 48)
                         }
-                        .padding(.top, 85)
-                        .padding(.bottom, 48)
                     }
                 }
             }
@@ -242,7 +269,7 @@ struct PersonalCabinetView: View {
         .frame(maxWidth: .infinity, maxHeight: 170.0, alignment: .leading)
         .cornerRadius(20)
         .padding(.horizontal, 5)
-        .shadow(color:  colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.slateGray700.opacity(0.5),
+        .shadow(color: colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.slateGray700.opacity(0.5),
                 radius: 10, x: 0, y: 0)
     }
     

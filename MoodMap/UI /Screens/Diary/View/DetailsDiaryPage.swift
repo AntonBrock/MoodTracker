@@ -11,27 +11,33 @@ struct DetailsDiaryPage: View {
     
     var dismiss: (() -> Void)
     var diaryPage: DiaryViewModel?
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
-        
-        headerView(diaryPage?.createdAt ?? "")
-            .frame(height: 240)
-         
-        ScrollView {
-            Text(diaryPage?.message ?? "")
-                .foregroundColor(Colors.Primary.blue)
-                .font(.system(size: 20, weight: .medium))
-                .lineLimit(9999999)
-                .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .padding(.leading, 40)
-                .padding(.trailing, 40)
-                .padding(.top, 20)
+        ZStack {
+            Color("Background")
+                .ignoresSafeArea()
+            
+            VStack {
+                headerView(diaryPage?.createdAt ?? "")
+                    .frame(height: 240)
+                 
+                ScrollView {
+                    Text(diaryPage?.message ?? "")
+                        .foregroundColor(colorScheme == .dark ? Colors.Primary.lightGray : Colors.Primary.blue)
+                        .font(.system(size: 20, weight: .medium))
+                        .lineLimit(9999999)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .padding(.leading, 40)
+                        .padding(.trailing, 40)
+                        .padding(.top, 20)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            
+            Spacer()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-        Spacer()
-
     }
     
     @ViewBuilder

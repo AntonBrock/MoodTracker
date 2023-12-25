@@ -101,20 +101,6 @@ struct MainView: View {
                                     )
                                     .padding(.top, isCompletedMoodCheck ? -85 : -25)
                                     .transition(.move(edge: .top))
-                                    .onTapGesture {
-                                        
-                                        withAnimation {
-                                            bottomSheetPosition = .absolute(0)
-                                            self.coordinator.parent.hideCustomTabBar = true
-                                            
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                                withAnimation {
-                                                    isSheetAboutMoodCheckPresent.toggle()
-                                                    self.bottomSheetPosition = .dynamicTop
-                                                }
-                                            }
-                                        }
-                                    }
                                     .confettiCannon(counter: $confettiCannon, num: 50, confettiSize: 15, rainHeight: 150, openingAngle: Angle.degrees(-120), radius: 300)
                             }
                         }
@@ -172,6 +158,7 @@ struct MainView: View {
                         .padding(.bottom, 90)
                 }
             }
+            .scrollIndicators(.hidden)
             .sheet(isPresented: $showMoreDetailsAboutJournalPage, content: {
                 DetailJournalView(
                     showMoreInfo: $showMoreDetailsAboutJournalPage,
@@ -365,14 +352,14 @@ struct MainView: View {
                     MTButton(buttonStyle: .fill, title: "Понятно") {
                         withAnimation {
                             bottomSheetPosition = .absolute(0)
-                            isSheetAboutMoodCheckPresent.toggle()
+//                            isSheetAboutMoodCheckPresent.toggle()
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                withAnimation {
-                                    self.bottomSheetPosition = .dynamicTop
-                                    self.coordinator.parent.hideCustomTabBar = false
-                                }
-                            }
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                                withAnimation {
+//                                    self.bottomSheetPosition = .dynamicTop
+//                                    self.coordinator.parent.hideCustomTabBar = false
+//                                }
+//                            }
                         }
                     }
                     .frame(width: 230, height: 48, alignment: .top)
@@ -568,7 +555,7 @@ struct MainView: View {
            
         }
         .frame(maxWidth: .infinity, minHeight: 90, alignment: .center)
-        .background(.white)
+        .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
         .compositingGroup()
         .cornerRadius(20)
         .padding(.horizontal, 35)

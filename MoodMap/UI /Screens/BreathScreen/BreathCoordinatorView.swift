@@ -10,12 +10,17 @@ import SwiftUI
 
 struct BreathCoordinatorView: View {
     
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var coordinator: BreathViewCoordinator
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             BreathView(coordinator: coordinator)
-                .navigationTitle("")
+            .navigationTitle("")
+            .toolbarBackground(
+                colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white,
+                for: .navigationBar
+            )
         }
     }
 }

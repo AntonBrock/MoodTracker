@@ -16,7 +16,7 @@ struct MoodCheckCoordinatorView: View {
     @ObservedObject var coordinator: MoodCheckViewCoordinator
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             MoodCheckView(container: .live, coordinator: coordinator,
                           valueModel: coordinator.sliderValueModele!)
             .navigation(item: $coordinator.activitiesViewCoordinator) {

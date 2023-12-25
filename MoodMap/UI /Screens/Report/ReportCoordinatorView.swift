@@ -9,18 +9,23 @@ import SwiftUI
 
 struct ReportCoordinatorView: View {
     
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var coordinator: ReportViewCoordinator
     @State var currentDate: Date = Date()
     
     var body: some View {        
-        NavigationView {
+        NavigationStack {
             ReportScreen(coordinator: coordinator, wasOpenedFromTabBar: {
                 Services.metricsService.sendEventWith(eventName: .openReportScreen)
                 Services.metricsService.sendEventWith(eventType: .openReportScreen)
 
             })
-                .navigationTitle("Отчет")
-                .navigationBarTitleDisplayMode(.large)
+            .navigationTitle("Отчет")
+            .toolbarBackground(
+                colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white,
+                for: .navigationBar
+            )
+            .navigationBarTitleDisplayMode(.large)
         }
     }
 }

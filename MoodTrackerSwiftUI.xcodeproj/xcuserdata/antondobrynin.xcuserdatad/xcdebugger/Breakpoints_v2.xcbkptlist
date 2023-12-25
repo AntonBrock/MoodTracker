@@ -62,8 +62,8 @@
             filePath = "MoodMap/UI /Screens/PersonalCabinet/PersonalCabinetCoordinatorView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
             landmarkName = "init(coordinator:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,26 +78,10 @@
             filePath = "MoodMap/UI /Screens/Diary/DiaryView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "diaryView(time:diaryPage:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C4096FF7-178A-4A62-B810-9A2ACA8FBEF6"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoodMap/UI /Screens/Diary/DiaryView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "body"
-            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -478,8 +462,8 @@
             filePath = "MoodMap/UI /Screens/MainScreen/MainView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "646"
-            endingLineNumber = "646"
+            startingLineNumber = "633"
+            endingLineNumber = "633"
             landmarkName = "journalViews()"
             landmarkType = "7">
          </BreakpointContent>

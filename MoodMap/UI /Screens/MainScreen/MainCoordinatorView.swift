@@ -9,14 +9,19 @@ import SwiftUI
 
 struct MainCoordinatorView: View {
     
+    @Environment(\.colorScheme) var colorScheme
+
     @ObservedObject var coordinator: MainViewCoordinator
     var animation: Namespace.ID
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             MainView(container: .live, animation: animation, coordinator: coordinator)
                 .navigationTitle("Главная")
-                .navigationBarTitleDisplayMode(.large)
+                .toolbarBackground(
+                    colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white,
+                    for: .navigationBar
+                )
                 .navigation(item: $coordinator.diaryViewCoordinator) {
                     DiaryCoordinatorView(coordinator: $0)
                         .navigationBarTitle("")

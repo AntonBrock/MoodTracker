@@ -252,9 +252,11 @@ struct StressCheckView: View {
                 
                 AppState.shared.userLimits = userLimits
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                parent.isShowingSharingScreen = true
-            }
+            
+            #warning("TODO: Пока скрываем функционал")
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                parent.isShowingSharingScreen = true
+//            }
         }
     }
     

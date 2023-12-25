@@ -9,11 +9,12 @@ import SwiftUI
 
 struct JournalCoordinatorView: View {
     
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var coordinator: JournalViewCoordinator
     @Namespace var animation
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             JournalView(coordinator: coordinator,
                         animation: animation, wasOpenedFromTabBar: {
                 
@@ -21,6 +22,10 @@ struct JournalCoordinatorView: View {
                 Services.metricsService.sendEventWith(eventType: .openJournalScreen)
             })
             .navigationTitle("Журнал")
+            .toolbarBackground(
+                colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white,
+                for: .navigationBar
+            )
             .navigationBarTitleDisplayMode(.large)
         }
     }

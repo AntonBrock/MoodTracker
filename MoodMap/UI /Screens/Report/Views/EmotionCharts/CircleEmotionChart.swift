@@ -44,7 +44,9 @@ struct CircleEmotionChart: View {
                         names: $emotionNames,
                         emotionCircleViewModel: $emotionCircleViewModel,
                         slices: $emotionSlices,
-                        formatter: { value in String(format: "%.2f", value) }
+                        formatter: {
+                            value in String(format: "%.2f", value)
+                        }
                     )
                     .frame(width: UIScreen.main.bounds.width - 32, height: 135, alignment: .center)
                     .background(.clear)
@@ -54,7 +56,7 @@ struct CircleEmotionChart: View {
                             LottieView(name: "loader", loopMode: .loop)
                         }
                         .frame(width: UIScreen.main.bounds.width - 32, height: 135, alignment: .center)
-                        .background(.white)
+                        .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
                         .cornerRadius(16)
                     } else {
                         if dataIsEmpty {

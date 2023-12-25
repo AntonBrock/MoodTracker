@@ -9,11 +9,12 @@ import SwiftUI
 
 struct PracticeCoordinatorView: View {
     
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var coordinator: PracticeViewCoordinator
     @Namespace var animation
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             PracticeView(coordinator: coordinator,
                         animation: animation, wasOpenedFromTabBar: {
                 
@@ -23,6 +24,10 @@ struct PracticeCoordinatorView: View {
             .navigation(item: $coordinator.diaryViewCoordinator) {
                 DiaryCoordinatorView(coordinator: $0)
                     .navigationBarTitle("")
+                    .toolbarBackground(
+                        colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white,
+                        for: .navigationBar
+                    )
                     .navigationBarHidden(true)
             }
             .navigation(item: $coordinator.breathCoordinator) {
@@ -46,6 +51,10 @@ struct PracticeCoordinatorView: View {
                     }
             }
             .navigationTitle("Практики")
+            .toolbarBackground(
+                colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white,
+                for: .navigationBar
+            )
             .navigationBarTitleDisplayMode(.large)
             .accentColor(.black)
         }
