@@ -46,12 +46,6 @@ struct PracticeView: View {
             }
             .onAppear {
                 viewModel.setupViewer(self)
-                
-                if coordinator.parent.isNeedShowAuthPopupFromLaunchScreen && AppState.shared.isLogin == false {
-                    withAnimation {
-                        coordinator.parent.showAuthLoginView = true
-                    }
-                }
             }
         }
     }
