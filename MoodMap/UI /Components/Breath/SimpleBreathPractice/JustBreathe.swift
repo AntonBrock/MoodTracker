@@ -11,6 +11,7 @@ import CoreHaptics
 struct JustBreathe: View {
         
     var callDismissAction: (() -> Void)
+    @Environment(\.colorScheme) var colorScheme
 
     @State private var grow = false
     @State private var rotateFarRight = false
@@ -40,7 +41,7 @@ struct JustBreathe: View {
                     .background(
                         LinearGradient(colors: [Color(hex: "BBBAFF"), Color(hex: "973FF4")], startPoint: .top, endPoint: .bottom)
                     )
-                    .opacity(0.4)
+                    .opacity(colorScheme == .dark ? 0 : 0.4)
             )
             
             VStack {

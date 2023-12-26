@@ -22,6 +22,9 @@ struct MonthChart: View {
     
     @State var currentDate: Date = Date()
     @State var currentMonth: Int = 0
+    
+    
+    @State var color: Color = .white
         
     var body: some View {
         
@@ -76,6 +79,9 @@ struct MonthChart: View {
         .onChange(of: currentMonth, perform: { newValue in
             currentDate = getCurrentMonth()
         })
+        .onAppear {
+            color = colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white
+        }
         
         if showDaylyMonthDetails && !subReportInfo.isEmpty {
             subReportInfoView()
@@ -133,7 +139,7 @@ struct MonthChart: View {
         VStack(spacing: 20) {
             Text("\(getFormattedChoosedDate(currentDate))")
                 .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.Primary.blue)
+                .foregroundColor(colorScheme == .dark ? Colors.Primary.lightGray : Colors.Primary.blue)
                 .frame(maxWidth: .infinity, alignment: .center)
 
             if monthChartViewModel.first(where: { task in
@@ -177,7 +183,7 @@ struct MonthChart: View {
                                 VStack {
                                     Text(getTitleStage(task.stateRate))
                                         .font(.system(size: 16, weight: .regular))
-                                        .foregroundColor(Colors.Primary.blue)
+                                        .foregroundColor( colorScheme == .dark ? Colors.Primary.lightGray : Colors.Primary.blue)
                                         .frame(maxWidth: .infinity, alignment: .leading)
 
                                     Text(getTitleStress(task.stressRate))
@@ -207,9 +213,9 @@ struct MonthChart: View {
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(
-                        Color.white
+                        color
                             .clipShape(RoundedRectangle(cornerRadius: 16))
-                            .shadow(color: colorScheme == .dark ? Colors.TextColors.athensGray300 : Colors.TextColors.cadetBlue600.opacity(0.5), radius: 5)
+                            .shadow(color: colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.cadetBlue600.opacity(0.5), radius: 5)
                     )
                 }
             }

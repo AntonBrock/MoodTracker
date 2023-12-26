@@ -139,6 +139,7 @@ struct ActivitiesCharts: View {
                             
                             Rectangle()
                                 .fill(colorScheme == .dark ? Colors.Primary.moodDarkBackground : Color.white)
+                                .cornerRadius(16)
                                 .frame(width: 50, height: 50)
                                 .overlay {
                                     Image(item.image)
@@ -155,6 +156,7 @@ struct ActivitiesCharts: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .center)
+        .cornerRadius(16)
         .padding(.top, 20)
 
     }

@@ -48,11 +48,11 @@ struct ReportTipView: View {
                                     .foregroundColor(getColorFor(tipType))
                                     .font(.system(size: 14, weight: .regular))
                             } else {
-                                Text("В демо-режиме")
+                                Text("Позже тут")
                                     .font(.system(size: 14, weight: .regular))
                                     .foregroundColor(colorScheme == .dark ? Colors.TextColors.cadetBlue600 : Colors.Primary.blue) +
                                 
-                                Text(" нет информации")
+                                Text(" будет информация")
                                     .font(.system(size: 14, weight: .regular))
                                     .foregroundColor(getColorFor(tipType))
                             }

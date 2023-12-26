@@ -15,6 +15,7 @@ struct PersonalCabinetView: View {
     @Environment(\.colorScheme) var colorScheme
         
     @State var pushNotification: Bool = AppState.shared.userPushNotification ?? false
+    @State var darkMode: Bool = AppState.shared.userPushNotification ?? false
     @State var showThatTelegramNotInstallView: Bool = false
     
     let notificationCenter = NotificationCenter.default
@@ -54,8 +55,8 @@ struct PersonalCabinetView: View {
                         
                         if AppState.shared.isLogin ?? false {
                             VStack(spacing: 12) {
-                                Text("ОСНОВНОЕ")
-                                    .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
+                                Text("Основное")
+                                    .frame(width: UIScreen.main.bounds.width - 32, height: 35, alignment: .bottomLeading)
                                     .foregroundColor(Colors.Primary.lightGray)
                                     .font(.system(size: 12))
                                 
@@ -63,6 +64,7 @@ struct PersonalCabinetView: View {
                                     Toggle(isOn: $pushNotification) {
                                         Text("Напоминания")
                                     }
+                                    .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
                                     .frame(width: UIScreen.main.bounds.width - 32, height: 64)
                                     .tint(Colors.Primary.lavender500Purple)
                                     .disabled(!(AppState.shared.isLogin ?? false))
@@ -79,15 +81,44 @@ struct PersonalCabinetView: View {
                                     
                                 }
                                 .padding(.horizontal, 24)
-                                .background(.white)
+                                .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
                             }
-                            
-                            .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.Primary.lightWhite)
+                            .background(colorScheme == .dark ?  Color("Background") : Colors.Primary.lightWhite)
                         }
+                        
+                        VStack(spacing: 5) {
+                            Text("Оформление")
+                                .frame(width: UIScreen.main.bounds.width - 32, height: 35, alignment: .bottomLeading)
+                                .foregroundColor(Colors.Primary.lightGray)
+                                .font(.system(size: 12))
+                            
+                            VStack {
+                                Toggle(isOn: $darkMode) {
+                                    Text("Темная тема")
+                                }
+                                .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
+                                .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+                                .tint(Colors.Primary.lavender500Purple)
+                                .onTapGesture {
+                                   print("Dark Mode is On")
+                                }
+
+    //                    createArrowBlock("Создание пароля")
+    //                        .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+    //                        .padding(.trailing, 5)
+    //                        .onTapGesture {
+    //                            coordinator.openLoginView()
+    //                        }
+                                
+                            }
+                            .padding(.horizontal, 24)
+                            .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
+                        }
+                        .background(colorScheme == .dark ?  Color("Background") : Colors.Primary.lightWhite)
                        
                         VStack(spacing: 12) {
-                            Text("ДОПОЛНИТЕЛЬНОЕ")
-                                .frame(width: UIScreen.main.bounds.width - 32, height: 56, alignment: .bottomLeading)
+                            Text("Дополнительно")
+                                .frame(width: UIScreen.main.bounds.width - 32, height: 35, alignment: .bottomLeading)
                                 .foregroundColor(Colors.Primary.lightGray)
                                 .font(.system(size: 12))
                             
@@ -148,7 +179,7 @@ struct PersonalCabinetView: View {
 //                                }
 //                            }
                         }
-                        .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.Primary.lightWhite)
+                        .background(colorScheme == .dark ? Color("Background") : Colors.Primary.lightWhite)
 
                         Text("Версия приложения: \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "")")
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -204,6 +235,9 @@ struct PersonalCabinetView: View {
         }
         .onChange(of: pushNotification, perform: { newValue in
             pushNotification = AppState.shared.userPushNotification ?? false
+        })
+        .onChange(of: darkMode, perform: { newValue in
+            darkMode = AppState.shared.darkModeIsEnable ?? false
         })
         .onReceive(showLoader) { (output) in
             showLoaderView = true

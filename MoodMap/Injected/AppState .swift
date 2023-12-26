@@ -32,6 +32,7 @@ final class AppState: ObservableObject {
     }
     
     enum UserDefaultsKeys {
+        static let darkModeIsEnable = "darkModeIsEnable"
         static let isAuthorizated = "isAuthorizated"
         static let rememberPushNotificationDate = "rememberPushNotificationDate"
         static let quoteText = "quoteText"
@@ -129,6 +130,16 @@ final class AppState: ObservableObject {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userPushNotification)
         }
     }
+    
+    var darkModeIsEnable: Bool? {
+        get {
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.darkModeIsEnable)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.darkModeIsEnable)
+        }
+    }
+    
     var userLanguage: String? {
         get {
             return UserDefaults.standard.string(forKey: UserDefaultsKeys.userLanguage)

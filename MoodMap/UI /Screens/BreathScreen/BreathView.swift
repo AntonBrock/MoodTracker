@@ -12,6 +12,8 @@ struct BreathView: View {
     
 //    @Environment(\.dismiss) var dismiss
 
+    @Environment(\.colorScheme) var colorScheme
+
     @ObservedObject var viewModel: ViewModel
     private unowned let coordinator: BreathViewCoordinator
     
@@ -61,7 +63,7 @@ struct BreathView: View {
                     .background(
                         LinearGradient(colors: [Color(hex: "BBBAFF"), Color(hex: "973FF4")], startPoint: .top, endPoint: .bottom)
                     )
-                    .opacity(0.4)
+                    .opacity(colorScheme == .dark ? 0.1 : 0.4)
             )
             
             VStack {
