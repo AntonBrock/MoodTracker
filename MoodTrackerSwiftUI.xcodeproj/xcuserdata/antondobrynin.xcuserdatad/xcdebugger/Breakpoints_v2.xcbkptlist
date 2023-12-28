@@ -30,8 +30,8 @@
             filePath = "MoodMap/UI /Screens/UserStateScreen/StressCheckScreen/StressCheckView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "showLoader()"
             landmarkType = "7">
          </BreakpointContent>
@@ -462,26 +462,10 @@
             filePath = "MoodMap/UI /Screens/MainScreen/MainView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "633"
-            endingLineNumber = "633"
+            startingLineNumber = "635"
+            endingLineNumber = "635"
             landmarkName = "journalViews()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9ECEBDED-2107-4704-A41C-BB7148523AB5"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoodMap/UI /Screens/UserStateScreen/StressCheckScreen/StressCheckView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
-            landmarkName = "body"
-            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -542,8 +526,8 @@
             filePath = "MoodMap/UI /Screens/UserStateScreen/StressCheckScreen/StressCheckView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
             landmarkName = "showAD(withModel:)"
             landmarkType = "7">
             <Locations>
@@ -578,22 +562,6 @@
                   offsetFromSymbolStart = "48">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1039B455-F9AE-45FA-967A-333314A35721"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoodMap/UI /Screens/UserStateScreen/StressCheckScreen/StressCheckView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "body"
-            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

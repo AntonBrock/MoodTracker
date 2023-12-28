@@ -10,10 +10,12 @@ import BottomSheet
 
 struct AuthDeleteAccountView: View {
     
+    @Environment(\.colorScheme) var colorScheme
     var dismiss: ((Bool) -> Void)
     var agreeToDeleteAccountAction: (() -> Void)
     
     @State var bottomSheetPosition: BottomSheetPosition = .dynamicTop
+    @State var color: Color = .black
 
     var body: some View {
         VStack {}
@@ -24,7 +26,7 @@ struct AuthDeleteAccountView: View {
                 Text("Удаление аккаунта")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(Colors.Primary.blue)
+                    .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
                     .padding(.top, 14)
                 
                 Text("Этим действием, ты удалишь аккаунт и\nвсе связанные с ним данные.\nПредупреждаем, данное действие отменить нельзя.\n\nТы потеряешь все данные о своих состояниях, активностях, статистики, а также свой дневник благодарности")
@@ -32,7 +34,7 @@ struct AuthDeleteAccountView: View {
                     .lineLimit(nil)
                     .font(.system(size: 16, weight: .regular))
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(Color(hex: "7A7E80"))
+                    .foregroundColor(colorScheme == .dark ? Colors.Primary.lightGray : Color(hex: "7A7E80"))
                     .padding(.leading, 32)
                     .padding(.top, 8)
                 
@@ -60,7 +62,7 @@ struct AuthDeleteAccountView: View {
             }
         }
         .customBackground(
-            Color.white
+            color
                 .cornerRadius(16, corners: [.topLeft, .topRight])
                 .shadow(color: .white, radius: 0, x: 0, y: 0)
         )
@@ -71,6 +73,9 @@ struct AuthDeleteAccountView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 dismiss(false)
             }
+        }
+        .onAppear {
+            color = colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white
         }
     }
 }

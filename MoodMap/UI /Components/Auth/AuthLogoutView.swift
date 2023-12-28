@@ -10,6 +10,9 @@ import BottomSheet
 
 struct AuthLogoutView: View {
     
+    @Environment(\.colorScheme) var colorScheme
+    @State var color: Color = .black
+
     var dismiss: (() -> Void)
     var logoutAction: (() -> Void)
     var deleteAction: (() -> Void)
@@ -27,7 +30,7 @@ struct AuthLogoutView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .font(.system(size: 24, weight: .bold))
                     .multilineTextAlignment(.center)
-                    .foregroundColor(Colors.Primary.blue)
+                    .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
                     .padding(.top, 14)
                 
                 MTButton(buttonStyle: .outline, title: "Выйти") {
@@ -59,7 +62,7 @@ struct AuthLogoutView: View {
             }
         }
         .customBackground(
-            Color.white
+            color
                 .cornerRadius(16, corners: [.topLeft, .topRight])
                 .shadow(color: .white, radius: 0, x: 0, y: 0)
         )
@@ -70,6 +73,9 @@ struct AuthLogoutView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 dismiss()
             }
+        }
+        .onAppear {
+            color = colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white
         }
     }
 }

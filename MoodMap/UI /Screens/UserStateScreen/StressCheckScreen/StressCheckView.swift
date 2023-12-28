@@ -11,11 +11,13 @@ import BottomSheet
 struct StressCheckView: View {
         
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme
     
     @ObservedObject var valueModel: SliderStressValueModele
     @ObservedObject var userStateVideModel: MoodCheckView.ViewModel
     
     let notificationCenter = NotificationCenter.default
+    @State var color: Color = .black
     
     @FocusState private var isFocused: Bool
     @State var disabledBackButton: Bool = false
@@ -42,9 +44,98 @@ struct StressCheckView: View {
     @State private var dragOffset: CGFloat = 0
 
     var body: some View {
+        ZStack {
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
+            
+            contentView()
+                .onAppear {
+                    choosedStress = "8b02d308-37fa-41de-bdd2-00303b976031"
+                    color = colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white
+                }
+                .bottomSheet(
+                    bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
+                    .relativeBottom(0.125),
+                    .relative(0.125),
+                    .relativeTop(0.975)
+                ], headerContent: {
+                    VStack {
+                        Text("Нажми, чтобы записать свои мысли")
+                            .foregroundColor(colorScheme == .dark ? Colors.Primary.lightGray : Colors.Primary.blue)
+                            .font(.system(size: 16, weight: .medium))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        VStack {
+                            TextEditor(text: $text)
+                                .foregroundStyle(colorScheme == .dark ? .white : Colors.Primary.blue)
+                                .focused($focusField)
+                                .multilineTextAlignment(.leading)
+                                .lineLimit(35)
+                                .toolbar {
+                                    ToolbarItemGroup(placement: .keyboard) {
+                                        Spacer()
+                                        
+                                        Button("Готово") {
+                                            self.focusField = false
+                                            self.bottomSheetPosition = .relative(0.125)
+                                        }
+                                    }
+                                }
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: focusField ? .infinity : 15, alignment: .leading)
+                        .padding(.horizontal, -5)
+                                        
+                        MTButton(buttonStyle: .fill, title: "Сохранить запись", handle: {
+                            
+                            switch selectedViewIndex {
+                            case 0: choosedStress = "fd3f28e0-273b-4a18-8aa8-56e85c9943c0"
+                            case 1: choosedStress = "8b02d308-37fa-41de-bdd2-00303b976031"
+                            case 2: choosedStress = "42148e04-8ba7-468d-8ce6-4f25987bdbdf"
+                            default:
+                                choosedStress = "8b02d308-37fa-41de-bdd2-00303b976031"
+                            }
+                            
+                            saveButtonDidTap(text, choosedStress, self)
+                            print(selectedViewIndex)
+                            
+                        })
+                        .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+                    }
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 5)
+                    .padding([.horizontal, .bottom])
+                    .onTapGesture {
+                        self.bottomSheetPosition = .relativeTop(0.975)
+                        self.focusField = true
+                    }
+                    .opacity(isShowLoader ? 0 : 1)
+                    .transition(.opacity)
+                })
+                {}
+                .enableAppleScrollBehavior(false)
+                .enableBackgroundBlur()
+                .backgroundBlurMaterial(bottomSheetPosition == .relative(0.125) ? colorScheme == .dark ? .systemDark : .systemLight : bottomSheetPosition == .relativeBottom(0.125) ? colorScheme == .dark ? .systemDark : .systemLight : .dark(.thin))
+                .customBackground(
+                    color
+                        .cornerRadius(16, corners: [.topLeft, .topRight])
+                        .shadow(color: .white, radius: 0, x: 0, y: 0)
+                )
+                .enableSwipeToDismiss(false)
+                .onChange(of: bottomSheetPosition) { newValue in
+                    if newValue == .relative(0.125) {
+                        self.focusField = false
+                    } else if newValue == .relativeTop(0.975) {
+                        self.focusField = true
+                    }
+                }
+        }
+    }
+    
+    @ViewBuilder
+    private func contentView() -> some View {
         VStack {
             HStack {
-                Image("leftBackBlackArror")
+                Image(colorScheme == .dark ? "ic-navbar-backIcon-white" : "leftBackBlackArror")
                     .resizable()
                     .frame(width: 24, height: 24, alignment: .center)
                     .padding(.leading, 18)
@@ -57,7 +148,7 @@ struct StressCheckView: View {
                     }
                 Text("Укажи уровень стресса")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Colors.Primary.blue)
+                    .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .padding(.leading, -42)
             }
@@ -74,46 +165,7 @@ struct StressCheckView: View {
                     yandexInterstitialADView
                 }
             } else {
-                NavigationStack {
-                    VStack {
-                        ZStack {
-                            ForEach(0..<3) { index in
-                                VStack {
-                                    createStressView(index)
-                                        .frame(maxWidth: 300, maxHeight: .infinity, alignment: .top)
-                                }
-                                .frame(maxWidth: 300, maxHeight: .infinity, alignment: .top)
-                                .background(
-                                    Image(index == 0 ? "ic-mc-lowStressBackground" : index == 1 ? "ic-mc-mediumStressBackground" : index == 2 ? "ic-mc-hightStressBackground" : "")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                )
-                                .cornerRadius (25)
-                                .opacity (selectedViewIndex == index ? 1.0 : 0.5)
-                                .scaleEffect(selectedViewIndex == index ? 1.2 : 0.8)
-                                .offset(x: CGFloat(index - selectedViewIndex) * 300 + dragOffset, y: 100)
-                                .shadow(color: Colors.TextColors.mischka500, radius: 15, x: 0, y: 0)
-                            }
-                        }
-                        .gesture(
-                            DragGesture()
-                                .onEnded({ value in
-                                    let threshold: CGFloat = 50
-                                    if value.translation.width > threshold {
-                                        withAnimation {
-                                            selectedViewIndex = max(0, selectedViewIndex - 1)
-                                            
-                                        }
-                                    } else if value.translation.width < -threshold {
-                                        withAnimation {
-                                            selectedViewIndex = min(images.count - 1,
-                                                                    selectedViewIndex + 1)
-                                        }
-                                    }
-                                })
-                        )
-                    }
-                }
+                navigationView()
             }
             
         }
@@ -121,78 +173,48 @@ struct StressCheckView: View {
         .sheet(isPresented: $isNeedShowADAsPage) {
             yandexInterstitialADView
         }
-        .onAppear {
-            choosedStress = "8b02d308-37fa-41de-bdd2-00303b976031"
-        }
-        .bottomSheet(
-            bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
-            .relativeBottom(0.125),
-            .relative(0.125),
-            .relativeTop(0.975)
-        ], headerContent: {
+    }
+    
+    @ViewBuilder
+    private func navigationView() -> some View {
+        NavigationStack {
             VStack {
-                Text("Нажми, чтобы записать свои мысли")
-                    .foregroundColor(Colors.Primary.blue)
-                    .font(.system(size: 16, weight: .medium))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                VStack {
-                    TextEditor(text: $text)
-                        .foregroundStyle(Colors.Primary.blue)
-                        .focused($focusField)
-                        .multilineTextAlignment(.leading)
-                        .lineLimit(35)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                Spacer()
-                                
-                                Button("Готово") {
-                                    self.focusField = false
-                                    self.bottomSheetPosition = .relative(0.125)
+                ZStack {
+                    ForEach(0..<3) { index in
+                        VStack {
+                            createStressView(index)
+                                .frame(maxWidth: 300, maxHeight: .infinity, alignment: .top)
+                        }
+                        .frame(maxWidth: 300, maxHeight: .infinity, alignment: .top)
+                        .background(
+                            Image(index == 0 ? "ic-mc-lowStressBackground" : index == 1 ? "ic-mc-mediumStressBackground" : index == 2 ? "ic-mc-hightStressBackground" : "")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        )
+                        .cornerRadius (25)
+                        .opacity (selectedViewIndex == index ? 1.0 : 0.5)
+                        .scaleEffect(selectedViewIndex == index ? 1.2 : 0.8)
+                        .offset(x: CGFloat(index - selectedViewIndex) * 300 + dragOffset, y: 100)
+                        .shadow(color: colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.mischka500, radius: 15, x: 0, y: 0)
+                    }
+                }
+                .gesture(
+                    DragGesture()
+                        .onEnded({ value in
+                            let threshold: CGFloat = 50
+                            if value.translation.width > threshold {
+                                withAnimation {
+                                    selectedViewIndex = max(0, selectedViewIndex - 1)
+                                    
+                                }
+                            } else if value.translation.width < -threshold {
+                                withAnimation {
+                                    selectedViewIndex = min(images.count - 1,
+                                                            selectedViewIndex + 1)
                                 }
                             }
-                        }
-                }
-                .frame(maxWidth: .infinity, maxHeight: focusField ? .infinity : 10, alignment: .leading)
-                .padding(.horizontal, -5)
-                                
-                MTButton(buttonStyle: .fill, title: "Сохранить запись", handle: {
-                    
-                    switch selectedViewIndex {
-                    case 0: choosedStress = "fd3f28e0-273b-4a18-8aa8-56e85c9943c0"
-                    case 1: choosedStress = "8b02d308-37fa-41de-bdd2-00303b976031"
-                    case 2: choosedStress = "42148e04-8ba7-468d-8ce6-4f25987bdbdf"
-                    default:
-                        choosedStress = "8b02d308-37fa-41de-bdd2-00303b976031"
-                    }
-                    
-                    saveButtonDidTap(text, choosedStress, self)
-                    print(selectedViewIndex)
-                    
-                })
-                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
-            }
-            .padding(.vertical, 8)
-            .padding(.horizontal, 5)
-            .padding([.horizontal, .bottom])
-            .onTapGesture {
-                self.bottomSheetPosition = .relativeTop(0.975)
-                self.focusField = true
-            }
-            .opacity(isShowLoader ? 0 : 1)
-            .transition(.opacity)
-        })
-        {}
-        .enableAppleScrollBehavior(false)
-        .enableBackgroundBlur()
-        .backgroundBlurMaterial(bottomSheetPosition == .relative(0.125) ? .systemLight : bottomSheetPosition == .relativeBottom(0.125) ? .systemLight : .dark(.thin))
-        .customBackground(.white)
-        .enableSwipeToDismiss(false)
-        .onChange(of: bottomSheetPosition) { newValue in
-            if newValue == .relative(0.125) {
-                self.focusField = false
-            } else if newValue == .relativeTop(0.975) {
-                self.focusField = true
+                        })
+                )
             }
         }
     }

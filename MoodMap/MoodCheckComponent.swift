@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MoodCheckComponent: View {
         
+    @Environment(\.colorScheme) var colorScheme
+
     var statesViewModel: [StatesViewModel] = []
     var setChoosedState: ((String) -> Void)
     
@@ -29,70 +31,78 @@ struct MoodCheckComponent: View {
     @Binding var value: Double
 
     var body: some View {
-        VStack {
-            ZStack {
-                VStack {}
-                    .frame(width: 170, height: 170)
-                    .overlay(
-                        Rectangle()
-                            .fill(AngularGradient(gradient:
-                                Gradient(colors:
-                                    [Color(hex: "B9C8FD").opacity(0.1),
-                                     Color(hex: "B283E4").opacity(0.5),
-                                     Color(hex: "E3A8F5").opacity(0.8)]),
-                              center: .center))
-                            .cornerRadius(82)
-                            .opacity(0.5)
-                    )
-                    .blur(radius: 20)
-                
-                Image("\(choosedImageName)")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 135, height: 135)
-            }
+        ZStack {
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
             
-            ZStack {
-                SwiftUISlider(thumbBorderWidth: 3,
-                              thumbBorderColor: UIColor(Colors.Primary.perfume400Purple),
-                              thumbColor: .white,
-                              minTrackColor: UIColor(Colors.Primary.lightGray),
-                              maxTrackColor: UIColor(Colors.Primary.lightGray),
-                              minValue: SliderConfigure.min,
-                              maxValue: SliderConfigure.max,
-                              value: $valueModel.value)
-                    .zIndex(1)
-                    .frame(width: (40 * CGFloat(statesViewModel.count) + 50), height: SliderSize.height, alignment: .leading)
-                    .onChange(of: valueModel.value) { newValue in
-                        self.changeImage(for: valueModel.value.rounded())
-                    }
-                
-                HStack {
-                    let count: Int = statesViewModel.count
+            VStack {
+                ZStack {
+                    VStack {}
+                        .frame(width: 170, height: 170)
+                        .overlay(
+                            Rectangle()
+                                .fill(AngularGradient(gradient:
+                                    Gradient(colors:
+                                        [Color(hex: "B9C8FD").opacity(0.1),
+                                         Color(hex: "B283E4").opacity(0.5),
+                                         Color(hex: "E3A8F5").opacity(0.8)]),
+                                  center: .center))
+                                .cornerRadius(82)
+                                .opacity(0.5)
+                        )
+                        .blur(radius: 20)
                     
-                    ForEach(0..<count) { index in
-                        VStack {
-                            Image(systemName: "circle.fill")
-                                .resizable()
-                                .frame(width: 10, height: 10, alignment: .leading)
-                                .foregroundColor(Colors.Primary.lightGray)
+                    Image("\(choosedImageName)")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 135, height: 135)
+                }
+                
+                ZStack {
+                    SwiftUISlider(
+                        thumbBorderWidth: 3,
+                        thumbBorderColor: UIColor(Colors.Primary.perfume400Purple),
+                        thumbColor: .white,
+                        minTrackColor: UIColor(Colors.Primary.lightGray),
+                        maxTrackColor: UIColor(Colors.Primary.lightGray),
+                        minValue: SliderConfigure.min,
+                        maxValue: SliderConfigure.max,
+                        value: $valueModel.value
+                    )
+                        .zIndex(1)
+                        .frame(width: (40 * CGFloat(statesViewModel.count) + 50), height: SliderSize.height, alignment: .leading)
+                        .onChange(of: valueModel.value) { newValue in
+                            self.changeImage(for: valueModel.value.rounded())
                         }
-                                   
-                        if index != (count - 1) {
-                            Spacer()
+                    
+                    HStack {
+                        let count: Int = statesViewModel.count
+                        
+                        ForEach(0..<count) { index in
+                            VStack {
+                                Image(systemName: "circle.fill")
+                                    .resizable()
+                                    .frame(width: 10, height: 10, alignment: .leading)
+                                    .foregroundColor(Colors.Primary.lightGray)
+                            }
+                                       
+                            if index != (count - 1) {
+                                Spacer()
+                            }
                         }
                     }
+                    .frame(width: (40 * CGFloat(statesViewModel.count) + 50), height: SliderSize.height)
+                    .padding(EdgeInsets(top: 1.5, leading: 0, bottom: 0, trailing: 0))
                 }
-                .frame(width: (40 * CGFloat(statesViewModel.count) + 50), height: SliderSize.height)
-                .padding(EdgeInsets(top: 1.5, leading: 0, bottom: 0, trailing: 0))
+                
+                Text("\(statesViewModel[Int(valueModel.value.rounded() / 10.0)].text)")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
             }
-            
-            Text("\(statesViewModel[Int(valueModel.value.rounded() / 10.0)].text)")
-                .font(.system(size: 24, weight: .bold))
-                .foregroundColor(Colors.Primary.blue)
-        }
-        .onChange(of: choosedImageName) { newValue in
-            self.setChoosedState(choosedImageId)
+            .background(colorScheme == .dark ? Color("Background") : .white)
+            .onChange(of: choosedImageName) { newValue in
+                self.setChoosedState(choosedImageId)
+            }
         }
     }
     

@@ -10,7 +10,8 @@ import SwiftUI
 struct ActivitiesView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    
+    @Environment(\.colorScheme) var colorScheme
+
     let parent: BaseViewCoordinator
     let container: DIContainer
     private unowned let coordinator: ActivitiesViewCoodinator
@@ -31,94 +32,99 @@ struct ActivitiesView: View {
     private let flexibleLayout = Array(repeating: GridItem(.flexible(), spacing: 10), count: 4)
 
     var body: some View {
-        VStack {
-            HStack {
-                Image("leftBackBlackArror")
-                    .resizable()
-                    .frame(width: 24, height: 24, alignment: .center)
-                    .padding(.leading, 18)
-                    .onTapGesture {
-                        withAnimation {
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                Text("Активность")
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Colors.Primary.blue)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                    .padding(.leading, -42)
-            }
-            .frame(width: UIScreen.main.bounds.width, height: 48, alignment: .center)
+        ZStack {
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("Выбери активности, которые повлияли на твое состояние сейчас, так мы сможем ее отследить")
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .foregroundColor(Colors.Primary.blue)
-                    .font(.system(size: 16, weight: .medium))
-                    .padding(.horizontal, 16)
-                    .padding(.top, 16)
-                    .multilineTextAlignment(.center)
+                HStack {
+                    Image(colorScheme == .dark ? "ic-navbar-backIcon-white" : "leftBackBlackArror")
+                        .resizable()
+                        .frame(width: 24, height: 24, alignment: .center)
+                        .padding(.leading, 18)
+                        .onTapGesture {
+                            withAnimation {
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        }
+                    Text("Активность")
+                        .font(.system(size: 18, weight: .medium))
+                        .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                        .padding(.leading, -42)
+                }
+                .frame(width: UIScreen.main.bounds.width, height: 48, alignment: .center)
                 
-                ScrollView {
+                VStack {
+                    Text("Выбери активности, которые повлияли на твое состояние сейчас, так мы сможем ее отследить")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .foregroundColor(colorScheme == .dark ? Colors.Primary.lightGray : Colors.Primary.blue)
+                        .font(.system(size: 16, weight: .medium))
+                        .padding(.horizontal, 16)
+                        .padding(.top, 16)
+                        .multilineTextAlignment(.center)
                     
-                    LazyVGrid(columns: flexibleLayout) {
+                    ScrollView {
                         
-                        ForEach(0..<coordinator.userStateViewModel.activitiesViewModel.count) { index in
-                            ZStack {
-                                ActivitiesChooseViewBlock(
-                                    activitiesId: coordinator.userStateViewModel.activitiesViewModel[index].id,
-                                    activitieImageTitle: coordinator.userStateViewModel.activitiesViewModel[index].image,
-                                    activitieTitle: coordinator.userStateViewModel.activitiesViewModel[index].text,
-                                    isEventIcon: coordinator.userStateViewModel.activitiesViewModel[index].isEventIcon,
-                                    isSelected: coordinator.userStateViewModel.choosedActivities.contains(
-                                        coordinator.userStateViewModel.activitiesViewModel[index].id)
-                                ) { choosedActivitie in
-                                    coordinator.userStateViewModel.choosedActivities.append(choosedActivitie)
-                                    self.choosedActivities.append(choosedActivitie)
-                                } unSelected: { unchoosedActivitie in
-                                    guard let index = choosedActivities.firstIndex(where: { $0 == unchoosedActivitie }) else { return }
-                                    choosedActivities.remove(at: index)
-                                    guard let _index = coordinator.userStateViewModel.choosedActivities.firstIndex(where: { $0 == unchoosedActivitie }) else { return }
-                                    coordinator.userStateViewModel.choosedActivities.remove(at: _index)
+                        LazyVGrid(columns: flexibleLayout) {
+                            
+                            ForEach(0..<coordinator.userStateViewModel.activitiesViewModel.count) { index in
+                                ZStack {
+                                    ActivitiesChooseViewBlock(
+                                        activitiesId: coordinator.userStateViewModel.activitiesViewModel[index].id,
+                                        activitieImageTitle: coordinator.userStateViewModel.activitiesViewModel[index].image,
+                                        activitieTitle: coordinator.userStateViewModel.activitiesViewModel[index].text,
+                                        isEventIcon: coordinator.userStateViewModel.activitiesViewModel[index].isEventIcon,
+                                        isSelected: coordinator.userStateViewModel.choosedActivities.contains(
+                                            coordinator.userStateViewModel.activitiesViewModel[index].id)
+                                    ) { choosedActivitie in
+                                        coordinator.userStateViewModel.choosedActivities.append(choosedActivitie)
+                                        self.choosedActivities.append(choosedActivitie)
+                                    } unSelected: { unchoosedActivitie in
+                                        guard let index = choosedActivities.firstIndex(where: { $0 == unchoosedActivitie }) else { return }
+                                        choosedActivities.remove(at: index)
+                                        guard let _index = coordinator.userStateViewModel.choosedActivities.firstIndex(where: { $0 == unchoosedActivitie }) else { return }
+                                        coordinator.userStateViewModel.choosedActivities.remove(at: _index)
+                                    }
                                 }
                             }
                         }
+                        .padding(EdgeInsets(top: 10, leading: 16, bottom: 0, trailing: 16))
                     }
-                    .padding(EdgeInsets(top: 10, leading: 16, bottom: 0, trailing: 16))
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                
-                NavigationLink(
-                    isActive: $isShowStressScreen,
-                    destination: {
-                        StressCheckView(
-                            valueModel: coordinator.sliderValueModele!,
-                            userStateVideModel: coordinator.userStateViewModel,
-                            parent: parent, stressViewModel: coordinator.userStateViewModel.stressViewModel,
-                            saveButtonDidTap: { text, choosedStress, view in
-                                coordinator.userStateViewModel.choosedStress = choosedStress
-                                coordinator.userStateViewModel.mindText = text
-                                coordinator.userStateViewModel.sendUserStateInfo(view: view)
-                        }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    
+                    NavigationLink(
+                        isActive: $isShowStressScreen,
+                        destination: {
+                            StressCheckView(
+                                valueModel: coordinator.sliderValueModele!,
+                                userStateVideModel: coordinator.userStateViewModel,
+                                parent: parent, stressViewModel: coordinator.userStateViewModel.stressViewModel,
+                                saveButtonDidTap: { text, choosedStress, view in
+                                    coordinator.userStateViewModel.choosedStress = choosedStress
+                                    coordinator.userStateViewModel.mindText = text
+                                    coordinator.userStateViewModel.sendUserStateInfo(view: view)
+                            }
+                        )
+                        .navigationBarHidden(true)
+                        },
+                        label: {}
                     )
-                    .navigationBarHidden(true)
-                    },
-                    label: {}
-                )
-                
-                MTButton(buttonStyle: .fill, title: "Продолжить", handle: {
-                    Services.metricsService.sendEventWith(eventName: .activitiesNextButton)
-                    Services.metricsService.sendEventWith(eventType: .activitiesNextButton)
+                    
+                    MTButton(buttonStyle: .fill, title: "Продолжить", handle: {
+                        Services.metricsService.sendEventWith(eventName: .activitiesNextButton)
+                        Services.metricsService.sendEventWith(eventType: .activitiesNextButton)
 
-                    isShowStressScreen.toggle()
-                })
-                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
-                .disabled(choosedActivities.isEmpty)
-                .opacity(choosedActivities.isEmpty ? 0.7 : 1)
+                        isShowStressScreen.toggle()
+                    })
+                    .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+                    .disabled(choosedActivities.isEmpty)
+                    .opacity(choosedActivities.isEmpty ? 0.7 : 1)
+                }
             }
-        }
-        .onAppear {
-            choosedActivities = coordinator.userStateViewModel.choosedActivities
+            .onAppear {
+                choosedActivities = coordinator.userStateViewModel.choosedActivities
+            }
         }
     }
 }
@@ -126,6 +132,8 @@ struct ActivitiesView: View {
 // MARK: - ActivitiesChooseViewBlock
 struct ActivitiesChooseViewBlock: View {
 
+    @Environment(\.colorScheme) var colorScheme
+    
     var activitiesId: String
     var activitieImageTitle: String
     var activitieTitle: String
@@ -144,19 +152,19 @@ struct ActivitiesChooseViewBlock: View {
                 .frame(width: 38, height: 38)
             Text("\(activitieTitle)")
                 .font(.system(size: 10, weight: .medium))
-                .foregroundColor(Colors.Primary.blue)
+                .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
                 .padding(.top, 10)
         }
         .frame(width: 90, height: 95)
-        .background(.white)
+        .background(colorScheme == .dark ? Colors.Primary.comet : .white)
         .cornerRadius(10)
-        .shadow(color: Colors.TextColors.mystic400, radius: 6.0, x: 0, y: 0)
+        .shadow(color: colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.mystic400, radius: 6.0, x: 0, y: 0)
         .overlay {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(
                     isSelected && isEventIcon ?? false ? Color(hex: "FF9635") :
                     isEventIcon ?? false ? Colors.Secondary.malibu600Blue :
-                    isSelected ? Colors.Primary.royalPurple600Purple : Color.white,
+                    isSelected ? colorScheme == .dark ? Colors.Primary.lavender500Purple : Colors.Primary.royalPurple600Purple : Color.white,
                     lineWidth: 1
                 )
         }

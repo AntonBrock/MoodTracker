@@ -10,6 +10,8 @@ import SwiftUI
 
 struct MoodsWordChooseView: View {
     
+    @Environment(\.colorScheme) var colorScheme
+
     var emotionViewModel: [[EmotionsViewModel]] = []
     private let flexibleLayout = Array(repeating: GridItem(.flexible(), spacing: 35), count: 4)
 
@@ -22,61 +24,70 @@ struct MoodsWordChooseView: View {
     var rightAction: (() -> Void)
     
     var body: some View {
-        VStack {
-            Text("Какая эмоция лучше всего описывает твои чувства сейчас?")
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(Colors.Primary.blue)
-                .padding(EdgeInsets(top: 10, leading: 16, bottom: 0, trailing: 16))
-                .fixedSize(horizontal: false, vertical: true)
+        ZStack {
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
             
-            LazyVGrid(columns: flexibleLayout) {
-                let emotions = emotionViewModel[Int(valueModel.value.rounded() / 10.0)]
+            VStack {
+                Text("Какая эмоция лучше всего описывает твои чувства сейчас?")
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(colorScheme == .dark ? Colors.Primary.lightGray : Colors.Primary.blue)
+                    .padding(EdgeInsets(top: 10, leading: 16, bottom: 0, trailing: 16))
+                    .fixedSize(horizontal: false, vertical: true)
                 
-                if !emotions.isEmpty {
-                    ForEach(1...emotions.count, id: \.self) { item in
-                        ZStack {
-                            MoodsWordChooseViewBlock(emotionId: emotions[item - 1].id,
-                                                     emotion: emotions[item - 1].image,
-                                                     emotionTitle: emotions[item - 1].text,
-                                                     selectedMoodId: $selectedMoodId)
-                            .frame(width: 85, height: 90)
-                            .background(.white)
-                            .cornerRadius(10)
-                            .shadow(color: Colors.TextColors.mystic400, radius: 6.0, x: 0, y: 0)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(selectedMoodId == emotions[item - 1].id ?
-                                            Colors.Primary.royalPurple600Purple :
-                                            .white, lineWidth: 1)
+                LazyVGrid(columns: flexibleLayout) {
+                    let emotions = emotionViewModel[Int(valueModel.value.rounded() / 10.0)]
+                    
+                    if !emotions.isEmpty {
+                        ForEach(1...emotions.count, id: \.self) { item in
+                            ZStack {
+                                MoodsWordChooseViewBlock(
+                                    emotionId: emotions[item - 1].id,
+                                    emotion: emotions[item - 1].image,
+                                    emotionTitle: emotions[item - 1].text,
+                                    selectedMoodId: $selectedMoodId
+                                )
+                                .frame(width: 85, height: 90)
+                                .background(colorScheme == .dark ? Colors.Primary.comet : .white)
+                                .cornerRadius(10)
+                                .shadow(color: colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.mystic400,
+                                        radius: 6.0, x: 0, y: 0)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(selectedMoodId == emotions[item - 1].id ?
+                                                colorScheme == .dark ? Colors.Primary.lavender500Purple : Colors.Primary.royalPurple600Purple :
+                                                .white, lineWidth: 1)
+                                }
+                                .padding(.top, 16)
                             }
-                            .padding(.top, 16)
                         }
                     }
                 }
+                .padding(EdgeInsets(top: 8, leading: 16, bottom: 32, trailing: 16))
+                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                    .onEnded({ value in
+                        if value.translation.width < 0 {
+                            leftAction()
+                        }
+                        
+                        if value.translation.width > 0 {
+                            rightAction()
+                        }
+                    })
+                )
             }
-            .padding(EdgeInsets(top: 8, leading: 16, bottom: 32, trailing: 16))
-            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                .onEnded({ value in
-                    if value.translation.width < 0 {
-                        leftAction()
-                    }
-                    
-                    if value.translation.width > 0 {
-                        rightAction()
-                    }
-                })
-            )
-        }
-        .onChange(of: selectedMoodId) { newValue in
-            setChoosedEmotion(newValue)
+            .onChange(of: selectedMoodId) { newValue in
+                setChoosedEmotion(newValue)
+            }
         }
     }
 }
 
 struct MoodsWordChooseViewBlock: View {
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var emotionId: String
     var emotion: String
     var emotionTitle: String
@@ -92,7 +103,7 @@ struct MoodsWordChooseViewBlock: View {
             Text("\(emotionTitle)")
                 .font(.system(size: 12, weight: .medium))
                 .padding(.horizontal, 10)
-                .foregroundColor(Colors.Primary.blue)
+                .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
                 .frame(maxWidth: .infinity)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)

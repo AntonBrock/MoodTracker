@@ -611,18 +611,20 @@ struct MainView: View {
         .shadow(color: colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.mischka500,
                 radius: 2.0, x: 0.0, y: 0)
         .onTapGesture {
-            if AppState.shared.isLogin ?? false {
-                if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
-                    coordinator.parent.showLimitsView = true
-                } else {
-                    Services.metricsService.sendEventWith(eventName: .createEmotionNoteButtonFromTopBlock)
-                    coordinator.openMoodCheckScreen()
-                }
-            } else {
-                withAnimation {
-                    coordinator.parent.showAuthLoginView = true
-                }
-            }
+            coordinator.openMoodCheckScreen()
+
+//            if AppState.shared.isLogin ?? false {
+//                if AppState.shared.userLimits == AppState.shared.maximumValueOfLimits {
+//                    coordinator.parent.showLimitsView = true
+//                } else {
+//                    Services.metricsService.sendEventWith(eventName: .createEmotionNoteButtonFromTopBlock)
+//                    coordinator.openMoodCheckScreen()
+//                }
+//            } else {
+//                withAnimation {
+//                    coordinator.parent.showAuthLoginView = true
+//                }
+//            }
         }
     }
     
