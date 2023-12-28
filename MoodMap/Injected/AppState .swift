@@ -131,6 +131,7 @@ final class AppState: ObservableObject {
         }
     }
     
+    
     var darkModeIsEnable: Bool? {
         get {
             return UserDefaults.standard.bool(forKey: UserDefaultsKeys.darkModeIsEnable)

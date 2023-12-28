@@ -13,9 +13,9 @@ struct PersonalCabinetView: View {
     unowned let coordinator: PersonalCabinetViewCoordinator
     
     @Environment(\.colorScheme) var colorScheme
-        
+    
     @State var pushNotification: Bool = AppState.shared.userPushNotification ?? false
-    @State var darkMode: Bool = AppState.shared.userPushNotification ?? false
+    @State var darkMode: Bool = false
     @State var showThatTelegramNotInstallView: Bool = false
     
     let notificationCenter = NotificationCenter.default
@@ -86,35 +86,32 @@ struct PersonalCabinetView: View {
                             .background(colorScheme == .dark ?  Color("Background") : Colors.Primary.lightWhite)
                         }
                         
-                        VStack(spacing: 5) {
-                            Text("Оформление")
-                                .frame(width: UIScreen.main.bounds.width - 32, height: 35, alignment: .bottomLeading)
-                                .foregroundColor(Colors.Primary.lightGray)
-                                .font(.system(size: 12))
-                            
-                            VStack {
-                                Toggle(isOn: $darkMode) {
-                                    Text("Темная тема")
-                                }
-                                .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
-                                .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-                                .tint(Colors.Primary.lavender500Purple)
-                                .onTapGesture {
-                                   print("Dark Mode is On")
-                                }
-
-    //                    createArrowBlock("Создание пароля")
-    //                        .frame(width: UIScreen.main.bounds.width - 32, height: 64)
-    //                        .padding(.trailing, 5)
-    //                        .onTapGesture {
-    //                            coordinator.openLoginView()
-    //                        }
-                                
-                            }
-                            .padding(.horizontal, 24)
-                            .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
-                        }
-                        .background(colorScheme == .dark ?  Color("Background") : Colors.Primary.lightWhite)
+                        #warning("TODO: В первой версии ТОЛЬКО темная")
+//                        VStack(spacing: 5) {
+//                            Text("Оформление")
+//                                .frame(width: UIScreen.main.bounds.width - 32, height: 35, alignment: .bottomLeading)
+//                                .foregroundColor(Colors.Primary.lightGray)
+//                                .font(.system(size: 12))
+//                            
+//                            VStack {
+//                                Toggle(isOn: $darkMode) {
+//                                    Text("Темная тема")
+//                                }
+//                                .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
+//                                .frame(width: UIScreen.main.bounds.width - 32, height: 64)
+//                                .tint(Colors.Primary.lavender500Purple)
+//                                .onTapGesture {
+//                                    if darkMode {
+//                                        UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .dark
+//                                    } else {
+//                                        UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .light
+//                                    }
+//                                }
+//                            }
+//                            .padding(.horizontal, 24)
+//                            .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground : .white)
+//                        }
+//                        .background(colorScheme == .dark ?  Color("Background") : Colors.Primary.lightWhite)
                        
                         VStack(spacing: 12) {
                             Text("Дополнительно")
@@ -233,11 +230,14 @@ struct PersonalCabinetView: View {
                 }
             }
         }
+        .onAppear {
+            darkMode = colorScheme == .dark
+        }
         .onChange(of: pushNotification, perform: { newValue in
             pushNotification = AppState.shared.userPushNotification ?? false
         })
         .onChange(of: darkMode, perform: { newValue in
-            darkMode = AppState.shared.darkModeIsEnable ?? false
+            darkMode = newValue
         })
         .onReceive(showLoader) { (output) in
             showLoaderView = true
