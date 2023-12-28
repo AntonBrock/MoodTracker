@@ -37,7 +37,7 @@ struct AuthMethodsView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .font(.system(size: 24, weight: .bold))
                     .multilineTextAlignment(.center)
-                    .foregroundColor(colorScheme == .dark ? Colors.Primary.lightGray : Colors.Primary.blue)
+                    .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
                     .padding(.top, 14)
                 
                 Text("Войдите, чтобы получить полную\n статистику вашего настроения")

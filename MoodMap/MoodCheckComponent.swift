@@ -29,6 +29,7 @@ struct MoodCheckComponent: View {
     @State var choosedImageName: String = "ch-ic-fine"
     @State var choosedImageId: String = ""
     @Binding var value: Double
+    @State var opacity: Double = 0.1
 
     var body: some View {
         ZStack {
@@ -46,9 +47,11 @@ struct MoodCheckComponent: View {
                                         [Color(hex: "B9C8FD").opacity(0.1),
                                          Color(hex: "B283E4").opacity(0.5),
                                          Color(hex: "E3A8F5").opacity(0.8)]),
-                                  center: .center))
+                                  center: .center)
+                                )
                                 .cornerRadius(82)
-                                .opacity(0.5)
+                                .opacity(opacity + 0.5)
+                                .transition(.opacity)
                         )
                         .blur(radius: 20)
                     
@@ -102,6 +105,10 @@ struct MoodCheckComponent: View {
             .background(colorScheme == .dark ? Color("Background") : .white)
             .onChange(of: choosedImageName) { newValue in
                 self.setChoosedState(choosedImageId)
+                withAnimation {
+                    self.opacity = self.changeOpaticy(for: valueModel.value.rounded())
+
+                }
             }
         }
     }
@@ -109,5 +116,9 @@ struct MoodCheckComponent: View {
     private func changeImage(for value: CGFloat) {
         choosedImageName = statesViewModel[Int(value / 10.0)].image
         choosedImageId = statesViewModel[Int(value / 10.0)].id
+    }
+    
+    private func changeOpaticy(for value: CGFloat) -> Double {
+        return Double(value / 100.0)
     }
 }

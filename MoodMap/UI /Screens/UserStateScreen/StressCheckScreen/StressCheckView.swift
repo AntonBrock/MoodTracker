@@ -36,7 +36,7 @@ struct StressCheckView: View {
     @State var isNeedShowADAsPage: Bool = false
     @State var isShowLoader: Bool = false
     
-    @State var bottomSheetPosition: BottomSheetPosition = .relative(0.125)
+    @State var bottomSheetPosition: BottomSheetPosition = .relative(0.120)
     
     private let images: [String] = ["emoji_cool", "emoji_sad", "emoji_happy"]
     
@@ -55,8 +55,8 @@ struct StressCheckView: View {
                 }
                 .bottomSheet(
                     bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
-                    .relativeBottom(0.125),
-                    .relative(0.125),
+                    .relativeBottom(0.120),
+                    .relative(0.120),
                     .relativeTop(0.975)
                 ], headerContent: {
                     VStack {
@@ -77,7 +77,7 @@ struct StressCheckView: View {
                                         
                                         Button("Готово") {
                                             self.focusField = false
-                                            self.bottomSheetPosition = .relative(0.125)
+                                            self.bottomSheetPosition = .relative(0.115)
                                         }
                                     }
                                 }
@@ -114,7 +114,7 @@ struct StressCheckView: View {
                 {}
                 .enableAppleScrollBehavior(false)
                 .enableBackgroundBlur()
-                .backgroundBlurMaterial(bottomSheetPosition == .relative(0.125) ? colorScheme == .dark ? .systemDark : .systemLight : bottomSheetPosition == .relativeBottom(0.125) ? colorScheme == .dark ? .systemDark : .systemLight : .dark(.thin))
+                .backgroundBlurMaterial(bottomSheetPosition == .relative(0.120) ? colorScheme == .dark ? .systemDark : .systemLight : bottomSheetPosition == .relativeBottom(0.120) ? colorScheme == .dark ? .systemDark : .systemLight : .dark(.thin))
                 .customBackground(
                     color
                         .cornerRadius(16, corners: [.topLeft, .topRight])
@@ -122,7 +122,7 @@ struct StressCheckView: View {
                 )
                 .enableSwipeToDismiss(false)
                 .onChange(of: bottomSheetPosition) { newValue in
-                    if newValue == .relative(0.125) {
+                    if newValue == .relative(0.120) {
                         self.focusField = false
                     } else if newValue == .relativeTop(0.975) {
                         self.focusField = true
@@ -195,7 +195,11 @@ struct StressCheckView: View {
                         .opacity (selectedViewIndex == index ? 1.0 : 0.5)
                         .scaleEffect(selectedViewIndex == index ? 1.2 : 0.8)
                         .offset(x: CGFloat(index - selectedViewIndex) * 300 + dragOffset, y: 100)
-                        .shadow(color: colorScheme == .dark ? Colors.Primary.moodDarkBackground : Colors.TextColors.mischka500, radius: 15, x: 0, y: 0)
+                        .shadow(
+                            color: colorScheme == .dark
+                            ? Colors.Primary.moodDarkBackground
+                            : Colors.TextColors.mischka500, radius: 15, x: 0, y: 0
+                        )
                     }
                 }
                 .gesture(

@@ -63,9 +63,6 @@ struct TabBarView: View {
                 
                 VStack {
                     ZStack {
-                        Color("Background")
-                            .edgesIgnoringSafeArea(.all)
-                        
                         HStack {
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .home, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-home-none-fill", tabName: "home", filledIconName: "tb-ic-home-fill")
                             TabBarIcon(viewRouter: viewRouter, assignedPage: .practice, width: geometry.size.width / 5, height: geometry.size.height / 28, iconName: "tb-ic-practice-none-fill", tabName: "practice", filledIconName: "tb-ic-practice-fill")
@@ -104,8 +101,17 @@ struct TabBarView: View {
                         .padding(.top, isiPhoneXOrNewer ? -20 : -5)
                         .disabled(disabledTabBar)
                     }
-                    .frame(width: geometry.size.width, height: coordinator.hideCustomTabBar ? 0 : isiPhoneXOrNewer ? geometry.size.height / 10 : geometry.size.height / 12.0)
-                    .background(colorScheme == .dark ? Colors.Primary.moodDarkBackground.clipShape(CustomShape()) : Color.white.clipShape(CustomShape()))
+                    .frame(
+                        width: geometry.size.width, height: coordinator.hideCustomTabBar
+                        ? 0 : isiPhoneXOrNewer
+                        ? geometry.size.height / 10
+                        : geometry.size.height / 12.0
+                    )
+                    .background(
+                        colorScheme == .dark
+                        ? Colors.Primary.moodDarkBackground.clipShape(CustomShape())
+                        : Color.white.clipShape(CustomShape())
+                    )
                     .shadow(
                         color: colorScheme == .dark ? Colors.Primary.moodDarkBackground.opacity(0.7) : Colors.TextColors.mischka500.opacity(0.7),
                         radius: 7, x: 0, y: -5
