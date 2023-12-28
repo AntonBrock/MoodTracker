@@ -69,7 +69,7 @@ struct MoodCheckView: View {
                     
                     Text("Как себя чувствуешь ?")
                         .font(.system(size: 18, weight: .medium))
-                        .foregroundColor(colorScheme == .dark ? Colors.Primary.lightGray : Colors.Primary.blue)
+                        .foregroundColor(colorScheme == .dark ? .white : Colors.Primary.blue)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         .padding(.leading, -42)
                 }
